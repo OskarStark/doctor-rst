@@ -52,7 +52,7 @@ class CheckCommand extends Command
     {
         $this
             ->setDescription('Check *.rst files')
-            ->addArgument('dir', InputArgument::REQUIRED, 'Directory')
+            ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
         ;
     }
 
