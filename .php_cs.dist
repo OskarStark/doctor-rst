@@ -1,0 +1,38 @@
+<?php
+
+$header = <<<'HEADER'
+This file is part of the rst-checker.
+
+(c) Oskar Stark <oskarstark@googlemail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+HEADER;
+
+$finder = PhpCsFixer\Finder::create()
+    ->in('src')
+;
+
+return PhpCsFixer\Config::create()
+    ->setRiskyAllowed(true)
+    ->setRules([
+        '@Symfony' => true,
+        'ordered_imports' => true,
+        'no_unused_imports' => true,
+        'psr4' => true,
+        'psr0' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'no_superfluous_phpdoc_tags' => true,
+        'linebreak_after_opening_tag' => true,
+        'logical_operators' => true,
+        'native_function_invocation' => [
+            'include' => ['@compiler_optimized'],
+            'scope' => 'namespaced'
+        ],
+        'declare_strict_types' => true,
+        'header_comment' => [
+            'header' => $header,
+        ],
+    ])
+    ->setFinder($finder)
+;
