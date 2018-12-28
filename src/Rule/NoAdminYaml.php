@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Constraints;
+namespace App\Rule;
 
-class NoAdminYaml implements Constraint
+class NoAdminYaml implements Rule
 {
     public function supportedExtensions(): array
     {
         return ['rst'];
     }
 
-    public function validate(string $line, int $number)
+    public function check(string $line)
     {
         if (strstr(strtolower($line), 'admin.yml')) {
             return 'Please use "services.yaml" instead of "admin.yml"';

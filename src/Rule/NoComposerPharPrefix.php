@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Constraints;
+namespace App\Rule;
 
-class NoComposerPharPrefix implements Constraint
+class NoComposerPharPrefix implements Rule
 {
     public function supportedExtensions(): array
     {
         return ['rst'];
     }
 
-    public function validate(string $line, int $number)
+    public function check(string $line)
     {
         if (strstr($line, 'composer.phar')) {
             return 'Please use "composer" instead of "composer.phar"';

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Constraints;
+namespace App\Rule;
 
-class Typo implements Constraint
+class Typo implements Rule
 {
     public function supportedExtensions(): array
     {
         return ['rst'];
     }
 
-    public function validate(string $line, int $number)
+    public function check(string $line)
     {
         if (strstr($line, $typo = 'compsoer')) {
             return sprintf('Typo in word "%s"', $typo);

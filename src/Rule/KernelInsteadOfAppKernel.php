@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Constraints;
+namespace App\Rule;
 
-class KernelInsteadOfAppKernel implements Constraint
+class KernelInsteadOfAppKernel implements Rule
 {
     public function supportedExtensions(): array
     {
         return ['rst'];
     }
 
-    public function validate(string $line, int $number)
+    public function check(string $line)
     {
         if (strstr($line, 'app/AppKernel.php')) {
             return 'Please use "src/Kernel.php" instead of "app/AppKernel.php"';

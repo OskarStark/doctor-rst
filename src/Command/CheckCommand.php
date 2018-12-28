@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Constraints\Constraint;
+use App\Rule\Rule;
 use PhpParser\Node\Scalar\MagicConst\File;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -23,15 +23,15 @@ class CheckCommand extends Command
     /** @var array */
     private $violations;
 
-    /** @var Constraint[] */
-    private $constraints;
+    /** @var Rule[] */
+    private $rules;
 
-    public function __construct(iterable $constraints, ?string $name = null)
+    public function __construct(iterable $rules, ?string $name = null)
     {
-        /** @var Constraint $constraint */
-        foreach ($constraints as $constraint) {
+        /** @var Rule $constraint */
+        foreach ($rules as $constraint) {
             foreach ($constraint->supportedExtensions() as $extension) {
-                $this->constraints[$extension][] = $constraint;
+                $this->rules[$extension][] = $constraint;
             }
         }
 
@@ -43,7 +43,6 @@ class CheckCommand extends Command
         $this
             ->setDescription('Check *.rst files')
             ->addArgument('dir', InputArgument::REQUIRED, 'Directory')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
 
@@ -73,7 +72,7 @@ class CheckCommand extends Command
     {
         $this->io->writeln($file->getPathname());
 
-        if (empty($this->constraints[$file->getExtension()])) {
+        if (empty($this->rules[$file->getExtension()])) {
             return;
         }
 
@@ -85,8 +84,8 @@ class CheckCommand extends Command
                 continue;
             }
 
-            foreach ($this->constraints[$file->getExtension()] as $constraint) {
-                $violation = $constraint->validate($line, $no);
+            foreach ($this->rules[$file->getExtension()] as $rule) {
+                $violation = $rule->check($line, $no);
 
                 if (!empty($violation)) {
                     $violations[] = [

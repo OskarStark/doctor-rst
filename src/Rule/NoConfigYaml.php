@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Constraints;
+namespace App\Rule;
 
-class NoConfigYaml implements Constraint
+class NoConfigYaml implements Rule
 {
     public function supportedExtensions(): array
     {
         return ['rst'];
     }
 
-    public function validate(string $line, int $number)
+    public function check(string $line)
     {
         if (strstr(strtolower($line), 'app/config/config.yml')) {
             return 'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"';
