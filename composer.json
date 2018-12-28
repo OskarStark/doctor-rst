@@ -11,6 +11,11 @@
         "symfony/framework-bundle": "4.2.*",
         "symfony/yaml": "4.2.*"
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.13",
+        "symfony/debug-pack": "^1.0",
+        "symfony/maker-bundle": "^1.11"
+    },
     "config": {
         "preferred-install": {
             "*": "dist"
@@ -37,8 +42,7 @@
     },
     "scripts": {
         "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "cache:clear": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
@@ -55,10 +59,5 @@
             "allow-contrib": false,
             "require": "4.2.*"
         }
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.13",
-        "symfony/debug-pack": "^1.0",
-        "symfony/maker-bundle": "^1.11"
     }
 }
