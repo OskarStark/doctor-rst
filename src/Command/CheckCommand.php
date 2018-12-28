@@ -94,6 +94,7 @@ class CheckCommand extends Command
                 continue;
             }
 
+            /** @var Rule $rule */
             foreach ($this->rules[$file->getExtension()] as $rule) {
                 $violation = $rule->check($line, $no);
 
