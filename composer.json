@@ -13,7 +13,6 @@
         "webmozart/assert": "^1.4"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.13",
         "symfony/debug-pack": "^1.0",
         "symfony/maker-bundle": "^1.11",
         "symfony/test-pack": "^1.0"
