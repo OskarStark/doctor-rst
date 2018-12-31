@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-class NoConfigYaml implements Rule
+use App\Util\Util;
+
+class CodeBlockPhpDirectiveHasOpenTag implements Rule
 {
     public function supportedExtensions(): array
     {
@@ -25,8 +27,18 @@ class NoConfigYaml implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr(strtolower($line), 'app/config/config.yml')) {
-            return 'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"';
+        if (!Util::codeBlockDirectiveIsTypeOf($line, Util::CODE_BLOCK_PHP)) {
+            return;
+        }
+
+        $lines->next();
+        $lines->next();
+
+        // check if next line is "<?php"
+        $nextLine = $lines->current();
+
+        if (Util::clean($nextLine) !== '<?php') {
+            return sprintf('Please add PHP open tag after "%s" directive', $line);
         }
     }
 }

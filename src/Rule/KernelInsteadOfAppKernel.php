@@ -20,8 +20,11 @@ class KernelInsteadOfAppKernel implements Rule
         return ['rst'];
     }
 
-    public function check(string $line)
+    public function check(\ArrayIterator $lines, int $number)
     {
+        $lines->seek($number);
+        $line = $lines->current();
+
         if (strstr($line, 'app/AppKernel.php')) {
             return 'Please use "src/Kernel.php" instead of "app/AppKernel.php"';
         }

@@ -20,8 +20,11 @@ class NoAdminYaml implements Rule
         return ['rst'];
     }
 
-    public function check(string $line)
+    public function check(\ArrayIterator $lines, int $number)
     {
+        $lines->seek($number);
+        $line = $lines->current();
+
         if (strstr(strtolower($line), 'admin.yml')) {
             return 'Please use "services.yaml" instead of "admin.yml"';
         }

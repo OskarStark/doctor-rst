@@ -14,10 +14,10 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Rule\Rule;
-use PhpParser\Node\Scalar\MagicConst\File;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
@@ -38,11 +38,15 @@ class CheckCommand extends Command
 
     public function __construct(iterable $rules, ?string $name = null)
     {
-        /** @var Rule $constraint */
-        foreach ($rules as $constraint) {
-            foreach ($constraint->supportedExtensions() as $extension) {
-                $this->rules[$extension][] = $constraint;
+        /** @var Rule $rule */
+        foreach ($rules as $rule) {
+            foreach ($rule->supportedExtensions() as $extension) {
+                $this->rules[$extension][] = $rule;
             }
+        }
+
+        if (empty($this->rules)) {
+            throw new \InvalidArgumentException('No rule provided!');
         }
 
         parent::__construct($name);
@@ -53,6 +57,7 @@ class CheckCommand extends Command
         $this
             ->setDescription('Check *.rst files')
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
+            ->addOption('rule', 'r', InputOption::VALUE_OPTIONAL, 'Which rule should be applied?')
         ;
     }
 
@@ -62,11 +67,17 @@ class CheckCommand extends Command
 
         $this->io->title(sprintf('Check *.rst files in: <info>%s</info>', $input->getArgument('dir')));
 
+        if (!is_null($input->getOption('rule'))) {
+            if (!class_exists($input->getOption('rule'))) {
+                throw new \InvalidArgumentException(sprintf('Invalid rule provided: %s', $input->getOption('rule')));
+            }
+        }
+
         $finder = new Finder();
         $finder->files()->name('*.rst')->in($input->getArgument('dir'));
 
         foreach ($finder as $file) {
-            $this->checkFile($file);
+            $this->checkFile($file, $input->getOption('rule'));
         }
 
         if ($this->violations) {
@@ -78,7 +89,7 @@ class CheckCommand extends Command
         return $this->violations ? 1 : 0;
     }
 
-    private function checkFile(SplFileInfo $file)
+    private function checkFile(SplFileInfo $file, ?string $configuredRule = null)
     {
         $this->io->writeln($file->getPathname());
 
@@ -86,7 +97,7 @@ class CheckCommand extends Command
             return;
         }
 
-        $lines = file($file->getRealPath());
+        $lines = new \ArrayIterator(file($file->getRealPath()));
 
         $violations = [];
         foreach ($lines as $no => $line) {
@@ -96,12 +107,16 @@ class CheckCommand extends Command
 
             /** @var Rule $rule */
             foreach ($this->rules[$file->getExtension()] as $rule) {
-                $violation = $rule->check($line, $no);
+                if (!is_null($configuredRule) && get_class($rule) !== $configuredRule) {
+                    continue;
+                }
+
+                $violation = $rule->check($lines, $no);
 
                 if (!empty($violation)) {
                     $violations[] = [
                         $violation,
-                        $no,
+                        $no+1,
                         trim($line),
                     ];
 

@@ -20,8 +20,11 @@ class NoComposerPharPrefix implements Rule
         return ['rst'];
     }
 
-    public function check(string $line)
+    public function check(\ArrayIterator $lines, int $number)
     {
+        $lines->seek($number);
+        $line = $lines->current();
+
         if (strstr($line, 'composer.phar')) {
             return 'Please use "composer" instead of "composer.phar"';
         }

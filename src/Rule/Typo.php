@@ -20,8 +20,11 @@ class Typo implements Rule
         return ['rst'];
     }
 
-    public function check(string $line)
+    public function check(\ArrayIterator $lines, int $number)
     {
+        $lines->seek($number);
+        $line = $lines->current();
+
         if (strstr($line, $typo = 'compsoer')) {
             return sprintf('Typo in word "%s"', $typo);
         }

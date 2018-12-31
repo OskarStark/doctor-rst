@@ -20,8 +20,11 @@ class NoPhpPrefix implements Rule
         return ['rst'];
     }
 
-    public function check(string $line)
+    public function check(\ArrayIterator $lines, int $number)
     {
+        $lines->seek($number);
+        $line = $lines->current();
+
         if (strstr($line, 'php composer')) {
             return 'Please remove "php" prefix';
         }
