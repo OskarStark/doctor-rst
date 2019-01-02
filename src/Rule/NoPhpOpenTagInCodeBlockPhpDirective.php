@@ -15,7 +15,7 @@ namespace App\Rule;
 
 use App\Util\Util;
 
-class CodeBlockPhpDirectiveHasOpenTag implements Rule
+class NoPhpOpenTagInCodeBlockPhpDirective implements Rule
 {
     public function supportedExtensions(): array
     {
@@ -37,8 +37,8 @@ class CodeBlockPhpDirectiveHasOpenTag implements Rule
         // check if next line is "<?php"
         $nextLine = $lines->current();
 
-        if (Util::clean($nextLine) !== '<?php') {
-            return sprintf('Please add PHP open tag after "%s" directive', $line);
+        if (Util::clean($nextLine) === '<?php') {
+            return sprintf('Please remove PHP open tag after "%s" directive', $line);
         }
     }
 }
