@@ -17,11 +17,6 @@ use App\Util\Util;
 
 class NoPhpOpenTagInCodeBlockPhpDirective implements Rule
 {
-    public function supportedExtensions(): array
-    {
-        return ['rst'];
-    }
-
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);
@@ -37,7 +32,7 @@ class NoPhpOpenTagInCodeBlockPhpDirective implements Rule
         // check if next line is "<?php"
         $nextLine = $lines->current();
 
-        if (Util::clean($nextLine) === '<?php') {
+        if ('<?php' === Util::clean($nextLine)) {
             return sprintf('Please remove PHP open tag after "%s" directive', $line);
         }
     }

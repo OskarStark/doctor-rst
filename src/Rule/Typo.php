@@ -15,11 +15,6 @@ namespace App\Rule;
 
 class Typo implements Rule
 {
-    public function supportedExtensions(): array
-    {
-        return ['rst'];
-    }
-
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

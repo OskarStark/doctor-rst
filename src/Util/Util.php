@@ -33,20 +33,19 @@ class Util
 
     public static function clean(string $string): string
     {
-        $string = str_replace(array('\n', '\r'), ' ', $string);
+        $string = str_replace(['\n', '\r'], ' ', $string);
 
         return trim($string);
     }
 
     public static function isDirective(string $string): bool
     {
-        return (substr(ltrim($string), 0, 2) == '..');
+        return '..' == substr(ltrim($string), 0, 2);
     }
 
     public static function directiveIs(string $string, string $directive): bool
     {
-        if (!self::isDirective($string))
-        {
+        if (!self::isDirective($string)) {
             return false;
         }
 
@@ -63,7 +62,6 @@ class Util
             ]
         );
 
-
         if (strstr($string, $directive)) {
             return true;
         }
@@ -73,8 +71,7 @@ class Util
 
     public static function codeBlockDirectiveIsTypeOf(string $string, string $type)
     {
-        if (!self::directiveIs($string, self::DIRECTIVE_CODE_BLOCK))
-        {
+        if (!self::directiveIs($string, self::DIRECTIVE_CODE_BLOCK)) {
             return false;
         }
 
@@ -91,11 +88,10 @@ class Util
 
         $string = self::clean($string);
 
-        if (substr($string, -(strlen(($type)))) == $type) {
+        if (substr($string, -(\strlen(($type)))) == $type) {
             return true;
         }
 
         return false;
     }
-
 }

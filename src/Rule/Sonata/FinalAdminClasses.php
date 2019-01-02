@@ -17,11 +17,6 @@ use App\Rule\Rule;
 
 class FinalAdminClasses implements Rule
 {
-    public function supportedExtensions(): array
-    {
-        return ['rst'];
-    }
-
     public function check(\ArrayIterator $lines, int $number)
     {
         return;

@@ -15,17 +15,12 @@ namespace App\Rule;
 
 class PhpPrefixBeforeBinConsole implements Rule
 {
-    public function supportedExtensions(): array
-    {
-        return ['rst'];
-    }
-
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, 'bin/console') && !strstr($line, 'php bin/console') && !strstr($line, '``bin/console') &&  !strstr($line, '"bin/console') ) {
+        if (strstr($line, 'bin/console') && !strstr($line, 'php bin/console') && !strstr($line, '``bin/console') && !strstr($line, '"bin/console')) {
             return 'Please add "php" prefix before "bin/console"';
         }
     }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\Handler\RulesHandler;
 use App\Rule\Rule;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -33,24 +34,19 @@ class CheckCommand extends Command
     /** @var array */
     private $violations;
 
-    /** @var Rule[] */
-    private $rules;
+    /** @var RulesHandler */
+    private $rulesHandler;
 
     /** @var bool */
     private $dryRun = false;
 
-    public function __construct(iterable $rules, ?string $name = null)
+    public function __construct(RulesHandler $rulesHandler, ?string $name = null)
     {
-        /** @var Rule $rule */
-        foreach ($rules as $rule) {
-            foreach ($rule->supportedExtensions() as $extension) {
-                $this->rules[$extension][] = $rule;
-            }
+        if (empty($rulesHandler->getRules())) {
+            throw new \InvalidArgumentException('No rules provided!');
         }
 
-        if (empty($this->rules)) {
-            throw new \InvalidArgumentException('No rule provided!');
-        }
+        $this->rulesHandler = $rulesHandler;
 
         parent::__construct($name);
     }
@@ -71,10 +67,9 @@ class CheckCommand extends Command
 
         $this->io->title(sprintf('Check *.rst files in: <info>%s</info>', $input->getArgument('dir')));
 
-        if (!is_null($input->getOption('rule'))) {
-            if (!class_exists($input->getOption('rule'))) {
-                throw new \InvalidArgumentException(sprintf('Invalid rule provided: %s', $input->getOption('rule')));
-            }
+        $configuredRule = null;
+        if (!\is_null($input->getOption('rule'))) {
+            $configuredRule = $this->rulesHandler->getRule($input->getOption('rule'));
         }
 
         if ($input->getOption('dry-run')) {
@@ -85,7 +80,7 @@ class CheckCommand extends Command
         $finder->files()->name('*.rst')->in($input->getArgument('dir'));
 
         foreach ($finder as $file) {
-            $this->checkFile($file, $input->getOption('rule'));
+            $this->checkFile($file, $configuredRule ?: null);
         }
 
         if ($this->violations) {
@@ -101,10 +96,6 @@ class CheckCommand extends Command
     {
         $this->io->writeln($file->getPathname());
 
-        if (empty($this->rules[$file->getExtension()])) {
-            return;
-        }
-
         $lines = new \ArrayIterator(file($file->getRealPath()));
 
         $violations = [];
@@ -114,8 +105,8 @@ class CheckCommand extends Command
             }
 
             /** @var Rule $rule */
-            foreach ($this->rules[$file->getExtension()] as $rule) {
-                if (!is_null($configuredRule) && get_class($rule) !== $configuredRule) {
+            foreach ($this->rulesHandler->getRules() as $rule) {
+                if (!\is_null($configuredRule) && \get_class($rule) !== $configuredRule) {
                     continue;
                 }
 
@@ -124,7 +115,7 @@ class CheckCommand extends Command
                 if (!empty($violation)) {
                     $violations[] = [
                         $violation,
-                        $no+1,
+                        $no + 1,
                         trim($line),
                     ];
 
