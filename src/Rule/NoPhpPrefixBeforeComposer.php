@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-class NoPhpPrefix implements Rule
+class NoPhpPrefixBeforeComposer implements Rule
 {
     public function supportedExtensions(): array
     {

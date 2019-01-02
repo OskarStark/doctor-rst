@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-class Typo implements Rule
+class NoPhpPrefixBeforeBinConsole implements Rule
 {
     public function supportedExtensions(): array
     {
@@ -25,12 +25,8 @@ class Typo implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, $typo = 'compsoer')) {
-            return sprintf('Typo in word "%s"', $typo);
-        }
-
-        if (strstr($line, $typo = 'registerbundles()')) {
-            return sprintf('Typo in word "%s", use "registerBundles()"', $typo);
+        if (strstr($line, 'php bin/console')) {
+            return 'Please remove "php" prefix before "bin/console"';
         }
     }
 }
