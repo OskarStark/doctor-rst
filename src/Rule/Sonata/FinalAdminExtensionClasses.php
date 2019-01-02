@@ -15,21 +15,15 @@ namespace App\Rule\Sonata;
 
 use App\Rule\Rule;
 
-class FinalAdminClasses implements Rule
+class FinalAdminExtensionClasses implements Rule
 {
     public function check(\ArrayIterator $lines, int $number)
     {
-        return;
-
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match('/^class(.*)extends AbstractAdminExtension$/', $line)) {
             return 'Please use "final" for AdminExtension class';
-        }
-
-        if (preg_match('/^class(.*)extends AbstractAdmin$/', $line)) {
-            return 'Please use "final" for Admin class';
         }
     }
 }

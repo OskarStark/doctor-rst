@@ -22,11 +22,11 @@ class NoAdminYaml implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr(strtolower($line), 'admin.yml') && !strstr(strtolower($line), 'sonata_admin.yml')) {
+        if (preg_match('/admin\.yml/', $line)) {
             return 'Please use "services.yaml" instead of "admin.yml"';
         }
 
-        if (strstr(strtolower($line), 'admin.yaml') && !strstr(strtolower($line), 'sonata_admin.yaml')) {
+        if (preg_match('/admin\.yaml/', $line)) {
             return 'Please use "services.yaml" instead of "admin.yaml"';
         }
     }
