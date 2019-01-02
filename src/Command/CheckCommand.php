@@ -36,6 +36,9 @@ class CheckCommand extends Command
     /** @var Rule[] */
     private $rules;
 
+    /** @var bool */
+    private $dryRun = false;
+
     public function __construct(iterable $rules, ?string $name = null)
     {
         /** @var Rule $rule */
@@ -58,6 +61,7 @@ class CheckCommand extends Command
             ->setDescription('Check *.rst files')
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
             ->addOption('rule', 'r', InputOption::VALUE_OPTIONAL, 'Which rule should be applied?')
+            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Dry-Run')
         ;
     }
 
@@ -71,6 +75,10 @@ class CheckCommand extends Command
             if (!class_exists($input->getOption('rule'))) {
                 throw new \InvalidArgumentException(sprintf('Invalid rule provided: %s', $input->getOption('rule')));
             }
+        }
+
+        if ($input->getOption('dry-run')) {
+            $this->dryRun = true;
         }
 
         $finder = new Finder();

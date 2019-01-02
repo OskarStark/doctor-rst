@@ -11,9 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule;
+namespace App\Rule\Sonata;
 
-class YamlInsteadOfYmlPrefix implements Rule
+use App\Rule\Rule;
+
+class FinalAdminClasses implements Rule
 {
     public function supportedExtensions(): array
     {
@@ -22,15 +24,17 @@ class YamlInsteadOfYmlPrefix implements Rule
 
     public function check(\ArrayIterator $lines, int $number)
     {
+        return;
+
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr(strtolower($line), '.. code-block:: yml')) {
-            return 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
+        if (strstr($line, 'extends AbstractAdminExtension') && !strstr($line, 'final')) {
+            return 'Please use "final" for AdminExtension class';
         }
 
-        if (strstr(strtolower($line), '.yml')) {
-            return 'Please use ".yaml" instead of ".yml"';
+        if (strstr($line, 'extends AbstractAdmin') && !strstr($line, 'final')) {
+            return 'Please use "final" for Admin class';
         }
     }
 }
