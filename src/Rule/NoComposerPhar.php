@@ -11,19 +11,29 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
-use App\Rule\Rule;
+use App\Handler\RulesHandler;
 
-class NoPhpPrefixBeforeBinConsole implements Rule
+class NoComposerPhar implements Rule
 {
+    public static function getName(): string
+    {
+        return 'no_composer_phar';
+    }
+
+    public static function getGroups(): array
+    {
+        return [RulesHandler::GROUP_SONATA];
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, 'php bin/console')) {
-            return 'Please remove "php" prefix before "bin/console"';
+        if (strstr($line, 'composer.phar')) {
+            return 'Please use "composer" instead of "composer.phar"';
         }
     }
 }

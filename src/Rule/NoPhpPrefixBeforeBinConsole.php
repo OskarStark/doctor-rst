@@ -13,15 +13,28 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-class NoComposerPharPrefix implements Rule
+use App\Handler\RulesHandler;
+use App\Rule\Rule;
+
+class NoPhpPrefixBeforeBinConsole implements Rule
 {
+    public static function getName(): string
+    {
+        return 'no_php_prefix_before_bin_console';
+    }
+
+    public static function getGroups(): array
+    {
+        return [RulesHandler::GROUP_SONATA];
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, 'composer.phar')) {
-            return 'Please use "composer" instead of "composer.phar"';
+        if (strstr($line, 'php bin/console')) {
+            return 'Please remove "php" prefix before "bin/console"';
         }
     }
 }
