@@ -14,16 +14,26 @@ declare(strict_types=1);
 namespace App\Handler;
 
 use App\Rule\Rule;
+use Webmozart\Assert\Assert;
 
 class RulesHandler
 {
     /** @var Rule[] */
-    private $rules;
+    private $rules = [];
 
     public function __construct(iterable $rules)
     {
+        $this->setRules($rules);
+    }
+
+    public function setRules(iterable $rules)
+    {
+        $this->rules = [];
+
+        Assert::allIsInstanceOf($rules, Rule::class);
+
         foreach ($rules as $rule) {
-            $this->rules[\get_class($rule)] = $rule;
+            $this->rules[$rule::getName()] = $rule;
         }
     }
 
@@ -32,12 +42,12 @@ class RulesHandler
         return $this->rules;
     }
 
-    public function getRule($class): Rule
+    public function getRule(string $name): Rule
     {
-        if (!isset($this->rules[$class])) {
-            throw new \InvalidArgumentException(sprintf('Could not find rule:: %s', $class));
+        if (!isset($this->rules[$name])) {
+            throw new \InvalidArgumentException(sprintf('Could not find rule:: %s', $name));
         }
 
-        return $this->rules[$class];
+        return $this->rules[$name];
     }
 }

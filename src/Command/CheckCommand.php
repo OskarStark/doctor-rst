@@ -37,6 +37,9 @@ class CheckCommand extends Command
     /** @var RulesHandler */
     private $rulesHandler;
 
+    /** @var Rule[] */
+    private $rules;
+
     /** @var bool */
     private $dryRun = false;
 
@@ -47,6 +50,7 @@ class CheckCommand extends Command
         }
 
         $this->rulesHandler = $rulesHandler;
+        $this->rules = $rulesHandler->getRules();
 
         parent::__construct($name);
     }
@@ -56,7 +60,7 @@ class CheckCommand extends Command
         $this
             ->setDescription('Check *.rst files')
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
-            ->addOption('rule', 'r', InputOption::VALUE_OPTIONAL, 'Which rule should be applied?')
+            ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Dry-Run')
         ;
     }
@@ -67,9 +71,12 @@ class CheckCommand extends Command
 
         $this->io->title(sprintf('Check *.rst files in: <info>%s</info>', $input->getArgument('dir')));
 
-        $configuredRule = null;
-        if (!\is_null($input->getOption('rule'))) {
-            $configuredRule = $this->rulesHandler->getRule($input->getOption('rule'));
+        if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
+            foreach ($input->getOption('rule') as $ruleName) {
+                $rules[] = $this->rulesHandler->getRule($ruleName);
+            }
+
+            $this->rulesHandler->setRules($rules);
         }
 
         if ($input->getOption('dry-run')) {
@@ -80,7 +87,7 @@ class CheckCommand extends Command
         $finder->files()->name('*.rst')->in($input->getArgument('dir'));
 
         foreach ($finder as $file) {
-            $this->checkFile($file, $configuredRule ?: null);
+            $this->checkFile($file);
         }
 
         if ($this->violations) {
@@ -92,7 +99,7 @@ class CheckCommand extends Command
         return $this->violations ? 1 : 0;
     }
 
-    private function checkFile(SplFileInfo $file, ?string $configuredRule = null)
+    private function checkFile(SplFileInfo $file)
     {
         $this->io->writeln($file->getPathname());
 
@@ -106,10 +113,6 @@ class CheckCommand extends Command
 
             /** @var Rule $rule */
             foreach ($this->rulesHandler->getRules() as $rule) {
-                if (!\is_null($configuredRule) && \get_class($rule) !== $configuredRule) {
-                    continue;
-                }
-
                 $violation = $rule->check($lines, $no);
 
                 if (!empty($violation)) {
