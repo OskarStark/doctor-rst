@@ -13,10 +13,21 @@ declare(strict_types=1);
 
 namespace App\Rule\Sonata;
 
+use App\Handler\RulesHandler;
 use App\Rule\Rule;
 
 class NoAdminYaml implements Rule
 {
+    public static function getName(): string
+    {
+        return 'no_admin_yaml';
+    }
+
+    public static function getGroups(): array
+    {
+        return [RulesHandler::GROUP_SONATA];
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

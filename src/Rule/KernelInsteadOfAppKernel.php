@@ -13,8 +13,20 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Handler\RulesHandler;
+
 class KernelInsteadOfAppKernel implements Rule
 {
+    public static function getName(): string
+    {
+        return 'kernel_instead_of_app_kernel';
+    }
+
+    public static function getGroups(): array
+    {
+        return [RulesHandler::GROUP_SONATA];
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

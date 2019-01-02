@@ -13,8 +13,20 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Handler\RulesHandler;
+
 class YamlInsteadOfYmlSuffix implements Rule
 {
+    public static function getName(): string
+    {
+        return 'yaml_instead_of_yml_suffix';
+    }
+
+    public static function getGroups(): array
+    {
+        return [RulesHandler::GROUP_SYMFONY];
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

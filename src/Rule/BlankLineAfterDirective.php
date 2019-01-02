@@ -13,10 +13,21 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Handler\RulesHandler;
 use App\Util\Util;
 
 class BlankLineAfterDirective implements Rule
 {
+    public static function getName(): string
+    {
+        return 'blank_line_after_directive';
+    }
+
+    public static function getGroups(): array
+    {
+        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

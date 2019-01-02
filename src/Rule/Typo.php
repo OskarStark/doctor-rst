@@ -15,6 +15,11 @@ namespace App\Rule;
 
 class Typo implements Rule
 {
+    public static function getName(): string
+    {
+        return 'typo';
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

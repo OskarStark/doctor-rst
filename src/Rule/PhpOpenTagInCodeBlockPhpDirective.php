@@ -17,6 +17,11 @@ use App\Util\Util;
 
 class PhpOpenTagInCodeBlockPhpDirective implements Rule
 {
+    public static function getName(): string
+    {
+        return 'php_open_tag_in_code_block_php_directive';
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

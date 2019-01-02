@@ -15,5 +15,7 @@ namespace App\Rule;
 
 interface Rule
 {
+    public static function getName(): string;
+
     public function check(\ArrayIterator $lines, int $number);
 }

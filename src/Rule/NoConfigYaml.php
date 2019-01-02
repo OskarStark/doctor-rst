@@ -15,6 +15,11 @@ namespace App\Rule;
 
 class NoConfigYaml implements Rule
 {
+    public static function getName(): string
+    {
+        return 'no_config_yaml';
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

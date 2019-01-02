@@ -13,10 +13,21 @@ declare(strict_types=1);
 
 namespace App\Rule\Sonata;
 
+use App\Handler\RulesHandler;
 use App\Rule\Rule;
 
 class FinalAdminExtensionClasses implements Rule
 {
+    public static function getName(): string
+    {
+        return 'final_admin_extension_classes';
+    }
+
+    public static function getGroups(): array
+    {
+        return [RulesHandler::GROUP_SONATA];
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

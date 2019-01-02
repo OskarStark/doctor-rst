@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
-use App\Rule\Rule;
 
 class NoPhpPrefixBeforeBinConsole implements Rule
 {
