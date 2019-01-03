@@ -32,11 +32,11 @@ class YamlInsteadOfYmlSuffix implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr(strtolower($line), '.. code-block:: yml')) {
+        if (preg_match('/^.. code-block:: yml$/', trim($line))) {
             return 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
         }
 
-        if (strstr(strtolower($line), '.yml')) {
+        if (preg_match('/.yml/', $line)) {
             return 'Please use ".yaml" instead of ".yml"';
         }
     }
