@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use App\Rule\KernelInsteadOfAppKernel;
 use App\Rule\Sonata\FinalAdminClasses;
 use App\Rule\Sonata\NoAdminYaml;
 use App\Rule\Typo;
-use App\Rule\YamlInsteadOfYmlSuffix;
 use PHPUnit\Framework\TestCase;
 
-class YamlInsteadofYmlSuffixTest extends TestCase
+class KernelInsteadOfAppKernelTest extends TestCase
 {
     /**
      * @test
@@ -30,7 +30,7 @@ class YamlInsteadofYmlSuffixTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new YamlInsteadOfYmlSuffix())->check(new \ArrayIterator([$line]), 0)
+            (new KernelInsteadOfAppKernel())->check(new \ArrayIterator([$line]), 0)
         );
     }
 
@@ -38,20 +38,20 @@ class YamlInsteadofYmlSuffixTest extends TestCase
     {
         return [
             [
-                'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"',
-                '.. code-block:: yml',
+                'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
+                'register the bundle in app/AppKernel.php',
             ],
             [
                 null,
-                '.. code-block:: yaml',
+                'register the bundle in src/Kernel.php',
             ],
             [
-                'Please use ".yaml" instead of ".yml"',
-                'Register your service in services.yml file',
+                'Please use "Kernel" instead of "AppKernel"',
+                'register the bundle via AppKernel',
             ],
             [
                 null,
-                'Register your service in services.yaml file',
+                'register the bundle via Kernel',
             ],
         ];
     }

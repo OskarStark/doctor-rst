@@ -32,11 +32,11 @@ class KernelInsteadOfAppKernel implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, 'app/AppKernel.php')) {
+        if (preg_match('/app\/AppKernel\.php/', $line)) {
             return 'Please use "src/Kernel.php" instead of "app/AppKernel.php"';
         }
 
-        if (strstr($line, 'AppKernel')) {
+        if (preg_match('/AppKernel/', $line)) {
             return 'Please use "Kernel" instead of "AppKernel"';
         }
     }
