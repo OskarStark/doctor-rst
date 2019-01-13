@@ -65,7 +65,7 @@ class PhpCsFixerPhpCodeBlock implements Rule
 
         file_put_contents($tempfile, implode('', $phpCode));
 
-        var_dump(file_get_contents($tempfile));
+        //var_dump(file_get_contents($tempfile));
 
 //        var_dump(shell_exec(sprintf(
 //            'docker run --rm -it -w /app -v %s:/app oskarstark/php-cs-fixer-ga:latest --config=../../',

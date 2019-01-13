@@ -25,6 +25,8 @@ class Util
     const DIRECTIVE_TIP = '.. tip::';
     const DIRECTIVE_CAUTION = '.. caution::';
     const DIRECTIVE_TOCTREE = '.. toctree::';
+    const DIRECTIVE_INDEX = '.. index::';
+    const DIRECTIVE_IMPORTANT = '.. important::';
 
     const CODE_BLOCK_PHP = 'php';
     const CODE_BLOCK_XML = 'xml';
@@ -58,6 +60,8 @@ class Util
             self::DIRECTIVE_TIP,
             self::DIRECTIVE_CAUTION,
             self::DIRECTIVE_TOCTREE,
+            self::DIRECTIVE_INDEX,
+            self::DIRECTIVE_IMPORTANT,
         ];
 
         Assert::oneOf(

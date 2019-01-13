@@ -15,6 +15,7 @@ namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
 use App\Rule\Rule;
+use App\Util\Util;
 
 class FinalAdminClasses implements Rule
 {
@@ -32,6 +33,8 @@ class FinalAdminClasses implements Rule
     {
         $lines->seek($number);
         $line = $lines->current();
+
+        $line = Util::clean($line);
 
         if (preg_match('/^class(.*)extends AbstractAdminExtension$/', $line)) {
             return 'Please use "final" for AdminExtension class';

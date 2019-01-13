@@ -15,17 +15,18 @@ namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
 use App\Rule\Rule;
+use App\Util\Util;
 
-class NoAdminYaml implements Rule
+class LineLength implements Rule
 {
     public static function getName(): string
     {
-        return 'no_admin_yaml';
+        return 'line_length';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA];
+        return [RulesHandler::GROUP_DEV];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -33,20 +34,10 @@ class NoAdminYaml implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/sonata_admin\.yaml/', $line)) {
-            return;
-        }
+        $count = mb_strlen(Util::clean($line));
 
-        if (preg_match('/sonata_doctrine_orm_admin\.yaml/', $line)) {
-            return;
-        }
-
-        if (preg_match('/admin\.yml/', $line)) {
-            return 'Please use "services.yaml" instead of "admin.yml"';
-        }
-
-        if (preg_match('/admin\.yaml/', $line)) {
-            return 'Please use "services.yaml" instead of "admin.yaml"';
+        if ($count > $max = 120) {
+            return sprintf('Line is to long (max %s) currently: %s', $max, $count);
         }
     }
 }

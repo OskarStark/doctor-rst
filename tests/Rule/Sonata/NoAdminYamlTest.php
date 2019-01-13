@@ -55,6 +55,10 @@ class NoAdminYamlTest extends TestCase
                 null,
                 '# config/packages/sonata_admin.yaml',
             ],
+            [
+                null,
+                '# config/packages/sonata_doctrine_orm_admin.yaml',
+            ],
         ];
     }
 }

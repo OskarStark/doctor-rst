@@ -38,6 +38,11 @@ class FinalAdminClassesTest extends TestCase
                 'Please use "final" for Admin class',
                 'class TestAdmin extends AbstractAdmin',
             ],
+
+            [
+                'Please use "final" for Admin class',
+                '    class TestAdmin extends AbstractAdmin',
+            ],
             [
                 null,
                 'final class TestAdmin extends AbstractAdmin',
