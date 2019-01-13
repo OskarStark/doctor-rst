@@ -24,6 +24,7 @@ class Util
     const DIRECTIVE_VERSIONADDED = '.. versionadded::';
     const DIRECTIVE_TIP = '.. tip::';
     const DIRECTIVE_CAUTION = '.. caution::';
+    const DIRECTIVE_TOCTREE = '.. toctree::';
 
     const CODE_BLOCK_PHP = 'php';
     const CODE_BLOCK_XML = 'xml';
@@ -40,7 +41,7 @@ class Util
 
     public static function isDirective(string $string): bool
     {
-        return '..' == substr(ltrim($string), 0, 2);
+        return '..' == substr(ltrim($string), 0, 2) || '::' == substr(self::clean($string), -2, 2);
     }
 
     public static function directiveIs(string $string, string $directive): bool
@@ -49,20 +50,33 @@ class Util
             return false;
         }
 
+        $directivesExcludedCodeBlock = [
+            self::DIRECTIVE_NOTE,
+            self::DIRECTIVE_WARNING,
+            self::DIRECTIVE_NOTICE,
+            self::DIRECTIVE_VERSIONADDED,
+            self::DIRECTIVE_TIP,
+            self::DIRECTIVE_CAUTION,
+            self::DIRECTIVE_TOCTREE,
+        ];
+
         Assert::oneOf(
             $directive,
-            [
-                self::DIRECTIVE_CODE_BLOCK,
-                self::DIRECTIVE_NOTE,
-                self::DIRECTIVE_WARNING,
-                self::DIRECTIVE_NOTICE,
-                self::DIRECTIVE_VERSIONADDED,
-                self::DIRECTIVE_TIP,
-                self::DIRECTIVE_CAUTION,
-            ]
+            array_merge(
+                [self::DIRECTIVE_CODE_BLOCK],
+                $directivesExcludedCodeBlock
+            )
         );
 
         if (strstr($string, $directive)) {
+            return true;
+        } elseif (self::DIRECTIVE_CODE_BLOCK == $directive && '::' == substr(self::clean($string), -2, 2)) {
+            foreach ($directivesExcludedCodeBlock as $other) {
+                if (strstr($string, $other)) {
+                    return false;
+                }
+            }
+
             return true;
         }
 
@@ -88,7 +102,8 @@ class Util
 
         $string = self::clean($string);
 
-        if (substr($string, -(\strlen(($type)))) == $type) {
+        if (substr($string, -(\strlen(($type)))) == $type
+            || (self::CODE_BLOCK_PHP == $type && '::' == substr(self::clean($string), -2, 2))) {
             return true;
         }
 

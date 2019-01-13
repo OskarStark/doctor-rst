@@ -22,6 +22,11 @@ class PhpOpenTagInCodeBlockPhpDirective implements Rule
         return 'php_open_tag_in_code_block_php_directive';
     }
 
+    public static function getGroups(): array
+    {
+        return [];
+    }
+
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

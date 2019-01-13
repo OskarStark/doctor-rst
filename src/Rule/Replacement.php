@@ -15,11 +15,11 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class Typo implements Rule
+class Replacement implements Rule
 {
     public static function getName(): string
     {
-        return 'typo';
+        return 'replacement';
     }
 
     public static function getGroups(): array
@@ -32,12 +32,12 @@ class Typo implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, $typo = 'compsoer')) {
-            return sprintf('Typo in word "%s"', $typo);
+        if (strstr($line, $replacement = '//...')) {
+            return sprintf('Please replace "%s" with "// ..."', $replacement);
         }
 
-        if (strstr($line, $typo = 'registerbundles()')) {
-            return sprintf('Typo in word "%s", use "registerBundles()"', $typo);
+        if (strstr($line, $replacement = '#...')) {
+            return sprintf('Please replace "%s" with "# ..."', $replacement);
         }
     }
 }

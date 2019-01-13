@@ -18,6 +18,7 @@ use Webmozart\Assert\Assert;
 
 class RulesHandler
 {
+    const GROUP_DEV = '@Dev';
     const GROUP_SONATA = '@Sonata';
     const GROUP_SYMFONY = '@Symfony';
 

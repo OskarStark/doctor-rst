@@ -61,6 +61,7 @@ class CheckCommand extends Command
             ->setDescription('Check *.rst files')
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
+            ->addOption('group', 'g', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be used?')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Dry-Run')
         ;
     }
@@ -71,9 +72,27 @@ class CheckCommand extends Command
 
         $this->io->title(sprintf('Check *.rst files in: <info>%s</info>', $input->getArgument('dir')));
 
+        if (!empty($input->getOption('rule') && !empty($input->getOption('group')))) {
+            $this->io->error('You can only provide "rule" or "group"!');
+
+            return 1;
+        }
+
         if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
-            foreach ($input->getOption('rule') as $ruleName) {
-                $rules[] = $this->rulesHandler->getRule($ruleName);
+            foreach ($input->getOption('rule') as $rule) {
+                $rules[] = $this->rulesHandler->getRule($rule);
+            }
+
+            $this->rulesHandler->setRules($rules);
+        }
+
+        if (\is_array($input->getOption('group')) && !empty($input->getOption('group'))) {
+            $rules = $this->rulesHandler->getRules();
+
+            foreach ($rules as $key => $rule) {
+                if (!\in_array(current($input->getOption('group')), $rule::getGroups())) {
+                    unset($rules[$key]);
+                }
             }
 
             $this->rulesHandler->setRules($rules);
@@ -117,6 +136,7 @@ class CheckCommand extends Command
 
                 if (!empty($violation)) {
                     $violations[] = [
+                        $rule::getName(),
                         $violation,
                         $no + 1,
                         trim($line),
@@ -128,7 +148,7 @@ class CheckCommand extends Command
         }
 
         if (!empty($violations)) {
-            $this->io->table(['Violation', 'Line', 'Extracted line from file'], $violations);
+            $this->io->table(['Rule', 'Violation', 'Line', 'Extracted line from file'], $violations);
         }
     }
 }

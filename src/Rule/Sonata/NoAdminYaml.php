@@ -33,6 +33,10 @@ class NoAdminYaml implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
+        if (preg_match('/sonata_admin\.yaml/', $line)) {
+            return;
+        }
+
         if (preg_match('/admin\.yml/', $line)) {
             return 'Please use "services.yaml" instead of "admin.yml"';
         }

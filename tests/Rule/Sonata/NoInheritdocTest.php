@@ -15,9 +15,10 @@ namespace App\Tests\Rule\Sonata;
 
 use App\Rule\Sonata\FinalAdminClasses;
 use App\Rule\Sonata\NoAdminYaml;
+use App\Rule\Sonata\NoInheritdoc;
 use PHPUnit\Framework\TestCase;
 
-class NoAdminYamlTest extends TestCase
+class NoInheritdocTest extends TestCase
 {
     /**
      * @test
@@ -28,7 +29,7 @@ class NoAdminYamlTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoAdminYaml())->check(new \ArrayIterator([$line]), 0)
+            (new NoInheritdoc())->check(new \ArrayIterator([$line]), 0)
         );
     }
 
@@ -36,24 +37,12 @@ class NoAdminYamlTest extends TestCase
     {
         return [
             [
-                'Please use "services.yaml" instead of "admin.yml"',
-                'register the admin class in admin.yml',
+                'Please do not use "@inheritdoc"',
+                '* {@inheritdoc}',
             ],
             [
                 null,
-                'register the admin class in services.yaml',
-            ],
-            [
-                'Please use "services.yaml" instead of "admin.yaml"',
-                'register the admin class in admin.yaml',
-            ],
-            [
-                null,
-                'register the admin class in services.yaml',
-            ],
-            [
-                null,
-                '# config/packages/sonata_admin.yaml',
+                'fine',
             ],
         ];
     }

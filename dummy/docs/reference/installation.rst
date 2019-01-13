@@ -39,7 +39,7 @@ are not already enabled:
     // config/bundles.php
 
     return [
-        //...
+        // ...
         Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle::class => ['all' => true],
     ];
 

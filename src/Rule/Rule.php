@@ -17,5 +17,7 @@ interface Rule
 {
     public static function getName(): string;
 
+    public static function getGroups(): array;
+
     public function check(\ArrayIterator $lines, int $number);
 }

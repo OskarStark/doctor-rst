@@ -11,20 +11,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule;
+namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
+use App\Rule\Rule;
 
-class Typo implements Rule
+class NoInheritdoc implements Rule
 {
     public static function getName(): string
     {
-        return 'typo';
+        return 'no_inheritdoc';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
+        return [RulesHandler::GROUP_SONATA];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -32,12 +33,8 @@ class Typo implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, $typo = 'compsoer')) {
-            return sprintf('Typo in word "%s"', $typo);
-        }
-
-        if (strstr($line, $typo = 'registerbundles()')) {
-            return sprintf('Typo in word "%s", use "registerBundles()"', $typo);
+        if (preg_match('/@inheritdoc/', $line)) {
+            return 'Please do not use "@inheritdoc"';
         }
     }
 }
