@@ -11,21 +11,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule;
+namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
-use App\Util\Util;
+use App\Rule\Rule;
 
-class Replacement implements Rule
+class ShortArraySyntax implements Rule
 {
     public static function getName(): string
     {
-        return 'replacement';
+        return 'short_array_syntax';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
+        return [RulesHandler::GROUP_SONATA];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -33,14 +33,8 @@ class Replacement implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = Util::clean($line);
-
-        if (strstr($line, $replacement = '//...')) {
-            return sprintf('Please replace "%s" with "// ..."', $replacement);
-        }
-
-        if (strstr($line, $replacement = '#...')) {
-            return sprintf('Please replace "%s" with "# ..."', $replacement);
+        if (preg_match('/ array\(/', $line)) {
+            return 'Please use short array syntax';
         }
     }
 }
