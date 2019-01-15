@@ -33,6 +33,8 @@ class Util
     const CODE_BLOCK_TWIG = 'twig';
     const CODE_BLOCK_YML = 'yml';
     const CODE_BLOCK_YAML = 'yaml';
+    const CODE_BLOCK_BASH = 'bash';
+    const CODE_BLOCK_SHELL = 'shell';
 
     public static function clean(string $string): string
     {
@@ -101,6 +103,8 @@ class Util
                 self::CODE_BLOCK_TWIG,
                 self::CODE_BLOCK_YML,
                 self::CODE_BLOCK_YAML,
+                self::CODE_BLOCK_SHELL,
+                self::CODE_BLOCK_BASH,
             ]
         );
 
@@ -112,5 +116,10 @@ class Util
         }
 
         return false;
+    }
+
+    public static function isBlankLine(string $string): bool
+    {
+        return (bool) empty(Util::clean($string));
     }
 }

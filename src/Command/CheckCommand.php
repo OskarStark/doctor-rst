@@ -38,19 +38,14 @@ class CheckCommand extends Command
     private $rulesHandler;
 
     /** @var Rule[] */
-    private $rules;
+    private $rules = [];
 
     /** @var bool */
     private $dryRun = false;
 
     public function __construct(RulesHandler $rulesHandler, ?string $name = null)
     {
-        if (empty($rulesHandler->getRules())) {
-            throw new \InvalidArgumentException('No rules provided!');
-        }
-
         $this->rulesHandler = $rulesHandler;
-        $this->rules = $rulesHandler->getRules();
 
         parent::__construct($name);
     }
@@ -61,7 +56,7 @@ class CheckCommand extends Command
             ->setDescription('Check *.rst files')
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
-            ->addOption('group', 'g', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be used?')
+            ->addOption('group', 'g', InputOption::VALUE_REQUIRED, 'Which groups should be used?')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Dry-Run')
         ;
     }
@@ -80,22 +75,18 @@ class CheckCommand extends Command
 
         if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
             foreach ($input->getOption('rule') as $rule) {
-                $rules[] = $this->rulesHandler->getRule($rule);
+                $this->rules = $this->rulesHandler->getRule($rule);
             }
-
-            $this->rulesHandler->setRules($rules);
         }
 
-        if (\is_array($input->getOption('group')) && !empty($input->getOption('group'))) {
-            $rules = $this->rulesHandler->getRules();
+        if (!empty($input->getOption('group'))) {
+            $this->rules = $this->rulesHandler->getRulesByGroup($input->getOption('group'));
+        }
 
-            foreach ($rules as $key => $rule) {
-                if (!\in_array(current($input->getOption('group')), $rule::getGroups())) {
-                    unset($rules[$key]);
-                }
-            }
+        if (empty($this->rules)) {
+            $this->io->warning('No rules selected!');
 
-            $this->rulesHandler->setRules($rules);
+            return;
         }
 
         if ($input->getOption('dry-run')) {
@@ -131,7 +122,7 @@ class CheckCommand extends Command
             }
 
             /** @var Rule $rule */
-            foreach ($this->rulesHandler->getRules() as $rule) {
+            foreach ($this->rules as $rule) {
                 $violation = $rule->check($lines, $no);
 
                 if (!empty($violation)) {

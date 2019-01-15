@@ -1,0 +1,61 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the rst-checker.
+ *
+ * (c) Oskar Stark <oskarstark@googlemail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace App\Tests\Rule\Sonata;
+
+use App\Rule\Sonata\FinalAdminClasses;
+use App\Rule\Sonata\NoAdminYaml;
+use App\Rule\Sonata\ShortArraySyntax;
+use PHPUnit\Framework\TestCase;
+
+class ShortArraySyntaxTest extends TestCase
+{
+    /**
+     * @test
+     *
+     * @dataProvider checkProvider
+     */
+    public function check($expected, $line)
+    {
+        $this->assertSame(
+            $expected,
+            (new ShortArraySyntax())->check(new \ArrayIterator([$line]), 0)
+        );
+    }
+
+    public function checkProvider()
+    {
+        return [
+            [
+                'Please use short array syntax',
+                '->add(\'foo\', null, array(\'key\' => 1));',
+            ],
+            [
+                null,
+                '->add(\'foo\', null, [\'key\' => 1[);',
+            ],
+            [
+                'Please use short array syntax',
+                'if (in_array(1, array())) { ',
+            ],
+            [
+                null,
+                'if (in_array(1, [])) {',
+            ],
+            [
+                null,
+                '$forms = iterator_to_array($forms);',
+            ],
+        ];
+    }
+}

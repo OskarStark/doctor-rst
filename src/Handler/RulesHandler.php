@@ -22,6 +22,12 @@ class RulesHandler
     const GROUP_SONATA = '@Sonata';
     const GROUP_SYMFONY = '@Symfony';
 
+    private const GROUPS = [
+        self::GROUP_DEV,
+        self::GROUP_SONATA,
+        self::GROUP_SYMFONY,
+    ];
+
     /** @var Rule[] */
     private $rules = [];
 
@@ -44,6 +50,20 @@ class RulesHandler
     public function getRules()
     {
         return $this->rules;
+    }
+
+    public function getRulesByGroup(string $group)
+    {
+        Assert::oneOf($group, self::GROUPS);
+
+        $rules = [];
+        foreach ($this->rules as $rule) {
+            if (\in_array($group, $rule::getGroups())) {
+                $rules[] = $rule;
+            }
+        }
+
+        return $rules;
     }
 
     public function getRule(string $name): Rule
