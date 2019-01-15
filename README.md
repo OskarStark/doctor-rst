@@ -47,10 +47,18 @@ You can run it in any given directory like this:
 
 `docker run --rm -it -e DOCS_DIR='/docs' -v ${PWD}:/docs  oskarstark/rst-checker:latest`
 
+Local usage
+-----------
+
+`bin/console check dummy/docs --group=@Symfony`
+
+or
+
+`bin/console check dummy/docs --group=@Sonata`
+
 Todo:
 -----
 
 * Allow to specifiy which rules should be used via config file (`.rst-checker`)
 * Allow to register custom Rules
-* Rework rules, currently ist just a simple string search
 * Move logic from Command to Services
