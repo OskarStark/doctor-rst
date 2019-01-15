@@ -15,10 +15,11 @@ namespace App\Tests\Rule\Sonata;
 
 use App\Rule\Sonata\FinalAdminClasses;
 use App\Rule\Sonata\NoAdminYaml;
+use App\Rule\Sonata\NoBashPrompt;
 use App\Rule\Sonata\ShortArraySyntax;
 use PHPUnit\Framework\TestCase;
 
-class ShortArraySyntaxTest extends TestCase
+class NoBashPromptTest extends TestCase
 {
     /**
      * @test
@@ -29,7 +30,7 @@ class ShortArraySyntaxTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new ShortArraySyntax())->check(new \ArrayIterator([$line]), 0)
+            (new NoBashPrompt())->check(new \ArrayIterator(is_array($line) ? $line : [$line]), 0)
         );
     }
 
@@ -37,24 +38,28 @@ class ShortArraySyntaxTest extends TestCase
     {
         return [
             [
-                'Please use short array syntax',
-                '->add(\'foo\', null, array(\'key\' => 1));',
+                'Please remove the "$" prefix in .. code-block:: directive',
+                [
+                    '.. code-block:: bash',
+                    '',
+                    '$ composer install sonata-project/admin-bundle',
+                ]
+            ],
+            [
+                'Please remove the "$" prefix in .. code-block:: directive',
+                [
+                    '.. code-block:: shell',
+                    '',
+                    '$ composer install sonata-project/admin-bundle',
+                ]
             ],
             [
                 null,
-                '->add(\'foo\', null, [\'key\' => 1[);',
-            ],
-            [
-                'Please use short array syntax',
-                'if (in_array(1, array())) { ',
+                '$ composer install sonata-project/admin-bundle',
             ],
             [
                 null,
-                'if (in_array(1, [])) {',
-            ],
-            [
-                null,
-                '$forms = iterator_to_array($forms);',
+                'composer install sonata-project/admin-bundle',
             ],
         ];
     }

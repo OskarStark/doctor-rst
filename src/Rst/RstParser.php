@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Util;
+namespace App\Rst;
 
 use Webmozart\Assert\Assert;
 
-class Util
+class RstParser
 {
     const DIRECTIVE_CODE_BLOCK = '.. code-block::';
     const DIRECTIVE_NOTE = '.. note::';
@@ -120,6 +120,6 @@ class Util
 
     public static function isBlankLine(string $string): bool
     {
-        return (bool) empty(Util::clean($string));
+        return (bool) empty(RstParser::clean($string));
     }
 }

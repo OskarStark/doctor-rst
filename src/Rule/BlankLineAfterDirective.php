@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
-use App\Util\Util;
+use App\Rst\RstParser;
 
 class BlankLineAfterDirective implements Rule
 {
@@ -33,13 +33,13 @@ class BlankLineAfterDirective implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!Util::isDirective($line)) {
+        if (!RstParser::isDirective($line)) {
             return;
         }
 
         $supports = false;
         foreach ($this->supportedDirectives() as $type) {
-            if (Util::directiveIs($line, $type)) {
+            if (RstParser::directiveIs($line, $type)) {
                 $supports = true;
                 break;
             }
@@ -54,7 +54,7 @@ class BlankLineAfterDirective implements Rule
         // check if next line is empty
         $nextLine = $lines->current();
 
-        if (!empty(Util::clean($nextLine))) {
+        if (!RstParser::isBlankLine($nextLine)) {
             return sprintf('Please add a blank line after "%s" directive', $line);
         }
     }
@@ -62,13 +62,13 @@ class BlankLineAfterDirective implements Rule
     private function supportedDirectives()
     {
         return [
-            Util::DIRECTIVE_CODE_BLOCK,
-            Util::DIRECTIVE_NOTE,
-            Util::DIRECTIVE_WARNING,
-            Util::DIRECTIVE_NOTICE,
-            Util::DIRECTIVE_TIP,
-            Util::DIRECTIVE_CAUTION,
-            Util::DIRECTIVE_VERSIONADDED,
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            RstParser::DIRECTIVE_NOTE,
+            RstParser::DIRECTIVE_WARNING,
+            RstParser::DIRECTIVE_NOTICE,
+            RstParser::DIRECTIVE_TIP,
+            RstParser::DIRECTIVE_CAUTION,
+            RstParser::DIRECTIVE_VERSIONADDED,
         ];
     }
 }

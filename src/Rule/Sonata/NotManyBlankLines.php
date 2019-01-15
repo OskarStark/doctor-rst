@@ -11,21 +11,22 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule;
+namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
+use App\Rule\Rule;
 
-class Replacement implements Rule
+class NotManyBlankLines implements Rule
 {
     public static function getName(): string
     {
-        return 'replacement';
+        return 'not_many_blank_lines';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
+        return [RulesHandler::GROUP_SONATA];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -33,14 +34,19 @@ class Replacement implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-
-        if (strstr($line, $replacement = '//...')) {
-            return sprintf('Please replace "%s" with "// ..."', $replacement);
+        if (!RstParser::isBlankLine($line)) {
+            return;
         }
 
-        if (strstr($line, $replacement = '#...')) {
-            return sprintf('Please replace "%s" with "# ..."', $replacement);
+        $lines->next();
+        $nextLine = $lines->current();
+
+        if (null === $nextLine) {
+            return;
+        }
+
+        if (RstParser::isBlankLine($nextLine)) {
+            return 'Please avoid many blank lines';
         }
     }
 }

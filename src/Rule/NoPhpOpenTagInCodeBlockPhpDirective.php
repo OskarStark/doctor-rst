@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
-use App\Util\Util;
+use App\Rst\RstParser;
 
 class NoPhpOpenTagInCodeBlockPhpDirective implements Rule
 {
@@ -33,7 +33,7 @@ class NoPhpOpenTagInCodeBlockPhpDirective implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!Util::codeBlockDirectiveIsTypeOf($line, Util::CODE_BLOCK_PHP)) {
+        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)) {
             return;
         }
 
@@ -43,7 +43,7 @@ class NoPhpOpenTagInCodeBlockPhpDirective implements Rule
         // check if next line is "<?php"
         $nextLine = $lines->current();
 
-        if ('<?php' === Util::clean($nextLine)) {
+        if ('<?php' === RstParser::clean($nextLine)) {
             return sprintf('Please remove PHP open tag after "%s" directive', $line);
         }
     }

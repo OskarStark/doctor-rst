@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
+use App\Rst\RstParser;
 use App\Rule\Rule;
-use App\Util\Util;
 
 class FinalAdminClasses implements Rule
 {
@@ -34,7 +34,7 @@ class FinalAdminClasses implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = Util::clean($line);
+        $line = RstParser::clean($line);
 
         if (preg_match('/^class(.*)extends AbstractAdminExtension$/', $line)) {
             return 'Please use "final" for AdminExtension class';

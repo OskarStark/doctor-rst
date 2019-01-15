@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
+use App\Rst\RstParser;
 use App\Rule\Rule;
-use App\Util\Util;
 
 class LineLength implements Rule
 {
@@ -34,7 +34,7 @@ class LineLength implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $count = mb_strlen(Util::clean($line));
+        $count = mb_strlen(RstParser::clean($line));
 
         if ($count > $max = 120) {
             return sprintf('Line is to long (max %s) currently: %s', $max, $count);

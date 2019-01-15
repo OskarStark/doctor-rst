@@ -11,21 +11,22 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule;
+namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
+use App\Rule\Rule;
 
-class Replacement implements Rule
+class NoBashPrompt implements Rule
 {
     public static function getName(): string
     {
-        return 'replacement';
+        return 'no_bash_prompt';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
+        return [RulesHandler::GROUP_SONATA];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -33,14 +34,17 @@ class Replacement implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-
-        if (strstr($line, $replacement = '//...')) {
-            return sprintf('Please replace "%s" with "// ..."', $replacement);
+        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_BASH)
+            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_SHELL)
+        ) {
+            return;
         }
 
-        if (strstr($line, $replacement = '#...')) {
-            return sprintf('Please replace "%s" with "# ..."', $replacement);
+        $lines->next();
+        $lines->next();
+
+        if (preg_match('/^\$ /', RstParser::clean($lines->current()))) {
+            return 'Please remove the "$" prefix in .. code-block:: directive';
         }
     }
 }

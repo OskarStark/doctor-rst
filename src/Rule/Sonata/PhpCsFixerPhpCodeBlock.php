@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
+use App\Rst\RstParser;
 use App\Rule\Rule;
-use App\Util\Util;
 
 class PhpCsFixerPhpCodeBlock implements Rule
 {
@@ -43,7 +43,7 @@ class PhpCsFixerPhpCodeBlock implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!Util::codeBlockDirectiveIsTypeOf($line, Util::CODE_BLOCK_PHP)) {
+        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)) {
             return;
         }
 
@@ -51,7 +51,7 @@ class PhpCsFixerPhpCodeBlock implements Rule
 
         $phpCode = [];
 
-        while (!\is_null($lines->current()) && ('    ' == substr($lines->current(), 0, 4) || empty(Util::clean($lines->current())))) {
+        while (!\is_null($lines->current()) && ('    ' == substr($lines->current(), 0, 4) || empty(RstParser::clean($lines->current())))) {
             $phpCode[] = $lines->current();
 
             $lines->next();
