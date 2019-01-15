@@ -1,5 +1,5 @@
-RST-Checker
-===========
+DOCtor-RST
+==========
 
 **This is a POC under development!**
 
@@ -12,11 +12,11 @@ _.github/rst.workflow_
 ```
 workflow "Test" {
   on = "push"
-  resolves = ["RST-Checker"]
+  resolves = ["DOCtor-RST"]
 }
 
-action "RST-Checker" {
-  uses = "docker://oskarstark/rst-checker"
+action "DOCtor-RST" {
+  uses = "docker://oskarstark/doctor-rst"
   secrets = ["GITHUB_TOKEN"]
 }
 ```
@@ -25,11 +25,11 @@ If your `*.rst` files are not located in root:
 ```diff
 workflow "Test" {
   on = "push"
-  resolves = ["RST-Checker"]
+  resolves = ["DOCtor-RST"]
 }
 
-action "RST-Checker" {
-  uses = "docker://oskarstark/rst-checker"
+action "DOCtor-RST" {
+  uses = "docker://oskarstark/doctor-rst"
   secrets = ["GITHUB_TOKEN"]
 +  env = {
 +    DOCS_DIR = "docs/"
@@ -41,11 +41,11 @@ Docker
 ------
 
 A Docker-Image is built automatically and located here:
-https://cloud.docker.com/u/oskarstark/repository/docker/oskarstark/rst-checker
+https://cloud.docker.com/u/oskarstark/repository/docker/oskarstark/doctor-rst
 
 You can run it in any given directory like this:
 
-`docker run --rm -it -e DOCS_DIR='/docs' -v ${PWD}:/docs  oskarstark/rst-checker:latest`
+`docker run --rm -it -e DOCS_DIR='/docs' -v ${PWD}:/docs  oskarstark/doctor-rst:latest`
 
 Local usage
 -----------
@@ -59,6 +59,6 @@ or
 Todo:
 -----
 
-* Allow to specifiy which rules should be used via config file (`.rst-checker`)
+* Allow to specifiy which rules should be used via config file (`.doctor-rst`)
 * Allow to register custom Rules
 * Move logic from Command to Services
