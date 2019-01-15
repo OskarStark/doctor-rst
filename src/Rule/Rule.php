@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the rst-checker.
+ * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
  *
