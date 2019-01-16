@@ -54,6 +54,10 @@ class ShortArraySyntaxTest extends TestCase
                 null,
                 '$forms = iterator_to_array($forms);',
             ],
+            [
+                'Please use short array syntax',
+                "->add('tags', null, array('label' => 'les tags'), null, array('expanded' => true, 'multiple' => true));",
+            ]
         ];
     }
 }
