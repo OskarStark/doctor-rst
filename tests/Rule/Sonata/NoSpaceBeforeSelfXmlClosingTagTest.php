@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the rst-checker.
+ * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
  *
@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Rule\Sonata;
+namespace app\tests\Rule\Sonata;
 
 use App\Rule\Sonata\NoSpaceBeforeSelfXmlClosingTag;
 use PHPUnit\Framework\TestCase;

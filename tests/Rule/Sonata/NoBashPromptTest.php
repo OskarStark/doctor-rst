@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the rst-checker.
+ * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
  *
@@ -11,12 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Rule\Sonata;
+namespace app\tests\Rule\Sonata;
 
-use App\Rule\Sonata\FinalAdminClasses;
-use App\Rule\Sonata\NoAdminYaml;
 use App\Rule\Sonata\NoBashPrompt;
-use App\Rule\Sonata\ShortArraySyntax;
 use PHPUnit\Framework\TestCase;
 
 class NoBashPromptTest extends TestCase
@@ -30,7 +27,7 @@ class NoBashPromptTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoBashPrompt())->check(new \ArrayIterator(is_array($line) ? $line : [$line]), 0)
+            (new NoBashPrompt())->check(new \ArrayIterator(\is_array($line) ? $line : [$line]), 0)
         );
     }
 
@@ -43,7 +40,7 @@ class NoBashPromptTest extends TestCase
                     '.. code-block:: bash',
                     '',
                     '$ composer install sonata-project/admin-bundle',
-                ]
+                ],
             ],
             [
                 'Please remove the "$" prefix in .. code-block:: directive',
@@ -51,7 +48,7 @@ class NoBashPromptTest extends TestCase
                     '.. code-block:: shell',
                     '',
                     '$ composer install sonata-project/admin-bundle',
-                ]
+                ],
             ],
             [
                 null,

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the rst-checker.
+ * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
  *
@@ -11,12 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Rule;
+namespace app\tests\Rule;
 
 use App\Rule\KernelInsteadOfAppKernel;
-use App\Rule\Sonata\FinalAdminClasses;
-use App\Rule\Sonata\NoAdminYaml;
-use App\Rule\Typo;
 use PHPUnit\Framework\TestCase;
 
 class KernelInsteadOfAppKernelTest extends TestCase
