@@ -75,7 +75,7 @@ class CheckCommand extends Command
 
         if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
             foreach ($input->getOption('rule') as $rule) {
-                $this->rules = $this->rulesHandler->getRule($rule);
+                $this->rules[] = $this->rulesHandler->getRule($rule);
             }
         }
 
