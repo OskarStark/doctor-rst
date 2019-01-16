@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule\Sonata;
 
-use App\Rule\Sonata\FinalAdminClasses;
-use App\Rule\Sonata\NoAdminYaml;
 use App\Rule\Sonata\ShortArraySyntax;
 use PHPUnit\Framework\TestCase;
 
