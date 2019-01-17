@@ -39,8 +39,20 @@ class NoSpaceBeforeSelfXmlClosingTagTest extends TestCase
                 '<argument type="service" id="sonata.admin.search.handler" />',
             ],
             [
+                'Please remove space before "/>"',
+                '<argument />',
+            ],
+            [
+                null,
+                '/>',
+            ],
+            [
                 null,
                 '<argument type="service" id="sonata.admin.search.handler"/>',
+            ],
+            [
+                null,
+                '<br/>',
             ],
         ];
     }

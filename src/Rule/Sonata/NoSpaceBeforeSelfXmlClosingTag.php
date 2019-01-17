@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule\Sonata;
 
 use App\Handler\RulesHandler;
+use App\Rst\RstParser;
 use App\Rule\Rule;
 
 class NoSpaceBeforeSelfXmlClosingTag implements Rule
@@ -33,7 +34,7 @@ class NoSpaceBeforeSelfXmlClosingTag implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/\" \/>/', $line)) {
+        if ('/>' != RstParser::clean($line) && preg_match('/\ \/>/', $line)) {
             return 'Please remove space before "/>"';
         }
     }
