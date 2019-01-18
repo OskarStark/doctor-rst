@@ -58,6 +58,10 @@ class ShortArraySyntaxTest extends TestCase
                 'Please use short array syntax',
                 "->add('tags', null, array('label' => 'les tags'), null, array('expanded' => true, 'multiple' => true));",
             ],
+            [
+                'Please use short array syntax',
+                '->assertLength(array(\'max\' => 100))',
+            ],
         ];
     }
 }

@@ -33,7 +33,7 @@ class ShortArraySyntax implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/ array\(/', $line)) {
+        if (preg_match('/[\\s|\()]array\(/', $line)) {
             return 'Please use short array syntax';
         }
     }
