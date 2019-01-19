@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Handler;
 
+use App\Rule\CheckListRule;
 use App\Rule\Rule;
 use Webmozart\Assert\Assert;
 
@@ -33,18 +34,30 @@ class RulesHandler
 
     public function __construct(iterable $rules)
     {
-        $this->setRules($rules);
-    }
-
-    public function setRules(iterable $rules)
-    {
         $this->rules = [];
 
-        Assert::allIsInstanceOf($rules, Rule::class);
-
         foreach ($rules as $rule) {
+            \assert($rule instanceof Rule);
+
+            if ($rule instanceof CheckListRule) {
+                foreach ($rule::getList() as $suffix => $config) {
+                    $clonedRule = clone $rule;
+
+                    list($search, $message) = $config;
+                    $this->rules[$rule::getName().'_'.$suffix] = $clonedRule->configure($search, $message);
+                }
+                continue;
+            }
+
             $this->rules[$rule::getName()] = $rule;
         }
+    }
+
+    public function setRules(array $rules): self
+    {
+        $this->rules = $rules;
+
+        return $this;
     }
 
     public function getRules()

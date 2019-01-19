@@ -15,11 +15,13 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class Typo extends CheckListRule
+class BeKeenToNewbies extends CheckListRule
 {
+    private const DEFAULT_MESSAGE = 'Please don\'t use the word "%s"';
+
     public static function getName(): string
     {
-        return 'typo';
+        return 'be_keen_to_newbies';
     }
 
     public static function getGroups(): array
@@ -40,9 +42,7 @@ class Typo extends CheckListRule
     public static function getList(): array
     {
         return [
-            ['compsoer', 'Typo in word "%s"'],
-            ['retun', 'Typo in word "%s"'],
-            ['registerbundles()', 'Typo in word "%s", use "registerBundles()"'],
+            ['simply', 'Please remove the word "%s"'],
         ];
     }
 }
