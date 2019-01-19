@@ -15,13 +15,13 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class BeKeenToNewbies extends CheckListRule
+class BeKeenToNewcomers extends CheckListRule
 {
     private const DEFAULT_MESSAGE = 'Please don\'t use the word "%s"';
 
     public static function getName(): string
     {
-        return 'be_keen_to_newbies';
+        return 'be_keen_to_newcomers';
     }
 
     public static function getGroups(): array
