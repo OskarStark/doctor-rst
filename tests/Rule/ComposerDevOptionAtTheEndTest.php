@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace app\tests\Rule;
 
-use App\Rule\Typo;
+use App\Rule\ComposerDevOptionAtTheEnd;
+use App\Rule\Sonata\NoBashPrompt;
 use PHPUnit\Framework\TestCase;
 
-class TypoTest extends TestCase
+class ComposerDevOptionAtTheEndTest extends TestCase
 {
     /**
      * @test
@@ -27,7 +28,7 @@ class TypoTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new Typo())->check(new \ArrayIterator([$line]), 0)
+            (new ComposerDevOptionAtTheEnd())->check(new \ArrayIterator([$line]), 0)
         );
     }
 
@@ -35,20 +36,12 @@ class TypoTest extends TestCase
     {
         return [
             [
-                'Typo in word "compsoer"',
-                'php compsoer install sonata-project/admin-bundle',
+                'Please move "--dev" option to the end of the command',
+                'composer require --dev symfony/debug',
             ],
             [
                 null,
-                'php composer install sonata-project/admin-bundle',
-            ],
-            [
-                'Typo in word "registerbundles()", use "registerBundles()"',
-                'public function registerbundles()',
-            ],
-            [
-                null,
-                'public function registerBundles()',
+                'composer require symfony/debug --dev',
             ],
         ];
     }

@@ -33,11 +33,7 @@ class NoAdminYaml implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/sonata_admin\.yaml/', $line)) {
-            return;
-        }
-
-        if (preg_match('/sonata_doctrine_orm_admin\.yaml/', $line)) {
+        if (preg_match('/_admin\.yaml/', $line)) {
             return;
         }
 

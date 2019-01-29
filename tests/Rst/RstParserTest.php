@@ -11,13 +11,43 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace app\tests\Util;
+namespace app\tests\Rst;
 
 use App\Rst\RstParser;
 use PHPUnit\Framework\TestCase;
 
-class UtilTest extends TestCase
+class RstParserTest extends TestCase
 {
+    /**
+     * @test
+     *
+     * @group temp
+     *
+     * @dataProvider hasNewlineProvider
+     */
+    public function hasNewline(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::hasNewline($string));
+    }
+
+    public function hasNewlineProvider()
+    {
+        return [
+            [
+                true,
+                'test\n',
+            ],
+            [
+                false,
+                '',
+            ],
+            [
+                false,
+                'foo',
+            ],
+        ];
+    }
+
     /**
      * @test
      *

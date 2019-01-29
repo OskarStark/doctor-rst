@@ -41,8 +41,8 @@ class Typo extends CheckListRule
     {
         return [
             ['compsoer', 'Typo in word "%s"'],
-            ['retun', 'Typo in word "%s"'],
             ['registerbundles()', 'Typo in word "%s", use "registerBundles()"'],
+            ['retun', 'Typo in word "%s"'],
         ];
     }
 }

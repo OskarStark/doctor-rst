@@ -36,6 +36,11 @@ class RstParser
     const CODE_BLOCK_BASH = 'bash';
     const CODE_BLOCK_SHELL = 'shell';
 
+    public static function hasNewline(string $string): bool
+    {
+        return '\n' === substr($string, -2);
+    }
+
     public static function clean(string $string): string
     {
         $string = str_replace(['\n', '\r'], ' ', $string);

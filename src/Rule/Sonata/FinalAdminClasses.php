@@ -36,10 +36,6 @@ class FinalAdminClasses implements Rule
 
         $line = RstParser::clean($line);
 
-        if (preg_match('/^class(.*)extends AbstractAdminExtension$/', $line)) {
-            return 'Please use "final" for AdminExtension class';
-        }
-
         if (preg_match('/^class(.*)extends AbstractAdmin$/', $line)) {
             return 'Please use "final" for Admin class';
         }
