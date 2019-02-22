@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace app\tests\Rule;
 
 use App\Rule\ComposerDevOptionAtTheEnd;
-use App\Rule\Sonata\NoBashPrompt;
 use PHPUnit\Framework\TestCase;
 
 class ComposerDevOptionAtTheEndTest extends TestCase

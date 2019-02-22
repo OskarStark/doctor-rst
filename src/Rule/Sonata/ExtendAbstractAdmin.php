@@ -43,6 +43,5 @@ class ExtendAbstractAdmin implements Rule
         if (strstr($line, 'use Sonata\AdminBundle\Admin\Admin;')) {
             return 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"';
         }
-
     }
 }

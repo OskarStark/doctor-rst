@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace app\tests\Rule\Sonata;
 
 use App\Rule\Sonata\ExtendAbstractAdmin;
-use App\Rule\Sonata\FinalAdminClasses;
 use PHPUnit\Framework\TestCase;
 
 class ExtendAbstractAdminTest extends TestCase

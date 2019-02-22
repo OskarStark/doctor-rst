@@ -60,7 +60,7 @@ class NoAdminYamlTest extends TestCase
             ],
             [
                 null,
-                '# config/packages/sonata_doctrine_mongodb_admin.yaml'
+                '# config/packages/sonata_doctrine_mongodb_admin.yaml',
             ],
         ];
     }

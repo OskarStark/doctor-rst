@@ -33,7 +33,7 @@ class ComposerDevOptionAtTheEnd implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line =  RstParser::clean($line);
+        $line = RstParser::clean($line);
         if (preg_match('/\-\-dev/', $line) && !preg_match('/\-\-dev$/', $line)) {
             return 'Please move "--dev" option to the end of the command';
         }
