@@ -43,14 +43,9 @@ class BeKeenToNewcomers extends CheckListRule
     {
         return [
             ['simply', 'Please remove the word "%s"'],
-            ['just', 'Please remove the word "%s"'],
             ['easy', 'Please remove the word "%s"'],
             ['easily', 'Please remove the word "%s"'],
-            ['of course', 'Please remove the word "%s"'],
-            ['logically', 'Please remove the word "%s"'],
-            ['clearly', 'Please remove the word "%s"'],
             ['obviously', 'Please remove the word "%s"'],
-            ['basically', 'Please remove the word "%s"'],
             ['trivial', 'Please remove the word "%s"'],
         ];
     }

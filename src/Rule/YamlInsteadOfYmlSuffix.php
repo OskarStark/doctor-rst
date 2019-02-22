@@ -32,6 +32,10 @@ class YamlInsteadOfYmlSuffix implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
+        if (preg_match('/\.travis\.yml/', trim($line))) {
+            return;
+        }
+
         if (preg_match('/^.. code-block:: yml$/', trim($line))) {
             return 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
         }

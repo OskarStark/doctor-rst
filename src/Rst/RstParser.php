@@ -29,6 +29,7 @@ class RstParser
     const DIRECTIVE_IMPORTANT = '.. important::';
 
     const CODE_BLOCK_PHP = 'php';
+    const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
     const CODE_BLOCK_XML = 'xml';
     const CODE_BLOCK_TWIG = 'twig';
     const CODE_BLOCK_YML = 'yml';
@@ -104,6 +105,7 @@ class RstParser
             $type,
             [
                 self::CODE_BLOCK_PHP,
+                self::CODE_BLOCK_PHP_ANNOTATIONS,
                 self::CODE_BLOCK_XML,
                 self::CODE_BLOCK_TWIG,
                 self::CODE_BLOCK_YML,

@@ -95,6 +95,7 @@ class RstParserTest extends TestCase
         return [
             [true, 'the following code is php::'],
             [true, '.. code-block:: php'],
+            [true, '.. code-block:: php-annotations'],
             [true, ' .. code-block:: php'],
             [false, 'foo'],
         ];
@@ -118,6 +119,7 @@ class RstParserTest extends TestCase
             [true, 'the following code is php::', RstParser::DIRECTIVE_CODE_BLOCK],
             [true, '.. code-block:: php', RstParser::DIRECTIVE_CODE_BLOCK],
             [true, ' .. code-block:: php', RstParser::DIRECTIVE_CODE_BLOCK],
+            [true, '.. code-block:: php-annotations', RstParser::DIRECTIVE_CODE_BLOCK],
             [false, 'foo', RstParser::DIRECTIVE_CODE_BLOCK],
         ];
     }
@@ -139,6 +141,7 @@ class RstParserTest extends TestCase
             [true, 'the following code is php::', RstParser::CODE_BLOCK_PHP],
             [true, '.. code-block:: php', RstParser::CODE_BLOCK_PHP],
             [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP],
+            [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS],
             [false, 'foo', RstParser::CODE_BLOCK_PHP],
         ];
     }

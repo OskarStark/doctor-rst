@@ -35,7 +35,7 @@ class Replacement implements Rule
 
         $line = RstParser::clean($line);
 
-        if (strstr($line, $replacement = '//...')) {
+        if (strstr($line, $replacement = '//...') && !strstr($line, 'http://...')) {
             return sprintf('Please replace "%s" with "// ..."', $replacement);
         }
 

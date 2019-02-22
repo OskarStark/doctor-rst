@@ -32,7 +32,8 @@ class PhpOpenTagInCodeBlockPhpDirective implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)) {
+        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)
+            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS)) {
             return;
         }
 

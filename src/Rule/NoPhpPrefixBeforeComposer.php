@@ -32,7 +32,7 @@ class NoPhpPrefixBeforeComposer implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, 'php composer')) {
+        if (preg_match('/php composer/', $line)) {
             return 'Please remove "php" prefix';
         }
     }

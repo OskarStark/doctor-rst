@@ -23,6 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\Yaml\Yaml;
 
 class CheckCommand extends Command
 {
@@ -94,7 +95,7 @@ class CheckCommand extends Command
         }
 
         $finder = new Finder();
-        $finder->files()->name('*.rst')->in($input->getArgument('dir'));
+        $finder->files()->name(['*.rst', '*.rst.inc'])->in($input->getArgument('dir'));
 
         foreach ($finder as $file) {
             $this->checkFile($file);
@@ -132,14 +133,41 @@ class CheckCommand extends Command
                         $no + 1,
                         trim($line),
                     ];
-
-                    $this->violations = true;
                 }
             }
         }
 
+        $violations = $this->filterWhitelistedViolations($violations);
+
         if (!empty($violations)) {
+            $this->violations = true;
+
             $this->io->table(['Rule', 'Violation', 'Line', 'Extracted line from file'], $violations);
         }
+    }
+
+    private function filterWhitelistedViolations(array $violations): array
+    {
+        $config = Yaml::parseFile(__DIR__.'/../../dummy/.doctor-rst.yaml');
+
+        foreach ($violations as $key => $violation) {
+            foreach ($config['whitelist']['regex'] as $pattern) {
+                if (preg_match($pattern, $violation[3])) {
+                    unset($violations[$key]);
+
+                    break;
+                }
+            }
+
+            foreach ($config['whitelist']['lines'] as $line) {
+                if ($line === $violation[3]) {
+                    unset($violations[$key]);
+
+                    break;
+                }
+            }
+        }
+
+        return $violations;
     }
 }

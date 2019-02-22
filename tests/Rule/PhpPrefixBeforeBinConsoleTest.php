@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace app\tests\Rule;
 
-use App\Rule\YamlInsteadOfYmlSuffix;
+use App\Rule\PhpPrefixBeforeBinConsole;
 use PHPUnit\Framework\TestCase;
 
-class YamlInsteadofYmlSuffixTest extends TestCase
+class PhpPrefixBeforeBinConsoleTest extends TestCase
 {
     /**
      * @test
@@ -27,7 +27,7 @@ class YamlInsteadofYmlSuffixTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new YamlInsteadOfYmlSuffix())->check(new \ArrayIterator([$line]), 0)
+            (new PhpPrefixBeforeBinConsole())->check(new \ArrayIterator([$line]), 0)
         );
     }
 
@@ -35,24 +35,16 @@ class YamlInsteadofYmlSuffixTest extends TestCase
     {
         return [
             [
-                'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"',
-                '.. code-block:: yml',
+                null,
+                'please execute php bin/console foo',
             ],
             [
                 null,
-                '.. code-block:: yaml',
+                'you can use `bin/console` to execute',
             ],
             [
-                null,
-                '.travis.yml',
-            ],
-            [
-                'Please use ".yaml" instead of ".yml"',
-                'Register your service in services.yml file',
-            ],
-            [
-                null,
-                'Register your service in services.yaml file',
+                'Please add "php" prefix before "bin/console"',
+                'please execute bin/console foo',
             ],
         ];
     }
