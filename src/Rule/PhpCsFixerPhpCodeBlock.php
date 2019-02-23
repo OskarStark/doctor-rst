@@ -11,11 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
-use App\Rule\Rule;
 
 class PhpCsFixerPhpCodeBlock implements Rule
 {

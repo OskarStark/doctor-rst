@@ -11,17 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
-use App\Rst\RstParser;
-use App\Rule\Rule;
 
-class FinalAdminExtensionClasses implements Rule
+class ShortArraySyntax implements Rule
 {
     public static function getName(): string
     {
-        return 'final_admin_extension_classes';
+        return 'short_array_syntax';
     }
 
     public static function getGroups(): array
@@ -34,10 +32,8 @@ class FinalAdminExtensionClasses implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-
-        if (preg_match('/^class(.*)extends AbstractAdminExtension$/', $line)) {
-            return 'Please use "final" for AdminExtension class';
+        if (preg_match('/[\\s|\()]array\(/', $line)) {
+            return 'Please use short array syntax';
         }
     }
 }

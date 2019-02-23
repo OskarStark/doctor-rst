@@ -11,22 +11,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
-use App\Rule\Rule;
 
-class LineLength implements Rule
+class NotManyBlankLines implements Rule
 {
     public static function getName(): string
     {
-        return 'line_length';
+        return 'not_many_blank_lines';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_DEV];
+        return [RulesHandler::GROUP_SONATA];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -34,10 +33,19 @@ class LineLength implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $count = mb_strlen(RstParser::clean($line));
+        if (!RstParser::isBlankLine($line)) {
+            return;
+        }
 
-        if ($count > $max = 80) {
-            return sprintf('Line is to long (max %s) currently: %s', $max, $count);
+        $lines->next();
+        $nextLine = $lines->current();
+
+        if (null === $nextLine) {
+            return;
+        }
+
+        if (RstParser::isBlankLine($nextLine)) {
+            return 'Please avoid many blank lines';
         }
     }
 }

@@ -11,22 +11,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
-use App\Rule\Rule;
 
-class BlankLineAfterFilepathInCodeBlock implements Rule
+class NoBlankLineAfterFilepathInXmlCodeBlock implements Rule
 {
     public static function getName(): string
     {
-        return 'blank_line_after_filepath_in_code_block';
+        return 'no_blank_line_after_filepath_in_xml_code_block';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA];
+        return [RulesHandler::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -34,7 +33,7 @@ class BlankLineAfterFilepathInCodeBlock implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_CODE_BLOCK)) {
+        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_XML)) {
             return;
         }
 
@@ -61,8 +60,8 @@ class BlankLineAfterFilepathInCodeBlock implements Rule
     {
         $lines->next();
 
-        if (!RstParser::isBlankLine($lines->current())) {
-            return sprintf('Please add a blank line after "%s"', $matches[0]);
+        if (RstParser::isBlankLine($lines->current())) {
+            return sprintf('Please remove blank line after "%s"', $matches[0]);
         }
     }
 }

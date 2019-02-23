@@ -11,17 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
-use App\Rst\RstParser;
-use App\Rule\Rule;
 
-class ExtendAbstractAdmin implements Rule
+class NoInheritdoc implements Rule
 {
     public static function getName(): string
     {
-        return 'extend_abstract_admin';
+        return 'no_inheritdoc';
     }
 
     public static function getGroups(): array
@@ -34,14 +32,8 @@ class ExtendAbstractAdmin implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-
-        if (preg_match('/^class(.*)extends Admin$/', $line)) {
-            return 'Please extend AbstractAdmin instead of Admin';
-        }
-
-        if (strstr($line, 'use Sonata\AdminBundle\Admin\Admin;')) {
-            return 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"';
+        if (preg_match('/@inheritdoc/', $line)) {
+            return 'Please do not use "@inheritdoc"';
         }
     }
 }

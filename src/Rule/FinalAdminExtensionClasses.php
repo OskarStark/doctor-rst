@@ -11,16 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
-use App\Rule\Rule;
+use App\Rst\RstParser;
 
-class NoAdminYaml implements Rule
+class FinalAdminExtensionClasses implements Rule
 {
     public static function getName(): string
     {
-        return 'no_admin_yaml';
+        return 'final_admin_extension_classes';
     }
 
     public static function getGroups(): array
@@ -33,16 +33,10 @@ class NoAdminYaml implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/_admin\.yaml/', $line)) {
-            return;
-        }
+        $line = RstParser::clean($line);
 
-        if (preg_match('/admin\.yml/', $line)) {
-            return 'Please use "services.yaml" instead of "admin.yml"';
-        }
-
-        if (preg_match('/admin\.yaml/', $line)) {
-            return 'Please use "services.yaml" instead of "admin.yaml"';
+        if (preg_match('/^class(.*)extends AbstractAdminExtension$/', $line)) {
+            return 'Please use "final" for AdminExtension class';
         }
     }
 }

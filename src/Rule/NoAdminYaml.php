@@ -11,16 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
-use App\Rule\Rule;
 
-class NoInheritdoc implements Rule
+class NoAdminYaml implements Rule
 {
     public static function getName(): string
     {
-        return 'no_inheritdoc';
+        return 'no_admin_yaml';
     }
 
     public static function getGroups(): array
@@ -33,8 +32,16 @@ class NoInheritdoc implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/@inheritdoc/', $line)) {
-            return 'Please do not use "@inheritdoc"';
+        if (preg_match('/_admin\.yaml/', $line)) {
+            return;
+        }
+
+        if (preg_match('/admin\.yml/', $line)) {
+            return 'Please use "services.yaml" instead of "admin.yml"';
+        }
+
+        if (preg_match('/admin\.yaml/', $line)) {
+            return 'Please use "services.yaml" instead of "admin.yaml"';
         }
     }
 }

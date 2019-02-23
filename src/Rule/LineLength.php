@@ -11,21 +11,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
-use App\Rule\Rule;
+use App\Rst\RstParser;
 
-class ShortArraySyntax implements Rule
+class LineLength implements Rule
 {
     public static function getName(): string
     {
-        return 'short_array_syntax';
+        return 'line_length';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA];
+        return [RulesHandler::GROUP_DEV];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -33,8 +33,10 @@ class ShortArraySyntax implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/[\\s|\()]array\(/', $line)) {
-            return 'Please use short array syntax';
+        $count = mb_strlen(RstParser::clean($line));
+
+        if ($count > $max = 80) {
+            return sprintf('Line is to long (max %s) currently: %s', $max, $count);
         }
     }
 }

@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace app\tests\Rule;
 
-use App\Rule\Typo;
+use App\Rule\FinalAdminExtensionClasses;
 use PHPUnit\Framework\TestCase;
 
-class TypoTest extends TestCase
+class FinalAdminExtensionClassesTest extends TestCase
 {
     /**
      * @test
@@ -27,7 +27,7 @@ class TypoTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new Typo())->check(new \ArrayIterator([$line]), 0)
+            (new FinalAdminExtensionClasses())->check(new \ArrayIterator([$line]), 0)
         );
     }
 
@@ -35,20 +35,16 @@ class TypoTest extends TestCase
     {
         return [
             [
-                'Typo in word "compsoer"',
-                'php compsoer install sonata-project/admin-bundle',
+                'Please use "final" for AdminExtension class',
+                'class TestExtension extends AbstractAdminExtension',
+            ],
+            [
+                'Please use "final" for AdminExtension class',
+                '    class TestExtension extends AbstractAdminExtension',
             ],
             [
                 null,
-                'php composer install sonata-project/admin-bundle',
-            ],
-            [
-                'Typo in word "registerbundles()", use "registerBundles()"',
-                'public function registerbundles()',
-            ],
-            [
-                null,
-                'public function registerBundles()',
+                'final class TestExtension extends AbstractAdminExtension',
             ],
         ];
     }

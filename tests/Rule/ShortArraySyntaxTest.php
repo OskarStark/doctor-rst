@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace app\tests\Rule\Sonata;
+namespace app\tests\Rule;
 
-use App\Rule\Sonata\ShortArraySyntax;
+use App\Rule\ShortArraySyntax;
 use PHPUnit\Framework\TestCase;
 
 class ShortArraySyntaxTest extends TestCase

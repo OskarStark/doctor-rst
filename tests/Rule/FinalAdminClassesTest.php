@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace app\tests\Rule\Sonata;
+namespace app\tests\Rule;
 
-use App\Rule\Sonata\NoInheritdoc;
+use App\Rule\FinalAdminClasses;
 use PHPUnit\Framework\TestCase;
 
-class NoInheritdocTest extends TestCase
+class FinalAdminClassesTest extends TestCase
 {
     /**
      * @test
@@ -27,7 +27,7 @@ class NoInheritdocTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoInheritdoc())->check(new \ArrayIterator([$line]), 0)
+            (new FinalAdminClasses())->check(new \ArrayIterator([$line]), 0)
         );
     }
 
@@ -35,12 +35,17 @@ class NoInheritdocTest extends TestCase
     {
         return [
             [
-                'Please do not use "@inheritdoc"',
-                '* {@inheritdoc}',
+                'Please use "final" for Admin class',
+                'class TestAdmin extends AbstractAdmin',
+            ],
+
+            [
+                'Please use "final" for Admin class',
+                '    class TestAdmin extends AbstractAdmin',
             ],
             [
                 null,
-                'fine',
+                'final class TestAdmin extends AbstractAdmin',
             ],
         ];
     }

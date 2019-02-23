@@ -11,17 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
-use App\Rule\Rule;
 
-class NotManyBlankLines implements Rule
+class FinalAdminClasses implements Rule
 {
     public static function getName(): string
     {
-        return 'not_many_blank_lines';
+        return 'final_admin_classes';
     }
 
     public static function getGroups(): array
@@ -34,19 +33,10 @@ class NotManyBlankLines implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::isBlankLine($line)) {
-            return;
-        }
+        $line = RstParser::clean($line);
 
-        $lines->next();
-        $nextLine = $lines->current();
-
-        if (null === $nextLine) {
-            return;
-        }
-
-        if (RstParser::isBlankLine($nextLine)) {
-            return 'Please avoid many blank lines';
+        if (preg_match('/^class(.*)extends AbstractAdmin$/', $line)) {
+            return 'Please use "final" for Admin class';
         }
     }
 }

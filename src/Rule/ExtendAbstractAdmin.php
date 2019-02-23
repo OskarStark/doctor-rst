@@ -11,17 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule\Sonata;
+namespace App\Rule;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
-use App\Rule\Rule;
 
-class NoBashPrompt implements Rule
+class ExtendAbstractAdmin implements Rule
 {
     public static function getName(): string
     {
-        return 'no_bash_prompt';
+        return 'extend_abstract_admin';
     }
 
     public static function getGroups(): array
@@ -34,17 +33,14 @@ class NoBashPrompt implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_BASH)
-            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_SHELL)
-        ) {
-            return;
+        $line = RstParser::clean($line);
+
+        if (preg_match('/^class(.*)extends Admin$/', $line)) {
+            return 'Please extend AbstractAdmin instead of Admin';
         }
 
-        $lines->next();
-        $lines->next();
-
-        if (preg_match('/^\$ /', RstParser::clean($lines->current()))) {
-            return 'Please remove the "$" prefix in .. code-block:: directive';
+        if (strstr($line, 'use Sonata\AdminBundle\Admin\Admin;')) {
+            return 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"';
         }
     }
 }

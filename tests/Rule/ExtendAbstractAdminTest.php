@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace app\tests\Rule\Sonata;
+namespace app\tests\Rule;
 
-use App\Rule\Sonata\ExtendAbstractAdmin;
+use App\Rule\ExtendAbstractAdmin;
 use PHPUnit\Framework\TestCase;
 
 class ExtendAbstractAdminTest extends TestCase
