@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace app\tests\Rule;
 
-use App\Rule\NoBlankLineAfterFilepathInCodeBlock;
 use App\Rule\NoBlankLineAfterFilepathInYamlCodeBlock;
 use PHPUnit\Framework\TestCase;
 

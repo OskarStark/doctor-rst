@@ -54,6 +54,11 @@ class NoBlankLineAfterFilepathInCodeBlock implements Rule
         if (preg_match('/^<!--(.*)\.xml(.*)-->$/', RstParser::clean($lines->current()), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
+
+        // TWIG
+        if (preg_match('/^{#(.*).twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
+            return $this->validateBlankLine($lines, $matches);
+        }
     }
 
     private function validateBlankLine(\ArrayIterator $lines, array $matches)

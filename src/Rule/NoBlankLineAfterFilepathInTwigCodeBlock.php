@@ -16,16 +16,16 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class BlankLineAfterFilepathInCodeBlock implements Rule
+class NoBlankLineAfterFilepathInTwigCodeBlock implements Rule
 {
     public static function getName(): string
     {
-        return 'blank_line_after_filepath_in_code_block';
+        return 'no_blank_line_after_filepath_in_twig_code_block';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA];
+        return [RulesHandler::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -33,27 +33,12 @@ class BlankLineAfterFilepathInCodeBlock implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_CODE_BLOCK)) {
+        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TWIG)) {
             return;
         }
 
         $lines->next();
         $lines->next();
-
-        // PHP
-        if (preg_match('/^\/\/(.*)\.php$/', RstParser::clean($lines->current()), $matches)) {
-            return $this->validateBlankLine($lines, $matches);
-        }
-
-        // YML / YAML
-        if (preg_match('/^#(.*)\.(yml|yaml)$/', RstParser::clean($lines->current()), $matches)) {
-            return $this->validateBlankLine($lines, $matches);
-        }
-
-        // XML
-        if (preg_match('/^<!--(.*)\.xml(.*)-->$/', RstParser::clean($lines->current()), $matches)) {
-            return $this->validateBlankLine($lines, $matches);
-        }
 
         // TWIG
         if (preg_match('/^{#(.*).twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
@@ -65,8 +50,8 @@ class BlankLineAfterFilepathInCodeBlock implements Rule
     {
         $lines->next();
 
-        if (!RstParser::isBlankLine($lines->current())) {
-            return sprintf('Please add a blank line after "%s"', $matches[0]);
+        if (RstParser::isBlankLine($lines->current())) {
+            return sprintf('Please remove blank line after "%s"', $matches[0]);
         }
     }
 }

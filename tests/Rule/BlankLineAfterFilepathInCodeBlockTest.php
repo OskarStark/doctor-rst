@@ -26,6 +26,7 @@ class BlankLineAfterFilepathInCodeBlockTest extends TestCase
      * @dataProvider checkYmlProvider
      * @dataProvider checkYamlProvider
      * @dataProvider checkXmlProvider
+     * @dataProvider checkTwigProvider
      */
     public function check($expected, $line)
     {
@@ -159,6 +160,31 @@ class BlankLineAfterFilepathInCodeBlockTest extends TestCase
                     '<!--config/services.xml-->',
                     '',
                     '<foo\/>',
+                ],
+            ],
+        ];
+    }
+
+    public function checkTwigProvider()
+    {
+        return [
+            [
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                [
+                    '.. code-block:: twig',
+                    '',
+                    '{# templates/index.html.twig #}',
+                    '{% set foo = "bar" %}',
+                ],
+            ],
+            [
+                null,
+                [
+                    '.. code-block:: twig',
+                    '',
+                    '{# templates/index.html.twig #}',
+                    '',
+                    '{% set foo = "bar" %}',
                 ],
             ],
         ];

@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace app\tests\Rule;
 
-use App\Rule\NoBlankLineAfterFilepathInPhpCodeBlock;
+use App\Rule\BlankLineAfterFilepathInTwigCodeBlock;
 use PHPUnit\Framework\TestCase;
 
-class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
+class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
 {
     /**
      * @test
@@ -27,7 +27,7 @@ class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check(new \ArrayIterator(\is_array($line) ? $line : [$line]), 0)
+            (new BlankLineAfterFilepathInTwigCodeBlock())->check(new \ArrayIterator(\is_array($line) ? $line : [$line]), 0)
         );
     }
 
@@ -35,22 +35,22 @@ class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
     {
         return [
             [
-                'Please remove blank line after "// src/Handler/Collection.php"',
+                'Please add a blank line after "{# templates/index.html.twig #}"',
                 [
-                    '.. code-block:: php',
+                    '.. code-block:: twig',
                     '',
-                    '// src/Handler/Collection.php',
-                    '',
-                    'namespace App\\Handler;',
+                    '{# templates/index.html.twig #}',
+                    '{% set foo = "bar" %}',
                 ],
             ],
             [
                 null,
                 [
-                    '.. code-block:: php',
+                    '.. code-block:: twig',
                     '',
-                    '// src/Handler/Collection.php',
-                    'namespace App\\Handler;',
+                    '{# templates/index.html.twig #}',
+                    '',
+                    '{% set foo = "bar" %}',
                 ],
             ],
             [
