@@ -33,7 +33,10 @@ class NoBlankLineAfterFilepathInTwigCodeBlock implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TWIG)) {
+        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TWIG)
+            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_JINJA)
+            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_HTML_JINJA)
+        ) {
             return;
         }
 
@@ -41,7 +44,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock implements Rule
         $lines->next();
 
         // TWIG
-        if (preg_match('/^{#(.*).twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^{#(.*)\.twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
     }

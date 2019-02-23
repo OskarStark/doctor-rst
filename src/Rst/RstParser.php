@@ -32,6 +32,9 @@ class RstParser
     const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
     const CODE_BLOCK_XML = 'xml';
     const CODE_BLOCK_TWIG = 'twig';
+    const CODE_BLOCK_JINJA = 'jinja';
+    const CODE_BLOCK_HTML = 'html';
+    const CODE_BLOCK_HTML_JINJA = 'html+jinja';
     const CODE_BLOCK_YML = 'yml';
     const CODE_BLOCK_YAML = 'yaml';
     const CODE_BLOCK_BASH = 'bash';
@@ -108,6 +111,9 @@ class RstParser
                 self::CODE_BLOCK_PHP_ANNOTATIONS,
                 self::CODE_BLOCK_XML,
                 self::CODE_BLOCK_TWIG,
+                self::CODE_BLOCK_JINJA,
+                self::CODE_BLOCK_HTML,
+                self::CODE_BLOCK_HTML_JINJA,
                 self::CODE_BLOCK_YML,
                 self::CODE_BLOCK_YAML,
                 self::CODE_BLOCK_SHELL,

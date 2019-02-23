@@ -56,7 +56,7 @@ class BlankLineAfterFilepathInCodeBlock implements Rule
         }
 
         // TWIG
-        if (preg_match('/^{#(.*).twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^{#(.*)\.twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
     }

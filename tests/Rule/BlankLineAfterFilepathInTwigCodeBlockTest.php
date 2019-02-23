@@ -54,6 +54,44 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 ],
             ],
             [
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                [
+                    '.. code-block:: jinja',
+                    '',
+                    '{# templates/index.html.twig #}',
+                    '{% set foo = "bar" %}',
+                ],
+            ],
+            [
+                null,
+                [
+                    '.. code-block:: jinja',
+                    '',
+                    '{# templates/index.html.twig #}',
+                    '',
+                    '{% set foo = "bar" %}',
+                ],
+            ],
+            [
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                [
+                    '.. code-block:: html+jinja',
+                    '',
+                    '{# templates/index.html.twig #}',
+                    '{% set foo = "bar" %}',
+                ],
+            ],
+            [
+                null,
+                [
+                    '.. code-block:: html+jinja',
+                    '',
+                    '{# templates/index.html.twig #}',
+                    '',
+                    '{% set foo = "bar" %}',
+                ],
+            ],
+            [
                 null,
                 'temp',
             ],
