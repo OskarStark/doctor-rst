@@ -3,8 +3,8 @@ whitelist:
         - '/FOSUserBundle(.*)\.yml/'
         - '/``.yml``/'
         - '/(.*)\.orm\.yml/' # currently DoctrineBundle only supports .yml
-
     lines:
         - 'in config files, so the old ``app/config/config_dev.yml`` goes to'
         - '#. The most important config file is ``app/config/services.yml``, which now is'
         - 'php "%s/../bin/console" cache:clear --env=%s --no-warmup'
+        - 'code in production without a proxy, it becomes trivially easy to abuse your'
