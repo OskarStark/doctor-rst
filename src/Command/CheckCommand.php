@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Handler\RulesHandler;
+use App\Rst\RstParser;
 use App\Rule\Rule;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

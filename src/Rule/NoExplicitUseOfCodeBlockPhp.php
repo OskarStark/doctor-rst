@@ -31,10 +31,9 @@ class NoExplicitUseOfCodeBlockPhp implements Rule
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);
-        $line = $lines->current();
 
         // only interesting if a PHP code block
-        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)) {
+        if (!RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)) {
             return;
         }
 
@@ -45,7 +44,10 @@ class NoExplicitUseOfCodeBlockPhp implements Rule
 
         // check if the code block is not on the first level, in this case
         // it could not be in a configuration block which would be ok
-        if (preg_match('/^[\s]+/', $lines->current(), $matches) && $number > 0) {
+        if (preg_match('/^[\s]+/', $lines->current(), $matches)
+            && RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)
+            && $number > 0
+        ) {
             $currentIndention = mb_strlen($matches[0]);
 
             $i = $number;
@@ -55,7 +57,6 @@ class NoExplicitUseOfCodeBlockPhp implements Rule
                 $lineIndention = 0;
 
                 if (RstParser::isBlankLine($lines->current())) {
-                    //dump('blank line');
                     goto next;
                 }
 
@@ -63,16 +64,20 @@ class NoExplicitUseOfCodeBlockPhp implements Rule
                     $lineIndention = mb_strlen($matches[0]);
                 }
 
-                if (RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CONFIGURATION_BLOCK)
-                    && $lineIndention < $currentIndention
+                if ($lineIndention < $currentIndention
+                    && RstParser::isDirective($lines->current())
                 ) {
-                    return;
+                    if (RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CONFIGURATION_BLOCK)) {
+                        return;
+                    }
+                    goto error;
                 }
 
                 next:
             }
         }
 
+        error:
         return 'Please do not use ".. code-block:: php", use "::" instead.';
     }
 }
