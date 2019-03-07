@@ -92,6 +92,25 @@ class NoBlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 ],
             ],
             [
+                'Please remove blank line after "{# templates/index.html.twig #}"',
+                [
+                    '.. code-block:: html+twig',
+                    '',
+                    '{# templates/index.html.twig #}',
+                    '',
+                    '{% set foo = "bar" %}',
+                ],
+            ],
+            [
+                null,
+                [
+                    '.. code-block:: html+twig',
+                    '',
+                    '{# templates/index.html.twig #}',
+                    '{% set foo = "bar" %}',
+                ],
+            ],
+            [
                 null,
                 'temp',
             ],

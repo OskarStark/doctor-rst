@@ -25,7 +25,7 @@ class BlankLineAfterFilepathInPhpCodeBlock implements Rule
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SYMFONY];
+        return [RulesHandler::GROUP_DEV];
     }
 
     public function check(\ArrayIterator $lines, int $number)

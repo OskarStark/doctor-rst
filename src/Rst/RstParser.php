@@ -27,18 +27,22 @@ class RstParser
     const DIRECTIVE_TOCTREE = '.. toctree::';
     const DIRECTIVE_INDEX = '.. index::';
     const DIRECTIVE_IMPORTANT = '.. important::';
+    const DIRECTIVE_CONFIGURATION_BLOCK = '.. configuration-block::';
 
     const CODE_BLOCK_PHP = 'php';
     const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
     const CODE_BLOCK_XML = 'xml';
+
     const CODE_BLOCK_TWIG = 'twig';
     const CODE_BLOCK_JINJA = 'jinja';
     const CODE_BLOCK_HTML = 'html';
     const CODE_BLOCK_HTML_JINJA = 'html+jinja';
+    const CODE_BLOCK_HTML_TWIG = 'html+twig';
     const CODE_BLOCK_YML = 'yml';
     const CODE_BLOCK_YAML = 'yaml';
     const CODE_BLOCK_BASH = 'bash';
     const CODE_BLOCK_SHELL = 'shell';
+    const CODE_BLOCK_TERMINAL = 'terminal';
 
     public static function hasNewline(string $string): bool
     {
@@ -73,6 +77,7 @@ class RstParser
             self::DIRECTIVE_TOCTREE,
             self::DIRECTIVE_INDEX,
             self::DIRECTIVE_IMPORTANT,
+            self::DIRECTIVE_CONFIGURATION_BLOCK,
         ];
 
         Assert::oneOf(
@@ -98,7 +103,7 @@ class RstParser
         return false;
     }
 
-    public static function codeBlockDirectiveIsTypeOf(string $string, string $type)
+    public static function codeBlockDirectiveIsTypeOf(string $string, string $type): bool
     {
         if (!self::directiveIs($string, self::DIRECTIVE_CODE_BLOCK)) {
             return false;
@@ -114,10 +119,12 @@ class RstParser
                 self::CODE_BLOCK_JINJA,
                 self::CODE_BLOCK_HTML,
                 self::CODE_BLOCK_HTML_JINJA,
+                self::CODE_BLOCK_HTML_TWIG,
                 self::CODE_BLOCK_YML,
                 self::CODE_BLOCK_YAML,
                 self::CODE_BLOCK_SHELL,
                 self::CODE_BLOCK_BASH,
+                self::CODE_BLOCK_TERMINAL,
             ]
         );
 

@@ -17,8 +17,6 @@ use App\Handler\RulesHandler;
 
 class BeKeenToNewcomers extends CheckListRule
 {
-    private const DEFAULT_MESSAGE = 'Please don\'t use the word "%s"';
-
     public static function getName(): string
     {
         return 'be_keen_to_newcomers';

@@ -16,16 +16,16 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class ComposerDevOptionAtTheEnd implements Rule
+class ComposerDevOptionNotAtTheEnd implements Rule
 {
     public static function getName(): string
     {
-        return 'composer_dev_option_at_the_end';
+        return 'composer_dev_option_not_at_the_end';
     }
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA];
+        return [RulesHandler::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -34,8 +34,8 @@ class ComposerDevOptionAtTheEnd implements Rule
         $line = $lines->current();
 
         $line = RstParser::clean($line);
-        if (preg_match('/composer require \-\-dev(.*)$/', $line)) {
-            return 'Please move "--dev" option to the end of the command';
+        if (preg_match('/composer require(.*)\-\-dev$/', $line)) {
+            return 'Please move "--dev" option before the package';
         }
     }
 }

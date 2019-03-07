@@ -51,6 +51,14 @@ class NoBashPromptTest extends TestCase
                 ],
             ],
             [
+                'Please remove the "$" prefix in .. code-block:: directive',
+                [
+                    '.. code-block:: terminal',
+                    '',
+                    '$ composer install sonata-project/admin-bundle',
+                ],
+            ],
+            [
                 null,
                 '$ composer install sonata-project/admin-bundle',
             ],

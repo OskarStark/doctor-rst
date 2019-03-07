@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
+use App\Rst\RstParser;
 
 class ShortArraySyntax implements Rule
 {
@@ -32,7 +33,7 @@ class ShortArraySyntax implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/[\\s|\()]array\(/', $line)) {
+        if (preg_match('/[\\s|\()]array\(/', RstParser::clean($line))) {
             return 'Please use short array syntax';
         }
     }

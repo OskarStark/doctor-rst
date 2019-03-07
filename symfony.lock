@@ -1,4 +1,7 @@
 {
+    "composer/semver": {
+        "version": "1.4.2"
+    },
     "doctrine/inflector": {
         "version": "v1.3.0"
     },

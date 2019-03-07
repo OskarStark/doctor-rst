@@ -87,4 +87,25 @@ class RulesHandler
 
         return $this->rules[$name];
     }
+
+    public function getRulesByName(string $name): iterable
+    {
+        $rules = [];
+
+        try {
+            $rules[] = $this->getRule($name);
+        } catch (\InvalidArgumentException $e) {
+            foreach ($this->rules as $key => $rule) {
+                if (preg_match(sprintf('/%s/', $name), $key)) {
+                    $rules[] = $rule;
+                }
+            }
+
+            if (empty($rules)) {
+                throw $e;
+            }
+        }
+
+        return $rules;
+    }
 }

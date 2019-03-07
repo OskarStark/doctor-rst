@@ -68,6 +68,20 @@ class CheckCommand extends Command
 
         $this->io->title(sprintf('Check *.rst files in: <info>%s</info>', $input->getArgument('dir')));
 
+        if (is_file($configFile = $input->getArgument('dir').'/.doctor-rst.yaml')) {
+            $config = Yaml::parseFile($configFile);
+
+            foreach ($config['rules'] as $rule) {
+                $rules = $this->rulesHandler->getRulesByName($rule);
+
+                if (\is_array($rules)) {
+                    $this->rules = array_merge($this->rules, $rules);
+                } else {
+                    $this->rules[] = $rules;
+                }
+            }
+        }
+
         if (!empty($input->getOption('rule') && !empty($input->getOption('group')))) {
             $this->io->error('You can only provide "rule" or "group"!');
 

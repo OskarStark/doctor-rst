@@ -62,6 +62,22 @@ class ShortArraySyntaxTest extends TestCase
                 'Please use short array syntax',
                 '->assertLength(array(\'max\' => 100))',
             ],
+            [
+                null,
+                'array(3) {',
+            ],
+            [
+                null,
+                ' array(3) {',
+            ],
+            [
+                null,
+                '      array(3) {',
+            ],
+            [
+                null,
+                'array(999) {      ',
+            ],
         ];
     }
 }

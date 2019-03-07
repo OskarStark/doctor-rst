@@ -27,3 +27,5 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Handler\RulesHandler:
         arguments: [!tagged rst_checker.rule]
+
+    Composer\Semver\VersionParser: ~
