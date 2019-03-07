@@ -51,13 +51,14 @@ class NoExplicitUseOfCodeBlockPhp implements Rule
             $currentIndention = mb_strlen($matches[0]);
 
             $i = $number;
+
             while ($i >= 1) {
                 --$i;
                 $lines->seek($i);
                 $lineIndention = 0;
 
                 if (RstParser::isBlankLine($lines->current())) {
-                    goto next;
+                    continue;
                 }
 
                 if (preg_match('/^[\s]+/', $lines->current(), $matches)) {
@@ -72,8 +73,6 @@ class NoExplicitUseOfCodeBlockPhp implements Rule
                     }
                     goto error;
                 }
-
-                next:
             }
         }
 

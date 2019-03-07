@@ -133,7 +133,7 @@ class CheckCommand extends Command
 
         $violations = [];
         foreach ($lines as $no => $line) {
-            if (empty($line)) {
+            if (RstParser::isBlankLine($line)) {
                 continue;
             }
 
