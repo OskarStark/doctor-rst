@@ -43,6 +43,7 @@ class RstParser
     const CODE_BLOCK_BASH = 'bash';
     const CODE_BLOCK_SHELL = 'shell';
     const CODE_BLOCK_TERMINAL = 'terminal';
+    const CODE_BLOCK_TEXT = 'text';
 
     public static function hasNewline(string $string): bool
     {
@@ -125,6 +126,7 @@ class RstParser
                 self::CODE_BLOCK_SHELL,
                 self::CODE_BLOCK_BASH,
                 self::CODE_BLOCK_TERMINAL,
+                self::CODE_BLOCK_TEXT,
             ]
         );
 

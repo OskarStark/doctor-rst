@@ -127,6 +127,7 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
 CONTENT;
 
         $content_with_blank_line_at_the_beginning = <<<'CONTENT'
+
 .. configuration-block::
 
     .. code-block:: yaml

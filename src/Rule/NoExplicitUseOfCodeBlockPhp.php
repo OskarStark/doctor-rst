@@ -50,33 +50,42 @@ class NoExplicitUseOfCodeBlockPhp implements Rule
         ) {
             $currentIndention = mb_strlen($matches[0]);
 
-            $i = $number;
-
-            while ($i >= 1) {
-                --$i;
-                $lines->seek($i);
-                $lineIndention = 0;
-
-                if (RstParser::isBlankLine($lines->current())) {
-                    continue;
-                }
-
-                if (preg_match('/^[\s]+/', $lines->current(), $matches)) {
-                    $lineIndention = mb_strlen($matches[0]);
-                }
-
-                if ($lineIndention < $currentIndention
-                    && RstParser::isDirective($lines->current())
-                ) {
-                    if (RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CONFIGURATION_BLOCK)) {
-                        return;
-                    }
-                    goto error;
-                }
+            if ($this->inConfigurationBlock($lines, $number, $currentIndention)) {
+                return;
             }
         }
 
-        error:
         return 'Please do not use ".. code-block:: php", use "::" instead.';
+    }
+
+    private function inConfigurationBlock(\ArrayIterator $lines, int $number, int $currentIndention): bool
+    {
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+            $lineIndention = 0;
+
+            if (RstParser::isBlankLine($lines->current())) {
+                continue;
+            }
+
+            if (preg_match('/^[\s]+/', $lines->current(), $matches)) {
+                $lineIndention = mb_strlen($matches[0]);
+            }
+
+            if ($lineIndention < $currentIndention
+                && RstParser::isDirective($lines->current())
+            ) {
+                if (RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CONFIGURATION_BLOCK)) {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        return false;
     }
 }
