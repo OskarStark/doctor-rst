@@ -48,13 +48,24 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
                 '    .. code-block:: php',
             ],
             [
+                'Please do not use ".. code-block:: php", use "::" instead.',
+                [
+                    'Welcome to our tutorial!',
+                    '',
+                    '     .. code-block:: php',
+                    '',
+                    'namespace App\Entity;',
+                ],
+                2,
+            ],
+            [
                 null,
                 [
                     '.. configuration-block::',
                     '',
                     ' .. code-block:: php',
                     '',
-                    'namespace App\Entity;',
+                    '  namespace App\Entity;',
                 ],
                 2,
             ],

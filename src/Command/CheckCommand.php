@@ -83,6 +83,8 @@ class CheckCommand extends Command
             }
         }
 
+        dump($this->rules);
+
         if (!empty($input->getOption('rule') && !empty($input->getOption('group')))) {
             $this->io->error('You can only provide "rule" or "group"!');
 
@@ -94,6 +96,8 @@ class CheckCommand extends Command
                 $this->rules[] = $this->rulesHandler->getRule($rule);
             }
         }
+
+        dump($this->rules);
 
         if (!empty($input->getOption('group'))) {
             $this->rules = $this->rulesHandler->getRulesByGroup($input->getOption('group'));
