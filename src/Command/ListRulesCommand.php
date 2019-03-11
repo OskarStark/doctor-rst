@@ -51,13 +51,13 @@ class ListRulesCommand extends Command
 
         $this->io->title(trim(sprintf(
             'List available rules %s',
-            $input->getOption('group')
-                ? sprintf('for group: <info>%s</info>', $input->getOption('group'))
+            (string) $input->getOption('group')
+                ? sprintf('for group: <info>%s</info>', (string) $input->getOption('group'))
                 : ''
         )));
 
         if (!empty($input->getOption('group'))) {
-            $rules = $this->rulesHandler->getRulesByGroup($input->getOption('group'));
+            $rules = $this->rulesHandler->getRulesByGroup((string) $input->getOption('group'));
         } else {
             $rules = $this->rulesHandler->getRules();
         }
@@ -65,7 +65,7 @@ class ListRulesCommand extends Command
         if (empty($rules)) {
             $this->io->warning('No rules available!');
 
-            return;
+            return 1;
         }
 
         dump($rules);
