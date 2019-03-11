@@ -59,7 +59,7 @@ class RstParser
 
     public static function isDirective(string $string): bool
     {
-        return '..' == substr(ltrim($string), 0, 2) || '::' == substr(self::clean($string), -2, 2);
+        return '.. ' == substr(ltrim($string), 0, 3) || '::' == substr(self::clean($string), -2, 2);
     }
 
     public static function directiveIs(string $string, string $directive): bool
