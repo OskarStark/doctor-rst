@@ -21,7 +21,6 @@ return PhpCsFixer\Config::create()
         'ordered_imports' => true,
         'no_unused_imports' => true,
         'psr4' => true,
-        'psr0' => true,
         'array_syntax' => ['syntax' => 'short'],
         'no_superfluous_phpdoc_tags' => true,
         'linebreak_after_opening_tag' => true,

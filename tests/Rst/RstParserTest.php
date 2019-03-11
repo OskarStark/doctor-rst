@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace app\tests\Rst;
+namespace App\Tests\Rst;
 
 use App\Rst\RstParser;
 use PHPUnit\Framework\TestCase;

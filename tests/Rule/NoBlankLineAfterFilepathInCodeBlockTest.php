@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace app\tests\Rule;
+namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInCodeBlock;
 use PHPUnit\Framework\TestCase;
