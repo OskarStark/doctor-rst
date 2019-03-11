@@ -33,7 +33,7 @@ class NoExplicitUseOfCodeBlockPhp implements Rule
         $lines->seek($number);
 
         // only interesting if a PHP code block
-        if (!RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)) {
+        if (!RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP, true)) {
             return;
         }
 

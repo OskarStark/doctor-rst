@@ -104,7 +104,7 @@ class RstParser
         return false;
     }
 
-    public static function codeBlockDirectiveIsTypeOf(string $string, string $type): bool
+    public static function codeBlockDirectiveIsTypeOf(string $string, string $type, bool $strict = false): bool
     {
         if (!self::directiveIs($string, self::DIRECTIVE_CODE_BLOCK)) {
             return false;
@@ -134,7 +134,17 @@ class RstParser
 
         if (substr($string, -(\strlen(($type)))) == $type
             || (self::CODE_BLOCK_PHP == $type && '::' == substr(self::clean($string), -2, 2))) {
-            return true;
+            if (!$strict) {
+                return true;
+            } else {
+                if (preg_match('/\:\: (.*)$/', $string, $matches)) {
+                    if ($type === $matches[1]) {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
         }
 
         return false;

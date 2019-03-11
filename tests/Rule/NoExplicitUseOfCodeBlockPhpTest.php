@@ -44,6 +44,10 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
                 '.. code-block:: php',
             ],
             [
+                null,
+                '.. code-block:: html+php',
+            ],
+            [
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 '    .. code-block:: php',
             ],

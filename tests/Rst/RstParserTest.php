@@ -129,9 +129,9 @@ class RstParserTest extends TestCase
      *
      * @dataProvider codeBlockDirectiveIsTypeOfProvider
      */
-    public function codeBlockDirectiveIsTypeOf(bool $expected, string $string, string $type)
+    public function codeBlockDirectiveIsTypeOf(bool $expected, string $string, string $type, bool $strict = false)
     {
-        $this->assertSame($expected, RstParser::codeBlockDirectiveIsTypeOf($string, $type));
+        $this->assertSame($expected, RstParser::codeBlockDirectiveIsTypeOf($string, $type, $strict));
     }
 
     public function codeBlockDirectiveIsTypeOfProvider()
@@ -143,6 +143,10 @@ class RstParserTest extends TestCase
             [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP],
             [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS],
             [false, 'foo', RstParser::CODE_BLOCK_PHP],
+            [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP, true],
+            [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS, false],
+            [true, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, false],
+            [false, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, true],
         ];
     }
 
