@@ -28,6 +28,7 @@ class RstParser
     const DIRECTIVE_INDEX = '.. index::';
     const DIRECTIVE_IMPORTANT = '.. important::';
     const DIRECTIVE_CONFIGURATION_BLOCK = '.. configuration-block::';
+    const DIRECTIVE_BEST_PRACTICE = '.. best-practice::';
 
     const CODE_BLOCK_PHP = 'php';
     const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
@@ -79,6 +80,7 @@ class RstParser
             self::DIRECTIVE_INDEX,
             self::DIRECTIVE_IMPORTANT,
             self::DIRECTIVE_CONFIGURATION_BLOCK,
+            self::DIRECTIVE_BEST_PRACTICE,
         ];
 
         Assert::oneOf(
