@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoPhpPrefixBeforeBinConsole;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoPhpPrefixBeforeBinConsoleTest extends TestCase
@@ -23,11 +24,11 @@ class NoPhpPrefixBeforeBinConsoleTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoPhpPrefixBeforeBinConsole())->check(new \ArrayIterator([$line]), 0)
+            (new NoPhpPrefixBeforeBinConsole())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,11 +37,11 @@ class NoPhpPrefixBeforeBinConsoleTest extends TestCase
         return [
             [
                 'Please remove "php" prefix before "bin/console"',
-                'please execute php bin/console foo',
+                new RstSample('please execute php bin/console foo'),
             ],
             [
                 null,
-                'please execute bin/console foo',
+                new RstSample('please execute bin/console foo'),
             ],
         ];
     }

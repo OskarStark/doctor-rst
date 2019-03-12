@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInPhpCodeBlock;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
@@ -23,11 +24,11 @@ class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check(new \ArrayIterator(\is_array($line) ? $line : [$line]), 0)
+            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,26 +37,26 @@ class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
         return [
             [
                 'Please remove blank line after "// src/Handler/Collection.php"',
-                [
+                new RstSample([
                     '.. code-block:: php',
                     '',
                     '    // src/Handler/Collection.php',
                     '',
                     '    namespace App\\Handler;',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: php',
                     '',
                     '    // src/Handler/Collection.php',
                     '    namespace App\\Handler;',
-                ],
+                ]),
             ],
             [
                 null,
-                'temp',
+                new RstSample('temp'),
             ],
         ];
     }

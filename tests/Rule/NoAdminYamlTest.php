@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoAdminYaml;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoAdminYamlTest extends TestCase
@@ -23,11 +24,11 @@ class NoAdminYamlTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoAdminYaml())->check(new \ArrayIterator([$line]), 0)
+            (new NoAdminYaml())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,31 +37,31 @@ class NoAdminYamlTest extends TestCase
         return [
             [
                 'Please use "services.yaml" instead of "admin.yml"',
-                'register the admin class in admin.yml',
+                new RstSample('register the admin class in admin.yml'),
             ],
             [
                 null,
-                'register the admin class in services.yaml',
+                new RstSample('register the admin class in services.yaml'),
             ],
             [
                 'Please use "services.yaml" instead of "admin.yaml"',
-                'register the admin class in admin.yaml',
+                new RstSample('register the admin class in admin.yaml'),
             ],
             [
                 null,
-                'register the admin class in services.yaml',
+                new RstSample('register the admin class in services.yaml'),
             ],
             [
                 null,
-                '# config/packages/sonata_admin.yaml',
+                new RstSample('# config/packages/sonata_admin.yaml'),
             ],
             [
                 null,
-                '# config/packages/sonata_doctrine_orm_admin.yaml',
+                new RstSample('# config/packages/sonata_doctrine_orm_admin.yaml'),
             ],
             [
                 null,
-                '# config/packages/sonata_doctrine_mongodb_admin.yaml',
+                new RstSample('# config/packages/sonata_doctrine_mongodb_admin.yaml'),
             ],
         ];
     }

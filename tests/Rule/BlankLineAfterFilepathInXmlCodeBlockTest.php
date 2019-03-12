@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInXmlCodeBlock;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class BlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
@@ -23,11 +24,11 @@ class BlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new BlankLineAfterFilepathInXmlCodeBlock())->check(new \ArrayIterator(\is_array($line) ? $line : [$line]), 0)
+            (new BlankLineAfterFilepathInXmlCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,45 +37,45 @@ class BlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
         return [
             [
                 'Please add a blank line after "<!-- config/services.xml -->"',
-                [
+                new RstSample([
                     '.. code-block:: xml',
                     '',
                     '    <!-- config/services.xml -->',
                     '    <foo\/>',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: xml',
                     '',
                     '    <!-- config/services.xml -->',
                     '',
                     '    <foo\/>',
-                ],
+                ]),
             ],
             [
                 'Please add a blank line after "<!--config/services.xml-->"',
-                [
+                new RstSample([
                     '.. code-block:: xml',
                     '',
                     '    <!--config/services.xml-->',
                     '    <foo\/>',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: xml',
                     '',
                     '    <!--config/services.xml-->',
                     '',
                     '    <foo\/>',
-                ],
+                ]),
             ],
             [
                 null,
-                'temp',
+                new RstSample('temp'),
             ],
         ];
     }

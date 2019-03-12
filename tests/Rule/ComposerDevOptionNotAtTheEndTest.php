@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\ComposerDevOptionNotAtTheEnd;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class ComposerDevOptionNotAtTheEndTest extends TestCase
@@ -23,11 +24,11 @@ class ComposerDevOptionNotAtTheEndTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new ComposerDevOptionNotAtTheEnd())->check(new \ArrayIterator([$line]), 0)
+            (new ComposerDevOptionNotAtTheEnd())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,11 +37,11 @@ class ComposerDevOptionNotAtTheEndTest extends TestCase
         return [
             [
                 null,
-                'composer require --dev symfony/debug',
+                new RstSample('composer require --dev symfony/debug'),
             ],
             [
                 'Please move "--dev" option before the package',
-                'composer require symfony/debug --dev',
+                new RstSample('composer require symfony/debug --dev'),
             ],
         ];
     }

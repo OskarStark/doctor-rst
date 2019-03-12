@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\KernelInsteadOfAppKernel;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class KernelInsteadOfAppKernelTest extends TestCase
@@ -23,11 +24,11 @@ class KernelInsteadOfAppKernelTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new KernelInsteadOfAppKernel())->check(new \ArrayIterator([$line]), 0)
+            (new KernelInsteadOfAppKernel())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,19 +37,19 @@ class KernelInsteadOfAppKernelTest extends TestCase
         return [
             [
                 'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
-                'register the bundle in app/AppKernel.php',
+                new RstSample('register the bundle in app/AppKernel.php'),
             ],
             [
                 null,
-                'register the bundle in src/Kernel.php',
+                new RstSample('register the bundle in src/Kernel.php'),
             ],
             [
                 'Please use "Kernel" instead of "AppKernel"',
-                'register the bundle via AppKernel',
+                new RstSample('register the bundle via AppKernel'),
             ],
             [
                 null,
-                'register the bundle via Kernel',
+                new RstSample('register the bundle via Kernel'),
             ],
         ];
     }

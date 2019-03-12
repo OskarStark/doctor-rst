@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\YarnDevOptionNotAtTheEnd;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class YarnDevOptionNotAtTheEndTest extends TestCase
@@ -23,11 +24,11 @@ class YarnDevOptionNotAtTheEndTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new YarnDevOptionNotAtTheEnd())->check(new \ArrayIterator([$line]), 0)
+            (new YarnDevOptionNotAtTheEnd())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,11 +37,11 @@ class YarnDevOptionNotAtTheEndTest extends TestCase
         return [
             [
                 null,
-                'yarn add --dev jquery',
+                new RstSample('yarn add --dev jquery'),
             ],
             [
                 'Please move "--dev" option before the package',
-                'yarn add jquery --dev',
+                new RstSample('yarn add jquery --dev'),
             ],
         ];
     }

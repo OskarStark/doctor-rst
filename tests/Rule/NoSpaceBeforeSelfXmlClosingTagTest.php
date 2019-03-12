@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoSpaceBeforeSelfXmlClosingTag;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoSpaceBeforeSelfXmlClosingTagTest extends TestCase
@@ -23,11 +24,11 @@ class NoSpaceBeforeSelfXmlClosingTagTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoSpaceBeforeSelfXmlClosingTag())->check(new \ArrayIterator([$line]), 0)
+            (new NoSpaceBeforeSelfXmlClosingTag())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,23 +37,23 @@ class NoSpaceBeforeSelfXmlClosingTagTest extends TestCase
         return [
             [
                 'Please remove space before "/>"',
-                '<argument type="service" id="sonata.admin.search.handler" />',
+                new RstSample('<argument type="service" id="sonata.admin.search.handler" />'),
             ],
             [
                 'Please remove space before "/>"',
-                '<argument />',
+                new RstSample('<argument />'),
             ],
             [
                 null,
-                '/>',
+                new RstSample('/>'),
             ],
             [
                 null,
-                '<argument type="service" id="sonata.admin.search.handler"/>',
+                new RstSample('<argument type="service" id="sonata.admin.search.handler"/>'),
             ],
             [
                 null,
-                '<br/>',
+                new RstSample('<br/>'),
             ],
         ];
     }

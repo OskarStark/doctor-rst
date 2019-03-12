@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoExplicitUseOfCodeBlockPhp;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoExplicitUseOfCodeBlockPhpTest extends TestCase
@@ -24,11 +25,11 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
      * @dataProvider checkProvider
      * @dataProvider realSymfonyFileProvider
      */
-    public function check($expected, $line, $number = 0)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoExplicitUseOfCodeBlockPhp())->check(new \ArrayIterator(\is_array($line) ? $line : [$line]), $number)
+            (new NoExplicitUseOfCodeBlockPhp())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -37,45 +38,43 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
         return [
             [
                 null,
-                'Check the following controller syntax::',
+                new RstSample('Check the following controller syntax::'),
             ],
             [
                 'Please do not use ".. code-block:: php", use "::" instead.',
-                '.. code-block:: php',
+                new RstSample('.. code-block:: php'),
             ],
             [
                 null,
-                '.. code-block:: html+php',
+                new RstSample('.. code-block:: html+php'),
             ],
             [
                 'Please do not use ".. code-block:: php", use "::" instead.',
-                '    .. code-block:: php',
+                new RstSample('    .. code-block:: php'),
             ],
             [
                 'Please do not use ".. code-block:: php", use "::" instead.',
-                [
+                new RstSample([
                     'Welcome to our tutorial!',
                     '',
                     '     .. code-block:: php',
                     '',
                     'namespace App\Entity;',
-                ],
-                2,
+                ], 2),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. configuration-block::',
                     '',
                     ' .. code-block:: php',
                     '',
                     '  namespace App\Entity;',
-                ],
-                2,
+                ], 2),
             ],
             [
                 'Please do not use ".. code-block:: php", use "::" instead.',
-                [
+                new RstSample([
                     '    .. configuration-block::',
                     '',
                     '        .. code-block:: xml',
@@ -85,8 +84,7 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
                     '    .. code-block:: php',
                     '',
                     'namespace App\Entity;',
-                ],
-                6,
+                ], 6),
             ],
         ];
     }
@@ -192,18 +190,15 @@ CONTENT;
         return [
             [
                 null,
-                explode(PHP_EOL, $content),
-                26,
+                new RstSample($content, 26),
             ],
             [
                 null,
-                explode(PHP_EOL, $content_with_blank_line_at_the_beginning),
-                27,
+                new RstSample($content_with_blank_line_at_the_beginning, 27),
             ],
             [
                 'Please do not use ".. code-block:: php", use "::" instead.',
-                explode(PHP_EOL, $invalid_content),
-                14,
+                new RstSample($invalid_content, 14),
             ],
         ];
     }

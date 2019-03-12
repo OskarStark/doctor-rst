@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\ExtendAbstractAdmin;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class ExtendAbstractAdminTest extends TestCase
@@ -23,11 +24,11 @@ class ExtendAbstractAdminTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new ExtendAbstractAdmin())->check(new \ArrayIterator([$line]), 0)
+            (new ExtendAbstractAdmin())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,37 +37,37 @@ class ExtendAbstractAdminTest extends TestCase
         return [
             [
                 'Please extend AbstractAdmin instead of Admin',
-                'class TestAdmin extends Admin',
+                new RstSample('class TestAdmin extends Admin'),
             ],
 
             [
                 'Please extend AbstractAdmin instead of Admin',
-                '    class TestAdmin extends Admin',
+                new RstSample('    class TestAdmin extends Admin'),
             ],
             [
                 null,
-                'class TestAdmin extends AbstractAdmin',
+                new RstSample('class TestAdmin extends AbstractAdmin'),
             ],
             [
                 null,
-                '    class TestAdmin extends AbstractAdmin',
+                new RstSample('    class TestAdmin extends AbstractAdmin'),
             ],
             [
                 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
-                'use Sonata\AdminBundle\Admin\Admin;',
+                new RstSample('use Sonata\AdminBundle\Admin\Admin;'),
             ],
 
             [
                 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
-                '    use Sonata\AdminBundle\Admin\Admin;',
+                new RstSample('    use Sonata\AdminBundle\Admin\Admin;'),
             ],
             [
                 null,
-                'use Sonata\AdminBundle\Admin\AbstractAdmin;',
+                new RstSample('use Sonata\AdminBundle\Admin\AbstractAdmin;'),
             ],
             [
                 null,
-                '    use Sonata\AdminBundle\Admin\AbstractAdmin;',
+                new RstSample('    use Sonata\AdminBundle\Admin\AbstractAdmin;'),
             ],
         ];
     }

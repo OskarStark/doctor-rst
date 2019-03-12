@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\YamlInsteadOfYmlSuffix;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class YamlInsteadofYmlSuffixTest extends TestCase
@@ -23,11 +24,11 @@ class YamlInsteadofYmlSuffixTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new YamlInsteadOfYmlSuffix())->check(new \ArrayIterator([$line]), 0)
+            (new YamlInsteadOfYmlSuffix())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,23 +37,23 @@ class YamlInsteadofYmlSuffixTest extends TestCase
         return [
             [
                 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"',
-                '.. code-block:: yml',
+                new RstSample('.. code-block:: yml'),
             ],
             [
                 null,
-                '.. code-block:: yaml',
+                new RstSample('.. code-block:: yaml'),
             ],
             [
                 null,
-                '.travis.yml',
+                new RstSample('.travis.yml'),
             ],
             [
                 'Please use ".yaml" instead of ".yml"',
-                'Register your service in services.yml file',
+                new RstSample('Register your service in services.yml file'),
             ],
             [
                 null,
-                'Register your service in services.yaml file',
+                new RstSample('Register your service in services.yaml file'),
             ],
         ];
     }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInCodeBlock;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
@@ -28,11 +29,11 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
      * @dataProvider checkXmlProvider
      * @dataProvider checkTwigProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoBlankLineAfterFilepathInCodeBlock())->check(new \ArrayIterator(\is_array($line) ? $line : [$line]), 0)
+            (new NoBlankLineAfterFilepathInCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -41,7 +42,7 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         return [
             [
                 null,
-                'temp',
+                new RstSample('temp'),
             ],
         ];
     }
@@ -51,22 +52,22 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         return [
             [
                 'Please remove blank line after "// src/Handler/Collection.php"',
-                [
+                new RstSample([
                     '.. code-block:: php',
                     '',
                     '    // src/Handler/Collection.php',
                     '',
                     '    namespace App\\Handler;',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: php',
                     '',
                     '    // src/Handler/Collection.php',
                     '    namespace App\\Handler;',
-                ],
+                ]),
             ],
         ];
     }
@@ -76,22 +77,22 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         return [
             [
                 'Please remove blank line after "# config/services.yml"',
-                [
+                new RstSample([
                     '.. code-block:: yml',
                     '',
                     '    # config/services.yml',
                     '',
                     '    services:',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: yml',
                     '',
                     '    # config/services.yml',
                     '    services:',
-                ],
+                ]),
             ],
         ];
     }
@@ -101,22 +102,22 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         return [
             [
                 'Please remove blank line after "# config/services.yaml"',
-                [
+                new RstSample([
                     '.. code-block:: yaml',
                     '',
                     '    # config/services.yaml',
                     '',
                     '    services:',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: yaml',
                     '',
                     '    # config/services.yaml',
                     '    services:',
-                ],
+                ]),
             ],
         ];
     }
@@ -126,41 +127,41 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         return [
             [
                 'Please remove blank line after "<!-- config/services.xml -->"',
-                [
+                new RstSample([
                     '.. code-block:: xml',
                     '',
                     '    <!-- config/services.xml -->',
                     '',
                     '    <foo\/>',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: xml',
                     '',
                     '    <!-- config/services.xml -->',
                     '    <foo\/>',
-                ],
+                ]),
             ],
             [
                 'Please remove blank line after "<!--config/services.xml-->"',
-                [
+                new RstSample([
                     '.. code-block:: xml',
                     '',
                     '    <!--config/services.xml-->',
                     '',
                     '    <foo\/>',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: xml',
                     '',
                     '    <!--config/services.xml-->',
                     '    <foo\/>',
-                ],
+                ]),
             ],
         ];
     }
@@ -170,60 +171,60 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         return [
             [
                 'Please remove blank line after "{# templates/index.html.twig #}"',
-                [
+                new RstSample([
                     '.. code-block:: twig',
                     '',
                     '    {# templates/index.html.twig #}',
                     '',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: twig',
                     '',
                     '    {# templates/index.html.twig #}',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 'Please remove blank line after "{# templates/index.html.twig #}"',
-                [
+                new RstSample([
                     '.. code-block:: jinja',
                     '',
                     '    {# templates/index.html.twig #}',
                     '',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: jinja',
                     '',
                     '    {# templates/index.html.twig #}',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 'Please remove blank line after "{# templates/index.html.twig #}"',
-                [
+                new RstSample([
                     '.. code-block:: html+jinja',
                     '',
                     '    {# templates/index.html.twig #}',
                     '',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: html+jinja',
                     '',
                     '    {# templates/index.html.twig #}',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
         ];
     }

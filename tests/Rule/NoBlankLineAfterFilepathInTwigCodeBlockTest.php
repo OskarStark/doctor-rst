@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInTwigCodeBlock;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoBlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
@@ -23,11 +24,11 @@ class NoBlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoBlankLineAfterFilepathInTwigCodeBlock())->check(new \ArrayIterator(\is_array($line) ? $line : [$line]), 0)
+            (new NoBlankLineAfterFilepathInTwigCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,83 +37,83 @@ class NoBlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
         return [
             [
                 'Please remove blank line after "{# templates/index.html.twig #}"',
-                [
+                new RstSample([
                     '.. code-block:: twig',
                     '',
                     '    {# templates/index.html.twig #}',
                     '',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: twig',
                     '',
                     '    {# templates/index.html.twig #}',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 'Please remove blank line after "{# templates/index.html.twig #}"',
-                [
+                new RstSample([
                     '.. code-block:: jinja',
                     '',
                     '    {# templates/index.html.twig #}',
                     '',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: jinja',
                     '',
                     '    {# templates/index.html.twig #}',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 'Please remove blank line after "{# templates/index.html.twig #}"',
-                [
+                new RstSample([
                     '.. code-block:: html+jinja',
                     '',
                     '    {# templates/index.html.twig #}',
                     '',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: html+jinja',
                     '',
                     '    {# templates/index.html.twig #}',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 'Please remove blank line after "{# templates/index.html.twig #}"',
-                [
+                new RstSample([
                     '.. code-block:: html+twig',
                     '',
                     '    {# templates/index.html.twig #}',
                     '',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 null,
-                [
+                new RstSample([
                     '.. code-block:: html+twig',
                     '',
                     '    {# templates/index.html.twig #}',
                     '    {% set foo = "bar" %}',
-                ],
+                ]),
             ],
             [
                 null,
-                'temp',
+                new RstSample('temp'),
             ],
         ];
     }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\ShortArraySyntax;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class ShortArraySyntaxTest extends TestCase
@@ -23,11 +24,11 @@ class ShortArraySyntaxTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new ShortArraySyntax())->check(new \ArrayIterator([$line]), 0)
+            (new ShortArraySyntax())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,47 +37,47 @@ class ShortArraySyntaxTest extends TestCase
         return [
             [
                 'Please use short array syntax',
-                '->add(\'foo\', null, array(\'key\' => 1));',
+                new RstSample('->add(\'foo\', null, array(\'key\' => 1));'),
             ],
             [
                 null,
-                '->add(\'foo\', null, [\'key\' => 1[);',
+                new RstSample('->add(\'foo\', null, [\'key\' => 1[);'),
             ],
             [
                 'Please use short array syntax',
-                'if (in_array(1, array())) { ',
+                new RstSample('if (in_array(1, array())) { '),
             ],
             [
                 null,
-                'if (in_array(1, [])) {',
+                new RstSample('if (in_array(1, [])) {'),
             ],
             [
                 null,
-                '$forms = iterator_to_array($forms);',
+                new RstSample('$forms = iterator_to_array($forms);'),
             ],
             [
                 'Please use short array syntax',
-                "->add('tags', null, array('label' => 'les tags'), null, array('expanded' => true, 'multiple' => true));",
+                new RstSample("->add('tags', null, array('label' => 'les tags'), null, array('expanded' => true, 'multiple' => true));"),
             ],
             [
                 'Please use short array syntax',
-                '->assertLength(array(\'max\' => 100))',
+                new RstSample('->assertLength(array(\'max\' => 100))'),
             ],
             [
                 null,
-                'array(3) {',
+                new RstSample('array(3) {'),
             ],
             [
                 null,
-                ' array(3) {',
+                new RstSample(' array(3) {'),
             ],
             [
                 null,
-                '      array(3) {',
+                new RstSample('      array(3) {'),
             ],
             [
                 null,
-                'array(999) {      ',
+                new RstSample('array(999) {      '),
             ],
         ];
     }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\PhpPrefixBeforeBinConsole;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class PhpPrefixBeforeBinConsoleTest extends TestCase
@@ -23,11 +24,11 @@ class PhpPrefixBeforeBinConsoleTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new PhpPrefixBeforeBinConsole())->check(new \ArrayIterator([$line]), 0)
+            (new PhpPrefixBeforeBinConsole())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,15 +37,15 @@ class PhpPrefixBeforeBinConsoleTest extends TestCase
         return [
             [
                 null,
-                'please execute php bin/console foo',
+                new RstSample('please execute php bin/console foo'),
             ],
             [
                 null,
-                'you can use `bin/console` to execute',
+                new RstSample('you can use `bin/console` to execute'),
             ],
             [
                 'Please add "php" prefix before "bin/console"',
-                'please execute bin/console foo',
+                new RstSample('please execute bin/console foo'),
             ],
         ];
     }

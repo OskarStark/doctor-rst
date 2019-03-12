@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\ComposerDevOptionAtTheEnd;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class ComposerDevOptionAtTheEndTest extends TestCase
@@ -23,11 +24,11 @@ class ComposerDevOptionAtTheEndTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new ComposerDevOptionAtTheEnd())->check(new \ArrayIterator([$line]), 0)
+            (new ComposerDevOptionAtTheEnd())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,11 +37,11 @@ class ComposerDevOptionAtTheEndTest extends TestCase
         return [
             [
                 'Please move "--dev" option to the end of the command',
-                'composer require --dev symfony/debug',
+                new RstSample('composer require --dev symfony/debug'),
             ],
             [
                 null,
-                'composer require symfony/debug --dev',
+                new RstSample('composer require symfony/debug --dev'),
             ],
         ];
     }

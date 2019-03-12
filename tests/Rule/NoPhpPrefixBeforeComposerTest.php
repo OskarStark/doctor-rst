@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoPhpPrefixBeforeComposer;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoPhpPrefixBeforeComposerTest extends TestCase
@@ -23,11 +24,11 @@ class NoPhpPrefixBeforeComposerTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoPhpPrefixBeforeComposer())->check(new \ArrayIterator([$line]), 0)
+            (new NoPhpPrefixBeforeComposer())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,11 +37,11 @@ class NoPhpPrefixBeforeComposerTest extends TestCase
         return [
             [
                 'Please remove "php" prefix',
-                'please execute php composer',
+                new RstSample('please execute php composer'),
             ],
             [
                 null,
-                'please execute composer install',
+                new RstSample('please execute composer install'),
             ],
         ];
     }

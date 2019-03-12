@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\FinalAdminClasses;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class FinalAdminClassesTest extends TestCase
@@ -23,11 +24,11 @@ class FinalAdminClassesTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new FinalAdminClasses())->check(new \ArrayIterator([$line]), 0)
+            (new FinalAdminClasses())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,16 +37,16 @@ class FinalAdminClassesTest extends TestCase
         return [
             [
                 'Please use "final" for Admin class',
-                'class TestAdmin extends AbstractAdmin',
+                new RstSample('class TestAdmin extends AbstractAdmin'),
             ],
 
             [
                 'Please use "final" for Admin class',
-                '    class TestAdmin extends AbstractAdmin',
+                new RstSample('    class TestAdmin extends AbstractAdmin'),
             ],
             [
                 null,
-                'final class TestAdmin extends AbstractAdmin',
+                new RstSample('final class TestAdmin extends AbstractAdmin'),
             ],
         ];
     }

@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoBashPrompt;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoBashPromptTest extends TestCase
@@ -23,11 +24,11 @@ class NoBashPromptTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoBashPrompt())->check(new \ArrayIterator(\is_array($line) ? $line : [$line]), 0)
+            (new NoBashPrompt())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,35 +37,35 @@ class NoBashPromptTest extends TestCase
         return [
             [
                 'Please remove the "$" prefix in .. code-block:: directive',
-                [
+                new RstSample([
                     '.. code-block:: bash',
                     '',
                     '$ composer install sonata-project/admin-bundle',
-                ],
+                ]),
             ],
             [
                 'Please remove the "$" prefix in .. code-block:: directive',
-                [
+                new RstSample([
                     '.. code-block:: shell',
                     '',
                     '$ composer install sonata-project/admin-bundle',
-                ],
+                ]),
             ],
             [
                 'Please remove the "$" prefix in .. code-block:: directive',
-                [
+                new RstSample([
                     '.. code-block:: terminal',
                     '',
                     '$ composer install sonata-project/admin-bundle',
-                ],
+                ]),
             ],
             [
                 null,
-                '$ composer install sonata-project/admin-bundle',
+                new RstSample('$ composer install sonata-project/admin-bundle'),
             ],
             [
                 null,
-                'composer install sonata-project/admin-bundle',
+                new RstSample('composer install sonata-project/admin-bundle'),
             ],
         ];
     }

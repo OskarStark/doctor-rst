@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoInheritdoc;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoInheritdocTest extends TestCase
@@ -23,11 +24,11 @@ class NoInheritdocTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoInheritdoc())->check(new \ArrayIterator([$line]), 0)
+            (new NoInheritdoc())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,11 +37,11 @@ class NoInheritdocTest extends TestCase
         return [
             [
                 'Please do not use "@inheritdoc"',
-                '* {@inheritdoc}',
+                new RstSample('* {@inheritdoc}'),
             ],
             [
                 null,
-                'fine',
+                new RstSample('fine'),
             ],
         ];
     }

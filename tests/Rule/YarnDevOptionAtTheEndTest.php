@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\YarnDevOptionAtTheEnd;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class YarnDevOptionAtTheEndTest extends TestCase
@@ -23,11 +24,11 @@ class YarnDevOptionAtTheEndTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new YarnDevOptionAtTheEnd())->check(new \ArrayIterator([$line]), 0)
+            (new YarnDevOptionAtTheEnd())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,11 +37,11 @@ class YarnDevOptionAtTheEndTest extends TestCase
         return [
             [
                 'Please move "--dev" option to the end of the command',
-                'yarn add --dev jquery',
+                new RstSample('yarn add --dev jquery'),
             ],
             [
                 null,
-                'yarn add jquery --dev',
+                new RstSample('yarn add jquery --dev'),
             ],
         ];
     }

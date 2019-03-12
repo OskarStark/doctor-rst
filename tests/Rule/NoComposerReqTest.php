@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\NoComposerReq;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class NoComposerReqTest extends TestCase
@@ -23,11 +24,11 @@ class NoComposerReqTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new NoComposerReq())->check(new \ArrayIterator([$line]), 0)
+            (new NoComposerReq())->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,11 +37,11 @@ class NoComposerReqTest extends TestCase
         return [
             [
                 'Please "composer require" instead of "composer req"',
-                'composer req symfony/form',
+                new RstSample('composer req symfony/form'),
             ],
             [
                 null,
-                'composer require symfony/form',
+                new RstSample('composer require symfony/form'),
             ],
         ];
     }
