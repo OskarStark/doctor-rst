@@ -39,9 +39,9 @@ class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
                 [
                     '.. code-block:: php',
                     '',
-                    '// src/Handler/Collection.php',
+                    '    // src/Handler/Collection.php',
                     '',
-                    'namespace App\\Handler;',
+                    '    namespace App\\Handler;',
                 ],
             ],
             [
@@ -49,8 +49,8 @@ class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
                 [
                     '.. code-block:: php',
                     '',
-                    '// src/Handler/Collection.php',
-                    'namespace App\\Handler;',
+                    '    // src/Handler/Collection.php',
+                    '    namespace App\\Handler;',
                 ],
             ],
             [

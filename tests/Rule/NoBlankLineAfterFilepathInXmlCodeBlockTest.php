@@ -39,9 +39,9 @@ class NoBlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
                 [
                     '.. code-block:: xml',
                     '',
-                    '<!-- config/services.xml -->',
+                    '    <!-- config/services.xml -->',
                     '',
-                    '<foo\/>',
+                    '    <foo\/>',
                 ],
             ],
             [
@@ -49,8 +49,8 @@ class NoBlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
                 [
                     '.. code-block:: xml',
                     '',
-                    '<!-- config/services.xml -->',
-                    '<foo\/>',
+                    '    <!-- config/services.xml -->',
+                    '    <foo\/>',
                 ],
             ],
             [
@@ -58,9 +58,9 @@ class NoBlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
                 [
                     '.. code-block:: xml',
                     '',
-                    '<!--config/services.xml-->',
+                    '    <!--config/services.xml-->',
                     '',
-                    '<foo\/>',
+                    '    <foo\/>',
                 ],
             ],
             [
@@ -68,8 +68,8 @@ class NoBlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
                 [
                     '.. code-block:: xml',
                     '',
-                    '<!--config/services.xml-->',
-                    '<foo\/>',
+                    '    <!--config/services.xml-->',
+                    '    <foo\/>',
                 ],
             ],
             [

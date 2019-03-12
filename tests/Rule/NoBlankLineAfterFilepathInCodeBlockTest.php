@@ -54,9 +54,9 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: php',
                     '',
-                    '// src/Handler/Collection.php',
+                    '    // src/Handler/Collection.php',
                     '',
-                    'namespace App\\Handler;',
+                    '    namespace App\\Handler;',
                 ],
             ],
             [
@@ -64,8 +64,8 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: php',
                     '',
-                    '// src/Handler/Collection.php',
-                    'namespace App\\Handler;',
+                    '    // src/Handler/Collection.php',
+                    '    namespace App\\Handler;',
                 ],
             ],
         ];
@@ -79,9 +79,9 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: yml',
                     '',
-                    '# config/services.yml',
+                    '    # config/services.yml',
                     '',
-                    'services:',
+                    '    services:',
                 ],
             ],
             [
@@ -89,8 +89,8 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: yml',
                     '',
-                    '# config/services.yml',
-                    'services:',
+                    '    # config/services.yml',
+                    '    services:',
                 ],
             ],
         ];
@@ -104,9 +104,9 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: yaml',
                     '',
-                    '# config/services.yaml',
+                    '    # config/services.yaml',
                     '',
-                    'services:',
+                    '    services:',
                 ],
             ],
             [
@@ -114,8 +114,8 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: yaml',
                     '',
-                    '# config/services.yaml',
-                    'services:',
+                    '    # config/services.yaml',
+                    '    services:',
                 ],
             ],
         ];
@@ -129,9 +129,9 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: xml',
                     '',
-                    '<!-- config/services.xml -->',
+                    '    <!-- config/services.xml -->',
                     '',
-                    '<foo\/>',
+                    '    <foo\/>',
                 ],
             ],
             [
@@ -139,8 +139,8 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: xml',
                     '',
-                    '<!-- config/services.xml -->',
-                    '<foo\/>',
+                    '    <!-- config/services.xml -->',
+                    '    <foo\/>',
                 ],
             ],
             [
@@ -148,9 +148,9 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: xml',
                     '',
-                    '<!--config/services.xml-->',
+                    '    <!--config/services.xml-->',
                     '',
-                    '<foo\/>',
+                    '    <foo\/>',
                 ],
             ],
             [
@@ -158,8 +158,8 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: xml',
                     '',
-                    '<!--config/services.xml-->',
-                    '<foo\/>',
+                    '    <!--config/services.xml-->',
+                    '    <foo\/>',
                 ],
             ],
         ];
@@ -173,9 +173,9 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: twig',
                     '',
-                    '{# templates/index.html.twig #}',
+                    '    {# templates/index.html.twig #}',
                     '',
-                    '{% set foo = "bar" %}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -183,8 +183,8 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: twig',
                     '',
-                    '{# templates/index.html.twig #}',
-                    '{% set foo = "bar" %}',
+                    '    {# templates/index.html.twig #}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -192,9 +192,9 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: jinja',
                     '',
-                    '{# templates/index.html.twig #}',
+                    '    {# templates/index.html.twig #}',
                     '',
-                    '{% set foo = "bar" %}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -202,8 +202,8 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: jinja',
                     '',
-                    '{# templates/index.html.twig #}',
-                    '{% set foo = "bar" %}',
+                    '    {# templates/index.html.twig #}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -211,9 +211,9 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: html+jinja',
                     '',
-                    '{# templates/index.html.twig #}',
+                    '    {# templates/index.html.twig #}',
                     '',
-                    '{% set foo = "bar" %}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -221,8 +221,8 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
                 [
                     '.. code-block:: html+jinja',
                     '',
-                    '{# templates/index.html.twig #}',
-                    '{% set foo = "bar" %}',
+                    '    {# templates/index.html.twig #}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
         ];
