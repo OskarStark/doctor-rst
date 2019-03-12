@@ -33,18 +33,19 @@ class RstParser
     const CODE_BLOCK_PHP = 'php';
     const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
     const CODE_BLOCK_XML = 'xml';
-
     const CODE_BLOCK_TWIG = 'twig';
     const CODE_BLOCK_JINJA = 'jinja';
     const CODE_BLOCK_HTML = 'html';
     const CODE_BLOCK_HTML_JINJA = 'html+jinja';
     const CODE_BLOCK_HTML_TWIG = 'html+twig';
+    const CODE_BLOCK_HTML_PHP = 'html+php';
     const CODE_BLOCK_YML = 'yml';
     const CODE_BLOCK_YAML = 'yaml';
     const CODE_BLOCK_BASH = 'bash';
     const CODE_BLOCK_SHELL = 'shell';
     const CODE_BLOCK_TERMINAL = 'terminal';
     const CODE_BLOCK_TEXT = 'text';
+    const CODE_BLOCK_RST = 'rst';
 
     public static function hasNewline(string $string): bool
     {
@@ -129,6 +130,8 @@ class RstParser
                 self::CODE_BLOCK_BASH,
                 self::CODE_BLOCK_TERMINAL,
                 self::CODE_BLOCK_TEXT,
+                self::CODE_BLOCK_RST,
+                self::CODE_BLOCK_HTML_PHP,
             ]
         );
 
