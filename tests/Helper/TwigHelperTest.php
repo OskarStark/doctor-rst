@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Tests\Helper;
 
 use App\Helper\TwigHelper;
-use App\Helper\YamlHelper;
 use PHPUnit\Framework\TestCase;
 
 class TwigHelperTest extends TestCase

@@ -51,7 +51,6 @@ class PhpPrefixBeforeBinConsoleTest extends TestCase
                 null,
                 new RstSample('php "%s/../bin/console"'),
             ],
-
         ];
     }
 }
