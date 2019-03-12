@@ -39,8 +39,8 @@ class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
                 [
                     '.. code-block:: php',
                     '',
-                    '// src/Handler/Collection.php',
-                    'namespace App\\Handler;',
+                    '    // src/Handler/Collection.php',
+                    '    namespace App\\Handler;',
                 ],
             ],
             [
@@ -48,9 +48,9 @@ class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
                 [
                     '.. code-block:: php',
                     '',
-                    '// src/Handler/Collection.php',
+                    '    // src/Handler/Collection.php',
                     '',
-                    'namespace App\\Handler;',
+                    '    namespace App\\Handler;',
                 ],
             ],
             [

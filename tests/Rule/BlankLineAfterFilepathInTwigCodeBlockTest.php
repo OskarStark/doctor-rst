@@ -39,8 +39,8 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 [
                     '.. code-block:: twig',
                     '',
-                    '{# templates/index.html.twig #}',
-                    '{% set foo = "bar" %}',
+                    '    {# templates/index.html.twig #}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -48,9 +48,9 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 [
                     '.. code-block:: twig',
                     '',
-                    '{# templates/index.html.twig #}',
+                    '    {# templates/index.html.twig #}',
                     '',
-                    '{% set foo = "bar" %}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -58,8 +58,8 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 [
                     '.. code-block:: jinja',
                     '',
-                    '{# templates/index.html.twig #}',
-                    '{% set foo = "bar" %}',
+                    '    {# templates/index.html.twig #}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -67,9 +67,9 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 [
                     '.. code-block:: jinja',
                     '',
-                    '{# templates/index.html.twig #}',
+                    '    {# templates/index.html.twig #}',
                     '',
-                    '{% set foo = "bar" %}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -77,8 +77,8 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 [
                     '.. code-block:: html+jinja',
                     '',
-                    '{# templates/index.html.twig #}',
-                    '{% set foo = "bar" %}',
+                    '    {# templates/index.html.twig #}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -86,9 +86,9 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 [
                     '.. code-block:: html+jinja',
                     '',
-                    '{# templates/index.html.twig #}',
+                    '    {# templates/index.html.twig #}',
                     '',
-                    '{% set foo = "bar" %}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -96,8 +96,8 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 [
                     '.. code-block:: html+twig',
                     '',
-                    '{# templates/index.html.twig #}',
-                    '{% set foo = "bar" %}',
+                    '    {# templates/index.html.twig #}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [
@@ -105,9 +105,9 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 [
                     '.. code-block:: html+twig',
                     '',
-                    '{# templates/index.html.twig #}',
+                    '    {# templates/index.html.twig #}',
                     '',
-                    '{% set foo = "bar" %}',
+                    '    {% set foo = "bar" %}',
                 ],
             ],
             [

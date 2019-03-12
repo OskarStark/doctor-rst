@@ -39,8 +39,8 @@ class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
                 [
                     '.. code-block:: yml',
                     '',
-                    '# config/services.yml',
-                    'services:',
+                    '    # config/services.yml',
+                    '    services:',
                 ],
             ],
             [
@@ -48,9 +48,9 @@ class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
                 [
                     '.. code-block:: yml',
                     '',
-                    '# config/services.yml',
+                    '    # config/services.yml',
                     '',
-                    'services:',
+                    '    services:',
                 ],
             ],
             [
@@ -58,8 +58,8 @@ class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
                 [
                     '.. code-block:: yaml',
                     '',
-                    '# config/services.yaml',
-                    'services:',
+                    '    # config/services.yaml',
+                    '    services:',
                 ],
             ],
             [
@@ -67,9 +67,9 @@ class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
                 [
                     '.. code-block:: yaml',
                     '',
-                    '# config/services.yaml',
+                    '    # config/services.yaml',
                     '',
-                    'services:',
+                    '    services:',
                 ],
             ],
             [
