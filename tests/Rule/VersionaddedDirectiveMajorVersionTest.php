@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveMajorVersion;
+use App\Tests\RstSample;
 use Composer\Semver\VersionParser;
 use PHPUnit\Framework\TestCase;
 
@@ -24,11 +25,12 @@ class VersionaddedDirectiveMajorVersionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, int $majorVersion, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new VersionaddedDirectiveMajorVersion(new VersionParser()))->check(new \ArrayIterator([$line]), 0)
+            (new VersionaddedDirectiveMajorVersion(new VersionParser()))
+                ->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -37,35 +39,43 @@ class VersionaddedDirectiveMajorVersionTest extends TestCase
         return [
             [
                 null,
-                '.. versionadded:: 3',
+                3,
+                new RstSample('.. versionadded:: 3'),
             ],
             [
                 null,
-                '.. versionadded:: 3.4',
+                3,
+                new RstSample('.. versionadded:: 3.4'),
             ],
             [
                 null,
-                '.. versionadded:: 3.4.0',
+                3,
+                new RstSample('.. versionadded:: 3.4.0'),
             ],
             [
                 null,
-                '.. versionadded:: 3.4.0.0',
+                3,
+                new RstSample('.. versionadded:: 3.4.0.0'),
             ],
             [
                 null,
-                '.. versionadded:: 3.4   ',
+                3,
+                new RstSample('.. versionadded:: 3.4   '),
             ],
             [
                 'You are not allowed to use version "2.7". Only major version "3" is allowed.',
-                '.. versionadded:: 2.7',
+                3,
+                new RstSample('.. versionadded:: 2.7'),
             ],
             [
                 'You are not allowed to use version "4.0". Only major version "3" is allowed.',
-                '.. versionadded:: 4.0',
+                3,
+                new RstSample('.. versionadded:: 4.0'),
             ],
             [
                 'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
-                '.. versionadded:: foo',
+                3,
+                new RstSample('.. versionadded:: foo'),
             ],
         ];
     }

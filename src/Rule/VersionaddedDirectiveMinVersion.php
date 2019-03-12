@@ -20,9 +20,9 @@ class VersionaddedDirectiveMinVersion implements Rule
 {
     private $minVersion;
 
-    public function __construct()
+    public function __construct(string $minVersion = '3.4')
     {
-        $this->minVersion = '3.4';
+        $this->minVersion = $minVersion;
     }
 
     public static function getName(): string

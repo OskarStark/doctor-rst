@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveShouldHaveVersion;
+use App\Tests\RstSample;
 use Composer\Semver\VersionParser;
 use PHPUnit\Framework\TestCase;
 
@@ -24,11 +25,12 @@ class VersionaddedDirectiveShouldHaveVersionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new VersionaddedDirectiveShouldHaveVersion(new VersionParser()))->check(new \ArrayIterator([$line]), 0)
+            (new VersionaddedDirectiveShouldHaveVersion(new VersionParser()))
+                ->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -37,27 +39,27 @@ class VersionaddedDirectiveShouldHaveVersionTest extends TestCase
         return [
             [
                 null,
-                '.. versionadded:: 1',
+                new RstSample('.. versionadded:: 1'),
             ],
             [
                 null,
-                '.. versionadded:: 1.2',
+                new RstSample('.. versionadded:: 1.2'),
             ],
             [
                 null,
-                '.. versionadded:: 1.2.0',
+                new RstSample('.. versionadded:: 1.2.0'),
             ],
             [
                 null,
-                '.. versionadded:: 1.2   ',
+                new RstSample('.. versionadded:: 1.2   '),
             ],
             [
                 'Please provide a version behind ".. versionadded::"',
-                '.. versionadded::',
+                new RstSample('.. versionadded::'),
             ],
             [
                 'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
-                '.. versionadded:: foo',
+                new RstSample('.. versionadded:: foo'),
             ],
         ];
     }

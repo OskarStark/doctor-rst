@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveMinVersion;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class VersionaddedDirectiveMinVersionTest extends TestCase
@@ -23,11 +24,11 @@ class VersionaddedDirectiveMinVersionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, $line)
+    public function check($expected, string $minVersion, RstSample $sample)
     {
         $this->assertSame(
             $expected,
-            (new VersionaddedDirectiveMinVersion())->check(new \ArrayIterator([$line]), 0)
+            (new VersionaddedDirectiveMinVersion($minVersion))->check($sample->getContent(), $sample->getLineNumber())
         );
     }
 
@@ -36,15 +37,18 @@ class VersionaddedDirectiveMinVersionTest extends TestCase
         return [
             [
                 null,
-                '.. versionadded:: 3.4',
+                '3.4',
+                new RstSample('.. versionadded:: 3.4'),
             ],
             [
                 null,
-                '.. versionadded:: 4.2',
+                '3.4',
+                new RstSample('.. versionadded:: 4.2'),
             ],
             [
                 'Please only provide ".. versionadded::" if the version is greater/equal "3.4"',
-                '.. versionadded:: 2.8',
+                '3.4',
+                new RstSample('.. versionadded:: 2.8'),
             ],
         ];
     }

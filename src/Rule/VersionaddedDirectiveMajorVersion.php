@@ -25,10 +25,10 @@ class VersionaddedDirectiveMajorVersion implements Rule
     /** @var int */
     private $majorVersion;
 
-    public function __construct(VersionParser $versionParser)
+    public function __construct(VersionParser $versionParser, int $majorVersion = 3)
     {
         $this->versionParser = $versionParser;
-        $this->majorVersion = 3;
+        $this->majorVersion = $majorVersion;
     }
 
     public static function getName(): string
