@@ -17,14 +17,11 @@ use App\Rst\RstParser;
 
 class LineLength extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'line_length';
-    }
+    private $max;
 
-    public static function getGroups(): array
+    public function __construct(int $max = 80)
     {
-        return [RulesHandler::GROUP_DEV];
+        $this->max = $max;
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -34,8 +31,8 @@ class LineLength extends AbstractRule implements Rule
 
         $count = mb_strlen(RstParser::clean($line));
 
-        if ($count > $max = 80) {
-            return sprintf('Line is to long (max %s) currently: %s', $max, $count);
+        if ($count > $this->max) {
+            return sprintf('Line is to long (max %s) currently: %s', $this->max, $count);
         }
     }
 }
