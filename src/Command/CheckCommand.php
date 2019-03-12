@@ -33,8 +33,8 @@ class CheckCommand extends Command
     /** @var SymfonyStyle */
     private $io;
 
-    /** @var array */
-    private $violations;
+    /** @var bool */
+    private $violations = false;
 
     /** @var RulesHandler */
     private $rulesHandler;
@@ -75,7 +75,7 @@ class CheckCommand extends Command
             foreach ($config['rules'] as $rule) {
                 $rules = $this->rulesHandler->getRulesByName($rule);
 
-                if (\is_array($rules)) {
+                if (\is_array($rules) && !empty($rules)) {
                     $this->rules = array_merge($this->rules, $rules);
                 } else {
                     $this->rules[] = $rules;
@@ -102,7 +102,7 @@ class CheckCommand extends Command
         if (empty($this->rules)) {
             $this->io->warning('No rules selected!');
 
-            return;
+            return 1;
         }
 
         if ($input->getOption('dry-run')) {

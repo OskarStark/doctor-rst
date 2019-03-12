@@ -88,7 +88,7 @@ class RulesHandler
         return $this->rules[$name];
     }
 
-    public function getRulesByName(string $name): iterable
+    public function getRulesByName(string $name): array
     {
         $rules = [];
 
