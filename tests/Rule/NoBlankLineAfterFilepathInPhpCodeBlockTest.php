@@ -56,6 +56,28 @@ class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
             ],
             [
                 null,
+                new RstSample([
+                    '.. code-block:: php',
+                    '',
+                    '    // src/Handler/Collection.php',
+                    '',
+                    '    // a comment',
+                    '    namespace App\\Handler;',
+                ]),
+            ],
+            [
+                null,
+                new RstSample([
+                    '.. code-block:: php',
+                    '',
+                    '    // src/Handler/Collection.php',
+                    '',
+                    '    # a comment',
+                    '    namespace App\\Handler;',
+                ]),
+            ],
+            [
+                null,
                 new RstSample('temp'),
             ],
         ];

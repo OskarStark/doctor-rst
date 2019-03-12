@@ -21,8 +21,6 @@ class RstParserTest extends TestCase
     /**
      * @test
      *
-     * @group temp
-     *
      * @dataProvider hasNewlineProvider
      */
     public function hasNewline(bool $expected, string $string)

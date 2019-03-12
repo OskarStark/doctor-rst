@@ -75,6 +75,16 @@ class BlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
             ],
             [
                 null,
+                new RstSample([
+                    '.. code-block:: xml',
+                    '',
+                    '    <!--config/services.xml-->',
+                    '    <!-- a comment -->',
+                    '    <foo\/>',
+                ]),
+            ],
+            [
+                null,
                 new RstSample('temp'),
             ],
         ];

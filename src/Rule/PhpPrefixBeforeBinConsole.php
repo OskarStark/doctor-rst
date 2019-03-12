@@ -32,7 +32,16 @@ class PhpPrefixBeforeBinConsole implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, 'bin/console') && !strstr($line, 'php bin/console') && !strstr($line, '`bin/console') && !strstr($line, '"bin/console') && !strstr($line, '_bin/console')) {
+        if (!preg_match('/bin\/console/', $line)) {
+            return;
+        }
+
+        if (preg_match('/(`|"|_)bin\/console/', $line)
+            || preg_match('/php "%s\/\.\.\/bin\/console"/', $line)) {
+            return;
+        }
+
+        if (!preg_match('/php(.*)bin\/console/', $line)) {
             return 'Please add "php" prefix before "bin/console"';
         }
     }

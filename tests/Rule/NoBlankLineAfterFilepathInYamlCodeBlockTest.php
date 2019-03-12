@@ -70,6 +70,17 @@ class NoBlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
                     '.. code-block:: yaml',
                     '',
                     '    # config/services.yaml',
+                    '',
+                    '    # a comment',
+                    '    services:',
+                ]),
+            ],
+            [
+                null,
+                new RstSample([
+                    '.. code-block:: yaml',
+                    '',
+                    '    # config/services.yaml',
                     '    services:',
                 ]),
             ],

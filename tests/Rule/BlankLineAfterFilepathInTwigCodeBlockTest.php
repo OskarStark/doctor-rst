@@ -107,6 +107,16 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                     '.. code-block:: html+twig',
                     '',
                     '    {# templates/index.html.twig #}',
+                    '    {# a comment #}',
+                    '    {% set foo = "bar" %}',
+                ]),
+            ],
+            [
+                null,
+                new RstSample([
+                    '.. code-block:: html+twig',
+                    '',
+                    '    {# templates/index.html.twig #}',
                     '',
                     '    {% set foo = "bar" %}',
                 ]),

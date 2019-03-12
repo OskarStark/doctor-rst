@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
+use App\Helper\XmlHelper;
 use App\Rst\RstParser;
 
 class BlankLineAfterFilepathInXmlCodeBlock implements Rule
@@ -50,8 +51,8 @@ class BlankLineAfterFilepathInXmlCodeBlock implements Rule
     {
         $lines->next();
 
-        if (!RstParser::isBlankLine($lines->current())) {
-            return sprintf('Please add a blank line after "%s"', $matches[0]);
+        if (!RstParser::isBlankLine($lines->current()) && !XmlHelper::isComment($lines->current())) {
+            return sprintf('Please add a blank line after "%s"', trim($matches[0]));
         }
     }
 }

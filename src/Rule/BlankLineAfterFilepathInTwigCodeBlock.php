@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
+use App\Helper\TwigHelper;
 use App\Rst\RstParser;
 
 class BlankLineAfterFilepathInTwigCodeBlock implements Rule
@@ -54,8 +55,8 @@ class BlankLineAfterFilepathInTwigCodeBlock implements Rule
     {
         $lines->next();
 
-        if (!RstParser::isBlankLine($lines->current())) {
-            return sprintf('Please add a blank line after "%s"', $matches[0]);
+        if (!RstParser::isBlankLine($lines->current()) && !TwigHelper::isComment($lines->current())) {
+            return sprintf('Please add a blank line after "%s"', trim($matches[0]));
         }
     }
 }

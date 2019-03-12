@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
+use App\Helper\TwigHelper;
 use App\Rst\RstParser;
 
 class NoBlankLineAfterFilepathInTwigCodeBlock implements Rule
@@ -55,7 +56,10 @@ class NoBlankLineAfterFilepathInTwigCodeBlock implements Rule
         $lines->next();
 
         if (RstParser::isBlankLine($lines->current())) {
-            return sprintf('Please remove blank line after "%s"', $matches[0]);
+            $lines->next();
+            if (!TwigHelper::isComment($lines->current())) {
+                return sprintf('Please remove blank line after "%s"', trim($matches[0]));
+            }
         }
     }
 }

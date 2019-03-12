@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
+use App\Helper\XmlHelper;
 use App\Rst\RstParser;
 
 class NoBlankLineAfterFilepathInXmlCodeBlock implements Rule
@@ -40,16 +41,6 @@ class NoBlankLineAfterFilepathInXmlCodeBlock implements Rule
         $lines->next();
         $lines->next();
 
-        // PHP
-        if (preg_match('/^\/\/(.*)\.php$/', RstParser::clean($lines->current()), $matches)) {
-            return $this->validateBlankLine($lines, $matches);
-        }
-
-        // YML / YAML
-        if (preg_match('/^#(.*)\.(yml|yaml)$/', RstParser::clean($lines->current()), $matches)) {
-            return $this->validateBlankLine($lines, $matches);
-        }
-
         // XML
         if (preg_match('/^<!--(.*)\.xml(.*)-->$/', RstParser::clean($lines->current()), $matches)) {
             return $this->validateBlankLine($lines, $matches);
@@ -61,7 +52,10 @@ class NoBlankLineAfterFilepathInXmlCodeBlock implements Rule
         $lines->next();
 
         if (RstParser::isBlankLine($lines->current())) {
-            return sprintf('Please remove blank line after "%s"', $matches[0]);
+            $lines->next();
+            if (!XmlHelper::isComment($lines->current())) {
+                return sprintf('Please remove blank line after "%s"', trim($matches[0]));
+            }
         }
     }
 }

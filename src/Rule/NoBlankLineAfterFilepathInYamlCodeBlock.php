@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
+use App\Helper\YamlHelper;
 use App\Rst\RstParser;
 
 class NoBlankLineAfterFilepathInYamlCodeBlock implements Rule
@@ -53,7 +54,10 @@ class NoBlankLineAfterFilepathInYamlCodeBlock implements Rule
         $lines->next();
 
         if (RstParser::isBlankLine($lines->current())) {
-            return sprintf('Please remove blank line after "%s"', $matches[0]);
+            $lines->next();
+            if (!YamlHelper::isComment($lines->current())) {
+                return sprintf('Please remove blank line after "%s"', trim($matches[0]));
+            }
         }
     }
 }

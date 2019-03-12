@@ -66,7 +66,7 @@ class NoBlankLineAfterFilepathInCodeBlock implements Rule
         $lines->next();
 
         if (RstParser::isBlankLine($lines->current())) {
-            return sprintf('Please remove blank line after "%s"', $matches[0]);
+            return sprintf('Please remove blank line after "%s"', trim($matches[0]));
         }
     }
 }
