@@ -16,13 +16,8 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class NoExplicitUseOfCodeBlockPhp implements Rule
+class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_explicit_use_of_code_block_php';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SYMFONY];

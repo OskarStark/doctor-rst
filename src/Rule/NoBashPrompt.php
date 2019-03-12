@@ -16,13 +16,8 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class NoBashPrompt implements Rule
+class NoBashPrompt extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_bash_prompt';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

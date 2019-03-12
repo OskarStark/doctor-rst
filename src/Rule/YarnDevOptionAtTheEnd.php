@@ -16,13 +16,8 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class YarnDevOptionAtTheEnd implements Rule
+class YarnDevOptionAtTheEnd extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'yarn_dev_option_at_the_end';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];

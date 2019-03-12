@@ -13,20 +13,8 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
-
-class SpaceBeforeSelfXmlClosingTag implements Rule
+class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'space_before_self_xml_closing_tag';
-    }
-
-    public static function getGroups(): array
-    {
-        return [RulesHandler::GROUP_DEV];
-    }
-
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

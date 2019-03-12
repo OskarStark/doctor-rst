@@ -17,7 +17,7 @@ use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 use Composer\Semver\VersionParser;
 
-class VersionaddedDirectiveShouldHaveVersion implements Rule
+class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Rule
 {
     /** @var VersionParser */
     private $versionParser;
@@ -25,11 +25,6 @@ class VersionaddedDirectiveShouldHaveVersion implements Rule
     public function __construct(VersionParser $versionParser)
     {
         $this->versionParser = $versionParser;
-    }
-
-    public static function getName(): string
-    {
-        return 'versionadded_directive_should_have_version';
     }
 
     public static function getGroups(): array

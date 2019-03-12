@@ -16,18 +16,13 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class VersionaddedDirectiveMinVersion implements Rule
+class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule
 {
     private $minVersion;
 
     public function __construct(string $minVersion = '3.4')
     {
         $this->minVersion = $minVersion;
-    }
-
-    public static function getName(): string
-    {
-        return 'versionadded_directive_min_version';
     }
 
     public static function getGroups(): array

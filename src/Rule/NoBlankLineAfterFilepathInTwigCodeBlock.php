@@ -17,13 +17,8 @@ use App\Handler\RulesHandler;
 use App\Helper\TwigHelper;
 use App\Rst\RstParser;
 
-class NoBlankLineAfterFilepathInTwigCodeBlock implements Rule
+class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_blank_line_after_filepath_in_twig_code_block';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SYMFONY];

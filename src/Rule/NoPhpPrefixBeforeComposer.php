@@ -15,13 +15,8 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class NoPhpPrefixBeforeComposer implements Rule
+class NoPhpPrefixBeforeComposer extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_php_prefix_before_composer';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

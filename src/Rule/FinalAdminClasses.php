@@ -16,13 +16,8 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class FinalAdminClasses implements Rule
+class FinalAdminClasses extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'final_admin_classes';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

@@ -16,13 +16,8 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class ShortArraySyntax implements Rule
+class ShortArraySyntax extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'short_array_syntax';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

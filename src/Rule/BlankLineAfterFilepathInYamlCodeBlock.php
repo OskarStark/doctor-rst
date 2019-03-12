@@ -13,22 +13,11 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
 use App\Helper\YamlHelper;
 use App\Rst\RstParser;
 
-class BlankLineAfterFilepathInYamlCodeBlock implements Rule
+class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'blank_line_after_filepath_in_yaml_code_block';
-    }
-
-    public static function getGroups(): array
-    {
-        return [RulesHandler::GROUP_DEV];
-    }
-
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

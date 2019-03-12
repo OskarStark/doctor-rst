@@ -16,13 +16,8 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class NoComposerReq implements Rule
+class NoComposerReq extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_composer_req';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SYMFONY];

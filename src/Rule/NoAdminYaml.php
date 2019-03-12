@@ -15,13 +15,8 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class NoAdminYaml implements Rule
+class NoAdminYaml extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_admin_yaml';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

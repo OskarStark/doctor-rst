@@ -15,13 +15,8 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class NoComposerPhar implements Rule
+class NoComposerPhar extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_composer_phar';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

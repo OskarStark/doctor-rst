@@ -16,13 +16,8 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class NotManyBlankLines implements Rule
+class NotManyBlankLines extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'not_many_blank_lines';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

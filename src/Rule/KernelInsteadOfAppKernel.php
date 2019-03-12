@@ -15,13 +15,8 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class KernelInsteadOfAppKernel implements Rule
+class KernelInsteadOfAppKernel extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'kernel_instead_of_app_kernel';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

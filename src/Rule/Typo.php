@@ -17,11 +17,6 @@ use App\Handler\RulesHandler;
 
 class Typo extends CheckListRule
 {
-    public static function getName(): string
-    {
-        return 'typo';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];

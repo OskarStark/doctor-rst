@@ -15,13 +15,8 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class YamlInsteadOfYmlSuffix implements Rule
+class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'yaml_instead_of_yml_suffix';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];

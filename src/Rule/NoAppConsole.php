@@ -15,13 +15,8 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class NoAppConsole implements Rule
+class NoAppConsole extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_app_console';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];

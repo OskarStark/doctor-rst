@@ -17,13 +17,8 @@ use App\Handler\RulesHandler;
 use App\Helper\XmlHelper;
 use App\Rst\RstParser;
 
-class NoBlankLineAfterFilepathInXmlCodeBlock implements Rule
+class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_blank_line_after_filepath_in_xml_code_block';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SYMFONY];

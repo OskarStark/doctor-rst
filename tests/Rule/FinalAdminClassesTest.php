@@ -21,6 +21,14 @@ class FinalAdminClassesTest extends TestCase
 {
     /**
      * @test
+     */
+    public function name()
+    {
+        $this->assertSame('final_admin_classes', FinalAdminClasses::getName());
+    }
+
+    /**
+     * @test
      *
      * @dataProvider checkProvider
      */

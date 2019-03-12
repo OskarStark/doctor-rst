@@ -17,7 +17,7 @@ use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 use Composer\Semver\VersionParser;
 
-class VersionaddedDirectiveMajorVersion implements Rule
+class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule
 {
     /** @var VersionParser */
     private $versionParser;
@@ -29,11 +29,6 @@ class VersionaddedDirectiveMajorVersion implements Rule
     {
         $this->versionParser = $versionParser;
         $this->majorVersion = $majorVersion;
-    }
-
-    public static function getName(): string
-    {
-        return 'versionadded_directive_major_version';
     }
 
     public static function getGroups(): array

@@ -15,13 +15,8 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class NoPhpPrefixBeforeBinConsole implements Rule
+class NoPhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_php_prefix_before_bin_console';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

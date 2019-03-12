@@ -17,13 +17,8 @@ use App\Handler\RulesHandler;
 use App\Helper\YamlHelper;
 use App\Rst\RstParser;
 
-class NoBlankLineAfterFilepathInYamlCodeBlock implements Rule
+class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_blank_line_after_filepath_in_yaml_code_block';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SYMFONY];

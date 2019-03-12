@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-abstract class CheckListRule implements Rule
+abstract class CheckListRule extends AbstractRule implements Rule
 {
     public $search;
     public $message;

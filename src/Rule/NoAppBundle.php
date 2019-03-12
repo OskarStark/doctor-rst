@@ -15,13 +15,8 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class NoAppBundle implements Rule
+class NoAppBundle extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_app_bundle';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

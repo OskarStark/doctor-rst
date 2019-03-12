@@ -17,11 +17,6 @@ use App\Handler\RulesHandler;
 
 class BeKeenToNewcomers extends CheckListRule
 {
-    public static function getName(): string
-    {
-        return 'be_keen_to_newcomers';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];

@@ -15,18 +15,8 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 
-class PhpOpenTagInCodeBlockPhpDirective implements Rule
+class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'php_open_tag_in_code_block_php_directive';
-    }
-
-    public static function getGroups(): array
-    {
-        return [];
-    }
-
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);

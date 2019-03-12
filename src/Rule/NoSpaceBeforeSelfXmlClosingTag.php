@@ -16,13 +16,8 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class NoSpaceBeforeSelfXmlClosingTag implements Rule
+class NoSpaceBeforeSelfXmlClosingTag extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_space_before_self_xml_closing_tag';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA];

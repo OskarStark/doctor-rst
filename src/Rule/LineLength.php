@@ -13,10 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class LineLength implements Rule
+class LineLength extends AbstractRule implements Rule
 {
     public static function getName(): string
     {

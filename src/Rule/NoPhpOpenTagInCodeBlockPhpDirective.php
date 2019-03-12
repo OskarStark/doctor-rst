@@ -16,13 +16,8 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class NoPhpOpenTagInCodeBlockPhpDirective implements Rule
+class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_php_open_tag_in_code_block_php_directive';
-    }
-
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];

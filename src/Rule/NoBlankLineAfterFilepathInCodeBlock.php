@@ -13,21 +13,10 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class NoBlankLineAfterFilepathInCodeBlock implements Rule
+class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
 {
-    public static function getName(): string
-    {
-        return 'no_blank_line_after_filepath_in_code_block';
-    }
-
-    public static function getGroups(): array
-    {
-        return [RulesHandler::GROUP_DEV];
-    }
-
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);
