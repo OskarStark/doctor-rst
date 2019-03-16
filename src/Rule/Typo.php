@@ -38,6 +38,9 @@ class Typo extends CheckListRule
             ['compsoer', 'Typo in word "%s"'],
             ['registerbundles()', 'Typo in word "%s", use "registerBundles()"'],
             ['retun', 'Typo in word "%s"'],
+            ['displayes', 'Typo in word "%s"'],
+            ['mantains',  'Typo in word "%s"'],
+            ['doctine',  'Typo in word "%s"'],
         ];
     }
 }
