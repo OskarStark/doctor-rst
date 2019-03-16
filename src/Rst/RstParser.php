@@ -22,6 +22,8 @@ class RstParser
     const DIRECTIVE_WARNING = '.. warning::';
     const DIRECTIVE_NOTICE = '.. notice::';
     const DIRECTIVE_VERSIONADDED = '.. versionadded::';
+    const DIRECTIVE_VERSIONCHANGED = '.. versionchanged::';
+    const DIRECTIVE_DEPRECATED = '.. deprecated::';
     const DIRECTIVE_TIP = '.. tip::';
     const DIRECTIVE_CAUTION = '.. caution::';
     const DIRECTIVE_TOCTREE = '.. toctree::';
@@ -29,6 +31,23 @@ class RstParser
     const DIRECTIVE_IMPORTANT = '.. important::';
     const DIRECTIVE_CONFIGURATION_BLOCK = '.. configuration-block::';
     const DIRECTIVE_BEST_PRACTICE = '.. best-practice::';
+
+    const DIRECTIVES = [
+        self::DIRECTIVE_CODE_BLOCK,
+        self::DIRECTIVE_NOTE,
+        self::DIRECTIVE_WARNING,
+        self::DIRECTIVE_NOTICE,
+        self::DIRECTIVE_VERSIONADDED,
+        self::DIRECTIVE_VERSIONCHANGED,
+        self::DIRECTIVE_DEPRECATED,
+        self::DIRECTIVE_TIP,
+        self::DIRECTIVE_CAUTION,
+        self::DIRECTIVE_TOCTREE,
+        self::DIRECTIVE_INDEX,
+        self::DIRECTIVE_IMPORTANT,
+        self::DIRECTIVE_CONFIGURATION_BLOCK,
+        self::DIRECTIVE_BEST_PRACTICE,
+    ];
 
     const CODE_BLOCK_PHP = 'php';
     const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
