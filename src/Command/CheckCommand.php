@@ -139,6 +139,9 @@ class CheckCommand extends Command
 
             /** @var Rule $rule */
             foreach ($this->rules as $rule) {
+                if (Rule::TYPE_FILE === $rule::getType() && $no > 0) {
+                    continue;
+                }
                 $violation = $rule->check(clone $lines, $no);
 
                 if (!empty($violation)) {

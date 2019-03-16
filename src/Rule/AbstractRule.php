@@ -26,4 +26,9 @@ abstract class AbstractRule
     {
         return [];
     }
+
+    public static function getType(): int
+    {
+        return Rule::TYPE_LINE;
+    }
 }

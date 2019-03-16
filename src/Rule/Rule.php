@@ -15,9 +15,14 @@ namespace App\Rule;
 
 interface Rule
 {
+    const TYPE_LINE = 1;
+    const TYPE_FILE = 2;
+
     public static function getName(): string;
 
     public static function getGroups(): array;
 
     public function check(\ArrayIterator $lines, int $number);
+
+    public static function getType(): int;
 }
