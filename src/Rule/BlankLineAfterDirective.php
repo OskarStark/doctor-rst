@@ -32,16 +32,10 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
             return;
         }
 
-        $supports = false;
-        foreach ($this->supportedDirectives() as $type) {
+        foreach (self::unSupportedDirectives() as $type) {
             if (RstParser::directiveIs($line, $type)) {
-                $supports = true;
-                break;
+                return;
             }
-        }
-
-        if (!$supports) {
-            return;
         }
 
         $lines->next();
@@ -54,16 +48,11 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
         }
     }
 
-    private function supportedDirectives()
+    public static function unSupportedDirectives()
     {
         return [
-            RstParser::DIRECTIVE_CODE_BLOCK,
-            RstParser::DIRECTIVE_NOTE,
-            RstParser::DIRECTIVE_WARNING,
-            RstParser::DIRECTIVE_NOTICE,
-            RstParser::DIRECTIVE_TIP,
-            RstParser::DIRECTIVE_CAUTION,
-            RstParser::DIRECTIVE_VERSIONADDED,
+            RstParser::DIRECTIVE_INDEX,
+            RstParser::DIRECTIVE_TOCTREE,
         ];
     }
 }
