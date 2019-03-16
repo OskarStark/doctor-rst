@@ -37,6 +37,13 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
             return;
         }
 
+        // it has no indention, check if it comes after a headline, in this case its ok
+        if (!preg_match('/^[\s]+/', $lines->current(), $matches)) {
+            if ($this->directAfterHeadline($lines, $number)) {
+                return;
+            }
+        }
+
         // check if the code block is not on the first level, in this case
         // it could not be in a configuration block which would be ok
         if (preg_match('/^[\s]+/', $lines->current(), $matches)
@@ -79,6 +86,28 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
                 return false;
             }
+        }
+
+        return false;
+    }
+
+    private function directAfterHeadline(\ArrayIterator $lines, int $number): bool
+    {
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (RstParser::isBlankLine($lines->current())) {
+                continue;
+            }
+
+            if (RstParser::isHeadline($lines->current())) {
+                return true;
+            }
+
+            return false;
         }
 
         return false;

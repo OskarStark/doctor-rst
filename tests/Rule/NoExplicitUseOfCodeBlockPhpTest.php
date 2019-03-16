@@ -166,7 +166,7 @@ CONTENT;
 
 CONTENT;
 
-        $invalid_content = <<<'CONTENT'
+        $invalid_content = <<<CONTENT
 .. configuration-block::
 
     .. code-block:: yaml
@@ -187,6 +187,25 @@ CONTENT;
 
 CONTENT;
 
+        $valid_code_block_after_headline = <<<'CONTENT'
+Creating an ACL and Adding an ACE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: php
+
+    // src/AppBundle/Controller/BlogController.php
+    namespace AppBundle\Controller;
+
+    use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+    use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+    use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+    use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+    use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+
+    class BlogController extends Controller
+    {
+CONTENT;
+
         return [
             [
                 null,
@@ -199,6 +218,10 @@ CONTENT;
             [
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 new RstSample($invalid_content, 14),
+            ],
+            [
+                null,
+                new RstSample($valid_code_block_after_headline, 3),
             ],
         ];
     }
