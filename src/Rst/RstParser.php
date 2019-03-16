@@ -159,4 +159,13 @@ class RstParser
     {
         return (bool) empty(RstParser::clean($string));
     }
+
+    public static function isHeadline(string $string): bool
+    {
+        if (preg_match('/^([\=]+|[\~]+|[\*]+|[\-]+|[\.]+)$/', $string)) {
+            return true;
+        }
+
+        return false;
+    }
 }

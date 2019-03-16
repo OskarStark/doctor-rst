@@ -21,6 +21,29 @@ class RstParserTest extends TestCase
     /**
      * @test
      *
+     * @dataProvider isHeadlineProvider
+     */
+    public function isHeadline(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isHeadline($string));
+    }
+
+    public function isHeadlineProvider()
+    {
+        yield [true, '==='];
+        yield [true, '~~~'];
+        yield [true, '***'];
+        yield [true, '---'];
+        yield [true, '...'];
+
+        yield [false, ''];
+        yield [false, ''];
+        yield [false, 'I am text::'];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider hasNewlineProvider
      */
     public function hasNewline(bool $expected, string $string)
