@@ -13,9 +13,13 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
 use App\Helper\YamlHelper;
 use App\Rst\RstParser;
 
+/**
+ * @Description("Make sure you have a blank line after a filepath in a YAML code block.")
+ */
 class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Rule
 {
     public function check(\ArrayIterator $lines, int $number)

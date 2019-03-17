@@ -13,9 +13,13 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
 use App\Helper\TwigHelper;
 use App\Rst\RstParser;
 
+/**
+ * @Description("Make sure you have a blank line after a filepath in a Twig code block.")
+ */
 class BlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Rule
 {
     public function check(\ArrayIterator $lines, int $number)

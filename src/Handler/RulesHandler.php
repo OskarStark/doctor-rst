@@ -32,12 +32,15 @@ class RulesHandler
     /** @var Rule[] */
     private $rules = [];
 
+    /** @var Rule[] */
+    private $rawRules = [];
+
     public function __construct(iterable $rules)
     {
-        $this->rules = [];
-
         foreach ($rules as $rule) {
             \assert($rule instanceof Rule);
+
+            $this->rawRules[] = $rule;
 
             if ($rule instanceof CheckListRule) {
                 foreach ($rule::getList() as $suffix => $config) {
@@ -63,6 +66,11 @@ class RulesHandler
     public function getRules()
     {
         return $this->rules;
+    }
+
+    public function getRawRules()
+    {
+        return $this->rawRules;
     }
 
     public function getRulesByGroup(string $group)

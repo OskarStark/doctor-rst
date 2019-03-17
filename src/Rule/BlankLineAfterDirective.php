@@ -13,9 +13,13 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
+/**
+ * @Description("Make sure you have a blank line after each directive.")
+ */
 class BlankLineAfterDirective extends AbstractRule implements Rule
 {
     public static function getGroups(): array

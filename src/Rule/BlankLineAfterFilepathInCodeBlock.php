@@ -13,9 +13,13 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
+/**
+ * @Description("Make sure you have a blank line after a filepath in a code block. This rule respects PHP, YAML, XML and Twig.")
+ */
 class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
 {
     public static function getGroups(): array

@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
 use App\Handler\RulesHandler;
 
+/**
+ * @Description("Do not use beliting words!")
+ */
 class BeKeenToNewcomers extends CheckListRule
 {
     public static function getGroups(): array
