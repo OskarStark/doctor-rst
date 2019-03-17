@@ -206,6 +206,167 @@ Creating an ACL and Adding an ACE
     {
 CONTENT;
 
+        $valid_two_following_php_code_blocks = <<<'CONTENT'
+How to Reduce Code Duplication with "inherit_data"
+==================================================
+
+The ``inherit_data`` form field option can be very useful when you have some
+duplicated fields in different entities. For example, imagine you have two
+entities, a ``Company`` and a ``Customer``::
+
+    // src/AppBundle/Entity/Company.php
+    namespace AppBundle\Entity;
+
+    class Company
+    {
+        private $name;
+    }
+
+.. code-block:: php
+
+    // src/AppBundle/Entity/Customer.php
+    namespace AppBundle\Entity;
+
+    class Customer
+    {
+        private $firstName;
+    }
+CONTENT;
+
+        $valid_two_following_php_code_blocks_after_headline = <<<'CONTENT'
+How to Reduce Code Duplication with "inherit_data"
+==================================================
+
+.. code-block:: php
+
+    // src/AppBundle/Entity/Company.php
+    namespace AppBundle\Entity;
+
+    class Company
+    {
+        private $name;
+    }
+
+.. code-block:: php
+
+    // src/AppBundle/Entity/Customer.php
+    namespace AppBundle\Entity;
+
+    class Customer
+    {
+        private $firstName;
+    }
+CONTENT;
+
+        $valid_two_following_php_code_blocks_in_configuration_block = <<<'CONTENT'
+Test
+====
+
+.. configuration-block::
+
+    .. code-block:: php
+    
+        // src/AppBundle/Entity/Company.php
+        namespace AppBundle\Entity;
+    
+        class Company
+        {
+            private $name;
+        }
+
+    .. code-block:: php
+
+        // src/AppBundle/Entity/Customer.php
+        namespace AppBundle\Entity;
+    
+        class Customer
+        {
+            private $firstName;
+        }
+CONTENT;
+
+        $valid_valid_in_code_block_text = <<<'CONTENT'
+Example
+~~~~~~~
+
+.. code-block:: text
+
+    Example
+    =======
+
+    When you are working on the docs, you should follow the
+    `Symfony Documentation`_ standards.
+
+    Level 2
+    -------
+
+    A PHP example would be::
+
+        echo 'Hello World';
+
+    Level 3
+    ~~~~~~~
+
+    .. code-block:: php
+
+        echo 'You cannot use the :: shortcut here';
+
+    .. _`Symfony Documentation`: https://symfony.com/doc
+CONTENT;
+
+        $valid_valid_in_code_block_rst = <<<'CONTENT'
+Example
+~~~~~~~
+
+.. code-block:: rst
+
+    Example
+    =======
+
+    When you are working on the docs, you should follow the
+    `Symfony Documentation`_ standards.
+
+    Level 2
+    -------
+
+    A PHP example would be::
+
+        echo 'Hello World';
+
+    Level 3
+    ~~~~~~~
+
+    .. code-block:: php
+
+        echo 'You cannot use the :: shortcut here';
+
+    .. _`Symfony Documentation`: https://symfony.com/doc
+CONTENT;
+
+        $valid_follows_code_block = <<<'CONTENT'
+The second argument of the :method:`Symfony\\Component\\Yaml\\Yaml::dump`
+method customizes the level at which the output switches from the expanded
+representation to the inline one::
+
+    echo Yaml::dump($array, 1);
+
+.. code-block:: yaml
+
+    foo: bar
+    bar: { foo: bar, bar: baz }
+
+.. code-block:: php
+
+    echo Yaml::dump($array, 2);
+
+.. code-block:: yaml
+
+    foo: bar
+    bar:
+        foo: bar
+        bar: baz
+CONTENT;
+
         return [
             [
                 null,
@@ -222,6 +383,38 @@ CONTENT;
             [
                 null,
                 new RstSample($valid_code_block_after_headline, 3),
+            ],
+            [
+                null,
+                new RstSample($valid_two_following_php_code_blocks, 15),
+            ],
+            [
+                null,
+                new RstSample($valid_two_following_php_code_blocks_after_headline, 2),
+            ],
+            [
+                null,
+                new RstSample($valid_two_following_php_code_blocks_after_headline, 13),
+            ],
+            [
+                null,
+                new RstSample($valid_two_following_php_code_blocks_in_configuration_block, 5),
+            ],
+            [
+                null,
+                new RstSample($valid_two_following_php_code_blocks_in_configuration_block, 15),
+            ],
+            [
+                null,
+                new RstSample($valid_valid_in_code_block_text, 21),
+            ],
+            [
+                null,
+                new RstSample($valid_valid_in_code_block_rst, 21),
+            ],
+            [
+                null,
+                new RstSample($valid_follows_code_block, 11),
             ],
         ];
     }

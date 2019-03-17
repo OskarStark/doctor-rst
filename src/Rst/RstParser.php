@@ -36,6 +36,7 @@ class RstParser
     const DIRECTIVE_ADMONITION = '.. admonition::';
     const DIRECTIVE_ROLE = '.. role::';
     const DIRECTIVE_FIGURE = '.. figure::';
+    const DIRECTIVE_SEEALSO = '.. seealso::';
 
     const DIRECTIVES = [
         self::DIRECTIVE_CODE_BLOCK,
@@ -57,6 +58,7 @@ class RstParser
         self::DIRECTIVE_ADMONITION,
         self::DIRECTIVE_ROLE,
         self::DIRECTIVE_FIGURE,
+        self::DIRECTIVE_SEEALSO,
     ];
 
     const CODE_BLOCK_PHP = 'php';
@@ -122,6 +124,7 @@ class RstParser
             self::DIRECTIVE_ADMONITION,
             self::DIRECTIVE_ROLE,
             self::DIRECTIVE_FIGURE,
+            self::DIRECTIVE_SEEALSO,
         ];
 
         Assert::oneOf(
