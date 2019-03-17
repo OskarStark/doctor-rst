@@ -21,6 +21,23 @@ class RstParserTest extends TestCase
     /**
      * @test
      *
+     * @dataProvider indentionProvider
+     */
+    public function indention(int $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::indention($string));
+    }
+
+    public function indentionProvider()
+    {
+        yield [0, ''];
+        yield [1, ' foo'];
+        yield [4, '    .. versionchanged:: 3.4'];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider isHeadlineProvider
      */
     public function isHeadline(bool $expected, string $string)

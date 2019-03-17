@@ -187,4 +187,13 @@ class RstParser
 
         return false;
     }
+
+    public static function indention(string $string): int
+    {
+        if (preg_match('/^[\s]+/', $string, $matches)) {
+            return mb_strlen($matches[0]);
+        }
+
+        return 0;
+    }
 }
