@@ -31,6 +31,11 @@ class RstParser
     const DIRECTIVE_IMPORTANT = '.. important::';
     const DIRECTIVE_CONFIGURATION_BLOCK = '.. configuration-block::';
     const DIRECTIVE_BEST_PRACTICE = '.. best-practice::';
+    const DIRECTIVE_INCLUDE = '.. include::';
+    const DIRECTIVE_IMAGE = '.. image::';
+    const DIRECTIVE_ADMONITION = '.. admonition::';
+    const DIRECTIVE_ROLE = '.. role::';
+    const DIRECTIVE_FIGURE = '.. figure::';
 
     const DIRECTIVES = [
         self::DIRECTIVE_CODE_BLOCK,
@@ -47,6 +52,11 @@ class RstParser
         self::DIRECTIVE_IMPORTANT,
         self::DIRECTIVE_CONFIGURATION_BLOCK,
         self::DIRECTIVE_BEST_PRACTICE,
+        self::DIRECTIVE_INCLUDE,
+        self::DIRECTIVE_IMAGE,
+        self::DIRECTIVE_ADMONITION,
+        self::DIRECTIVE_ROLE,
+        self::DIRECTIVE_FIGURE,
     ];
 
     const CODE_BLOCK_PHP = 'php';
@@ -78,9 +88,15 @@ class RstParser
         return trim($string);
     }
 
+    /**
+     * @todo use regex here
+     */
     public static function isDirective(string $string): bool
     {
-        return '.. ' == substr(ltrim($string), 0, 3) || '::' == substr(self::clean($string), -2, 2);
+        return ('.. ' == substr(ltrim($string), 0, 3)
+            && '.. _`' !== substr(ltrim($string), 0, 5)
+            && strstr($string, '::'))
+            || '::' == substr(self::clean($string), -2, 2);
     }
 
     public static function directiveIs(string $string, string $directive): bool
@@ -101,6 +117,11 @@ class RstParser
             self::DIRECTIVE_IMPORTANT,
             self::DIRECTIVE_CONFIGURATION_BLOCK,
             self::DIRECTIVE_BEST_PRACTICE,
+            self::DIRECTIVE_INCLUDE,
+            self::DIRECTIVE_IMAGE,
+            self::DIRECTIVE_ADMONITION,
+            self::DIRECTIVE_ROLE,
+            self::DIRECTIVE_FIGURE,
         ];
 
         Assert::oneOf(

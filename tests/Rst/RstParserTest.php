@@ -130,13 +130,17 @@ class RstParserTest extends TestCase
 
     public function isDirectiveProvider()
     {
-        return [
-            [true, 'the following code is php::'],
-            [true, '.. code-block:: php'],
-            [true, '.. code-block:: php-annotations'],
-            [true, ' .. code-block:: php'],
-            [false, 'foo'],
-        ];
+        yield [true, 'the following code is php::'];
+        yield [true, '.. code-block:: php'];
+        yield [true, '.. code-block:: php-annotations'];
+        yield [true, ' .. code-block:: php'];
+        yield [true, '.. code-block:: html+php'];
+        yield [true, '.. image:: /foo/bar.jpg'];
+        yield [true, '.. admonition:: Screencast'];
+
+        yield [false, 'foo'];
+        yield [false, '.. _`they can be cached`: https://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-20#section-2.3.4'];
+        yield [false, '.. _security-firewalls:'];
     }
 
     /**
