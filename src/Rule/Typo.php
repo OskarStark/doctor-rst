@@ -43,6 +43,7 @@ class Typo extends CheckListRule
             ['doctine',  'Typo in word "%s"'],
             ['adress',  'Typo in word "%s"'],
             ['argon21',  'Typo in word "%s"'],
+            ['descritpion',  'Typo in word "%s"'],
         ];
     }
 }
