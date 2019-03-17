@@ -43,11 +43,19 @@ class CheckCommand extends Command
     private $rules = [];
 
     /** @var bool */
-    private $dryRun = false;
+    private $short = false;
+
+    /** @var string|null */
+    private $dir;
+
+    /** @var mixed */
+    private $config;
 
     public function __construct(RulesHandler $rulesHandler, ?string $name = null)
     {
         $this->rulesHandler = $rulesHandler;
+
+        $this->config = Yaml::parseFile(__DIR__.'/../../dummy/.doctor-rst.yaml');
 
         parent::__construct($name);
     }
@@ -59,7 +67,7 @@ class CheckCommand extends Command
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
             ->addOption('group', 'g', InputOption::VALUE_REQUIRED, 'Which groups should be used?')
-            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'Dry-Run')
+            ->addOption('short', null, InputOption::VALUE_NONE, 'Do not output valid files.')
         ;
     }
 
@@ -105,19 +113,20 @@ class CheckCommand extends Command
             return 1;
         }
 
-        if ($input->getOption('dry-run')) {
-            $this->dryRun = true;
+        if ($input->getOption('short')) {
+            $this->short = true;
         }
 
         $finder = new Finder();
-        $finder->files()->name(['*.rst', '*.rst.inc'])->in($input->getArgument('dir'));
+        $finder->files()->name(['*.rst', '*.rst.inc'])->in($this->dir = $input->getArgument('dir'));
 
+        $violatedFiles = 0;
         foreach ($finder as $file) {
-            $this->checkFile($file);
+            $violatedFiles = $violatedFiles + $this->checkFile($file);
         }
 
         if ($this->violations) {
-            $this->io->warning('Found invalid files!');
+            $this->io->warning(sprintf('Found "%s" invalid files!', $violatedFiles));
         } else {
             $this->io->success('All files are valid!');
         }
@@ -125,10 +134,8 @@ class CheckCommand extends Command
         return $this->violations ? 1 : 0;
     }
 
-    private function checkFile(SplFileInfo $file)
+    private function checkFile(SplFileInfo $file): int
     {
-        $this->io->writeln($file->getPathname());
-
         $lines = new \ArrayIterator(file($file->getRealPath()));
 
         $violations = [];
@@ -144,7 +151,7 @@ class CheckCommand extends Command
                 }
                 $violation = $rule->check(clone $lines, $no);
 
-                if (!empty($violation)) {
+                if (null !== $violation) {
                     $violations[] = [
                         $rule::getName(),
                         $violation,
@@ -157,19 +164,25 @@ class CheckCommand extends Command
 
         $violations = $this->filterWhitelistedViolations($violations);
 
+        if (!$this->short || !empty($violations)) {
+            $this->io->writeln(ltrim(str_replace($this->dir, '', $file->getPathname()), '/'));
+        }
+
         if (!empty($violations)) {
             $this->violations = true;
 
             $this->io->table(['Rule', 'Violation', 'Line', 'Extracted line from file'], $violations);
+
+            return 1;
         }
+
+        return 0;
     }
 
     private function filterWhitelistedViolations(array $violations): array
     {
-        $config = Yaml::parseFile(__DIR__.'/../../dummy/.doctor-rst.yaml');
-
         foreach ($violations as $key => $violation) {
-            foreach ($config['whitelist']['regex'] as $pattern) {
+            foreach ($this->config['whitelist']['regex'] as $pattern) {
                 if (preg_match($pattern, $violation[3])) {
                     unset($violations[$key]);
 
@@ -177,7 +190,7 @@ class CheckCommand extends Command
                 }
             }
 
-            foreach ($config['whitelist']['lines'] as $line) {
+            foreach ($this->config['whitelist']['lines'] as $line) {
                 if ($line === $violation[3]) {
                     unset($violations[$key]);
 
