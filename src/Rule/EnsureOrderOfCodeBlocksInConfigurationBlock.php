@@ -37,22 +37,40 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
 
         $lines->next();
 
+        $validOrder = self::validOrder();
+
         $codeBlocks = [];
         while ($lines->valid() && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))) {
             if (RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CODE_BLOCK)) {
                 $codeBlocks[] = RstParser::clean($lines->current());
+
+                // if its an xml code-block, check if it contains xliff
+                // @todo refactor in extra method: getDirectiveContent
+                if (RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_XML)) {
+                    $content = $this->cloneIterator($lines, $lines->key());
+                    $content->next();
+
+                    while ($content->valid() && (RstParser::isBlankLine($content->current()) || RstParser::indention($lines->current()) < RstParser::indention($content->current()))) {
+                        if (preg_match('/xliff/', $content->current())) {
+                            $validOrder = self::validOrderIncludingXliff();
+
+                            break;
+                        }
+
+                        $content->next();
+                    }
+                }
             }
 
             $lines->next();
         }
 
         foreach ($codeBlocks as $key => $codeBlock) {
-            if (!\in_array($codeBlock, self::getValidOrder())) {
+            if (!\in_array($codeBlock, $validOrder)) {
                 unset($codeBlocks[$key]);
             }
         }
 
-        $validOrder = self::getValidOrder();
         foreach ($validOrder as $key => $order) {
             if (!\in_array($order, $codeBlocks)) {
                 unset($validOrder[$key]);
@@ -64,12 +82,12 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         } catch (\InvalidArgumentException $e) {
             return sprintf(
                 'Please use the following order for your code blocks: "%s"',
-                str_replace('.. code-block:: ', '', implode(', ', self::getValidOrder()))
+                str_replace('.. code-block:: ', '', implode(', ', $validOrder))
             );
         }
     }
 
-    private static function getValidOrder(): array
+    private static function validOrder(): array
     {
         return [
             '.. code-block:: php-annotations',
@@ -77,5 +95,23 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             '.. code-block:: xml',
             '.. code-block:: php',
         ];
+    }
+
+    private static function validOrderIncludingXliff(): array
+    {
+        return [
+            '.. code-block:: xml',
+            '.. code-block:: php-annotations',
+            '.. code-block:: yaml',
+            '.. code-block:: php',
+        ];
+    }
+
+    private function cloneIterator(\ArrayIterator $iterator, int $number)
+    {
+        $clone = new \ArrayIterator($iterator->getArrayCopy());
+        $clone->seek($number);
+
+        return $clone;
     }
 }
