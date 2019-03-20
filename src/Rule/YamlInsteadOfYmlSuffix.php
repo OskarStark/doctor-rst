@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
+use App\Rst\RstParser;
 
 class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
 {
@@ -31,7 +32,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
             return;
         }
 
-        if (preg_match('/^.. code-block:: yml$/', trim($line))) {
+        if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_YML)) {
             return 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
         }
 
