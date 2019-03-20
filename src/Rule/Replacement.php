@@ -30,12 +30,16 @@ class Replacement extends AbstractRule implements Rule
 
         $line = RstParser::clean($line);
 
-        if (strstr($line, $replacement = '//...') && !strstr($line, 'http://...')) {
-            return sprintf('Please replace "%s" with "// ..."', $replacement);
+        if (preg_match('/^([\s]+)?\/\/.\.(\.)?$/', $line, $matches)) {
+            return sprintf('Please replace "%s" with "// ..."', $matches[0]);
         }
 
-        if (strstr($line, $replacement = '#...')) {
-            return sprintf('Please replace "%s" with "# ..."', $replacement);
+        if (preg_match('/^([\s]+)?#.\.(\.)?$/', $line, $matches)) {
+            return sprintf('Please replace "%s" with "# ..."', $matches[0]);
+        }
+
+        if (preg_match('/^([\s]+)?<!--(.\.(\.)?|[\s]+\.\.[\s]+)-->$/', $line, $matches)) {
+            return sprintf('Please replace "%s" with "<!-- ... -->"', $matches[0]);
         }
     }
 }
