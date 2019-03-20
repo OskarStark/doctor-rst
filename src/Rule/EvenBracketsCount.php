@@ -52,7 +52,7 @@ class EvenBracketsCount extends AbstractRule implements Rule
 
                 // allow sth like: "1) Chapter" or "A) Chapter"
                 // and: * `A) Chapter`
-                if (preg_match_all('/^(\* \`|Step )?[a-zA-Z0-9]\)/', $lines->current(), $matches)) {
+                if (preg_match_all('/^(\* (\`)?|Step )?[a-zA-Z0-9]\)/', $lines->current(), $matches)) {
                     $this->round = $this->round - \count($matches[0]);
                 }
             }

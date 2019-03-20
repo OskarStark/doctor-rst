@@ -137,6 +137,10 @@ class EvenBracketsCountTest extends TestCase
             ],
             [
                 null,
+                new RstSample('* A) Add Composer Dependencies`_'),
+            ],
+            [
+                null,
                 new RstSample('Step 5) Cleanup'),
             ],
 //            [
