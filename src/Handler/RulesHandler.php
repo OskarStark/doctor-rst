@@ -43,11 +43,11 @@ class RulesHandler
             $this->rawRules[] = $rule;
 
             if ($rule instanceof CheckListRule) {
-                foreach ($rule::getList() as $suffix => $config) {
+                $i = 0;
+                foreach ($rule::getList() as $search => $message) {
                     $clonedRule = clone $rule;
-
-                    list($search, $message) = $config;
-                    $this->rules[$rule::getName().'_'.$suffix] = $clonedRule->configure($search, $message);
+                    $this->rules[$rule::getName().'_'.$i] = $clonedRule->configure($search, $message);
+                    ++$i;
                 }
                 continue;
             }

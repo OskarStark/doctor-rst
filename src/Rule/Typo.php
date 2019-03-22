@@ -27,23 +27,28 @@ class Typo extends CheckListRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, $search = $this->search)) {
+        if (strstr($line, $this->search)) {
             return $this->message;
         }
+    }
+
+    public function getDefaultMessage(): string
+    {
+        return 'Typo in word "%s"';
     }
 
     public static function getList(): array
     {
         return [
-            ['compsoer', 'Typo in word "%s"'],
-            ['registerbundles()', 'Typo in word "%s", use "registerBundles()"'],
-            ['retun', 'Typo in word "%s"'],
-            ['displayes', 'Typo in word "%s"'],
-            ['mantains',  'Typo in word "%s"'],
-            ['doctine',  'Typo in word "%s"'],
-            ['adress',  'Typo in word "%s"'],
-            ['argon21',  'Typo in word "%s"'],
-            ['descritpion',  'Typo in word "%s"'],
+            'compsoer' => null,
+            'registerbundles()' => 'Typo in word "%s", use "registerBundles()"',
+            'retun' => null,
+            'displayes' => null,
+            'mantains' => null,
+            'doctine' => null,
+            'adress' => null,
+            'argon21' => null,
+            'descritpion' => null,
         ];
     }
 }

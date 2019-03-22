@@ -31,19 +31,24 @@ class BeKeenToNewcomers extends CheckListRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, $search = $this->search)) {
+        if (strstr($line, $this->search)) {
             return $this->message;
         }
+    }
+
+    public function getDefaultMessage(): string
+    {
+        return 'Please remove the word "%s"';
     }
 
     public static function getList(): array
     {
         return [
-            ['simply', 'Please remove the word "%s"'],
-            ['easy', 'Please remove the word "%s"'],
-            ['easily', 'Please remove the word "%s"'],
-            ['obviously', 'Please remove the word "%s"'],
-            ['trivial', 'Please remove the word "%s"'],
+            'simply' => null,
+            'easy' => null,
+            'easily' => null,
+            'obviously' => null,
+            'trivial' => null,
         ];
     }
 }

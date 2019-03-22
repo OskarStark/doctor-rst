@@ -18,13 +18,15 @@ abstract class CheckListRule extends AbstractRule implements Rule
     public $search;
     public $message;
 
-    public function configure(string $search, string $message): self
+    public function configure(string $search, ?string $message): self
     {
         $this->search = $search;
-        $this->message = sprintf($message, $search);
+        $this->message = sprintf($message ?: $this->getDefaultMessage(), $search);
 
         return $this;
     }
+
+    abstract public function getDefaultMessage(): string;
 
     public static function getList(): array
     {
