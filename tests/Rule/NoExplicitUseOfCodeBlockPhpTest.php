@@ -367,6 +367,36 @@ representation to the inline one::
         bar: baz
 CONTENT;
 
+        $valid_code_block_after_table = <<<'CONTENT'
+You can use the following parameters:
+
+======================================  ============================================================
+Parameter                               Description
+======================================  ============================================================
+**choices**                             Array of choices
+**required**                            Whether the field is required or not (default true) when the
+                                        ``editable`` option is set to ``true``. If false, an empty
+                                        placeholder will be added.
+======================================  ============================================================
+
+.. code-block:: php
+
+    protected function configureListFields(ListMapper $listMapper)
+    {
+        // For the value `prog`, the displayed text is `In progress`. The `App` catalogue will be used to translate `In progress` message.
+        $listMapper
+            ->add('status', 'choice', [
+                'choices' => [
+                    'prep' => 'Prepared',
+                    'prog' => 'In progress',
+                    'done' => 'Done',
+                ],
+                'catalogue' => 'App',
+            ])
+        ;
+    }
+CONTENT;
+
         return [
             [
                 null,
@@ -415,6 +445,10 @@ CONTENT;
             [
                 null,
                 new RstSample($valid_follows_code_block, 11),
+            ],
+            'valid_code_block_after_table' => [
+                null,
+                new RstSample($valid_code_block_after_table, 11),
             ],
         ];
     }

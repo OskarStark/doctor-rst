@@ -39,7 +39,9 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
         // it has no indention, check if it comes after a headline, in this case its ok
         if (!preg_match('/^[\s]+/', $lines->current(), $matches)) {
-            if ($this->directAfterHeadline($lines, $number)) {
+            if ($this->directAfterHeadline($lines, $number)
+                || $this->directAfterTable($lines, $number)
+            ) {
                 return;
             }
         }
@@ -126,6 +128,30 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
             }
 
             if (RstParser::isHeadline($lines->current())) {
+                return true;
+            }
+
+            return false;
+        }
+
+        return false;
+    }
+
+    private function directAfterTable(\ArrayIterator $lines, int $number): bool
+    {
+        $lines = $this->cloneIterator($lines, $number);
+
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (RstParser::isBlankLine($lines->current())) {
+                continue;
+            }
+
+            if (RstParser::isTable($lines->current())) {
                 return true;
             }
 
