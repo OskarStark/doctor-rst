@@ -27,8 +27,8 @@ class Typo extends CheckListRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, $this->search)) {
-            return $this->message;
+        if (preg_match($this->pattern, $line, $matches)) {
+            return sprintf($this->message, $matches[0]);
         }
     }
 
@@ -40,15 +40,15 @@ class Typo extends CheckListRule
     public static function getList(): array
     {
         return [
-            'compsoer' => null,
-            'registerbundles()' => 'Typo in word "%s", use "registerBundles()"',
-            'retun' => null,
-            'displayes' => null,
-            'mantains' => null,
-            'doctine' => null,
-            'adress' => null,
-            'argon21' => null,
-            'descritpion' => null,
+            '/(C|c)ompsoer/' => null,
+            '/registerbundles\(\)/' => 'Typo in word "%s", use "registerBundles()"',
+            '/retun/' => null,
+            '/(D|d)isplayes/' => null,
+            '/(M|m)antains/' => null,
+            '/(D|d)octine/' => null,
+            '/(A|a)dress/' => null,
+            '/argon21/' => 'Typo in word "%s", use "argon2i"',
+            '/(d|d)escritpion/' => null,
         ];
     }
 }

@@ -27,20 +27,20 @@ class AmericanEnglish extends CheckListRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match($this->search, $line, $matches)) {
-            return $this->message.' '.$matches[0];
+        if (preg_match($this->pattern, $line, $matches)) {
+            return sprintf($this->message, $matches[0]);
         }
     }
 
     public function getDefaultMessage(): string
     {
-        return 'Please use American English for:';
+        return 'Please use American English for: %s';
     }
 
     public static function getList(): array
     {
         return [
-            '/(b|B)ehaviour(s)?/' => null,
+            '/(B|b)ehaviour(s)?/' => null,
         ];
     }
 }

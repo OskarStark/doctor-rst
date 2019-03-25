@@ -57,19 +57,19 @@ class AmericanEnglishTest extends TestCase
         yield [null, new RstSample('Behaviors')];
 
         yield [
-            'Please use American English!',
+            'Please use American English for: behaviour',
             new RstSample('behaviour'),
         ];
         yield [
-            'Please use American English!',
+            'Please use American English for: Behaviour',
             new RstSample('Behaviour'),
         ];
         yield [
-            'Please use American English!',
+            'Please use American English for: behaviours',
             new RstSample('behaviours'),
         ];
         yield [
-            'Please use American English!',
+            'Please use American English for: Behaviours',
             new RstSample('Behaviours'),
         ];
     }
