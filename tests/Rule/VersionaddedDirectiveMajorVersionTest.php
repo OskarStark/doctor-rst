@@ -27,11 +27,10 @@ class VersionaddedDirectiveMajorVersionTest extends TestCase
      */
     public function check($expected, int $majorVersion, RstSample $sample)
     {
-        $this->assertSame(
-            $expected,
-            (new VersionaddedDirectiveMajorVersion(new VersionParser()))
-                ->check($sample->getContent(), $sample->getLineNumber())
-        );
+        $rule = (new VersionaddedDirectiveMajorVersion(new VersionParser()));
+        $rule->setOptions(['major_version' => $majorVersion]);
+
+        $this->assertSame($expected, $rule->check($sample->getContent(), $sample->getLineNumber()));
     }
 
     public function checkProvider()

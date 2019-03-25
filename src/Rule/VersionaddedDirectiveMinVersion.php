@@ -15,14 +15,17 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
+use Webmozart\Assert\Assert;
 
-class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule
+class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Configurable
 {
+    /** @var string */
     private $minVersion;
 
-    public function __construct(string $minVersion = '3.4')
+    public function setOptions(array $options): void
     {
-        $this->minVersion = $minVersion;
+        Assert::keyExists($options, 'min_version');
+        $this->minVersion = $options['min_version'];
     }
 
     public static function getGroups(): array

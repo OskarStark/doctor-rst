@@ -16,8 +16,9 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 use Composer\Semver\VersionParser;
+use Webmozart\Assert\Assert;
 
-class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule
+class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Configurable
 {
     /** @var VersionParser */
     private $versionParser;
@@ -25,10 +26,15 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule
     /** @var int */
     private $majorVersion;
 
-    public function __construct(VersionParser $versionParser, int $majorVersion = 3)
+    public function __construct(VersionParser $versionParser)
     {
         $this->versionParser = $versionParser;
-        $this->majorVersion = $majorVersion;
+    }
+
+    public function setOptions(array $options): void
+    {
+        Assert::keyExists($options, 'major_version');
+        $this->majorVersion = $options['major_version'];
     }
 
     public static function getGroups(): array

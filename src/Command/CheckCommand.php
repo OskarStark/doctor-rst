@@ -15,6 +15,7 @@ namespace App\Command;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
+use App\Rule\Configurable;
 use App\Rule\Rule;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -55,8 +56,6 @@ class CheckCommand extends Command
     {
         $this->rulesHandler = $rulesHandler;
 
-        $this->config = Yaml::parseFile(__DIR__.'/../../dummy/.doctor-rst.yaml');
-
         parent::__construct($name);
     }
 
@@ -77,16 +76,19 @@ class CheckCommand extends Command
 
         $this->io->title(sprintf('Check *.rst files in: <info>%s</info>', $input->getArgument('dir')));
 
-        if (is_file($configFile = $input->getArgument('dir').'/.doctor-rst.yaml')) {
-            $config = Yaml::parseFile($configFile);
+        if (is_file($configFile = $input->getArgument('dir').'/../.doctor-rst.yaml')) {
+            $this->config = Yaml::parseFile($configFile);
 
-            foreach ($config['rules'] as $rule) {
+            foreach ($this->config['rules'] as $rule => $options) {
+                /** @var Rule[] $rules */
                 $rules = $this->rulesHandler->getRulesByName($rule);
 
-                if (\is_array($rules) && !empty($rules)) {
-                    $this->rules = array_merge($this->rules, $rules);
-                } else {
-                    $this->rules[] = $rules;
+                foreach ($rules as $rule) {
+                    if ($rule instanceof Configurable && null !== $options) {
+                        $rule->setOptions($options);
+                    }
+
+                    $this->rules[] = $rule;
                 }
             }
         }
@@ -181,20 +183,26 @@ class CheckCommand extends Command
 
     private function filterWhitelistedViolations(array $violations): array
     {
-        foreach ($violations as $key => $violation) {
-            foreach ($this->config['whitelist']['regex'] as $pattern) {
-                if (preg_match($pattern, $violation[3])) {
-                    unset($violations[$key]);
+        if (isset($this->config['whitelist'])) {
+            foreach ($violations as $key => $violation) {
+                if (isset($this->config['whitelist']['regex'])) {
+                    foreach ($this->config['whitelist']['regex'] as $pattern) {
+                        if (preg_match($pattern, $violation[3])) {
+                            unset($violations[$key]);
 
-                    break;
+                            break;
+                        }
+                    }
                 }
-            }
 
-            foreach ($this->config['whitelist']['lines'] as $line) {
-                if ($line === $violation[3]) {
-                    unset($violations[$key]);
+                if (isset($this->config['whitelist']['lines'])) {
+                    foreach ($this->config['whitelist']['lines'] as $line) {
+                        if ($line === $violation[3]) {
+                            unset($violations[$key]);
 
-                    break;
+                            break;
+                        }
+                    }
                 }
             }
         }

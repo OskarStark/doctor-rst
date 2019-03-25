@@ -26,10 +26,10 @@ class VersionaddedDirectiveMinVersionTest extends TestCase
      */
     public function check($expected, string $minVersion, RstSample $sample)
     {
-        $this->assertSame(
-            $expected,
-            (new VersionaddedDirectiveMinVersion($minVersion))->check($sample->getContent(), $sample->getLineNumber())
-        );
+        $rule = (new VersionaddedDirectiveMinVersion());
+        $rule->setOptions(['min_version' => $minVersion]);
+
+        $this->assertSame($expected, $rule->check($sample->getContent(), $sample->getLineNumber()));
     }
 
     public function checkProvider()
