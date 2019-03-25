@@ -38,6 +38,32 @@ class RstParserTest extends TestCase
     /**
      * @test
      *
+     * @dataProvider isTableProvider
+     */
+    public function isTable(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isTable($string));
+    }
+
+    public function isTableProvider()
+    {
+        yield [true, '==='];
+        yield [true, '=== ==='];
+        yield [true, '=== === ==='];
+
+        yield [false, '~~~'];
+        yield [false, '***'];
+        yield [false, '---'];
+        yield [false, '...'];
+        yield [false, '^^^'];
+        yield [false, ''];
+        yield [false, ''];
+        yield [false, 'I am text::'];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider isHeadlineProvider
      */
     public function isHeadline(bool $expected, string $string)
@@ -52,6 +78,7 @@ class RstParserTest extends TestCase
         yield [true, '***'];
         yield [true, '---'];
         yield [true, '...'];
+        yield [true, '^^^'];
 
         yield [false, ''];
         yield [false, ''];

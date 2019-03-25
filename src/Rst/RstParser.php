@@ -207,7 +207,16 @@ class RstParser
 
     public static function isHeadline(string $string): bool
     {
-        if (preg_match('/^([\=]+|[\~]+|[\*]+|[\-]+|[\.]+)$/', $string)) {
+        if (preg_match('/^([\=]+|[\~]+|[\*]+|[\-]+|[\.]+|[\^]+)$/', $string)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isTable(string $string): bool
+    {
+        if (preg_match('/^[\=]+([\s\=]+)?$/', $string)) {
             return true;
         }
 
