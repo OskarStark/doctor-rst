@@ -183,6 +183,10 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
                 return false;
             }
 
+            if ($lineIndention === $currentIndention && !RstParser::isDirective($lines->current())) {
+                return false;
+            }
+
             if ((
                 $lineIndention === $currentIndention
                 && RstParser::isDirective($lines->current())
