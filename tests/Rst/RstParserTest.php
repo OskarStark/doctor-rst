@@ -38,6 +38,24 @@ class RstParserTest extends TestCase
     /**
      * @test
      *
+     * @dataProvider isLinkProvider
+     */
+    public function isLink(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isLink($string));
+    }
+
+    public function isLinkProvider()
+    {
+        yield [true, '.. _`Symfony`: https://symfony.com'];
+
+        yield [false, ''];
+        yield [false, 'I am text::'];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider isTableProvider
      */
     public function isTable(bool $expected, string $string)
@@ -56,7 +74,6 @@ class RstParserTest extends TestCase
         yield [false, '---'];
         yield [false, '...'];
         yield [false, '^^^'];
-        yield [false, ''];
         yield [false, ''];
         yield [false, 'I am text::'];
     }
@@ -80,7 +97,6 @@ class RstParserTest extends TestCase
         yield [true, '...'];
         yield [true, '^^^'];
 
-        yield [false, ''];
         yield [false, ''];
         yield [false, 'I am text::'];
     }

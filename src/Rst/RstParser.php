@@ -231,4 +231,13 @@ class RstParser
 
         return 0;
     }
+
+    public static function isLink(string $string): bool
+    {
+        if (preg_match('/^\.\. _`(.*)`: (.*)$/', $string)) {
+            return true;
+        }
+
+        return false;
+    }
 }
