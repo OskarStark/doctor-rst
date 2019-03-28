@@ -66,6 +66,13 @@ class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends TestCase
                     '    Foo was deprecated in Symfony 3.4.',
                 ]),
             ],
+            'versionadded directive with deprecated option' => [
+                null,
+                new RstSample([
+                    '.. versionadded:: 4.3',
+                    '    The ``deprecated`` option for service aliases was introduced in Symfony 4.3.',
+                ]),
+            ],
         ];
     }
 

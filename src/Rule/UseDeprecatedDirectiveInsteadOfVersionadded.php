@@ -37,7 +37,7 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
         $lines->next();
 
         while ($lines->valid() && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))) {
-            if (preg_match('/deprecated/', $lines->current())) {
+            if (preg_match('/[^`]deprecated/', $lines->current())) {
                 return 'Please use ".. deprecated::" instead of ".. versionadded::"';
             }
 
