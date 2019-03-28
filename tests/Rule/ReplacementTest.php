@@ -67,6 +67,8 @@ class ReplacementTest extends TestCase
         yield [null, new RstSample('applications')];
         yield [null, new RstSample('    applications')];
 
+        yield [null, new RstSample('<?xml version="1.0" encoding="UTF-8" ?>')];
+
         // todo this should be supported by the regex
         //yield [null, new RstSample('# username is your full Gmail or Google Apps email address')];
 
@@ -150,6 +152,10 @@ class ReplacementTest extends TestCase
             [
                 'Please replace "apps" with "applications"',
                 new RstSample('    apps'),
+            ],
+            [
+                'Please replace "encoding="utf-8"" with "encoding="UTF-8""',
+                new RstSample('<?xml version="1.0" encoding="utf-8" ?>'),
             ],
         ];
 

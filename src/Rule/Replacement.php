@@ -47,6 +47,7 @@ class Replacement extends CheckListRule implements Rule
             '/^([\s]+)?{#(.\.(\.)?|[\s]+\.\.[\s]+)#}$/' => 'Please replace "%s" with "{# ... #}"',
             '/apps/' => 'Please replace "%s" with "applications"',
             '/Apps/' => 'Please replace "%s" with "Applications"',
+            '/encoding="utf-8"/' => 'Please replace "%s" with "encoding="UTF-8""',
         ];
     }
 }
