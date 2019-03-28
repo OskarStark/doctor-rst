@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\Replacement;
+use App\Rule\Rule;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
@@ -26,10 +27,26 @@ class ReplacementTest extends TestCase
      */
     public function check($expected, RstSample $sample)
     {
-        $this->assertSame(
-            $expected,
-            (new Replacement())->check($sample->getContent(), $sample->getLineNumber())
-        );
+        $configuredRules = [];
+        foreach (Replacement::getList() as $search => $message) {
+            $configuredRules[] = (new Replacement())->configure($search, $message);
+        }
+
+        $violations = [];
+        /** @var Rule $rule */
+        foreach ($configuredRules as $rule) {
+            $violation = $rule->check($sample->getContent(), $sample->getLineNumber());
+            if (null !== $violation) {
+                $violations[] = $violation;
+            }
+        }
+
+        if (null === $expected) {
+            $this->assertCount(0, $violations);
+        } else {
+            $this->assertCount(1, $violations);
+            $this->assertSame($expected, $violations[0]);
+        }
     }
 
     public function checkProvider()
@@ -42,6 +59,16 @@ class ReplacementTest extends TestCase
         yield [null, new RstSample('    # ...')];
         yield [null, new RstSample('<!-- ... -->')];
         yield [null, new RstSample('    <!-- ... -->')];
+        yield [null, new RstSample('{# ... #}')];
+        yield [null, new RstSample('    {# ... #}')];
+
+        yield [null, new RstSample('Applications')];
+        yield [null, new RstSample('    Applications')];
+        yield [null, new RstSample('applications')];
+        yield [null, new RstSample('    applications')];
+
+        // todo this should be supported by the regex
+        //yield [null, new RstSample('# username is your full Gmail or Google Apps email address')];
 
         $invalidCases = [
             [
@@ -69,6 +96,14 @@ class ReplacementTest extends TestCase
                 new RstSample('    <!-- .. -->'),
             ],
             [
+                'Please replace "{# .. #}" with "{# ... #}"',
+                new RstSample('{# .. #}'),
+            ],
+            [
+                'Please replace "{# .. #}" with "{# ... #}"',
+                new RstSample('    {# .. #}'),
+            ],
+            [
                 'Please replace "//.." with "// ..."',
                 new RstSample('//..'),
             ],
@@ -91,6 +126,30 @@ class ReplacementTest extends TestCase
             [
                 'Please replace "<!--..-->" with "<!-- ... -->"',
                 new RstSample('    <!--..-->'),
+            ],
+            [
+                'Please replace "{#..#}" with "{# ... #}"',
+                new RstSample('{#..#}'),
+            ],
+            [
+                'Please replace "{#..#}" with "{# ... #}"',
+                new RstSample('    {#..#}'),
+            ],
+            [
+                'Please replace "Apps" with "Applications"',
+                new RstSample('Apps'),
+            ],
+            [
+                'Please replace "Apps" with "Applications"',
+                new RstSample('    Apps'),
+            ],
+            [
+                'Please replace "apps" with "applications"',
+                new RstSample('apps'),
+            ],
+            [
+                'Please replace "apps" with "applications"',
+                new RstSample('    apps'),
             ],
         ];
 

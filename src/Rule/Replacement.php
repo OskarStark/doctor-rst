@@ -16,7 +16,7 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
-class Replacement extends AbstractRule implements Rule
+class Replacement extends CheckListRule implements Rule
 {
     public static function getGroups(): array
     {
@@ -28,18 +28,25 @@ class Replacement extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-
-        if (preg_match('/^([\s]+)?\/\/.\.(\.)?$/', $line, $matches)) {
-            return sprintf('Please replace "%s" with "// ..."', $matches[0]);
+        if (preg_match($this->pattern, RstParser::clean($line), $matches)) {
+            return sprintf($this->message, $matches[0]);
         }
+    }
 
-        if (preg_match('/^([\s]+)?#.\.(\.)?$/', $line, $matches)) {
-            return sprintf('Please replace "%s" with "# ..."', $matches[0]);
-        }
+    public function getDefaultMessage(): string
+    {
+        return 'Please don\'t use: %s';
+    }
 
-        if (preg_match('/^([\s]+)?<!--(.\.(\.)?|[\s]+\.\.[\s]+)-->$/', $line, $matches)) {
-            return sprintf('Please replace "%s" with "<!-- ... -->"', $matches[0]);
-        }
+    public static function getList(): array
+    {
+        return [
+            '/^([\s]+)?\/\/.\.(\.)?$/' => 'Please replace "%s" with "// ..."',
+            '/^([\s]+)?#.\.(\.)?$/' => 'Please replace "%s" with "# ..."',
+            '/^([\s]+)?<!--(.\.(\.)?|[\s]+\.\.[\s]+)-->$/' => 'Please replace "%s" with "<!-- ... -->"',
+            '/^([\s]+)?{#(.\.(\.)?|[\s]+\.\.[\s]+)#}$/' => 'Please replace "%s" with "{# ... #}"',
+            '/apps/' => 'Please replace "%s" with "applications"',
+            '/Apps/' => 'Please replace "%s" with "Applications"',
+        ];
     }
 }
