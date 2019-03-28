@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
+use App\Rst\RstParser;
 
 class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 {
@@ -31,8 +32,12 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
             return;
         }
 
-        if (preg_match('/(`|"|_)bin\/console/', $line)
+        if (preg_match('/(`|"|_|├─ )bin\/console/', $line)
             || preg_match('/php "%s\/\.\.\/bin\/console"/', $line)) {
+            return;
+        }
+
+        if (RstParser::isLink($line)) {
             return;
         }
 
