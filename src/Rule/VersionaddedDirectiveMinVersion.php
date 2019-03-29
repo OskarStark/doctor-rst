@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
 class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Configurable
@@ -24,8 +25,15 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Conf
 
     public function setOptions(array $options): void
     {
-        Assert::keyExists($options, 'min_version');
-        $this->minVersion = $options['min_version'];
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setRequired('min_version')
+            ->setAllowedTypes('min_version', 'string')
+        ;
+
+        $resolvedOptions = $resolver->resolve($options);
+
+        $this->minVersion = $resolvedOptions['min_version'];
     }
 
     public static function getGroups(): array

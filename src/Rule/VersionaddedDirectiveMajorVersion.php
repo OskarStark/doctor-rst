@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 use Composer\Semver\VersionParser;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
 
 class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Configurable
@@ -33,8 +34,15 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Co
 
     public function setOptions(array $options): void
     {
-        Assert::keyExists($options, 'major_version');
-        $this->majorVersion = $options['major_version'];
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setRequired('major_version')
+            ->setAllowedTypes('major_version', 'int')
+        ;
+
+        $resolvedOptions = $resolver->resolve($options);
+
+        $this->majorVersion = $resolvedOptions['major_version'];
     }
 
     public static function getGroups(): array

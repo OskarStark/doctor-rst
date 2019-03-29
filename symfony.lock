@@ -137,6 +137,9 @@
             "ref": "18ebf5a940573a20de06f9c4060101eeb438cf3d"
         }
     },
+    "symfony/options-resolver": {
+        "version": "v4.2.4"
+    },
     "symfony/panther": {
         "version": "v0.2.0"
     },
