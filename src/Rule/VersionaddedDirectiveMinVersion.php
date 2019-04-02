@@ -16,7 +16,6 @@ namespace App\Rule;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Webmozart\Assert\Assert;
 
 class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Configurable
 {

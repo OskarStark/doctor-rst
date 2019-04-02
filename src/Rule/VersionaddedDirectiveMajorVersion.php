@@ -17,7 +17,6 @@ use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 use Composer\Semver\VersionParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Webmozart\Assert\Assert;
 
 class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Configurable
 {
