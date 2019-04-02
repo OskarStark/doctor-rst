@@ -51,116 +51,50 @@ class ReplacementTest extends TestCase
 
     public function checkProvider()
     {
-        yield [null, new RstSample('http://...')];
-        yield [null, new RstSample('transport://..')];
-        yield [null, new RstSample('// ...')];
-        yield [null, new RstSample('    // ...')];
-        yield [null, new RstSample('# ...')];
-        yield [null, new RstSample('    # ...')];
-        yield [null, new RstSample('<!-- ... -->')];
-        yield [null, new RstSample('    <!-- ... -->')];
-        yield [null, new RstSample('{# ... #}')];
-        yield [null, new RstSample('    {# ... #}')];
+        yield 'empty string' => [null, new RstSample('')];
 
-        yield [null, new RstSample('Applications')];
-        yield [null, new RstSample('    Applications')];
-        yield [null, new RstSample('applications')];
-        yield [null, new RstSample('    applications')];
-
-        yield [null, new RstSample('<?xml version="1.0" encoding="UTF-8" ?>')];
-
-        // todo this should be supported by the regex
-        //yield [null, new RstSample('# username is your full Gmail or Google Apps email address')];
-
-        $invalidCases = [
-            [
-                'Please replace "// .." with "// ..."',
-                new RstSample('// ..'),
-            ],
-            [
-                'Please replace "// .." with "// ..."',
-                new RstSample('    // ..'),
-            ],
-            [
-                'Please replace "# .." with "# ..."',
-                new RstSample('# ..'),
-            ],
-            [
-                'Please replace "# .." with "# ..."',
-                new RstSample('    # ..'),
-            ],
-            [
-                'Please replace "<!-- .. -->" with "<!-- ... -->"',
-                new RstSample('<!-- .. -->'),
-            ],
-            [
-                'Please replace "<!-- .. -->" with "<!-- ... -->"',
-                new RstSample('    <!-- .. -->'),
-            ],
-            [
-                'Please replace "{# .. #}" with "{# ... #}"',
-                new RstSample('{# .. #}'),
-            ],
-            [
-                'Please replace "{# .. #}" with "{# ... #}"',
-                new RstSample('    {# .. #}'),
-            ],
-            [
-                'Please replace "//.." with "// ..."',
-                new RstSample('//..'),
-            ],
-            [
-                'Please replace "//.." with "// ..."',
-                new RstSample('    //..'),
-            ],
-            [
-                'Please replace "#.." with "# ..."',
-                new RstSample('#..'),
-            ],
-            [
-                'Please replace "#.." with "# ..."',
-                new RstSample('    #..'),
-            ],
-            [
-                'Please replace "<!--..-->" with "<!-- ... -->"',
-                new RstSample('<!--..-->'),
-            ],
-            [
-                'Please replace "<!--..-->" with "<!-- ... -->"',
-                new RstSample('    <!--..-->'),
-            ],
-            [
-                'Please replace "{#..#}" with "{# ... #}"',
-                new RstSample('{#..#}'),
-            ],
-            [
-                'Please replace "{#..#}" with "{# ... #}"',
-                new RstSample('    {#..#}'),
-            ],
-            [
-                'Please replace "Apps" with "Applications"',
-                new RstSample('Apps'),
-            ],
-            [
-                'Please replace "Apps" with "Applications"',
-                new RstSample('    Apps'),
-            ],
-            [
-                'Please replace "apps" with "applications"',
-                new RstSample('apps'),
-            ],
-            [
-                'Please replace "apps" with "applications"',
-                new RstSample('    apps'),
-            ],
-            [
-                'Please replace "encoding="utf-8"" with "encoding="UTF-8""',
-                new RstSample('<?xml version="1.0" encoding="utf-8" ?>'),
-            ],
+        $valids = [
+            'http://...',
+            'transport://..',
+            '// ...',
+            '# ...',
+            '<!-- ... -->',
+            'Applications',
+            'applications',
+            'Type-hint',
+            'type-hint',
+            '<?xml version="1.0" encoding="UTF-8" ?>',
+//            '# username is your full Gmail or Google Apps email address', // todo this should be supported by the regex
         ];
 
-        foreach ($invalidCases as $case) {
-            yield $case;
+        foreach ($valids as $valid) {
+            yield $valid => [null, new RstSample($valid)];
+
+            // add leading spaces
+            yield sprintf('"%s" with leading spaces', $valid) => [null, new RstSample(sprintf('    %s', $valid))];
+        }
+
+        $invalids = [
+            '// ..' => '// ...',
+            '//..' => '// ...',
+            '# ..' => '# ...',
+            '#..' => '# ...',
+            '<!-- .. -->' => '<!-- ... -->',
+            '<!--..-->' => '<!-- ... -->',
+            '{# .. #}' => '{# ... #}',
+            '{#..#}' => '{# ... #}',
+            'Apps' => 'Applications',
+            'apps' => 'applications',
+            'Typehint' => 'Type-hint',
+            'typehint' => 'type-hint',
+            'encoding="utf-8"' => 'encoding="UTF-8"',
+        ];
+
+        foreach ($invalids as $invalid => $valid) {
+            yield $invalid => [sprintf('Please replace "%s" with "%s"', $invalid, $valid), new RstSample($invalid)];
+
+            // add leading spaces
+            yield sprintf('"%s" with leading spaces', $invalid) => [sprintf('Please replace "%s" with "%s"', $invalid, $valid), new RstSample(sprintf('    %s', $invalid))];
         }
     }
 }
