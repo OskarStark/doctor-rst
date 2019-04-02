@@ -74,22 +74,27 @@ class CheckCommand extends Command
     {
         $this->io = new SymfonyStyle($input, $output);
 
-        $this->io->title(sprintf('Check *.rst files in: <info>%s</info>', $input->getArgument('dir')));
+        $this->io->text(sprintf('Check *.rst(.inc) files in: <info>%s</info>', $input->getArgument('dir')));
 
-        if (is_file($configFile = $input->getArgument('dir').'/../.doctor-rst.yaml')) {
-            $this->config = Yaml::parseFile($configFile);
+        if (!is_file($configFile = $input->getArgument('dir').'/.doctor-rst.yaml')) {
+            $this->io->error(sprintf('Could not find config file: %s', $configFile));
+        }
 
-            foreach ($this->config['rules'] as $rule => $options) {
-                /** @var Rule[] $rules */
-                $rules = $this->rulesHandler->getRulesByName($rule);
+        $this->io->text(sprintf('Used config file:           <info>%s</info>', $configFile));
+        $this->io->newLine();
 
-                foreach ($rules as $rule) {
-                    if ($rule instanceof Configurable && null !== $options) {
-                        $rule->setOptions($options);
-                    }
+        $this->config = Yaml::parseFile($configFile);
 
-                    $this->rules[] = $rule;
+        foreach ($this->config['rules'] as $rule => $options) {
+            /** @var Rule[] $rules */
+            $rules = $this->rulesHandler->getRulesByName($rule);
+
+            foreach ($rules as $rule) {
+                if ($rule instanceof Configurable && null !== $options) {
+                    $rule->setOptions($options);
                 }
+
+                $this->rules[] = $rule;
             }
         }
 
