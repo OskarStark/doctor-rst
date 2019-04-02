@@ -133,7 +133,11 @@ class CheckCommand extends Command
         }
 
         if ($this->violations) {
-            $this->io->warning(sprintf('Found "%s" invalid files!', $violatedFiles));
+            $this->io->warning(sprintf(
+                'Found "%s" invalid %s!',
+                $violatedFiles,
+                1 === $violatedFiles ? 'file':'files'
+            ));
         } else {
             $this->io->success('All files are valid!');
         }
