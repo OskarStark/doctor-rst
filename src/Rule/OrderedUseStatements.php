@@ -38,39 +38,47 @@ class OrderedUseStatements extends AbstractRule implements Rule
 
         $lines->next();
 
-        $useStatements = [];
+        $statements = [];
         $indentionOfFirstFoundUseStatement = null;
 
         while ($lines->valid()
             && !RstParser::isDirective($lines->current())
             && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
+            && (!preg_match('/^(class (.*)|\$)/', RstParser::clean($lines->current())))
         ) {
-            if (preg_match('/use (.*);/', RstParser::clean($lines->current()), $matches)) {
+            if (preg_match('/^use (.*);$/', RstParser::clean($lines->current()), $matches)) {
                 if (null === $indentionOfFirstFoundUseStatement) {
                     $indentionOfFirstFoundUseStatement = RstParser::indention($lines->current());
-                    $useStatements[] = RstParser::clean($lines->current());
+                    $statements[] = $this->extractClass(RstParser::clean($lines->current()));
                 } else {
                     if ($indentionOfFirstFoundUseStatement != RstParser::indention($lines->current())) {
                         break;
                     }
 
-                    $useStatements[] = RstParser::clean($lines->current());
+                    $statements[] = $this->extractClass(RstParser::clean($lines->current()));
                 }
             }
 
             $lines->next();
         }
 
-        if (empty($useStatements)) {
+        if (empty($statements) || 1 === \count($statements)) {
             return;
         }
 
-        $sortedUseStatements = $useStatements;
-        sort($sortedUseStatements);
+        $sortedUseStatements = $statements;
 
-        if ($useStatements !== $sortedUseStatements) {
-            dump($sortedUseStatements);
+        natsort($sortedUseStatements);
+
+        if ($statements !== $sortedUseStatements) {
             return 'Please reorder the use statements alphabetical';
         }
+    }
+
+    private function extractClass(string $useStatement): string
+    {
+        preg_match('/use (.*);/', $useStatement, $matches);
+
+        return $matches[1];
     }
 }

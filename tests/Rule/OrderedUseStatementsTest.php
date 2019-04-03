@@ -146,8 +146,65 @@ CONTENT;
         }
 CONTENT;
 
+        $valid_with_nsort = <<<'CONTENT'
+.. code-block:: php
 
-        yield [null, new RstSample($valid_with_trait, 1)];
-        yield [null, new RstSample($valid_with_two_code_examples_in_one_block)];
+    use AppBundle\EventListener\SearchIndexer;
+    use AppBundle\EventListener\SearchIndexer2;
+    use AppBundle\EventListener\SearchIndexerSubscriber;
+CONTENT;
+
+        $valid_with_use_statement_in_comment = <<<'CONTENT'
+a ``postPersist()`` method, which will be called when the event is dispatched::
+
+    // src/AppBundle/EventListener/SearchIndexer.php
+    namespace AppBundle\EventListener;
+
+    use AppBundle\Entity\Product;
+    // for Doctrine < 2.4: use Doctrine\ORM\Event\LifecycleEventArgs;
+    use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+
+    class SearchIndexer
+CONTENT;
+
+        $valid_without_class_but_variable_in_between = <<<'CONTENT'
+Instead of loading each file manually, you'll only have to register the
+generated class map with, for example, the
+:class:`Symfony\\Component\\ClassLoader\\MapClassLoader`::
+
+    use Symfony\Component\ClassLoader\MapClassLoader;
+
+    $mapping = include __DIR__.'/class_map.php';
+    $loader = new MapClassLoader($mapping);
+    $loader->register();
+
+    // you can now use the classes:
+    use Acme\Foo;
+
+    $foo = new Foo();
+
+    // ...
+CONTENT;
+
+        yield 'valid with trait' => [
+            null,
+            new RstSample($valid_with_trait, 1),
+        ];
+        yield 'valid with 2 code examples in one block' => [
+            null,
+            new RstSample($valid_with_two_code_examples_in_one_block),
+        ];
+        yield 'valid with nsort' => [
+            null,
+            new RstSample($valid_with_nsort),
+        ];
+        yield 'valid with use statement in comment' => [
+            null,
+            new RstSample($valid_with_use_statement_in_comment),
+        ];
+        yield 'valid without class but variable in between' => [
+            null,
+            new RstSample($valid_without_class_but_variable_in_between, 2),
+        ];
     }
 }
