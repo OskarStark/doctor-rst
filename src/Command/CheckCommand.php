@@ -74,9 +74,15 @@ class CheckCommand extends Command
     {
         $this->io = new SymfonyStyle($input, $output);
 
-        $this->io->text(sprintf('Check *.rst(.inc) files in: <info>%s</info>', $input->getArgument('dir')));
+        if (!$this->dir = realpath($input->getArgument('dir'))) {
+            $this->io->error(sprintf('Could not find directory: %s', $input->getArgument('dir')));
 
-        if (!is_file($configFile = $input->getArgument('dir').'/.doctor-rst.yaml')) {
+            return 1;
+        }
+
+        $this->io->text(sprintf('Check *.rst(.inc) files in: <info>%s</info>', $this->dir));
+
+        if (!is_file($configFile = $this->dir.'/.doctor-rst.yaml')) {
             $this->io->error(sprintf('Could not find config file: %s', $configFile));
         }
 
@@ -125,7 +131,7 @@ class CheckCommand extends Command
         }
 
         $finder = new Finder();
-        $finder->files()->name(['*.rst', '*.rst.inc'])->in($this->dir = $input->getArgument('dir'));
+        $finder->files()->name(['*.rst', '*.rst.inc'])->in($this->dir);
 
         $violatedFiles = 0;
         foreach ($finder as $file) {
@@ -136,7 +142,7 @@ class CheckCommand extends Command
             $this->io->warning(sprintf(
                 'Found "%s" invalid %s!',
                 $violatedFiles,
-                1 === $violatedFiles ? 'file':'files'
+                1 === $violatedFiles ? 'file' : 'files'
             ));
         } else {
             $this->io->success('All files are valid!');
