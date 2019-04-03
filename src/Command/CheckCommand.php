@@ -34,9 +34,6 @@ class CheckCommand extends Command
     /** @var SymfonyStyle */
     private $io;
 
-    /** @var bool */
-    private $violations = false;
-
     /** @var RulesHandler */
     private $rulesHandler;
 
@@ -138,7 +135,7 @@ class CheckCommand extends Command
             $violatedFiles = $violatedFiles + $this->checkFile($file);
         }
 
-        if ($this->violations) {
+        if ($violatedFiles > 0) {
             $this->io->warning(sprintf(
                 'Found "%s" invalid %s!',
                 $violatedFiles,
@@ -148,7 +145,7 @@ class CheckCommand extends Command
             $this->io->success('All files are valid!');
         }
 
-        return $this->violations ? 1 : 0;
+        return $violatedFiles > 0 ? 1 : 0;
     }
 
     private function checkFile(SplFileInfo $file): int
@@ -180,7 +177,7 @@ class CheckCommand extends Command
         }
 
         $violations = $this->filterWhitelistedViolations($violations);
-        $this->violations = $hasViolations = !empty($violations);
+        $hasViolations = !empty($violations);
 
         if (!$this->short || $hasViolations) {
             $this->io->writeln(sprintf(
