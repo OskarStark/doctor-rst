@@ -79,6 +79,7 @@ class OrderedUseStatements extends AbstractRule implements Rule
     {
         preg_match('/use (.*);/', $useStatement, $matches);
 
-        return $matches[1];
+        // the "A" here helps to sort !!
+        return strtolower(str_replace('\\', 'A', trim($matches[1])));
     }
 }

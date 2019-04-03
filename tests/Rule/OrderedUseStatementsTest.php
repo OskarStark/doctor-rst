@@ -186,6 +186,31 @@ generated class map with, for example, the
     // ...
 CONTENT;
 
+        $valid_with_uppercase = <<<'CONTENT'
+for that::
+
+    // src/AppBundle/Form/Type/LocationType.php
+    namespace AppBundle\Form\Type;
+
+    use Symfony\Component\Form\AbstractType;
+    use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+    use Symfony\Component\Form\Extension\Core\Type\TextType;
+    use Symfony\Component\Form\FormBuilderInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
+
+    class LocationType extends AbstractType
+CONTENT;
+
+        $valid2 = <<<'CONTENT'
+the user::
+
+    use Symfony\Component\HttpFoundation\RequestMatcher;
+    use Symfony\Component\Security\Http\Firewall\ExceptionListener;
+    use Symfony\Component\Security\Http\FirewallMap;
+
+    $firewallMap = new FirewallMap();
+CONTENT;
+
         yield 'valid with trait' => [
             null,
             new RstSample($valid_with_trait, 1),
@@ -205,6 +230,14 @@ CONTENT;
         yield 'valid without class but variable in between' => [
             null,
             new RstSample($valid_without_class_but_variable_in_between, 2),
+        ];
+        yield 'valid with uppercase' => [
+            null,
+            new RstSample($valid_with_uppercase),
+        ];
+        yield 'valid 2' => [
+            null,
+            new RstSample($valid2),
         ];
     }
 }
