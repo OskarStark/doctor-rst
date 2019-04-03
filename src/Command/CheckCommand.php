@@ -190,7 +190,7 @@ class CheckCommand extends Command
         if ($hasViolations) {
             foreach ($violations as $violation) {
                 $this->io->writeln(sprintf(
-                    '%s: %s',
+                    '<comment>%s</comment>: %s',
                     str_pad((string) $violation[2], 5, ' ', STR_PAD_LEFT),
                     $violation[1]
                 ));
