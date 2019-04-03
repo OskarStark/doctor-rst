@@ -50,6 +50,7 @@ class Replacement extends CheckListRule implements Rule
             '/typehint/' => 'Please replace "%s" with "type-hint"',
             '/Typehint/' => 'Please replace "%s" with "Type-hint"',
             '/encoding="utf-8"/' => 'Please replace "%s" with "encoding="UTF-8""',
+            '/\$fileSystem/' => 'Please replace "%s" with "$filesystem"',
         ];
     }
 }
