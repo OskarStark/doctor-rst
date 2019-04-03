@@ -180,15 +180,25 @@ class CheckCommand extends Command
         }
 
         $violations = $this->filterWhitelistedViolations($violations);
+        $this->violations = $hasViolations = !empty($violations);
 
-        if (!$this->short || !empty($violations)) {
-            $this->io->writeln(ltrim(str_replace($this->dir, '', $file->getPathname()), '/'));
+        if (!$this->short || $hasViolations) {
+            $this->io->writeln(sprintf(
+                '%s %s',
+                ltrim(str_replace($this->dir, '', $file->getPathname()), '/'),
+                $hasViolations ? sprintf('<fg=red;options=bold>%s</>', "\xE2\x9C\x98" /* HEAVY BALLOT X (U+2718) */) : sprintf('<fg=green;options=bold>%s</>', "\xE2\x9C\x94" /* HEAVY CHECK MARK (U+2714) */)
+            ));
         }
 
-        if (!empty($violations)) {
-            $this->violations = true;
-
-            $this->io->table(['Rule', 'Violation', 'Line', 'Extracted line from file'], $violations);
+        if ($hasViolations) {
+            foreach ($violations as $violation) {
+                $this->io->writeln(sprintf(
+                    '%s: %s',
+                    str_pad((string) $violation[2], 5, ' ', STR_PAD_LEFT),
+                    $violation[1]
+                ));
+            }
+            $this->io->newLine();
 
             return 1;
         }
