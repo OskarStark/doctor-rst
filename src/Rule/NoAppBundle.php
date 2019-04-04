@@ -27,7 +27,7 @@ class NoAppBundle extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, 'AppBundle')) {
+        if (preg_match('/AppBundle/', $line)) {
             return 'Please don\'t use "AppBundle" anymore';
         }
     }
