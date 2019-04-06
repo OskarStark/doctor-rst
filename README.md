@@ -59,16 +59,21 @@ or
 Available rules
 ---------------
 
+* **american_english** [`@Sonata`, `@Symfony`]
+
+  Checks:
+    - `/(B|b)ehaviour(s)?/`: Please use American English for: %s
+
 * **be_keen_to_newcomers** [`@Sonata`, `@Symfony`]
 
-  _Do not use beliting words!_
+  _Do not use beliting words! _
 
-  Default:
-    - `simply`
-    - `easy`
-    - `easily`
-    - `obviously`
-    - `trivial`
+  Checks:
+    - `/(S|s)imply/`: Please remove the word: %s
+    - `/(E|e)asy/`: Please remove the word: %s
+    - `/(E|e)asily/`: Please remove the word: %s
+    - `/(O|o)bviously/`: Please remove the word: %s
+    - `/(T|t)rivial/`: Please remove the word: %s
 
 * **blank_line_after_directive** [`@Sonata`, `@Symfony`]
 
@@ -116,6 +121,8 @@ Available rules
 
 * **line_length**
 
+* **lowercase_as_in_use_statements** [`@Sonata`, `@Symfony`]
+
 * **no_admin_yaml** [`@Sonata`]
 
 * **no_app_bundle** [`@Sonata`]
@@ -144,6 +151,8 @@ Available rules
 
 * **no_inheritdoc** [`@Sonata`]
 
+* **no_namespace_after_use_statements** [`@Sonata`, `@Symfony`]
+
 * **no_php_open_tag_in_code_block_php_directive** [`@Sonata`, `@Symfony`]
 
 * **no_php_prefix_before_bin_console** [`@Sonata`]
@@ -154,11 +163,25 @@ Available rules
 
 * **not_many_blank_lines** [`@Sonata`]
 
+* **ordered_use_statements** [`@Sonata`, `@Symfony`]
+
 * **php_open_tag_in_code_block_php_directive**
 
 * **php_prefix_before_bin_console** [`@Symfony`]
 
 * **replacement** [`@Sonata`, `@Symfony`]
+
+  Checks:
+    - `/^([\s]+)?\/\/.\.(\.)?$/`: Please replace "%s" with "// ..."
+    - `/^([\s]+)?#.\.(\.)?$/`: Please replace "%s" with "# ..."
+    - `/^([\s]+)?<!--(.\.(\.)?|[\s]+\.\.[\s]+)-->$/`: Please replace "%s" with "<!-- ... -->"
+    - `/^([\s]+)?{#(.\.(\.)?|[\s]+\.\.[\s]+)#}$/`: Please replace "%s" with "{# ... #}"
+    - `/apps/`: Please replace "%s" with "applications"
+    - `/Apps/`: Please replace "%s" with "Applications"
+    - `/typehint/`: Please replace "%s" with "type-hint"
+    - `/Typehint/`: Please replace "%s" with "Type-hint"
+    - `/encoding="utf-8"/`: Please replace "%s" with "encoding="UTF-8""
+    - `/\$fileSystem/`: Please replace "%s" with "$filesystem"
 
 * **short_array_syntax** [`@Sonata`]
 
@@ -166,18 +189,22 @@ Available rules
 
 * **typo** [`@Sonata`, `@Symfony`]
 
-  Default:
-    - `compsoer`
-    - `registerbundles()`
-    - `retun`
-    - `displayes`
-    - `mantains`
-    - `doctine`
-    - `adress`
-    - `argon21`
-    - `descritpion`
+  Checks:
+    - `/(C|c)ompsoer/`: Typo in word "%s"
+    - `/registerbundles\(\)/`: Typo in word "%s", use "registerBundles()"
+    - `/retun/`: Typo in word "%s"
+    - `/(D|d)isplayes/`: Typo in word "%s"
+    - `/(M|m)antains/`: Typo in word "%s"
+    - `/(D|d)octine/`: Typo in word "%s"
+    - `/(A|a)dress/`: Typo in word "%s"
+    - `/argon21/`: Typo in word "%s", use "argon2i"
+    - `/(d|d)escritpion/`: Typo in word "%s"
 
 * **use_deprecated_directive_instead_of_versionadded** [`@Sonata`, `@Symfony`]
+
+* **use_https_xsd_urls** [`@Sonata`, `@Symfony`]
+
+* **valid_use_statements** [`@Sonata`, `@Symfony`]
 
 * **versionadded_directive_major_version** [`@Symfony`]
 
@@ -190,6 +217,7 @@ Available rules
 * **yarn_dev_option_at_the_end** [`@Sonata`, `@Symfony`]
 
 * **yarn_dev_option_not_at_the_end**
+
 
 Todo:
 -----
