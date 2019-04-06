@@ -97,9 +97,9 @@ class RulesCommand extends Command
         }
 
         if ($rule instanceof CheckListRule && !empty($rule::getList())) {
-            $this->io->writeln('  Default:');
-            foreach ($rule::getList() as $check) {
-                $this->io->writeln(sprintf('    - `%s`', $check[0]));
+            $this->io->writeln('  Checks:');
+            foreach ($rule::getList() as $check => $message) {
+                $this->io->writeln(sprintf('    - `%s`: %s', $check, $message ?: $rule->getDefaultMessage()));
             }
             $this->io->newLine();
         }
