@@ -44,18 +44,18 @@ class BeKindToNewcomers extends CheckListRule
     public static function getList(): array
     {
         return [
-            '/(S|s)imply/' => null,
-            '/(E|e)asy/' => null,
-            '/(E|e)asily/' => null,
-            '/(O|o)bviously/' => null,
-            '/(T|t)rivial/' => null,
-            '/(J|j)ust/' => null,
-            '/(Q|q)uick/' => null,
-            '/(O|o)f course/' => null,
-            '/(L|l)ogically/' => null,
-            '/(C|c)learly/' => null,
-            '/(M|m)erely/' => null,
-            '/(B|b)asically/' => null,
+            '/simply/i' => null,
+            '/easy/i' => null,
+            '/easily/i' => null,
+            '/obviously/i' => null,
+            '/trivial/i' => null,
+            '/just/i' => null,
+            '/quick/i' => null,
+            '/of course/i' => null,
+            '/logically/i' => null,
+            '/clearly/i' => null,
+            '/merely/i' => null,
+            '/basically/i' => null,
         ];
     }
 }
