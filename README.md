@@ -64,9 +64,9 @@ Available rules
   Checks:
     - `/(B|b)ehaviour(s)?/`: Please use American English for: %s
 
-* **be_keen_to_newcomers** [`@Sonata`, `@Symfony`]
+* **be_kind_to_newcomers** [`@Sonata`, `@Symfony`]
 
-  _Do not use beliting words! _
+  _Do not use belittling words! _
 
   Checks:
     - `/(S|s)imply/`: Please remove the word: %s

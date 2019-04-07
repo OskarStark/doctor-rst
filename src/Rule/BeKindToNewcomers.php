@@ -17,9 +17,9 @@ use App\Annotations\Rule\Description;
 use App\Handler\RulesHandler;
 
 /**
- * @Description("Do not use beliting words!")
+ * @Description("Do not use belittling words!")
  */
-class BeKeenToNewcomers extends CheckListRule
+class BeKindToNewcomers extends CheckListRule
 {
     public static function getGroups(): array
     {
@@ -49,6 +49,13 @@ class BeKeenToNewcomers extends CheckListRule
             '/(E|e)asily/' => null,
             '/(O|o)bviously/' => null,
             '/(T|t)rivial/' => null,
+            '/(J|j)ust/' => null,
+            '/(Q|q)uick/' => null,
+            '/(O|o)f course/' => null,
+            '/(L|l)ogically/' => null,
+            '/(C|c)learly/' => null,
+            '/(M|m)erely/' => null,
+            '/(B|b)asically/' => null,
         ];
     }
 }
