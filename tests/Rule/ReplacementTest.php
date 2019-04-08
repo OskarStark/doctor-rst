@@ -92,7 +92,6 @@ class ReplacementTest extends TestCase
             'encoding="utf-8"' => 'encoding="UTF-8"',
             '$fileSystem' => '$filesystem',
             'Content-type' => 'Content-Type',
-            'content-type' => 'Content-Type',
         ];
 
         foreach ($invalids as $invalid => $valid) {
