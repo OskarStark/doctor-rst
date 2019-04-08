@@ -65,6 +65,7 @@ class ReplacementTest extends TestCase
             'type-hint',
             '<?xml version="1.0" encoding="UTF-8" ?>',
             '$filesystem',
+            'Content-Type',
 //            '# username is your full Gmail or Google Apps email address', // todo this should be supported by the regex
         ];
 
@@ -90,6 +91,8 @@ class ReplacementTest extends TestCase
             'typehint' => 'type-hint',
             'encoding="utf-8"' => 'encoding="UTF-8"',
             '$fileSystem' => '$filesystem',
+            'Content-type' => 'Content-Type',
+            'content-type' => 'Content-Type',
         ];
 
         foreach ($invalids as $invalid => $valid) {
