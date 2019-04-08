@@ -40,15 +40,16 @@ class Typo extends CheckListRule
     public static function getList(): array
     {
         return [
-            '/(C|c)ompsoer/' => null,
+            '/compsoer/i' => null,
             '/registerbundles\(\)/' => 'Typo in word "%s", use "registerBundles()"',
             '/retun/' => null,
-            '/(D|d)isplayes/' => null,
-            '/(M|m)antains/' => null,
-            '/(D|d)octine/' => null,
-            '/(A|a)dress/' => null,
+            '/displayes/i' => null,
+            '/mantains/i' => null,
+            '/doctine/i' => null,
+            '/adress/i' => null,
             '/argon21/' => 'Typo in word "%s", use "argon2i"',
-            '/(d|d)escritpion/' => null,
+            '/descritpion/i' => null,
+            '/recalcuate/i' => null,
         ];
     }
 }
