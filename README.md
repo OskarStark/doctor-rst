@@ -66,14 +66,21 @@ Available rules
 
 * **be_kind_to_newcomers** [`@Sonata`, `@Symfony`]
 
-  _Do not use belittling words! _
+  _Do not use belittling words!_
 
   Checks:
-    - `/(S|s)imply/`: Please remove the word: %s
-    - `/(E|e)asy/`: Please remove the word: %s
-    - `/(E|e)asily/`: Please remove the word: %s
-    - `/(O|o)bviously/`: Please remove the word: %s
-    - `/(T|t)rivial/`: Please remove the word: %s
+    - `/simply/i`: Please remove the word: %s
+    - `/easy/i`: Please remove the word: %s
+    - `/easily/i`: Please remove the word: %s
+    - `/obviously/i`: Please remove the word: %s
+    - `/trivial/i`: Please remove the word: %s
+    - `/just/i`: Please remove the word: %s
+    - `/quick/i`: Please remove the word: %s
+    - `/of course/i`: Please remove the word: %s
+    - `/logically/i`: Please remove the word: %s
+    - `/clearly/i`: Please remove the word: %s
+    - `/merely/i`: Please remove the word: %s
+    - `/basically/i`: Please remove the word: %s
 
 * **blank_line_after_directive** [`@Sonata`, `@Symfony`]
 
@@ -217,7 +224,6 @@ Available rules
 * **yarn_dev_option_at_the_end** [`@Sonata`, `@Symfony`]
 
 * **yarn_dev_option_not_at_the_end**
-
 
 Todo:
 -----
