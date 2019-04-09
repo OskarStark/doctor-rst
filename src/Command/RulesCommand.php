@@ -56,8 +56,7 @@ class RulesCommand extends Command
     {
         $this->io = new SymfonyStyle($input, $output);
 
-        $this->io->writeln('Available rules');
-        $this->io->writeln('---------------');
+        $this->io->writeln('# Available Rules');
         $this->io->newLine();
 
         $rules = $this->rulesHandler->getRawRules();
@@ -81,11 +80,7 @@ class RulesCommand extends Command
             RuleAnnotation\Description::class
         );
 
-        $this->io->writeln(trim(sprintf(
-            '* **%s**%s',
-            $rule::getName(),
-            !empty($rule::getGroups()) ? sprintf(' [`%s`]', implode('`, `', $rule::getGroups())) : ''
-        )));
+        $this->io->writeln(sprintf('## `%s`', $rule::getName()));
         $this->io->newLine();
 
         if (null !== $description) {
@@ -96,12 +91,66 @@ class RulesCommand extends Command
             $this->io->newLine();
         }
 
+        if (!empty($rule::getGroups())) {
+            $this->io->writeln(sprintf('#### Groups [`%s`]', implode('`, `', $rule::getGroups())));
+            $this->io->newLine();
+        }
+
+        if ($rule instanceof Configurable) {
+            $this->io->writeln('#### Configuration options');
+            $this->io->newLine();
+            $this->io->writeln('Name | Required');
+            $this->io->writeln('--- | ---');
+
+            $resolver = $rule->getConfiguration();
+            foreach ($resolver->getDefinedOptions() as $option) {
+                $this->io->writeln(sprintf('`%s` | `%s`', $option, $resolver->isRequired($option) ? 'true' : 'false'));
+            }
+        }
+
         if ($rule instanceof CheckListRule && !empty($rule::getList())) {
-            $this->io->writeln('  Checks:');
-            foreach ($rule::getList() as $check => $message) {
-                $this->io->writeln(sprintf('    - `%s`: %s', $check, $message ?: $rule->getDefaultMessage()));
+            $this->io->writeln('#### Checks');
+            $this->io->newLine();
+            $this->io->writeln('Pattern | Message');
+            $this->io->writeln('--- | ---');
+            foreach ($rule::getList() as $pattern => $message) {
+                $this->io->writeln(sprintf('`%s` | %s', str_replace('|', '\|', $pattern), $message ?: $rule->getDefaultMessage()));
             }
             $this->io->newLine();
         }
+
+        /** @var RuleAnnotation\ValidExample $validExample */
+        $validExample = $this->annotationReader->getClassAnnotation(
+            new \ReflectionClass(\get_class($rule)),
+            RuleAnnotation\ValidExample::class
+        );
+
+        /** @var RuleAnnotation\InvalidExample $invalidExample */
+        $invalidExample = $this->annotationReader->getClassAnnotation(
+            new \ReflectionClass(\get_class($rule)),
+            RuleAnnotation\InvalidExample::class
+        );
+
+        if (null !== $validExample || null !== $invalidExample) {
+            $this->io->writeln('#### Examples');
+            $this->io->newLine();
+
+            $this->renderExamples('##### Valid :+1:', \is_array($validExample->value) ? $validExample->value : [$validExample->value]);
+            $this->renderExamples('##### Invalid :-1:', \is_array($invalidExample->value) ? $invalidExample->value : [$invalidExample->value]);
+        }
+    }
+
+    private function renderExamples(string $headline, array $examples): void
+    {
+        $this->io->writeln($headline);
+
+        foreach ($examples as $example) {
+            $this->io->newLine();
+            $this->io->writeln('```rst');
+            $this->io->writeln($example);
+            $this->io->writeln('```');
+        }
+
+        $this->io->newLine();
     }
 }

@@ -13,9 +13,16 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
+/**
+ * @Descriptionn("Ensure `bin\console` is prefixed with `php` to executable on Microsoft Windows.")
+ * @InvalidExample("bin\console list")
+ * @ValidExample("php bin\console list")
+ */
 class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 {
     public static function getGroups(): array

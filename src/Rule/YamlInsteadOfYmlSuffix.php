@@ -13,9 +13,17 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
+/**
+ * @Description("Make sure to only use `yaml` instead of `yml`.")
+ * @ValidExample({".travis.yml", "..code-block:: yaml", "Please add this to your services.yaml file."})
+ * @InvalidExample({"..code-block:: yml", "Please add this to your services.yml file."})
+ */
 class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
 {
     public static function getGroups(): array

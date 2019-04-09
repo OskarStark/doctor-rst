@@ -13,8 +13,16 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Rst\RstParser;
 
+/**
+ * @Description("Make sure yarn `--dev` option for `add` command is used at the end.")
+ * @ValidExample("yarn add --dev jquery")
+ * @InvalidExample("yarn add jquery --dev")
+ */
 class YarnDevOptionNotAtTheEnd extends AbstractRule implements Rule
 {
     public function check(\ArrayIterator $lines, int $number)

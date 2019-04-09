@@ -13,9 +13,13 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
+/**
+ * @Description("Ensure `Controller` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\Controller` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\AbstractController`.")
+ */
 class ExtendController extends AbstractRule implements Rule
 {
     public static function getGroups(): array

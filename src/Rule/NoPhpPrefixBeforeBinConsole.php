@@ -13,8 +13,15 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 
+/**
+ * @Descriptionn("Ensure `bin\console` is not prefixed with `php`.")
+ * @InvalidExample("php bin\console list")
+ * @ValidExample("bin\console list")
+ */
 class NoPhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 {
     public static function getGroups(): array

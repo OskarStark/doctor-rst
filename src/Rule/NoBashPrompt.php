@@ -13,9 +13,17 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
+/**
+ * @Description("Ensure no bash prompt `$` is used before commands in `bash`, `shell` or `terminal` code blocks.")
+ * @InvalidExample("$ bin\console list")
+ * @ValidExample("bin\console list")
+ */
 class NoBashPrompt extends AbstractRule implements Rule
 {
     public static function getGroups(): array

@@ -13,9 +13,17 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
+/**
+ * @Description("Make sure yarn `--dev` option for `add` command is used at the end.")
+ * @InvalidExample("yarn add --dev jquery")
+ * @ValidExample("yarn add jquery --dev")
+ */
 class YarnDevOptionAtTheEnd extends AbstractRule implements Rule
 {
     public static function getGroups(): array
