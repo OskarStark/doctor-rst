@@ -80,6 +80,7 @@ class RstParser
     const CODE_BLOCK_DIFF = 'diff';
     const CODE_BLOCK_JSON = 'json';
     const CODE_BLOCK_JAVASCRIPT = 'javascript';
+    const CODE_BLOCK_JS = 'js';
 
     public static function hasNewline(string $string): bool
     {
@@ -181,6 +182,7 @@ class RstParser
                 self::CODE_BLOCK_DIFF,
                 self::CODE_BLOCK_JSON,
                 self::CODE_BLOCK_JAVASCRIPT,
+                self::CODE_BLOCK_JS,
             ]
         );
 
