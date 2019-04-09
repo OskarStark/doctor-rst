@@ -3,26 +3,30 @@ Available rules
 
 * **american_english** [`@Sonata`, `@Symfony`]
 
-  Checks:
-    - `/(B|b)ehaviour(s)?/`: Please use American English for: %s
+Checks:
+Pattern | Message
+--- | ---
+`/(B|b)ehaviour(s)?/` | Please use American English for: %s
 
 * **be_kind_to_newcomers** [`@Sonata`, `@Symfony`]
 
   _Do not use belittling words!_
 
-  Checks:
-    - `/simply/i`: Please remove the word: %s
-    - `/easy/i`: Please remove the word: %s
-    - `/easily/i`: Please remove the word: %s
-    - `/obviously/i`: Please remove the word: %s
-    - `/trivial/i`: Please remove the word: %s
-    - `/just/i`: Please remove the word: %s
-    - `/quick/i`: Please remove the word: %s
-    - `/of course/i`: Please remove the word: %s
-    - `/logically/i`: Please remove the word: %s
-    - `/clearly/i`: Please remove the word: %s
-    - `/merely/i`: Please remove the word: %s
-    - `/basically/i`: Please remove the word: %s
+Checks:
+Pattern | Message
+--- | ---
+`/simply/i` | Please remove the word: %s
+`/easy/i` | Please remove the word: %s
+`/easily/i` | Please remove the word: %s
+`/obviously/i` | Please remove the word: %s
+`/trivial/i` | Please remove the word: %s
+`/just/i` | Please remove the word: %s
+`/quick/i` | Please remove the word: %s
+`/of course/i` | Please remove the word: %s
+`/logically/i` | Please remove the word: %s
+`/clearly/i` | Please remove the word: %s
+`/merely/i` | Please remove the word: %s
+`/basically/i` | Please remove the word: %s
 
 * **blank_line_after_directive** [`@Sonata`, `@Symfony`]
 
@@ -122,18 +126,20 @@ Available rules
 
 * **replacement** [`@Sonata`, `@Symfony`]
 
-  Checks:
-    - `/^([\s]+)?\/\/.\.(\.)?$/`: Please replace "%s" with "// ..."
-    - `/^([\s]+)?#.\.(\.)?$/`: Please replace "%s" with "# ..."
-    - `/^([\s]+)?<!--(.\.(\.)?|[\s]+\.\.[\s]+)-->$/`: Please replace "%s" with "<!-- ... -->"
-    - `/^([\s]+)?{#(.\.(\.)?|[\s]+\.\.[\s]+)#}$/`: Please replace "%s" with "{# ... #}"
-    - `/apps/`: Please replace "%s" with "applications"
-    - `/Apps/`: Please replace "%s" with "Applications"
-    - `/typehint/`: Please replace "%s" with "type-hint"
-    - `/Typehint/`: Please replace "%s" with "Type-hint"
-    - `/encoding="utf-8"/`: Please replace "%s" with "encoding="UTF-8""
-    - `/\$fileSystem/`: Please replace "%s" with "$filesystem"
-    - `/Content-type/`: Please replace "%s" with "Content-Type"
+Checks:
+Pattern | Message
+--- | ---
+`/^([\s]+)?\/\/.\.(\.)?$/` | Please replace "%s" with "// ..."
+`/^([\s]+)?#.\.(\.)?$/` | Please replace "%s" with "# ..."
+`/^([\s]+)?<!--(.\.(\.)?|[\s]+\.\.[\s]+)-->$/` | Please replace "%s" with "<!-- ... -->"
+`/^([\s]+)?{#(.\.(\.)?|[\s]+\.\.[\s]+)#}$/` | Please replace "%s" with "{# ... #}"
+`/apps/` | Please replace "%s" with "applications"
+`/Apps/` | Please replace "%s" with "Applications"
+`/typehint/` | Please replace "%s" with "type-hint"
+`/Typehint/` | Please replace "%s" with "Type-hint"
+`/encoding="utf-8"/` | Please replace "%s" with "encoding="UTF-8""
+`/\$fileSystem/` | Please replace "%s" with "$filesystem"
+`/Content-type/` | Please replace "%s" with "Content-Type"
 
 * **short_array_syntax** [`@Sonata`]
 
@@ -141,17 +147,19 @@ Available rules
 
 * **typo** [`@Sonata`, `@Symfony`]
 
-  Checks:
-    - `/compsoer/i`: Typo in word "%s"
-    - `/registerbundles\(\)/`: Typo in word "%s", use "registerBundles()"
-    - `/retun/`: Typo in word "%s"
-    - `/displayes/i`: Typo in word "%s"
-    - `/mantains/i`: Typo in word "%s"
-    - `/doctine/i`: Typo in word "%s"
-    - `/adress/i`: Typo in word "%s"
-    - `/argon21/`: Typo in word "%s", use "argon2i"
-    - `/descritpion/i`: Typo in word "%s"
-    - `/recalcuate/i`: Typo in word "%s"
+Checks:
+Pattern | Message
+--- | ---
+`/compsoer/i` | Typo in word "%s"
+`/registerbundles\(\)/` | Typo in word "%s", use "registerBundles()"
+`/retun/` | Typo in word "%s"
+`/displayes/i` | Typo in word "%s"
+`/mantains/i` | Typo in word "%s"
+`/doctine/i` | Typo in word "%s"
+`/adress/i` | Typo in word "%s"
+`/argon21/` | Typo in word "%s", use "argon2i"
+`/descritpion/i` | Typo in word "%s"
+`/recalcuate/i` | Typo in word "%s"
 
 * **use_deprecated_directive_instead_of_versionadded** [`@Sonata`, `@Symfony`]
 
