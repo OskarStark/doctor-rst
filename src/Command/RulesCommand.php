@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Annotations\Rule\Description;
+use App\Annotations\Rule as RuleAnnotation;
 use App\Handler\RulesHandler;
 use App\Rule\CheckListRule;
 use App\Rule\Rule;
 use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -37,13 +37,10 @@ class RulesCommand extends Command
     /** @var AnnotationReader */
     private $annotationReader;
 
-    public function __construct(RulesHandler $rulesHandler, ?string $name = null)
+    public function __construct(RulesHandler $rulesHandler, Reader $annotationReader, ?string $name = null)
     {
         $this->rulesHandler = $rulesHandler;
-
-        AnnotationRegistry::loadAnnotationClass(Description::class);
-
-        $this->annotationReader = new AnnotationReader();
+        $this->annotationReader = $annotationReader;
 
         parent::__construct($name);
     }
@@ -78,8 +75,11 @@ class RulesCommand extends Command
 
     private function rule(Rule $rule)
     {
-        /** @var Description $description */
-        $description = $this->annotationReader->getClassAnnotation(new \ReflectionClass(\get_class($rule)), Description::class);
+        /** @var RuleAnnotation\Description $description */
+        $description = $this->annotationReader->getClassAnnotation(
+            new \ReflectionClass(\get_class($rule)),
+            RuleAnnotation\Description::class
+        );
 
         $this->io->writeln(trim(sprintf(
             '* **%s**%s',
