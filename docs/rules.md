@@ -4,6 +4,7 @@ Available rules
 * **american_english** [`@Sonata`, `@Symfony`]
 
 Checks:
+
 Pattern | Message
 --- | ---
 `/(B|b)ehaviour(s)?/` | Please use American English for: %s
@@ -13,6 +14,7 @@ Pattern | Message
   _Do not use belittling words!_
 
 Checks:
+
 Pattern | Message
 --- | ---
 `/simply/i` | Please remove the word: %s
@@ -127,6 +129,7 @@ Pattern | Message
 * **replacement** [`@Sonata`, `@Symfony`]
 
 Checks:
+
 Pattern | Message
 --- | ---
 `/^([\s]+)?\/\/.\.(\.)?$/` | Please replace "%s" with "// ..."
@@ -148,6 +151,7 @@ Pattern | Message
 * **typo** [`@Sonata`, `@Symfony`]
 
 Checks:
+
 Pattern | Message
 --- | ---
 `/compsoer/i` | Typo in word "%s"
