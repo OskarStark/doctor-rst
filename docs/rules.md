@@ -12,15 +12,13 @@ Pattern | Message
 --- | ---
 `/(B\|b)ehaviour(s)?/` | Please use American English for: %s
 
-#### Examples
-
-##### Valid :+1:
+##### Valid Examples :+1:
 
 ```rst
 This is a nice behavior...
 ```
 
-##### Invalid :-1:
+##### Invalid Examples :-1:
 
 ```rst
 This is a nice behaviour...
@@ -155,15 +153,13 @@ Pattern | Message
 
 #### Groups [`@Sonata`]
 
-#### Examples
-
-##### Valid :+1:
+##### Valid Examples :+1:
 
 ```rst
 bin\console list
 ```
 
-##### Invalid :-1:
+##### Invalid Examples :-1:
 
 ```rst
 $ bin\console list
@@ -221,15 +217,13 @@ $ bin\console list
 
 #### Groups [`@Sonata`]
 
-#### Examples
-
-##### Valid :+1:
+##### Valid Examples :+1:
 
 ```rst
 bin\console list
 ```
 
-##### Invalid :-1:
+##### Invalid Examples :-1:
 
 ```rst
 php bin\console list
@@ -264,15 +258,13 @@ Name | Required
 
 #### Groups [`@Symfony`]
 
-#### Examples
-
-##### Valid :+1:
+##### Valid Examples :+1:
 
 ```rst
 php bin\console list
 ```
 
-##### Invalid :-1:
+##### Invalid Examples :-1:
 
 ```rst
 bin\console list
@@ -377,9 +369,7 @@ Name | Required
 
 #### Groups [`@Sonata`, `@Symfony`]
 
-#### Examples
-
-##### Valid :+1:
+##### Valid Examples :+1:
 
 ```rst
 .travis.yml
@@ -393,7 +383,7 @@ Name | Required
 Please add this to your services.yaml file.
 ```
 
-##### Invalid :-1:
+##### Invalid Examples :-1:
 
 ```rst
 ..code-block:: yml
@@ -409,15 +399,13 @@ Please add this to your services.yml file.
 
 #### Groups [`@Sonata`, `@Symfony`]
 
-#### Examples
-
-##### Valid :+1:
+##### Valid Examples :+1:
 
 ```rst
 yarn add jquery --dev
 ```
 
-##### Invalid :-1:
+##### Invalid Examples :-1:
 
 ```rst
 yarn add --dev jquery
@@ -427,15 +415,13 @@ yarn add --dev jquery
 
   > _Make sure yarn `--dev` option for `add` command is used at the end._
 
-#### Examples
-
-##### Valid :+1:
+##### Valid Examples :+1:
 
 ```rst
 yarn add --dev jquery
 ```
 
-##### Invalid :-1:
+##### Invalid Examples :-1:
 
 ```rst
 yarn add jquery --dev
