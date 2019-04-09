@@ -289,7 +289,7 @@ Name | Required
 
 ## `yaml_instead_of_yml_suffix`
 
-  _Make sure to only use `yaml` instead of ``yml`._
+  _Make sure to only use `yaml` instead of `yml`._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
