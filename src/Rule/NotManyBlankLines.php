@@ -15,32 +15,63 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class NotManyBlankLines extends AbstractRule implements Rule
+class NotManyBlankLines extends AbstractRule implements Rule, Configurable
 {
+    /** @var int */
+    private $max;
+
+    public function getConfiguration(): OptionsResolver
+    {
+        $resolver = new OptionsResolver();
+        $resolver
+            ->setDefault('max', 2)
+            ->setRequired('max')
+            ->setAllowedTypes('max', 'int')
+        ;
+
+        return $resolver;
+    }
+
+    public function setOptions(array $options): void
+    {
+        $resolver = $this->getConfiguration();
+
+        $resolvedOptions = $resolver->resolve($options);
+
+        $this->max = $resolvedOptions['max'];
+    }
+
+    public static function runOnlyOnBlankline(): bool
+    {
+        return true;
+    }
+
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA];
+        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)
     {
         $lines->seek($number);
-        $line = $lines->current();
 
-        if (!RstParser::isBlankLine($line)) {
+        if (!RstParser::isBlankLine($lines->current())) {
             return;
         }
 
+        $blanklines = 1;
         $lines->next();
-        $nextLine = $lines->current();
 
-        if (null === $nextLine) {
-            return;
+        while ($lines->valid() && RstParser::isBlankLine($lines->current())) {
+            ++$blanklines;
+
+            $lines->next();
         }
 
-        if (RstParser::isBlankLine($nextLine)) {
-            return 'Please avoid many blank lines';
+        if ($blanklines > $this->max) {
+            return sprintf('Please use max %s blank lines, you used %s', $this->max, $blanklines);
         }
     }
 }
