@@ -2,7 +2,7 @@
 
 ## `american_english`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ### Checks
 
@@ -14,7 +14,7 @@ Pattern | Message
 
   _Do not use belittling words!_
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ### Checks
 
@@ -37,13 +37,13 @@ Pattern | Message
 
   _Make sure you have a blank line after each directive._
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `blank_line_after_filepath_in_code_block`
 
   _Make sure you have a blank line after a filepath in a code block. This rule respects PHP, YAML, XML and Twig._
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `blank_line_after_filepath_in_php_code_block`
 
@@ -63,145 +63,145 @@ Pattern | Message
 
 ## `composer_dev_option_at_the_end`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `composer_dev_option_not_at_the_end`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `correct_code_block_directive_based_on_the_content`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `ensure_order_of_code_blocks_in_configuration_block`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `even_brackets_count`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `extend_abstract_admin`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `extend_abstract_controller`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `extend_controller`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `final_admin_classes`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `final_admin_extension_classes`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `kernel_instead_of_app_kernel`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `line_length`
 
 ## `lowercase_as_in_use_statements`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `no_admin_yaml`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `no_app_bundle`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `no_app_console`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `no_bash_prompt`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `no_blank_line_after_filepath_in_code_block`
 
 ## `no_blank_line_after_filepath_in_php_code_block`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `no_blank_line_after_filepath_in_twig_code_block`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `no_blank_line_after_filepath_in_xml_code_block`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `no_blank_line_after_filepath_in_yaml_code_block`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `no_composer_phar`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `no_composer_req`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `no_config_yaml`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `no_explicit_use_of_code_block_php`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `no_inheritdoc`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `no_namespace_after_use_statements`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `no_php_open_tag_in_code_block_php_directive`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `no_php_prefix_before_bin_console`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `no_php_prefix_before_composer`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `no_space_before_self_xml_closing_tag`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `not_many_blank_lines`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `ordered_use_statements`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `php_open_tag_in_code_block_php_directive`
 
 ## `php_prefix_before_bin_console`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `replacement`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ### Checks
 
@@ -221,13 +221,13 @@ Pattern | Message
 
 ## `short_array_syntax`
 
-### Groups  [`@Sonata`]
+**Groups** [`@Sonata`]
 
 ## `space_before_self_xml_closing_tag`
 
 ## `typo`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ### Checks
 
@@ -246,35 +246,35 @@ Pattern | Message
 
 ## `use_deprecated_directive_instead_of_versionadded`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `use_https_xsd_urls`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `valid_use_statements`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `versionadded_directive_major_version`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `versionadded_directive_min_version`
 
-### Groups  [`@Symfony`]
+**Groups** [`@Symfony`]
 
 ## `versionadded_directive_should_have_version`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `yaml_instead_of_yml_suffix`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `yarn_dev_option_at_the_end`
 
-### Groups  [`@Sonata`, `@Symfony`]
+**Groups** [`@Sonata`, `@Symfony`]
 
 ## `yarn_dev_option_not_at_the_end`
 
