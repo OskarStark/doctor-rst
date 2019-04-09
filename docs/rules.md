@@ -2,6 +2,8 @@
 
 ## `american_english`
 
+  _Ensure only American English is used._
+
 #### Groups [`@Sonata`, `@Symfony`]
 
 #### Checks
@@ -63,13 +65,13 @@ Pattern | Message
 
 ## `composer_dev_option_at_the_end`
 
-  _Make sure Composer `--dev` option for `require` command is used at the end_
+  _Make sure Composer `--dev` option for `require` command is used at the end._
 
 #### Groups [`@Sonata`]
 
 ## `composer_dev_option_not_at_the_end`
 
-  _Make sure Composer `--dev` option for `require` command is not used at the end_
+  _Make sure Composer `--dev` option for `require` command is not used at the end._
 
 #### Groups [`@Symfony`]
 
@@ -87,13 +89,19 @@ Pattern | Message
 
 ## `extend_abstract_admin`
 
+  _Ensure `AbstractAdmin` and the corresponding namespace `Sonata\AdminBundle\Admin\AbstractAdmin` is used._
+
 #### Groups [`@Sonata`]
 
 ## `extend_abstract_controller`
 
+  _Ensure `AbstractController` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\AbstractController` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\Controller`._
+
 #### Groups [`@Symfony`]
 
 ## `extend_controller`
+
+  _Ensure `Controller` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\Controller` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\AbstractController`._
 
 #### Groups [`@Symfony`]
 
@@ -129,7 +137,23 @@ Pattern | Message
 
 ## `no_bash_prompt`
 
+  _Ensure no bash prompt `$` is used before commands in `bash`, `shell` or `terminal` code blocks._
+
 #### Groups [`@Sonata`]
+
+#### Examples
+
+##### Valid :+1:
+
+```rst
+bin\console list
+```
+
+##### Invalid :-1:
+
+```rst
+$ bin\console list
+```
 
 ## `no_blank_line_after_filepath_in_code_block`
 
@@ -207,6 +231,20 @@ Name | Required
 ## `php_prefix_before_bin_console`
 
 #### Groups [`@Symfony`]
+
+## `replace_code_block_types`
+
+  _Propose alternatives for disallowed code block types._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+#### Checks
+
+Pattern | Message
+--- | ---
+`jinja` | Please do not use type "jinja" for code-block, use "twig" instead
+`html+jinja` | Please do not use type "html+jinja" for code-block, use "html+twig" instead
+`js` | Please do not use type "js" for code-block, use "javascript" instead
 
 ## `replacement`
 
@@ -293,9 +331,35 @@ Name | Required
 
 #### Groups [`@Sonata`, `@Symfony`]
 
+#### Examples
+
+##### Valid :+1:
+
+```rst
+.travis.yml
+```
+
+```rst
+..code-block:: yaml
+```
+
+```rst
+Please add this to your services.yaml file.
+```
+
+##### Invalid :-1:
+
+```rst
+..code-block:: yml
+```
+
+```rst
+Please add this to your services.yml file.
+```
+
 ## `yarn_dev_option_at_the_end`
 
-  _Make sure yarn `--dev` option for `add` command is used at the end_
+  _Make sure yarn `--dev` option for `add` command is used at the end._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
@@ -303,15 +367,31 @@ Name | Required
 
 ##### Valid :+1:
 
-```
+```rst
 yarn add jquery --dev
 ```
-##### Invalid :+-1:
 
-```
+##### Invalid :-1:
+
+```rst
 yarn add --dev jquery
 ```
+
 ## `yarn_dev_option_not_at_the_end`
 
-  _Make sure yarn `--dev` option for `add` command is used at the end_
+  _Make sure yarn `--dev` option for `add` command is used at the end._
+
+#### Examples
+
+##### Valid :+1:
+
+```rst
+yarn add --dev jquery
+```
+
+##### Invalid :-1:
+
+```rst
+yarn add jquery --dev
+```
 
