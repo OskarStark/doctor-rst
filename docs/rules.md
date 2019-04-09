@@ -289,6 +289,8 @@ Name | Required
 
 ## `yaml_instead_of_yml_suffix`
 
+  _Make sure to only use `yaml` instead of ``yml`._
+
 #### Groups [`@Sonata`, `@Symfony`]
 
 ## `yarn_dev_option_at_the_end`
@@ -297,6 +299,18 @@ Name | Required
 
 #### Groups [`@Sonata`, `@Symfony`]
 
+#### Examples
+
+##### Valid :+1:
+
+```
+yarn add jquery --dev
+```
+##### Invalid :+1:
+
+```
+yarn add --dev jquery
+```
 ## `yarn_dev_option_not_at_the_end`
 
   _Make sure yarn `--dev` option for `add` command is used at the end_
