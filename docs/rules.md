@@ -63,9 +63,13 @@ Pattern | Message
 
 ## `composer_dev_option_at_the_end`
 
+  _Make sure Composer `--dev` option for `require` command is used at the end_
+
 #### Groups [`@Sonata`]
 
 ## `composer_dev_option_not_at_the_end`
+
+  _Make sure Composer `--dev` option for `require` command is not used at the end_
 
 #### Groups [`@Symfony`]
 
@@ -289,7 +293,11 @@ Name | Required
 
 ## `yarn_dev_option_at_the_end`
 
+  _Make sure yarn `--dev` option for `add` command is used at the end_
+
 #### Groups [`@Sonata`, `@Symfony`]
 
 ## `yarn_dev_option_not_at_the_end`
+
+  _Make sure yarn `--dev` option for `add` command is used at the end_
 
