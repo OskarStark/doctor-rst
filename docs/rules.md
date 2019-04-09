@@ -12,6 +12,20 @@ Pattern | Message
 --- | ---
 `/(B\|b)ehaviour(s)?/` | Please use American English for: %s
 
+#### Examples
+
+##### Valid :+1:
+
+```rst
+This is a nice behavior...
+```
+
+##### Invalid :-1:
+
+```rst
+This is a nice behaviour...
+```
+
 ## `be_kind_to_newcomers`
 
   _Do not use belittling words!_
@@ -203,7 +217,23 @@ $ bin\console list
 
 ## `no_php_prefix_before_bin_console`
 
+  _Ensure `bin\console` is not prefixed with `php`._
+
 #### Groups [`@Sonata`]
+
+#### Examples
+
+##### Valid :+1:
+
+```rst
+bin\console list
+```
+
+##### Invalid :-1:
+
+```rst
+php bin\console list
+```
 
 ## `no_php_prefix_before_composer`
 
@@ -230,7 +260,23 @@ Name | Required
 
 ## `php_prefix_before_bin_console`
 
+  _Ensure `bin\console` is prefixed with `php` to executable on Microsoft Windows._
+
 #### Groups [`@Symfony`]
+
+#### Examples
+
+##### Valid :+1:
+
+```rst
+php bin\console list
+```
+
+##### Invalid :-1:
+
+```rst
+bin\console list
+```
 
 ## `replace_code_block_types`
 

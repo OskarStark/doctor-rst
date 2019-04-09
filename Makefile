@@ -8,7 +8,7 @@ update-rules.md-file:
 	php bin/console rules > docs/rules.md
 
 docs-update:
-	git stash && make update-rules.md-file && git add docs && git commit -m"update rules documentation (automatic)" && git push && git stash apply
+	make update-rules.md-file && git add docs && git commit -m"update rules documentation (automatic)" && git push
 
 DATE := $(shell date +%Y-%m-%d_%H-%M-%S)
 vendor-updates:
