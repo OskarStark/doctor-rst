@@ -306,7 +306,7 @@ Name | Required
 ```
 yarn add jquery --dev
 ```
-##### Invalid :+1:
+##### Invalid :+-1:
 
 ```
 yarn add --dev jquery
