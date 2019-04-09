@@ -4,6 +4,9 @@ cs:
 static-analyse:
 	docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/phpstan-ga:latest analyse src/ --level=5
 
+update-rules-docs:
+	php bin/console rules > docs/rules.md
+
 DATE := $(shell date +%Y-%m-%d_%H-%M-%S)
 vendor-updates:
 	@git checkout -b support/vendor-updates-$(DATE)
