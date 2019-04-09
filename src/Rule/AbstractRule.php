@@ -31,4 +31,9 @@ abstract class AbstractRule
     {
         return Rule::TYPE_LINE;
     }
+
+    public static function runOnlyOnBlankline(): bool
+    {
+        return false;
+    }
 }

@@ -154,12 +154,12 @@ class CheckCommand extends Command
 
         $violations = [];
         foreach ($lines as $no => $line) {
-            if (RstParser::isBlankLine($line)) {
-                continue;
-            }
-
             /** @var Rule $rule */
             foreach ($this->rules as $rule) {
+                if (!$rule::runOnlyOnBlankline() && RstParser::isBlankLine($line)) {
+                    continue;
+                }
+
                 if (Rule::TYPE_FILE === $rule::getType() && $no > 0) {
                     continue;
                 }

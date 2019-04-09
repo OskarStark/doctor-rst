@@ -25,4 +25,6 @@ interface Rule
     public function check(\ArrayIterator $lines, int $number);
 
     public static function getType(): int;
+
+    public static function runOnlyOnBlankline(): bool;
 }
