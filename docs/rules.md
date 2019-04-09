@@ -189,6 +189,11 @@ Pattern | Message
 
 #### Groups [`@Sonata`, `@Symfony`]
 
+#### Configuration options
+
+Name | Required
+--- | ---
+`max` | `true`
 ## `ordered_use_statements`
 
 #### Groups [`@Sonata`, `@Symfony`]
@@ -260,10 +265,20 @@ Pattern | Message
 
 #### Groups [`@Symfony`]
 
+#### Configuration options
+
+Name | Required
+--- | ---
+`major_version` | `true`
 ## `versionadded_directive_min_version`
 
 #### Groups [`@Symfony`]
 
+#### Configuration options
+
+Name | Required
+--- | ---
+`min_version` | `true`
 ## `versionadded_directive_should_have_version`
 
 #### Groups [`@Sonata`, `@Symfony`]
