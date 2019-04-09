@@ -27,7 +27,7 @@ class NoComposerPhar extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr($line, 'composer.phar')) {
+        if (preg_match('/composer\.phar/', $line)) {
             return 'Please use "composer" instead of "composer.phar"';
         }
     }

@@ -30,8 +30,7 @@ class YarnDevOptionNotAtTheEnd extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-        if (preg_match('/yarn add(.*)\-\-dev$/', $line)) {
+        if (preg_match('/yarn add(.*)\-\-dev$/', RstParser::clean($line))) {
             return 'Please move "--dev" option before the package';
         }
     }

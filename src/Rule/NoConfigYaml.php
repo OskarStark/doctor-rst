@@ -27,7 +27,7 @@ class NoConfigYaml extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (strstr(strtolower($line), 'app/config/config.yml')) {
+        if (preg_match('/app\/config\/config\.yml/', $line)) {
             return 'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"';
         }
     }
