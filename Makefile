@@ -4,8 +4,11 @@ cs:
 static-analyse:
 	docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/phpstan-ga:latest analyse src/ --level=5
 
-update-rules-docs:
+update-rules.md-file:
 	php bin/console rules > docs/rules.md
+
+docs-update:
+	git stash && make update-rules.md-file && git add docs && git commit -m"update rules documentation (automatic)" && git push && git stash apply
 
 DATE := $(shell date +%Y-%m-%d_%H-%M-%S)
 vendor-updates:
