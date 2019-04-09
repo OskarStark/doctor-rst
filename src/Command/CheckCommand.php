@@ -194,10 +194,12 @@ class CheckCommand extends Command
                     str_pad((string) $violation[2], 5, ' ', STR_PAD_LEFT),
                     $violation[1]
                 ));
-                $this->io->writeln(sprintf(
-                    '   <info>-></info>  %s',
-                    $violation[3]
-                ));
+                if (!empty($violation[3])) {
+                    $this->io->writeln(sprintf(
+                        '   <info>-></info>  %s',
+                        $violation[3]
+                    ));
+                }
             }
             $this->io->newLine();
 
