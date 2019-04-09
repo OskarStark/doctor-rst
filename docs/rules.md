@@ -2,7 +2,7 @@
 
 ## `american_english`
 
-  _Ensure only American English is used._
+  > _Ensure only American English is used._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
@@ -28,7 +28,7 @@ This is a nice behaviour...
 
 ## `be_kind_to_newcomers`
 
-  _Do not use belittling words!_
+  > _Do not use belittling words!_
 
 #### Groups [`@Sonata`, `@Symfony`]
 
@@ -51,41 +51,41 @@ Pattern | Message
 
 ## `blank_line_after_directive`
 
-  _Make sure you have a blank line after each directive._
+  > _Make sure you have a blank line after each directive._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
 ## `blank_line_after_filepath_in_code_block`
 
-  _Make sure you have a blank line after a filepath in a code block. This rule respects PHP, YAML, XML and Twig._
+  > _Make sure you have a blank line after a filepath in a code block. This rule respects PHP, YAML, XML and Twig._
 
 #### Groups [`@Sonata`]
 
 ## `blank_line_after_filepath_in_php_code_block`
 
-  _Make sure you have a blank line after a filepath in a PHP code block._
+  > _Make sure you have a blank line after a filepath in a PHP code block._
 
 ## `blank_line_after_filepath_in_twig_code_block`
 
-  _Make sure you have a blank line after a filepath in a Twig code block._
+  > _Make sure you have a blank line after a filepath in a Twig code block._
 
 ## `blank_line_after_filepath_in_xml_code_block`
 
-  _Make sure you have a blank line after a filepath in a XML code block._
+  > _Make sure you have a blank line after a filepath in a XML code block._
 
 ## `blank_line_after_filepath_in_yaml_code_block`
 
-  _Make sure you have a blank line after a filepath in a YAML code block._
+  > _Make sure you have a blank line after a filepath in a YAML code block._
 
 ## `composer_dev_option_at_the_end`
 
-  _Make sure Composer `--dev` option for `require` command is used at the end._
+  > _Make sure Composer `--dev` option for `require` command is used at the end._
 
 #### Groups [`@Sonata`]
 
 ## `composer_dev_option_not_at_the_end`
 
-  _Make sure Composer `--dev` option for `require` command is not used at the end._
+  > _Make sure Composer `--dev` option for `require` command is not used at the end._
 
 #### Groups [`@Symfony`]
 
@@ -103,19 +103,19 @@ Pattern | Message
 
 ## `extend_abstract_admin`
 
-  _Ensure `AbstractAdmin` and the corresponding namespace `Sonata\AdminBundle\Admin\AbstractAdmin` is used._
+  > _Ensure `AbstractAdmin` and the corresponding namespace `Sonata\AdminBundle\Admin\AbstractAdmin` is used._
 
 #### Groups [`@Sonata`]
 
 ## `extend_abstract_controller`
 
-  _Ensure `AbstractController` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\AbstractController` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\Controller`._
+  > _Ensure `AbstractController` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\AbstractController` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\Controller`._
 
 #### Groups [`@Symfony`]
 
 ## `extend_controller`
 
-  _Ensure `Controller` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\Controller` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\AbstractController`._
+  > _Ensure `Controller` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\Controller` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\AbstractController`._
 
 #### Groups [`@Symfony`]
 
@@ -151,7 +151,7 @@ Pattern | Message
 
 ## `no_bash_prompt`
 
-  _Ensure no bash prompt `$` is used before commands in `bash`, `shell` or `terminal` code blocks._
+  > _Ensure no bash prompt `$` is used before commands in `bash`, `shell` or `terminal` code blocks._
 
 #### Groups [`@Sonata`]
 
@@ -217,7 +217,7 @@ $ bin\console list
 
 ## `no_php_prefix_before_bin_console`
 
-  _Ensure `bin\console` is not prefixed with `php`._
+  > _Ensure `bin\console` is not prefixed with `php`._
 
 #### Groups [`@Sonata`]
 
@@ -260,7 +260,7 @@ Name | Required
 
 ## `php_prefix_before_bin_console`
 
-  _Ensure `bin\console` is prefixed with `php` to executable on Microsoft Windows._
+  > _Ensure `bin\console` is prefixed with `php` to executable on Microsoft Windows._
 
 #### Groups [`@Symfony`]
 
@@ -280,7 +280,7 @@ bin\console list
 
 ## `replace_code_block_types`
 
-  _Propose alternatives for disallowed code block types._
+  > _Propose alternatives for disallowed code block types._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
@@ -373,7 +373,7 @@ Name | Required
 
 ## `yaml_instead_of_yml_suffix`
 
-  _Make sure to only use `yaml` instead of `yml`._
+  > _Make sure to only use `yaml` instead of `yml`._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
@@ -405,7 +405,7 @@ Please add this to your services.yml file.
 
 ## `yarn_dev_option_at_the_end`
 
-  _Make sure yarn `--dev` option for `add` command is used at the end._
+  > _Make sure yarn `--dev` option for `add` command is used at the end._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
@@ -425,7 +425,7 @@ yarn add --dev jquery
 
 ## `yarn_dev_option_not_at_the_end`
 
-  _Make sure yarn `--dev` option for `add` command is used at the end._
+  > _Make sure yarn `--dev` option for `add` command is used at the end._
 
 #### Examples
 
