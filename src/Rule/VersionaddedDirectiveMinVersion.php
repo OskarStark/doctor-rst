@@ -22,13 +22,20 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Conf
     /** @var string */
     private $minVersion;
 
-    public function setOptions(array $options): void
+    public function getConfiguration(): OptionsResolver
     {
         $resolver = new OptionsResolver();
         $resolver
             ->setRequired('min_version')
             ->setAllowedTypes('min_version', 'string')
         ;
+
+        return $resolver;
+    }
+
+    public function setOptions(array $options): void
+    {
+        $resolver = $this->getConfiguration();
 
         $resolvedOptions = $resolver->resolve($options);
 

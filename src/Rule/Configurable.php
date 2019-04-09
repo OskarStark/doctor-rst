@@ -13,7 +13,11 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 interface Configurable
 {
+    public function getConfiguration(): OptionsResolver;
+
     public function setOptions(array $options): void;
 }

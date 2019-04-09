@@ -16,6 +16,7 @@ namespace App\Command;
 use App\Annotations\Rule as RuleAnnotation;
 use App\Handler\RulesHandler;
 use App\Rule\CheckListRule;
+use App\Rule\Configurable;
 use App\Rule\Rule;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;

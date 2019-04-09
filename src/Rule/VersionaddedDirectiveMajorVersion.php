@@ -31,13 +31,20 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Co
         $this->versionParser = $versionParser;
     }
 
-    public function setOptions(array $options): void
+    public function getConfiguration(): OptionsResolver
     {
         $resolver = new OptionsResolver();
         $resolver
             ->setRequired('major_version')
             ->setAllowedTypes('major_version', 'int')
         ;
+
+        return $resolver;
+    }
+
+    public function setOptions(array $options): void
+    {
+        $resolver = $this->getConfiguration();
 
         $resolvedOptions = $resolver->resolve($options);
 
