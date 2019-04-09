@@ -14,10 +14,14 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 
 /**
  * @Description("Ensure only American English is used.")
+ * @InvalidExample("This is a nice behaviour...")
+ * @ValidExample("This is a nice behavior...")
  */
 class AmericanEnglish extends CheckListRule
 {
