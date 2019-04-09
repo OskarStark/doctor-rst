@@ -8,7 +8,7 @@
 
 Pattern | Message
 --- | ---
-`/(B|b)ehaviour(s)?/` | Please use American English for: %s
+`/(B\|b)ehaviour(s)?/` | Please use American English for: %s
 
 ## `be_kind_to_newcomers`
 
@@ -209,8 +209,8 @@ Pattern | Message
 --- | ---
 `/^([\s]+)?\/\/.\.(\.)?$/` | Please replace "%s" with "// ..."
 `/^([\s]+)?#.\.(\.)?$/` | Please replace "%s" with "# ..."
-`/^([\s]+)?<!--(.\.(\.)?|[\s]+\.\.[\s]+)-->$/` | Please replace "%s" with "<!-- ... -->"
-`/^([\s]+)?{#(.\.(\.)?|[\s]+\.\.[\s]+)#}$/` | Please replace "%s" with "{# ... #}"
+`/^([\s]+)?<!--(.\.(\.)?\|[\s]+\.\.[\s]+)-->$/` | Please replace "%s" with "<!-- ... -->"
+`/^([\s]+)?{#(.\.(\.)?\|[\s]+\.\.[\s]+)#}$/` | Please replace "%s" with "{# ... #}"
 `/apps/` | Please replace "%s" with "applications"
 `/Apps/` | Please replace "%s" with "Applications"
 `/typehint/` | Please replace "%s" with "type-hint"
