@@ -385,6 +385,8 @@ Pattern | Message
 `/encoding="utf-8"/` | Please replace "%s" with "encoding="UTF-8""
 `/\$fileSystem/` | Please replace "%s" with "$filesystem"
 `/Content-type/` | Please replace "%s" with "Content-Type"
+`/\-\-env prod/` | Please replace "%s" with "--env=prod"
+`/\-\-env test/` | Please replace "%s" with "--env=test"
 
 ## `short_array_syntax`
 
