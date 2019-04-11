@@ -387,6 +387,8 @@ Pattern | Message
 `/Content-type/` | Please replace "%s" with "Content-Type"
 `/\-\-env prod/` | Please replace "%s" with "--env=prod"
 `/\-\-env test/` | Please replace "%s" with "--env=test"
+`/End 2 End/i` | Please replace "%s" with "End-to-End"
+`/E2E/` | Please replace "%s" with "End-to-End"
 
 ## `short_array_syntax`
 
