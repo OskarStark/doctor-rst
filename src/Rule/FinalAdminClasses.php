@@ -28,9 +28,7 @@ class FinalAdminClasses extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-
-        if (preg_match('/^class(.*)extends AbstractAdmin$/', $line)) {
+        if (preg_match('/^class(.*)extends AbstractAdmin$/', RstParser::clean($line))) {
             return 'Please use "final" for Admin class';
         }
     }

@@ -19,9 +19,9 @@ use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 
 /**
- * @Description("Ensure `bin\console` is not prefixed with `php`.")
- * @InvalidExample("php bin\console list")
- * @ValidExample("bin\console list")
+ * @Description("Ensure `bin/console` is not prefixed with `php`.")
+ * @InvalidExample("php bin/console list")
+ * @ValidExample("bin/console list")
  */
 class NoPhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 {

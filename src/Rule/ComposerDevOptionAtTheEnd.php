@@ -14,11 +14,15 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
 /**
  * @Description("Make sure Composer `--dev` option for `require` command is used at the end.")
+ * @InvalidExample("composer require --dev symfony/form")
+ * @ValidExample("composer require symfony/form --dev")
  */
 class ComposerDevOptionAtTheEnd extends AbstractRule implements Rule
 {

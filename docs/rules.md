@@ -81,11 +81,35 @@ Pattern | Message
 
 #### Groups [`@Sonata`]
 
+##### Valid Examples :+1:
+
+```rst
+composer require symfony/form --dev
+```
+
+##### Invalid Examples :-1:
+
+```rst
+composer require --dev symfony/form
+```
+
 ## `composer_dev_option_not_at_the_end`
 
   > _Make sure Composer `--dev` option for `require` command is not used at the end._
 
 #### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+composer require --dev symfony/form
+```
+
+##### Invalid Examples :-1:
+
+```rst
+composer require symfony/form --dev
+```
 
 ## `correct_code_block_directive_based_on_the_content`
 
@@ -213,20 +237,20 @@ $ bin\console list
 
 ## `no_php_prefix_before_bin_console`
 
-  > _Ensure `bin\console` is not prefixed with `php`._
+  > _Ensure `bin/console` is not prefixed with `php`._
 
 #### Groups [`@Sonata`]
 
 ##### Valid Examples :+1:
 
 ```rst
-bin\console list
+bin/console list
 ```
 
 ##### Invalid Examples :-1:
 
 ```rst
-php bin\console list
+php bin/console list
 ```
 
 ## `no_php_prefix_before_composer`
@@ -254,20 +278,20 @@ Name | Required
 
 ## `php_prefix_before_bin_console`
 
-  > _Ensure `bin\console` is prefixed with `php` to executable on Microsoft Windows._
+  > _Ensure `bin/console` is prefixed with `php` to be safe executable on Microsoft Windows._
 
 #### Groups [`@Symfony`]
 
 ##### Valid Examples :+1:
 
 ```rst
-php bin\console list
+php bin/console list
 ```
 
 ##### Invalid Examples :-1:
 
 ```rst
-bin\console list
+bin/console list
 ```
 
 ## `replace_code_block_types`

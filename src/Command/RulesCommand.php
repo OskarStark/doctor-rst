@@ -133,11 +133,8 @@ class RulesCommand extends Command
         );
 
         if (null !== $validExample || null !== $invalidExample) {
-            $this->io->writeln('#### Examples');
-            $this->io->newLine();
-
-            $this->renderExamples('##### Valid :+1:', \is_array($validExample->value) ? $validExample->value : [$validExample->value]);
-            $this->renderExamples('##### Invalid :-1:', \is_array($invalidExample->value) ? $invalidExample->value : [$invalidExample->value]);
+            $this->renderExamples('##### Valid Examples :+1:', \is_array($validExample->value) ? $validExample->value : [$validExample->value]);
+            $this->renderExamples('##### Invalid Examples :-1:', \is_array($invalidExample->value) ? $invalidExample->value : [$invalidExample->value]);
         }
     }
 

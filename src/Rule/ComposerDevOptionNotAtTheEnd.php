@@ -14,11 +14,15 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
 /**
  * @Description("Make sure Composer `--dev` option for `require` command is not used at the end.")
+ * @InvalidExample("composer require symfony/form --dev")
+ * @ValidExample("composer require --dev symfony/form")
  */
 class ComposerDevOptionNotAtTheEnd extends AbstractRule implements Rule
 {
@@ -32,8 +36,7 @@ class ComposerDevOptionNotAtTheEnd extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-        if (preg_match('/composer require(.*)\-\-dev$/', $line)) {
+        if (preg_match('/composer require(.*)\-\-dev$/', RstParser::clean($line))) {
             return 'Please move "--dev" option before the package';
         }
     }

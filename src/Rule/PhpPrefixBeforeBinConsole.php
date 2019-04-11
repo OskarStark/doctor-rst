@@ -20,9 +20,9 @@ use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 
 /**
- * @Description("Ensure `bin\console` is prefixed with `php` to executable on Microsoft Windows.")
- * @InvalidExample("bin\console list")
- * @ValidExample("php bin\console list")
+ * @Description("Ensure `bin/console` is prefixed with `php` to be safe executable on Microsoft Windows.")
+ * @InvalidExample("bin/console list")
+ * @ValidExample("php bin/console list")
  */
 class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 {
