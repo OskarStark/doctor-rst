@@ -3251,7 +3251,7 @@
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v4.2.6",
+            "version": "v4.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
