@@ -49,6 +49,7 @@ class AmericanEnglish extends CheckListRule
     {
         return [
             '/(B|b)ehaviour(s)?/' => null,
+            '/(I|i)nitialise/i' => null,
         ];
     }
 }

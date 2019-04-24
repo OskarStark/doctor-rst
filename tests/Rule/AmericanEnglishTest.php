@@ -52,7 +52,7 @@ class AmericanEnglishTest extends TestCase
     public function checkProvider()
     {
         yield [null, new RstSample('behavior')];
-        yield [null, new RstSample('behavior')];
+        yield [null, new RstSample('Behavior')];
         yield [null, new RstSample('behaviors')];
         yield [null, new RstSample('Behaviors')];
 
@@ -71,6 +71,18 @@ class AmericanEnglishTest extends TestCase
         yield [
             'Please use American English for: Behaviours',
             new RstSample('Behaviours'),
+        ];
+
+        yield [null, new RstSample('initialize')];
+        yield [null, new RstSample('Initialize')];
+
+        yield [
+            'Please use American English for: initialise',
+            new RstSample('initialise'),
+        ];
+        yield [
+            'Please use American English for: Initialise',
+            new RstSample('Initialise'),
         ];
     }
 }
