@@ -44,7 +44,7 @@ class OrderedUseStatements extends AbstractRule implements Rule
         while ($lines->valid()
             && !RstParser::isDirective($lines->current())
             && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
-            && (!preg_match('/^(class (.*)|\$)/', RstParser::clean($lines->current())))
+            && (!preg_match('/^((class|trait) (.*)|\$)/', RstParser::clean($lines->current())))
         ) {
             if (preg_match('/^use (.*);$/', RstParser::clean($lines->current()), $matches)) {
                 if (null === $indentionOfFirstFoundUseStatement) {
