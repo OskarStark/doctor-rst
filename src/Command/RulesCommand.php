@@ -57,7 +57,7 @@ class RulesCommand extends Command
     {
         $this->io = new SymfonyStyle($input, $output);
 
-        $this->io->writeln('# Available Rules');
+        $this->io->writeln('# Rules Overview');
         $this->io->newLine();
 
         $rules = $this->rulesHandler->getRawRules();
@@ -66,6 +66,14 @@ class RulesCommand extends Command
             $this->io->warning('No rules available!');
 
             return 1;
+        }
+
+        foreach ($rules as $rule) {
+            $this->io->writeln(sprintf(
+                '* [%s](#%s)',
+                $rule::getName(),
+                $rule::getName()
+            ));
         }
 
         foreach ($rules as $rule) {
@@ -86,7 +94,7 @@ class RulesCommand extends Command
 
         if (null !== $description) {
             $this->io->writeln(sprintf(
-                '  _%s_',
+                '  > _%s_',
                 $description->value
             ));
             $this->io->newLine();
