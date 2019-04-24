@@ -52,6 +52,10 @@ class Replacement extends CheckListRule implements Rule
             '/encoding="utf-8"/' => 'Please replace "%s" with "encoding="UTF-8""',
             '/\$fileSystem/' => 'Please replace "%s" with "$filesystem"',
             '/Content-type/' => 'Please replace "%s" with "Content-Type"',
+            '/\-\-env prod/' => 'Please replace "%s" with "--env=prod"',
+            '/\-\-env test/' => 'Please replace "%s" with "--env=test"',
+            '/End 2 End/i' => 'Please replace "%s" with "End-to-End"',
+            '/E2E/' => 'Please replace "%s" with "End-to-End"',
         ];
     }
 }

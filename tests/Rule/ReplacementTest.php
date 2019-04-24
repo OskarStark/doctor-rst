@@ -66,6 +66,9 @@ class ReplacementTest extends TestCase
             '<?xml version="1.0" encoding="UTF-8" ?>',
             '$filesystem',
             'Content-Type',
+            '--env=prod',
+            '--env=test',
+            'End-to-End',
 //            '# username is your full Gmail or Google Apps email address', // todo this should be supported by the regex
         ];
 
@@ -92,6 +95,10 @@ class ReplacementTest extends TestCase
             'encoding="utf-8"' => 'encoding="UTF-8"',
             '$fileSystem' => '$filesystem',
             'Content-type' => 'Content-Type',
+            '--env prod' => '--env=prod',
+            '--env test' => '--env=test',
+            'End 2 End' => 'End-to-End',
+            'E2E' => 'End-to-End',
         ];
 
         foreach ($invalids as $invalid => $valid) {
