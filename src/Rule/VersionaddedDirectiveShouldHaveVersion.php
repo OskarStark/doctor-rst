@@ -13,10 +13,18 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 use Composer\Semver\VersionParser;
 
+/**
+ * @Description("Ensure a versionadded directive has a version which follows SemVer.")
+ * @ValidExample(".. versionadded:: 3.4")
+ * @InvalidExample({".. versionadded::", ".. versionadded:: foo-bar"})
+ */
 class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Rule
 {
     /** @var VersionParser */

@@ -22,7 +22,6 @@ use App\Helper\TwigHelper;
 use App\Helper\XmlHelper;
 use App\Helper\YamlHelper;
 use App\Rst\RstParser;
-use App\Traits\CloneIteratorTrait;
 use App\Traits\DirectiveTrait;
 
 /**
@@ -32,7 +31,6 @@ use App\Traits\DirectiveTrait;
  */
 class AvoidRepetetiveWords extends AbstractRule implements Rule
 {
-    use CloneIteratorTrait;
     use DirectiveTrait;
 
     public static function getGroups(): array

@@ -124,6 +124,7 @@ class RstParser
             self::DIRECTIVE_WARNING,
             self::DIRECTIVE_NOTICE,
             self::DIRECTIVE_VERSIONADDED,
+            self::DIRECTIVE_DEPRECATED,
             self::DIRECTIVE_TIP,
             self::DIRECTIVE_CAUTION,
             self::DIRECTIVE_TOCTREE,

@@ -14,9 +14,13 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\RulesHandler;
+use App\Rst\RstParser;
+use App\Traits\DirectiveTrait;
 
 class NoInheritdocInCodeExamples extends AbstractRule implements Rule
 {
+    use DirectiveTrait;
+
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
@@ -27,7 +31,9 @@ class NoInheritdocInCodeExamples extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/@inheritdoc/', $line)) {
+        if (preg_match('/@inheritdoc/', $line)
+            && $this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_ANNOTATIONS])
+        ) {
             return 'Please do not use "@inheritdoc"';
         }
     }
