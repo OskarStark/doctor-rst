@@ -89,7 +89,15 @@ class RstParser
 
     public static function clean(string $string): string
     {
-        $string = str_replace(['\n', '\r'], ' ', $string);
+        $string = trim($string);
+
+        if ('\n' == substr($string, -2)) {
+            $string = substr($string, 0, \strlen($string) - 2);
+        }
+
+        if ('\r' == substr($string, -2)) {
+            $string = substr($string, 0, \strlen($string) - 2);
+        }
 
         return trim($string);
     }
@@ -222,7 +230,7 @@ class RstParser
 
     public static function isTable(string $string): bool
     {
-        if (preg_match('/^[\=]+([\s\=]+)?$/', $string)) {
+        if (preg_match('/^[\=\-]+([\s\=\-]+)?$/', $string)) {
             return true;
         }
 

@@ -56,7 +56,6 @@ class ExtendAbstractAdminTest extends TestCase
                 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
                 new RstSample('use Sonata\AdminBundle\Admin\Admin;'),
             ],
-
             [
                 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
                 new RstSample('    use Sonata\AdminBundle\Admin\Admin;'),

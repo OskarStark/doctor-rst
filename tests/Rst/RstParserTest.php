@@ -68,10 +68,10 @@ class RstParserTest extends TestCase
         yield [true, '==='];
         yield [true, '=== ==='];
         yield [true, '=== === ==='];
+        yield [true, '------------------ -------- -------- ------ ----------------------------------------------'];
 
         yield [false, '~~~'];
         yield [false, '***'];
-        yield [false, '---'];
         yield [false, '...'];
         yield [false, '^^^'];
         yield [false, ''];
@@ -99,6 +99,7 @@ class RstParserTest extends TestCase
 
         yield [false, ''];
         yield [false, 'I am text::'];
+        yield 'no spaces allowed' => [false, '--- ---'];
     }
 
     /**
@@ -157,6 +158,22 @@ class RstParserTest extends TestCase
             [
                 '',
                 '\n',
+            ],
+            [
+                'when you need to embed a ``\n`` or a Unicode character in a string.',
+                'when you need to embed a ``\n`` or a Unicode character in a string.\n',
+            ],
+            [
+                'use Sonata\AdminBundle\Admin\Admin;',
+                'use Sonata\AdminBundle\Admin\Admin;',
+            ],
+            [
+                'use Sonata\AdminBundle\Admin\Admin',
+                'use Sonata\AdminBundle\Admin\Admin',
+            ],
+            [
+                'use Sonata\AdminBundle\Admin\Admin',
+                'use Sonata\AdminBundle\Admin\Admin  ',
             ],
         ];
     }

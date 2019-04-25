@@ -15,10 +15,13 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 use App\Rst\RstParser;
+use App\Traits\CloneIteratorTrait;
 use Webmozart\Assert\Assert;
 
 class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implements Rule
 {
+    use CloneIteratorTrait;
+
     public static function getGroups(): array
     {
         return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
@@ -105,13 +108,5 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             '.. code-block:: yaml',
             '.. code-block:: php',
         ];
-    }
-
-    private function cloneIterator(\ArrayIterator $iterator, int $number)
-    {
-        $clone = new \ArrayIterator($iterator->getArrayCopy());
-        $clone->seek($number);
-
-        return $clone;
     }
 }
