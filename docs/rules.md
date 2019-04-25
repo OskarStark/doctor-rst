@@ -12,6 +12,7 @@
 * [composer_dev_option_at_the_end](#composer_dev_option_at_the_end)
 * [composer_dev_option_not_at_the_end](#composer_dev_option_not_at_the_end)
 * [correct_code_block_directive_based_on_the_content](#correct_code_block_directive_based_on_the_content)
+* [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
 * [even_brackets_count](#even_brackets_count)
 * [extend_abstract_admin](#extend_abstract_admin)
@@ -35,7 +36,7 @@
 * [no_composer_req](#no_composer_req)
 * [no_config_yaml](#no_config_yaml)
 * [no_explicit_use_of_code_block_php](#no_explicit_use_of_code_block_php)
-* [no_inheritdoc](#no_inheritdoc)
+* [no_inheritdoc_in_code_examples](#no_inheritdoc_in_code_examples)
 * [no_namespace_after_use_statements](#no_namespace_after_use_statements)
 * [no_php_open_tag_in_code_block_php_directive](#no_php_open_tag_in_code_block_php_directive)
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
@@ -193,6 +194,28 @@ composer require symfony/form --dev
 
 #### Groups [`@Sonata`, `@Symfony`]
 
+## `deprecated_directive_should_have_version`
+
+  > _Ensure a deprecated directive has a version which follows SemVer._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+.. deprecated:: 3.4
+```
+
+##### Invalid Examples :-1:
+
+```rst
+.. deprecated::
+```
+
+```rst
+.. deprecated:: foo-bar
+```
+
 ## `ensure_order_of_code_blocks_in_configuration_block`
 
 #### Groups [`@Sonata`, `@Symfony`]
@@ -301,9 +324,9 @@ $ bin\console list
 
 #### Groups [`@Symfony`]
 
-## `no_inheritdoc`
+## `no_inheritdoc_in_code_examples`
 
-#### Groups [`@Sonata`]
+#### Groups [`@Sonata`, `@Symfony`]
 
 ## `no_namespace_after_use_statements`
 
@@ -467,7 +490,25 @@ Name | Required
 `min_version` | `true`
 ## `versionadded_directive_should_have_version`
 
+  > _Ensure a versionadded directive has a version which follows SemVer._
+
 #### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+.. versionadded:: 3.4
+```
+
+##### Invalid Examples :-1:
+
+```rst
+.. versionadded::
+```
+
+```rst
+.. versionadded:: foo-bar
+```
 
 ## `yaml_instead_of_yml_suffix`
 
