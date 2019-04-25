@@ -17,6 +17,8 @@ use App\Rst\RstParser;
 
 trait DirectiveTrait
 {
+    use CloneIteratorTrait;
+
     private function in(string $directive, \ArrayIterator $lines, int $number, array $directiveTypes = null): bool
     {
         $lines = $this->cloneIterator($lines, $number);

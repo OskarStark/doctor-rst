@@ -15,11 +15,11 @@ namespace App\Rule;
 
 use App\Handler\RulesHandler;
 
-class NoInheritdoc extends AbstractRule implements Rule
+class NoInheritdocInCodeExamples extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA];
+        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)
