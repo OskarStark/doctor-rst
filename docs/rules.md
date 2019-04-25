@@ -1,6 +1,7 @@
 # Rules Overview
 
 * [american_english](#american_english)
+* [avoid_repetetive_words](#avoid_repetetive_words)
 * [be_kind_to_newcomers](#be_kind_to_newcomers)
 * [blank_line_after_directive](#blank_line_after_directive)
 * [blank_line_after_filepath_in_code_block](#blank_line_after_filepath_in_code_block)
@@ -69,6 +70,7 @@
 Pattern | Message
 --- | ---
 `/(B\|b)ehaviour(s)?/` | Please use American English for: %s
+`/(I\|i)nitialise/i` | Please use American English for: %s
 
 ##### Valid Examples :+1:
 
@@ -80,6 +82,24 @@ This is a nice behavior...
 
 ```rst
 This is a nice behaviour...
+```
+
+## `avoid_repetetive_words`
+
+  > _Make sure that a word is not used twice in a row._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+Please do not use it this way...
+```
+
+##### Invalid Examples :-1:
+
+```rst
+Please do not not use it this way...
 ```
 
 ## `be_kind_to_newcomers`
@@ -385,6 +405,10 @@ Pattern | Message
 `/encoding="utf-8"/` | Please replace "%s" with "encoding="UTF-8""
 `/\$fileSystem/` | Please replace "%s" with "$filesystem"
 `/Content-type/` | Please replace "%s" with "Content-Type"
+`/\-\-env prod/` | Please replace "%s" with "--env=prod"
+`/\-\-env test/` | Please replace "%s" with "--env=test"
+`/End 2 End/i` | Please replace "%s" with "End-to-End"
+`/E2E/` | Please replace "%s" with "End-to-End"
 
 ## `short_array_syntax`
 
