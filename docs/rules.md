@@ -23,6 +23,7 @@
 * [kernel_instead_of_app_kernel](#kernel_instead_of_app_kernel)
 * [line_length](#line_length)
 * [lowercase_as_in_use_statements](#lowercase_as_in_use_statements)
+* [max_blank_lines](#max_blank_lines)
 * [no_admin_yaml](#no_admin_yaml)
 * [no_app_bundle](#no_app_bundle)
 * [no_app_console](#no_app_console)
@@ -42,7 +43,6 @@
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
 * [no_php_prefix_before_composer](#no_php_prefix_before_composer)
 * [no_space_before_self_xml_closing_tag](#no_space_before_self_xml_closing_tag)
-* [not_many_blank_lines](#not_many_blank_lines)
 * [ordered_use_statements](#ordered_use_statements)
 * [php_open_tag_in_code_block_php_directive](#php_open_tag_in_code_block_php_directive)
 * [php_prefix_before_bin_console](#php_prefix_before_bin_console)
@@ -54,6 +54,7 @@
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
 * [use_https_xsd_urls](#use_https_xsd_urls)
 * [valid_use_statements](#valid_use_statements)
+* [valid_whitespace](#valid_whitespace)
 * [versionadded_directive_major_version](#versionadded_directive_major_version)
 * [versionadded_directive_min_version](#versionadded_directive_min_version)
 * [versionadded_directive_should_have_version](#versionadded_directive_should_have_version)
@@ -260,6 +261,15 @@ composer require symfony/form --dev
 
 #### Groups [`@Sonata`, `@Symfony`]
 
+## `max_blank_lines`
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+#### Configuration options
+
+Name | Required
+--- | ---
+`max` | `true`
 ## `no_admin_yaml`
 
 #### Groups [`@Sonata`]
@@ -362,15 +372,6 @@ php bin/console list
 
 #### Groups [`@Sonata`]
 
-## `not_many_blank_lines`
-
-#### Groups [`@Sonata`, `@Symfony`]
-
-#### Configuration options
-
-Name | Required
---- | ---
-`max` | `true`
 ## `ordered_use_statements`
 
 #### Groups [`@Sonata`, `@Symfony`]
@@ -467,6 +468,12 @@ Pattern | Message
 #### Groups [`@Sonata`, `@Symfony`]
 
 ## `valid_use_statements`
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+## `valid_whitespace`
+
+  > _Ensure that only 0x20 (normale whitespace) and no 0xA0 (see http://www.fileformat.info/info/unicode/char/00a0/index.htm) is used._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
