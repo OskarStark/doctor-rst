@@ -13,8 +13,12 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 
+/**
+ * @Description("Report common typos.")
+ */
 class Typo extends CheckListRule
 {
     public static function getGroups(): array
