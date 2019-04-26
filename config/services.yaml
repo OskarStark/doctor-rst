@@ -19,11 +19,11 @@ services:
 
     App\Rule\:
         resource: '../src/Rule'
-        tags: ['rst_checker.rule']
+        tags: ['doctor_rst.rule']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\Handler\Registry:
-        arguments: [!tagged rst_checker.rule]
+        arguments: [!tagged doctor_rst.rule]
 
     Composer\Semver\VersionParser: ~
