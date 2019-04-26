@@ -17,7 +17,7 @@ use App\Handler\RulesHandler;
 use App\Rst\RstParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class NotManyBlankLines extends AbstractRule implements Rule, Configurable
+class MaxBlankLines extends AbstractRule implements Rule, Configurable
 {
     /** @var int */
     private $max;

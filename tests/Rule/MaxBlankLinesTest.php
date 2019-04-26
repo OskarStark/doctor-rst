@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rule\NotManyBlankLines;
+use App\Rule\MaxBlankLines;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class NotManyBlankLinesTest extends TestCase
+class MaxBlankLinesTest extends TestCase
 {
     /**
      * @test
@@ -26,7 +26,7 @@ class NotManyBlankLinesTest extends TestCase
      */
     public function check($expected, int $max, RstSample $sample)
     {
-        $rule = (new NotManyBlankLines());
+        $rule = (new MaxBlankLines());
         $rule->setOptions(['max' => $max]);
 
         $this->assertSame($expected, $rule->check($sample->getContent(), $sample->getLineNumber()));
