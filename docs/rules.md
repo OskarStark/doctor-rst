@@ -2,7 +2,7 @@
 
 * [american_english](#american_english)
 * [avoid_repetetive_words](#avoid_repetetive_words)
-* [be_kind_to_newcomers](#be_kind_to_newcomers)
+* [be_kind_to_newcomers](#be_kind_to_newcomers) :exclamation:
 * [blank_line_after_directive](#blank_line_after_directive)
 * [blank_line_after_filepath_in_code_block](#blank_line_after_filepath_in_code_block)
 * [blank_line_after_filepath_in_php_code_block](#blank_line_after_filepath_in_php_code_block)
@@ -14,7 +14,7 @@
 * [correct_code_block_directive_based_on_the_content](#correct_code_block_directive_based_on_the_content)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
-* [even_brackets_count](#even_brackets_count)
+* [even_brackets_count](#even_brackets_count) :exclamation:
 * [extend_abstract_admin](#extend_abstract_admin)
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
@@ -54,7 +54,7 @@
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
 * [use_https_xsd_urls](#use_https_xsd_urls)
 * [valid_use_statements](#valid_use_statements)
-* [valid_whitespace](#valid_whitespace)
+* [valid_whitespace](#valid_whitespace) :exclamation:
 * [versionadded_directive_major_version](#versionadded_directive_major_version)
 * [versionadded_directive_min_version](#versionadded_directive_min_version)
 * [versionadded_directive_should_have_version](#versionadded_directive_should_have_version)
@@ -108,7 +108,7 @@ Please do not not use it this way...
 
   > _Do not use belittling words!_
 
-#### Groups [`@Sonata`, `@Symfony`]
+#### Groups [`@Experimental`]
 
 #### Checks
 
@@ -223,7 +223,7 @@ composer require symfony/form --dev
 
 ## `even_brackets_count`
 
-#### Groups [`@Sonata`, `@Symfony`]
+#### Groups [`@Experimental`]
 
 ## `extend_abstract_admin`
 
@@ -475,7 +475,7 @@ Pattern | Message
 
   > _Ensure that only 0x20 (normale whitespace) and no 0xA0 (see http://www.fileformat.info/info/unicode/char/00a0/index.htm) is used._
 
-#### Groups [`@Sonata`, `@Symfony`]
+#### Groups [`@Experimental`]
 
 ## `versionadded_directive_major_version`
 
