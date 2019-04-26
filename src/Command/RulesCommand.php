@@ -39,9 +39,9 @@ class RulesCommand extends Command
     /** @var AnnotationReader */
     private $annotationReader;
 
-    public function __construct(Registry $rulesHandler, Reader $annotationReader, ?string $name = null)
+    public function __construct(Registry $registry, Reader $annotationReader, ?string $name = null)
     {
-        $this->rulesHandler = $rulesHandler;
+        $this->rulesHandler = $registry;
         $this->annotationReader = $annotationReader;
 
         parent::__construct($name);

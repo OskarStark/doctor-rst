@@ -35,7 +35,7 @@ class CheckCommand extends Command
     private $io;
 
     /** @var Registry */
-    private $rulesHandler;
+    private $registry;
 
     /** @var Rule[] */
     private $rules = [];
@@ -49,9 +49,9 @@ class CheckCommand extends Command
     /** @var mixed */
     private $config;
 
-    public function __construct(Registry $rulesHandler, ?string $name = null)
+    public function __construct(Registry $registry, ?string $name = null)
     {
-        $this->rulesHandler = $rulesHandler;
+        $this->registry = $registry;
 
         parent::__construct($name);
     }
@@ -90,7 +90,7 @@ class CheckCommand extends Command
 
         foreach ($this->config['rules'] as $rule => $options) {
             /** @var Rule[] $rules */
-            $rules = $this->rulesHandler->getRulesByName($rule);
+            $rules = $this->registry->getRulesByName($rule);
 
             foreach ($rules as $rule) {
                 if ($rule instanceof Configurable && null !== $options) {
@@ -109,12 +109,12 @@ class CheckCommand extends Command
 
         if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
             foreach ($input->getOption('rule') as $rule) {
-                $this->rules[] = $this->rulesHandler->getRule($rule);
+                $this->rules[] = $this->registry->getRule($rule);
             }
         }
 
         if (!empty($input->getOption('group'))) {
-            $this->rules = $this->rulesHandler->getRulesByGroup($input->getOption('group'));
+            $this->rules = $this->registry->getRulesByGroup($input->getOption('group'));
         }
 
         if (empty($this->rules)) {
