@@ -54,7 +54,6 @@
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
 * [use_https_xsd_urls](#use_https_xsd_urls)
 * [valid_use_statements](#valid_use_statements)
-* [valid_whitespace](#valid_whitespace) :exclamation:
 * [versionadded_directive_major_version](#versionadded_directive_major_version)
 * [versionadded_directive_min_version](#versionadded_directive_min_version)
 * [versionadded_directive_should_have_version](#versionadded_directive_should_have_version)
@@ -442,6 +441,8 @@ Pattern | Message
 
 ## `typo`
 
+  > _Report common typos._
+
 #### Groups [`@Sonata`, `@Symfony`]
 
 #### Checks
@@ -470,12 +471,6 @@ Pattern | Message
 ## `valid_use_statements`
 
 #### Groups [`@Sonata`, `@Symfony`]
-
-## `valid_whitespace`
-
-  > _Ensure that only 0x20 (normale whitespace) and no 0xA0 (see http://www.fileformat.info/info/unicode/char/00a0/index.htm) is used._
-
-#### Groups [`@Experimental`]
 
 ## `versionadded_directive_major_version`
 
