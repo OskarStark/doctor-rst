@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Annotations\Rule as RuleAnnotation;
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Rule\CheckListRule;
 use App\Rule\Configurable;
 use App\Rule\Rule;
@@ -32,13 +32,13 @@ class RulesCommand extends Command
     /** @var SymfonyStyle */
     private $io;
 
-    /** @var RulesHandler */
+    /** @var Registry */
     private $rulesHandler;
 
     /** @var AnnotationReader */
     private $annotationReader;
 
-    public function __construct(RulesHandler $rulesHandler, Reader $annotationReader, ?string $name = null)
+    public function __construct(Registry $rulesHandler, Reader $annotationReader, ?string $name = null)
     {
         $this->rulesHandler = $rulesHandler;
         $this->annotationReader = $annotationReader;
@@ -73,7 +73,7 @@ class RulesCommand extends Command
                 '* [%s](#%s)%s',
                 $rule::getName(),
                 $rule::getName(),
-                \in_array(RulesHandler::GROUP_EXPERIMENTAL, $rule::getGroups()) ? ' :exclamation:' : ''
+                \in_array(Registry::GROUP_EXPERIMENTAL, $rule::getGroups()) ? ' :exclamation:' : ''
             ));
         }
 
@@ -112,7 +112,7 @@ class RulesCommand extends Command
             $this->io->writeln('Name | Required');
             $this->io->writeln('--- | ---');
 
-            $resolver = $rule->getConfiguration();
+            $resolver = $rule->configureOptions();
             foreach ($resolver->getDefinedOptions() as $option) {
                 $this->io->writeln(sprintf('`%s` | `%s`', $option, $resolver->isRequired($option) ? 'true' : 'false'));
             }

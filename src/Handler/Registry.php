@@ -17,7 +17,7 @@ use App\Rule\CheckListRule;
 use App\Rule\Rule;
 use Webmozart\Assert\Assert;
 
-class RulesHandler
+final class Registry
 {
     const GROUP_EXPERIMENTAL = '@Experimental';
     const GROUP_SONATA = '@Sonata';

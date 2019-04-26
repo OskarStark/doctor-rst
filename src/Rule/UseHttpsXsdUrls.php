@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 
 class UseHttpsXsdUrls extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
+        return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)

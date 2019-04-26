@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 
 /**
  * @Description("Do not use belittling words!")
@@ -23,7 +23,7 @@ class BeKindToNewcomers extends CheckListRule
 {
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_EXPERIMENTAL];
+        return [Registry::GROUP_EXPERIMENTAL];
     }
 
     public function check(\ArrayIterator $lines, int $number)

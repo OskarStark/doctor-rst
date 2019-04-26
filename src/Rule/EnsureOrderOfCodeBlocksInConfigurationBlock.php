@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Traits\CloneIteratorTrait;
 use Webmozart\Assert\Assert;
@@ -24,7 +24,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
+        return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)

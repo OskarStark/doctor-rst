@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Helper\TwigHelper;
 use App\Rst\RstParser;
 
@@ -21,7 +21,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Ru
 {
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SYMFONY];
+        return [Registry::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)

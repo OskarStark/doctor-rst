@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Rst\RstParser;
 
 class FinalAdminExtensionClasses extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA];
+        return [Registry::GROUP_SONATA];
     }
 
     public function check(\ArrayIterator $lines, int $number)

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Rst\RstParser;
 
 /**
@@ -24,7 +24,7 @@ class ExtendAbstractController extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SYMFONY];
+        return [Registry::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)

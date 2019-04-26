@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Rule\Configurable;
 use App\Rule\Rule;
@@ -34,7 +34,7 @@ class CheckCommand extends Command
     /** @var SymfonyStyle */
     private $io;
 
-    /** @var RulesHandler */
+    /** @var Registry */
     private $rulesHandler;
 
     /** @var Rule[] */
@@ -49,7 +49,7 @@ class CheckCommand extends Command
     /** @var mixed */
     private $config;
 
-    public function __construct(RulesHandler $rulesHandler, ?string $name = null)
+    public function __construct(Registry $rulesHandler, ?string $name = null)
     {
         $this->rulesHandler = $rulesHandler;
 

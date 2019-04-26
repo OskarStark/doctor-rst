@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Rst\RstParser;
 use Composer\Semver\VersionParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,9 +31,8 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Co
         $this->versionParser = $versionParser;
     }
 
-    public function getConfiguration(): OptionsResolver
+    public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {
-        $resolver = new OptionsResolver();
         $resolver
             ->setRequired('major_version')
             ->setAllowedTypes('major_version', 'int')
@@ -44,7 +43,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Co
 
     public function setOptions(array $options): void
     {
-        $resolver = $this->getConfiguration();
+        $resolver = $this->configureOptions(new OptionsResolver());
 
         $resolvedOptions = $resolver->resolve($options);
 
@@ -53,7 +52,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Co
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SYMFONY];
+        return [Registry::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)

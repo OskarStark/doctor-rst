@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Rst\RstParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,9 +22,8 @@ class MaxBlankLines extends AbstractRule implements Rule, Configurable
     /** @var int */
     private $max;
 
-    public function getConfiguration(): OptionsResolver
+    public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {
-        $resolver = new OptionsResolver();
         $resolver
             ->setDefault('max', 2)
             ->setRequired('max')
@@ -36,7 +35,7 @@ class MaxBlankLines extends AbstractRule implements Rule, Configurable
 
     public function setOptions(array $options): void
     {
-        $resolver = $this->getConfiguration();
+        $resolver = $this->configureOptions(new OptionsResolver());
 
         $resolvedOptions = $resolver->resolve($options);
 
@@ -50,7 +49,7 @@ class MaxBlankLines extends AbstractRule implements Rule, Configurable
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
+        return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)

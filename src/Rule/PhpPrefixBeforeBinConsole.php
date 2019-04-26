@@ -16,7 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Rst\RstParser;
 
 /**
@@ -28,7 +28,7 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SYMFONY];
+        return [Registry::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)

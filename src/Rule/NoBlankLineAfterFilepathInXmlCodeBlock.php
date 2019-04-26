@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Helper\XmlHelper;
 use App\Rst\RstParser;
 
@@ -21,7 +21,7 @@ class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Rul
 {
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SYMFONY];
+        return [Registry::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)

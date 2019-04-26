@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\RulesHandler;
+use App\Handler\Registry;
 use App\Rst\RstParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,9 +22,8 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Conf
     /** @var string */
     private $minVersion;
 
-    public function getConfiguration(): OptionsResolver
+    public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {
-        $resolver = new OptionsResolver();
         $resolver
             ->setRequired('min_version')
             ->setAllowedTypes('min_version', 'string')
@@ -35,7 +34,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Conf
 
     public function setOptions(array $options): void
     {
-        $resolver = $this->getConfiguration();
+        $resolver = $this->configureOptions(new OptionsResolver());
 
         $resolvedOptions = $resolver->resolve($options);
 
@@ -44,7 +43,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Conf
 
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SYMFONY];
+        return [Registry::GROUP_SYMFONY];
     }
 
     public function check(\ArrayIterator $lines, int $number)
