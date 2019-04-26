@@ -19,12 +19,12 @@ use Webmozart\Assert\Assert;
 
 class RulesHandler
 {
-    const GROUP_DEV = '@Dev';
+    const GROUP_EXPERIMENTAL = '@Experimental';
     const GROUP_SONATA = '@Sonata';
     const GROUP_SYMFONY = '@Symfony';
 
     private const GROUPS = [
-        self::GROUP_DEV,
+        self::GROUP_EXPERIMENTAL,
         self::GROUP_SONATA,
         self::GROUP_SYMFONY,
     ];

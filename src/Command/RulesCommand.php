@@ -70,9 +70,10 @@ class RulesCommand extends Command
 
         foreach ($rules as $rule) {
             $this->io->writeln(sprintf(
-                '* [%s](#%s)',
+                '* [%s](#%s)%s',
                 $rule::getName(),
-                $rule::getName()
+                $rule::getName(),
+                \in_array(RulesHandler::GROUP_EXPERIMENTAL, $rule::getGroups()) ? ' :exclamation:' : ''
             ));
         }
 

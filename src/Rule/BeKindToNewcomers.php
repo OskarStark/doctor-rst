@@ -23,7 +23,7 @@ class BeKindToNewcomers extends CheckListRule
 {
     public static function getGroups(): array
     {
-        return [RulesHandler::GROUP_SONATA, RulesHandler::GROUP_SYMFONY];
+        return [RulesHandler::GROUP_EXPERIMENTAL];
     }
 
     public function check(\ArrayIterator $lines, int $number)
