@@ -24,6 +24,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RulesCommand extends Command
 {
@@ -112,7 +113,7 @@ class RulesCommand extends Command
             $this->io->writeln('Name | Required');
             $this->io->writeln('--- | ---');
 
-            $resolver = $rule->configureOptions();
+            $resolver = $rule->configureOptions(new OptionsResolver());
             foreach ($resolver->getDefinedOptions() as $option) {
                 $this->io->writeln(sprintf('`%s` | `%s`', $option, $resolver->isRequired($option) ? 'true' : 'false'));
             }
