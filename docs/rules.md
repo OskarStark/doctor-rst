@@ -20,6 +20,7 @@
 * [extend_controller](#extend_controller)
 * [final_admin_classes](#final_admin_classes)
 * [final_admin_extension_classes](#final_admin_extension_classes)
+* [indention](#indention)
 * [kernel_instead_of_app_kernel](#kernel_instead_of_app_kernel)
 * [line_length](#line_length)
 * [lowercase_as_in_use_statements](#lowercase_as_in_use_statements)
@@ -258,6 +259,15 @@ composer require symfony/form --dev
 
 #### Groups [`@Sonata`]
 
+## `indention`
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+#### Configuration options
+
+Name | Required
+--- | ---
+`size` | `true`
 ## `kernel_instead_of_app_kernel`
 
 #### Groups [`@Sonata`]
