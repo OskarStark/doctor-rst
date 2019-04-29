@@ -56,6 +56,8 @@ class Replacement extends CheckListRule implements Rule
             '/\-\-env test/' => 'Please replace "%s" with "--env=test"',
             '/End 2 End/i' => 'Please replace "%s" with "End-to-End"',
             '/E2E/' => 'Please replace "%s" with "End-to-End"',
+            '/informations/' => 'Please replace "%s" with "information"',
+            '/Informations/' => 'Please replace "%s" with "Information"',
         ];
     }
 }
