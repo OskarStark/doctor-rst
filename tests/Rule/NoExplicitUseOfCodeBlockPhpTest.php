@@ -490,6 +490,17 @@ CONTENT;
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 new RstSample($invalid_content2, 18),
             ],
+            'valid because previous paragraph ends with question mark (?)' => [
+                null,
+                new RstSample(<<<CONTENT
+This is nice PHP code, isn't it?
+
+.. code-block:: php
+
+    echo 'Hello World!';
+CONTENT
+                , 2),
+            ],
         ];
     }
 }

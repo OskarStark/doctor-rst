@@ -44,6 +44,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
         if (!preg_match('/^[\s]+/', $lines->current(), $matches)) {
             if ($this->directAfterHeadline($lines, $number)
                 || $this->directAfterTable($lines, $number)
+                || $this->previousParagraphEndsWithQuestionMark($lines, $number)
             ) {
                 return;
             }
@@ -111,6 +112,30 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
             }
 
             if (RstParser::isTable($lines->current())) {
+                return true;
+            }
+
+            return false;
+        }
+
+        return false;
+    }
+
+    private function previousParagraphEndsWithQuestionMark(\ArrayIterator $lines, int $number): bool
+    {
+        $lines = $this->cloneIterator($lines, $number);
+
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (RstParser::isBlankLine($lines->current())) {
+                continue;
+            }
+
+            if (preg_match('/\?$/', RstParser::clean($lines->current()))) {
                 return true;
             }
 
