@@ -18,7 +18,6 @@ use App\Handler\Registry;
 use App\Rule\CheckListRule;
 use App\Rule\Configurable;
 use App\Rule\Rule;
-use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,14 +33,14 @@ class RulesCommand extends Command
     private $io;
 
     /** @var Registry */
-    private $rulesHandler;
+    private $registry;
 
-    /** @var AnnotationReader */
+    /** @var Reader */
     private $annotationReader;
 
     public function __construct(Registry $registry, Reader $annotationReader, ?string $name = null)
     {
-        $this->rulesHandler = $registry;
+        $this->registry = $registry;
         $this->annotationReader = $annotationReader;
 
         parent::__construct($name);
@@ -61,7 +60,7 @@ class RulesCommand extends Command
         $this->io->writeln('# Rules Overview');
         $this->io->newLine();
 
-        $rules = $this->rulesHandler->getRawRules();
+        $rules = $this->registry->getRawRules();
 
         if (empty($rules)) {
             $this->io->warning('No rules available!');
@@ -142,8 +141,11 @@ class RulesCommand extends Command
             RuleAnnotation\InvalidExample::class
         );
 
-        if (null !== $validExample || null !== $invalidExample) {
+        if (null !== $validExample) {
             $this->renderExamples('##### Valid Examples :+1:', \is_array($validExample->value) ? $validExample->value : [$validExample->value]);
+        }
+
+        if (null !== $invalidExample) {
             $this->renderExamples('##### Invalid Examples :-1:', \is_array($invalidExample->value) ? $invalidExample->value : [$invalidExample->value]);
         }
     }
