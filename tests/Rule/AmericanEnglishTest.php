@@ -49,40 +49,54 @@ class AmericanEnglishTest extends TestCase
         }
     }
 
-    public function checkProvider()
+    public function checkProvider(): \Generator
     {
-        yield [null, new RstSample('behavior')];
-        yield [null, new RstSample('Behavior')];
-        yield [null, new RstSample('behaviors')];
-        yield [null, new RstSample('Behaviors')];
-
-        yield [
-            'Please use American English for: behaviour',
-            new RstSample('behaviour'),
-        ];
-        yield [
-            'Please use American English for: Behaviour',
-            new RstSample('Behaviour'),
-        ];
-        yield [
-            'Please use American English for: behaviours',
-            new RstSample('behaviours'),
-        ];
-        yield [
-            'Please use American English for: Behaviours',
-            new RstSample('Behaviours'),
+        $valids = [
+            'behavior',
+            'behaviors',
+            'initialize',
+            'normalize',
+            'organize',
+            'recognize',
+            'center',
+            'color',
+            'flavor',
+            'analyze',
+            'license',
         ];
 
-        yield [null, new RstSample('initialize')];
-        yield [null, new RstSample('Initialize')];
+        foreach ($valids as $valid) {
+            yield $valid => [null, new RstSample($valid)];
 
-        yield [
-            'Please use American English for: initialise',
-            new RstSample('initialise'),
+            $validUppercase = ucfirst($valid);
+            yield $validUppercase => [null, new RstSample($validUppercase)];
+        }
+
+        $invalids = [
+            'behaviour',
+            'behaviours',
+            'initialise',
+            'normalise',
+            'organise',
+            'recognise',
+            'centre',
+            'colour',
+            'flavour',
+            'analyse',
+            'licence',
         ];
-        yield [
-            'Please use American English for: Initialise',
-            new RstSample('Initialise'),
-        ];
+
+        foreach ($invalids as $invalid) {
+            yield $invalid => [
+                sprintf('Please use American English for: %s', $invalid),
+                new RstSample($invalid),
+            ];
+
+            $invalidUppercase = ucfirst($invalid);
+            yield $invalidUppercase => [
+                sprintf('Please use American English for: %s', $invalidUppercase),
+                new RstSample($invalidUppercase),
+            ];
+        }
     }
 }

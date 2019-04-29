@@ -50,6 +50,14 @@ class AmericanEnglish extends CheckListRule
         return [
             '/(B|b)ehaviour(s)?/' => null,
             '/(I|i)nitialise/i' => null,
+            '/normalise/i' => null,
+            '/organise/i' => null,
+            '/recognise/i' => null,
+            '/centre/i' => null,
+            '/colour/i' => null,
+            '/flavour/i' => null,
+            '/analyse/i' => null,
+            '/licence/i' => null,
         ];
     }
 }
