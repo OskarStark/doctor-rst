@@ -81,6 +81,7 @@ class RstParser
     const CODE_BLOCK_JSON = 'json';
     const CODE_BLOCK_JAVASCRIPT = 'javascript';
     const CODE_BLOCK_JS = 'js';
+    const CODE_BLOCK_SQL = 'sql';
 
     public static function hasNewline(string $string): bool
     {
@@ -192,6 +193,7 @@ class RstParser
                 self::CODE_BLOCK_JSON,
                 self::CODE_BLOCK_JAVASCRIPT,
                 self::CODE_BLOCK_JS,
+                self::CODE_BLOCK_SQL,
             ]
         );
 
@@ -250,6 +252,15 @@ class RstParser
     public static function isLink(string $string): bool
     {
         if (preg_match('/^\.\. _`(.*)`: (.*)$/', $string)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isListItem(string $string): bool
+    {
+        if (preg_match('/(\* |\#. )/', self::clean($string))) {
             return true;
         }
 

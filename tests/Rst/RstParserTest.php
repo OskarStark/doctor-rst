@@ -21,6 +21,25 @@ class RstParserTest extends TestCase
     /**
      * @test
      *
+     * @dataProvider isListItemProvider
+     */
+    public function isListItem(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isListItem($string));
+    }
+
+    public function isListItemProvider(): \Generator
+    {
+        yield [false, ''];
+        yield [true, '* Bullet point 1'];
+        yield [true, '  * Bullet point 1'];
+        yield [true, '#. list item 1'];
+        yield [true, '  #. list item 1'];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider indentionProvider
      */
     public function indention(int $expected, string $string)

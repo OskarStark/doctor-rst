@@ -14,14 +14,12 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
+use App\Helper\Helper;
 use App\Rst\RstParser;
-use App\Traits\CloneIteratorTrait;
 use Webmozart\Assert\Assert;
 
 class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implements Rule
 {
-    use CloneIteratorTrait;
-
     public static function getGroups(): array
     {
         return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
@@ -50,7 +48,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
                 // if its an xml code-block, check if it contains xliff
                 // @todo refactor in extra method: getDirectiveContent
                 if (RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_XML)) {
-                    $content = $this->cloneIterator($lines, $lines->key());
+                    $content = Helper::cloneIterator($lines, $lines->key());
                     $content->next();
 
                     while ($content->valid() && (RstParser::isBlankLine($content->current()) || RstParser::indention($lines->current()) < RstParser::indention($content->current()))) {

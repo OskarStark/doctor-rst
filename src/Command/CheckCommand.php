@@ -93,8 +93,8 @@ class CheckCommand extends Command
             $rules = $this->registry->getRulesByName($rule);
 
             foreach ($rules as $rule) {
-                if ($rule instanceof Configurable && null !== $options) {
-                    $rule->setOptions($options);
+                if ($rule instanceof Configurable) {
+                    $rule->setOptions($options ?? []);
                 }
 
                 $this->rules[] = $rule;

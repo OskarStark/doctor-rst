@@ -43,7 +43,17 @@ Headline
 
     Content
 CONTENT
-            ),
+            , 2),
+        ];
+
+        yield [
+            null,
+            4,
+            new RstSample(<<<CONTENT
+Headline
+Content
+CONTENT
+            , 1),
         ];
 
         yield [
@@ -53,16 +63,7 @@ CONTENT
 Headline
 
 CONTENT
-            ),
-        ];
-
-        yield [
-            'A file should start without any indention.',
-            4,
-            new RstSample(<<<CONTENT
-  Headline
-CONTENT
-            ),
+            , 1),
         ];
 
         yield 'wrong without blank line' => [
@@ -73,7 +74,7 @@ Headline
 ========
   Content
 CONTENT
-            ),
+            , 2),
         ];
 
         yield 'wrong with blank line' => [
@@ -84,6 +85,109 @@ Headline
 ========
 
   Content
+CONTENT
+            , 3),
+        ];
+
+        yield [
+            null,
+            4,
+            new RstSample(<<<CONTENT
+.. index::
+   single: Cache
+
+HTTP Cache
+==========
+
+The nature of rich web applications means that they're dynamic. No matter   
+CONTENT
+            , 1),
+        ];
+
+        $php_comment_example = <<<'CONTENT'
+Code here::
+
+    class MicroController extends Controller
+    {
+        /**
+         * @Route("/random/{limit}")
+         */
+        public function randomAction($limit)
+        {
+CONTENT;
+
+        yield 'first line of the php comment' => [
+            null,
+            4,
+            new RstSample($php_comment_example, 4),
+        ];
+
+        yield 'middle of the php comment' => [
+            null,
+            4,
+            new RstSample($php_comment_example, 5),
+        ];
+
+        yield 'last line of the php comment' => [
+            null,
+            4,
+            new RstSample($php_comment_example, 6),
+        ];
+
+        yield 'list item (#) first line' => [
+            null,
+            4,
+            new RstSample(<<<'CONTENT'
+#. At the beginning of the request, the Firewall checks the firewall map
+   to see if any firewall should be active for this URL;
+CONTENT
+            ),
+        ];
+
+        yield 'list item (#) second line' => [
+            null,
+            4,
+            new RstSample(<<<'CONTENT'
+#. At the beginning of the request, the Firewall checks the firewall map
+   to see if any firewall should be active for this URL;
+CONTENT
+            , 1),
+        ];
+
+        yield 'list item (*) first line' => [
+            null,
+            4,
+            new RstSample(<<<'CONTENT'
+* At the beginning of the request, the Firewall checks the firewall map
+  to see if any firewall should be active for this URL;
+CONTENT
+            ),
+        ];
+
+        yield 'list item (*) second line' => [
+            null,
+            4,
+            new RstSample(<<<'CONTENT'
+* At the beginning of the request, the Firewall checks the firewall map
+  to see if any firewall should be active for this URL;
+CONTENT
+            , 1),
+        ];
+
+        yield 'special char "├─"' => [
+            null,
+            4,
+            new RstSample(<<<'CONTENT'
+  ├─ app.php
+CONTENT
+            ),
+        ];
+
+        yield 'special char "└─"' => [
+            null,
+            4,
+            new RstSample(<<<'CONTENT'
+  └─ ...
 CONTENT
             ),
         ];

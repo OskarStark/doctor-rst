@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
+use App\Helper\Helper;
 use App\Rst\RstParser;
 
 trait DirectiveTrait
 {
-    use CloneIteratorTrait;
-
     private function in(string $directive, \ArrayIterator $lines, int $number, array $directiveTypes = null): bool
     {
-        $lines = $this->cloneIterator($lines, $number);
+        $lines = Helper::cloneIterator($lines, $number);
 
         $currentIndention = RstParser::indention($lines->current());
 
@@ -69,7 +68,7 @@ trait DirectiveTrait
 
     private function previousDirectiveIs(string $directive, \ArrayIterator $lines, int $number, array $directiveTypes = null): bool
     {
-        $lines = $this->cloneIterator($lines, $number);
+        $lines = Helper::cloneIterator($lines, $number);
 
         $currentIndention = RstParser::indention($lines->current());
 
@@ -97,7 +96,11 @@ trait DirectiveTrait
                     $lineIndention === $currentIndention
                     && RstParser::isDirective($lines->current())
                     && RstParser::directiveIs($lines->current(), $directive)
-                ) || (0 === $lineIndention && RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP))
+                ) || (0 === $lineIndention
+                    && (
+                        RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)
+                        || RstParser::directiveIs($lines->current(), $directive)
+                    ))
             ) {
                 if (null !== $directiveTypes) {
                     $found = false;

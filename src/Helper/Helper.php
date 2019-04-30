@@ -11,11 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Traits;
+namespace App\Helper;
 
-trait CloneIteratorTrait
+class Helper
 {
-    private function cloneIterator(\ArrayIterator $iterator, int $number): \ArrayIterator
+    public static function cloneIterator(\ArrayIterator $iterator, int $number): \ArrayIterator
     {
         $clone = new \ArrayIterator($iterator->getArrayCopy());
         $clone->seek($number);

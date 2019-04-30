@@ -15,10 +15,15 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Traits\DirectiveTrait;
+use App\Traits\ListTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Indention extends AbstractRule implements Rule, Configurable
 {
+    use DirectiveTrait;
+    use ListTrait;
+
     /** @var int */
     private $size;
 
@@ -42,11 +47,6 @@ class Indention extends AbstractRule implements Rule, Configurable
         $this->size = $resolvedOptions['size'];
     }
 
-    public static function getType(): int
-    {
-        return Rule::TYPE_FILE;
-    }
-
     public static function getGroups(): array
     {
         return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
@@ -56,26 +56,33 @@ class Indention extends AbstractRule implements Rule, Configurable
     {
         $lines->seek($number);
 
-        $initial = RstParser::indention($lines->current());
-
-        if (0 !== $initial) {
-            return 'A file should start without any indention.';
+        if (RstParser::isBlankLine($lines->current())
+            || preg_match('/(├|└)/', RstParser::clean($lines->current()))
+            || $this->isPartOfListItem($lines, $number)
+            || $this->in(RstParser::DIRECTIVE_INDEX, $lines, $number)
+            || $this->in(RstParser::DIRECTIVE_FIGURE, $lines, $number)
+            || $this->in(RstParser::DIRECTIVE_IMAGE, $lines, $number)
+            || $this->in(RstParser::DIRECTIVE_TOCTREE, $lines, $number)
+        ) {
+            return;
         }
 
-        while ($lines->valid()) {
-            if (RstParser::isBlankLine($lines->current())) {
-                $lines->next();
+        $indention = RstParser::indention($lines->current());
 
-                continue;
-            }
+        $minus = 0;
+        if (preg_match('/^\*/', RstParser::clean($lines->current()))
+            && $this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [
+                RstParser::CODE_BLOCK_PHP,
+                RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
+                RstParser::CODE_BLOCK_JAVASCRIPT,
+                RstParser::CODE_BLOCK_SQL,
+            ])
+        ) {
+            $minus = 1;
+        }
 
-            $indention = RstParser::indention($lines->current());
-
-            if (0 !== ($indention % $this->size)) {
-                return sprintf('Please add %s spaces for every indention.', $this->size);
-            }
-
-            $lines->next();
+        if ($indention > 0 && 0 !== (($indention % $this->size) - $minus)) {
+            return sprintf('Please add %s spaces for every indention.', $this->size);
         }
     }
 }
