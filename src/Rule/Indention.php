@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
+use App\Helper\Helper;
+use App\Helper\TwigHelper;
+use App\Helper\XmlHelper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Traits\ListTrait;
@@ -49,7 +52,7 @@ class Indention extends AbstractRule implements Rule, Configurable
 
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
+        return [Registry::GROUP_EXPERIMENTAL];
     }
 
     public function check(\ArrayIterator $lines, int $number)
@@ -59,17 +62,25 @@ class Indention extends AbstractRule implements Rule, Configurable
         if (RstParser::isBlankLine($lines->current())
             || preg_match('/(├|└)/', RstParser::clean($lines->current()))
             || $this->isPartOfListItem($lines, $number)
+            || $this->isPartOfFootnote($lines, $number)
+            || $this->isPartOfRstComment($lines, $number)
             || $this->in(RstParser::DIRECTIVE_INDEX, $lines, $number)
             || $this->in(RstParser::DIRECTIVE_FIGURE, $lines, $number)
             || $this->in(RstParser::DIRECTIVE_IMAGE, $lines, $number)
             || $this->in(RstParser::DIRECTIVE_TOCTREE, $lines, $number)
+            || $this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [
+                RstParser::CODE_BLOCK_TEXT,
+                RstParser::CODE_BLOCK_TERMINAL,
+                RstParser::CODE_BLOCK_BASH,
+                RstParser::CODE_BLOCK_SQL,
+            ])
         ) {
             return;
         }
 
         $indention = RstParser::indention($lines->current());
-
         $minus = 0;
+
         if (preg_match('/^\*/', RstParser::clean($lines->current()))
             && $this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [
                 RstParser::CODE_BLOCK_PHP,
@@ -81,8 +92,92 @@ class Indention extends AbstractRule implements Rule, Configurable
             $minus = 1;
         }
 
-        if ($indention > 0 && 0 !== (($indention % $this->size) - $minus)) {
+        // XML
+        if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_XML])
+            && !XmlHelper::isComment($lines->current())
+            && $this->isPartOrMultilineXmlComment($lines, $number)
+        ) {
+            $minus = 1;
+        }
+
+        // Twig
+        if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG])
+            && !TwigHelper::isComment($lines->current())
+            && $this->isPartOrMultilineTwigComment($lines, $number)
+        ) {
+            $minus = 3;
+        }
+
+        if ($indention > 0 && 0 < (($indention % $this->size) - $minus)) {
             return sprintf('Please add %s spaces for every indention.', $this->size);
         }
+    }
+
+    public function isPartOrMultilineXmlComment(\ArrayIterator $lines, int $number): bool
+    {
+        $lines = Helper::cloneIterator($lines, $number);
+
+        if (XmlHelper::isComment($lines->current(), false)) {
+            return true;
+        }
+
+        $currentIndention = RstParser::indention($lines->current());
+
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (RstParser::isBlankLine($lines->current())) {
+                continue;
+            }
+
+            $lineIndention = RstParser::indention($lines->current());
+
+            if ($lineIndention < $currentIndention) {
+                if (XmlHelper::isComment($lines->current(), false)) {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public function isPartOrMultilineTwigComment(\ArrayIterator $lines, int $number): bool
+    {
+        $lines = Helper::cloneIterator($lines, $number);
+
+        if (TwigHelper::isComment($lines->current(), false)) {
+            return true;
+        }
+
+        $currentIndention = RstParser::indention($lines->current());
+
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (RstParser::isBlankLine($lines->current())) {
+                continue;
+            }
+
+            $lineIndention = RstParser::indention($lines->current());
+
+            if ($lineIndention < $currentIndention) {
+                if (TwigHelper::isComment($lines->current(), false)) {
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        return false;
     }
 }

@@ -17,10 +17,28 @@ use App\Rst\RstParser;
 
 final class TwigHelper
 {
-    public static function isComment(string $line): bool
+    public static function isComment(string $line, bool $closed = null): bool
     {
-        if (preg_match('/^{#(.*)/', RstParser::clean($line))) {
+        $line = RstParser::clean($line);
+
+        if ('{#' === $line || '#}' === $line) {
             return true;
+        }
+
+        if (null === $closed) {
+            if (preg_match('/^{#(.*)/', $line)) {
+                return true;
+            }
+        } else {
+            if (preg_match('/^{#(.*)/', $line)
+                && (
+                    ($closed && preg_match('/(.*)#}$/', $line))
+                    || (!$closed && !preg_match('/(.*)#}$/', $line)
+                    )
+                )
+            ) {
+                return true;
+            }
         }
 
         return false;

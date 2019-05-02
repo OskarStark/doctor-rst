@@ -41,6 +41,44 @@ class RstParserTest extends TestCase
     /**
      * @test
      *
+     * @dataProvider isCommentProvider
+     */
+    public function isComment(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isComment($string));
+    }
+
+    public function isCommentProvider(): \Generator
+    {
+        yield [true, '.. I am a comment'];
+
+        yield [false, ''];
+        yield [false, '.. [1]'];
+        yield [false, '.. [1] '];
+        yield [false, ' .. [1] '];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider isFootnoteProvider
+     */
+    public function isFootnote(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isFootnote($string));
+    }
+
+    public function isFootnoteProvider(): \Generator
+    {
+        yield [false, ''];
+        yield [true, '.. [1]'];
+        yield [true, '.. [1] '];
+        yield [true, ' .. [1] '];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider isListItemProvider
      */
     public function isListItem(bool $expected, string $string)

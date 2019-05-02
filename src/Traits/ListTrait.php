@@ -53,4 +53,76 @@ trait ListTrait
 
         return false;
     }
+
+    private function isPartOfFootnote(\ArrayIterator $lines, int $number): bool
+    {
+        $lines = Helper::cloneIterator($lines, $number);
+
+        if (RstParser::isFootnote($lines->current())) {
+            return true;
+        }
+
+        $currentIndention = RstParser::indention($lines->current());
+
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (RstParser::isBlankLine($lines->current())) {
+                continue;
+            }
+
+            if (RstParser::isHeadline($lines->current())) {
+                return false;
+            }
+
+            $lineIndention = RstParser::indention($lines->current());
+
+            if ($lineIndention < $currentIndention
+                && RstParser::isFootnote($lines->current())
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isPartOfRstComment(\ArrayIterator $lines, int $number): bool
+    {
+        $lines = Helper::cloneIterator($lines, $number);
+
+        if (RstParser::isComment($lines->current())) {
+            return true;
+        }
+
+        $currentIndention = RstParser::indention($lines->current());
+
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (RstParser::isBlankLine($lines->current())) {
+                continue;
+            }
+
+            if (RstParser::isHeadline($lines->current())) {
+                return false;
+            }
+
+            $lineIndention = RstParser::indention($lines->current());
+
+            if ($lineIndention < $currentIndention
+                && RstParser::isComment($lines->current())
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
