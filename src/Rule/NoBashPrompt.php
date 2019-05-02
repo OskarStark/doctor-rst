@@ -21,8 +21,8 @@ use App\Rst\RstParser;
 
 /**
  * @Description("Ensure no bash prompt `$` is used before commands in `bash`, `shell` or `terminal` code blocks.")
- * @InvalidExample("$ bin\console list")
- * @ValidExample("bin\console list")
+ * @InvalidExample("$ bin/console list")
+ * @ValidExample("bin/console list")
  */
 class NoBashPrompt extends AbstractRule implements Rule
 {
