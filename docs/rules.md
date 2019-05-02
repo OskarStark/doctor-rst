@@ -308,13 +308,13 @@ Name | Required
 ##### Valid Examples :+1:
 
 ```rst
-bin\console list
+bin/console list
 ```
 
 ##### Invalid Examples :-1:
 
 ```rst
-$ bin\console list
+$ bin/console list
 ```
 
 ## `no_blank_line_after_filepath_in_code_block`
@@ -452,6 +452,8 @@ Pattern | Message
 `/E2E/` | Please replace "%s" with "End-to-End"
 `/informations/` | Please replace "%s" with "information"
 `/Informations/` | Please replace "%s" with "Information"
+`/performances/` | Please replace "%s" with "performance"
+`/Performances/` | Please replace "%s" with "Performance"
 
 ## `short_array_syntax`
 
