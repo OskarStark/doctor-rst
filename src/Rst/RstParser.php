@@ -82,6 +82,7 @@ class RstParser
     const CODE_BLOCK_JAVASCRIPT = 'javascript';
     const CODE_BLOCK_JS = 'js';
     const CODE_BLOCK_SQL = 'sql';
+    const CODE_BLOCK_INI = 'ini';
 
     public static function hasNewline(string $string): bool
     {
@@ -194,6 +195,7 @@ class RstParser
                 self::CODE_BLOCK_JAVASCRIPT,
                 self::CODE_BLOCK_JS,
                 self::CODE_BLOCK_SQL,
+                self::CODE_BLOCK_INI,
             ]
         );
 
