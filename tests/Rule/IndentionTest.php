@@ -174,6 +174,26 @@ RST
             , 1),
         ];
 
+        yield 'comment (rst) first line' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+.. I am a comment
+   and have a second line.
+RST
+            ),
+        ];
+
+        yield 'comment (rst) second line' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+.. I am a comment
+   and have a second line.
+RST
+                , 1),
+        ];
+
         yield 'special char "├─"' => [
             null,
             4,
@@ -191,5 +211,181 @@ RST
 RST
             ),
         ];
+
+        yield 'twig multiline comment' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+.. code-block:: twig
+
+    {# if the controller is associated with a route, use the path() or
+        url() functions to generate the URI used by render() #}
+RST
+            , 3),
+        ];
+
+        yield 'twig multiline comment on second level' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+Info here:
+            
+    .. code-block:: twig
+
+        {# if the controller is associated with a route, use the path() or
+            url() functions to generate the URI used by render() #}
+RST
+                , 5),
+        ];
+
+        yield 'xml multiline comment' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+.. code-block:: xml
+
+    <services>
+        <!-- ... -->
+
+        <!-- overrides the public setting of the parent service -->
+        <service id="AppBundle\Repository\DoctrineUserRepository"
+            parent="AppBundle\Repository\BaseDoctrineRepository"
+            public="false"
+        >
+            <!-- appends the '@app.username_checker' argument to the parent
+                 argument list -->
+RST
+                , 11),
+        ];
+
+        yield 'yaml array' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+.. code-block:: yaml
+
+    # ...
+    folders:
+        - map: ~/projects
+          to: /home/vagrant/projects
+RST
+            , 5),
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider multilineXmlProvider
+     */
+    public function isPartOfMultilineXmlComment(bool $expected, RstSample $sample)
+    {
+        $this->assertSame(
+            $expected,
+            (new Indention())->isPartOrMultilineXmlComment($sample->getContent(), $sample->getLineNumber())
+        );
+    }
+
+    public function multilineXmlProvider(): \Generator
+    {
+        yield [
+            true,
+            new RstSample(<<<'RST'
+<!-- appends the '@app.username_checker' argument to the parent
+     argument list -->
+RST
+            ),
+        ];
+
+        yield [
+            true,
+            new RstSample(<<<'RST'
+<!-- appends the '@app.username_checker' argument to the parent
+     argument list -->
+RST
+            , 1),
+        ];
+
+        yield [
+            false,
+            new RstSample(<<<'RST'
+<!-- appends the '@app.username_checker' argument to the parent -->
+RST
+            ),
+        ];
+
+        yield [
+            false,
+            new RstSample(<<<'RST'
+<!-- call a method on the specified factory service -->
+<factory service="AppBundle\Email\NewsletterManagerFactory"
+    method="createNewsletterManager"
+/>        
+RST
+            , 2),
+        ];
+
+        yield [
+            false,
+            new RstSample(<<<'RST'
+<monolog:config>
+    <!--
+    500 errors are logged at the critical level,
+    to also log 400 level errors (but not 404's):
+    action-level="error"
+    And add this child inside this monolog:handler
+    <monolog:excluded-404>^/</monolog:excluded-404>
+    -->
+    <monolog:handler
+        name="main"      
+RST
+                , 9),
+        ];
+
+        yield [false, new RstSample('foo bar')];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider multilineTwigProvider
+     */
+    public function isPartOfMultilineTwigComment(bool $expected, RstSample $sample)
+    {
+        $this->assertSame(
+            $expected,
+            (new Indention())->isPartOrMultilineTwigComment($sample->getContent(), $sample->getLineNumber())
+        );
+    }
+
+    public function multilineTwigProvider(): \Generator
+    {
+        yield [
+            true,
+            new RstSample(<<<'RST'
+{# appends the '@app.username_checker' argument to the parent
+   argument list #}
+RST
+            ),
+        ];
+
+        yield [
+            true,
+            new RstSample(<<<'RST'
+{# appends the '@app.username_checker' argument to the parent
+   argument list #}
+RST
+                , 1),
+        ];
+
+        yield [
+            false,
+            new RstSample(<<<'RST'
+{# appends the '@app.username_checker' argument to the parent #}
+RST
+            ),
+        ];
+
+        yield [false, new RstSample('foo bar')];
     }
 }

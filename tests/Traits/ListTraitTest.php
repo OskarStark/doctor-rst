@@ -26,6 +26,8 @@ class ListTraitTest extends TestCase
         $this->traitWrapper = new class() {
             use ListTrait {
                 ListTrait::isPartOfListItem as public;
+                ListTrait::isPartOfFootnote as public;
+                ListTrait::isPartOfRstComment as public;
             }
         };
     }
@@ -41,9 +43,9 @@ class ListTraitTest extends TestCase
     /**
      * @test
      *
-     * @dataProvider inProvider
+     * @dataProvider listItemProvider
      */
-    public function in(bool $expected, RstSample $sample)
+    public function isPartOfListItem(bool $expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
@@ -51,7 +53,7 @@ class ListTraitTest extends TestCase
         );
     }
 
-    public function inProvider()
+    public function listItemProvider()
     {
         yield [
             false,
@@ -76,5 +78,101 @@ RST;
 
         yield 'first line (*)' => [true, new RstSample($list_2)];
         yield 'second line (*)' => [true, new RstSample($list_2, 1)];
+
+        $list_3 = <<<'RST'
+A) Line 1
+   Line 2
+RST;
+
+        yield 'first line (alpha uppercase)' => [true, new RstSample($list_3)];
+        yield 'second line (alpha uppercase)' => [true, new RstSample($list_3, 1)];
+
+        $list_4 = <<<'RST'
+- Line 1
+  Line 2
+RST;
+
+        yield 'first line (dash)' => [true, new RstSample($list_4)];
+        yield 'second line (dash)' => [true, new RstSample($list_4, 1)];
+
+        $list_5 = <<<'RST'
+1. Line 1
+   Line 2
+RST;
+
+        yield 'first line (numeric + dot + parenthesis)' => [true, new RstSample($list_5)];
+        yield 'second line (numeric + dot + parenthesis)' => [true, new RstSample($list_5, 1)];
+
+        $list_6 = <<<'RST'
+1.) Line 1
+    Line 2
+RST;
+
+        yield 'first line (numeric + parenthesis)' => [true, new RstSample($list_6)];
+        yield 'second line (numeric + parenthesis)' => [true, new RstSample($list_6, 1)];
+
+        $list_7 = <<<'RST'
+a) Line 1
+   Line 2
+RST;
+
+        yield 'first line (alpha lowercase)' => [true, new RstSample($list_7)];
+        yield 'second line (alpha lowercase)' => [true, new RstSample($list_7, 1)];
+
+        $list_8 = <<<'RST'
+1) Line 1
+   Line 2
+RST;
+
+        yield 'first line (numeric + parenthesis)' => [true, new RstSample($list_8)];
+        yield 'second line (numeric + parenthesis)' => [true, new RstSample($list_8, 1)];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider footnoteProvider
+     */
+    public function isPartOfFootnote(bool $expected, RstSample $sample)
+    {
+        $this->assertSame(
+            $expected,
+            $this->traitWrapper->isPartOfFootnote($sample->getContent(), $sample->getLineNumber())
+        );
+    }
+
+    public function footnoteProvider(): \Generator
+    {
+        $footnote = <<<'RST'
+.. [1] Line 1
+       Line 2
+RST;
+
+        yield 'first line (footnote)' => [true, new RstSample($footnote)];
+        yield 'second line (footnote)' => [true, new RstSample($footnote, 1)];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider commentProvider
+     */
+    public function isPartOfRstComment(bool $expected, RstSample $sample)
+    {
+        $this->assertSame(
+            $expected,
+            $this->traitWrapper->isPartOfRstComment($sample->getContent(), $sample->getLineNumber())
+        );
+    }
+
+    public function commentProvider(): \Generator
+    {
+        $rst_comment = <<<'RST'
+.. Line 1
+   Line 2
+RST;
+
+        yield 'first line (rst comment)' => [true, new RstSample($rst_comment)];
+        yield 'second line (rst comment)' => [true, new RstSample($rst_comment, 1)];
     }
 }

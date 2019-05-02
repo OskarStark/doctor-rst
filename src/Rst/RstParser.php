@@ -266,7 +266,31 @@ class RstParser
 
     public static function isListItem(string $string): bool
     {
-        if (preg_match('/(\* |\#. )/', self::clean($string))) {
+        if (preg_match('/^(\* |\#. |[A-Za-z]{1}\) |-\ |[0-9]\. |[0-9]\) )/', self::clean($string))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Whether its a footnote ".. [1] " directive or not.
+     */
+    public static function isFootnote(string $string): bool
+    {
+        if (preg_match('/^\.\. \[[0-9]\]/', self::clean($string))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Whether its and rst comment or not.
+     */
+    public static function isComment(string $string): bool
+    {
+        if (!self::isFootnote($string) && preg_match('/^\.\. /', self::clean($string))) {
             return true;
         }
 

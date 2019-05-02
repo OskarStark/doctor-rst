@@ -23,17 +23,26 @@ class TwigHelperTest extends TestCase
      *
      * @dataProvider isCommentProvider
      */
-    public function isComment(bool $expected, string $line)
+    public function isComment(bool $expected, string $line, ?bool $closed)
     {
         $this->assertSame(
             $expected,
-            TwigHelper::isComment($line)
+            TwigHelper::isComment($line, $closed)
         );
     }
 
     public function isCommentProvider()
     {
-        yield [true, '{# comment #}'];
-        yield [false, 'no comment'];
+        yield [true, '{#', null];
+        yield [true, '#}', null];
+
+        yield [true, '{# comment #}', true];
+        yield [false, '{# comment #}', false];
+        yield [true, '{# comment', false];
+        yield [false, '{# comment', true];
+
+        yield [false, 'no comment', null];
+        yield [false, 'no comment', true];
+        yield [false, 'no comment', false];
     }
 }
