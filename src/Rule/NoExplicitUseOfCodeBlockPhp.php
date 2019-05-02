@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
+use App\Helper\Helper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 
@@ -75,7 +76,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
     private function directAfterHeadline(\ArrayIterator $lines, int $number): bool
     {
-        $lines = $this->cloneIterator($lines, $number);
+        $lines = Helper::cloneIterator($lines, $number);
 
         $i = $number;
         while ($i >= 1) {
@@ -99,7 +100,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
     private function directAfterTable(\ArrayIterator $lines, int $number): bool
     {
-        $lines = $this->cloneIterator($lines, $number);
+        $lines = Helper::cloneIterator($lines, $number);
 
         $i = $number;
         while ($i >= 1) {
@@ -123,7 +124,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
     private function previousParagraphEndsWithQuestionMark(\ArrayIterator $lines, int $number): bool
     {
-        $lines = $this->cloneIterator($lines, $number);
+        $lines = Helper::cloneIterator($lines, $number);
 
         $i = $number;
         while ($i >= 1) {
