@@ -114,10 +114,10 @@ class RstParser
         return ('.. ' == substr(ltrim($string), 0, 3)
             && '.. _`' !== substr(ltrim($string), 0, 5)
             && strstr($string, '::'))
-            || '::' == substr(self::clean($string), -2, 2);
+            || self::isDefaultDirective($string);
     }
 
-    public static function directiveIs(string $string, string $directive): bool
+    public static function directiveIs(string $string, string $directive, ?bool $strict = false): bool
     {
         if (!self::isDirective($string)) {
             return false;
@@ -154,7 +154,7 @@ class RstParser
 
         if (strstr($string, $directive)) {
             return true;
-        } elseif (self::DIRECTIVE_CODE_BLOCK == $directive && '::' == substr(self::clean($string), -2, 2)) {
+        } elseif (self::DIRECTIVE_CODE_BLOCK == $directive && (!$strict && self::isDefaultDirective($string))) {
             foreach ($directivesExcludedCodeBlock as $other) {
                 if (strstr($string, $other)) {
                     return false;
@@ -169,7 +169,7 @@ class RstParser
 
     public static function codeBlockDirectiveIsTypeOf(string $string, string $type, bool $strict = false): bool
     {
-        if (!self::directiveIs($string, self::DIRECTIVE_CODE_BLOCK)) {
+        if (!self::directiveIs($string, self::DIRECTIVE_CODE_BLOCK, $strict)) {
             return false;
         }
 
@@ -206,7 +206,7 @@ class RstParser
         $string = self::clean($string);
 
         if (substr($string, -(\strlen(($type)))) == $type
-            || (self::CODE_BLOCK_PHP == $type && '::' == substr(self::clean($string), -2, 2))) {
+            || (self::CODE_BLOCK_PHP === $type && self::isDefaultDirective($string))) {
             if (!$strict) {
                 return true;
             } else {
@@ -267,6 +267,16 @@ class RstParser
     public static function isListItem(string $string): bool
     {
         if (preg_match('/(\* |\#. )/', self::clean($string))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isDefaultDirective(string $string): bool
+    {
+        if (!preg_match('/^\.\. (.*)\:\:/', $string)
+            && preg_match('/\:\:$/', $string)) {
             return true;
         }
 

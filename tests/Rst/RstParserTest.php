@@ -21,6 +21,26 @@ class RstParserTest extends TestCase
     /**
      * @test
      *
+     * @dataProvider isDefaultDirectiveProvider
+     */
+    public function isDefaultDirective(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isDefaultDirective($string));
+    }
+
+    public function isDefaultDirectiveProvider(): \Generator
+    {
+        yield [true, 'this is using the default directive::'];
+        yield [true, 'prefixed classes included in doc block comments (``/** ... */``). For example::'];
+
+        yield [false, ''];
+        yield [false, '.. code-block:: php'];
+        yield [false, '.. index::'];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider isListItemProvider
      */
     public function isListItem(bool $expected, string $string)
