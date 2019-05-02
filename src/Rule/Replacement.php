@@ -58,6 +58,8 @@ class Replacement extends CheckListRule implements Rule
             '/E2E/' => 'Please replace "%s" with "End-to-End"',
             '/informations/' => 'Please replace "%s" with "information"',
             '/Informations/' => 'Please replace "%s" with "Information"',
+            '/performances/' => 'Please replace "%s" with "performance"',
+            '/Performances/' => 'Please replace "%s" with "Performance"',
         ];
     }
 }

@@ -71,6 +71,8 @@ class ReplacementTest extends TestCase
             'End-to-End',
             'information',
             'Information',
+            'performance',
+            'Performance',
 //            '# username is your full Gmail or Google Apps email address', // todo this should be supported by the regex
         ];
 
@@ -103,6 +105,8 @@ class ReplacementTest extends TestCase
             'E2E' => 'End-to-End',
             'informations' => 'information',
             'Informations' => 'Information',
+            'performances' => 'performance',
+            'Performances' => 'Performance',
         ];
 
         foreach ($invalids as $invalid => $valid) {
