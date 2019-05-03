@@ -48,7 +48,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
                 // if its an xml code-block, check if it contains xliff
                 // @todo refactor in extra method: getDirectiveContent
                 if (RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_XML)) {
-                    $content = Helper::cloneIterator($lines, $lines->key());
+                    $content = Helper::cloneIterator($lines, (int) $lines->key());
                     $content->next();
 
                     while ($content->valid() && (RstParser::isBlankLine($content->current()) || RstParser::indention($lines->current()) < RstParser::indention($content->current()))) {

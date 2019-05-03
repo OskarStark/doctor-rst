@@ -19,7 +19,7 @@ abstract class AbstractRule
 {
     public static function getName(): string
     {
-        return Inflector::tableize(substr(strrchr(static::class, '\\'), 1));
+        return Inflector::tableize(substr((string) strrchr(static::class, '\\'), 1));
     }
 
     public static function getGroups(): array
