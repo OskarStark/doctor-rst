@@ -38,7 +38,7 @@ class ExtendController extends AbstractRule implements Rule
             return 'Please extend Controller instead of AbstractController';
         }
 
-        if (strstr($line, 'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;')) {
+        if (preg_match('/^use Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController;/', $line)) {
             return 'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"';
         }
     }

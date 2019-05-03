@@ -38,7 +38,7 @@ class ExtendAbstractAdmin extends AbstractRule implements Rule
             return 'Please extend AbstractAdmin instead of Admin';
         }
 
-        if (strstr($line, 'use Sonata\AdminBundle\Admin\Admin;')) {
+        if (preg_match('/^use Sonata\\\\AdminBundle\\\\Admin\\\\Admin;/', $line)) {
             return 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"';
         }
     }
