@@ -9,6 +9,7 @@
 * [blank_line_after_filepath_in_twig_code_block](#blank_line_after_filepath_in_twig_code_block)
 * [blank_line_after_filepath_in_xml_code_block](#blank_line_after_filepath_in_xml_code_block)
 * [blank_line_after_filepath_in_yaml_code_block](#blank_line_after_filepath_in_yaml_code_block)
+* [blank_line_before_directive](#blank_line_before_directive)
 * [composer_dev_option_at_the_end](#composer_dev_option_at_the_end)
 * [composer_dev_option_not_at_the_end](#composer_dev_option_not_at_the_end)
 * [correct_code_block_directive_based_on_the_content](#correct_code_block_directive_based_on_the_content)
@@ -162,6 +163,12 @@ Pattern | Message
 ## `blank_line_after_filepath_in_yaml_code_block`
 
   > _Make sure you have a blank line after a filepath in a YAML code block._
+
+## `blank_line_before_directive`
+
+  > _Make sure you have a blank line before each directive._
+
+#### Groups [`@Sonata`, `@Symfony`]
 
 ## `composer_dev_option_at_the_end`
 
