@@ -38,61 +38,61 @@ class IndentionTest extends TestCase
         yield [
             null,
             4,
-            new RstSample(<<<CONTENT
+            new RstSample(<<<RST
 Headline
 
     Content
-CONTENT
+RST
             , 2),
         ];
 
         yield [
             null,
             4,
-            new RstSample(<<<CONTENT
+            new RstSample(<<<RST
 Headline
 Content
-CONTENT
+RST
             , 1),
         ];
 
         yield [
             null,
             4,
-            new RstSample(<<<CONTENT
+            new RstSample(<<<RST
 Headline
 
-CONTENT
+RST
             , 1),
         ];
 
         yield 'wrong without blank line' => [
             'Please add 4 spaces for every indention.',
             4,
-            new RstSample(<<<CONTENT
+            new RstSample(<<<RST
 Headline
 ========
   Content
-CONTENT
+RST
             , 2),
         ];
 
         yield 'wrong with blank line' => [
             'Please add 4 spaces for every indention.',
             4,
-            new RstSample(<<<CONTENT
+            new RstSample(<<<RST
 Headline
 ========
 
   Content
-CONTENT
+RST
             , 3),
         ];
 
         yield [
             null,
             4,
-            new RstSample(<<<CONTENT
+            new RstSample(<<<RST
 .. index::
    single: Cache
 
@@ -100,11 +100,11 @@ HTTP Cache
 ==========
 
 The nature of rich web applications means that they're dynamic. No matter   
-CONTENT
+RST
             , 1),
         ];
 
-        $php_comment_example = <<<'CONTENT'
+        $php_comment_example = <<<'RST'
 Code here::
 
     class MicroController extends Controller
@@ -114,7 +114,7 @@ Code here::
          */
         public function randomAction($limit)
         {
-CONTENT;
+RST;
 
         yield 'first line of the php comment' => [
             null,
@@ -137,58 +137,58 @@ CONTENT;
         yield 'list item (#) first line' => [
             null,
             4,
-            new RstSample(<<<'CONTENT'
+            new RstSample(<<<'RST'
 #. At the beginning of the request, the Firewall checks the firewall map
    to see if any firewall should be active for this URL;
-CONTENT
+RST
             ),
         ];
 
         yield 'list item (#) second line' => [
             null,
             4,
-            new RstSample(<<<'CONTENT'
+            new RstSample(<<<'RST'
 #. At the beginning of the request, the Firewall checks the firewall map
    to see if any firewall should be active for this URL;
-CONTENT
+RST
             , 1),
         ];
 
         yield 'list item (*) first line' => [
             null,
             4,
-            new RstSample(<<<'CONTENT'
+            new RstSample(<<<'RST'
 * At the beginning of the request, the Firewall checks the firewall map
   to see if any firewall should be active for this URL;
-CONTENT
+RST
             ),
         ];
 
         yield 'list item (*) second line' => [
             null,
             4,
-            new RstSample(<<<'CONTENT'
+            new RstSample(<<<'RST'
 * At the beginning of the request, the Firewall checks the firewall map
   to see if any firewall should be active for this URL;
-CONTENT
+RST
             , 1),
         ];
 
         yield 'special char "├─"' => [
             null,
             4,
-            new RstSample(<<<'CONTENT'
+            new RstSample(<<<'RST'
   ├─ app.php
-CONTENT
+RST
             ),
         ];
 
         yield 'special char "└─"' => [
             null,
             4,
-            new RstSample(<<<'CONTENT'
+            new RstSample(<<<'RST'
   └─ ...
-CONTENT
+RST
             ),
         ];
     }

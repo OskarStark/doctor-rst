@@ -54,9 +54,9 @@ class DirectiveTraitTest extends TestCase
 
     public function inProvider()
     {
-        $no_code_block = <<<'CONTENT'
+        $no_code_block = <<<'RST'
 I am just a cool text!
-CONTENT;
+RST;
 
         yield [
             false,
@@ -64,11 +64,11 @@ CONTENT;
             RstParser::DIRECTIVE_CODE_BLOCK,
         ];
 
-        $in_code_block = <<<'CONTENT'
+        $in_code_block = <<<'RST'
 .. code-block:: php
 
     // I am just a cool text!
-CONTENT;
+RST;
 
         yield [
             true,
@@ -90,7 +90,7 @@ CONTENT;
             [RstParser::CODE_BLOCK_JAVASCRIPT],
         ];
 
-        $invalid = <<<'CONTENT'
+        $invalid = <<<'RST'
 Coding Standards
 ================
 
@@ -379,7 +379,7 @@ License
 .. _`camelCase`: https://en.wikipedia.org/wiki/Camel_case
 .. _`UpperCamelCase`: https://en.wikipedia.org/wiki/Camel_case
 .. _`snake_case`: https://en.wikipedia.org/wiki/Snake_case
-CONTENT;
+RST;
 
         yield [
             false,

@@ -35,7 +35,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends TestCase
 
     public function validProvider()
     {
-        $valid = <<<CONTENT
+        $valid = <<<RST
 .. configuration-block::
 
     .. code-block:: php-annotations
@@ -53,9 +53,9 @@ class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends TestCase
     .. code-block:: php
 
         test
-CONTENT;
+RST;
 
-        $valid2 = <<<CONTENT
+        $valid2 = <<<RST
 .. configuration-block::
 
     .. code-block:: html
@@ -77,9 +77,9 @@ CONTENT;
     .. code-block:: php
 
         test
-CONTENT;
+RST;
 
-        $invalid_but_valid_because_of_xliff = <<<CONTENT
+        $invalid_but_valid_because_of_xliff = <<<RST
 .. configuration-block::
 
     .. code-block:: xml
@@ -97,7 +97,7 @@ CONTENT;
     .. code-block:: php
 
         test
-CONTENT;
+RST;
 
         return [
             [
@@ -117,7 +117,7 @@ CONTENT;
 
     public function invalidProvider()
     {
-        $invalid = <<<CONTENT
+        $invalid = <<<RST
 .. configuration-block::
 
     .. code-block:: yaml
@@ -135,9 +135,9 @@ CONTENT;
     .. code-block:: php-annotations
 
         test         
-CONTENT;
+RST;
 
-        $invalid2 = <<<CONTENT
+        $invalid2 = <<<RST
 .. configuration-block::
 
     .. code-block:: html
@@ -159,9 +159,9 @@ CONTENT;
     .. code-block:: php-annotations
 
         test         
-CONTENT;
+RST;
 
-        $valid_but_invalid_in_the_end_because_of_xliff_content = <<<CONTENT
+        $valid_but_invalid_in_the_end_because_of_xliff_content = <<<RST
 .. configuration-block::
 
     .. code-block:: php-annotations
@@ -179,7 +179,7 @@ CONTENT;
     .. code-block:: php
 
         test
-CONTENT;
+RST;
 
         return [
             [

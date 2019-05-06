@@ -57,7 +57,7 @@ class MaxBlankLinesTest extends TestCase
             ]),
         ];
 
-        $invalid = <<<CONTENT
+        $invalid = <<<RST
 Routing is a system for mapping the URL of incoming requests to the controller
 function that should be called to process the request. It both allows you
 to specify beautiful URLs and keeps the functionality of your application
@@ -73,7 +73,7 @@ Routing, check! Now, uncover the power of :doc:`controllers </controller>`.
 
 Learn more about Routing
 ------------------------
-CONTENT;
+RST;
 
         yield [
             'Please use max 2 blank lines, you used 3',

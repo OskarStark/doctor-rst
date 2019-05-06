@@ -49,21 +49,21 @@ class BlankLineBeforeDirectiveTest extends TestCase
 
         yield 'valid short php directive' => [
             null,
-            new RstSample(<<<'CONTENT'
+            new RstSample(<<<'RST'
 Headline
 
 This is cool php
 code::
-CONTENT
+RST
             , 3),
         ];
 
         yield 'valid because .. role directive is ignored' => [
             null,
-            new RstSample(<<<'CONTENT'
+            new RstSample(<<<'RST'
 .. role:: foo
 .. role:: bar
-CONTENT
+RST
                 , 1),
         ];
 

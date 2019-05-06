@@ -55,24 +55,24 @@ class ListTraitTest extends TestCase
     {
         yield [
             false,
-            new RstSample(<<<'CONTENT'
+            new RstSample(<<<'RST'
 I am just a cool text!
-CONTENT
+RST
             ),
         ];
 
-        $list_1 = <<<'CONTENT'
+        $list_1 = <<<'RST'
 #. Line 1
    Line 2
-CONTENT;
+RST;
 
         yield 'first line (#)' => [true, new RstSample($list_1)];
         yield 'second line (#)' => [true, new RstSample($list_1, 1)];
 
-        $list_2 = <<<'CONTENT'
+        $list_2 = <<<'RST'
 * Line 1
   Line 2
-CONTENT;
+RST;
 
         yield 'first line (*)' => [true, new RstSample($list_2)];
         yield 'second line (*)' => [true, new RstSample($list_2, 1)];

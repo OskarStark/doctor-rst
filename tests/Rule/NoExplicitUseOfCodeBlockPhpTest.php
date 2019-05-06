@@ -91,7 +91,7 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
 
     public function realSymfonyFileProvider()
     {
-        $content = <<<'CONTENT'
+        $content = <<<'RST'
 .. configuration-block::
 
     .. code-block:: yaml
@@ -126,9 +126,9 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
         $container->register('app.mailer', Mailer::class)
             ->addArgument('sendmail');
 
-CONTENT;
+RST;
 
-        $content_with_blank_line_at_the_beginning = <<<'CONTENT'
+        $content_with_blank_line_at_the_beginning = <<<'RST'
 
 .. configuration-block::
 
@@ -164,9 +164,9 @@ CONTENT;
         $container->register('app.mailer', Mailer::class)
             ->addArgument('sendmail');
 
-CONTENT;
+RST;
 
-        $invalid_content = <<<CONTENT
+        $invalid_content = <<<RST
 .. configuration-block::
 
     .. code-block:: yaml
@@ -185,9 +185,9 @@ CONTENT;
 
         echo 'foo';
 
-CONTENT;
+RST;
 
-        $valid_code_block_after_headline = <<<'CONTENT'
+        $valid_code_block_after_headline = <<<'RST'
 Creating an ACL and Adding an ACE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -204,9 +204,9 @@ Creating an ACL and Adding an ACE
 
     class BlogController extends Controller
     {
-CONTENT;
+RST;
 
-        $valid_two_following_php_code_blocks = <<<'CONTENT'
+        $valid_two_following_php_code_blocks = <<<'RST'
 How to Reduce Code Duplication with "inherit_data"
 ==================================================
 
@@ -231,9 +231,9 @@ entities, a ``Company`` and a ``Customer``::
     {
         private $firstName;
     }
-CONTENT;
+RST;
 
-        $valid_two_following_php_code_blocks_after_headline = <<<'CONTENT'
+        $valid_two_following_php_code_blocks_after_headline = <<<'RST'
 How to Reduce Code Duplication with "inherit_data"
 ==================================================
 
@@ -256,9 +256,9 @@ How to Reduce Code Duplication with "inherit_data"
     {
         private $firstName;
     }
-CONTENT;
+RST;
 
-        $valid_two_following_php_code_blocks_in_configuration_block = <<<'CONTENT'
+        $valid_two_following_php_code_blocks_in_configuration_block = <<<'RST'
 Test
 ====
 
@@ -283,9 +283,9 @@ Test
         {
             private $firstName;
         }
-CONTENT;
+RST;
 
-        $valid_valid_in_code_block_text = <<<'CONTENT'
+        $valid_valid_in_code_block_text = <<<'RST'
 Example
 ~~~~~~~
 
@@ -312,9 +312,9 @@ Example
         echo 'You cannot use the :: shortcut here';
 
     .. _`Symfony Documentation`: https://symfony.com/doc
-CONTENT;
+RST;
 
-        $valid_valid_in_code_block_rst = <<<'CONTENT'
+        $valid_valid_in_code_block_rst = <<<'RST'
 Example
 ~~~~~~~
 
@@ -341,9 +341,9 @@ Example
         echo 'You cannot use the :: shortcut here';
 
     .. _`Symfony Documentation`: https://symfony.com/doc
-CONTENT;
+RST;
 
-        $valid_follows_code_block = <<<'CONTENT'
+        $valid_follows_code_block = <<<'RST'
 The second argument of the :method:`Symfony\\Component\\Yaml\\Yaml::dump`
 method customizes the level at which the output switches from the expanded
 representation to the inline one::
@@ -365,9 +365,9 @@ representation to the inline one::
     bar:
         foo: bar
         bar: baz
-CONTENT;
+RST;
 
-        $valid_code_block_after_table = <<<'CONTENT'
+        $valid_code_block_after_table = <<<'RST'
 You can use the following parameters:
 
 ======================================  ============================================================
@@ -395,9 +395,9 @@ Parameter                               Description
             ])
         ;
     }
-CONTENT;
+RST;
 
-        $invalid_content2 = <<<'CONTENT'
+        $invalid_content2 = <<<'RST'
 label_translation_parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -431,7 +431,7 @@ You can specify the placeholder values as follows:
 The ``label_translation_parameters`` option of buttons is merged with the same
 option of its parents, so buttons can reuse and/or override any of the parent
 placeholders.
-CONTENT;
+RST;
 
         return [
             [
@@ -492,13 +492,13 @@ CONTENT;
             ],
             'valid because previous paragraph ends with question mark (?)' => [
                 null,
-                new RstSample(<<<CONTENT
+                new RstSample(<<<RST
 This is nice PHP code, isn't it?
 
 .. code-block:: php
 
     echo 'Hello World!';
-CONTENT
+RST
                 , 2),
             ],
         ];

@@ -88,7 +88,7 @@ class OrderedUseStatementsTest extends TestCase
             ];
         }
 
-        $valid_with_trait = <<<'CONTENT'
+        $valid_with_trait = <<<'RST'
 In addition, the Console component provides a PHP trait called ``LockableTrait``
 that adds two convenient methods to lock and release commands::
 
@@ -101,9 +101,9 @@ that adds two convenient methods to lock and release commands::
     class UpdateContentsCommand extends Command
     {
         use LockableTrait;
-CONTENT;
+RST;
 
-        $valid_with_two_code_examples_in_one_block = <<<'CONTENT'
+        $valid_with_two_code_examples_in_one_block = <<<'RST'
     .. code-block:: php
 
         // src/AppBundle/Entity/Address.php
@@ -144,17 +144,17 @@ CONTENT;
                 $metadata->addPropertyConstraint('lastName', new Assert\NotBlank());
             }
         }
-CONTENT;
+RST;
 
-        $valid_with_nsort = <<<'CONTENT'
+        $valid_with_nsort = <<<'RST'
 .. code-block:: php
 
     use AppBundle\EventListener\SearchIndexer;
     use AppBundle\EventListener\SearchIndexer2;
     use AppBundle\EventListener\SearchIndexerSubscriber;
-CONTENT;
+RST;
 
-        $valid_with_use_statement_in_comment = <<<'CONTENT'
+        $valid_with_use_statement_in_comment = <<<'RST'
 a ``postPersist()`` method, which will be called when the event is dispatched::
 
     // src/AppBundle/EventListener/SearchIndexer.php
@@ -165,9 +165,9 @@ a ``postPersist()`` method, which will be called when the event is dispatched::
     use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 
     class SearchIndexer
-CONTENT;
+RST;
 
-        $valid_without_class_but_variable_in_between = <<<'CONTENT'
+        $valid_without_class_but_variable_in_between = <<<'RST'
 Instead of loading each file manually, you'll only have to register the
 generated class map with, for example, the
 :class:`Symfony\\Component\\ClassLoader\\MapClassLoader`::
@@ -184,9 +184,9 @@ generated class map with, for example, the
     $foo = new Foo();
 
     // ...
-CONTENT;
+RST;
 
-        $valid_with_uppercase = <<<'CONTENT'
+        $valid_with_uppercase = <<<'RST'
 for that::
 
     // src/AppBundle/Form/Type/LocationType.php
@@ -199,9 +199,9 @@ for that::
     use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class LocationType extends AbstractType
-CONTENT;
+RST;
 
-        $valid2 = <<<'CONTENT'
+        $valid2 = <<<'RST'
 the user::
 
     use Symfony\Component\HttpFoundation\RequestMatcher;
@@ -209,9 +209,9 @@ the user::
     use Symfony\Component\Security\Http\FirewallMap;
 
     $firewallMap = new FirewallMap();
-CONTENT;
+RST;
 
-        $valid_in_trait_definition = <<<'CONTENT'
+        $valid_in_trait_definition = <<<'RST'
 This  allows you to create helper traits like RouterAware, LoggerAware, etc...
 and compose your services with them::
 
@@ -257,7 +257,7 @@ and compose your services with them::
             // $this->logger() ...
         }
     }
-CONTENT;
+RST;
 
         yield 'valid with trait' => [
             null,
