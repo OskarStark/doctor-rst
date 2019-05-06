@@ -21,8 +21,8 @@ use App\Rst\RstParser;
 
 /**
  * @Description("Make sure Composer `--dev` option for `require` command is not used at the end.")
- * @InvalidExample("composer require symfony/form --dev")
- * @ValidExample("composer require --dev symfony/form")
+ * @InvalidExample("composer require symfony/var-dumper --dev")
+ * @ValidExample("composer require --dev symfony/var-dumper")
  */
 class ComposerDevOptionNotAtTheEnd extends AbstractRule implements Rule
 {
