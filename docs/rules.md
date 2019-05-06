@@ -179,13 +179,13 @@ Pattern | Message
 ##### Valid Examples :+1:
 
 ```rst
-composer require symfony/form --dev
+composer require symfony/var-dumper --dev
 ```
 
 ##### Invalid Examples :-1:
 
 ```rst
-composer require --dev symfony/form
+composer require --dev symfony/var-dumper
 ```
 
 ## `composer_dev_option_not_at_the_end`
@@ -197,13 +197,13 @@ composer require --dev symfony/form
 ##### Valid Examples :+1:
 
 ```rst
-composer require --dev symfony/form
+composer require --dev symfony/var-dumper
 ```
 
 ##### Invalid Examples :-1:
 
 ```rst
-composer require symfony/form --dev
+composer require symfony/var-dumper --dev
 ```
 
 ## `correct_code_block_directive_based_on_the_content`
