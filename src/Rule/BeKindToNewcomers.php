@@ -47,15 +47,15 @@ class BeKindToNewcomers extends CheckListRule
             '/simply/i' => null,
             '/easy/i' => null,
             '/easily/i' => null,
-            '/obviously/i' => null,
+            '/obvious/i' => null,
             '/trivial/i' => null,
             '/just/i' => null,
             '/quick/i' => null,
             '/of course/i' => null,
             '/logically/i' => null,
-            '/clearly/i' => null,
+            '/clear/i' => null,
             '/merely/i' => null,
-            '/basically/i' => null,
+            '/basic/i' => null,
         ];
     }
 }
