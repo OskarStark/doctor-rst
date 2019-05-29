@@ -21,7 +21,7 @@
 * [extend_controller](#extend_controller)
 * [final_admin_classes](#final_admin_classes)
 * [final_admin_extension_classes](#final_admin_extension_classes)
-* [indention](#indention)
+* [indention](#indention) :exclamation:
 * [kernel_instead_of_app_kernel](#kernel_instead_of_app_kernel)
 * [line_length](#line_length)
 * [lowercase_as_in_use_statements](#lowercase_as_in_use_statements)
@@ -126,15 +126,15 @@ Pattern | Message
 `/simply/i` | Please remove the word: %s
 `/easy/i` | Please remove the word: %s
 `/easily/i` | Please remove the word: %s
-`/obviously/i` | Please remove the word: %s
+`/obvious/i` | Please remove the word: %s
 `/trivial/i` | Please remove the word: %s
 `/just/i` | Please remove the word: %s
 `/quick/i` | Please remove the word: %s
 `/of course/i` | Please remove the word: %s
 `/logically/i` | Please remove the word: %s
-`/clearly/i` | Please remove the word: %s
+`/clear/i` | Please remove the word: %s
 `/merely/i` | Please remove the word: %s
-`/basically/i` | Please remove the word: %s
+`/basic/i` | Please remove the word: %s
 
 ## `blank_line_after_directive`
 
@@ -268,7 +268,7 @@ composer require symfony/var-dumper --dev
 
 ## `indention`
 
-#### Groups [`@Sonata`, `@Symfony`]
+#### Groups [`@Experimental`]
 
 #### Configuration options
 
