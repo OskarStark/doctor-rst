@@ -1498,16 +1498,16 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v4.2.8",
+            "version": "v4.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "e45135658bd6c14b61850bf131c4f09a55133f69"
+                "reference": "e0ff582c4b038567a7c6630f136488b1d793e6a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/e45135658bd6c14b61850bf131c4f09a55133f69",
-                "reference": "e45135658bd6c14b61850bf131c4f09a55133f69",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/e0ff582c4b038567a7c6630f136488b1d793e6a9",
+                "reference": "e0ff582c4b038567a7c6630f136488b1d793e6a9",
                 "shasum": ""
             },
             "require": {
@@ -1543,7 +1543,7 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2019-04-06T13:51:08+00:00"
+            "time": "2019-05-26T20:47:34+00:00"
         },
         {
             "name": "symfony/flex",
@@ -1596,16 +1596,16 @@
         },
         {
             "name": "symfony/framework-bundle",
-            "version": "v4.2.8",
+            "version": "v4.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "2748b12d8c456dbfeae149fc88b3012a333d817b"
+                "reference": "6b51be8f4a8f7966efd54c212662db1bb6cb656a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/2748b12d8c456dbfeae149fc88b3012a333d817b",
-                "reference": "2748b12d8c456dbfeae149fc88b3012a333d817b",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/6b51be8f4a8f7966efd54c212662db1bb6cb656a",
+                "reference": "6b51be8f4a8f7966efd54c212662db1bb6cb656a",
                 "shasum": ""
             },
             "require": {
@@ -1711,7 +1711,7 @@
             ],
             "description": "Symfony FrameworkBundle",
             "homepage": "https://symfony.com",
-            "time": "2019-05-01T08:36:31+00:00"
+            "time": "2019-05-22T18:38:35+00:00"
         },
         {
             "name": "symfony/http-foundation",
