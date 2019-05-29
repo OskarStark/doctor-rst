@@ -1962,16 +1962,16 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v4.2.8",
+            "version": "v4.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "f4e43bb0dff56f0f62fa056c82d7eadcdb391bab"
+                "reference": "c5ce09ed9db079dded1017a2494dbf6820efd204"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/f4e43bb0dff56f0f62fa056c82d7eadcdb391bab",
-                "reference": "f4e43bb0dff56f0f62fa056c82d7eadcdb391bab",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/c5ce09ed9db079dded1017a2494dbf6820efd204",
+                "reference": "c5ce09ed9db079dded1017a2494dbf6820efd204",
                 "shasum": ""
             },
             "require": {
@@ -2034,7 +2034,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-04-27T09:38:08+00:00"
+            "time": "2019-05-20T16:15:26+00:00"
         },
         {
             "name": "symfony/var-exporter",
