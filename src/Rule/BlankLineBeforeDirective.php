@@ -37,10 +37,7 @@ class BlankLineBeforeDirective extends AbstractRule implements Rule
             return;
         }
 
-        if (RstParser::isDefaultDirective($line)
-            || !RstParser::isDirective($line)
-            || RstParser::directiveIs($line, RstParser::DIRECTIVE_ROLE)
-        ) {
+        if (RstParser::isDefaultDirective($line) || !RstParser::isDirective($line)) {
             return;
         }
 

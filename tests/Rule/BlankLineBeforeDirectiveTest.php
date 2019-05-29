@@ -58,15 +58,6 @@ RST
             , 3),
         ];
 
-        yield 'valid because .. role directive is ignored' => [
-            null,
-            new RstSample(<<<'RST'
-.. role:: foo
-.. role:: bar
-RST
-                , 1),
-        ];
-
         foreach (RstParser::DIRECTIVES as $directive) {
             if (RstParser::DIRECTIVE_ROLE == $directive) {
                 continue;
