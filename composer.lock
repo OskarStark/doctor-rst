@@ -1072,7 +1072,7 @@
         },
         {
             "name": "symfony/contracts",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/contracts.git",
