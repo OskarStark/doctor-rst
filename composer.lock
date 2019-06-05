@@ -3659,22 +3659,22 @@
         },
         {
             "name": "symfony/web-profiler-bundle",
-            "version": "v4.2.9",
+            "version": "v4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "1bd05666e23aff4306d7b236b6ccdf6d2e99fe00"
+                "reference": "b371e362dada3c1fcd9e7f7a31a91bd681860331"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/1bd05666e23aff4306d7b236b6ccdf6d2e99fe00",
-                "reference": "1bd05666e23aff4306d7b236b6ccdf6d2e99fe00",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/b371e362dada3c1fcd9e7f7a31a91bd681860331",
+                "reference": "b371e362dada3c1fcd9e7f7a31a91bd681860331",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.3",
                 "symfony/config": "^4.2",
-                "symfony/http-kernel": "^4.2.6",
+                "symfony/http-kernel": "^4.3",
                 "symfony/routing": "~3.4|~4.0",
                 "symfony/twig-bundle": "~4.2",
                 "symfony/var-dumper": "~3.4|~4.0",
@@ -3682,7 +3682,7 @@
             },
             "conflict": {
                 "symfony/dependency-injection": "<3.4",
-                "symfony/event-dispatcher": "<3.4",
+                "symfony/form": "<4.3",
                 "symfony/messenger": "<4.2",
                 "symfony/var-dumper": "<3.4"
             },
@@ -3694,7 +3694,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.2-dev"
+                    "dev-master": "4.3-dev"
                 }
             },
             "autoload": {
@@ -3721,20 +3721,20 @@
             ],
             "description": "Symfony WebProfilerBundle",
             "homepage": "https://symfony.com",
-            "time": "2019-05-26T20:47:34+00:00"
+            "time": "2019-05-26T20:47:49+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v2.11.0",
+            "version": "v2.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "c344879ae57dc1487b1df3e3d8325936125ba2cc"
+                "reference": "0418e17113266e84c03ccf758680af8abc4b22dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/c344879ae57dc1487b1df3e3d8325936125ba2cc",
-                "reference": "c344879ae57dc1487b1df3e3d8325936125ba2cc",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/0418e17113266e84c03ccf758680af8abc4b22dc",
+                "reference": "0418e17113266e84c03ccf758680af8abc4b22dc",
                 "shasum": ""
             },
             "require": {
@@ -3745,7 +3745,7 @@
             "require-dev": {
                 "psr/container": "^1.0",
                 "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8|^5.0"
             },
             "type": "library",
             "extra": {
@@ -3788,7 +3788,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-05-31T06:21:42+00:00"
+            "time": "2019-06-04T11:32:47+00:00"
         }
     ],
     "aliases": [],
