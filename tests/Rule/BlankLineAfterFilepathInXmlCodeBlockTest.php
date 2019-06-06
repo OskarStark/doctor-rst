@@ -32,61 +32,72 @@ class BlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                'Please add a blank line after "<!-- config/services.xml -->"',
+        $paths = [
+            'config/services.xml',
+            'translations/messages.xlf',
+            'translations/messages.xliff',
+        ];
+
+        foreach ($paths as $path) {
+            yield [
+                sprintf('Please add a blank line after "<!-- %s -->"', $path),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    '    <!-- config/services.xml -->',
+                    sprintf('    <!-- %s -->', $path),
                     '    <foo\/>',
                 ]),
-            ],
-            [
+            ];
+
+            yield [
                 null,
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    '    <!-- config/services.xml -->',
+                    sprintf('    <!-- %s -->', $path),
                     '',
                     '    <foo\/>',
                 ]),
-            ],
-            [
-                'Please add a blank line after "<!--config/services.xml-->"',
+            ];
+
+            yield [
+                sprintf('Please add a blank line after "<!--%s-->"', $path),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    '    <!--config/services.xml-->',
+                    sprintf('    <!--%s-->', $path),
                     '    <foo\/>',
                 ]),
-            ],
-            [
+            ];
+
+            yield [
                 null,
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    '    <!--config/services.xml-->',
+                    sprintf('    <!--%s-->', $path),
                     '',
                     '    <foo\/>',
                 ]),
-            ],
-            [
+            ];
+
+            yield [
                 null,
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    '    <!--config/services.xml-->',
+                    sprintf('    <!--%s-->', $path),
                     '    <!-- a comment -->',
                     '    <foo\/>',
                 ]),
-            ],
-            [
-                null,
-                new RstSample('temp'),
-            ],
+            ];
+        }
+
+        yield [
+            null,
+            new RstSample('temp'),
         ];
     }
 }
