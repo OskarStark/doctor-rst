@@ -506,6 +506,8 @@ Pattern | Message
 `/argon21/` | Typo in word "%s", use "argon2i"
 `/descritpion/i` | Typo in word "%s"
 `/recalcuate/i` | Typo in word "%s"
+`/achived/i` | Typo in word "%s"
+`/overriden/i` | Typo in word "%s"
 
 ## `use_deprecated_directive_instead_of_versionadded`
 
