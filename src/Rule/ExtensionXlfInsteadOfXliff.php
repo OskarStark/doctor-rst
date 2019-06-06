@@ -17,7 +17,6 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
-use App\Rst\RstParser;
 
 /**
  * @Description("Make sure to only use `.xlf` instead of `.xliff`.")
