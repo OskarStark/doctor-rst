@@ -80,7 +80,6 @@ Pattern | Message
 `/centre/i` | Please use American English for: %s
 `/colour/i` | Please use American English for: %s
 `/flavour/i` | Please use American English for: %s
-`/analyse/i` | Please use American English for: %s
 `/licence/i` | Please use American English for: %s
 
 ##### Valid Examples :+1:
