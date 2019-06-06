@@ -19,6 +19,7 @@
 * [extend_abstract_admin](#extend_abstract_admin)
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
+* [extension_xlf_instead_of_xliff](#extension_xlf_instead_of_xliff)
 * [final_admin_classes](#final_admin_classes)
 * [final_admin_extension_classes](#final_admin_extension_classes)
 * [indention](#indention) :exclamation:
@@ -256,6 +257,24 @@ composer require symfony/var-dumper --dev
   > _Ensure `Controller` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\Controller` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\AbstractController`._
 
 #### Groups [`@Symfony`]
+
+## `extension_xlf_instead_of_xliff`
+
+  > _Make sure to only use `.xlf` instead of `.xliff`._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+messages.xlf
+```
+
+##### Invalid Examples :-1:
+
+```rst
+messages.xliff
+```
 
 ## `final_admin_classes`
 
