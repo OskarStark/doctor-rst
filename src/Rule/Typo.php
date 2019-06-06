@@ -54,6 +54,8 @@ class Typo extends CheckListRule
             '/argon21/' => 'Typo in word "%s", use "argon2i"',
             '/descritpion/i' => null,
             '/recalcuate/i' => null,
+            '/achived/i' => null,
+            '/overriden/i' => null,
         ];
     }
 }
