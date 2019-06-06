@@ -57,7 +57,7 @@ class NoBlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    sprintf('    <!-- %s -->',$path),
+                    sprintf('    <!-- %s -->', $path),
                     '    <foo\/>',
                 ]),
             ];
