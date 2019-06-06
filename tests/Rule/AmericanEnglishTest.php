@@ -61,7 +61,6 @@ class AmericanEnglishTest extends TestCase
             'center',
             'color',
             'flavor',
-            'analyze',
             'license',
         ];
 
@@ -82,7 +81,6 @@ class AmericanEnglishTest extends TestCase
             'centre',
             'colour',
             'flavour',
-            'analyse',
             'licence',
         ];
 

@@ -56,7 +56,6 @@ class AmericanEnglish extends CheckListRule
             '/centre/i' => null,
             '/colour/i' => null,
             '/flavour/i' => null,
-            '/analyse/i' => null,
             '/licence/i' => null,
         ];
     }
