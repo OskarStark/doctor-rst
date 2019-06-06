@@ -70,7 +70,7 @@ trait DirectiveTrait
     {
         $lines = Helper::cloneIterator($lines, $number);
 
-        $currentIndention = RstParser::indention($lines->current());
+        $initialIndention = RstParser::indention($lines->current());
 
         $i = $number;
         while ($i >= 1) {
@@ -84,16 +84,16 @@ trait DirectiveTrait
 
             $lineIndention = RstParser::indention($lines->current());
 
-            if ($lineIndention < $currentIndention) {
+            if ($lineIndention < $initialIndention) {
                 return false;
             }
 
-            if ($lineIndention === $currentIndention && !RstParser::isDirective($lines->current())) {
+            if ($lineIndention === $initialIndention && !RstParser::isDirective($lines->current())) {
                 return false;
             }
 
             if ((
-                    $lineIndention === $currentIndention
+                    $lineIndention === $initialIndention
                     && RstParser::isDirective($lines->current())
                     && RstParser::directiveIs($lines->current(), $directive)
                 ) || (0 === $lineIndention
@@ -114,7 +114,7 @@ trait DirectiveTrait
                     return $found;
                 }
 
-                return false;
+                return true;
             }
         }
 

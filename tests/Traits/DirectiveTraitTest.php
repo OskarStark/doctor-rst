@@ -27,6 +27,7 @@ class DirectiveTraitTest extends TestCase
         $this->traitWrapper = new class() {
             use DirectiveTrait {
                 DirectiveTrait::in as public;
+                DirectiveTrait::previousDirectiveIs as public;
             }
         };
     }
@@ -404,6 +405,83 @@ RST;
             ], 3),
             RstParser::DIRECTIVE_CODE_BLOCK,
             [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_ANNOTATIONS],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @group temp
+     *
+     * @dataProvider previousDirectiveIsProvider
+     */
+    public function previousDirectiveIs(bool $expected, RstSample $sample, string $directive, ?array $types = null)
+    {
+        $this->assertSame(
+            $expected,
+            $this->traitWrapper->previousDirectiveIs($directive, $sample->getContent(), $sample->getLineNumber(), $types)
+        );
+    }
+
+    public function previousDirectiveIsProvider()
+    {
+        yield [
+            false,
+            new RstSample('I am just a cool text!'),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+        ];
+
+        yield [
+            false,
+            new RstSample(<<<RST
+.. code-block:: php
+
+    // I am just a cool text!
+RST
+            , 2),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+        ];
+
+        yield [
+            true,
+            new RstSample(<<<RST
+.. code-block:: php
+
+    // I am just a cool text!
+    
+.. code-block:: yaml
+RST
+            , 4),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            [RstParser::CODE_BLOCK_PHP],
+        ];
+
+        yield [
+            true,
+            new RstSample(<<<RST
+.. code-block:: php
+
+    // I am just a cool text!
+    
+.. code-block:: yaml
+RST
+                , 4),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+        ];
+
+        yield [
+            true,
+            new RstSample(<<<RST
+.. configuration-block::
+
+    .. code-block: yaml
+
+        // I am just a cool text!
+
+.. code-block:: php
+RST
+                , 6),
+            RstParser::DIRECTIVE_CONFIGURATION_BLOCK,
         ];
     }
 }

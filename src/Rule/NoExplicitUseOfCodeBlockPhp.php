@@ -71,6 +71,11 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
             return;
         }
 
+        // check if the previous directive is a configuration-block
+        if ($this->previousDirectiveIs(RstParser::DIRECTIVE_CONFIGURATION_BLOCK, $lines, $number)) {
+            return;
+        }
+
         return 'Please do not use ".. code-block:: php", use "::" instead.';
     }
 

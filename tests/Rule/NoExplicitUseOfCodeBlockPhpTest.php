@@ -59,7 +59,7 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
                     '',
                     '     .. code-block:: php',
                     '',
-                    'namespace App\Entity;',
+                    '         namespace App\Entity;',
                 ], 2),
             ],
             [
@@ -67,13 +67,13 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
                 new RstSample([
                     '.. configuration-block::',
                     '',
-                    ' .. code-block:: php',
+                    '    .. code-block:: php',
                     '',
-                    '  namespace App\Entity;',
+                    '        namespace App\Entity;',
                 ], 2),
             ],
             [
-                'Please do not use ".. code-block:: php", use "::" instead.',
+                null,
                 new RstSample([
                     '    .. configuration-block::',
                     '',
@@ -83,7 +83,7 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
                     '',
                     '    .. code-block:: php',
                     '',
-                    'namespace App\Entity;',
+                    '        namespace App\Entity;',
                 ], 6),
             ],
         ];
@@ -500,6 +500,21 @@ This is nice PHP code, isn't it?
     echo 'Hello World!';
 RST
                 , 2),
+            ],
+            'php code block following a configuration-block' => [
+                null,
+                new RstSample(<<<RST
+.. configuration-block::
+
+    .. code-block:: xml
+    
+        content1
+
+.. code-block:: php
+
+    echo 'Hello World!';
+RST
+                , 6),
             ],
         ];
     }
