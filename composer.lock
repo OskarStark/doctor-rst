@@ -858,16 +858,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "f09463d1165396745fef0aae64b7a784c891be9f"
+                "reference": "2edc417da273bafee589a8758f0278416d04af38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/f09463d1165396745fef0aae64b7a784c891be9f",
-                "reference": "f09463d1165396745fef0aae64b7a784c891be9f",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/2edc417da273bafee589a8758f0278416d04af38",
+                "reference": "2edc417da273bafee589a8758f0278416d04af38",
                 "shasum": ""
             },
             "require": {
@@ -932,7 +932,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-05-27T08:16:38+00:00"
+            "time": "2019-06-06T10:05:02+00:00"
         },
         {
             "name": "symfony/config",
@@ -2244,7 +2244,7 @@
         },
         {
             "name": "symfony/var-exporter",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
