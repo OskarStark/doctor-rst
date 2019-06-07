@@ -2924,22 +2924,22 @@
         },
         {
             "name": "symfony/http-client",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-client.git",
-                "reference": "fec81f1da93f50334085b00113d2fb6f34efc801"
+                "reference": "c453b1bb8e8a8b79c9db65a1bd86822f8c6e2bb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-client/zipball/fec81f1da93f50334085b00113d2fb6f34efc801",
-                "reference": "fec81f1da93f50334085b00113d2fb6f34efc801",
+                "url": "https://api.github.com/repos/symfony/http-client/zipball/c453b1bb8e8a8b79c9db65a1bd86822f8c6e2bb7",
+                "reference": "c453b1bb8e8a8b79c9db65a1bd86822f8c6e2bb7",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.3",
                 "psr/log": "^1.0",
-                "symfony/http-client-contracts": "^1.1",
+                "symfony/http-client-contracts": "^1.1.3",
                 "symfony/polyfill-php73": "^1.11"
             },
             "provide": {
@@ -2982,7 +2982,7 @@
             ],
             "description": "Symfony HttpClient component",
             "homepage": "https://symfony.com",
-            "time": "2019-05-28T08:25:44+00:00"
+            "time": "2019-06-05T13:19:12+00:00"
         },
         {
             "name": "symfony/maker-bundle",
