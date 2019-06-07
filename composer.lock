@@ -2767,7 +2767,7 @@
         },
         {
             "name": "symfony/debug-bundle",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug-bundle.git",
@@ -3473,16 +3473,16 @@
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v4.3.0",
+            "version": "v4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
-                "reference": "5ed4b37b36e37baeb36028e2e27725c571853444"
+                "reference": "52aa76480b775be0f6465b90ca9e3c2dccc8f3cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/5ed4b37b36e37baeb36028e2e27725c571853444",
-                "reference": "5ed4b37b36e37baeb36028e2e27725c571853444",
+                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/52aa76480b775be0f6465b90ca9e3c2dccc8f3cd",
+                "reference": "52aa76480b775be0f6465b90ca9e3c2dccc8f3cd",
                 "shasum": ""
             },
             "require": {
@@ -3567,7 +3567,7 @@
             ],
             "description": "Symfony Twig Bridge",
             "homepage": "https://symfony.com",
-            "time": "2019-05-28T09:03:44+00:00"
+            "time": "2019-06-01T07:11:44+00:00"
         },
         {
             "name": "symfony/twig-bundle",
