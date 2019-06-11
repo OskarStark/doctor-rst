@@ -17,6 +17,7 @@ use App\Handler\Registry;
 use App\Helper\Helper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
+use App\Value\RuleGroup;
 
 class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 {
@@ -24,7 +25,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SYMFONY];
+        return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
     }
 
     public function check(\ArrayIterator $lines, int $number)

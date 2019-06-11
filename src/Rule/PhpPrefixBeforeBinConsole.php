@@ -18,6 +18,7 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure `bin/console` is prefixed with `php` to be safe executable on Microsoft Windows.")
@@ -28,7 +29,7 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SYMFONY];
+        return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
     }
 
     public function check(\ArrayIterator $lines, int $number)

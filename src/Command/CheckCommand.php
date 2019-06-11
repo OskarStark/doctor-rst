@@ -17,6 +17,8 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Rule\Configurable;
 use App\Rule\Rule;
+use App\Value\RuleGroup;
+use App\Value\RuleName;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -88,9 +90,9 @@ class CheckCommand extends Command
 
         $this->config = Yaml::parseFile($configFile);
 
-        foreach ($this->config['rules'] as $rule => $options) {
+        foreach ($this->config['rules'] as $name => $options) {
             /** @var Rule[] $rules */
-            $rules = $this->registry->getRulesByName($rule);
+            $rules = $this->registry->getRulesByName(RuleName::fromString($name));
 
             foreach ($rules as $rule) {
                 if ($rule instanceof Configurable) {
@@ -109,12 +111,12 @@ class CheckCommand extends Command
 
         if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
             foreach ($input->getOption('rule') as $rule) {
-                $this->rules[] = $this->registry->getRule($rule);
+                $this->rules[] = $this->registry->getRule(RuleName::fromString($rule));
             }
         }
 
         if (!empty($input->getOption('group'))) {
-            $this->rules = $this->registry->getRulesByGroup($input->getOption('group'));
+            $this->rules = $this->registry->getRulesByGroup(RuleGroup::fromString($input->getOption('group')));
         }
 
         if (empty($this->rules)) {

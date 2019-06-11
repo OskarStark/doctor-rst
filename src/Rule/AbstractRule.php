@@ -13,15 +13,22 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Value\RuleGroup;
+use App\Value\RuleName;
 use Doctrine\Common\Inflector\Inflector;
 
 abstract class AbstractRule
 {
-    public static function getName(): string
+    public static function getName(): RuleName
     {
-        return Inflector::tableize(substr((string) strrchr(static::class, '\\'), 1));
+        return RuleName::fromString(
+            Inflector::tableize(substr((string) strrchr(static::class, '\\'), 1))
+        );
     }
 
+    /**
+     * @return RuleGroup[]
+     */
     public static function getGroups(): array
     {
         return [];

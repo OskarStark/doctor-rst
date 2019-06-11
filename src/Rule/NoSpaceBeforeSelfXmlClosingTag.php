@@ -15,12 +15,13 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\RuleGroup;
 
 class NoSpaceBeforeSelfXmlClosingTag extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SONATA];
+        return [RuleGroup::fromString(Registry::GROUP_SONATA)];
     }
 
     public function check(\ArrayIterator $lines, int $number)

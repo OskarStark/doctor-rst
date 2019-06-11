@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\RuleGroup;
 
 /**
  * @Description("Propose alternatives for disallowed code block types.")
@@ -24,7 +25,10 @@ class ReplaceCodeBlockTypes extends CheckListRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
+        return [
+            RuleGroup::fromString(Registry::GROUP_SONATA),
+            RuleGroup::fromString(Registry::GROUP_SYMFONY),
+        ];
     }
 
     public function check(\ArrayIterator $lines, int $number)

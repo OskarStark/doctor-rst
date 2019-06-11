@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure `AbstractAdmin` and the corresponding namespace `Sonata\AdminBundle\Admin\AbstractAdmin` is used.")
@@ -24,7 +25,7 @@ class ExtendAbstractAdmin extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SONATA];
+        return [RuleGroup::fromString(Registry::GROUP_SONATA)];
     }
 
     public function check(\ArrayIterator $lines, int $number)

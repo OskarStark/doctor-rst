@@ -16,12 +16,13 @@ namespace App\Rule;
 use App\Handler\Registry;
 use App\Helper\TwigHelper;
 use App\Rst\RstParser;
+use App\Value\RuleGroup;
 
 class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SYMFONY];
+        return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
     }
 
     public function check(\ArrayIterator $lines, int $number)

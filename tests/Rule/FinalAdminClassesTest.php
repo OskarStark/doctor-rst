@@ -15,6 +15,7 @@ namespace App\Tests\Rule;
 
 use App\Rule\FinalAdminClasses;
 use App\Tests\RstSample;
+use App\Value\RuleName;
 use PHPUnit\Framework\TestCase;
 
 class FinalAdminClassesTest extends TestCase
@@ -24,7 +25,8 @@ class FinalAdminClassesTest extends TestCase
      */
     public function name()
     {
-        $this->assertSame('final_admin_classes', FinalAdminClasses::getName());
+        $this->assertInstanceOf(RuleName::class, FinalAdminClasses::getName());
+        $this->assertSame('final_admin_classes', FinalAdminClasses::getName()->asString());
     }
 
     /**

@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\RuleGroup;
 
 /**
  * @Description("Make sure you have a blank line after each directive.")
@@ -24,7 +25,10 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
+        return [
+            RuleGroup::fromString(Registry::GROUP_SONATA),
+            RuleGroup::fromString(Registry::GROUP_SYMFONY),
+        ];
     }
 
     public function check(\ArrayIterator $lines, int $number)

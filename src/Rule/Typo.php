@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
+use App\Value\RuleGroup;
 
 /**
  * @Description("Report common typos.")
@@ -23,7 +24,10 @@ class Typo extends CheckListRule
 {
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
+        return [
+            RuleGroup::fromString(Registry::GROUP_SONATA),
+            RuleGroup::fromString(Registry::GROUP_SYMFONY),
+        ];
     }
 
     public function check(\ArrayIterator $lines, int $number)
