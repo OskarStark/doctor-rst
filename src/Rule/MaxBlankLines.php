@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MaxBlankLines extends AbstractRule implements Rule, Configurable
@@ -49,7 +50,10 @@ class MaxBlankLines extends AbstractRule implements Rule, Configurable
 
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
+        return [
+            RuleGroup::fromString(Registry::GROUP_SONATA),
+            RuleGroup::fromString(Registry::GROUP_SYMFONY),
+        ];
     }
 
     public function check(\ArrayIterator $lines, int $number)

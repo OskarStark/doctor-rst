@@ -20,6 +20,7 @@ use App\Helper\XmlHelper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Traits\ListTrait;
+use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Indention extends AbstractRule implements Rule, Configurable
@@ -52,7 +53,7 @@ class Indention extends AbstractRule implements Rule, Configurable
 
     public static function getGroups(): array
     {
-        return [Registry::GROUP_EXPERIMENTAL];
+        return [RuleGroup::fromString(Registry::GROUP_EXPERIMENTAL)];
     }
 
     public function check(\ArrayIterator $lines, int $number)

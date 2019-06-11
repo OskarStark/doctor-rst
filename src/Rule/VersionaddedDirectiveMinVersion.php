@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Configurable
@@ -43,7 +44,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Conf
 
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SYMFONY];
+        return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
     }
 
     public function check(\ArrayIterator $lines, int $number)

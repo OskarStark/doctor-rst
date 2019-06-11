@@ -15,7 +15,8 @@ namespace App\Handler;
 
 use App\Rule\CheckListRule;
 use App\Rule\Rule;
-use Webmozart\Assert\Assert;
+use App\Value\RuleGroup;
+use App\Value\RuleName;
 
 final class Registry
 {
@@ -46,13 +47,13 @@ final class Registry
                 $i = 0;
                 foreach ($rule::getList() as $search => $message) {
                     $clonedRule = clone $rule;
-                    $this->rules[$rule::getName().'_'.$i] = $clonedRule->configure($search, $message);
+                    $this->rules[$rule::getName()->asString().'_'.$i] = $clonedRule->configure($search, $message);
                     ++$i;
                 }
                 continue;
             }
 
-            $this->rules[$rule::getName()] = $rule;
+            $this->rules[$rule::getName()->asString()] = $rule;
         }
     }
 
@@ -63,20 +64,24 @@ final class Registry
         return $this;
     }
 
-    public function getRules()
+    /**
+     * @return Rule[]
+     */
+    public function getRules(): array
     {
         return $this->rules;
     }
 
-    public function getRawRules()
+    /**
+     * @return Rule[]
+     */
+    public function getRawRules(): array
     {
         return $this->rawRules;
     }
 
-    public function getRulesByGroup(string $group)
+    public function getRulesByGroup(RuleGroup $group)
     {
-        Assert::oneOf($group, self::GROUPS);
-
         $rules = [];
         foreach ($this->rules as $rule) {
             if (\in_array($group, $rule::getGroups())) {
@@ -87,16 +92,16 @@ final class Registry
         return $rules;
     }
 
-    public function getRule(string $name): Rule
+    public function getRule(RuleName $name): Rule
     {
-        if (!isset($this->rules[$name])) {
-            throw new \InvalidArgumentException(sprintf('Could not find rule:: %s', $name));
+        if (!isset($this->rules[$name->asString()])) {
+            throw new \InvalidArgumentException(sprintf('Could not find rule:: %s', $name->asString()));
         }
 
-        return $this->rules[$name];
+        return $this->rules[$name->asString()];
     }
 
-    public function getRulesByName(string $name): array
+    public function getRulesByName(RuleName $name): array
     {
         $rules = [];
 
@@ -104,7 +109,7 @@ final class Registry
             $rules[] = $this->getRule($name);
         } catch (\InvalidArgumentException $e) {
             foreach ($this->rules as $key => $rule) {
-                if (preg_match(sprintf('/%s/', $name), $key)) {
+                if (preg_match(sprintf('/%s/', $name->asString()), $key)) {
                     $rules[] = $rule;
                 }
             }

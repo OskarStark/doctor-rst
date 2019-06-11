@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
+use App\Value\RuleGroup;
 
 class EvenBracketsCount extends AbstractRule implements Rule
 {
@@ -29,7 +30,7 @@ class EvenBracketsCount extends AbstractRule implements Rule
 
     public static function getGroups(): array
     {
-        return [Registry::GROUP_EXPERIMENTAL];
+        return [RuleGroup::fromString(Registry::GROUP_EXPERIMENTAL)];
     }
 
     public function check(\ArrayIterator $lines, int $number)

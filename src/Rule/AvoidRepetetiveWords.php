@@ -23,6 +23,7 @@ use App\Helper\XmlHelper;
 use App\Helper\YamlHelper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
+use App\Value\RuleGroup;
 
 /**
  * @Description("Make sure that a word is not used twice in a row.")
@@ -35,7 +36,10 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
 
     public static function getGroups(): array
     {
-        return [Registry::GROUP_SONATA, Registry::GROUP_SYMFONY];
+        return [
+            RuleGroup::fromString(Registry::GROUP_SONATA),
+            RuleGroup::fromString(Registry::GROUP_SYMFONY),
+        ];
     }
 
     public function check(\ArrayIterator $lines, int $number)
