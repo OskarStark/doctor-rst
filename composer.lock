@@ -3187,23 +3187,22 @@
         },
         {
             "name": "symfony/panther",
-            "version": "v0.4.0",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/panther.git",
-                "reference": "7a041cb4fc56e16f11808943633068a8fa3d6a51"
+                "reference": "6581f7bc0498f0328fe955a2894ffc40070d2bcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/panther/zipball/7a041cb4fc56e16f11808943633068a8fa3d6a51",
-                "reference": "7a041cb4fc56e16f11808943633068a8fa3d6a51",
+                "url": "https://api.github.com/repos/symfony/panther/zipball/6581f7bc0498f0328fe955a2894ffc40070d2bcb",
+                "reference": "6581f7bc0498f0328fe955a2894ffc40070d2bcb",
                 "shasum": ""
             },
             "require": {
                 "facebook/webdriver": "^1.5",
                 "php": ">=7.1",
                 "symfony/browser-kit": "^4.0",
-                "symfony/contracts": "^1.1",
                 "symfony/http-client": "^4.3",
                 "symfony/polyfill-php72": "^1.9",
                 "symfony/process": "^3.4 || ^4.0"
@@ -3254,7 +3253,7 @@
                 "testing",
                 "webdriver"
             ],
-            "time": "2019-06-04T09:44:04+00:00"
+            "time": "2019-06-11T14:14:33+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
