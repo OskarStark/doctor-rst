@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Traits;
 
 use App\Helper\Helper;
+use App\Helper\PhpHelper;
 use App\Rst\RstParser;
 
 trait ListTrait
@@ -23,7 +24,13 @@ trait ListTrait
         $lines = Helper::cloneIterator($lines, $number);
 
         if (RstParser::isListItem($lines->current())) {
-            return true;
+            if ((new PhpHelper())->isPartOfMultilineComment($lines, $number)
+                || (new PhpHelper())->isPartOfDocBlock($lines, $number)
+            ) {
+                return false;
+            } else {
+                return true;
+            }
         }
 
         $currentIndention = RstParser::indention($lines->current());

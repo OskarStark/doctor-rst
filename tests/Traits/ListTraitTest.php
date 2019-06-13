@@ -126,6 +126,20 @@ RST;
 
         yield 'first line (numeric + parenthesis)' => [true, new RstSample($list_8)];
         yield 'second line (numeric + parenthesis)' => [true, new RstSample($list_8, 1)];
+
+        yield 'not list item' => [false, new RstSample(<<<'RST'
+Code here::
+ 
+    class User
+    {
+        /**
+        * @Assert\NotBlank
+        */
+        protected $name;
+    }
+RST
+                , 5),
+        ];
     }
 
     /**
