@@ -85,6 +85,7 @@ class RstParser
     const CODE_BLOCK_INI = 'ini';
     const CODE_BLOCK_VARNISH_3 = 'varnish3';
     const CODE_BLOCK_VARNISH_4 = 'varnish4';
+    const CODE_BLOCK_APACHE = 'apache';
 
     public static function hasNewline(string $string): bool
     {
@@ -200,6 +201,7 @@ class RstParser
                 self::CODE_BLOCK_INI,
                 self::CODE_BLOCK_VARNISH_3,
                 self::CODE_BLOCK_VARNISH_4,
+                self::CODE_BLOCK_APACHE,
             ]
         );
 
