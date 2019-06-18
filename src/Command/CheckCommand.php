@@ -45,7 +45,7 @@ class CheckCommand extends Command
     /** @var bool */
     private $short = false;
 
-    /** @var string|null */
+    /** @var string */
     private $dir;
 
     /** @var mixed */

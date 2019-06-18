@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Value\RuleGroup;
 use App\Value\RuleName;
 
 interface Rule
@@ -22,6 +23,9 @@ interface Rule
 
     public static function getName(): RuleName;
 
+    /**
+     * @return RuleGroup[]
+     */
     public static function getGroups(): array;
 
     public function check(\ArrayIterator $lines, int $number);

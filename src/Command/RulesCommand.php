@@ -102,7 +102,12 @@ class RulesCommand extends Command
         }
 
         if (!empty($rule::getGroups())) {
-            $this->io->writeln(sprintf('#### Groups [`%s`]', implode('`, `', $rule::getGroups())));
+            $groupNames = [];
+            foreach ($rule::getGroups() as $group) {
+                $groupNames[] = $group->asString();
+            }
+
+            $this->io->writeln(sprintf('#### Groups [`%s`]', implode('`, `', $groupNames)));
             $this->io->newLine();
         }
 
