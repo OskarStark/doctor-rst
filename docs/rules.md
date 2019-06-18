@@ -2,7 +2,7 @@
 
 * [american_english](#american_english)
 * [avoid_repetetive_words](#avoid_repetetive_words)
-* [be_kind_to_newcomers](#be_kind_to_newcomers) :exclamation:
+* [be_kind_to_newcomers](#be_kind_to_newcomers)
 * [blank_line_after_directive](#blank_line_after_directive)
 * [blank_line_after_filepath_in_code_block](#blank_line_after_filepath_in_code_block)
 * [blank_line_after_filepath_in_php_code_block](#blank_line_after_filepath_in_php_code_block)
@@ -13,16 +13,18 @@
 * [composer_dev_option_at_the_end](#composer_dev_option_at_the_end)
 * [composer_dev_option_not_at_the_end](#composer_dev_option_not_at_the_end)
 * [correct_code_block_directive_based_on_the_content](#correct_code_block_directive_based_on_the_content)
+* [deprecated_directive_major_version](#deprecated_directive_major_version)
+* [deprecated_directive_min_version](#deprecated_directive_min_version)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
-* [even_brackets_count](#even_brackets_count) :exclamation:
+* [even_brackets_count](#even_brackets_count)
 * [extend_abstract_admin](#extend_abstract_admin)
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
 * [extension_xlf_instead_of_xliff](#extension_xlf_instead_of_xliff)
 * [final_admin_classes](#final_admin_classes)
 * [final_admin_extension_classes](#final_admin_extension_classes)
-* [indention](#indention) :exclamation:
+* [indention](#indention)
 * [kernel_instead_of_app_kernel](#kernel_instead_of_app_kernel)
 * [line_length](#line_length)
 * [lowercase_as_in_use_statements](#lowercase_as_in_use_statements)
@@ -146,7 +148,7 @@ Pattern | Message
 
   > _Make sure you have a blank line after a filepath in a code block. This rule respects PHP, YAML, XML and Twig._
 
-#### Groups [`@Sonata`]
+#### Groups [`@Sonata`, `@Symfony`]
 
 ## `blank_line_after_filepath_in_php_code_block`
 
@@ -210,6 +212,24 @@ composer require symfony/var-dumper --dev
 
 #### Groups [`@Sonata`, `@Symfony`]
 
+## `deprecated_directive_major_version`
+
+#### Groups [`@Symfony`]
+
+#### Configuration options
+
+Name | Required
+--- | ---
+`major_version` | `true`
+## `deprecated_directive_min_version`
+
+#### Groups [`@Symfony`]
+
+#### Configuration options
+
+Name | Required
+--- | ---
+`min_version` | `true`
 ## `deprecated_directive_should_have_version`
 
   > _Ensure a deprecated directive has a version which follows SemVer._
