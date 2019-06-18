@@ -58,6 +58,7 @@
 * [typo](#typo)
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
 * [use_https_xsd_urls](#use_https_xsd_urls)
+* [valid_inline_highlighted_namespaces](#valid_inline_highlighted_namespaces)
 * [valid_use_statements](#valid_use_statements)
 * [versionadded_directive_major_version](#versionadded_directive_major_version)
 * [versionadded_directive_min_version](#versionadded_directive_min_version)
@@ -536,6 +537,24 @@ Pattern | Message
 ## `use_https_xsd_urls`
 
 #### Groups [`@Sonata`, `@Symfony`]
+
+## `valid_inline_highlighted_namespaces`
+
+  > _Ensures to have 2 backslashes when highlighting a namespace to have valid output._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+``App\Entity\Foo``
+```
+
+##### Invalid Examples :-1:
+
+```rst
+``App\\Entity\\Foo``
+```
 
 ## `valid_use_statements`
 
