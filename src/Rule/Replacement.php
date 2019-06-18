@@ -64,6 +64,7 @@ class Replacement extends CheckListRule implements Rule
             '/Informations/' => 'Please replace "%s" with "Information"',
             '/performances/' => 'Please replace "%s" with "performance"',
             '/Performances/' => 'Please replace "%s" with "Performance"',
+            "/``'%kernel.debug%'``/" => 'Please replace "%s" with "``%%kernel.debug%%``"',
         ];
     }
 }
