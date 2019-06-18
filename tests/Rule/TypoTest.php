@@ -25,7 +25,7 @@ class TypoTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample)
     {
         $configuredRules = [];
         foreach (Typo::getList() as $search => $message) {

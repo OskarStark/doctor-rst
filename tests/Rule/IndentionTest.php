@@ -24,7 +24,7 @@ class IndentionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, int $size, RstSample $sample)
+    public function check(?string $expected, int $size, RstSample $sample)
     {
         $rule = (new Indention());
         $rule->setOptions(['size' => $size]);

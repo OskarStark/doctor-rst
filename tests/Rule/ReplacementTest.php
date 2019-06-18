@@ -25,7 +25,7 @@ class ReplacementTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample)
     {
         $configuredRules = [];
         foreach (Replacement::getList() as $search => $message) {

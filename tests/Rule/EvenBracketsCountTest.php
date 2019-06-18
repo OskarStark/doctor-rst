@@ -26,7 +26,7 @@ class EvenBracketsCountTest extends TestCase
      * @dataProvider invalidProvider
      * @dataProvider realSymfonyFileProvider
      */
-    public function check($expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,

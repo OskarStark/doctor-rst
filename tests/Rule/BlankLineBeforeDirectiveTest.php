@@ -25,7 +25,7 @@ class BlankLineBeforeDirectiveTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,

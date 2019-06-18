@@ -25,7 +25,7 @@ class VersionaddedDirectiveMajorVersionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, int $majorVersion, RstSample $sample)
+    public function check(?string $expected, int $majorVersion, RstSample $sample)
     {
         $rule = (new VersionaddedDirectiveMajorVersion(new VersionParser()));
         $rule->setOptions(['major_version' => $majorVersion]);

@@ -25,7 +25,7 @@ class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends TestCase
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check($expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,

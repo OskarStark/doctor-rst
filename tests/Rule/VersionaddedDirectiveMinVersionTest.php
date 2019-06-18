@@ -24,7 +24,7 @@ class VersionaddedDirectiveMinVersionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check($expected, string $minVersion, RstSample $sample)
+    public function check(?string $expected, string $minVersion, RstSample $sample)
     {
         $rule = (new VersionaddedDirectiveMinVersion());
         $rule->setOptions(['min_version' => $minVersion]);

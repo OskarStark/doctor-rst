@@ -25,7 +25,7 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
      * @dataProvider checkProvider
      * @dataProvider realSymfonyFileProvider
      */
-    public function check($expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample)
     {
         $this->assertSame(
             $expected,
