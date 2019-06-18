@@ -73,11 +73,16 @@ class CheckCommand extends Command
     {
         $this->io = new SymfonyStyle($input, $output);
 
-        if (!$this->dir = realpath($input->getArgument('dir'))) {
-            $this->io->error(sprintf('Could not find directory: %s', $input->getArgument('dir')));
+        $dir = $input->getArgument('dir');
+        assert(is_string($dir));
+
+        if (!$realpath = realpath($dir)) {
+            $this->io->error(sprintf('Could not find directory: %s', $dir));
 
             return 1;
         }
+
+        $this->dir = $realpath;
 
         $this->io->text(sprintf('Check *.rst(.inc) files in: <info>%s</info>', $this->dir));
 
@@ -116,7 +121,11 @@ class CheckCommand extends Command
         }
 
         if (!empty($input->getOption('group'))) {
-            $this->rules = $this->registry->getRulesByGroup(RuleGroup::fromString($input->getOption('group')));
+            $group = $input->getOption('group');
+
+            \assert(is_string($group));
+
+            $this->rules = $this->registry->getRulesByGroup(RuleGroup::fromString($group));
         }
 
         if (empty($this->rules)) {
@@ -152,10 +161,21 @@ class CheckCommand extends Command
 
     private function checkFile(SplFileInfo $file): int
     {
-        $lines = new \ArrayIterator(file($file->getRealPath()));
+        $content = file((string) $file->getRealPath());
+
+        if (!$content) {
+            throw new \RuntimeException(sprintf(
+                'Cannot parse file: %s',
+                (string) $file->getRealPath()
+            ));
+        }
+
+        $lines = new \ArrayIterator($content);
 
         $violations = [];
         foreach ($lines as $no => $line) {
+            \assert(is_integer($no));
+
             /** @var Rule $rule */
             foreach ($this->rules as $rule) {
                 if (!$rule::runOnlyOnBlankline() && RstParser::isBlankLine($line)) {

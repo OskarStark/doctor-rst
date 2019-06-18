@@ -28,6 +28,9 @@ abstract class CheckListRule extends AbstractRule implements Rule
 
     abstract public function getDefaultMessage(): string;
 
+    /**
+     * @return array<string, string|null>
+     */
     public static function getList(): array
     {
         return [];
