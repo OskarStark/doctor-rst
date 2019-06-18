@@ -74,7 +74,7 @@ class CheckCommand extends Command
         $this->io = new SymfonyStyle($input, $output);
 
         $dir = $input->getArgument('dir');
-        assert(is_string($dir));
+        \assert(\is_string($dir));
 
         if (!$realpath = realpath($dir)) {
             $this->io->error(sprintf('Could not find directory: %s', $dir));
@@ -123,7 +123,7 @@ class CheckCommand extends Command
         if (!empty($input->getOption('group'))) {
             $group = $input->getOption('group');
 
-            \assert(is_string($group));
+            \assert(\is_string($group));
 
             $this->rules = $this->registry->getRulesByGroup(RuleGroup::fromString($group));
         }
@@ -174,7 +174,7 @@ class CheckCommand extends Command
 
         $violations = [];
         foreach ($lines as $no => $line) {
-            \assert(is_integer($no));
+            \assert(\is_integer($no));
 
             /** @var Rule $rule */
             foreach ($this->rules as $rule) {
