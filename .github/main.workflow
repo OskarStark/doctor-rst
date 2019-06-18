@@ -13,5 +13,5 @@ action "PHP-CS-Fixer" {
 
 action "PHPStan" {
   uses = "docker://oskarstark/phpstan-ga"
-  args = "analyse src --level=5"
+  args = "analyse src --level=7"
 }

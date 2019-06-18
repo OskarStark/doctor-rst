@@ -2,7 +2,7 @@ cs:
 	docker run --rm -it -w /app -v ${PWD}:/app oskarstark/php-cs-fixer-ga:latest
 
 static-analyse:
-	docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/phpstan-ga:latest analyse src/ --level=5
+	docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/phpstan-ga:latest analyse src/ --level=7
 
 update-rules.md-file:
 	php bin/console rules > docs/rules.md
