@@ -75,5 +75,9 @@ class ValidInlineHighlightedNamespacesTest extends TestCase
             'Please use 2 backslashes when highlighting a namespace with single backticks: `\Swift_Transport`',
             new RstSample('`\Swift_Transport`'),
         ];
+
+        // edge cases of the Symfony Documentation
+        yield [null, new RstSample('``"autoload": { "psr-4": { "SomeVendor\\BlogBundle\\": "" } }``')];
+        yield [null, new RstSample('look like ``@ORM\Table(name="`user`")``.')];
     }
 }

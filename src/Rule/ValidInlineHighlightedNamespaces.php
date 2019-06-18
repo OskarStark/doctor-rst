@@ -43,7 +43,7 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements Rule
         $line = $lines->current();
 
         // check 2 backticks
-        if (preg_match_all('/(``[^`]+``)/', $line, $occurences, PREG_SET_ORDER)) {
+        if (preg_match_all('/(``[^`{}@]+``)/', $line, $occurences)) {
             foreach (array_unique($occurences[0]) as $occurence) {
                 if (!PhpHelper::containsBackslash($occurence)) {
                     continue;
@@ -57,7 +57,7 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements Rule
             goto end;
         }
 
-        if (preg_match_all('/(`[^`]+`)/', $line, $occurences, PREG_SET_ORDER)) { // check 1 backtick
+        if (preg_match_all('/(`[^`{}@]+`)/', $line, $occurences)) { // check 1 backtick
             foreach (array_unique($occurences[0]) as $occurence) {
                 if (!PhpHelper::containsBackslash($occurence)) {
                     continue;
