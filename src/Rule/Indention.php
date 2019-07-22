@@ -101,6 +101,8 @@ class Indention extends AbstractRule implements Rule, Configurable
                     && $indention > 0 && 0 < RstParser::indention($lines->current()) % $this->size
                 ) {
                     $minus = 1;
+                } elseif ($indention > 0 && 0 < RstParser::indention($lines->current()) % $this->size) {
+                    $minus = 1;
                 }
             } elseif (PhpHelper::isLastLineOfDocBlock($lines->current())
                 && (new PhpHelper())->isPartOfDocBlock($lines, $number)

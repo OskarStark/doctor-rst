@@ -174,7 +174,7 @@ RST
             4,
             new RstSample(<<<'RST'
 Code here::
- 
+
     $types = $propertyInfo->getTypes($class, $property);
     /*
         Example Result
@@ -185,6 +185,26 @@ Code here::
     */
 RST
                 , 9),
+        ];
+
+        yield 'valid multiline php comment 3' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+Code here::
+
+    public function onKernelController(FilterControllerEvent $event)
+    {
+        $controller = $event->getController();
+
+        /*
+         * $controller passed can be either a class or a Closure.
+         * This is not usual in Symfony but it may happen.
+         * If it is a class, it comes in array format
+         */
+        if (true !== false) {
+RST
+                , 7),
         ];
 
         yield 'list item (#) first line' => [
