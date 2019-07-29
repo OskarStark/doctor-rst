@@ -3564,21 +3564,22 @@
         },
         {
             "name": "symfony/twig-bundle",
-            "version": "v4.2.10",
+            "version": "v4.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bundle.git",
-                "reference": "648472323d703908dc8c7698b867c4970724b4cf"
+                "reference": "db06490aeabba37dfc55a53fbf901c75e0d4f7b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/648472323d703908dc8c7698b867c4970724b4cf",
-                "reference": "648472323d703908dc8c7698b867c4970724b4cf",
+                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/db06490aeabba37dfc55a53fbf901c75e0d4f7b0",
+                "reference": "db06490aeabba37dfc55a53fbf901c75e0d4f7b0",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1.3",
                 "symfony/config": "~4.2",
+                "symfony/debug": "~4.0",
                 "symfony/http-foundation": "~4.1",
                 "symfony/http-kernel": "~4.1",
                 "symfony/polyfill-ctype": "~1.8",
@@ -3636,7 +3637,7 @@
             ],
             "description": "Symfony TwigBundle",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:06:08+00:00"
+            "time": "2019-07-19T08:33:10+00:00"
         },
         {
             "name": "symfony/var-dumper",
@@ -3716,16 +3717,16 @@
         },
         {
             "name": "symfony/web-profiler-bundle",
-            "version": "v4.3.2",
+            "version": "v4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "ca3a3c8558bc641df7c8c2c546381ccd78d0777a"
+                "reference": "a7886865c523a7751ee39480a25b663b82d00846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/ca3a3c8558bc641df7c8c2c546381ccd78d0777a",
-                "reference": "ca3a3c8558bc641df7c8c2c546381ccd78d0777a",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/a7886865c523a7751ee39480a25b663b82d00846",
+                "reference": "a7886865c523a7751ee39480a25b663b82d00846",
                 "shasum": ""
             },
             "require": {
@@ -3778,7 +3779,7 @@
             ],
             "description": "Symfony WebProfilerBundle",
             "homepage": "https://symfony.com",
-            "time": "2019-05-30T16:10:05+00:00"
+            "time": "2019-07-24T14:47:54+00:00"
         },
         {
             "name": "twig/twig",
