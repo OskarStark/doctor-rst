@@ -132,4 +132,49 @@ trait ListTrait
 
         return false;
     }
+
+    /**
+     * Something like:.
+     *
+     * Line 12
+     *   You can see x here.
+     *
+     * Line 13 - 15
+     *   You can see y here.
+     */
+    private function isPartOfLineNumberAnnotation(\ArrayIterator $lines, int $number): bool
+    {
+        $lines = Helper::cloneIterator($lines, $number);
+
+        if (RstParser::isLineNumberAnnotation($lines->current())) {
+            return true;
+        }
+
+        $currentIndention = RstParser::indention($lines->current());
+
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (RstParser::isBlankLine($lines->current())) {
+                continue;
+            }
+
+            if (RstParser::isHeadline($lines->current())) {
+                return false;
+            }
+
+            $lineIndention = RstParser::indention($lines->current());
+
+            if ($lineIndention < $currentIndention
+                && RstParser::isLineNumberAnnotation($lines->current())
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

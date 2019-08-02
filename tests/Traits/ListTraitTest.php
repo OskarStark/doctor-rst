@@ -28,6 +28,7 @@ class ListTraitTest extends TestCase
                 ListTrait::isPartOfListItem as public;
                 ListTrait::isPartOfFootnote as public;
                 ListTrait::isPartOfRstComment as public;
+                ListTrait::isPartOfLineNumberAnnotation as public;
             }
         };
     }
@@ -43,7 +44,7 @@ class ListTraitTest extends TestCase
     /**
      * @test
      *
-     * @dataProvider listItemProvider
+     * @dataProvider isPartOfListItemProvider
      */
     public function isPartOfListItem(bool $expected, RstSample $sample)
     {
@@ -53,7 +54,7 @@ class ListTraitTest extends TestCase
         );
     }
 
-    public function listItemProvider()
+    public function isPartOfListItemProvider()
     {
         yield [
             false,
@@ -145,7 +146,7 @@ RST
     /**
      * @test
      *
-     * @dataProvider footnoteProvider
+     * @dataProvider isPartOfFootnoteProvider
      */
     public function isPartOfFootnote(bool $expected, RstSample $sample)
     {
@@ -155,7 +156,7 @@ RST
         );
     }
 
-    public function footnoteProvider(): \Generator
+    public function isPartOfFootnoteProvider(): \Generator
     {
         $footnote = <<<'RST'
 .. [1] Line 1
@@ -169,7 +170,7 @@ RST;
     /**
      * @test
      *
-     * @dataProvider commentProvider
+     * @dataProvider isPartOfRstCommentProvider
      */
     public function isPartOfRstComment(bool $expected, RstSample $sample)
     {
@@ -179,7 +180,7 @@ RST;
         );
     }
 
-    public function commentProvider(): \Generator
+    public function isPartOfRstCommentProvider(): \Generator
     {
         $rst_comment = <<<'RST'
 .. Line 1
@@ -188,5 +189,45 @@ RST;
 
         yield 'first line (rst comment)' => [true, new RstSample($rst_comment)];
         yield 'second line (rst comment)' => [true, new RstSample($rst_comment, 1)];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider isPartOfLineNumberAnnotationProvider
+     */
+    public function isPartOfLineNumberAnnotation(bool $expected, RstSample $sample)
+    {
+        $this->assertSame(
+            $expected,
+            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->getContent(), $sample->getLineNumber())
+        );
+    }
+
+    public function isPartOfLineNumberAnnotationProvider(): \Generator
+    {
+        $line_number_annotation = <<<'RST'
+Line 15
+   Text
+RST;
+
+        yield 'first line (line number annotation)' => [true, new RstSample($line_number_annotation)];
+        yield 'second line (line number annotation)' => [true, new RstSample($line_number_annotation, 1)];
+
+        $line_number_annotation_from_to = <<<'RST'
+Line 15-16
+   Text
+RST;
+
+        yield 'first line (line number annotation + from/to)' => [true, new RstSample($line_number_annotation_from_to)];
+        yield 'second line (line number annotation + from/to)' => [true, new RstSample($line_number_annotation_from_to, 1)];
+
+        $line_number_annotation_from_to_spaces = <<<'RST'
+Line 15 - 16
+   Text
+RST;
+
+        yield 'first line (line number annotation + from/to)' => [true, new RstSample($line_number_annotation_from_to_spaces)];
+        yield 'second line (line number annotation + from/to)' => [true, new RstSample($line_number_annotation_from_to_spaces, 1)];
     }
 }

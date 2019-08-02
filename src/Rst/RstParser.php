@@ -308,4 +308,16 @@ class RstParser
 
         return false;
     }
+
+    /**
+     * Whether its a line number annotation "Line 15" or "Line 16-18" or not.
+     */
+    public static function isLineNumberAnnotation(string $string): bool
+    {
+        if (preg_match('/^Line [0-9]+(\s?-\s?[0-9]+)?$/', self::clean($string))) {
+            return true;
+        }
+
+        return false;
+    }
 }

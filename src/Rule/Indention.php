@@ -66,6 +66,7 @@ class Indention extends AbstractRule implements Rule, Configurable
             || $this->isPartOfListItem($lines, $number)
             || $this->isPartOfFootnote($lines, $number)
             || $this->isPartOfRstComment($lines, $number)
+            || $this->isPartOfLineNumberAnnotation($lines, $number)
             || $this->in(RstParser::DIRECTIVE_INDEX, $lines, $number)
             || $this->in(RstParser::DIRECTIVE_FIGURE, $lines, $number)
             || $this->in(RstParser::DIRECTIVE_IMAGE, $lines, $number)
