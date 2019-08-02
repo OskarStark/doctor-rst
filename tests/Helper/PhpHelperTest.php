@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Helper;
 
 use App\Helper\PhpHelper;
+use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
 class PhpHelperTest extends TestCase
@@ -61,6 +62,43 @@ class PhpHelperTest extends TestCase
     /**
      * @test
      *
+     * @dataProvider isUsingTwoBackSlashesProvider
+     */
+    public function isUsingTwoBackslashes(bool $expected, string $string)
+    {
+        $this->assertSame($expected, PhpHelper::isUsingTwoBackslashes($string));
+    }
+
+    public function isUsingTwoBackSlashesProvider(): \Generator
+    {
+        yield 'two backslashes + beginning' => [true, '\\\\Test\\\\Test'];
+        yield 'two backslashes' => [true, 'Test\\\\Test'];
+        yield 'two backslashes 2' => [true, 'App\\\\Entity\\\\Foo'];
+        yield 'no backslash' => [false, 'Test'];
+        yield 'one backslashes' => [false, '\Test'];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider isUsingOneBackslashProvider
+     */
+    public function isUsingOneBackslash(bool $expected, string $string)
+    {
+        $this->assertSame($expected, PhpHelper::isUsingOneBackslash($string));
+    }
+
+    public function isUsingOneBackslashProvider(): \Generator
+    {
+        yield 'one backslash + beginning' => [true, '\Test\Test'];
+        yield 'one backslash' => [true, 'Test\Test'];
+        yield 'no backslash' => [false, 'Test'];
+        yield 'two backslashes' => [false, '\\\\Test'];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider isStartingWithOneBackslashProvider
      */
     public function isStartingWithOneBackslash(bool $expected, string $string)
@@ -94,38 +132,153 @@ class PhpHelperTest extends TestCase
 
     /**
      * @test
-     *
-     * @dataProvider isUsingOneBackslashProvider
+     * @dataProvider isLastLineOfMultilineCommentProvider
      */
-    public function isUsingOneBackslash(bool $expected, string $string)
+    public function isLastLineOfMultilineComment(bool $expected, string $line)
     {
-        $this->assertSame($expected, PhpHelper::isUsingOneBackslash($string));
+        $this->assertSame(
+            $expected,
+            PhpHelper::isLastLineOfMultilineComment($line)
+        );
     }
 
-    public function isUsingOneBackslashProvider(): \Generator
+    public function isLastLineOfMultilineCommentProvider(): \Generator
     {
-        yield 'one backslash + beginning' => [true, '\Test\Test'];
-        yield 'one backslash' => [true, 'Test\Test'];
-        yield 'no backslash' => [false, 'Test'];
-        yield 'two backslashes' => [false, '\\\\Test'];
+        yield [false, '/**'];
+        yield [false, '* test'];
+        yield [true, '*/'];
     }
 
     /**
      * @test
      *
-     * @dataProvider isUsingTwoBackSlashesProvider
+     * @dataProvider isPartOfDocBlockProvider
      */
-    public function isUsingTwoBackslashes(bool $expected, string $string)
+    public function isPartOfDocBlock(bool $expected, RstSample $sample)
     {
-        $this->assertSame($expected, PhpHelper::isUsingTwoBackslashes($string));
+        $this->assertSame(
+            $expected,
+            (new PhpHelper())->isPartOfDocBlock($sample->getContent(), $sample->getLineNumber())
+        );
     }
 
-    public function isUsingTwoBackSlashesProvider(): \Generator
+    public function isPartOfDocBlockProvider(): \Generator
     {
-        yield 'two backslashes + beginning' => [true, '\\\\Test\\\\Test'];
-        yield 'two backslashes' => [true, 'Test\\\\Test'];
-        yield 'two backslashes 2' => [true, 'App\\\\Entity\\\\Foo'];
-        yield 'no backslash' => [false, 'Test'];
-        yield 'one backslashes' => [false, '\Test'];
+        $valid = <<<'RST'
+class User
+{
+    /**
+     * @Assert\NotBlank
+     */
+    protected $name;
+}
+RST;
+
+        yield 'first line' => [true, new RstSample($valid, 2)];
+        yield 'second line' => [true, new RstSample($valid, 3)];
+        yield 'last line' => [true, new RstSample($valid, 4)];
+        yield 'not part of doc block' => [false, new RstSample($valid, 5)];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider isPartOfMultilineCommentProvider
+     */
+    public function isPartOfMultilineComment(bool $expected, RstSample $sample)
+    {
+        $this->assertSame(
+            $expected,
+            (new PhpHelper())->isPartOfMultilineComment($sample->getContent(), $sample->getLineNumber())
+        );
+    }
+
+    public function isPartOfMultilineCommentProvider(): \Generator
+    {
+        $valid = <<<'RST'
+    /*
+     * this is a nice variable!
+     */
+    $var = 'foo';
+RST;
+
+        yield 'first line' => [true, new RstSample($valid, 0)];
+        yield 'second line' => [true, new RstSample($valid, 1)];
+        yield 'last line' => [true, new RstSample($valid, 2)];
+        yield 'not part of multiline comment' => [false, new RstSample($valid, 3)];
+
+        $valid = <<<'RST'
+    /*
+        Example Result
+    */
+    $var = 'foo';
+RST;
+
+        yield 'no asterisk - first line' => [true, new RstSample($valid, 0)];
+        yield 'no asterisk - second line' => [true, new RstSample($valid, 1)];
+        yield 'no asterisk - last line' => [true, new RstSample($valid, 2)];
+        yield 'no asterisk - not part of multiline comment' => [false, new RstSample($valid, 3)];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider isFirstLineOfMultilineCommentProvider
+     */
+    public function isFirstLineOfMultilineComment(bool $expected, string $line)
+    {
+        $this->assertSame(
+            $expected,
+            PhpHelper::isFirstLineOfMultilineComment($line)
+        );
+    }
+
+    public function isFirstLineOfMultilineCommentProvider(): \Generator
+    {
+        yield [true, '/*'];
+        yield [false, '/**'];
+        yield [false, '* test'];
+        yield [false, '*/'];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider isFirstLineOfDocBlockProvider
+     */
+    public function isFirstLineOfDocBlock(bool $expected, string $line)
+    {
+        $this->assertSame(
+            $expected,
+            PhpHelper::isFirstLineOfDocBlock($line)
+        );
+    }
+
+    public function isFirstLineOfDocBlockProvider(): \Generator
+    {
+        yield [true, '/**'];
+        yield [false, '/*'];
+        yield [false, '* test'];
+        yield [false, '*/'];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider isLastLineOfDocBlockProvider
+     */
+    public function isLastLineOfDocBlock(bool $expected, string $line)
+    {
+        $this->assertSame(
+            $expected,
+            PhpHelper::isLastLineOfDocBlock($line)
+        );
+    }
+
+    public function isLastLineOfDocBlockProvider(): \Generator
+    {
+        yield [false, '/**'];
+        yield [false, '* test'];
+        yield [true, '*/'];
     }
 }

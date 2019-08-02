@@ -16,8 +16,29 @@ namespace App\Tests\Rst;
 use App\Rst\RstParser;
 use PHPUnit\Framework\TestCase;
 
-class RstParserTest extends TestCase
+final class RstParserTest extends TestCase
 {
+    /**
+     * @test
+     *
+     * @dataProvider isLineNumberAnnotationProvider
+     */
+    public function isLineNumberAnnotation(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isLineNumberAnnotation($string));
+    }
+
+    public function isLineNumberAnnotationProvider(): \Generator
+    {
+        yield [true, 'Line 15'];
+        yield [true, 'Line 16 - 18'];
+        yield [true, 'Line 16-18'];
+
+        yield [false, ''];
+        yield [false, '.. code-block:: php'];
+        yield [false, '.. index::'];
+    }
+
     /**
      * @test
      *

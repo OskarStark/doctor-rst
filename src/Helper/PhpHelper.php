@@ -53,4 +53,100 @@ final class PhpHelper
     {
         return (bool) preg_match('/[\\\\]{1}/', $string);
     }
+
+    public static function isFirstLineOfMultilineComment(string $line): bool
+    {
+        if (preg_match('/^\/\*$/', RstParser::clean($line))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isLastLineOfMultilineComment(string $line): bool
+    {
+        if (preg_match('/^\*\/$/', RstParser::clean($line))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isFirstLineOfDocBlock(string $line): bool
+    {
+        if (preg_match('/^\/\*\*$/', RstParser::clean($line))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isLastLineOfDocBlock(string $line): bool
+    {
+        if (preg_match('/^\*\/$/', RstParser::clean($line))) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isPartOfDocBlock(\ArrayIterator $lines, int $number): bool
+    {
+        $lines = Helper::cloneIterator($lines, $number);
+
+        if (self::isFirstLineOfDocBlock($lines->current())
+            || self::isLastLineOfDocBlock($lines->current())
+        ) {
+            return true;
+        }
+
+        if (!preg_match('/^\*/', RstParser::clean($lines->current()))) {
+            return false;
+        }
+
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (self::isFirstLineOfDocBlock($lines->current())) {
+                return true;
+            }
+
+            if (!preg_match('/^\*/', RstParser::clean($lines->current()))) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public function isPartOfMultilineComment(\ArrayIterator $lines, int $number): bool
+    {
+        $lines = Helper::cloneIterator($lines, $number);
+
+        if (self::isFirstLineOfMultilineComment($lines->current())
+            || self::isLastLineOfMultilineComment($lines->current())
+        ) {
+            return true;
+        }
+
+        $i = $number;
+        while ($i >= 1) {
+            --$i;
+
+            $lines->seek($i);
+
+            if (self::isLastLineOfMultilineComment($lines->current())) {
+                return false;
+            }
+
+            if (self::isFirstLineOfMultilineComment($lines->current())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

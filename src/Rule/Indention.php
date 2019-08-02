@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Helper\Helper;
+use App\Helper\PhpHelper;
 use App\Helper\TwigHelper;
 use App\Helper\XmlHelper;
 use App\Rst\RstParser;
@@ -65,6 +66,7 @@ class Indention extends AbstractRule implements Rule, Configurable
             || $this->isPartOfListItem($lines, $number)
             || $this->isPartOfFootnote($lines, $number)
             || $this->isPartOfRstComment($lines, $number)
+            || $this->isPartOfLineNumberAnnotation($lines, $number)
             || $this->in(RstParser::DIRECTIVE_INDEX, $lines, $number)
             || $this->in(RstParser::DIRECTIVE_FIGURE, $lines, $number)
             || $this->in(RstParser::DIRECTIVE_IMAGE, $lines, $number)
@@ -82,15 +84,36 @@ class Indention extends AbstractRule implements Rule, Configurable
         $indention = RstParser::indention($lines->current());
         $minus = 0;
 
-        if (preg_match('/^\*/', RstParser::clean($lines->current()))
-            && $this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [
-                RstParser::CODE_BLOCK_PHP,
-                RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-                RstParser::CODE_BLOCK_JAVASCRIPT,
-                RstParser::CODE_BLOCK_SQL,
-            ])
-        ) {
-            $minus = 1;
+        $customMessage = null;
+
+        if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [
+            RstParser::CODE_BLOCK_PHP,
+            RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
+            RstParser::CODE_BLOCK_JAVASCRIPT,
+            RstParser::CODE_BLOCK_SQL,
+        ])) {
+            if (PhpHelper::isFirstLineOfDocBlock($lines->current())
+                || PhpHelper::isFirstLineOfMultilineComment($lines->current())
+            ) {
+                $minus = 0;
+            } elseif ((new PhpHelper())->isPartOfMultilineComment($lines, $number)) {
+                $customMessage = 'Please fix the indention of the multiline comment.';
+                if (PhpHelper::isLastLineOfMultilineComment($lines->current())
+                    && $indention > 0 && 0 < RstParser::indention($lines->current()) % $this->size
+                ) {
+                    $minus = 1;
+                } elseif ($indention > 0 && 0 < RstParser::indention($lines->current()) % $this->size) {
+                    $minus = 1;
+                }
+            } elseif (PhpHelper::isLastLineOfDocBlock($lines->current())
+                && (new PhpHelper())->isPartOfDocBlock($lines, $number)
+            ) {
+                $customMessage = 'Please fix the indention of the PHP DocBlock.';
+                $minus = 1;
+            } elseif ((new PhpHelper())->isPartOfDocBlock($lines, $number)) {
+                $customMessage = 'Please fix the indention of the PHP DocBlock.';
+                $minus = 1;
+            }
         }
 
         // XML
@@ -109,8 +132,8 @@ class Indention extends AbstractRule implements Rule, Configurable
             $minus = 3;
         }
 
-        if ($indention > 0 && 0 < (($indention % $this->size) - $minus)) {
-            return sprintf('Please add %s spaces for every indention.', $this->size);
+        if ($indention > 0 && 0 < (($indention - $minus) % $this->size)) {
+            return $customMessage ?? sprintf('Please add %s spaces for every indention.', $this->size);
         }
     }
 

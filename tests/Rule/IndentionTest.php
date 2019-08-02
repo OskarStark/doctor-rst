@@ -99,7 +99,7 @@ RST
 HTTP Cache
 ==========
 
-The nature of rich web applications means that they're dynamic. No matter   
+The nature of rich web applications means that they're dynamic. No matter
 RST
             , 1),
         ];
@@ -132,6 +132,79 @@ RST;
             null,
             4,
             new RstSample($php_comment_example, 6),
+        ];
+
+        yield 'wrong indention in php DocBlock' => [
+            'Please fix the indention of the PHP DocBlock.',
+            4,
+            new RstSample(<<<'RST'
+Code here::
+
+    class User
+    {
+        /**
+        * @Assert\NotBlank
+        */
+        protected $name;
+    }
+RST
+            , 5),
+        ];
+
+        yield 'valid multiline php comment' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+Code here::
+
+    $types = $propertyInfo->getTypes($class, $property);
+    /*
+        Example Result
+        --------------
+        array(1) {
+            private $collectionValueType  => NULL
+        }
+    */
+RST
+            , 4),
+        ];
+
+        yield 'valid multiline php comment 2' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+Code here::
+
+    $types = $propertyInfo->getTypes($class, $property);
+    /*
+        Example Result
+        --------------
+        array(1) {
+            private $collectionValueType  => NULL
+        }
+    */
+RST
+                , 9),
+        ];
+
+        yield 'valid multiline php comment 3' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+Code here::
+
+    public function onKernelController(FilterControllerEvent $event)
+    {
+        $controller = $event->getController();
+
+        /*
+         * $controller passed can be either a class or a Closure.
+         * This is not usual in Symfony but it may happen.
+         * If it is a class, it comes in array format
+         */
+        if (true !== false) {
+RST
+                , 7),
         ];
 
         yield 'list item (#) first line' => [
@@ -229,7 +302,7 @@ RST
             4,
             new RstSample(<<<'RST'
 Info here:
-            
+
     .. code-block:: twig
 
         {# if the controller is associated with a route, use the path() or
