@@ -47,7 +47,10 @@ class BlankLineBeforeDirective extends AbstractRule implements Rule
 
         $lines->seek($number - 1);
 
-        if ($lines->valid() && !RstParser::isBlankLine($lines->current())) {
+        if ($lines->valid()
+            && !RstParser::isBlankLine($lines->current())
+            && !RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CLASS)
+        ) {
             return sprintf('Please add a blank line before "%s" directive', $line);
         }
     }

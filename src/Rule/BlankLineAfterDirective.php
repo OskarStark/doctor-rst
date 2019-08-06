@@ -66,6 +66,7 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
             RstParser::DIRECTIVE_ADMONITION,
             RstParser::DIRECTIVE_ROLE,
             RstParser::DIRECTIVE_FIGURE,
+            RstParser::DIRECTIVE_CLASS,
         ];
     }
 }

@@ -37,6 +37,7 @@ class RstParser
     const DIRECTIVE_ROLE = '.. role::';
     const DIRECTIVE_FIGURE = '.. figure::';
     const DIRECTIVE_SEEALSO = '.. seealso::';
+    const DIRECTIVE_CLASS = '.. class::';
 
     const DIRECTIVES = [
         self::DIRECTIVE_CODE_BLOCK,
@@ -143,6 +144,7 @@ class RstParser
             self::DIRECTIVE_ROLE,
             self::DIRECTIVE_FIGURE,
             self::DIRECTIVE_SEEALSO,
+            self::DIRECTIVE_CLASS,
         ];
 
         Assert::oneOf(
