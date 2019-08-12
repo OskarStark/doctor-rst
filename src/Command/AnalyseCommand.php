@@ -28,6 +28,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Contracts\Service\ResetInterface;
 
 class AnalyseCommand extends Command
 {
@@ -193,8 +194,12 @@ class AnalyseCommand extends Command
                         $rule::getName(),
                         $violation,
                         $no + 1,
-                        trim($line),
+                        Rule::TYPE_FILE === $rule->getType() ? '' : trim($line),
                     ];
+                }
+
+                if ($rule instanceof ResetInterface) {
+                    $rule->reset();
                 }
             }
         }

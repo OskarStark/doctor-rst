@@ -20,6 +20,7 @@ interface Rule
 {
     const TYPE_LINE = 1;
     const TYPE_FILE = 2;
+    const TYPE_WHOLE_DOCUMENT = 3;
 
     public static function getName(): RuleName;
 

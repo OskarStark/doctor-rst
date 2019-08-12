@@ -13,6 +13,7 @@
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
         "symfony/options-resolver": "4.3.*",
+        "symfony/service-contracts": "^1.1",
         "symfony/yaml": "4.3.*",
         "webmozart/assert": "^1.4"
     },

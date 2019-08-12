@@ -259,9 +259,18 @@ class RstParser
         return 0;
     }
 
-    public static function isLink(string $string): bool
+    public static function isLinkDefinition(string $string): bool
     {
-        if (preg_match('/^\.\. _`(.*)`: (.*)$/', $string)) {
+        if (preg_match('/^\.\. _(`([^`]+)`|([^`]+)): (.*)$/', $string)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isLinkUsage(string $string): bool
+    {
+        if (preg_match('/`([^`]+)`_/', $string, $matches)) {
             return true;
         }
 
