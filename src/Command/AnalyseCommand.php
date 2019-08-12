@@ -29,9 +29,9 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
 
-class CheckCommand extends Command
+class AnalyseCommand extends Command
 {
-    protected static $defaultName = 'check';
+    protected static $defaultName = 'analyse';
 
     /** @var SymfonyStyle */
     private $io;
@@ -61,6 +61,7 @@ class CheckCommand extends Command
     protected function configure()
     {
         $this
+            ->setAliases(['check'])
             ->setDescription('Check *.rst files')
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
