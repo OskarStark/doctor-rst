@@ -46,7 +46,7 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
             return;
         }
 
-        if (RstParser::isLink($line)) {
+        if (RstParser::isLinkDefinition($line)) {
             return;
         }
 

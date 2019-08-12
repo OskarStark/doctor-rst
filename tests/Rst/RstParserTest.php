@@ -136,16 +136,39 @@ final class RstParserTest extends TestCase
     /**
      * @test
      *
-     * @dataProvider isLinkProvider
+     * @dataProvider isLinkDefinitionProvider
      */
-    public function isLink(bool $expected, string $string)
+    public function isLinkDefinition(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isLink($string));
+        $this->assertSame($expected, RstParser::isLinkDefinition($string));
     }
 
-    public function isLinkProvider()
+    public function isLinkDefinitionProvider()
     {
         yield [true, '.. _`Symfony`: https://symfony.com'];
+        yield [true, '.. _`APCu`: https://github.com/krakjoe/apcu'];
+        yield [true, '.. _APCu: https://github.com/krakjoe/apcu'];
+
+        yield [false, '.. _APCu`: https://github.com/krakjoe/apcu'];
+        yield [false, '.. _`APCu: https://github.com/krakjoe/apcu'];
+        yield [false, ''];
+        yield [false, 'I am text::'];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider isLinkUsageProvider
+     */
+    public function isLinkUsage(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isLinkUsage($string));
+    }
+
+    public function isLinkUsageProvider()
+    {
+        yield [true, '`Symfony`_'];
+        yield [true, '`APCu`_'];
 
         yield [false, ''];
         yield [false, 'I am text::'];

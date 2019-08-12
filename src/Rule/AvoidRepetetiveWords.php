@@ -48,7 +48,7 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
         $line = $lines->current();
 
         if (RstParser::isDirective($line)
-            || RstParser::isLink($line)
+            || RstParser::isLinkDefinition($line)
             || RstParser::isBlankLine($line)
             || RstParser::isTable($line)
             || ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number) && (
