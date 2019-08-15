@@ -56,6 +56,7 @@
 * [short_array_syntax](#short_array_syntax)
 * [space_before_self_xml_closing_tag](#space_before_self_xml_closing_tag)
 * [typo](#typo)
+* [unused_links](#unused_links)
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
 * [use_https_xsd_urls](#use_https_xsd_urls)
 * [valid_inline_highlighted_namespaces](#valid_inline_highlighted_namespaces)
@@ -500,6 +501,7 @@ Pattern | Message
 `/Informations/` | Please replace "%s" with "Information"
 `/performances/` | Please replace "%s" with "performance"
 `/Performances/` | Please replace "%s" with "Performance"
+`/``'%kernel.debug%'``/` | Please replace "%s" with "``%%kernel.debug%%``"
 
 ## `short_array_syntax`
 
@@ -529,6 +531,12 @@ Pattern | Message
 `/recalcuate/i` | Typo in word "%s"
 `/achived/i` | Typo in word "%s"
 `/overriden/i` | Typo in word "%s"
+
+## `unused_links`
+
+  > _Report all links which are not used in the file anymore._
+
+#### Groups [`@Sonata`, `@Symfony`]
 
 ## `use_deprecated_directive_instead_of_versionadded`
 
