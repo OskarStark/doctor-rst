@@ -99,18 +99,38 @@ RST;
         test
 RST;
 
+        $valid_too_with_xliff = <<<RST
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        test
+
+    .. code-block:: xml
+
+        <xliff version="1.2">test</xliff>
+
+    .. code-block:: php
+
+        test
+RST;
+
         return [
-            [
+            'valid 1' => [
                 null,
                 new RstSample($valid),
             ],
-            [
+            'valid 2' => [
                 null,
                 new RstSample($valid2),
             ],
-            [
+            'first invalid, but valid because of xliff' => [
                 null,
                 new RstSample($invalid_but_valid_because_of_xliff),
+            ],
+            'valid too with xliff' => [
+                null,
+                new RstSample($valid_too_with_xliff),
             ],
         ];
     }
@@ -161,26 +181,6 @@ RST;
         test         
 RST;
 
-        $valid_but_invalid_in_the_end_because_of_xliff_content = <<<RST
-.. configuration-block::
-
-    .. code-block:: php-annotations
-
-        test
-
-    .. code-block:: yaml
-
-        test
-
-    .. code-block:: xml
-
-        <xliff version="1.2">test</xliff>
-
-    .. code-block:: php
-
-        test
-RST;
-
         return [
             [
                 'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
@@ -189,10 +189,6 @@ RST;
             [
                 'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
                 new RstSample($invalid2),
-            ],
-            'valid but invalid in the end because of xliff content' => [
-                'Please use the following order for your code blocks: "xml, php-annotations, yaml, php"',
-                new RstSample($valid_but_invalid_in_the_end_because_of_xliff_content),
             ],
         ];
     }

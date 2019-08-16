@@ -43,6 +43,9 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         $lines->next();
 
         $validOrder = self::validOrder();
+        $validXliffOrder = self::validOrderIncludingXliff();
+
+        $xliff = false;
 
         $codeBlocks = [];
         while ($lines->valid() && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))) {
@@ -57,7 +60,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
 
                     while ($content->valid() && (RstParser::isBlankLine($content->current()) || RstParser::indention($lines->current()) < RstParser::indention($content->current()))) {
                         if (preg_match('/xliff/', $content->current())) {
-                            $validOrder = self::validOrderIncludingXliff();
+                            $xliff = true;
 
                             break;
                         }
@@ -82,13 +85,39 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             }
         }
 
-        try {
-            Assert::eq(array_values($codeBlocks), array_values($validOrder));
-        } catch (\InvalidArgumentException $e) {
+        // no xliff
+        if (!$xliff && !$this->equal($codeBlocks, $validOrder)) {
             return sprintf(
                 'Please use the following order for your code blocks: "%s"',
                 str_replace('.. code-block:: ', '', implode(', ', $validOrder))
             );
+        }
+
+        // xliff
+        foreach ($validXliffOrder as $key => $order) {
+            if (!\in_array($order, $codeBlocks)) {
+                unset($validXliffOrder[$key]);
+            }
+        }
+
+        if ($xliff) {
+            if (!$this->equal($codeBlocks, $validXliffOrder) && !$this->equal($codeBlocks, $validOrder)) {
+                return sprintf(
+                    'Please use the following order for your code blocks: "%s"',
+                    str_replace('.. code-block:: ', '', implode(', ', $validXliffOrder))
+                );
+            }
+        }
+    }
+
+    public function equal(array $codeBlocks, array $validOrder): bool
+    {
+        try {
+            Assert::eq(array_values($codeBlocks), array_values($validOrder));
+
+            return true;
+        } catch (\InvalidArgumentException $e) {
+            return false;
         }
     }
 
