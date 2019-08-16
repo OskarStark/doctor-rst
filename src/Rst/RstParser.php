@@ -60,6 +60,7 @@ class RstParser
         self::DIRECTIVE_ROLE,
         self::DIRECTIVE_FIGURE,
         self::DIRECTIVE_SEEALSO,
+        self::DIRECTIVE_CLASS,
     ];
 
     const CODE_BLOCK_PHP = 'php';
