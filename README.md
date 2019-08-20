@@ -69,6 +69,5 @@ or
 Todo:
 -----
 
-* Allow to specifiy which rules should be used via config file (`.doctor-rst.yaml`)
 * Allow to register custom Rules
 * Move logic from Command to Services
