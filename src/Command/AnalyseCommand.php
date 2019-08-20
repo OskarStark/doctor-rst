@@ -85,13 +85,13 @@ class AnalyseCommand extends Command
 
         $this->dir = $realpath;
 
-        $this->io->text(sprintf('Check *.rst(.inc) files in: <info>%s</info>', $this->dir));
+        $this->io->text(sprintf('Analyse *.rst(.inc) files in: <info>%s</info>', $this->dir));
 
         if (!is_file($configFile = $this->dir.'/.doctor-rst.yaml')) {
             $this->io->error(sprintf('Could not find config file: %s', $configFile));
         }
 
-        $this->io->text(sprintf('Used config file:           <info>%s</info>', $configFile));
+        $this->io->text(sprintf('Used config file:             <info>%s</info>', $configFile));
         $this->io->newLine();
 
         $this->config = Yaml::parseFile($configFile);
