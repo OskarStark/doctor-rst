@@ -62,8 +62,7 @@ class AnalyseCommand extends Command
     protected function configure()
     {
         $this
-            ->setAliases(['check'])
-            ->setDescription('Check *.rst files')
+            ->setDescription('Analyse *.rst files')
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
             ->addOption('group', 'g', InputOption::VALUE_REQUIRED, 'Which groups should be used?')

@@ -1,3 +1,3 @@
 #!/bin/sh -l
 
-sh -c "php /usr/src/app/bin/console check $DOCS_DIR $*"
+sh -c "php /usr/src/app/bin/console analyse $DOCS_DIR $*"
