@@ -13,33 +13,38 @@ Usage
 
 You can use it as a Github Action like this:
 
-_.github/rst.workflow_
+_.github/workflows/lint.yaml_
 ```
-workflow "Test" {
-  on = "push"
-  resolves = ["DOCtor-RST"]
-}
-
-action "DOCtor-RST" {
-  uses = "docker://oskarstark/doctor-rst"
-  secrets = ["GITHUB_TOKEN"]
-}
+on: push
+name: Lint
+jobs:
+    doctor-rst:
+        name: DOCtor-RST
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: DOCtor-RST
+              uses: docker://oskarstark/doctor-rst
+              with:
+                  args: --short
 ```
 
 If your `*.rst` files are not located in root:
 ```diff
-workflow "Test" {
-  on = "push"
-  resolves = ["DOCtor-RST"]
-}
-
-action "DOCtor-RST" {
-  uses = "docker://oskarstark/doctor-rst"
-  secrets = ["GITHUB_TOKEN"]
-+  env = {
-+    DOCS_DIR = "docs/"
-+  }
-}
+on: push
+name: Lint
+jobs:
+    doctor-rst:
+        name: DOCtor-RST
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: DOCtor-RST
+              uses: docker://oskarstark/doctor-rst
+              with:
+                  args: --short
++              env:
++                  DOCS_DIR: 'docs/'
 ```
 
 Docker
