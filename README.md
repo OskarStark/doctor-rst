@@ -15,7 +15,7 @@ You can use it as a Github Action like this:
 
 _.github/workflows/lint.yaml_
 ```
-on: push
+on: [push, pull_request]
 name: Lint
 jobs:
     doctor-rst:
@@ -31,7 +31,7 @@ jobs:
 
 If your `*.rst` files are not located in root:
 ```diff
-on: push
+on: [push, pull_request]
 name: Lint
 jobs:
     doctor-rst:
