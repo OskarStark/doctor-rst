@@ -23,6 +23,7 @@ class AvoidRepetetiveWordsTest extends TestCase
      * @test
      *
      * @dataProvider checkProvider
+     * @dataProvider whitelistProvider
      */
     public function check(?string $expected, RstSample $sample)
     {
@@ -30,6 +31,17 @@ class AvoidRepetetiveWordsTest extends TestCase
             $expected,
             (new AvoidRepetetiveWords())->check($sample->getContent(), $sample->getLineNumber())
         );
+    }
+
+    public function whitelistProvider(): \Generator
+    {
+        $whitelist = [
+            '...',
+        ];
+
+        foreach ($whitelist as $word) {
+            yield sprintf('valid whitelist: %s', $word) => [null, new RstSample(sprintf('%s %s %s', $word, $word, $word))];
+        }
     }
 
     public function checkProvider()

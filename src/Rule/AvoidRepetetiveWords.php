@@ -65,7 +65,7 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
         $words = explode(' ', $line);
 
         foreach ($words as $key => $word) {
-            if (0 === $key) {
+            if (0 === $key || \in_array($word, self::whitelist())) {
                 continue;
             }
 
@@ -73,5 +73,12 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
                 return sprintf('The word "%s" is used more times in a row.', $word);
             }
         }
+    }
+
+    private static function whitelist(): array
+    {
+        return [
+            '...',
+        ];
     }
 }
