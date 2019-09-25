@@ -75,7 +75,7 @@ class OrderedUseStatements extends AbstractRule implements Rule
         natsort($sortedUseStatements);
 
         if ($statements !== $sortedUseStatements) {
-            return 'Please reorder the use statements alphabetical';
+            return 'Please reorder the use statements alphabetically';
         }
     }
 
