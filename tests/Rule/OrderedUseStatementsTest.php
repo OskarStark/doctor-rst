@@ -68,7 +68,7 @@ class OrderedUseStatementsTest extends TestCase
         foreach ($codeBlocks as $codeBlock) {
             // WITH blank line after directive
             yield [
-                'Please reorder the use statements alphabetical',
+                'Please reorder the use statements alphabetically',
                 new RstSample([
                     $codeBlock,
                     '',
@@ -79,7 +79,7 @@ class OrderedUseStatementsTest extends TestCase
 
             // WITHOUT blank line after directive
             yield [
-                'Please reorder the use statements alphabetical',
+                'Please reorder the use statements alphabetically',
                 new RstSample([
                     $codeBlock,
                     '    use Symfony\B;',
