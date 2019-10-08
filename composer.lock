@@ -2884,7 +2884,7 @@
         },
         {
             "name": "symfony/debug-bundle",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug-bundle.git",
