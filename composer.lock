@@ -866,16 +866,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "1d8f7fee990c586f275cde1a9fc883d6b1e2d43e"
+                "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/1d8f7fee990c586f275cde1a9fc883d6b1e2d43e",
-                "reference": "1d8f7fee990c586f275cde1a9fc883d6b1e2d43e",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/40c62600ebad1ed2defbf7d35523d918a73ab330",
+                "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330",
                 "shasum": ""
             },
             "require": {
@@ -940,7 +940,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-08-26T08:26:39+00:00"
+            "time": "2019-10-04T10:57:53+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -2422,7 +2422,7 @@
         },
         {
             "name": "symfony/var-exporter",
-            "version": "v4.3.4",
+            "version": "v4.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
