@@ -119,5 +119,10 @@ class AvoidRepetetiveWordsTest extends TestCase
                 '    services   : ~',
             ], 2),
         ];
+
+        yield 'numeric repetition' => [
+            null,
+            new RstSample('This is valid 123 123'),
+        ];
     }
 }
