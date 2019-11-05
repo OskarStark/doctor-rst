@@ -819,16 +819,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2"
+                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2",
-                "reference": "bf73deb2b3b896a9d9c75f3f0d88185d2faa27e2",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/446d54b4cb6bf489fc9d75f55843658e6f25d801",
+                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801",
                 "shasum": ""
             },
             "require": {
@@ -862,20 +862,20 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2019-10-25T08:06:51+00:00"
+            "time": "2019-11-01T11:05:21+00:00"
         },
         {
             "name": "symfony/cache",
-            "version": "v4.3.5",
+            "version": "v4.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330"
+                "reference": "30a51b2401ee15bfc7ea98bd7af0f9d80e26e649"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/40c62600ebad1ed2defbf7d35523d918a73ab330",
-                "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/30a51b2401ee15bfc7ea98bd7af0f9d80e26e649",
+                "reference": "30a51b2401ee15bfc7ea98bd7af0f9d80e26e649",
                 "shasum": ""
             },
             "require": {
@@ -940,7 +940,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-10-04T10:57:53+00:00"
+            "time": "2019-10-30T12:58:49+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -2422,7 +2422,7 @@
         },
         {
             "name": "symfony/var-exporter",
-            "version": "v4.3.5",
+            "version": "v4.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
