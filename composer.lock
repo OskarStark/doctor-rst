@@ -3721,16 +3721,16 @@
         },
         {
             "name": "symfony/web-profiler-bundle",
-            "version": "v4.3.5",
+            "version": "v4.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "b52bb32e6182d924303dbeb9c584396819fef118"
+                "reference": "6ce12ffe97d9e26091b0e7340a9d661fba64655e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/b52bb32e6182d924303dbeb9c584396819fef118",
-                "reference": "b52bb32e6182d924303dbeb9c584396819fef118",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/6ce12ffe97d9e26091b0e7340a9d661fba64655e",
+                "reference": "6ce12ffe97d9e26091b0e7340a9d661fba64655e",
                 "shasum": ""
             },
             "require": {
@@ -3783,7 +3783,7 @@
             ],
             "description": "Symfony WebProfilerBundle",
             "homepage": "https://symfony.com",
-            "time": "2019-10-02T08:36:26+00:00"
+            "time": "2019-10-23T17:52:52+00:00"
         },
         {
             "name": "twig/twig",
