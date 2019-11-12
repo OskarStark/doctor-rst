@@ -2775,7 +2775,7 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v4.3.6",
+            "version": "v4.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
@@ -2983,7 +2983,7 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v4.3.6",
+            "version": "v4.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
