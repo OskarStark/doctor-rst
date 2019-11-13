@@ -69,7 +69,7 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
                 continue;
             }
 
-            if (isset($words[$key + 1]) && !empty($words[$key + 1]) && 1 < \strlen($word) && $words[$key + 1] == $word && !is_numeric($word)) {
+            if (isset($words[$key + 1]) && !empty($words[$key + 1]) && 1 < \strlen($word) && $words[$key + 1] == $word && (!is_numeric(rtrim($word, ',')))) {
                 return sprintf('The word "%s" is used more times in a row.', $word);
             }
         }

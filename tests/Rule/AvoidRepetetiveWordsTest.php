@@ -124,5 +124,10 @@ class AvoidRepetetiveWordsTest extends TestCase
             null,
             new RstSample('This is valid 123 123'),
         ];
+
+        yield 'numeric repetition with comma' => [
+            null,
+            new RstSample('224, 165, 141, 224, 164, 164, 224, 165, 135])'),
+        ];
     }
 }
