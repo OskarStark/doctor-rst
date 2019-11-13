@@ -73,6 +73,10 @@ class TypoTest extends TestCase
             'recalculate',
             'achieved',
             'overridden',
+            'Successfully',
+            'successfully',
+            'Optionally',
+            'optionally',
         ];
 
         foreach ($valids as $valid) {
@@ -102,6 +106,10 @@ class TypoTest extends TestCase
             'recalcuate',
             'achived',
             'overriden',
+            'Succesfully',
+            'succesfully',
+            'Optionnally',
+            'optionnally',
         ];
 
         foreach ($invalids as $invalid) {

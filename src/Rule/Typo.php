@@ -68,6 +68,8 @@ class Typo extends CheckListRule
             '/recalcuate/i' => null,
             '/achived/i' => null,
             '/overriden/i' => null,
+            '/succesfully/i' => null,
+            '/optionnally/i' => null,
         ];
     }
 }

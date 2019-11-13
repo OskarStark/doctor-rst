@@ -74,6 +74,8 @@ class ReplacementTest extends TestCase
             'performance',
             'Performance',
             '``%kernel.debug%``',
+            'e.g.',
+            'PHPDoc',
 //            '# username is your full Gmail or Google Apps email address', // todo this should be supported by the regex
         ];
 
@@ -109,6 +111,8 @@ class ReplacementTest extends TestCase
             'performances' => 'performance',
             'Performances' => 'Performance',
             '``\'%kernel.debug%\'``' => '``%kernel.debug%``',
+            'PHPdoc' => 'PHPDoc',
+            'eg.' => 'e.g.',
         ];
 
         foreach ($invalids as $invalid => $valid) {
