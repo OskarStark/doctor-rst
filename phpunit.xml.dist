@@ -14,7 +14,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="RST-Checker Test Suite">
+        <testsuite name="DOCtor-RST Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
