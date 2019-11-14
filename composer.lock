@@ -1586,7 +1586,7 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v4.3.7",
+            "version": "v4.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
@@ -1684,7 +1684,7 @@
         },
         {
             "name": "symfony/framework-bundle",
-            "version": "v4.2.11",
+            "version": "v4.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
