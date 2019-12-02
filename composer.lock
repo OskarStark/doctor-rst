@@ -875,16 +875,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v4.4.0",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "72d5cdc6920f889290beb65fa96b5e9d4515e382"
+                "reference": "de737c81ea95018d11a3ef908ad2ebf203741b96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/72d5cdc6920f889290beb65fa96b5e9d4515e382",
-                "reference": "72d5cdc6920f889290beb65fa96b5e9d4515e382",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/de737c81ea95018d11a3ef908ad2ebf203741b96",
+                "reference": "de737c81ea95018d11a3ef908ad2ebf203741b96",
                 "shasum": ""
             },
             "require": {
@@ -950,7 +950,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-11-17T11:01:12+00:00"
+            "time": "2019-12-01T10:50:45+00:00"
         },
         {
             "name": "symfony/cache-contracts",
