@@ -2356,16 +2356,16 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v4.4.0",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "cf6d72cf0348775f5243b8389169a7096221ea40"
+                "reference": "51f3f20ad29329a0bdf5c0e2f722d3764b065273"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/cf6d72cf0348775f5243b8389169a7096221ea40",
-                "reference": "cf6d72cf0348775f5243b8389169a7096221ea40",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/51f3f20ad29329a0bdf5c0e2f722d3764b065273",
+                "reference": "51f3f20ad29329a0bdf5c0e2f722d3764b065273",
                 "shasum": ""
             },
             "require": {
@@ -2428,7 +2428,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-11-20T13:44:34+00:00"
+            "time": "2019-12-01T08:39:58+00:00"
         },
         {
             "name": "symfony/service-contracts",
