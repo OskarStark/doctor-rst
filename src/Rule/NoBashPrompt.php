@@ -18,6 +18,7 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -32,8 +33,10 @@ class NoBashPrompt extends AbstractRule implements Rule
         return [RuleGroup::fromString(Registry::GROUP_SONATA)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
@@ -41,7 +44,7 @@ class NoBashPrompt extends AbstractRule implements Rule
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_SHELL)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TERMINAL)
         ) {
-            return;
+            return null;
         }
 
         $lines->next();
@@ -50,5 +53,7 @@ class NoBashPrompt extends AbstractRule implements Rule
         if (preg_match('/^\$ /', RstParser::clean($lines->current()))) {
             return 'Please remove the "$" prefix in .. code-block:: directive';
         }
+
+        return null;
     }
 }

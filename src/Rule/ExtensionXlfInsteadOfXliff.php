@@ -17,6 +17,7 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -34,13 +35,17 @@ class ExtensionXlfInsteadOfXliff extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match('/\.xliff/i', $line, $matches)) {
             return sprintf('Please use ".xlf" extension instead of "%s"', $matches[0]);
         }
+
+        return null;
     }
 }

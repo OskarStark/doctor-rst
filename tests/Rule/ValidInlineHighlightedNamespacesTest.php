@@ -28,7 +28,7 @@ class ValidInlineHighlightedNamespacesTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new ValidInlineHighlightedNamespaces())->check($sample->getContent(), $sample->getLineNumber())
+            (new ValidInlineHighlightedNamespaces())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

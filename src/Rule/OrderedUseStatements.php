@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class OrderedUseStatements extends AbstractRule implements Rule
@@ -27,15 +28,17 @@ class OrderedUseStatements extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS)
         ) {
-            return;
+            return null;
         }
 
         $indention = RstParser::indention($line);
@@ -67,7 +70,7 @@ class OrderedUseStatements extends AbstractRule implements Rule
         }
 
         if (empty($statements) || 1 === \count($statements)) {
-            return;
+            return null;
         }
 
         $sortedUseStatements = $statements;
@@ -77,6 +80,8 @@ class OrderedUseStatements extends AbstractRule implements Rule
         if ($statements !== $sortedUseStatements) {
             return 'Please reorder the use statements alphabetically';
         }
+
+        return null;
     }
 
     private function extractClass(string $useStatement): string

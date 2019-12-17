@@ -28,7 +28,7 @@ class UseHttpsXsdUrlsTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new UseHttpsXsdUrls())->check($sample->getContent(), $sample->getLineNumber())
+            (new UseHttpsXsdUrls())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 use Composer\Semver\VersionParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -56,13 +57,15 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements Rule, Conf
         return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_DEPRECATED)) {
-            return;
+            return null;
         }
 
         if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED), RstParser::clean($lines->current()), $matches)) {
@@ -90,5 +93,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements Rule, Conf
                 );
             }
         }
+
+        return null;
     }
 }

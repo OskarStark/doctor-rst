@@ -14,13 +14,18 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class EvenBracketsCount extends AbstractRule implements Rule
 {
+    /** @var int */
     private $round = 0;
+    /** @var int */
     private $curly = 0;
+    /** @var int */
     private $square = 0;
+    ///** @var int */
     //private $edge = 0;
 
     public static function getType(): int
@@ -33,8 +38,10 @@ class EvenBracketsCount extends AbstractRule implements Rule
         return [RuleGroup::fromString(Registry::GROUP_EXPERIMENTAL)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $this->round = 0;
         $this->curly = 0;
         $this->square = 0;
@@ -107,5 +114,7 @@ class EvenBracketsCount extends AbstractRule implements Rule
         ) {
             return 'Please make sure you have even number of brackets in the file!';
         }
+
+        return null;
     }
 }

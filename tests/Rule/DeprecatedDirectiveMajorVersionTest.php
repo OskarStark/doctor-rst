@@ -30,52 +30,53 @@ class DeprecatedDirectiveMajorVersionTest extends TestCase
         $rule = (new DeprecatedDirectiveMajorVersion(new VersionParser()));
         $rule->setOptions(['major_version' => $majorVersion]);
 
-        $this->assertSame($expected, $rule->check($sample->getContent(), $sample->getLineNumber()));
+        $this->assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: int, 2: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                null,
-                3,
-                new RstSample('.. deprecated:: 3'),
-            ],
-            [
-                null,
-                3,
-                new RstSample('.. deprecated:: 3.4'),
-            ],
-            [
-                null,
-                3,
-                new RstSample('.. deprecated:: 3.4.0'),
-            ],
-            [
-                null,
-                3,
-                new RstSample('.. deprecated:: 3.4.0.0'),
-            ],
-            [
-                null,
-                3,
-                new RstSample('.. deprecated:: 3.4   '),
-            ],
-            [
-                'You are not allowed to use version "2.7". Only major version "3" is allowed.',
-                3,
-                new RstSample('.. deprecated:: 2.7'),
-            ],
-            [
-                'You are not allowed to use version "4.0". Only major version "3" is allowed.',
-                3,
-                new RstSample('.. deprecated:: 4.0'),
-            ],
-            [
-                'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
-                3,
-                new RstSample('.. deprecated:: foo'),
-            ],
+        yield [
+            null,
+            3,
+            new RstSample('.. deprecated:: 3'),
+        ];
+        yield [
+            null,
+            3,
+            new RstSample('.. deprecated:: 3.4'),
+        ];
+        yield [
+            null,
+            3,
+            new RstSample('.. deprecated:: 3.4.0'),
+        ];
+        yield [
+            null,
+            3,
+            new RstSample('.. deprecated:: 3.4.0.0'),
+        ];
+        yield [
+            null,
+            3,
+            new RstSample('.. deprecated:: 3.4   '),
+        ];
+        yield [
+            'You are not allowed to use version "2.7". Only major version "3" is allowed.',
+            3,
+            new RstSample('.. deprecated:: 2.7'),
+        ];
+        yield [
+            'You are not allowed to use version "4.0". Only major version "3" is allowed.',
+            3,
+            new RstSample('.. deprecated:: 4.0'),
+        ];
+        yield [
+            'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
+            3,
+            new RstSample('.. deprecated:: foo'),
         ];
     }
 }

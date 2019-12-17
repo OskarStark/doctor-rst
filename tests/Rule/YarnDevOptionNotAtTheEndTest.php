@@ -28,7 +28,7 @@ class YarnDevOptionNotAtTheEndTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new YarnDevOptionNotAtTheEnd())->check($sample->getContent(), $sample->getLineNumber())
+            (new YarnDevOptionNotAtTheEnd())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

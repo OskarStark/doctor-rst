@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
@@ -27,15 +28,17 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS)
         ) {
-            return;
+            return null;
         }
 
         $indention = RstParser::indention($line);
@@ -61,5 +64,7 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
 
             $lines->next();
         }
+
+        return null;
     }
 }

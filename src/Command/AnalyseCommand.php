@@ -17,6 +17,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Rule\Configurable;
 use App\Rule\Rule;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 use App\Value\RuleName;
 use Symfony\Component\Console\Command\Command;
@@ -59,7 +60,7 @@ class AnalyseCommand extends Command
         parent::__construct($name);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Analyse *.rst files')
@@ -70,7 +71,7 @@ class AnalyseCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io = new SymfonyStyle($input, $output);
 
@@ -162,19 +163,27 @@ class AnalyseCommand extends Command
 
     private function checkFile(SplFileInfo $file): int
     {
-        $content = file((string) $file->getRealPath());
+        $realpath = $file->getRealPath();
+        if (false === $realpath) {
+            throw new \RuntimeException(sprintf(
+                'Cannot get real path for file: %s',
+                (string) $file->getRealPath()
+            ));
+        }
 
-        if (!$content) {
+        $content = file($realpath);
+
+        if (false == $content) {
             throw new \RuntimeException(sprintf(
                 'Cannot parse file: %s',
                 (string) $file->getRealPath()
             ));
         }
 
-        $lines = new \ArrayIterator($content);
+        $lines = Lines::fromArray($content);
 
         $violations = [];
-        foreach ($lines as $no => $line) {
+        foreach ($lines->toIterator() as $no => $line) {
             \assert(\is_integer($no));
 
             /** @var Rule $rule */
@@ -186,14 +195,14 @@ class AnalyseCommand extends Command
                 if (Rule::TYPE_FILE === $rule::getType() && $no > 0) {
                     continue;
                 }
-                $violation = $rule->check(clone $lines, $no);
+                $violation = $rule->check($lines, $no);
 
                 if (null !== $violation) {
                     $violations[] = [
                         $rule::getName(),
                         $violation,
                         $no + 1,
-                        Rule::TYPE_FILE === $rule->getType() ? '' : trim($line),
+                        Rule::TYPE_FILE === $rule::getType() ? '' : trim($line),
                     ];
                 }
 

@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,13 +48,15 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Conf
         return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_VERSIONADDED)) {
-            return;
+            return null;
         }
 
         if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), RstParser::clean($lines->current()), $matches)) {
@@ -67,5 +70,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Conf
                 );
             }
         }
+
+        return null;
     }
 }

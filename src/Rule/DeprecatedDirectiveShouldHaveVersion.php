@@ -18,6 +18,7 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 use Composer\Semver\VersionParser;
 
@@ -44,13 +45,15 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_DEPRECATED)) {
-            return;
+            return null;
         }
 
         if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED), RstParser::clean($lines->current()), $matches)) {
@@ -70,5 +73,7 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements Rule
                 );
             }
         }
+
+        return null;
     }
 }

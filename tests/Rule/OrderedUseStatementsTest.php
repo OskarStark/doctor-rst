@@ -28,7 +28,7 @@ class OrderedUseStatementsTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new OrderedUseStatements())->check($sample->getContent(), $sample->getLineNumber())
+            (new OrderedUseStatements())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

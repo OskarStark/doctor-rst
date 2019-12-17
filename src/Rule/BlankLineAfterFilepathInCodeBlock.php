@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -31,13 +32,15 @@ class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_CODE_BLOCK)) {
-            return;
+            return null;
         }
 
         $lines->next();
@@ -62,14 +65,18 @@ class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
         if (preg_match('/^{#(.*)\.twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
+
+        return null;
     }
 
-    private function validateBlankLine(\ArrayIterator $lines, array $matches)
+    private function validateBlankLine(\ArrayIterator $lines, array $matches): ?string
     {
         $lines->next();
 
         if (!RstParser::isBlankLine($lines->current())) {
             return sprintf('Please add a blank line after "%s"', trim($matches[0]));
         }
+
+        return null;
     }
 }

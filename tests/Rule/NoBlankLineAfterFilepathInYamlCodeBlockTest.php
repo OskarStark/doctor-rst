@@ -28,7 +28,7 @@ class NoBlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoBlankLineAfterFilepathInYamlCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoBlankLineAfterFilepathInYamlCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

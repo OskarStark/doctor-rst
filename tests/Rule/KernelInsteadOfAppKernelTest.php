@@ -28,7 +28,7 @@ class KernelInsteadOfAppKernelTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new KernelInsteadOfAppKernel())->check($sample->getContent(), $sample->getLineNumber())
+            (new KernelInsteadOfAppKernel())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

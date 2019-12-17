@@ -28,7 +28,7 @@ class NoNamespaceAfterUseStatementsTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoNamespaceAfterUseStatements())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoNamespaceAfterUseStatements())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

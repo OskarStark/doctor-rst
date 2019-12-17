@@ -35,7 +35,7 @@ class ReplacementTest extends TestCase
         $violations = [];
         /** @var Rule $rule */
         foreach ($configuredRules as $rule) {
-            $violation = $rule->check($sample->getContent(), $sample->getLineNumber());
+            $violation = $rule->check($sample->lines(), $sample->lineNumber());
             if (null !== $violation) {
                 $violations[] = $violation;
             }

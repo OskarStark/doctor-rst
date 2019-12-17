@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Value\Lines;
 use App\Value\RuleGroup;
 use App\Value\RuleName;
 
@@ -29,7 +30,7 @@ interface Rule
      */
     public static function getGroups(): array;
 
-    public function check(\ArrayIterator $lines, int $number);
+    public function check(Lines $lines, int $number): ?string;
 
     public static function getType(): int;
 

@@ -18,5 +18,6 @@ namespace App\Annotations\Rule;
  */
 class ValidExample
 {
+    /** @var array|string */
     public $value;
 }

@@ -28,7 +28,7 @@ class NoPhpPrefixBeforeBinConsoleTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoPhpPrefixBeforeBinConsole())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoPhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

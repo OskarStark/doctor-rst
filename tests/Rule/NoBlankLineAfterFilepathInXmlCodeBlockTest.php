@@ -28,7 +28,7 @@ class NoBlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoBlankLineAfterFilepathInXmlCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoBlankLineAfterFilepathInXmlCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

@@ -29,10 +29,13 @@ class AvoidRepetetiveWordsTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new AvoidRepetetiveWords())->check($sample->getContent(), $sample->getLineNumber())
+            (new AvoidRepetetiveWords())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
+    /**
+     * @return \Generator<array{0: null, 1: RstSample}>
+     */
     public function whitelistProvider(): \Generator
     {
         $whitelist = [
@@ -44,6 +47,9 @@ class AvoidRepetetiveWordsTest extends TestCase
         }
     }
 
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
     public function checkProvider()
     {
         $valid = '';

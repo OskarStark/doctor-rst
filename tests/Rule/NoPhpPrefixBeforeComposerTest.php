@@ -28,7 +28,7 @@ class NoPhpPrefixBeforeComposerTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoPhpPrefixBeforeComposer())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoPhpPrefixBeforeComposer())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

@@ -28,10 +28,13 @@ class BlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new BlankLineAfterFilepathInXmlCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new BlankLineAfterFilepathInXmlCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
     public function checkProvider(): \Generator
     {
         $paths = [

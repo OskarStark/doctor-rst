@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class NoInheritdocInCodeExamples extends AbstractRule implements Rule
@@ -30,8 +31,10 @@ class NoInheritdocInCodeExamples extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
@@ -40,5 +43,7 @@ class NoInheritdocInCodeExamples extends AbstractRule implements Rule
         ) {
             return 'Please do not use "@inheritdoc"';
         }
+
+        return null;
     }
 }

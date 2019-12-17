@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class NoComposerPhar extends AbstractRule implements Rule
@@ -23,13 +24,17 @@ class NoComposerPhar extends AbstractRule implements Rule
         return [RuleGroup::fromString(Registry::GROUP_SONATA)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match('/composer\.phar/', $line)) {
             return 'Please use "composer" instead of "composer.phar"';
         }
+
+        return null;
     }
 }

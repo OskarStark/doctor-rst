@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
@@ -27,14 +28,16 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP, true)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS, true)) {
-            return;
+            return null;
         }
 
         $lines->next();
@@ -46,5 +49,7 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
         if ('<?php' === RstParser::clean($nextLine)) {
             return sprintf('Please remove PHP open tag after "%s" directive', $line);
         }
+
+        return null;
     }
 }

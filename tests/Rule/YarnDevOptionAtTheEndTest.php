@@ -28,7 +28,7 @@ class YarnDevOptionAtTheEndTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new YarnDevOptionAtTheEnd())->check($sample->getContent(), $sample->getLineNumber())
+            (new YarnDevOptionAtTheEnd())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

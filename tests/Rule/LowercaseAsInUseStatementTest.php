@@ -28,7 +28,7 @@ class LowercaseAsInUseStatementTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new LowercaseAsInUseStatements())->check($sample->getContent(), $sample->getLineNumber())
+            (new LowercaseAsInUseStatements())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

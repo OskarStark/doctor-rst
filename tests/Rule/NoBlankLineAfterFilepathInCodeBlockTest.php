@@ -33,7 +33,7 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoBlankLineAfterFilepathInCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoBlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

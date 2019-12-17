@@ -28,7 +28,7 @@ class ValidUseStatementsTests extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new ValidUseStatements())->check($sample->getContent(), $sample->getLineNumber())
+            (new ValidUseStatements())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

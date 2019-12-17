@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -31,18 +32,20 @@ class BlankLineBeforeDirective extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (0 == $number) {
             // it is ok to start with a directive
-            return;
+            return null;
         }
 
         if (RstParser::isDefaultDirective($line) || !RstParser::isDirective($line)) {
-            return;
+            return null;
         }
 
         $lines->seek($number - 1);
@@ -53,5 +56,7 @@ class BlankLineBeforeDirective extends AbstractRule implements Rule
         ) {
             return sprintf('Please add a blank line before "%s" directive', $line);
         }
+
+        return null;
     }
 }

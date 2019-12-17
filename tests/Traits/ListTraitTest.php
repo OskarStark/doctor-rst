@@ -50,10 +50,13 @@ class ListTraitTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->isPartOfListItem($sample->getContent(), $sample->getLineNumber())
+            $this->traitWrapper->isPartOfListItem($sample->lines()->toIterator(), $sample->lineNumber())
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: RstSample}>
+     */
     public function isPartOfListItemProvider()
     {
         yield [
@@ -152,10 +155,13 @@ RST
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->isPartOfFootnote($sample->getContent(), $sample->getLineNumber())
+            $this->traitWrapper->isPartOfFootnote($sample->lines()->toIterator(), $sample->lineNumber())
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: RstSample}>
+     */
     public function isPartOfFootnoteProvider(): \Generator
     {
         $footnote = <<<'RST'
@@ -176,10 +182,13 @@ RST;
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->isPartOfRstComment($sample->getContent(), $sample->getLineNumber())
+            $this->traitWrapper->isPartOfRstComment($sample->lines()->toIterator(), $sample->lineNumber())
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: RstSample}>
+     */
     public function isPartOfRstCommentProvider(): \Generator
     {
         $rst_comment = <<<'RST'
@@ -200,10 +209,13 @@ RST;
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->getContent(), $sample->getLineNumber())
+            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines()->toIterator(), $sample->lineNumber())
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: RstSample}>
+     */
     public function isPartOfLineNumberAnnotationProvider(): \Generator
     {
         $line_number_annotation = <<<'RST'

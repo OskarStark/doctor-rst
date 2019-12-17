@@ -28,7 +28,7 @@ class ShortArraySyntaxTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new ShortArraySyntax())->check($sample->getContent(), $sample->getLineNumber())
+            (new ShortArraySyntax())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

@@ -29,7 +29,7 @@ class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->getContent(), $sample->getLineNumber())
+            (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

@@ -30,7 +30,7 @@ class VersionaddedDirectiveShouldHaveVersionTest extends TestCase
         $this->assertSame(
             $expected,
             (new VersionaddedDirectiveShouldHaveVersion(new VersionParser()))
-                ->check($sample->getContent(), $sample->getLineNumber())
+                ->check($sample->lines(), $sample->lineNumber())
         );
     }
 

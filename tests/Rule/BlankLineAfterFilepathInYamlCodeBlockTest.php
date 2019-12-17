@@ -28,65 +28,66 @@ class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new BlankLineAfterFilepathInYamlCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new BlankLineAfterFilepathInYamlCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                'Please add a blank line after "# config/services.yml"',
-                new RstSample([
-                    '.. code-block:: yml',
-                    '',
-                    '    # config/services.yml',
-                    '    services:',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: yml',
-                    '',
-                    '    # config/services.yml',
-                    '',
-                    '    services:',
-                ]),
-            ],
-            [
-                'Please add a blank line after "# config/services.yaml"',
-                new RstSample([
-                    '.. code-block:: yaml',
-                    '',
-                    '    # config/services.yaml',
-                    '    services:',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: yaml',
-                    '',
-                    '    # config/services.yaml',
-                    '',
-                    '    services:',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: yaml',
-                    '',
-                    '    # config/services.yaml',
-                    '    # a comment',
-                    '    services:',
-                ]),
-            ],
-            [
-                null,
-                new RstSample('temp'),
-            ],
+        yield [
+            'Please add a blank line after "# config/services.yml"',
+            new RstSample([
+                '.. code-block:: yml',
+                '',
+                '    # config/services.yml',
+                '    services:',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: yml',
+                '',
+                '    # config/services.yml',
+                '',
+                '    services:',
+            ]),
+        ];
+        yield[
+            'Please add a blank line after "# config/services.yaml"',
+            new RstSample([
+                '.. code-block:: yaml',
+                '',
+                '    # config/services.yaml',
+                '    services:',
+            ]),
+        ];
+        yield[
+            null,
+            new RstSample([
+                '.. code-block:: yaml',
+                '',
+                '    # config/services.yaml',
+                '',
+                '    services:',
+            ]),
+        ];
+        yield[
+            null,
+            new RstSample([
+                '.. code-block:: yaml',
+                '',
+                '    # config/services.yaml',
+                '    # a comment',
+                '    services:',
+            ]),
+        ];
+        yield[
+            null,
+            new RstSample('temp'),
         ];
     }
 }

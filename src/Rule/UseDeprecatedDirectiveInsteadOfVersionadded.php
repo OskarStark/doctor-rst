@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implements Rule
@@ -27,13 +28,15 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_VERSIONADDED)) {
-            return;
+            return null;
         }
 
         $indention = RstParser::indention($line);
@@ -49,5 +52,7 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
 
             $lines->next();
         }
+
+        return null;
     }
 }

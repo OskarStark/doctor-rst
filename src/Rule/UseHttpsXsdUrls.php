@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class UseHttpsXsdUrls extends AbstractRule implements Rule
@@ -26,13 +27,17 @@ class UseHttpsXsdUrls extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match('/http\:\/\/([^\s]+)\.xsd/', $line, $matches)) {
             return sprintf('Please use "https" for %s', $matches[0]);
         }
+
+        return null;
     }
 }

@@ -80,7 +80,10 @@ final class Registry
         return $this->rawRules;
     }
 
-    public function getRulesByGroup(RuleGroup $group)
+    /**
+     * @return Rule[]
+     */
+    public function getRulesByGroup(RuleGroup $group): array
     {
         $rules = [];
         foreach ($this->rules as $rule) {
@@ -101,6 +104,9 @@ final class Registry
         return $this->rules[$name->asString()];
     }
 
+    /**
+     * @return Rule[]
+     */
     public function getRulesByName(RuleName $name): array
     {
         $rules = [];

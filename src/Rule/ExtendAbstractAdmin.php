@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -28,8 +29,10 @@ class ExtendAbstractAdmin extends AbstractRule implements Rule
         return [RuleGroup::fromString(Registry::GROUP_SONATA)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
@@ -42,5 +45,7 @@ class ExtendAbstractAdmin extends AbstractRule implements Rule
         if (preg_match('/^use Sonata\\\\AdminBundle\\\\Admin\\\\Admin;/', $line)) {
             return 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"';
         }
+
+        return null;
     }
 }

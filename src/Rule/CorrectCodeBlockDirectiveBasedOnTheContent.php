@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements Rule
@@ -27,13 +28,15 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_CODE_BLOCK)) {
-            return;
+            return null;
         }
 
         $indention = RstParser::indention($line);
@@ -76,6 +79,8 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                 return $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG);
             }
         }
+
+        return null;
     }
 
     private function getErrorMessage(string $new, string $current): string

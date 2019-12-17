@@ -18,6 +18,7 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -32,8 +33,10 @@ class ComposerDevOptionAtTheEnd extends AbstractRule implements Rule
         return [RuleGroup::fromString(Registry::GROUP_SONATA)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
@@ -41,5 +44,7 @@ class ComposerDevOptionAtTheEnd extends AbstractRule implements Rule
         if (preg_match('/composer require \-\-dev(.*)$/', $line)) {
             return 'Please move "--dev" option to the end of the command';
         }
+
+        return null;
     }
 }

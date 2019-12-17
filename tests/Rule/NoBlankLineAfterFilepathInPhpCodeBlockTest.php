@@ -28,7 +28,7 @@ class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

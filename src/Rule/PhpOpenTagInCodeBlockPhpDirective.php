@@ -14,17 +14,20 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Rst\RstParser;
+use App\Value\Lines;
 
 class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
 {
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP, true)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS, true)) {
-            return;
+            return null;
         }
 
         $lines->next();
@@ -36,5 +39,7 @@ class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
         if ('<?php' !== RstParser::clean($nextLine)) {
             return sprintf('Please add PHP open tag after "%s" directive', $line);
         }
+
+        return null;
     }
 }

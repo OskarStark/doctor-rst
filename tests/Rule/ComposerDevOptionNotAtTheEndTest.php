@@ -28,21 +28,22 @@ class ComposerDevOptionNotAtTheEndTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new ComposerDevOptionNotAtTheEnd())->check($sample->getContent(), $sample->getLineNumber())
+            (new ComposerDevOptionNotAtTheEnd())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                null,
-                new RstSample('composer require --dev symfony/debug'),
-            ],
-            [
-                'Please move "--dev" option before the package',
-                new RstSample('composer require symfony/debug --dev'),
-            ],
+        yield [
+            null,
+            new RstSample('composer require --dev symfony/debug'),
+        ];
+        yield[
+            'Please move "--dev" option before the package',
+            new RstSample('composer require symfony/debug --dev'),
         ];
     }
 }
