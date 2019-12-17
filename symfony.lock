@@ -86,9 +86,6 @@
             "ref": "f3a28efb32f20b8740fd763651cabd780bce43da"
         }
     },
-    "symfony/contracts": {
-        "version": "v1.0.2"
-    },
     "symfony/css-selector": {
         "version": "v4.2.1"
     },
