@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -30,14 +31,18 @@ class Typo extends CheckListRule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match($this->pattern, $line, $matches)) {
             return sprintf($this->message, $matches[0]);
         }
+
+        return null;
     }
 
     public function getDefaultMessage(): string
@@ -45,6 +50,9 @@ class Typo extends CheckListRule
         return 'Typo in word "%s"';
     }
 
+    /**
+     * @return array<string, string|null>
+     */
     public static function getList(): array
     {
         return [

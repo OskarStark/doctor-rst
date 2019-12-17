@@ -46,14 +46,14 @@ class RulesCommand extends Command
         parent::__construct($name);
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('List available rules')
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io = new SymfonyStyle($input, $output);
 
@@ -80,9 +80,11 @@ class RulesCommand extends Command
         foreach ($rules as $rule) {
             $this->rule($rule);
         }
+
+        return 0;
     }
 
-    private function rule(Rule $rule)
+    private function rule(Rule $rule): void
     {
         /** @var RuleAnnotation\Description $description */
         $description = $this->annotationReader->getClassAnnotation(

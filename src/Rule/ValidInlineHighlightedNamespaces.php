@@ -18,6 +18,7 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
 use App\Helper\PhpHelper;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -37,8 +38,10 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
@@ -72,5 +75,6 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements Rule
         }
 
         end:
+        return null;
     }
 }

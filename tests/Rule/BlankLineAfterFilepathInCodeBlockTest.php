@@ -33,199 +33,205 @@ class BlankLineAfterFilepathInCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new BlankLineAfterFilepathInCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new BlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array{0: null, 1: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                null,
-                new RstSample('temp'),
-            ],
+        yield [
+            null,
+            new RstSample('temp'),
         ];
     }
 
-    public function checkPhpProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkPhpProvider(): \Generator
     {
-        return [
-            [
-                'Please add a blank line after "// src/Handler/Collection.php"',
-                new RstSample([
-                    '.. code-block:: php',
-                    '',
-                    '    // src/Handler/Collection.php',
-                    '    namespace App\\Handler;',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: php',
-                    '',
-                    '    // src/Handler/Collection.php',
-                    '',
-                    '    namespace App\\Handler;',
-                ]),
-            ],
+        yield [
+            'Please add a blank line after "// src/Handler/Collection.php"',
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Handler/Collection.php',
+                '    namespace App\\Handler;',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Handler/Collection.php',
+                '',
+                '    namespace App\\Handler;',
+            ]),
         ];
     }
 
-    public function checkYmlProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkYmlProvider(): \Generator
     {
-        return [
-            [
-                'Please add a blank line after "# config/services.yml"',
-                new RstSample([
-                    '.. code-block:: yml',
-                    '',
-                    '    # config/services.yml',
-                    '    services:',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: yml',
-                    '',
-                    '    # config/services.yml',
-                    '',
-                    '    services:',
-                ]),
-            ],
+        yield [
+            'Please add a blank line after "# config/services.yml"',
+            new RstSample([
+                '.. code-block:: yml',
+                '',
+                '    # config/services.yml',
+                '    services:',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: yml',
+                '',
+                '    # config/services.yml',
+                '',
+                '    services:',
+            ]),
         ];
     }
 
-    public function checkYamlProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkYamlProvider(): \Generator
     {
-        return [
-            [
-                'Please add a blank line after "# config/services.yaml"',
-                new RstSample([
-                    '.. code-block:: yaml',
-                    '',
-                    '    # config/services.yaml',
-                    '    services:',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: yaml',
-                    '',
-                    '    # config/services.yaml',
-                    '',
-                    '    services:',
-                ]),
-            ],
+        yield [
+            'Please add a blank line after "# config/services.yaml"',
+            new RstSample([
+                '.. code-block:: yaml',
+                '',
+                '    # config/services.yaml',
+                '    services:',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: yaml',
+                '',
+                '    # config/services.yaml',
+                '',
+                '    services:',
+            ]),
         ];
     }
 
-    public function checkXmlProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkXmlProvider(): \Generator
     {
-        return [
-            [
-                'Please add a blank line after "<!-- config/services.xml -->"',
-                new RstSample([
-                    '.. code-block:: xml',
-                    '',
-                    '    <!-- config/services.xml -->',
-                    '    <foo\/>',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: xml',
-                    '',
-                    '    <!-- config/services.xml -->',
-                    '',
-                    '    <foo\/>',
-                ]),
-            ],
-            [
-                'Please add a blank line after "<!--config/services.xml-->"',
-                new RstSample([
-                    '.. code-block:: xml',
-                    '',
-                    '    <!--config/services.xml-->',
-                    '    <foo\/>',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: xml',
-                    '',
-                    '    <!--config/services.xml-->',
-                    '',
-                    '    <foo\/>',
-                ]),
-            ],
+        yield [
+            'Please add a blank line after "<!-- config/services.xml -->"',
+            new RstSample([
+                '.. code-block:: xml',
+                '',
+                '    <!-- config/services.xml -->',
+                '    <foo\/>',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: xml',
+                '',
+                '    <!-- config/services.xml -->',
+                '',
+                '    <foo\/>',
+            ]),
+        ];
+        yield [
+            'Please add a blank line after "<!--config/services.xml-->"',
+            new RstSample([
+                '.. code-block:: xml',
+                '',
+                '    <!--config/services.xml-->',
+                '    <foo\/>',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: xml',
+                '',
+                '    <!--config/services.xml-->',
+                '',
+                '    <foo\/>',
+            ]),
         ];
     }
 
-    public function checkTwigProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkTwigProvider(): \Generator
     {
-        return [
-            [
-                'Please add a blank line after "{# templates/index.html.twig #}"',
-                new RstSample([
-                    '.. code-block:: twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                'Please add a blank line after "{# templates/index.html.twig #}"',
-                new RstSample([
-                    '.. code-block:: jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                'Please add a blank line after "{# templates/index.html.twig #}"',
-                new RstSample([
-                    '.. code-block:: html+jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: html+jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
+        yield [
+            'Please add a blank line after "{# templates/index.html.twig #}"',
+            new RstSample([
+                '.. code-block:: twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            'Please add a blank line after "{# templates/index.html.twig #}"',
+            new RstSample([
+                '.. code-block:: jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            'Please add a blank line after "{# templates/index.html.twig #}"',
+            new RstSample([
+                '.. code-block:: html+jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: html+jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
         ];
     }
 }

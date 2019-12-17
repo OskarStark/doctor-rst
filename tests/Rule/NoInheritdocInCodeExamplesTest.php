@@ -28,7 +28,7 @@ class NoInheritdocInCodeExamplesTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoInheritdocInCodeExamples())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoInheritdocInCodeExamples())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

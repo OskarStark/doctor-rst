@@ -49,11 +49,11 @@ class DirectiveTraitTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->in($directive, $sample->getContent(), $sample->getLineNumber(), $types)
+            $this->traitWrapper->in($directive, $sample->lines()->toIterator(), $sample->lineNumber(), $types)
         );
     }
 
-    public function inProvider()
+    public function inProvider(): \Generator
     {
         $no_code_block = <<<'RST'
 I am just a cool text!
@@ -419,7 +419,7 @@ RST;
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->previousDirectiveIs($directive, $sample->getContent(), $sample->getLineNumber(), $types)
+            $this->traitWrapper->previousDirectiveIs($directive, $sample->lines()->toIterator(), $sample->lineNumber(), $types)
         );
     }
 

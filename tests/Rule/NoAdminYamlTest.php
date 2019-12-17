@@ -28,7 +28,7 @@ class NoAdminYamlTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoAdminYaml())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoAdminYaml())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

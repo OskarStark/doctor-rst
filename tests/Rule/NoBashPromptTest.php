@@ -28,7 +28,7 @@ class NoBashPromptTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoBashPrompt())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoBashPrompt())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

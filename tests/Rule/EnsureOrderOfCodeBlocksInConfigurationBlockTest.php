@@ -29,11 +29,14 @@ class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new EnsureOrderOfCodeBlocksInConfigurationBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new EnsureOrderOfCodeBlocksInConfigurationBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
-    public function validProvider()
+    /**
+     * @return \Generator<array{0: null, 1: RstSample}>
+     */
+    public function validProvider(): \Generator
     {
         $valid = <<<RST
 .. configuration-block::
@@ -115,27 +118,28 @@ RST;
         test
 RST;
 
-        return [
-            'valid 1' => [
-                null,
-                new RstSample($valid),
-            ],
-            'valid 2' => [
-                null,
-                new RstSample($valid2),
-            ],
-            'first invalid, but valid because of xliff' => [
-                null,
-                new RstSample($invalid_but_valid_because_of_xliff),
-            ],
-            'valid too with xliff' => [
-                null,
-                new RstSample($valid_too_with_xliff),
-            ],
+        yield 'valid 1' => [
+            null,
+            new RstSample($valid),
+        ];
+        yield 'valid 2' => [
+            null,
+            new RstSample($valid2),
+        ];
+        yield 'first invalid, but valid because of xliff' => [
+            null,
+            new RstSample($invalid_but_valid_because_of_xliff),
+        ];
+        yield 'valid too with xliff' => [
+            null,
+            new RstSample($valid_too_with_xliff),
         ];
     }
 
-    public function invalidProvider()
+    /**
+     * @return \Generator<array{0: string, 1: RstSample}>
+     */
+    public function invalidProvider(): \Generator
     {
         $invalid = <<<RST
 .. configuration-block::
@@ -181,15 +185,13 @@ RST;
         test         
 RST;
 
-        return [
-            [
-                'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
-                new RstSample($invalid),
-            ],
-            [
-                'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
-                new RstSample($invalid2),
-            ],
+        yield [
+            'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
+            new RstSample($invalid),
+        ];
+        yield [
+            'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
+            new RstSample($invalid2),
         ];
     }
 }

@@ -29,10 +29,13 @@ class BlankLineBeforeDirectiveTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new BlankLineBeforeDirective())->check($sample->getContent(), $sample->getLineNumber())
+            (new BlankLineBeforeDirective())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
     public function checkProvider(): \Generator
     {
         yield 'no directive' => [

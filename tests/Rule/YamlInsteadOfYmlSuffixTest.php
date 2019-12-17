@@ -28,7 +28,7 @@ class YamlInsteadOfYmlSuffixTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new YamlInsteadOfYmlSuffix())->check($sample->getContent(), $sample->getLineNumber())
+            (new YamlInsteadOfYmlSuffix())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

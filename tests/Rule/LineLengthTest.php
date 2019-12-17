@@ -28,7 +28,7 @@ class LineLengthTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new LineLength($max))->check($sample->getContent(), $sample->getLineNumber())
+            (new LineLength($max))->check($sample->lines(), $sample->lineNumber())
         );
     }
 

@@ -28,7 +28,7 @@ class ExtensionXlfInsteadOfXliffTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new ExtensionXlfInsteadOfXliff())->check($sample->getContent(), $sample->getLineNumber())
+            (new ExtensionXlfInsteadOfXliff())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

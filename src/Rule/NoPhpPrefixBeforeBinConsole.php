@@ -17,6 +17,7 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -31,13 +32,17 @@ class NoPhpPrefixBeforeBinConsole extends AbstractRule implements Rule
         return [RuleGroup::fromString(Registry::GROUP_SONATA)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match('/php bin\/console/', $line)) {
             return 'Please remove "php" prefix before "bin/console"';
         }
+
+        return null;
     }
 }

@@ -16,21 +16,24 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Helper\PhpHelper;
 use App\Rst\RstParser;
+use App\Value\Lines;
 
 /**
  * @Description("Make sure you have a blank line after a filepath in a PHP code block.")
  */
 class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Rule
 {
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS)
         ) {
-            return;
+            return null;
         }
 
         $lines->next();
@@ -40,14 +43,18 @@ class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Rule
         if (preg_match('/^\/\/(.*)\.php$/', RstParser::clean($lines->current()), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
+
+        return null;
     }
 
-    private function validateBlankLine(\ArrayIterator $lines, array $matches)
+    private function validateBlankLine(\ArrayIterator $lines, array $matches): ?string
     {
         $lines->next();
 
         if (!RstParser::isBlankLine($lines->current()) && !PhpHelper::isComment($lines->current())) {
             return sprintf('Please add a blank line after "%s"', trim($matches[0]));
         }
+
+        return null;
     }
 }

@@ -28,7 +28,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoBlankLineAfterFilepathInTwigCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoBlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

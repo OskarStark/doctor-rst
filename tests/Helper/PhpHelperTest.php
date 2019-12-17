@@ -32,7 +32,10 @@ class PhpHelperTest extends TestCase
         );
     }
 
-    public function isCommentProvider()
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
+    public function isCommentProvider(): \Generator
     {
         yield [true, '# comment'];
         yield [true, '// comment'];
@@ -49,6 +52,9 @@ class PhpHelperTest extends TestCase
         $this->assertSame($expected, PhpHelper::containsBackslash($string));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function containsBackslashProvider(): \Generator
     {
         yield 'one backslash at the beginning' => [true, '\Test'];
@@ -69,6 +75,9 @@ class PhpHelperTest extends TestCase
         $this->assertSame($expected, PhpHelper::isUsingTwoBackslashes($string));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isUsingTwoBackSlashesProvider(): \Generator
     {
         yield 'two backslashes + beginning' => [true, '\\\\Test\\\\Test'];
@@ -88,6 +97,9 @@ class PhpHelperTest extends TestCase
         $this->assertSame($expected, PhpHelper::isUsingOneBackslash($string));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isUsingOneBackslashProvider(): \Generator
     {
         yield 'one backslash + beginning' => [true, '\Test\Test'];
@@ -106,6 +118,9 @@ class PhpHelperTest extends TestCase
         $this->assertSame($expected, PhpHelper::isStartingWithOneBackslash($string));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isStartingWithOneBackslashProvider(): \Generator
     {
         yield 'one backslash' => [true, '\Test'];
@@ -123,6 +138,9 @@ class PhpHelperTest extends TestCase
         $this->assertSame($expected, PhpHelper::isStartingWithTwoBackslashes($string));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isStartingWithTwoBackslashesProvider(): \Generator
     {
         yield 'one backslash' => [false, '\Test'];
@@ -142,6 +160,9 @@ class PhpHelperTest extends TestCase
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isLastLineOfMultilineCommentProvider(): \Generator
     {
         yield [false, '/**'];
@@ -158,10 +179,13 @@ class PhpHelperTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new PhpHelper())->isPartOfDocBlock($sample->getContent(), $sample->getLineNumber())
+            (new PhpHelper())->isPartOfDocBlock($sample->lines()->toIterator(), $sample->lineNumber())
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: RstSample}>
+     */
     public function isPartOfDocBlockProvider(): \Generator
     {
         $valid = <<<'RST'
@@ -189,10 +213,13 @@ RST;
     {
         $this->assertSame(
             $expected,
-            (new PhpHelper())->isPartOfMultilineComment($sample->getContent(), $sample->getLineNumber())
+            (new PhpHelper())->isPartOfMultilineComment($sample->lines()->toIterator(), $sample->lineNumber())
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: RstSample}>
+     */
     public function isPartOfMultilineCommentProvider(): \Generator
     {
         $valid = <<<'RST'
@@ -233,6 +260,9 @@ RST;
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isFirstLineOfMultilineCommentProvider(): \Generator
     {
         yield [true, '/*'];
@@ -254,6 +284,9 @@ RST;
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isFirstLineOfDocBlockProvider(): \Generator
     {
         yield [true, '/**'];
@@ -275,6 +308,9 @@ RST;
         );
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isLastLineOfDocBlockProvider(): \Generator
     {
         yield [false, '/**'];

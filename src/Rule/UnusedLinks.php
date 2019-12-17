@@ -18,6 +18,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Rst\Value\LinkDefinition;
 use App\Rst\Value\LinkUsage;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 use Symfony\Contracts\Service\ResetInterface;
 
@@ -40,8 +41,10 @@ class UnusedLinks extends AbstractRule implements Rule, ResetInterface
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
 
         while ($lines->valid()) {
@@ -75,9 +78,11 @@ class UnusedLinks extends AbstractRule implements Rule, ResetInterface
                 implode(', ', array_unique(array_keys($this->linkDefinitions)))
             );
         }
+
+        return null;
     }
 
-    public function reset()
+    public function reset(): void
     {
         $this->linkUsages = [];
         $this->linkDefinitions = [];

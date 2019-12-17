@@ -28,7 +28,7 @@ class ExtendControllerTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new ExtendController())->check($sample->getContent(), $sample->getLineNumber())
+            (new ExtendController())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

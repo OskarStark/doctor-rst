@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -31,14 +32,18 @@ class ReplaceCodeBlockTypes extends CheckListRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (RstParser::codeBlockDirectiveIsTypeOf($line, $this->pattern, true)) {
             return $this->message;
         }
+
+        return null;
     }
 
     public function getDefaultMessage(): string
@@ -46,6 +51,9 @@ class ReplaceCodeBlockTypes extends CheckListRule implements Rule
         return 'Please do not use type "%s" for code-block.';
     }
 
+    /**
+     * @return array<string, string>
+     */
     public static function getList(): array
     {
         $replacements = [

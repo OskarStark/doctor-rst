@@ -28,7 +28,7 @@ class NoComposerReqTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoComposerReq())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoComposerReq())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

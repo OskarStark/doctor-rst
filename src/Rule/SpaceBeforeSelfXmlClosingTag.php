@@ -13,19 +13,25 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Value\Lines;
+
 class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements Rule
 {
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!preg_match('/\/>/', $line)) {
-            return;
+            return null;
         }
 
         if (!preg_match('/\ \/>/', $line)) {
             return 'Please add space before "/>"';
         }
+
+        return null;
     }
 }

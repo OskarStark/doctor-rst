@@ -28,103 +28,104 @@ class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new BlankLineAfterFilepathInTwigCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new BlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                'Please add a blank line after "{# templates/index.html.twig #}"',
-                new RstSample([
-                    '.. code-block:: twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                'Please add a blank line after "{# templates/index.html.twig #}"',
-                new RstSample([
-                    '.. code-block:: jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                'Please add a blank line after "{# templates/index.html.twig #}"',
-                new RstSample([
-                    '.. code-block:: html+jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: html+jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                'Please add a blank line after "{# templates/index.html.twig #}"',
-                new RstSample([
-                    '.. code-block:: html+twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: html+twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {# a comment #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: html+twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                null,
-                new RstSample('temp'),
-            ],
+        yield [
+            'Please add a blank line after "{# templates/index.html.twig #}"',
+            new RstSample([
+                '.. code-block:: twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield[
+            null,
+            new RstSample([
+                '.. code-block:: twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            'Please add a blank line after "{# templates/index.html.twig #}"',
+            new RstSample([
+                '.. code-block:: jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield[
+            'Please add a blank line after "{# templates/index.html.twig #}"',
+            new RstSample([
+                '.. code-block:: html+jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: html+jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield[
+            'Please add a blank line after "{# templates/index.html.twig #}"',
+            new RstSample([
+                '.. code-block:: html+twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield[
+            null,
+            new RstSample([
+                '.. code-block:: html+twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {# a comment #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield[
+            null,
+            new RstSample([
+                '.. code-block:: html+twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample('temp'),
         ];
     }
 }

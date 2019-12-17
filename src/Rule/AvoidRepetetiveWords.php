@@ -23,6 +23,7 @@ use App\Helper\XmlHelper;
 use App\Helper\YamlHelper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -42,8 +43,10 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
@@ -57,7 +60,7 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
                 && !TwigHelper::isComment($line)
                 && !YamlHelper::isComment($line)))
         ) {
-            return;
+            return null;
         }
 
         $line = RstParser::clean($line);
@@ -73,6 +76,8 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
                 return sprintf('The word "%s" is used more times in a row.', $word);
             }
         }
+
+        return null;
     }
 
     private static function whitelist(): array

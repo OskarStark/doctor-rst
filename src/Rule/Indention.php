@@ -21,6 +21,7 @@ use App\Helper\XmlHelper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Traits\ListTrait;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -57,8 +58,10 @@ class Indention extends AbstractRule implements Rule, Configurable
         return [RuleGroup::fromString(Registry::GROUP_EXPERIMENTAL)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
 
         if (RstParser::isBlankLine($lines->current())
@@ -78,7 +81,7 @@ class Indention extends AbstractRule implements Rule, Configurable
                 RstParser::CODE_BLOCK_SQL,
             ])
         ) {
-            return;
+            return null;
         }
 
         $indention = RstParser::indention($lines->current());
@@ -135,6 +138,8 @@ class Indention extends AbstractRule implements Rule, Configurable
         if ($indention > 0 && 0 < (($indention - $minus) % $this->size)) {
             return $customMessage ?? sprintf('Please add %s spaces for every indention.', $this->size);
         }
+
+        return null;
     }
 
     public function isPartOrMultilineXmlComment(\ArrayIterator $lines, int $number): bool

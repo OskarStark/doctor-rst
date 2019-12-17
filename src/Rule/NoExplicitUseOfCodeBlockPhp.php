@@ -17,6 +17,7 @@ use App\Handler\Registry;
 use App\Helper\Helper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
@@ -28,18 +29,20 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
         return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
 
         // only interesting if a PHP code block
         if (!RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP, true)) {
-            return;
+            return null;
         }
 
         // :: is a php code block, but its ok
         if (preg_match('/\:\:$/', RstParser::clean($lines->current()))) {
-            return;
+            return null;
         }
 
         // it has no indention, check if it comes after a headline, in this case its ok
@@ -48,7 +51,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
                 || $this->directAfterTable($lines, $number)
                 || $this->previousParagraphEndsWithQuestionMark($lines, $number)
             ) {
-                return;
+                return null;
             }
         }
 
@@ -59,22 +62,22 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
             && $number > 0
         ) {
             if ($this->in(RstParser::DIRECTIVE_CONFIGURATION_BLOCK, $lines, $number)) {
-                return;
+                return null;
             }
 
             if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_TEXT, RstParser::CODE_BLOCK_RST])) {
-                return;
+                return null;
             }
         }
 
         // check if the previous code block is php code block
         if ($this->previousDirectiveIs(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_YAML])) {
-            return;
+            return null;
         }
 
         // check if the previous directive is a configuration-block
         if ($this->previousDirectiveIs(RstParser::DIRECTIVE_CONFIGURATION_BLOCK, $lines, $number)) {
-            return;
+            return null;
         }
 
         return 'Please do not use ".. code-block:: php", use "::" instead.';

@@ -13,29 +13,38 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
+use App\Value\Lines;
+
 final class RstSample
 {
+    /** @var int */
     private $lineNumber = 0;
 
-    private $content;
+    /**
+     * @var array<string>
+     */
+    private $lines;
 
+    /**
+     * @param string|array<string> $content
+     */
     public function __construct($content, int $lineNumber = 0)
     {
         if (!\is_array($content)) {
             $content = explode(PHP_EOL, $content);
         }
 
-        $this->content = $content;
+        $this->lines = Lines::fromArray($content);
         $this->lineNumber = $lineNumber;
     }
 
-    public function getLineNumber(): int
+    public function lineNumber(): int
     {
         return $this->lineNumber;
     }
 
-    public function getContent(): \ArrayIterator
+    public function lines(): Lines
     {
-        return new \ArrayIterator($this->content);
+        return $this->lines;
     }
 }

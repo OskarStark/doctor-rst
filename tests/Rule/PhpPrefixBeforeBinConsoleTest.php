@@ -28,7 +28,7 @@ class PhpPrefixBeforeBinConsoleTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new PhpPrefixBeforeBinConsole())->check($sample->getContent(), $sample->getLineNumber())
+            (new PhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

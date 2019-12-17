@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -27,14 +28,18 @@ class BeKindToNewcomers extends CheckListRule
         return [RuleGroup::fromString(Registry::GROUP_EXPERIMENTAL)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match($this->pattern, $line, $matches)) {
             return sprintf($this->message, $matches[0]);
         }
+
+        return null;
     }
 
     public function getDefaultMessage(): string
@@ -42,6 +47,9 @@ class BeKindToNewcomers extends CheckListRule
         return 'Please remove the word: %s';
     }
 
+    /**
+     * @return array<string, null>
+     */
     public static function getList(): array
     {
         return [

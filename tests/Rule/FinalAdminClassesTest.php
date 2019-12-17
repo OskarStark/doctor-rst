@@ -38,7 +38,7 @@ class FinalAdminClassesTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new FinalAdminClasses())->check($sample->getContent(), $sample->getLineNumber())
+            (new FinalAdminClasses())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

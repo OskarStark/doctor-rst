@@ -29,7 +29,7 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoExplicitUseOfCodeBlockPhp())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

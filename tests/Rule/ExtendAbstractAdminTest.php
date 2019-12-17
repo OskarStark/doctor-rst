@@ -28,7 +28,7 @@ class ExtendAbstractAdminTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new ExtendAbstractAdmin())->check($sample->getContent(), $sample->getLineNumber())
+            (new ExtendAbstractAdmin())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

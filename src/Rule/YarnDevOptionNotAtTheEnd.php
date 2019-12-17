@@ -17,6 +17,7 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Rst\RstParser;
+use App\Value\Lines;
 
 /**
  * @Description("Make sure yarn `--dev` option for `add` command is used at the end.")
@@ -25,13 +26,17 @@ use App\Rst\RstParser;
  */
 class YarnDevOptionNotAtTheEnd extends AbstractRule implements Rule
 {
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match('/yarn add(.*)\-\-dev$/', RstParser::clean($line))) {
             return 'Please move "--dev" option before the package';
         }
+
+        return null;
     }
 }

@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -31,18 +32,20 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::isDirective($line)) {
-            return;
+            return null;
         }
 
         foreach (self::unSupportedDirectives() as $type) {
             if (RstParser::directiveIs($line, $type) || !\in_array($type, RstParser::DIRECTIVES)) {
-                return;
+                return null;
             }
         }
 
@@ -54,9 +57,14 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
         if ($lines->valid() && !RstParser::isBlankLine($nextLine)) {
             return sprintf('Please add a blank line after "%s" directive', $line);
         }
+
+        return null;
     }
 
-    public static function unSupportedDirectives()
+    /**
+     * @return array<int, string>
+     */
+    public static function unSupportedDirectives(): array
     {
         return [
             RstParser::DIRECTIVE_INDEX,

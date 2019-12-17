@@ -18,6 +18,7 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
@@ -35,13 +36,15 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match('/\.travis\.yml/', $line)) {
-            return;
+            return null;
         }
 
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_YML)) {
@@ -51,5 +54,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
         if (preg_match('/\.yml/i', $line, $matches)) {
             return sprintf('Please use ".yaml" instead of "%s"', $matches[0]);
         }
+
+        return null;
     }
 }

@@ -14,16 +14,19 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Rst\RstParser;
+use App\Value\Lines;
 
 class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
 {
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_CODE_BLOCK)) {
-            return;
+            return null;
         }
 
         $lines->next();
@@ -48,14 +51,18 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
         if (preg_match('/^{#(.*)\.twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
+
+        return null;
     }
 
-    private function validateBlankLine(\ArrayIterator $lines, array $matches)
+    private function validateBlankLine(\ArrayIterator $lines, array $matches): ?string
     {
         $lines->next();
 
         if (RstParser::isBlankLine($lines->current())) {
             return sprintf('Please remove blank line after "%s"', trim($matches[0]));
         }
+
+        return null;
     }
 }

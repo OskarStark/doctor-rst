@@ -30,37 +30,38 @@ class DeprecatedDirectiveShouldHaveVersionTest extends TestCase
         $this->assertSame(
             $expected,
             (new DeprecatedDirectiveShouldHaveVersion(new VersionParser()))
-                ->check($sample->getContent(), $sample->getLineNumber())
+                ->check($sample->lines(), $sample->lineNumber())
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array{0: null|string, 1: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                null,
-                new RstSample('.. deprecated:: 1'),
-            ],
-            [
-                null,
-                new RstSample('.. deprecated:: 1.2'),
-            ],
-            [
-                null,
-                new RstSample('.. deprecated:: 1.2.0'),
-            ],
-            [
-                null,
-                new RstSample('.. deprecated:: 1.2   '),
-            ],
-            [
-                'Please provide a version behind ".. deprecated::"',
-                new RstSample('.. deprecated::'),
-            ],
-            [
-                'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
-                new RstSample('.. deprecated:: foo'),
-            ],
+        yield [
+            null,
+            new RstSample('.. deprecated:: 1'),
+        ];
+        yield [
+            null,
+            new RstSample('.. deprecated:: 1.2'),
+        ];
+        yield[
+            null,
+            new RstSample('.. deprecated:: 1.2.0'),
+        ];
+        yield [
+            null,
+            new RstSample('.. deprecated:: 1.2   '),
+        ];
+        yield[
+            'Please provide a version behind ".. deprecated::"',
+            new RstSample('.. deprecated::'),
+        ];
+        yield[
+            'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
+            new RstSample('.. deprecated:: foo'),
         ];
     }
 }

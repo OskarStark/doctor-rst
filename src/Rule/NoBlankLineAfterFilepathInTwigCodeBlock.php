@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Handler\Registry;
 use App\Helper\TwigHelper;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Rule
@@ -25,8 +26,10 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Ru
         return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
@@ -35,7 +38,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Ru
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_JINJA)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_HTML_JINJA)
         ) {
-            return;
+            return null;
         }
 
         $lines->next();
@@ -45,9 +48,11 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Ru
         if (preg_match('/^{#(.*)\.twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
+
+        return null;
     }
 
-    private function validateBlankLine(\ArrayIterator $lines, array $matches)
+    private function validateBlankLine(\ArrayIterator $lines, array $matches): ?string
     {
         $lines->next();
 
@@ -57,5 +62,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Ru
                 return sprintf('Please remove blank line after "%s"', trim($matches[0]));
             }
         }
+
+        return null;
     }
 }

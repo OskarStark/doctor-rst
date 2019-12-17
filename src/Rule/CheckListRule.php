@@ -15,7 +15,9 @@ namespace App\Rule;
 
 abstract class CheckListRule extends AbstractRule implements Rule
 {
+    /** @var string */
     public $pattern;
+    /** @var string|null */
     public $message;
 
     public function configure(string $pattern, ?string $message): self

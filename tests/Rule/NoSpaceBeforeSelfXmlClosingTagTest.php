@@ -28,7 +28,7 @@ class NoSpaceBeforeSelfXmlClosingTagTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new NoSpaceBeforeSelfXmlClosingTag())->check($sample->getContent(), $sample->getLineNumber())
+            (new NoSpaceBeforeSelfXmlClosingTag())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

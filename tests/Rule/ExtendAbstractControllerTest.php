@@ -28,7 +28,7 @@ class ExtendAbstractControllerTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new ExtendAbstractController())->check($sample->getContent(), $sample->getLineNumber())
+            (new ExtendAbstractController())->check($sample->lines(), $sample->lineNumber())
         );
     }
 

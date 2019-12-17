@@ -29,16 +29,17 @@ class BlankLineAfterDirectiveTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new BlankLineAfterDirective())->check($sample->getContent(), $sample->getLineNumber())
+            (new BlankLineAfterDirective())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
-        $tests = [];
-
         foreach (RstParser::DIRECTIVES as $directive) {
-            $tests[] = [
+            yield [
                 null,
                 new RstSample([
                     $directive,
@@ -52,7 +53,7 @@ class BlankLineAfterDirectiveTest extends TestCase
                 $errorMessage = null;
             }
 
-            $tests[] = [
+            yield [
                 $errorMessage,
                 new RstSample([
                     $directive,
@@ -61,11 +62,9 @@ class BlankLineAfterDirectiveTest extends TestCase
             ];
         }
 
-        $tests[] = [
+        yield [
             null,
             new RstSample('temp'),
         ];
-
-        return $tests;
     }
 }

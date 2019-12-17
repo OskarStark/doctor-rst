@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Handler\Registry;
 use App\Rst\RstParser;
+use App\Value\Lines;
 use App\Value\RuleGroup;
 
 class ValidUseStatements extends AbstractRule implements Rule
@@ -27,8 +28,10 @@ class ValidUseStatements extends AbstractRule implements Rule
         ];
     }
 
-    public function check(\ArrayIterator $lines, int $number)
+    public function check(Lines $lines, int $number): ?string
     {
+        $lines = $lines->toIterator();
+
         $lines->seek($number);
         $line = $lines->current();
 
@@ -40,5 +43,7 @@ class ValidUseStatements extends AbstractRule implements Rule
         if (preg_match('/^use (.*);$/', $line) && strstr($line, '\\\\')) {
             return 'Please do not escape the backslashes in a use statement.';
         }
+
+        return null;
     }
 }

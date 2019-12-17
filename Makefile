@@ -2,10 +2,10 @@ test:
 	bin/phpunit
 
 cs:
-	docker run --rm -it -w /app -v ${PWD}:/app oskarstark/php-cs-fixer-ga:2.16.0
+	docker run --rm -it -w /app -v ${PWD}:/app oskarstark/php-cs-fixer-ga:2.16.1.1
 
-static-analyse:
-	docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/phpstan-ga:latest analyse src/ --level=7
+phpstan:
+	docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/phpstan-ga:0.12.2 analyse src/ --level=7
 
 update-rules.md-file:
 	php bin/console rules > docs/rules.md

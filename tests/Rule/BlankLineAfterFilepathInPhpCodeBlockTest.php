@@ -28,56 +28,57 @@ class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new BlankLineAfterFilepathInPhpCodeBlock())->check($sample->getContent(), $sample->getLineNumber())
+            (new BlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                'Please add a blank line after "// src/Handler/Collection.php"',
-                new RstSample([
-                    '.. code-block:: php',
-                    '',
-                    '    // src/Handler/Collection.php',
-                    '    namespace App\\Handler;',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: php',
-                    '',
-                    '    // src/Handler/Collection.php',
-                    '',
-                    '    namespace App\\Handler;',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: php',
-                    '',
-                    '    // src/Handler/Collection.php',
-                    '    // a comment',
-                    '    namespace App\\Handler;',
-                ]),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. code-block:: php',
-                    '',
-                    '    // src/Handler/Collection.php',
-                    '    # a comment',
-                    '    namespace App\\Handler;',
-                ]),
-            ],
-            [
-                null,
-                new RstSample('temp'),
-            ],
+        yield [
+            'Please add a blank line after "// src/Handler/Collection.php"',
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Handler/Collection.php',
+                '    namespace App\\Handler;',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Handler/Collection.php',
+                '',
+                '    namespace App\\Handler;',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Handler/Collection.php',
+                '    // a comment',
+                '    namespace App\\Handler;',
+            ]),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Handler/Collection.php',
+                '    # a comment',
+                '    namespace App\\Handler;',
+            ]),
+        ];
+        yield[
+            null,
+            new RstSample('temp'),
         ];
     }
 }
