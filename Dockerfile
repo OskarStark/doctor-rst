@@ -1,4 +1,4 @@
-FROM exozet/php-fpm:7.3
+FROM exozet/php-fpm:7.4
 
 LABEL "com.github.actions.name"="DOCtor-RST"
 LABEL "com.github.actions.description"="check *.rst files against given rules"

@@ -1,6 +1,6 @@
 name: rst-checker
 
-type: php:7.3
+type: php:7.4
 
 runtime:
     extensions:
