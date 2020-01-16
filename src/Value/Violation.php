@@ -47,8 +47,8 @@ final class Violation
         return $this->filename;
     }
 
-    public function lineno(): string
+    public function lineno(): int
     {
-        return $this->lineno();
+        return $this->lineno;
     }
 }
