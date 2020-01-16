@@ -25,7 +25,10 @@ final class RuleGroup
 
     private function __construct(string $name)
     {
-        Assert::notEmpty($name);
+        $name = trim($name);
+
+        Assert::stringNotEmpty($name);
+        Assert::notWhitespaceOnly($name);
         Assert::oneOf($name, [
             Registry::GROUP_SONATA,
             Registry::GROUP_SYMFONY,

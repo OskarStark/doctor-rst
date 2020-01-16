@@ -23,8 +23,14 @@ final class Violation
 
     private function __construct(string $message, string $filename, int $lineno)
     {
-        Assert::notEmpty($message);
-        Assert::notEmpty($filename);
+        $message = trim($message);
+        Assert::stringNotEmpty($message);
+        Assert::notWhitespaceOnly($message);
+
+        $filename = trim($filename);
+        Assert::stringNotEmpty($filename);
+        Assert::notWhitespaceOnly($filename);
+
         Assert::greaterThan($lineno, 0);
 
         $this->message = $message;

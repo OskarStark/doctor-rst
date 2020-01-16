@@ -24,7 +24,10 @@ final class RuleName
 
     private function __construct(string $name)
     {
-        Assert::notEmpty($name);
+        $name = trim($name);
+
+        Assert::stringNotEmpty($name);
+        Assert::notWhitespaceOnly($name);
 
         $this->name = $name;
     }

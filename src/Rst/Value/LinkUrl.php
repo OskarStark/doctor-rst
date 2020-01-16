@@ -24,7 +24,8 @@ final class LinkUrl
     {
         $value = trim($value);
 
-        Assert::notEmpty($value);
+        Assert::stringNotEmpty($value);
+        Assert::notWhitespaceOnly($value);
 
         $this->value = $value;
     }
