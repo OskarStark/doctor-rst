@@ -18,6 +18,7 @@ use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class NoInheritdocInCodeExamples extends AbstractRule implements Rule
 {
@@ -38,7 +39,7 @@ class NoInheritdocInCodeExamples extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/@inheritdoc/', $line)
+        if (u($line)->match('/@inheritdoc/')
             && $this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_ANNOTATIONS])
         ) {
             return 'Please do not use "@inheritdoc"';

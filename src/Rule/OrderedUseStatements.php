@@ -17,6 +17,8 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
+use Webmozart\Assert\Assert;
 
 class OrderedUseStatements extends AbstractRule implements Rule
 {
@@ -53,7 +55,7 @@ class OrderedUseStatements extends AbstractRule implements Rule
             && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
             && (!preg_match('/^((class|trait) (.*)|\$)/', RstParser::clean($lines->current())))
         ) {
-            if (preg_match('/^use (.*);$/', RstParser::clean($lines->current()), $matches)) {
+            if (u(RstParser::clean($lines->current()))->match('/^use (.*);$/')) {
                 if (null === $indentionOfFirstFoundUseStatement) {
                     $indentionOfFirstFoundUseStatement = RstParser::indention($lines->current());
                     $statements[] = $this->extractClass(RstParser::clean($lines->current()));
@@ -86,9 +88,14 @@ class OrderedUseStatements extends AbstractRule implements Rule
 
     private function extractClass(string $useStatement): string
     {
-        preg_match('/use (.*);/', $useStatement, $matches);
+        $matches = u($useStatement)->match('/use (.*);/');
 
-        // the "A" here helps to sort !!
-        return strtolower(str_replace('\\', 'A', trim($matches[1])));
+        Assert::keyExists($matches, 1);
+
+        return u($matches[1])
+            ->trim()
+            ->replace('\\', 'A') // the "A" here helps to sort !!
+            ->lower()
+            ->toString();
     }
 }

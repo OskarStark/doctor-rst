@@ -18,6 +18,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensure `Controller` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\Controller` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\AbstractController`.")
@@ -38,11 +39,11 @@ class ExtendController extends AbstractRule implements Rule
 
         $line = RstParser::clean($line);
 
-        if (preg_match('/^class(.*)extends AbstractController$/', $line)) {
+        if (u($line)->match('/^class(.*)extends AbstractController$/')) {
             return 'Please extend Controller instead of AbstractController';
         }
 
-        if (preg_match('/^use Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController;/', $line)) {
+        if (u($line)->match('/^use Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController;/')) {
             return 'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"';
         }
 

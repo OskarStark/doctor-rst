@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Handler\Registry;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class NoAppBundle extends AbstractRule implements Rule
 {
@@ -31,7 +32,7 @@ class NoAppBundle extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/AppBundle/', $line)) {
+        if (u($line)->match('/AppBundle/')) {
             return 'Please don\'t use "AppBundle" anymore';
         }
 

@@ -19,6 +19,7 @@ use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensure `bin/console` is not prefixed with `php`.")
@@ -39,7 +40,7 @@ class NoPhpPrefixBeforeBinConsole extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/php bin\/console/', $line)) {
+        if (u($line)->match('/php bin\/console/')) {
             return 'Please remove "php" prefix before "bin/console"';
         }
 

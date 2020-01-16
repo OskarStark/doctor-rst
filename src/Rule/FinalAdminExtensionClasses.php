@@ -17,6 +17,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class FinalAdminExtensionClasses extends AbstractRule implements Rule
 {
@@ -32,7 +33,9 @@ class FinalAdminExtensionClasses extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/^class(.*)extends AbstractAdminExtension$/', RstParser::clean($line))) {
+        $line = RstParser::clean($line);
+
+        if (u($line)->match('/^class(.*)extends AbstractAdminExtension$/')) {
             return 'Please use "final" for AdminExtension class';
         }
 

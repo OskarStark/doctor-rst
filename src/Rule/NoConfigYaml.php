@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Handler\Registry;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class NoConfigYaml extends AbstractRule implements Rule
 {
@@ -34,7 +35,7 @@ class NoConfigYaml extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/app\/config\/config\.yml/', $line)) {
+        if (u($line)->match('/app\/config\/config\.yml/')) {
             return 'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"';
         }
 

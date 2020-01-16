@@ -15,6 +15,7 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use function Symfony\Component\String\u;
 
 class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
 {
@@ -36,7 +37,7 @@ class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
         // check if next line is "<?php"
         $nextLine = $lines->current();
 
-        if ('<?php' !== RstParser::clean($nextLine)) {
+        if (!u(RstParser::clean($nextLine))->startsWith('<?php')) {
             return sprintf('Please add PHP open tag after "%s" directive', $line);
         }
 

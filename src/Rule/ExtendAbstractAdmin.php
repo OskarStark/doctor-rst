@@ -18,6 +18,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensure `AbstractAdmin` and the corresponding namespace `Sonata\AdminBundle\Admin\AbstractAdmin` is used.")
@@ -38,11 +39,11 @@ class ExtendAbstractAdmin extends AbstractRule implements Rule
 
         $line = RstParser::clean($line);
 
-        if (preg_match('/^class(.*)extends Admin$/', $line)) {
+        if (u($line)->match('/^class(.*)extends Admin$/')) {
             return 'Please extend AbstractAdmin instead of Admin';
         }
 
-        if (preg_match('/^use Sonata\\\\AdminBundle\\\\Admin\\\\Admin;/', $line)) {
+        if (u($line)->match('/^use Sonata\\\\AdminBundle\\\\Admin\\\\Admin;/')) {
             return 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"';
         }
 

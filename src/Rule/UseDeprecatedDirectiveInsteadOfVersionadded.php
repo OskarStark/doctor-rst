@@ -17,6 +17,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implements Rule
 {
@@ -46,7 +47,7 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
         while ($lines->valid()
             && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
         ) {
-            if (preg_match('/[^`]deprecated/', $lines->current())) {
+            if (u($lines->current())->match('/[^`]deprecated/')) {
                 return 'Please use ".. deprecated::" instead of ".. versionadded::"';
             }
 

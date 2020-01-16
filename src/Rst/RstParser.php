@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rst;
 
+use function Symfony\Component\String\u;
 use Webmozart\Assert\Assert;
 
 class RstParser
@@ -215,7 +216,7 @@ class RstParser
             if (!$strict) {
                 return true;
             } else {
-                if (preg_match('/\:\: (.*)$/', $string, $matches)) {
+                if ($matches = u($string)->match('/\:\: (.*)$/')) {
                     if ($type === $matches[1]) {
                         return true;
                     }
@@ -235,7 +236,7 @@ class RstParser
 
     public static function isHeadline(string $string): bool
     {
-        if (preg_match('/^([\=]+|[\~]+|[\*]+|[\-]+|[\.]+|[\^]+)$/', $string)) {
+        if (u($string)->match('/^([\=]+|[\~]+|[\*]+|[\-]+|[\.]+|[\^]+)$/')) {
             return true;
         }
 
@@ -244,7 +245,7 @@ class RstParser
 
     public static function isTable(string $string): bool
     {
-        if (preg_match('/^[\=\-]+([\s\=\-]+)?$/', $string)) {
+        if (u($string)->match('/^[\=\-]+([\s\=\-]+)?$/')) {
             return true;
         }
 
@@ -253,7 +254,7 @@ class RstParser
 
     public static function indention(string $string): int
     {
-        if (preg_match('/^[\s]+/', $string, $matches)) {
+        if ($matches = u($string)->match('/^[\s]+/')) {
             return \strlen($matches[0]);
         }
 
@@ -262,7 +263,7 @@ class RstParser
 
     public static function isLinkDefinition(string $string): bool
     {
-        if (preg_match('/^\.\. _(`([^`]+)`|([^`]+)): (.*)$/', $string)) {
+        if (u($string)->match('/^\.\. _(`([^`]+)`|([^`]+)): (.*)$/')) {
             return true;
         }
 
@@ -271,7 +272,7 @@ class RstParser
 
     public static function isLinkUsage(string $string): bool
     {
-        if (preg_match('/`([^`]+)`_/', $string, $matches)) {
+        if (u($string)->match('/`([^`]+)`_/')) {
             return true;
         }
 
@@ -280,7 +281,9 @@ class RstParser
 
     public static function isListItem(string $string): bool
     {
-        if (preg_match('/^(\* |\#. |[A-Za-z]{1}\) |-\ |[0-9]\. |[0-9]\) )/', self::clean($string))) {
+        $string = self::clean($string);
+
+        if (u($string)->match('/^(\* |\#. |[A-Za-z]{1}\) |-\ |[0-9]\. |[0-9]\) )/')) {
             return true;
         }
 
@@ -292,7 +295,9 @@ class RstParser
      */
     public static function isFootnote(string $string): bool
     {
-        if (preg_match('/^\.\. \[[0-9]\]/', self::clean($string))) {
+        $string = self::clean($string);
+
+        if (u($string)->match('/^\.\. \[[0-9]\]/')) {
             return true;
         }
 
@@ -326,7 +331,9 @@ class RstParser
      */
     public static function isLineNumberAnnotation(string $string): bool
     {
-        if (preg_match('/^Line [0-9]+(\s?-\s?[0-9]+)?$/', self::clean($string))) {
+        $string = self::clean($string);
+
+        if (u($string)->match('/^Line [0-9]+(\s?-\s?[0-9]+)?$/')) {
             return true;
         }
 

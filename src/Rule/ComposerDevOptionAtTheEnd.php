@@ -20,6 +20,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 /**
  * @Description("Make sure Composer `--dev` option for `require` command is used at the end.")
@@ -41,7 +42,7 @@ class ComposerDevOptionAtTheEnd extends AbstractRule implements Rule
         $line = $lines->current();
 
         $line = RstParser::clean($line);
-        if (preg_match('/composer require \-\-dev(.*)$/', $line)) {
+        if (u($line)->match('/composer require \-\-dev(.*)$/')) {
             return 'Please move "--dev" option to the end of the command';
         }
 
