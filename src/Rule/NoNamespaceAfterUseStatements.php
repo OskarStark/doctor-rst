@@ -17,6 +17,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
 {
@@ -51,11 +52,13 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
             && !RstParser::isDirective($lines->current())
             && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
         ) {
-            if (preg_match('/^use (.*);$/', RstParser::clean($lines->current()), $matches)) {
+            $line = RstParser::clean($lines->current());
+
+            if (u($line)->match('/^use (.*);$/')) {
                 $useStatementFound = true;
             }
 
-            if (preg_match('/^namespace (.*);$/', RstParser::clean($lines->current()), $matches)) {
+            if (u($line)->match('/^namespace (.*);$/')) {
                 if ($useStatementFound) {
                     return 'Please move the namespace before the use statement(s)';
                 }

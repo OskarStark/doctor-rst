@@ -17,6 +17,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class ValidUseStatements extends AbstractRule implements Rule
 {
@@ -40,7 +41,7 @@ class ValidUseStatements extends AbstractRule implements Rule
         /*
          * @todo do it in one regex instead of regex + string search
          */
-        if (preg_match('/^use (.*);$/', $line) && strstr($line, '\\\\')) {
+        if (u($line)->match('/^use (.*);$/') && strstr($line, '\\\\')) {
             return 'Please do not escape the backslashes in a use statement.';
         }
 

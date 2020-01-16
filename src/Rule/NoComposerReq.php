@@ -17,6 +17,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class NoComposerReq extends AbstractRule implements Rule
 {
@@ -33,7 +34,7 @@ class NoComposerReq extends AbstractRule implements Rule
         $line = $lines->current();
 
         $line = RstParser::clean($line);
-        if (preg_match('/composer req /', $line)) {
+        if (u($line)->match('/composer req /')) {
             return 'Please "composer require" instead of "composer req"';
         }
 

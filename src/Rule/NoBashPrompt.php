@@ -20,6 +20,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensure no bash prompt `$` is used before commands in `bash`, `shell` or `terminal` code blocks.")
@@ -50,7 +51,7 @@ class NoBashPrompt extends AbstractRule implements Rule
         $lines->next();
         $lines->next();
 
-        if (preg_match('/^\$ /', RstParser::clean($lines->current()))) {
+        if (u(RstParser::clean($lines->current()))->match('/^\$ /')) {
             return 'Please remove the "$" prefix in .. code-block:: directive';
         }
 

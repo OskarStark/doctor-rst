@@ -17,6 +17,7 @@ use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class Replacement extends CheckListRule implements Rule
 {
@@ -35,7 +36,7 @@ class Replacement extends CheckListRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match($this->pattern, RstParser::clean($line), $matches)) {
+        if ($matches = u(RstParser::clean($line))->match($this->pattern)) {
             return sprintf($this->message, $matches[0]);
         }
 

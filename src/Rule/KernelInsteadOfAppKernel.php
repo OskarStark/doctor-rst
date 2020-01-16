@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Handler\Registry;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class KernelInsteadOfAppKernel extends AbstractRule implements Rule
 {
@@ -31,11 +32,11 @@ class KernelInsteadOfAppKernel extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/app\/AppKernel\.php/', $line)) {
+        if (u($line)->match('/app\/AppKernel\.php/')) {
             return 'Please use "src/Kernel.php" instead of "app/AppKernel.php"';
         }
 
-        if (preg_match('/AppKernel/', $line)) {
+        if (u($line)->match('/AppKernel/')) {
             return 'Please use "Kernel" instead of "AppKernel"';
         }
 

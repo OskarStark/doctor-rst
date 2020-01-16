@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Handler\Registry;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class UseHttpsXsdUrls extends AbstractRule implements Rule
 {
@@ -34,7 +35,7 @@ class UseHttpsXsdUrls extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/http\:\/\/([^\s]+)\.xsd/', $line, $matches)) {
+        if ($matches = u($line)->match('/http\:\/\/([^\s]+)\.xsd/')) {
             return sprintf('Please use "https" for %s', $matches[0]);
         }
 

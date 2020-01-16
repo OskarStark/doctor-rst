@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Handler\Registry;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class NoAppConsole extends AbstractRule implements Rule
 {
@@ -34,7 +35,7 @@ class NoAppConsole extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match('/app\/console/', $line)) {
+        if (u($line)->match('/app\/console/')) {
             return 'Please use "bin/console" instead of "app/console"';
         }
 
