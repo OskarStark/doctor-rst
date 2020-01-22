@@ -53,7 +53,7 @@ class UnusedLinks extends AbstractRule implements Rule, ResetInterface
                 $this->linkDefinitions[$definition->name()->value()] = $definition;
             }
 
-            preg_match_all('/`([^`]+)`_/', $lines->current(), $matches);
+            preg_match_all('/(?:`[^`]+`|\S+)_/', $lines->current(), $matches);
             if (!empty($matches[0])) {
                 foreach ($matches[0] as $match) {
                     if (RstParser::isLinkUsage($match)) {

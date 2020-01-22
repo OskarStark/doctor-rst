@@ -81,6 +81,18 @@ I am a `Link`_ and `Link2`_
 RST
             ),
         ];
+
+        yield [
+            null,
+            new RstSample(<<<RST
+I am `a Link`_, `some other Link`_ and Link2_
+
+.. _a Link: https://example.com
+.. _Link2: https://example2.com
+.. _`some other Link`: https://example3.com
+RST
+            ),
+        ];
     }
 
     public function invalidProvider(): \Generator
