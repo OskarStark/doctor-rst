@@ -184,7 +184,7 @@ class AnalyseCommand extends Command
 
         $violations = [];
         foreach ($lines->toIterator() as $no => $line) {
-            \assert(\is_integer($no));
+            \assert(\is_int($no));
 
             /** @var Rule $rule */
             foreach ($this->rules as $rule) {
