@@ -22,12 +22,7 @@ final class LinkName
 
     private function __construct(string $value)
     {
-        $value = trim($value);
-
-        Assert::stringNotEmpty($value);
-        Assert::notWhitespaceOnly($value);
-
-        $this->value = $value;
+        $this->value = trim($value);
     }
 
     public static function fromString(string $value): self
