@@ -272,7 +272,7 @@ class RstParser
 
     public static function isLinkUsage(string $string): bool
     {
-        if (u($string)->match('/(?:`[^`]+`|\S+)_/')) {
+        if (u($string)->match('/(?:`[^`]+`|(?:(?!_)\w)+(?:[-._+:](?:(?!_)\w)+)*+)_/')) {
             return true;
         }
 
