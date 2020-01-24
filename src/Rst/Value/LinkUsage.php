@@ -25,7 +25,7 @@ final class LinkUsage
 
     public static function fromLine(string $line): self
     {
-        preg_match('/(`[^`]+`|\S+)_/', $line, $matches);
+        preg_match('/(`[^`]+`|(?:(?!_)\w)+(?:[-._+:](?:(?!_)\w)+)*+)_/', $line, $matches);
         $matches[1] = trim($matches[1], '`');
 
         return new self(LinkName::fromString($matches[1]));
