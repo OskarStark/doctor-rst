@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rst\Value;
 
-use Webmozart\Assert\Assert;
-
 final class LinkName
 {
     /** @var string */
