@@ -66,6 +66,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
 
         $indention = RstParser::indention($lines->current());
 
+
         $content = [];
 
         foreach ($lines as $line) {
@@ -78,7 +79,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
             if (RstParser::indention($line) > $indention) {
                 $content[] = RstParser::clean($line);
             }
-
+            
             if (RstParser::indention($line) < $indention) {
                 break;
             }

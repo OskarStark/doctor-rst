@@ -22,6 +22,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContentTest extends TestCase
     /**
      * @test
      *
+<<<<<<< HEAD
      * @dataProvider containsHtmlProvider
      */
     public function containsHtml(bool $expected, RstSample $sample)
@@ -96,6 +97,8 @@ CONTENT
     /**
      * @test
      *
+=======
+>>>>>>> db75c00... Add missing testcase for: CorrectCodeBlockDirectiveBasedOnTheContent
      * @dataProvider checkProvider
      */
     public function check(?string $expected, RstSample $sample)
@@ -128,6 +131,7 @@ CONTENT
             ];
 
         yield [
+<<<<<<< HEAD
             null,
             new RstSample(<<<CONTENT
 .. code-block:: twig
@@ -175,6 +179,8 @@ CONTENT
         ];
 
         yield [
+=======
+>>>>>>> db75c00... Add missing testcase for: CorrectCodeBlockDirectiveBasedOnTheContent
             'Please use "twig" instead of "html+twig"',
             new RstSample(<<<CONTENT
 .. code-block:: html+twig
@@ -192,6 +198,7 @@ CONTENT
 
         yield [
             null,
+<<<<<<< HEAD
             new RstSample(<<<CONTENT
 Considering that the ``name`` property is of type ``string``, override the
 built-in ``field_string.html.twig`` template to add support for the ``trans``
@@ -218,6 +225,8 @@ CONTENT
 
         yield [
             null,
+=======
+>>>>>>> db75c00... Add missing testcase for: CorrectCodeBlockDirectiveBasedOnTheContent
             new RstSample('temp'),
         ];
     }
