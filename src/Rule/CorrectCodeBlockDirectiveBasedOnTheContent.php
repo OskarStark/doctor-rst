@@ -43,6 +43,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
 
         // check code-block: twig
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TWIG, true)) {
+
             if ($this->containsHtml(Helper::cloneIterator($lines, $number))) {
                 return self::getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
             }
