@@ -45,22 +45,16 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TWIG, true)) {
             $lines->next();
 
-            $foundHtml = 0;
-
             while ($lines->valid()
                 && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
             ) {
-                if (preg_match('/[<|>]+/', RstParser::clean($lines->current()), $matches)
+                if (preg_match('/[<]+/', RstParser::clean($lines->current()), $matches)
                     && !preg_match('/<3/', RstParser::clean($lines->current()))
                 ) {
-                    ++$foundHtml;
+                    return $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
                 }
 
                 $lines->next();
-            }
-
-            if (0 === ($foundHtml % 2)) {
-                return $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
             }
         }
 
@@ -68,24 +62,20 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_HTML_TWIG, true)) {
             $lines->next();
 
-            $foundHtml = 0;
+            $foundHtml = false;
 
             while ($lines->valid()
                 && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
+                && false === $foundHtml
             ) {
-                if (preg_match('/[<|>]+/', RstParser::clean($lines->current()), $matches)) {
-                    ++$foundHtml;
+                if (preg_match('/[<]+/', RstParser::clean($lines->current()))) {
+                    $foundHtml = true;
                 }
 
                 $lines->next();
             }
 
-            /*
-             * Because online one could be a comparator like:
-             *
-             *     {% if item.stock < 10 %}
-             */
-            if (0 !== ($foundHtml % 2)) {
+            if (!$foundHtml) {
                 return $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG);
             }
         }
