@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
+use App\Helper\Helper;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
@@ -42,14 +43,14 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
 
         // check code-block: twig
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TWIG, true)) {
-            if ($this->containsHtml($lines)) {
+            if ($this->containsHtml(Helper::cloneIterator($lines, $number))) {
                 return self::getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
             }
         }
 
         // check code-block: html+twig
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_HTML_TWIG, true)) {
-            if (!$this->containsHtml($lines)) {
+            if (!$this->containsHtml(Helper::cloneIterator($lines, $number))) {
                 return self::getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG);
             }
         }
