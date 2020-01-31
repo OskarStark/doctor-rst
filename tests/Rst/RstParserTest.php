@@ -375,6 +375,11 @@ final class RstParserTest extends TestCase
             [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS, false],
             [true, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, false],
             [false, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, true],
+            [true, ' .. code-block:: twig', RstParser::CODE_BLOCK_TWIG, false],
+            [true, ' .. code-block:: html+twig', RstParser::CODE_BLOCK_HTML_TWIG, false],
+            [true, ' .. code-block:: twig', RstParser::CODE_BLOCK_TWIG, true],
+            [true, ' .. code-block:: html+twig', RstParser::CODE_BLOCK_HTML_TWIG, true],
+            [false, ' .. code-block:: html+twig', RstParser::CODE_BLOCK_TWIG, true],
         ];
     }
 

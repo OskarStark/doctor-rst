@@ -28,7 +28,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContentTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new CorrectCodeBlockDirectiveBasedOnTheContent())->containsHtml($sample->lines()->toIterator(), 0)
+            (new CorrectCodeBlockDirectiveBasedOnTheContent())->containsHtml($sample->lines()->toIterator())
         );
     }
 
@@ -39,8 +39,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContentTest extends TestCase
     {
         yield [
             false,
-            new RstSample(
-                <<<CONTENT
+            new RstSample(<<<CONTENT
 {# templates/admin/tag_collection.html.twig #}
 {% set colors = field_options.label_colors|default(['primary']) %}
 
@@ -53,8 +52,7 @@ CONTENT
 
         yield [
             true,
-            new RstSample(
-                <<<CONTENT
+            new RstSample(<<<CONTENT
 {# templates/admin/tag_collection.html.twig #}
 {% set colors = field_options.label_colors|default(['primary']) %}
 
@@ -67,8 +65,7 @@ CONTENT
 
         yield [
             false,
-            new RstSample(
-                <<<CONTENT
+            new RstSample(<<<CONTENT
 {# templates/admin/restock_action.html.twig #}
 
 {# if the stock is low, include the default action template to render the
@@ -82,16 +79,15 @@ CONTENT
 
         yield [
             false,
-            new RstSample(
-                <<<CONTENT
-    {# templates/bundles/EasyAdminBundle/default/field_string.html.twig #}
-    {% if field_options.trans|default(false) %}
-        {# translate fields defined as "translatable" #}
-        {{ value|trans({}, field_options.domain|default('messages')) }}
-    {% else %}
-        {# if not translatable, simply include the default template #}
-        {{ include('@!EasyAdmin/default/field_string.html.twig') }}
-    {% endif %}
+            new RstSample(<<<CONTENT
+{# templates/bundles/EasyAdminBundle/default/field_string.html.twig #}
+{% if field_options.trans|default(false) %}
+    {# translate fields defined as "translatable" #}
+    {{ value|trans({}, field_options.domain|default('messages')) }}
+{% else %}
+    {# if not translatable, simply include the default template #}
+    {{ include('@!EasyAdmin/default/field_string.html.twig') }}
+{% endif %}
 CONTENT
             ),
         ];

@@ -199,7 +199,7 @@ class AnalyseCommand extends Command
 
                 if (null !== $violation) {
                     $violations[] = [
-                        $rule::getName(),
+                        $rule::getName()->asString(),
                         $violation,
                         $no + 1,
                         Rule::TYPE_FILE === $rule::getType() ? '' : trim($line),

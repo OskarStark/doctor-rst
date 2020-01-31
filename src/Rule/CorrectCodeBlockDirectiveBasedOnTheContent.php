@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
-use App\Helper\Helper;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
@@ -41,39 +40,51 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
             return null;
         }
 
-        $indention = RstParser::indention($line);
-
         // check code-block: twig
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TWIG, true)) {
-            $lines->next();
-
-            if ($this->containsHtml(Helper::cloneIterator($lines, (int) $lines->key()), $indention)) {
-                return $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
+            if ($this->containsHtml($lines)) {
+                return self::getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
             }
         }
 
         // check code-block: html+twig
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_HTML_TWIG, true)) {
-            $lines->next();
-
-            if (!$this->containsHtml(Helper::cloneIterator($lines, (int) $lines->key()), $indention)) {
-                return $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG);
+            if (!$this->containsHtml($lines)) {
+                return self::getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG);
             }
         }
 
         return null;
     }
 
-    public function containsHtml(\ArrayIterator $lines, int $indention): bool
+    public function containsHtml(\ArrayIterator $lines): bool
     {
+        while ($lines->valid() && RstParser::isBlankLine($lines->current())) {
+            $lines->next();
+        }
+
+        $indention = RstParser::indention($lines->current());
+
         $content = [];
 
-        while ($lines->valid()
-            && (($indention < RstParser::indention($lines->current()) || 0 === $indention) || RstParser::isBlankLine($lines->current()))
-        ) {
-            $content[] = RstParser::clean($lines->current());
+        foreach ($lines as $line) {
+//            var_dump($line);
 
-            $lines->next();
+            if (RstParser::isBlankLine($line)) {
+                continue;
+            }
+
+            if (RstParser::indention($line) > $indention) {
+                $content[] = RstParser::clean($line);
+            }
+
+            if (RstParser::indention($line) < $indention) {
+                break;
+            }
+        }
+
+        if ([] === $content) {
+            return false;
         }
 
         /**
@@ -88,7 +99,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
         return $string->length() !== u(strip_tags($string->toString()))->length();
     }
 
-    private function getErrorMessage(string $new, string $current): string
+    private static function getErrorMessage(string $new, string $current): string
     {
         return sprintf('Please use "%s" instead of "%s"', $new, $current);
     }
