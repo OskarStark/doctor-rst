@@ -48,6 +48,16 @@ class BlankLineAfterDirectiveTest extends TestCase
                 ]),
             ];
 
+            yield [
+                null,
+                new RstSample([
+                    $directive,
+                    ':lineos:',
+                    '',
+                    'temp',
+                ]),
+            ];
+
             $errorMessage = sprintf('Please add a blank line after "%s" directive', $directive);
             if (\in_array($directive, BlankLineAfterDirective::unSupportedDirectives())) {
                 $errorMessage = null;

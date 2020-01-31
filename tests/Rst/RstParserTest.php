@@ -397,4 +397,25 @@ final class RstParserTest extends TestCase
             [false, 'foo'],
         ];
     }
+
+    /**
+     * @test
+     *
+     * @dataProvider isOptionProvider
+     */
+    public function isOption(bool $expected, string $string)
+    {
+        $this->assertSame($expected, RstParser::isOption($string));
+    }
+
+    public function isOptionProvider()
+    {
+        return [
+            [true, ':lineos:'],
+            [true, ' :lineos: '],
+            [false, ' '],
+            [false, ''],
+            [false, '.. class::'],
+        ];
+    }
 }

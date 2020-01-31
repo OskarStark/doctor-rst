@@ -516,6 +516,16 @@ RST
 RST
                 , 6),
             ],
+            'php code block unsing an option' => [
+                null,
+                new RstSample(<<<RST
+.. code-block:: php
+   :lineos:
+
+    echo 'Hello World!';
+RST
+                    , 1),
+            ],
         ];
     }
 }

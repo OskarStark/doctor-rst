@@ -80,6 +80,11 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
             return null;
         }
 
+        $lines->next();
+        if ($lines->valid() && RstParser::isOption($lines->current())) {
+            return null;
+        }
+
         return 'Please do not use ".. code-block:: php", use "::" instead.';
     }
 

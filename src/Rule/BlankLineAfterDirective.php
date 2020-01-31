@@ -51,6 +51,10 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
 
         $lines->next();
 
+        if (RstParser::isOption($lines->current())) {
+            $lines->next();
+        }
+
         // check if next line is empty
         $nextLine = $lines->current();
 

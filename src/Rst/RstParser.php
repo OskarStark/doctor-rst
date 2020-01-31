@@ -339,4 +339,15 @@ class RstParser
 
         return false;
     }
+
+    public static function isOption(string $string): bool
+    {
+        $string = self::clean($string);
+
+        if (u($string)->match('/^:[a-zA-Z]+:$/')) {
+            return true;
+        }
+
+        return false;
+    }
 }
