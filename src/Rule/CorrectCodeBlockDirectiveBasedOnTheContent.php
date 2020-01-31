@@ -14,9 +14,11 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
+use App\Helper\Helper;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements Rule
 {
@@ -45,21 +47,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TWIG, true)) {
             $lines->next();
 
-            $foundHtml = 0;
-
-            while ($lines->valid()
-                && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
-            ) {
-                if (preg_match('/[<|>]+/', RstParser::clean($lines->current()), $matches)
-                    && !preg_match('/<3/', RstParser::clean($lines->current()))
-                ) {
-                    ++$foundHtml;
-                }
-
-                $lines->next();
-            }
-
-            if (0 === ($foundHtml % 2)) {
+            if ($this->containsHtml(Helper::cloneIterator($lines, (int) $lines->key()), $indention)) {
                 return $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
             }
         }
@@ -68,29 +56,35 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_HTML_TWIG, true)) {
             $lines->next();
 
-            $foundHtml = 0;
-
-            while ($lines->valid()
-                && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
-            ) {
-                if (preg_match('/[<|>]+/', RstParser::clean($lines->current()), $matches)) {
-                    ++$foundHtml;
-                }
-
-                $lines->next();
-            }
-
-            /*
-             * Because online one could be a comparator like:
-             *
-             *     {% if item.stock < 10 %}
-             */
-            if (0 !== ($foundHtml % 2)) {
+            if (!$this->containsHtml(Helper::cloneIterator($lines, (int) $lines->key()), $indention)) {
                 return $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG);
             }
         }
 
         return null;
+    }
+
+    public function containsHtml(\ArrayIterator $lines, int $indention): bool
+    {
+        $content = [];
+
+        while ($lines->valid()
+            && ($indention <= RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
+        ) {
+            $content[] = RstParser::clean($lines->current());
+
+            $lines->next();
+        }
+
+        /**
+         * it looks like strip_tags is stripping a single "<3" (used often as heard),
+         * so we replace it beforehand.
+         */
+        $string = u(implode(' ', $content))
+            ->replace('<3', 'heart')
+        ;
+
+        return $string->length() !== u(strip_tags($string->toString()))->length();
     }
 
     private function getErrorMessage(string $new, string $current): string
