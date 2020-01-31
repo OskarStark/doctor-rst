@@ -70,6 +70,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
 
         $content = [];
 
+
         foreach ($lines as $line) {
 //            var_dump($line);
 
