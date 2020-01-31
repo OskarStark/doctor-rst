@@ -69,7 +69,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
         $content = [];
 
         while ($lines->valid()
-            && (($indention < RstParser::indention($lines->current()) || 0 === $indention) || RstParser::isBlankLine($lines->current()))
+            && ($indention <= RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
         ) {
             $content[] = RstParser::clean($lines->current());
 
@@ -82,7 +82,6 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
          */
         $string = u(implode(' ', $content))
             ->replace('<3', 'heart')
-            ->trim()
         ;
 
         return $string->length() !== u(strip_tags($string->toString()))->length();

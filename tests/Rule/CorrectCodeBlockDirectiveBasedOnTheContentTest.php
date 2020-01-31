@@ -196,32 +196,6 @@ CONTENT
 
         yield [
             null,
-            new RstSample(<<<CONTENT
-Considering that the ``name`` property is of type ``string``, override the
-built-in ``field_string.html.twig`` template to add support for the ``trans``
-and ``domain`` options:
-
-.. code-block:: twig
-
-    {# templates/bundles/EasyAdminBundle/default/field_string.html.twig #}
-    {% if field_options.trans|default(false) %}
-        {# translate fields defined as "translatable" #}
-        {{ value|trans({}, field_options.domain|default('messages')) }}
-    {% else %}
-        {# if not translatable, simply include the default template #}
-        {{ include('@!EasyAdmin/default/field_string.html.twig') }}
-    {% endif %}
-
-If the custom logic is too complex, it may be better to render the property with
-its own custom template to not mess the default templates too much. In the
-following example, the backend wants to display a collection of tags with the
-colors configured for the property.
-CONTENT
-            , 4),
-        ];
-
-        yield [
-            null,
             new RstSample('temp'),
         ];
     }
