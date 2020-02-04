@@ -15,5 +15,4 @@ ADD . /usr/src/app
 
 RUN composer install
 
-ADD entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
