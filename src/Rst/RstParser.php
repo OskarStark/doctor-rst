@@ -346,7 +346,7 @@ class RstParser
     {
         $string = self::clean($string);
 
-        if (u($string)->match('/^:[a-zA-Z]+:$/')) {
+        if (u($string)->match('/^(:[a-zA-Z]+:).*/')) {
             return true;
         }
 

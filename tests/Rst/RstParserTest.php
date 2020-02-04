@@ -413,6 +413,8 @@ final class RstParserTest extends TestCase
         return [
             [true, ':lineos:'],
             [true, ' :lineos: '],
+            [true, ':language: text'],
+            [true, ' :language: text '],
             [false, ' '],
             [false, ''],
             [false, '.. class::'],
