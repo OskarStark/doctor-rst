@@ -59,6 +59,15 @@ class BlankLineBeforeDirectiveTest extends TestCase
             ], 2),
         ];
 
+        yield 'directive with a comment directive before' => [
+            null,
+            new RstSample([
+                '',
+                '.. I am a comment',
+                '.. code-block:: terminal',
+            ], 2),
+        ];
+
         yield 'valid short php directive' => [
             null,
             new RstSample(<<<'RST'
