@@ -39,6 +39,7 @@ class RstParser
     const DIRECTIVE_FIGURE = '.. figure::';
     const DIRECTIVE_SEEALSO = '.. seealso::';
     const DIRECTIVE_CLASS = '.. class::';
+    const DIRECTIVE_LITERALINCLUDE = '.. literalinclude::';
 
     const DIRECTIVES = [
         self::DIRECTIVE_CODE_BLOCK,
@@ -62,6 +63,7 @@ class RstParser
         self::DIRECTIVE_FIGURE,
         self::DIRECTIVE_SEEALSO,
         self::DIRECTIVE_CLASS,
+        self::DIRECTIVE_LITERALINCLUDE,
     ];
 
     const CODE_BLOCK_PHP = 'php';
