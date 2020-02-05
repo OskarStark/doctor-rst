@@ -90,10 +90,12 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
 
         // no xliff
         if (!$xliff && !$this->equal($codeBlocks, $validOrder)) {
-            return sprintf(
-                'Please use the following order for your code blocks: "%s"',
-                str_replace('.. code-block:: ', '', implode(', ', $validOrder))
-            );
+            if (count($validOrder) !== 1) {
+                return sprintf(
+                    'Please use the following order for your code blocks: "%s"',
+                    str_replace('.. code-block:: ', '', implode(', ', $validOrder))
+                );
+            }
         }
 
         // xliff

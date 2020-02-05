@@ -118,6 +118,40 @@ RST;
         test
 RST;
 
+$valid_all_the_same = <<<RST
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/fos_rest.yaml
+
+        fos_rest:
+            param_fetcher_listener: true
+            body_listener:          true
+            format_listener:        true
+            view:
+                view_response_listener: force
+            body_converter:
+                enabled: true
+                validate: true
+
+    .. code-block:: yaml
+
+        # config/packages/sensio_framework_extra.yaml
+
+        sensio_framework_extra:
+            view:    { annotations: false }
+            router:  { annotations: true }
+            request: { converters: true }
+
+    .. code-block:: yaml
+
+        # config/packages/twig.yaml
+
+        twig:
+            exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
+RST;
+
         yield 'valid 1' => [
             null,
             new RstSample($valid),
@@ -133,6 +167,10 @@ RST;
         yield 'valid too with xliff' => [
             null,
             new RstSample($valid_too_with_xliff),
+        ];
+        yield 'valid all the same' => [
+            null,
+            new RstSample($valid_all_the_same),
         ];
     }
 
