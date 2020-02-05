@@ -1,0 +1,15 @@
+# https://help.github.com/en/articles/metadata-syntax-for-github-actions
+
+author: 'OskarStark'
+
+branding:
+    icon: 'check'
+    color: 'blue'
+
+description: 'Check *.rst files against given rules.'
+
+name: 'DOCtor-RST'
+
+runs:
+    using: 'docker'
+    image: 'docker://oskarstark/doctor-rst'
