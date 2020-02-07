@@ -17,6 +17,11 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
+    App\Command\AnalyseCommand:
+        public: true
+    App\Command\RulesCommand:
+        public: true
+
     App\Rule\:
         resource: '../src/Rule'
         tags: ['doctor_rst.rule']
@@ -27,3 +32,6 @@ services:
         arguments: [!tagged doctor_rst.rule]
 
     Composer\Semver\VersionParser: ~
+
+    Doctrine\Common\Annotations\AnnotationReader: ~
+    Doctrine\Common\Annotations\Reader: '@Doctrine\Common\Annotations\AnnotationReader'
