@@ -11,7 +11,7 @@ LABEL "maintainer"="Oskar Stark <oskarstark@googlemail.com>"
 
 ENV APP_ENV=prod
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /usr/src/app
 
