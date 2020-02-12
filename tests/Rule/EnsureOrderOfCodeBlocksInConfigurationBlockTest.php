@@ -118,7 +118,7 @@ RST;
         test
 RST;
 
-$valid_all_the_same = <<<RST
+        $valid_all_the_same = <<<RST
 .. configuration-block::
 
     .. code-block:: yaml
