@@ -1,0 +1,8 @@
+{
+  "files": [
+    "config/services.yaml"
+  ],
+  "compression": "GZ",
+  "main": "bin/doctor-rst",
+  "git-version": "git-version"
+}
