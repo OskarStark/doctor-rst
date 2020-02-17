@@ -1,4 +1,4 @@
-FROM exozet/php-fpm:7.4
+FROM php:7.4-cli-alpine
 
 LABEL "com.github.actions.name"="DOCtor-RST"
 LABEL "com.github.actions.description"="check *.rst files against given rules"
@@ -11,8 +11,12 @@ LABEL "maintainer"="Oskar Stark <oskarstark@googlemail.com>"
 
 ENV APP_ENV=prod
 
+COPY --from=composer:1.9.3 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /usr/src/app
+
 ADD . /usr/src/app
 
-RUN composer install
+RUN composer install --classmap-authoritative --no-interaction
 
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
