@@ -34,20 +34,16 @@ class AnalyseCommand extends Command
 {
     protected static $defaultName = 'analyse';
 
-    /** @var SymfonyStyle */
-    private $io;
+    private SymfonyStyle $io;
 
-    /** @var Registry */
-    private $registry;
+    private Registry $registry;
 
     /** @var Rule[] */
-    private $rules = [];
+    private array $rules = [];
 
-    /** @var bool */
-    private $short = false;
+    private bool $short = false;
 
-    /** @var string */
-    private $dir;
+    private string $dir;
 
     /** @var mixed */
     private $config;
@@ -172,7 +168,7 @@ class AnalyseCommand extends Command
 
         $content = file($realpath);
 
-        if (false == $content) {
+        if (false === $content) {
             throw new \RuntimeException(sprintf(
                 'Cannot parse file: %s',
                 (string) $file->getRealPath()

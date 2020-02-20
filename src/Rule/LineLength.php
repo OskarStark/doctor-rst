@@ -17,7 +17,7 @@ use App\Value\Lines;
 
 class LineLength extends AbstractRule implements Rule
 {
-    private $max;
+    private int $max;
 
     public function __construct(int $max = 80)
     {

@@ -22,11 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Configurable
 {
-    /** @var VersionParser */
-    private $versionParser;
-
-    /** @var int */
-    private $majorVersion;
+    private VersionParser $versionParser;
+    private int $majorVersion;
 
     public function __construct(VersionParser $versionParser)
     {
@@ -76,7 +73,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Co
 
                 $major = (int) $major;
 
-                if ($this->majorVersion != $major) {
+                if ($this->majorVersion !== $major) {
                     return sprintf(
                         'You are not allowed to use version "%s". Only major version "%s" is allowed.',
                         $version,

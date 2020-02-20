@@ -15,11 +15,8 @@ namespace App\Rst\Value;
 
 final class LinkDefinition
 {
-    /** @var LinkName */
-    private $name;
-
-    /** @var LinkUrl */
-    private $url;
+    private LinkName $name;
+    private LinkUrl $url;
 
     private function __construct(LinkName $name, LinkUrl $url)
     {

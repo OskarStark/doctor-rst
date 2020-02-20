@@ -16,7 +16,6 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
 use App\Rst\RstParser;
-use App\Value\Line;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 

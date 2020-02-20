@@ -17,9 +17,9 @@ use Webmozart\Assert\Assert;
 
 final class Violation
 {
-    private $message;
-    private $filename;
-    private $lineno;
+    private string $message;
+    private string $filename;
+    private int $lineno;
 
     private function __construct(string $message, string $filename, int $lineno)
     {

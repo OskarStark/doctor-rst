@@ -29,8 +29,7 @@ use Composer\Semver\VersionParser;
  */
 class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Rule
 {
-    /** @var VersionParser */
-    private $versionParser;
+    private VersionParser $versionParser;
 
     public function __construct(VersionParser $versionParser)
     {

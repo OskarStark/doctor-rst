@@ -30,7 +30,7 @@ class NoSpaceBeforeSelfXmlClosingTag extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ('/>' != $line->clean() && u($line->raw())->match('/\ \/>/')) {
+        if ('/>' !== $line->clean() && u($line->raw())->match('/\ \/>/')) {
             return 'Please remove space before "/>"';
         }
 
