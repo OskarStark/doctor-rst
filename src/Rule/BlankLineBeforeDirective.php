@@ -37,7 +37,7 @@ class BlankLineBeforeDirective extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (0 == $number) {
+        if (0 === $number) {
             // it is ok to start with a directive
             return null;
         }

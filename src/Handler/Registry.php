@@ -30,11 +30,11 @@ final class Registry
         self::GROUP_SYMFONY,
     ];
 
-    /** @var Rule[] */
-    private $rules = [];
+    /** @var array<string, Rule> */
+    private array $rules = [];
 
     /** @var Rule[] */
-    private $rawRules = [];
+    private array $rawRules = [];
 
     public function __construct(iterable $rules)
     {
@@ -87,7 +87,7 @@ final class Registry
     {
         $rules = [];
         foreach ($this->rules as $rule) {
-            if (\in_array($group, $rule::getGroups())) {
+            if (\in_array($group, $rule::getGroups(), true)) {
                 $rules[] = $rule;
             }
         }

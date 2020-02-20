@@ -15,8 +15,7 @@ namespace App\Rst\Value;
 
 final class LinkUsage
 {
-    /** @var LinkName */
-    private $name;
+    private LinkName $name;
 
     private function __construct(LinkName $name)
     {

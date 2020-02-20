@@ -20,8 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MaxBlankLines extends AbstractRule implements Rule, Configurable
 {
-    /** @var int */
-    private $max;
+    private int $max;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {

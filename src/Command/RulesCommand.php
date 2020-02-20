@@ -18,6 +18,7 @@ use App\Handler\Registry;
 use App\Rule\CheckListRule;
 use App\Rule\Configurable;
 use App\Rule\Rule;
+use App\Value\RuleGroup;
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,14 +30,9 @@ class RulesCommand extends Command
 {
     protected static $defaultName = 'rules';
 
-    /** @var SymfonyStyle */
-    private $io;
-
-    /** @var Registry */
-    private $registry;
-
-    /** @var Reader */
-    private $annotationReader;
+    private SymfonyStyle $io;
+    private Registry $registry;
+    private Reader $annotationReader;
 
     public function __construct(Registry $registry, Reader $annotationReader, ?string $name = null)
     {
@@ -69,11 +65,15 @@ class RulesCommand extends Command
         }
 
         foreach ($rules as $rule) {
+            $groups = array_map(static function (RuleGroup $group) {
+                return $group->asString();
+            }, $rule::getGroups());
+
             $this->io->writeln(sprintf(
                 '* [%s](#%s)%s',
                 $rule::getName()->asString(),
                 $rule::getName()->asString(),
-                \in_array(Registry::GROUP_EXPERIMENTAL, $rule::getGroups()) ? ' :exclamation:' : ''
+                \in_array(Registry::GROUP_EXPERIMENTAL, $groups, true) ? ' :exclamation:' : ''
             ));
         }
 

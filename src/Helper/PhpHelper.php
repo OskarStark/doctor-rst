@@ -101,7 +101,7 @@ final class PhpHelper
             return true;
         }
 
-        if (!preg_match('/^\*/', $lines->current()->clean())) {
+        if (0 !== strpos($lines->current()->clean(), '*')) {
             return false;
         }
 
@@ -115,7 +115,7 @@ final class PhpHelper
                 return true;
             }
 
-            if (!preg_match('/^\*/', $lines->current()->clean())) {
+            if (0 !== strpos($lines->current()->clean(), '*')) {
                 return false;
             }
         }

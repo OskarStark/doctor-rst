@@ -29,8 +29,7 @@ class Indention extends AbstractRule implements Rule, Configurable
     use DirectiveTrait;
     use ListTrait;
 
-    /** @var int */
-    private $size;
+    private int $size;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {

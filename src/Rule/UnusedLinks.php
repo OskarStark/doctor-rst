@@ -28,10 +28,10 @@ use Symfony\Contracts\Service\ResetInterface;
 class UnusedLinks extends AbstractRule implements Rule, ResetInterface
 {
     /** @var LinkUsage[] */
-    private $linkUsages = [];
+    private array $linkUsages = [];
 
     /** @var LinkDefinition[] */
-    private $linkDefinitions = [];
+    private array $linkDefinitions = [];
 
     public static function getGroups(): array
     {

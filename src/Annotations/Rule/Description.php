@@ -18,6 +18,5 @@ namespace App\Annotations\Rule;
  */
 class Description
 {
-    /** @var string */
-    public $value;
+    public string $value;
 }

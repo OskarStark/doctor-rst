@@ -21,8 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Configurable
 {
-    /** @var string */
-    private $minVersion;
+    private string $minVersion;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {

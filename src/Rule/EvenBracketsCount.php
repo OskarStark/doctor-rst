@@ -19,12 +19,9 @@ use App\Value\RuleGroup;
 
 class EvenBracketsCount extends AbstractRule implements Rule
 {
-    /** @var int */
-    private $round = 0;
-    /** @var int */
-    private $curly = 0;
-    /** @var int */
-    private $square = 0;
+    private int $round = 0;
+    private int $curly = 0;
+    private int $square = 0;
     ///** @var int */
     //private $edge = 0;
 
