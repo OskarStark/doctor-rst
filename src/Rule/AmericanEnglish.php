@@ -37,12 +37,10 @@ class AmericanEnglish extends CheckListRule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match($this->pattern, $line, $matches)) {
+        if (preg_match($this->pattern, $line->raw(), $matches)) {
             return sprintf($this->message, $matches[0]);
         }
 

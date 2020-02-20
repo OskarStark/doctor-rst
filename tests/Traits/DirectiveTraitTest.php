@@ -49,7 +49,7 @@ class DirectiveTraitTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->in($directive, $sample->lines()->toIterator(), $sample->lineNumber(), $types)
+            $this->traitWrapper->in($directive, clone $sample->lines(), $sample->lineNumber(), $types)
         );
     }
 
@@ -419,7 +419,7 @@ RST;
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->previousDirectiveIs($directive, $sample->lines()->toIterator(), $sample->lineNumber(), $types)
+            $this->traitWrapper->previousDirectiveIs($directive, $sample->lines(), $sample->lineNumber(), $types)
         );
     }
 

@@ -20,8 +20,6 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
 {
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -33,33 +31,33 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
         $lines->next();
 
         // PHP
-        if (preg_match('/^\/\/(.*)\.php$/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^\/\/(.*)\.php$/', $lines->current()->clean(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         // YML / YAML
-        if (preg_match('/^#(.*)\.(yml|yaml)$/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         // XML
-        if (preg_match('/^<!--(.*)\.xml(.*)-->$/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^<!--(.*)\.xml(.*)-->$/', $lines->current()->clean(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         // TWIG
-        if (preg_match('/^{#(.*)\.twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         return null;
     }
 
-    private function validateBlankLine(\ArrayIterator $lines, array $matches): ?string
+    private function validateBlankLine(Lines $lines, array $matches): ?string
     {
         $lines->next();
 
-        if (RstParser::isBlankLine($lines->current())) {
+        if ($lines->current()->isBlank()) {
             return sprintf('Please remove blank line after "%s"', trim($matches[0]));
         }
 

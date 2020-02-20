@@ -28,8 +28,6 @@ class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Rul
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -43,18 +41,18 @@ class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Rul
         $lines->next();
 
         // PHP
-        if (preg_match('/^\/\/(.*)\.php$/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^\/\/(.*)\.php$/', $lines->current()->clean(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         return null;
     }
 
-    private function validateBlankLine(\ArrayIterator $lines, array $matches): ?string
+    private function validateBlankLine(Lines $lines, array $matches): ?string
     {
         $lines->next();
 
-        if (RstParser::isBlankLine($lines->current())) {
+        if ($lines->current()->isBlank()) {
             $lines->next();
             if (!PhpHelper::isComment($lines->current())) {
                 return sprintf('Please remove blank line after "%s"', trim($matches[0]));

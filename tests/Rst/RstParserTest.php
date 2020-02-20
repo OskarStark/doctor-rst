@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Rst;
 
 use App\Rst\RstParser;
+use App\Value\Line;
 use PHPUnit\Framework\TestCase;
 
 final class RstParserTest extends TestCase
@@ -25,7 +26,7 @@ final class RstParserTest extends TestCase
      */
     public function isLineNumberAnnotation(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isLineNumberAnnotation($string));
+        $this->assertSame($expected, RstParser::isLineNumberAnnotation(new Line($string)));
     }
 
     public function isLineNumberAnnotationProvider(): \Generator
@@ -46,7 +47,7 @@ final class RstParserTest extends TestCase
      */
     public function isDefaultDirective(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isDefaultDirective($string));
+        $this->assertSame($expected, RstParser::isDefaultDirective(new Line($string)));
     }
 
     public function isDefaultDirectiveProvider(): \Generator
@@ -66,7 +67,7 @@ final class RstParserTest extends TestCase
      */
     public function isComment(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isComment($string));
+        $this->assertSame($expected, RstParser::isComment(new Line($string)));
     }
 
     public function isCommentProvider(): \Generator
@@ -86,7 +87,7 @@ final class RstParserTest extends TestCase
      */
     public function isFootnote(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isFootnote($string));
+        $this->assertSame($expected, RstParser::isFootnote(new Line($string)));
     }
 
     public function isFootnoteProvider(): \Generator
@@ -104,7 +105,7 @@ final class RstParserTest extends TestCase
      */
     public function isListItem(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isListItem($string));
+        $this->assertSame($expected, RstParser::isListItem(new Line($string)));
     }
 
     public function isListItemProvider(): \Generator
@@ -119,28 +120,11 @@ final class RstParserTest extends TestCase
     /**
      * @test
      *
-     * @dataProvider indentionProvider
-     */
-    public function indention(int $expected, string $string)
-    {
-        $this->assertSame($expected, RstParser::indention($string));
-    }
-
-    public function indentionProvider()
-    {
-        yield [0, ''];
-        yield [1, ' foo'];
-        yield [4, '    .. versionchanged:: 3.4'];
-    }
-
-    /**
-     * @test
-     *
      * @dataProvider isLinkDefinitionProvider
      */
     public function isLinkDefinition(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isLinkDefinition($string));
+        $this->assertSame($expected, RstParser::isLinkDefinition(new Line($string)));
     }
 
     public function isLinkDefinitionProvider()
@@ -181,7 +165,7 @@ final class RstParserTest extends TestCase
      */
     public function isTable(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isTable($string));
+        $this->assertSame($expected, RstParser::isTable(new Line($string)));
     }
 
     public function isTableProvider()
@@ -206,7 +190,7 @@ final class RstParserTest extends TestCase
      */
     public function isHeadline(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isHeadline($string));
+        $this->assertSame($expected, RstParser::isHeadline(new Line($string)));
     }
 
     public function isHeadlineProvider()
@@ -230,7 +214,7 @@ final class RstParserTest extends TestCase
      */
     public function hasNewline(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::hasNewline($string));
+        $this->assertSame($expected, RstParser::hasNewline(new Line($string)));
     }
 
     public function hasNewlineProvider()
@@ -254,59 +238,11 @@ final class RstParserTest extends TestCase
     /**
      * @test
      *
-     * @dataProvider cleanProvider
-     */
-    public function clean(string $expected, string $string)
-    {
-        $this->assertSame($expected, RstParser::clean($string));
-    }
-
-    public function cleanProvider()
-    {
-        return [
-            [
-                '.. code-block:: php',
-                '.. code-block:: php',
-            ],
-            [
-                '.. code-block:: php',
-                '  .. code-block:: php  ',
-            ],
-            [
-                '',
-                '\r',
-            ],
-            [
-                '',
-                '\n',
-            ],
-            [
-                'when you need to embed a ``\n`` or a Unicode character in a string.',
-                'when you need to embed a ``\n`` or a Unicode character in a string.\n',
-            ],
-            [
-                'use Sonata\AdminBundle\Admin\Admin;',
-                'use Sonata\AdminBundle\Admin\Admin;',
-            ],
-            [
-                'use Sonata\AdminBundle\Admin\Admin',
-                'use Sonata\AdminBundle\Admin\Admin',
-            ],
-            [
-                'use Sonata\AdminBundle\Admin\Admin',
-                'use Sonata\AdminBundle\Admin\Admin  ',
-            ],
-        ];
-    }
-
-    /**
-     * @test
-     *
      * @dataProvider isDirectiveProvider
      */
     public function isDirective(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isDirective($string));
+        $this->assertSame($expected, RstParser::isDirective(new Line($string)));
     }
 
     public function isDirectiveProvider()
@@ -332,7 +268,7 @@ final class RstParserTest extends TestCase
      */
     public function directiveIs(bool $expected, string $string, string $directive)
     {
-        $this->assertSame($expected, RstParser::directiveIs($string, $directive));
+        $this->assertSame($expected, RstParser::directiveIs(new Line($string), $directive));
     }
 
     public function directiveIsProvider()
@@ -357,7 +293,7 @@ final class RstParserTest extends TestCase
      */
     public function codeBlockDirectiveIsTypeOf(bool $expected, string $string, string $type, bool $strict = false)
     {
-        $this->assertSame($expected, RstParser::codeBlockDirectiveIsTypeOf($string, $type, $strict));
+        $this->assertSame($expected, RstParser::codeBlockDirectiveIsTypeOf(new Line($string), $type, $strict));
     }
 
     public function codeBlockDirectiveIsTypeOfProvider()
@@ -381,31 +317,11 @@ final class RstParserTest extends TestCase
     /**
      * @test
      *
-     * @dataProvider isBlankLineProvider
-     */
-    public function isBlankLine(bool $expected, string $string)
-    {
-        $this->assertSame($expected, RstParser::isBlankLine($string));
-    }
-
-    public function isBlankLineProvider()
-    {
-        return [
-            [true, '\r\n'],
-            [true, ''],
-            [true, ' '],
-            [false, 'foo'],
-        ];
-    }
-
-    /**
-     * @test
-     *
      * @dataProvider isOptionProvider
      */
     public function isOption(bool $expected, string $string)
     {
-        $this->assertSame($expected, RstParser::isOption($string));
+        $this->assertSame($expected, RstParser::isOption(new Line($string)));
     }
 
     public function isOptionProvider()

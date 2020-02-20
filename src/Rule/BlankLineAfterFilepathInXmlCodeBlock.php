@@ -25,8 +25,6 @@ class BlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Rule
 {
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -38,18 +36,18 @@ class BlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Rule
         $lines->next();
 
         // XML
-        if (preg_match('/^<!--(.*)\.(xml|xlf|xliff)(.*)-->$/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^<!--(.*)\.(xml|xlf|xliff)(.*)-->$/', $lines->current()->clean(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         return null;
     }
 
-    private function validateBlankLine(\ArrayIterator $lines, array $matches): ?string
+    private function validateBlankLine(Lines $lines, array $matches): ?string
     {
         $lines->next();
 
-        if (!RstParser::isBlankLine($lines->current()) && !XmlHelper::isComment($lines->current())) {
+        if (!$lines->current()->isBlank() && !XmlHelper::isComment($lines->current())) {
             return sprintf('Please add a blank line after "%s"', trim($matches[0]));
         }
 

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
-use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -59,18 +58,16 @@ class MaxBlankLines extends AbstractRule implements Rule, Configurable
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
 
-        if (!RstParser::isBlankLine($lines->current())) {
+        if (!$lines->current()->isBlank()) {
             return null;
         }
 
         $blanklines = 1;
         $lines->next();
 
-        while ($lines->valid() && RstParser::isBlankLine($lines->current())) {
+        while ($lines->valid() && $lines->current()->isBlank()) {
             ++$blanklines;
 
             $lines->next();

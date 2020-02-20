@@ -36,8 +36,6 @@ class NoBashPrompt extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -51,7 +49,7 @@ class NoBashPrompt extends AbstractRule implements Rule
         $lines->next();
         $lines->next();
 
-        if (u(RstParser::clean($lines->current()))->match('/^\$ /')) {
+        if (u($lines->current()->clean())->match('/^\$ /')) {
             return 'Please remove the "$" prefix in .. code-block:: directive';
         }
 

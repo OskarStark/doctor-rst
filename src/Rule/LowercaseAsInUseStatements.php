@@ -30,8 +30,6 @@ class LowercaseAsInUseStatements extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -41,15 +39,15 @@ class LowercaseAsInUseStatements extends AbstractRule implements Rule
             return null;
         }
 
-        $indention = RstParser::indention($line);
+        $indention = $line->indention();
 
         $lines->next();
 
         while ($lines->valid()
             && !RstParser::isDirective($lines->current())
-            && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
+            && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
-            if (preg_match('/^use (.*) (AS|As|aS) (.*);$/', RstParser::clean($lines->current()), $matches)) {
+            if (preg_match('/^use (.*) (AS|As|aS) (.*);$/', $lines->current()->clean(), $matches)) {
                 return sprintf('Please use lowercase "as" instead of "%s"', $matches[2]);
             }
 

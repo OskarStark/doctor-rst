@@ -30,8 +30,6 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -39,17 +37,17 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
             return null;
         }
 
-        $indention = RstParser::indention($line);
+        $indention = $line->indention();
 
         // check code-block: twig
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_TWIG, true)) {
             $lines->next();
 
             while ($lines->valid()
-                && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
+                && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
             ) {
-                if (preg_match('/[<]+/', RstParser::clean($lines->current()), $matches)
-                    && !preg_match('/<3/', RstParser::clean($lines->current()))
+                if (preg_match('/[<]+/', $lines->current()->clean(), $matches)
+                    && !preg_match('/<3/', $lines->current()->clean())
                 ) {
                     return $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
                 }
@@ -65,10 +63,10 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
             $foundHtml = false;
 
             while ($lines->valid()
-                && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
+                && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
                 && false === $foundHtml
             ) {
-                if (preg_match('/[<]+/', RstParser::clean($lines->current()))) {
+                if (preg_match('/[<]+/', $lines->current()->clean())) {
                     $foundHtml = true;
                 }
 

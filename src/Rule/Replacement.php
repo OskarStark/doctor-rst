@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
-use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 use function Symfony\Component\String\u;
@@ -31,12 +30,10 @@ class Replacement extends CheckListRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($matches = u(RstParser::clean($line))->match($this->pattern)) {
+        if ($matches = u($line->clean())->match($this->pattern)) {
             return sprintf($this->message, $matches[0]);
         }
 

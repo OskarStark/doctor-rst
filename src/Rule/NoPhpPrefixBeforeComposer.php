@@ -27,12 +27,10 @@ class NoPhpPrefixBeforeComposer extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line)->match('/php composer/')) {
+        if (u($line->raw())->match('/php composer/')) {
             return 'Please remove "php" prefix';
         }
 

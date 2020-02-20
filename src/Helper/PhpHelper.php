@@ -13,16 +13,17 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
-use App\Rst\RstParser;
+use App\Value\Line;
+use App\Value\Lines;
 
 final class PhpHelper
 {
     private const REGEX_NAMESPACE_WITH_ONE_BACKSLASH = '((?:\\\\{0,1}\w+|\w+\\\\{1})(?:\w+\\\\{1})+)';
     private const REGEX_NAMESPACE_WITH_TWO_BACKSLASHES = '((?:\\\\{0,2}\w+|\w+\\\\{2})(?:\w+\\\\{2})+)';
 
-    public static function isComment(string $line): bool
+    public static function isComment(Line $line): bool
     {
-        if (preg_match('/^(#|\/\/)(.*)/', RstParser::clean($line))) {
+        if (preg_match('/^(#|\/\/)(.*)/', $line->clean())) {
             return true;
         }
 
@@ -54,45 +55,45 @@ final class PhpHelper
         return (bool) preg_match('/[\\\\]{1}/', $string);
     }
 
-    public static function isFirstLineOfMultilineComment(string $line): bool
+    public static function isFirstLineOfMultilineComment(Line $line): bool
     {
-        if (preg_match('/^\/\*$/', RstParser::clean($line))) {
+        if (preg_match('/^\/\*$/', $line->clean())) {
             return true;
         }
 
         return false;
     }
 
-    public static function isLastLineOfMultilineComment(string $line): bool
+    public static function isLastLineOfMultilineComment(Line $line): bool
     {
-        if (preg_match('/^\*\/$/', RstParser::clean($line))) {
+        if (preg_match('/^\*\/$/', $line->clean())) {
             return true;
         }
 
         return false;
     }
 
-    public static function isFirstLineOfDocBlock(string $line): bool
+    public static function isFirstLineOfDocBlock(Line $line): bool
     {
-        if (preg_match('/^\/\*\*$/', RstParser::clean($line))) {
+        if (preg_match('/^\/\*\*$/', $line->clean())) {
             return true;
         }
 
         return false;
     }
 
-    public static function isLastLineOfDocBlock(string $line): bool
+    public static function isLastLineOfDocBlock(Line $line): bool
     {
-        if (preg_match('/^\*\/$/', RstParser::clean($line))) {
+        if (preg_match('/^\*\/$/', $line->clean())) {
             return true;
         }
 
         return false;
     }
 
-    public function isPartOfDocBlock(\ArrayIterator $lines, int $number): bool
+    public function isPartOfDocBlock(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         if (self::isFirstLineOfDocBlock($lines->current())
             || self::isLastLineOfDocBlock($lines->current())
@@ -100,7 +101,7 @@ final class PhpHelper
             return true;
         }
 
-        if (!preg_match('/^\*/', RstParser::clean($lines->current()))) {
+        if (!preg_match('/^\*/', $lines->current()->clean())) {
             return false;
         }
 
@@ -114,7 +115,7 @@ final class PhpHelper
                 return true;
             }
 
-            if (!preg_match('/^\*/', RstParser::clean($lines->current()))) {
+            if (!preg_match('/^\*/', $lines->current()->clean())) {
                 return false;
             }
         }
@@ -122,9 +123,9 @@ final class PhpHelper
         return false;
     }
 
-    public function isPartOfMultilineComment(\ArrayIterator $lines, int $number): bool
+    public function isPartOfMultilineComment(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         if (self::isFirstLineOfMultilineComment($lines->current())
             || self::isLastLineOfMultilineComment($lines->current())

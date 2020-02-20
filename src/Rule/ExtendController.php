@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Annotations\Rule\Description;
 use App\Handler\Registry;
-use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 use function Symfony\Component\String\u;
@@ -32,18 +31,14 @@ class ExtendController extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-
-        if (u($line)->match('/^class(.*)extends AbstractController$/')) {
+        if (u($line->clean())->match('/^class(.*)extends AbstractController$/')) {
             return 'Please extend Controller instead of AbstractController';
         }
 
-        if (u($line)->match('/^use Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController;/')) {
+        if (u($line->clean())->match('/^use Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController;/')) {
             return 'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"';
         }
 

@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
-use App\Helper\Helper;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
@@ -32,8 +31,6 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -41,7 +38,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             return null;
         }
 
-        $indention = RstParser::indention($line);
+        $indention = $line->indention();
 
         $lines->next();
 
@@ -51,18 +48,18 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         $xliff = false;
 
         $codeBlocks = [];
-        while ($lines->valid() && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))) {
+        while ($lines->valid() && ($indention < $lines->current()->indention() || $lines->current()->isBlank())) {
             if (RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CODE_BLOCK)) {
-                $codeBlocks[] = RstParser::clean($lines->current());
+                $codeBlocks[] = $lines->current()->clean();
 
                 // if its an xml code-block, check if it contains xliff
                 // @todo refactor in extra method: getDirectiveContent
                 if (RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_XML)) {
-                    $content = Helper::cloneIterator($lines, (int) $lines->key());
-                    $content->next();
+                    $content = clone $lines;
+                    $content->seek($lines->key() + 1);
 
-                    while ($content->valid() && (RstParser::isBlankLine($content->current()) || RstParser::indention($lines->current()) < RstParser::indention($content->current()))) {
-                        if (preg_match('/xliff/', $content->current())) {
+                    while ($content->valid() && ($content->current()->isBlank() || $lines->current()->indention() < $content->current()->indention())) {
+                        if (false !== strpos($content->current()->raw(), 'xliff')) {
                             $xliff = true;
 
                             break;
@@ -77,41 +74,37 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         }
 
         foreach ($codeBlocks as $key => $codeBlock) {
-            if (!\in_array($codeBlock, $validOrder)) {
+            if (!\in_array($codeBlock, $validOrder, true)) {
                 unset($codeBlocks[$key]);
             }
         }
 
         foreach ($validOrder as $key => $order) {
-            if (!\in_array($order, $codeBlocks)) {
+            if (!\in_array($order, $codeBlocks, true)) {
                 unset($validOrder[$key]);
             }
         }
 
         // no xliff
-        if (!$xliff && !$this->equal($codeBlocks, $validOrder)) {
-            if (1 !== \count($validOrder)) {
-                return sprintf(
-                    'Please use the following order for your code blocks: "%s"',
-                    str_replace('.. code-block:: ', '', implode(', ', $validOrder))
-                );
-            }
+        if (!$xliff && !$this->equal($codeBlocks, $validOrder) && 1 !== \count($validOrder)) {
+            return sprintf(
+                'Please use the following order for your code blocks: "%s"',
+                str_replace('.. code-block:: ', '', implode(', ', $validOrder))
+            );
         }
 
         // xliff
         foreach ($validXliffOrder as $key => $order) {
-            if (!\in_array($order, $codeBlocks)) {
+            if (!\in_array($order, $codeBlocks, true)) {
                 unset($validXliffOrder[$key]);
             }
         }
 
-        if ($xliff) {
-            if (!$this->equal($codeBlocks, $validXliffOrder) && !$this->equal($codeBlocks, $validOrder)) {
-                return sprintf(
-                    'Please use the following order for your code blocks: "%s"',
-                    str_replace('.. code-block:: ', '', implode(', ', $validXliffOrder))
-                );
-            }
+        if ($xliff && !$this->equal($codeBlocks, $validXliffOrder) && !$this->equal($codeBlocks, $validOrder)) {
+            return sprintf(
+                'Please use the following order for your code blocks: "%s"',
+                str_replace('.. code-block:: ', '', implode(', ', $validXliffOrder))
+            );
         }
 
         return null;

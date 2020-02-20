@@ -27,10 +27,8 @@ class NoAdminYaml extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
-        $line = $lines->current();
+        $line = $lines->current()->raw();
 
         if (u($line)->match('/_admin\.yaml/')) {
             return null;

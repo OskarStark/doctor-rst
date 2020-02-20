@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
-use App\Rst\RstParser;
+use App\Value\Line;
 
 final class YamlHelper
 {
-    public static function isComment(string $line): bool
+    public static function isComment(Line $line): bool
     {
-        if (preg_match('/^#(.*)/', RstParser::clean($line))) {
+        if (preg_match('/^#(.*)/', $line->clean())) {
             return true;
         }
 

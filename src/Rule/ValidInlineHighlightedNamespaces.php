@@ -40,13 +40,11 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
         // check 2 backticks
-        if (preg_match_all('/(``[^`{}@]+``)/', $line, $occurences)) {
+        if (preg_match_all('/(``[^`{}@]+``)/', $line->raw(), $occurences)) {
             foreach (array_unique($occurences[0]) as $occurence) {
                 if (!PhpHelper::containsBackslash($occurence)) {
                     continue;
@@ -60,7 +58,7 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements Rule
             goto end;
         }
 
-        if (preg_match_all('/(`[^`{}@]+`)/', $line, $occurences)) { // check 1 backtick
+        if (preg_match_all('/(`[^`{}@]+`)/', $line->raw(), $occurences)) { // check 1 backtick
             foreach (array_unique($occurences[0]) as $occurence) {
                 if (!PhpHelper::containsBackslash($occurence)) {
                     continue;

@@ -30,8 +30,6 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -46,8 +44,8 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
         // check if next line is "<?php"
         $nextLine = $lines->current();
 
-        if ('<?php' === RstParser::clean($nextLine)) {
-            return sprintf('Please remove PHP open tag after "%s" directive', $line);
+        if ('<?php' === $nextLine->clean()) {
+            return sprintf('Please remove PHP open tag after "%s" directive', $line->raw());
         }
 
         return null;

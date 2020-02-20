@@ -355,7 +355,7 @@ RST
     {
         $this->assertSame(
             $expected,
-            (new Indention())->isPartOrMultilineXmlComment($sample->lines()->toIterator(), $sample->lineNumber())
+            (new Indention())->isPartOrMultilineXmlComment($sample->lines(), $sample->lineNumber())
         );
     }
 
@@ -427,7 +427,7 @@ RST
     {
         $this->assertSame(
             $expected,
-            (new Indention())->isPartOrMultilineTwigComment($sample->lines()->toIterator(), $sample->lineNumber())
+            (new Indention())->isPartOrMultilineTwigComment($sample->lines(), $sample->lineNumber())
         );
     }
 

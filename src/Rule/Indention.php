@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
-use App\Helper\Helper;
 use App\Helper\PhpHelper;
 use App\Helper\TwigHelper;
 use App\Helper\XmlHelper;
@@ -60,12 +59,11 @@ class Indention extends AbstractRule implements Rule, Configurable
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
+        $line = $lines->current();
 
-        if (RstParser::isBlankLine($lines->current())
-            || preg_match('/(├|└)/', RstParser::clean($lines->current()))
+        if ($line->isBlank()
+            || preg_match('/([├└])/u', $line->clean())
             || $this->isPartOfListItem($lines, $number)
             || $this->isPartOfFootnote($lines, $number)
             || $this->isPartOfRstComment($lines, $number)
@@ -84,7 +82,8 @@ class Indention extends AbstractRule implements Rule, Configurable
             return null;
         }
 
-        $indention = RstParser::indention($lines->current());
+        $lines->seek($number);
+        $indention = $line->indention();
         $minus = 0;
 
         $customMessage = null;
@@ -95,20 +94,20 @@ class Indention extends AbstractRule implements Rule, Configurable
             RstParser::CODE_BLOCK_JAVASCRIPT,
             RstParser::CODE_BLOCK_SQL,
         ])) {
-            if (PhpHelper::isFirstLineOfDocBlock($lines->current())
-                || PhpHelper::isFirstLineOfMultilineComment($lines->current())
+            if (PhpHelper::isFirstLineOfDocBlock($line)
+                || PhpHelper::isFirstLineOfMultilineComment($line)
             ) {
                 $minus = 0;
             } elseif ((new PhpHelper())->isPartOfMultilineComment($lines, $number)) {
                 $customMessage = 'Please fix the indention of the multiline comment.';
-                if (PhpHelper::isLastLineOfMultilineComment($lines->current())
-                    && $indention > 0 && 0 < RstParser::indention($lines->current()) % $this->size
+                if (PhpHelper::isLastLineOfMultilineComment($line)
+                    && $indention > 0 && 0 < $line->indention() % $this->size
                 ) {
                     $minus = 1;
-                } elseif ($indention > 0 && 0 < RstParser::indention($lines->current()) % $this->size) {
+                } elseif ($indention > 0 && 0 < $line->indention() % $this->size) {
                     $minus = 1;
                 }
-            } elseif (PhpHelper::isLastLineOfDocBlock($lines->current())
+            } elseif (PhpHelper::isLastLineOfDocBlock($line)
                 && (new PhpHelper())->isPartOfDocBlock($lines, $number)
             ) {
                 $customMessage = 'Please fix the indention of the PHP DocBlock.';
@@ -121,7 +120,7 @@ class Indention extends AbstractRule implements Rule, Configurable
 
         // XML
         if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_XML])
-            && !XmlHelper::isComment($lines->current())
+            && !XmlHelper::isComment($line)
             && $this->isPartOrMultilineXmlComment($lines, $number)
         ) {
             $minus = 1;
@@ -129,7 +128,7 @@ class Indention extends AbstractRule implements Rule, Configurable
 
         // Twig
         if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG])
-            && !TwigHelper::isComment($lines->current())
+            && !TwigHelper::isComment($line)
             && $this->isPartOrMultilineTwigComment($lines, $number)
         ) {
             $minus = 3;
@@ -142,15 +141,15 @@ class Indention extends AbstractRule implements Rule, Configurable
         return null;
     }
 
-    public function isPartOrMultilineXmlComment(\ArrayIterator $lines, int $number): bool
+    public function isPartOrMultilineXmlComment(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         if (XmlHelper::isComment($lines->current(), false)) {
             return true;
         }
 
-        $currentIndention = RstParser::indention($lines->current());
+        $currentIndention = $lines->current()->indention();
 
         $i = $number;
         while ($i >= 1) {
@@ -158,11 +157,11 @@ class Indention extends AbstractRule implements Rule, Configurable
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
-            $lineIndention = RstParser::indention($lines->current());
+            $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention) {
                 if (XmlHelper::isComment($lines->current(), false)) {
@@ -176,15 +175,15 @@ class Indention extends AbstractRule implements Rule, Configurable
         return false;
     }
 
-    public function isPartOrMultilineTwigComment(\ArrayIterator $lines, int $number): bool
+    public function isPartOrMultilineTwigComment(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         if (TwigHelper::isComment($lines->current(), false)) {
             return true;
         }
 
-        $currentIndention = RstParser::indention($lines->current());
+        $currentIndention = $lines->current()->indention();
 
         $i = $number;
         while ($i >= 1) {
@@ -192,11 +191,11 @@ class Indention extends AbstractRule implements Rule, Configurable
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
-            $lineIndention = RstParser::indention($lines->current());
+            $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention) {
                 if (TwigHelper::isComment($lines->current(), false)) {

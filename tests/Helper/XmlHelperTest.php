@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Helper;
 
 use App\Helper\XmlHelper;
+use App\Value\Line;
 use PHPUnit\Framework\TestCase;
 
 class XmlHelperTest extends TestCase
@@ -27,7 +28,7 @@ class XmlHelperTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            XmlHelper::isComment($line, $closed)
+            XmlHelper::isComment(new Line($line), $closed)
         );
     }
 

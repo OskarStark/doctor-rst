@@ -152,6 +152,37 @@ RST;
             exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 RST;
 
+        $translationDebug = <<<RST
+.. configuration-block::
+
+    .. code-block:: xml
+
+        <!-- translations/messages.fr.xlf -->
+        <?xml version="1.0"?>
+        <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+            <file source-language="en" datatype="plaintext" original="file.ext">
+                <body>
+                    <trans-unit id="1">
+                        <source>Symfony is great</source>
+                        <target>J'aime Symfony</target>
+                    </trans-unit>
+                </body>
+            </file>
+        </xliff>
+
+    .. code-block:: yaml
+
+        # translations/messages.fr.yaml
+        Symfony is great: J'aime Symfony
+
+    .. code-block:: php
+
+        // translations/messages.fr.php
+        return [
+            'Symfony is great' => 'J\'aime Symfony',
+        ];
+RST;
+
         yield 'valid 1' => [
             null,
             new RstSample($valid),
@@ -171,6 +202,10 @@ RST;
         yield 'valid all the same' => [
             null,
             new RstSample($valid_all_the_same),
+        ];
+        yield 'translation debug' => [
+            null,
+            new RstSample($translationDebug),
         ];
     }
 

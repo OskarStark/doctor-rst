@@ -21,8 +21,6 @@ class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
 {
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -37,8 +35,8 @@ class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
         // check if next line is "<?php"
         $nextLine = $lines->current();
 
-        if (!u(RstParser::clean($nextLine))->startsWith('<?php')) {
-            return sprintf('Please add PHP open tag after "%s" directive', $line);
+        if (!u($nextLine->clean())->startsWith('<?php')) {
+            return sprintf('Please add PHP open tag after "%s" directive', $line->raw());
         }
 
         return null;

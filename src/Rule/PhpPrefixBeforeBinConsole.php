@@ -35,17 +35,15 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!preg_match('/bin\/console/', $line)) {
+        if (!preg_match('/bin\/console/', $line->raw())) {
             return null;
         }
 
-        if (preg_match('/(`|"|_|├─ )bin\/console/', $line)
-            || preg_match('/php "%s\/\.\.\/bin\/console"/', $line)) {
+        if (preg_match('/(`|"|_|├─ )bin\/console/u', $line->raw())
+            || preg_match('/php "%s\/\.\.\/bin\/console"/', $line->raw())) {
             return null;
         }
 
@@ -53,7 +51,7 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
             return null;
         }
 
-        if (!preg_match('/php(.*)bin\/console/', $line)) {
+        if (!preg_match('/php(.*)bin\/console/', $line->raw())) {
             return 'Please add "php" prefix before "bin/console"';
         }
 

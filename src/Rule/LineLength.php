@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Rst\RstParser;
 use App\Value\Lines;
 
 class LineLength extends AbstractRule implements Rule
@@ -27,12 +26,10 @@ class LineLength extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        $count = mb_strlen(RstParser::clean($line));
+        $count = mb_strlen($line->clean());
 
         if ($count > $this->max) {
             return sprintf('Line is to long (max %s) currently: %s', $this->max, $count);

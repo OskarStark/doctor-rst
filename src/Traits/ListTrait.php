@@ -13,27 +13,22 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
-use App\Helper\Helper;
 use App\Helper\PhpHelper;
 use App\Rst\RstParser;
+use App\Value\Lines;
 
 trait ListTrait
 {
-    private function isPartOfListItem(\ArrayIterator $lines, int $number): bool
+    private function isPartOfListItem(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         if (RstParser::isListItem($lines->current())) {
-            if ((new PhpHelper())->isPartOfMultilineComment($lines, $number)
-                || (new PhpHelper())->isPartOfDocBlock($lines, $number)
-            ) {
-                return false;
-            } else {
-                return true;
-            }
+            return !((new PhpHelper())->isPartOfMultilineComment($lines, $number)
+                || (new PhpHelper())->isPartOfDocBlock($lines, $number));
         }
 
-        $currentIndention = RstParser::indention($lines->current());
+        $currentIndention = $lines->current()->indention();
 
         $i = $number;
         while ($i >= 1) {
@@ -41,7 +36,7 @@ trait ListTrait
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
@@ -49,7 +44,7 @@ trait ListTrait
                 return false;
             }
 
-            $lineIndention = RstParser::indention($lines->current());
+            $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention
                 && RstParser::isListItem($lines->current())
@@ -61,15 +56,15 @@ trait ListTrait
         return false;
     }
 
-    private function isPartOfFootnote(\ArrayIterator $lines, int $number): bool
+    private function isPartOfFootnote(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         if (RstParser::isFootnote($lines->current())) {
             return true;
         }
 
-        $currentIndention = RstParser::indention($lines->current());
+        $currentIndention = $lines->current()->indention();
 
         $i = $number;
         while ($i >= 1) {
@@ -77,7 +72,7 @@ trait ListTrait
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
@@ -85,7 +80,7 @@ trait ListTrait
                 return false;
             }
 
-            $lineIndention = RstParser::indention($lines->current());
+            $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention
                 && RstParser::isFootnote($lines->current())
@@ -97,15 +92,15 @@ trait ListTrait
         return false;
     }
 
-    private function isPartOfRstComment(\ArrayIterator $lines, int $number): bool
+    private function isPartOfRstComment(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         if (RstParser::isComment($lines->current())) {
             return true;
         }
 
-        $currentIndention = RstParser::indention($lines->current());
+        $currentIndention = $lines->current()->indention();
 
         $i = $number;
         while ($i >= 1) {
@@ -113,7 +108,7 @@ trait ListTrait
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
@@ -121,7 +116,7 @@ trait ListTrait
                 return false;
             }
 
-            $lineIndention = RstParser::indention($lines->current());
+            $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention
                 && RstParser::isComment($lines->current())
@@ -142,15 +137,15 @@ trait ListTrait
      * Line 13 - 15
      *   You can see y here.
      */
-    private function isPartOfLineNumberAnnotation(\ArrayIterator $lines, int $number): bool
+    private function isPartOfLineNumberAnnotation(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         if (RstParser::isLineNumberAnnotation($lines->current())) {
             return true;
         }
 
-        $currentIndention = RstParser::indention($lines->current());
+        $currentIndention = $lines->current()->indention();
 
         $i = $number;
         while ($i >= 1) {
@@ -158,7 +153,7 @@ trait ListTrait
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
@@ -166,7 +161,7 @@ trait ListTrait
                 return false;
             }
 
-            $lineIndention = RstParser::indention($lines->current());
+            $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention
                 && RstParser::isLineNumberAnnotation($lines->current())

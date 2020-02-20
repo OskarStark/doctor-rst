@@ -15,6 +15,7 @@ namespace App\Tests\Helper;
 
 use App\Helper\PhpHelper;
 use App\Tests\RstSample;
+use App\Value\Line;
 use PHPUnit\Framework\TestCase;
 
 class PhpHelperTest extends TestCase
@@ -28,7 +29,7 @@ class PhpHelperTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            PhpHelper::isComment($line)
+            PhpHelper::isComment(new Line($line))
         );
     }
 
@@ -156,7 +157,7 @@ class PhpHelperTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            PhpHelper::isLastLineOfMultilineComment($line)
+            PhpHelper::isLastLineOfMultilineComment(new Line($line))
         );
     }
 
@@ -179,7 +180,7 @@ class PhpHelperTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            (new PhpHelper())->isPartOfDocBlock($sample->lines()->toIterator(), $sample->lineNumber())
+            (new PhpHelper())->isPartOfDocBlock($sample->lines(), $sample->lineNumber())
         );
     }
 
@@ -213,7 +214,7 @@ RST;
     {
         $this->assertSame(
             $expected,
-            (new PhpHelper())->isPartOfMultilineComment($sample->lines()->toIterator(), $sample->lineNumber())
+            (new PhpHelper())->isPartOfMultilineComment($sample->lines(), $sample->lineNumber())
         );
     }
 
@@ -256,7 +257,7 @@ RST;
     {
         $this->assertSame(
             $expected,
-            PhpHelper::isFirstLineOfMultilineComment($line)
+            PhpHelper::isFirstLineOfMultilineComment(new Line($line))
         );
     }
 
@@ -280,7 +281,7 @@ RST;
     {
         $this->assertSame(
             $expected,
-            PhpHelper::isFirstLineOfDocBlock($line)
+            PhpHelper::isFirstLineOfDocBlock(new Line($line))
         );
     }
 
@@ -304,7 +305,7 @@ RST;
     {
         $this->assertSame(
             $expected,
-            PhpHelper::isLastLineOfDocBlock($line)
+            PhpHelper::isLastLineOfDocBlock(new Line($line))
         );
     }
 

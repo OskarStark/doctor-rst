@@ -31,8 +31,6 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -40,14 +38,14 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
             return null;
         }
 
-        $indention = RstParser::indention($line);
+        $indention = $line->indention();
 
         $lines->next();
 
         while ($lines->valid()
-            && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
+            && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
-            if (u($lines->current())->match('/[^`]deprecated/')) {
+            if (u($lines->current()->raw())->match('/[^`]deprecated/')) {
                 return 'Please use ".. deprecated::" instead of ".. versionadded::"';
             }
 

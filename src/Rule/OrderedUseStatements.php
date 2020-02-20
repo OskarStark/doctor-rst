@@ -32,8 +32,6 @@ class OrderedUseStatements extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -43,7 +41,7 @@ class OrderedUseStatements extends AbstractRule implements Rule
             return null;
         }
 
-        $indention = RstParser::indention($line);
+        $indention = $line->indention();
 
         $lines->next();
 
@@ -52,19 +50,19 @@ class OrderedUseStatements extends AbstractRule implements Rule
 
         while ($lines->valid()
             && !RstParser::isDirective($lines->current())
-            && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
-            && (!preg_match('/^((class|trait) (.*)|\$)/', RstParser::clean($lines->current())))
+            && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
+            && (!preg_match('/^((class|trait) (.*)|\$)/', $lines->current()->clean()))
         ) {
-            if (u(RstParser::clean($lines->current()))->match('/^use (.*);$/')) {
+            if (u($lines->current()->clean())->match('/^use (.*);$/')) {
                 if (null === $indentionOfFirstFoundUseStatement) {
-                    $indentionOfFirstFoundUseStatement = RstParser::indention($lines->current());
-                    $statements[] = $this->extractClass(RstParser::clean($lines->current()));
+                    $indentionOfFirstFoundUseStatement = $lines->current()->indention();
+                    $statements[] = $this->extractClass($lines->current()->clean());
                 } else {
-                    if ($indentionOfFirstFoundUseStatement != RstParser::indention($lines->current())) {
+                    if ($indentionOfFirstFoundUseStatement !== $lines->current()->indention()) {
                         break;
                     }
 
-                    $statements[] = $this->extractClass(RstParser::clean($lines->current()));
+                    $statements[] = $this->extractClass($lines->current()->clean());
                 }
             }
 

@@ -16,7 +16,6 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
-use App\Rst\RstParser;
 use App\Value\Lines;
 use function Symfony\Component\String\u;
 
@@ -29,12 +28,10 @@ class YarnDevOptionNotAtTheEnd extends AbstractRule implements Rule
 {
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u(RstParser::clean($line))->match('/yarn add(.*)\-\-dev$/')) {
+        if (u($line->clean())->match('/yarn add(.*)\-\-dev$/')) {
             return 'Please move "--dev" option before the package';
         }
 
