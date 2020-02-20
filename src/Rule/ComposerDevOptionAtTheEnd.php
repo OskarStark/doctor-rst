@@ -17,7 +17,6 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Handler\Registry;
-use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 use function Symfony\Component\String\u;
@@ -36,13 +35,10 @@ class ComposerDevOptionAtTheEnd extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-        if (u($line)->match('/composer require \-\-dev(.*)$/')) {
+        if (u($line->clean())->match('/composer require \-\-dev(.*)$/')) {
             return 'Please move "--dev" option to the end of the command';
         }
 

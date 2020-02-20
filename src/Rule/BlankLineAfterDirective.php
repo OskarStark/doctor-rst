@@ -34,8 +34,6 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -58,8 +56,8 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
         // check if next line is empty
         $nextLine = $lines->current();
 
-        if ($lines->valid() && !RstParser::isBlankLine($nextLine)) {
-            return sprintf('Please add a blank line after "%s" directive', $line);
+        if ($lines->valid() && !$nextLine->isBlank()) {
+            return sprintf('Please add a blank line after "%s" directive', $line->raw());
         }
 
         return null;

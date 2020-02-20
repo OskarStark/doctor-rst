@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
-use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 use function Symfony\Component\String\u;
@@ -28,13 +27,10 @@ class NoComposerReq extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-        if (u($line)->match('/composer req /')) {
+        if (u($line->clean())->match('/composer req /')) {
             return 'Please "composer require" instead of "composer req"';
         }
 

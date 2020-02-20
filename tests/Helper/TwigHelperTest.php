@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Helper;
 
 use App\Helper\TwigHelper;
+use App\Value\Line;
 use PHPUnit\Framework\TestCase;
 
 class TwigHelperTest extends TestCase
@@ -27,7 +28,7 @@ class TwigHelperTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            TwigHelper::isComment($line, $closed)
+            TwigHelper::isComment(new Line($line), $closed)
         );
     }
 

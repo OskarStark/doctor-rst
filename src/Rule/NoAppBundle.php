@@ -27,12 +27,10 @@ class NoAppBundle extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line)->match('/AppBundle/')) {
+        if (u($line->raw())->match('/AppBundle/')) {
             return 'Please don\'t use "AppBundle" anymore';
         }
 

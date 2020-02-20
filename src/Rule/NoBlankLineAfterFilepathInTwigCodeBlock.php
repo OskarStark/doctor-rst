@@ -28,8 +28,6 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Ru
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -45,18 +43,18 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Ru
         $lines->next();
 
         // TWIG
-        if (preg_match('/^{#(.*)\.twig(.*)#}/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         return null;
     }
 
-    private function validateBlankLine(\ArrayIterator $lines, array $matches): ?string
+    private function validateBlankLine(Lines $lines, array $matches): ?string
     {
         $lines->next();
 
-        if (RstParser::isBlankLine($lines->current())) {
+        if ($lines->current()->isBlank()) {
             $lines->next();
             if (!TwigHelper::isComment($lines->current())) {
                 return sprintf('Please remove blank line after "%s"', trim($matches[0]));

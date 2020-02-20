@@ -31,8 +31,6 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -42,7 +40,7 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
             return null;
         }
 
-        $indention = RstParser::indention($line);
+        $indention = $line->indention();
 
         $lines->next();
 
@@ -50,9 +48,9 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
 
         while ($lines->valid()
             && !RstParser::isDirective($lines->current())
-            && ($indention < RstParser::indention($lines->current()) || RstParser::isBlankLine($lines->current()))
+            && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
-            $line = RstParser::clean($lines->current());
+            $line = $lines->current()->clean();
 
             if (u($line)->match('/^use (.*);$/')) {
                 $useStatementFound = true;

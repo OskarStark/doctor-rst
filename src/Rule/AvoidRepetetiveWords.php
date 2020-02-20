@@ -45,14 +45,12 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
         if (RstParser::isDirective($line)
             || RstParser::isLinkDefinition($line)
-            || RstParser::isBlankLine($line)
+            || $line->isBlank()
             || RstParser::isTable($line)
             || ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number) && (
                 !PhpHelper::isComment($line)
@@ -63,12 +61,10 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
             return null;
         }
 
-        $line = RstParser::clean($line);
-
-        $words = explode(' ', $line);
+        $words = explode(' ', $line->clean());
 
         foreach ($words as $key => $word) {
-            if (0 === $key || \in_array($word, self::whitelist())) {
+            if (0 === $key || \in_array($word, self::whitelist(), true)) {
                 continue;
             }
 

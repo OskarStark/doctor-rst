@@ -50,7 +50,7 @@ class ListTraitTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->isPartOfListItem($sample->lines()->toIterator(), $sample->lineNumber())
+            $this->traitWrapper->isPartOfListItem($sample->lines(), $sample->lineNumber())
         );
     }
 
@@ -155,7 +155,7 @@ RST
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->isPartOfFootnote($sample->lines()->toIterator(), $sample->lineNumber())
+            $this->traitWrapper->isPartOfFootnote($sample->lines(), $sample->lineNumber())
         );
     }
 
@@ -182,7 +182,7 @@ RST;
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->isPartOfRstComment($sample->lines()->toIterator(), $sample->lineNumber())
+            $this->traitWrapper->isPartOfRstComment($sample->lines(), $sample->lineNumber())
         );
     }
 
@@ -209,7 +209,7 @@ RST;
     {
         $this->assertSame(
             $expected,
-            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines()->toIterator(), $sample->lineNumber())
+            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines(), $sample->lineNumber())
         );
     }
 

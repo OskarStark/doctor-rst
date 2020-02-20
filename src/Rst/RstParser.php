@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rst;
 
+use App\Value\Line;
 use function Symfony\Component\String\u;
 use Webmozart\Assert\Assert;
 
@@ -92,21 +93,21 @@ class RstParser
     const CODE_BLOCK_VARNISH_4 = 'varnish4';
     const CODE_BLOCK_APACHE = 'apache';
 
-    public static function hasNewline(string $string): bool
+    public static function hasNewline(Line $string): bool
     {
-        return '\n' === substr($string, -2);
+        return '\n' === substr($string->raw(), -2);
     }
 
     public static function clean(string $string): string
     {
         $string = trim($string);
 
-        if ('\n' == substr($string, -2)) {
-            $string = substr($string, 0, \strlen($string) - 2);
+        if ('\n' === substr($string, -2)) {
+            $string = substr($string, 0, -2);
         }
 
-        if ('\r' == substr($string, -2)) {
-            $string = substr($string, 0, \strlen($string) - 2);
+        if ('\r' === substr($string, -2)) {
+            $string = substr($string, 0, -2);
         }
 
         return trim($string);
@@ -115,17 +116,17 @@ class RstParser
     /**
      * @todo use regex here
      */
-    public static function isDirective(string $string): bool
+    public static function isDirective(Line $string): bool
     {
-        return ('.. ' == substr(ltrim($string), 0, 3)
-            && '.. _`' !== substr(ltrim($string), 0, 5)
-            && strstr($string, '::'))
+        return (0 === strpos(ltrim($string->raw()), '.. ')
+            && 0 !== strpos(ltrim($string->raw()), '.. _`')
+            && false !== strpos($string->raw(), '::'))
             || self::isDefaultDirective($string);
     }
 
-    public static function directiveIs(string $string, string $directive, ?bool $strict = false): bool
+    public static function directiveIs(Line $line, string $directive, ?bool $strict = false): bool
     {
-        if (!self::isDirective($string)) {
+        if (!self::isDirective($line)) {
             return false;
         }
 
@@ -159,11 +160,13 @@ class RstParser
             )
         );
 
-        if (strstr($string, $directive)) {
+        if (false !== strpos($line->raw(), $directive)) {
             return true;
-        } elseif (self::DIRECTIVE_CODE_BLOCK == $directive && (!$strict && self::isDefaultDirective($string))) {
+        }
+
+        if (self::DIRECTIVE_CODE_BLOCK === $directive && (!$strict && self::isDefaultDirective($line))) {
             foreach ($directivesExcludedCodeBlock as $other) {
-                if (strstr($string, $other)) {
+                if (false !== strpos($line->raw(), $other)) {
                     return false;
                 }
             }
@@ -174,9 +177,9 @@ class RstParser
         return false;
     }
 
-    public static function codeBlockDirectiveIsTypeOf(string $string, string $type, bool $strict = false): bool
+    public static function codeBlockDirectiveIsTypeOf(Line $line, string $type, bool $strict = false): bool
     {
-        if (!self::directiveIs($string, self::DIRECTIVE_CODE_BLOCK, $strict)) {
+        if (!self::directiveIs($line, self::DIRECTIVE_CODE_BLOCK, $strict)) {
             return false;
         }
 
@@ -211,61 +214,43 @@ class RstParser
             ]
         );
 
-        $string = self::clean($string);
-
-        if (substr($string, -(\strlen(($type)))) == $type
-            || (self::CODE_BLOCK_PHP === $type && self::isDefaultDirective($string))) {
+        if (substr($line->clean(), -(\strlen(($type)))) === $type
+            || (self::CODE_BLOCK_PHP === $type && self::isDefaultDirective($line))) {
             if (!$strict) {
                 return true;
-            } else {
-                if ($matches = u($string)->match('/\:\: (.*)$/')) {
-                    if ($type === $matches[1]) {
-                        return true;
-                    }
-                }
-
-                return false;
             }
+
+            if (($matches = u($line->clean())->match('/\:\: (.*)$/')) && $type === $matches[1]) {
+                return true;
+            }
+
+            return false;
         }
 
         return false;
     }
 
-    public static function isBlankLine(string $string): bool
+    public static function isHeadline(Line $line): bool
     {
-        return (bool) empty(RstParser::clean($string));
-    }
-
-    public static function isHeadline(string $string): bool
-    {
-        if (u($string)->match('/^([\=]+|[\~]+|[\*]+|[\-]+|[\.]+|[\^]+)$/')) {
+        if (u($line->raw())->match('/^([\=]+|[\~]+|[\*]+|[\-]+|[\.]+|[\^]+)$/')) {
             return true;
         }
 
         return false;
     }
 
-    public static function isTable(string $string): bool
+    public static function isTable(Line $line): bool
     {
-        if (u($string)->match('/^[\=\-]+([\s\=\-]+)?$/')) {
+        if (u($line->raw())->match('/^[\=\-]+([\s\=\-]+)?$/')) {
             return true;
         }
 
         return false;
     }
 
-    public static function indention(string $string): int
+    public static function isLinkDefinition(Line $line): bool
     {
-        if ($matches = u($string)->match('/^[\s]+/')) {
-            return \strlen($matches[0]);
-        }
-
-        return 0;
-    }
-
-    public static function isLinkDefinition(string $string): bool
-    {
-        if (u($string)->match('/^\.\. _(`([^`]+)`|([^`]+)): (.*)$/')) {
+        if (u($line->raw())->match('/^\.\. _(`([^`]+)`|([^`]+)): (.*)$/')) {
             return true;
         }
 
@@ -281,11 +266,9 @@ class RstParser
         return false;
     }
 
-    public static function isListItem(string $string): bool
+    public static function isListItem(Line $line): bool
     {
-        $string = self::clean($string);
-
-        if (u($string)->match('/^(\* |\#. |[A-Za-z]{1}\) |-\ |[0-9]\. |[0-9]\) )/')) {
+        if (u($line->clean())->match('/^(\* |\#. |[A-Za-z]{1}\) |-\ |[0-9]\. |[0-9]\) )/')) {
             return true;
         }
 
@@ -295,11 +278,9 @@ class RstParser
     /**
      * Whether its a footnote ".. [1] " directive or not.
      */
-    public static function isFootnote(string $string): bool
+    public static function isFootnote(Line $line): bool
     {
-        $string = self::clean($string);
-
-        if (u($string)->match('/^\.\. \[[0-9]\]/')) {
+        if (u($line->clean())->match('/^\.\. \[[0-9]\]/')) {
             return true;
         }
 
@@ -309,44 +290,32 @@ class RstParser
     /**
      * Whether its and rst comment or not.
      */
-    public static function isComment(string $string): bool
+    public static function isComment(Line $line): bool
     {
-        if (!self::isFootnote($string) && preg_match('/^\.\. /', self::clean($string))) {
-            return true;
-        }
-
-        return false;
+        return !self::isFootnote($line) && preg_match('/^\.\. /', $line->clean());
     }
 
-    public static function isDefaultDirective(string $string): bool
+    public static function isDefaultDirective(Line $line): bool
     {
-        if (!preg_match('/^\.\. (.*)\:\:/', $string)
-            && preg_match('/\:\:$/', $string)) {
-            return true;
-        }
-
-        return false;
+        return !preg_match('/^\.\. (.*)\:\:/', $line->raw())
+            && preg_match('/\:\:$/', $line->raw());
     }
 
     /**
      * Whether its a line number annotation "Line 15" or "Line 16-18" or not.
      */
-    public static function isLineNumberAnnotation(string $string): bool
+    public static function isLineNumberAnnotation(Line $line): bool
     {
-        $string = self::clean($string);
-
-        if (u($string)->match('/^Line [0-9]+(\s?-\s?[0-9]+)?$/')) {
+        if (u($line->clean())->match('/^Line [0-9]+(\s?-\s?[0-9]+)?$/')) {
             return true;
         }
 
         return false;
     }
 
-    public static function isOption(string $string): bool
+    public static function isOption(Line $line): bool
     {
-        $string = self::clean($string);
-
-        if (u($string)->match('/^(:[a-zA-Z]+:).*/')) {
+        if (u($line->clean())->match('/^(:[a-zA-Z]+:).*/')) {
             return true;
         }
 

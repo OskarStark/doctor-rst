@@ -38,10 +38,8 @@ class ExtensionXlfInsteadOfXliff extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
-        $line = $lines->current();
+        $line = $lines->current()->raw();
 
         if ($matches = u($line)->match('/\.xliff/i')) {
             return sprintf('Please use ".xlf" extension instead of "%s"', $matches[0]);

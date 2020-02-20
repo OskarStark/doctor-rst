@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Helper;
 
 use App\Helper\YamlHelper;
+use App\Value\Line;
 use PHPUnit\Framework\TestCase;
 
 class YamlHelperTest extends TestCase
@@ -27,7 +28,7 @@ class YamlHelperTest extends TestCase
     {
         $this->assertSame(
             $expected,
-            YamlHelper::isComment($line)
+            YamlHelper::isComment(new Line($line))
         );
     }
 

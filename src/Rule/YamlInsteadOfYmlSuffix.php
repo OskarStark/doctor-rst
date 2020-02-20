@@ -39,12 +39,10 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line)->match('/\.travis\.yml/')) {
+        if (u($line->raw())->match('/\.travis\.yml/')) {
             return null;
         }
 
@@ -52,7 +50,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
             return 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
         }
 
-        if ($matches = u($line)->match('/\.yml/i')) {
+        if ($matches = u($line->raw())->match('/\.yml/i')) {
             return sprintf('Please use ".yaml" instead of "%s"', $matches[0]);
         }
 

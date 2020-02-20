@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
-use App\Helper\Helper;
 use App\Rst\RstParser;
+use App\Value\Lines;
 
 trait DirectiveTrait
 {
-    private function in(string $directive, \ArrayIterator $lines, int $number, array $directiveTypes = null): bool
+    private function in(string $directive, Lines $lines, int $number, array $directiveTypes = null): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
-        $currentIndention = RstParser::indention($lines->current());
+        $currentIndention = $lines->current()->indention();
 
         $i = $number;
         while ($i >= 1) {
@@ -30,7 +30,7 @@ trait DirectiveTrait
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
@@ -38,7 +38,7 @@ trait DirectiveTrait
                 return false;
             }
 
-            $lineIndention = RstParser::indention($lines->current());
+            $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention
                 && RstParser::isDirective($lines->current())
@@ -66,11 +66,11 @@ trait DirectiveTrait
         return false;
     }
 
-    private function previousDirectiveIs(string $directive, \ArrayIterator $lines, int $number, array $directiveTypes = null): bool
+    private function previousDirectiveIs(string $directive, Lines $lines, int $number, array $directiveTypes = null): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
-        $initialIndention = RstParser::indention($lines->current());
+        $initialIndention = $lines->current()->indention();
 
         $i = $number;
         while ($i >= 1) {
@@ -78,11 +78,11 @@ trait DirectiveTrait
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
-            $lineIndention = RstParser::indention($lines->current());
+            $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $initialIndention) {
                 return false;

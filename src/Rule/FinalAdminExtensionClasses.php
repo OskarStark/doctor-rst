@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
-use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 use function Symfony\Component\String\u;
@@ -28,14 +27,10 @@ class FinalAdminExtensionClasses extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = RstParser::clean($line);
-
-        if (u($line)->match('/^class(.*)extends AbstractAdminExtension$/')) {
+        if (u($line->clean())->match('/^class(.*)extends AbstractAdminExtension$/')) {
             return 'Please use "final" for AdminExtension class';
         }
 

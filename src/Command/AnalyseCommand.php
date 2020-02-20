@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Command;
 
 use App\Handler\Registry;
-use App\Rst\RstParser;
 use App\Rule\Configurable;
 use App\Rule\Rule;
 use App\Value\Lines;
@@ -188,7 +187,7 @@ class AnalyseCommand extends Command
 
             /** @var Rule $rule */
             foreach ($this->rules as $rule) {
-                if (!$rule::runOnlyOnBlankline() && RstParser::isBlankLine($line)) {
+                if (!$rule::runOnlyOnBlankline() && $line->isBlank()) {
                     continue;
                 }
 
@@ -202,7 +201,7 @@ class AnalyseCommand extends Command
                         $rule::getName(),
                         $violation,
                         $no + 1,
-                        Rule::TYPE_FILE === $rule::getType() ? '' : trim($line),
+                        Rule::TYPE_FILE === $rule::getType() ? '' : trim($line->raw()),
                     ];
                 }
 

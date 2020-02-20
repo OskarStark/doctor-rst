@@ -25,8 +25,6 @@ class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Rule
 {
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -40,18 +38,18 @@ class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Rule
         $lines->next();
 
         // YML / YAML
-        if (preg_match('/^#(.*)\.(yml|yaml)$/', RstParser::clean($lines->current()), $matches)) {
+        if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         return null;
     }
 
-    private function validateBlankLine(\ArrayIterator $lines, array $matches): ?string
+    private function validateBlankLine(Lines $lines, array $matches): ?string
     {
         $lines->next();
 
-        if (!RstParser::isBlankLine($lines->current()) && !YamlHelper::isComment($lines->current())) {
+        if (!$lines->current()->isBlank() && !YamlHelper::isComment($lines->current())) {
             return sprintf('Please add a blank line after "%s"', trim($matches[0]));
         }
 

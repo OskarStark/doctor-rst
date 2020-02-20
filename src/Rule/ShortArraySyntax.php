@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
-use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 use function Symfony\Component\String\u;
@@ -28,12 +27,10 @@ class ShortArraySyntax extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u(RstParser::clean($line))->match('/[\\s|\()]array\(/')) {
+        if (u($line->clean())->match('/[\\s|\()]array\(/')) {
             return 'Please use short array syntax';
         }
 

@@ -43,17 +43,15 @@ class UnusedLinks extends AbstractRule implements Rule, ResetInterface
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
 
         while ($lines->valid()) {
             if (RstParser::isLinkDefinition($lines->current())) {
-                $definition = LinkDefinition::fromLine($lines->current());
+                $definition = LinkDefinition::fromLine($lines->current()->raw());
                 $this->linkDefinitions[$definition->name()->value()] = $definition;
             }
 
-            preg_match_all('/(?:`[^`]+`|(?:(?!_)\w)+(?:[-._+:](?:(?!_)\w)+)*+)_/', $lines->current(), $matches);
+            preg_match_all('/(?:`[^`]+`|(?:(?!_)\w)+(?:[-._+:](?:(?!_)\w)+)*+)_/', $lines->current()->raw(), $matches);
             if (!empty($matches[0])) {
                 foreach ($matches[0] as $match) {
                     if (RstParser::isLinkUsage($match)) {

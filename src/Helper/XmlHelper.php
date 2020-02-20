@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
-use App\Rst\RstParser;
+use App\Value\Line;
 
 final class XmlHelper
 {
-    public static function isComment(string $line, bool $closed = null): bool
+    public static function isComment(Line $line, bool $closed = null): bool
     {
-        $line = RstParser::clean($line);
+        $line = $line->clean();
 
         if ('<!--' === $line || '-->' === $line) {
             return true;

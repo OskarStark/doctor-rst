@@ -27,10 +27,8 @@ class KernelInsteadOfAppKernel extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
-        $line = $lines->current();
+        $line = $lines->current()->raw();
 
         if (u($line)->match('/app\/AppKernel\.php/')) {
             return 'Please use "src/Kernel.php" instead of "app/AppKernel.php"';

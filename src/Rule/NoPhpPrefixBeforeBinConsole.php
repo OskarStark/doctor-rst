@@ -35,12 +35,10 @@ class NoPhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line)->match('/php bin\/console/')) {
+        if (u($line->raw())->match('/php bin\/console/')) {
             return 'Please remove "php" prefix before "bin/console"';
         }
 

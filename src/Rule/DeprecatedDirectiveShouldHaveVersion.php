@@ -47,8 +47,6 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -56,7 +54,7 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements Rule
             return null;
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED), RstParser::clean($lines->current()), $matches)) {
+        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED), $lines->current()->clean(), $matches)) {
             $version = trim($matches[1]);
 
             if (empty($version)) {

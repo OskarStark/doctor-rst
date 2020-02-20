@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Handler\Registry;
-use App\Helper\Helper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
@@ -31,8 +30,6 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
 
         // only interesting if a PHP code block
@@ -41,12 +38,12 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
         }
 
         // :: is a php code block, but its ok
-        if (preg_match('/\:\:$/', RstParser::clean($lines->current()))) {
+        if (preg_match('/\:\:$/', $lines->current()->clean())) {
             return null;
         }
 
         // it has no indention, check if it comes after a headline, in this case its ok
-        if (!preg_match('/^[\s]+/', $lines->current(), $matches)) {
+        if (!preg_match('/^[\s]+/', $lines->current()->raw(), $matches)) {
             if ($this->directAfterHeadline($lines, $number)
                 || $this->directAfterTable($lines, $number)
                 || $this->previousParagraphEndsWithQuestionMark($lines, $number)
@@ -57,7 +54,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
         // check if the code block is not on the first level, in this case
         // it could not be in a configuration block which would be ok
-        if (preg_match('/^[\s]+/', $lines->current(), $matches)
+        if (preg_match('/^[\s]+/', $lines->current()->raw(), $matches)
             && RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)
             && $number > 0
         ) {
@@ -88,9 +85,9 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
         return 'Please do not use ".. code-block:: php", use "::" instead.';
     }
 
-    private function directAfterHeadline(\ArrayIterator $lines, int $number): bool
+    private function directAfterHeadline(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         $i = $number;
         while ($i >= 1) {
@@ -98,7 +95,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
@@ -112,9 +109,9 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
         return false;
     }
 
-    private function directAfterTable(\ArrayIterator $lines, int $number): bool
+    private function directAfterTable(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         $i = $number;
         while ($i >= 1) {
@@ -122,7 +119,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
@@ -136,9 +133,9 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
         return false;
     }
 
-    private function previousParagraphEndsWithQuestionMark(\ArrayIterator $lines, int $number): bool
+    private function previousParagraphEndsWithQuestionMark(Lines $lines, int $number): bool
     {
-        $lines = Helper::cloneIterator($lines, $number);
+        $lines->seek($number);
 
         $i = $number;
         while ($i >= 1) {
@@ -146,11 +143,11 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
             $lines->seek($i);
 
-            if (RstParser::isBlankLine($lines->current())) {
+            if ($lines->current()->isBlank()) {
                 continue;
             }
 
-            if (preg_match('/\?$/', RstParser::clean($lines->current()))) {
+            if (preg_match('/\?$/', $lines->current()->clean())) {
                 return true;
             }
 

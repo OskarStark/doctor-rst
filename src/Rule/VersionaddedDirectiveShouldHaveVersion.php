@@ -47,8 +47,6 @@ class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Rul
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
@@ -56,7 +54,7 @@ class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Rul
             return null;
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), RstParser::clean($lines->current()), $matches)) {
+        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $lines->current()->clean(), $matches)) {
             $version = trim($matches[1]);
 
             if (empty($version)) {

@@ -34,10 +34,8 @@ class Typo extends CheckListRule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
-        $line = $lines->current();
+        $line = $lines->current()->raw();
 
         if ($matches = u($line)->match($this->pattern)) {
             return sprintf($this->message, $matches[0]);

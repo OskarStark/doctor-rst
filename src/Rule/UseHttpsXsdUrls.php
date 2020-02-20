@@ -30,12 +30,10 @@ class UseHttpsXsdUrls extends AbstractRule implements Rule
 
     public function check(Lines $lines, int $number): ?string
     {
-        $lines = $lines->toIterator();
-
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($matches = u($line)->match('/http\:\/\/([^\s]+)\.xsd/')) {
+        if ($matches = u($line->raw())->match('/http\:\/\/([^\s]+)\.xsd/')) {
             return sprintf('Please use "https" for %s', $matches[0]);
         }
 
