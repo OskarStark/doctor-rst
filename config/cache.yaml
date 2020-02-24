@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Analyser\Cache: '@App\Analyser\FileCache'
+    App\Analyser\FileCache:
+        $cacheFile: '%cache.file%'

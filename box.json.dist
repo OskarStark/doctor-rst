@@ -1,6 +1,7 @@
 {
   "files": [
-    "config/services.yaml"
+    "config/services.yaml",
+    "config/cache.yaml"
   ],
   "compression": "GZ",
   "main": "bin/doctor-rst",

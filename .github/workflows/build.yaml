@@ -1,0 +1,62 @@
+on: push
+
+name: Build
+
+env:
+    REQUIRED_PHP_EXTENSIONS: "ctype, filter, hash, iconv, json"
+
+jobs:
+    build:
+        name: Build
+
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                php-version:
+                    - "7.4"
+
+        steps:
+            -   name: "Checkout"
+                uses: actions/checkout@v2
+
+            -   name: "Cache dependencies installed with composer"
+                uses: actions/cache@v1
+                with:
+                    path: ~/.composer/cache
+                    key: composer-cache-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        composer-cache-
+
+            -   name: "Install dependencies with composer"
+                run: composer install --no-interaction --no-progress --no-suggest --optimize-autoloader
+
+            -   name: "Download humbug/box"
+                run: wget --no-clobber --output-document=./box https://github.com/humbug/box/releases/download/3.8.4/box.phar || true
+
+            -   name: "Make humbug/box executable"
+                run: chmod +x ./box
+
+            -   name: "Compile phar"
+                run: ./box compile
+
+            -   name: "Run phar without cache"
+                run: bin/doctor-rst.phar analyse dummy/ --no-cache
+
+            -   name: "Cache file should not exist"
+                run: "[ ! -f '.doctor-rst.cache' ]"
+
+            -   name: "Run phar with cache enabled"
+                run: bin/doctor-rst.phar analyse dummy/
+
+            -   name: "Cache file should exist"
+                run: "[ -f '.doctor-rst.cache' ]"
+
+            -   name: "Run phar again with cache enabled to be sure the cache file could be reused"
+                run: bin/doctor-rst.phar analyse dummy/
+
+            -   name: "Run phar with custom cache file output"
+                run: bin/doctor-rst.phar analyse dummy/ --cache-file=.doctor-rst.cache2
+
+            -   name: "Custom cache file should exist"
+                run: "[ -f '.doctor-rst.cache2' ]"
