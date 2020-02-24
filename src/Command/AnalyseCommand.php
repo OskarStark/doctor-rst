@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\Analyser\MemoizingAnalyser;
 use App\Handler\Registry;
 use App\Rule\Configurable;
 use App\Rule\Rule;
-use App\Value\Lines;
 use App\Value\RuleGroup;
 use App\Value\RuleName;
 use Symfony\Component\Console\Command\Command;
@@ -28,7 +28,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\Yaml\Yaml;
-use Symfony\Contracts\Service\ResetInterface;
 
 class AnalyseCommand extends Command
 {
@@ -48,11 +47,14 @@ class AnalyseCommand extends Command
     /** @var mixed */
     private $config;
 
-    public function __construct(Registry $registry, ?string $name = null)
+    private MemoizingAnalyser $analyser;
+
+    public function __construct(Registry $registry, MemoizingAnalyser $analyser)
     {
         $this->registry = $registry;
+        $this->analyser = $analyser;
 
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function configure(): void
@@ -85,6 +87,8 @@ class AnalyseCommand extends Command
 
         if (!is_file($configFile = $this->dir.'/.doctor-rst.yaml')) {
             $this->io->error(sprintf('Could not find config file: %s', $configFile));
+
+            return 1;
         }
 
         $this->io->text(sprintf('Used config file:             <info>%s</info>', $configFile));
@@ -140,8 +144,10 @@ class AnalyseCommand extends Command
 
         $violatedFiles = 0;
         foreach ($finder as $file) {
-            $violatedFiles = $violatedFiles + $this->checkFile($file);
+            $violatedFiles += $this->checkFile($file);
         }
+
+        $this->analyser->write();
 
         if ($violatedFiles > 0) {
             $this->io->warning(sprintf(
@@ -158,54 +164,7 @@ class AnalyseCommand extends Command
 
     private function checkFile(SplFileInfo $file): int
     {
-        $realpath = $file->getRealPath();
-        if (false === $realpath) {
-            throw new \RuntimeException(sprintf(
-                'Cannot get real path for file: %s',
-                (string) $file->getRealPath()
-            ));
-        }
-
-        $content = file($realpath);
-
-        if (false === $content) {
-            throw new \RuntimeException(sprintf(
-                'Cannot parse file: %s',
-                (string) $file->getRealPath()
-            ));
-        }
-
-        $lines = Lines::fromArray($content);
-
-        $violations = [];
-        foreach ($lines->toIterator() as $no => $line) {
-            \assert(\is_int($no));
-
-            /** @var Rule $rule */
-            foreach ($this->rules as $rule) {
-                if (!$rule::runOnlyOnBlankline() && $line->isBlank()) {
-                    continue;
-                }
-
-                if (Rule::TYPE_FILE === $rule::getType() && $no > 0) {
-                    continue;
-                }
-                $violation = $rule->check($lines, $no);
-
-                if (null !== $violation) {
-                    $violations[] = [
-                        $rule::getName(),
-                        $violation,
-                        $no + 1,
-                        Rule::TYPE_FILE === $rule::getType() ? '' : trim($line->raw()),
-                    ];
-                }
-
-                if ($rule instanceof ResetInterface) {
-                    $rule->reset();
-                }
-            }
-        }
+        $violations = $this->analyser->analyse($file, $this->rules);
 
         $violations = $this->filterWhitelistedViolations($violations);
         $hasViolations = !empty($violations);

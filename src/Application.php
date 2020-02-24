@@ -18,6 +18,7 @@ use App\Command\RulesCommand;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -29,11 +30,16 @@ class Application extends BaseApplication
     public function __construct()
     {
         parent::__construct('DOCtor-RST', self::VERSION);
+
+        $this->getDefinition()->addOptions([
+            new InputOption('--no-cache', null, InputOption::VALUE_NONE, 'Disable caching mechanisms'),
+            new InputOption('--cache-file', null, InputOption::VALUE_REQUIRED, 'Path to the cache file', '.doctor-rst.cache'),
+        ]);
     }
 
     public function doRun(InputInterface $input, OutputInterface $output): int
     {
-        $container = $this->buildContainer();
+        $container = $this->buildContainer($input);
 
         /** @var AnalyseCommand $analyseCommand */
         $analyseCommand = $container->get(AnalyseCommand::class);
@@ -46,12 +52,21 @@ class Application extends BaseApplication
         return parent::doRun($input, $output);
     }
 
-    private function buildContainer(): ContainerBuilder
+    private function buildContainer(InputInterface $input): ContainerBuilder
     {
         $container = new ContainerBuilder();
 
         $fileLoader = new YamlFileLoader($container, new FileLocator(\dirname(__DIR__).'/config/'));
         $fileLoader->load('services.yaml');
+
+        if (false === $input->hasParameterOption('--no-cache')) {
+            $container->setParameter(
+                'cache.file',
+                $input->getParameterOption('--cache-file', getcwd().'/.doctor-rst.cache')
+            );
+
+            $fileLoader->load('cache.yaml');
+        }
 
         $container->compile();
 
