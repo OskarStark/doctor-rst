@@ -921,16 +921,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.0.4",
+            "version": "v5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "978261d3c4ffd64f99dea0e78b026690a67fe7fe"
+                "reference": "a45ae78382337833e3b0ab3097d1769074950007"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/978261d3c4ffd64f99dea0e78b026690a67fe7fe",
-                "reference": "978261d3c4ffd64f99dea0e78b026690a67fe7fe",
+                "url": "https://api.github.com/repos/symfony/string/zipball/a45ae78382337833e3b0ab3097d1769074950007",
+                "reference": "a45ae78382337833e3b0ab3097d1769074950007",
                 "shasum": ""
             },
             "require": {
@@ -981,7 +981,7 @@
                 "utf-8",
                 "utf8"
             ],
-            "time": "2020-01-14T17:54:59+00:00"
+            "time": "2020-02-26T22:30:10+00:00"
         },
         {
             "name": "symfony/translation-contracts",
