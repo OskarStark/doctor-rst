@@ -152,6 +152,7 @@ class RstParser
             self::DIRECTIVE_FIGURE,
             self::DIRECTIVE_SEEALSO,
             self::DIRECTIVE_CLASS,
+            self::DIRECTIVE_CONTENTS,
         ];
 
         Assert::oneOf(
