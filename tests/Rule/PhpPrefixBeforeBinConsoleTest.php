@@ -39,6 +39,7 @@ class PhpPrefixBeforeBinConsoleTest extends TestCase
         yield [null, new RstSample('php "%s/../bin/console"')];
         yield [null, new RstSample('.. _`copying Symfony\'s bin/console source`: https://github.com/symfony/recipes/blob/master/symfony/console/3.3/bin/console')];
         yield [null, new RstSample('├─ bin/console')];
+        yield [null, new RstSample('Symfony\Component\Console\Application->run() at /home/greg/demo/bin/console:42')];
         yield ['Please add "php" prefix before "bin/console"', new RstSample('please execute bin/console foo')];
     }
 }
