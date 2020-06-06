@@ -47,6 +47,11 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
             return null;
         }
 
+        if (preg_match('@/bin/console:\d+@u', $line->raw())
+            || preg_match('/php "%s\/\.\.\/bin\/console"/', $line->raw())) {
+            return null;
+        }
+
         if (RstParser::isLinkDefinition($line)) {
             return null;
         }
