@@ -71,7 +71,7 @@ jobs:
 
         needs:
             - "phpstan"
-            - "composer-normalize"
+            - "php-cs-fixer"
             - "phpunit"
 
         if: >
