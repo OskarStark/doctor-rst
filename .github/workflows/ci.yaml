@@ -1,4 +1,4 @@
-on: push
+on: [push, pull_request]
 
 name: CI
 
@@ -17,6 +17,19 @@ jobs:
               uses: docker://oskarstark/phpstan-ga:0.12.8
               with:
                   args: analyse src/ --level=7
+
+    php-cs-fixer:
+        name: PHP-CS-Fixer
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@master
+            - name: PHP-CS-Fixer
+              uses: docker://oskarstark/php-cs-fixer-ga:2.16.1.1
+              with:
+                  args: --diff --dry-run
+
     phpunit:
         name: PHPUnit
 
@@ -50,3 +63,39 @@ jobs:
 
             - name: "Run unit tests via bin/phpunit"
               run: bin/phpunit
+
+    auto-merge:
+        name: "Auto-Merge"
+
+        runs-on: "ubuntu-latest"
+
+        needs:
+            - "phpstan"
+            - "composer-normalize"
+            - "phpunit"
+
+        if: >
+            github.event_name == 'pull_request' &&
+            github.event.pull_request.draft == false && (
+              github.event.action == 'opened' ||
+              github.event.action == 'reopened' ||
+              github.event.action == 'synchronize'
+            ) && (
+              github.actor == 'dependabot[bot]'
+            )
+
+        steps:
+            -   name: "Merge pull request"
+                uses: "actions/github-script@v2"
+                with:
+                    github-token: "$"
+                    script: |
+                        const pullRequest = context.payload.pull_request
+                        const repository = context.repo
+
+                        await github.pulls.merge({
+                          merge_method: "merge",
+                          owner: repository.owner,
+                          pull_number: pullRequest.number,
+                          repo: repository.repo,
+                        })
