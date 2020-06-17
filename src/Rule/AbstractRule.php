@@ -15,14 +15,14 @@ namespace App\Rule;
 
 use App\Value\RuleGroup;
 use App\Value\RuleName;
-use Doctrine\Common\Inflector\Inflector;
+use function Symfony\Component\String\u;
 
 abstract class AbstractRule
 {
     public static function getName(): RuleName
     {
         return RuleName::fromString(
-            Inflector::tableize(substr((string) strrchr(static::class, '\\'), 1))
+            u(substr((string) strrchr(static::class, '\\'), 1))->snake()->toString()
         );
     }
 
