@@ -40,6 +40,7 @@ class RstParser
     const DIRECTIVE_FIGURE = '.. figure::';
     const DIRECTIVE_SEEALSO = '.. seealso::';
     const DIRECTIVE_CLASS = '.. class::';
+    const DIRECTIVE_RST_CLASS = '.. rst-class::';
     const DIRECTIVE_LITERALINCLUDE = '.. literalinclude::';
     const DIRECTIVE_CONTENTS = '.. contents::';
 
@@ -65,6 +66,7 @@ class RstParser
         self::DIRECTIVE_FIGURE,
         self::DIRECTIVE_SEEALSO,
         self::DIRECTIVE_CLASS,
+        self::DIRECTIVE_RST_CLASS,
         self::DIRECTIVE_LITERALINCLUDE,
         self::DIRECTIVE_CONTENTS,
     ];
@@ -153,6 +155,7 @@ class RstParser
             self::DIRECTIVE_FIGURE,
             self::DIRECTIVE_SEEALSO,
             self::DIRECTIVE_CLASS,
+            self::DIRECTIVE_RST_CLASS,
             self::DIRECTIVE_CONTENTS,
         ];
 
