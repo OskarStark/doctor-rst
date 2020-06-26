@@ -89,6 +89,7 @@ class RstParser
     const CODE_BLOCK_JSON = 'json';
     const CODE_BLOCK_JAVASCRIPT = 'javascript';
     const CODE_BLOCK_JS = 'js';
+    const CODE_BLOCK_JSX = 'jsx';
     const CODE_BLOCK_SQL = 'sql';
     const CODE_BLOCK_INI = 'ini';
     const CODE_BLOCK_VARNISH_3 = 'varnish3';
@@ -209,6 +210,7 @@ class RstParser
                 self::CODE_BLOCK_JSON,
                 self::CODE_BLOCK_JAVASCRIPT,
                 self::CODE_BLOCK_JS,
+                self::CODE_BLOCK_JSX,
                 self::CODE_BLOCK_SQL,
                 self::CODE_BLOCK_INI,
                 self::CODE_BLOCK_VARNISH_3,
