@@ -48,15 +48,11 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
         }
 
         $lines->next();
-
-        if (RstParser::isOption($lines->current())) {
+        if ($lines->valid() && RstParser::isOption($lines->current())) {
             $lines->next();
         }
 
-        // check if next line is empty
-        $nextLine = $lines->current();
-
-        if ($lines->valid() && !$nextLine->isBlank()) {
+        if (!$lines->valid() || !$lines->current()->isBlank()) {
             return sprintf('Please add a blank line after "%s" directive', $line->raw());
         }
 

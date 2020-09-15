@@ -46,6 +46,8 @@ final class Lines implements \SeekableIterator
 
     public function current(): Line
     {
+        $this->validate();
+
         return $this->array[$this->currentLine];
     }
 
@@ -56,6 +58,8 @@ final class Lines implements \SeekableIterator
 
     public function key(): int
     {
+        $this->validate();
+
         return $this->currentLine;
     }
 
@@ -74,20 +78,31 @@ final class Lines implements \SeekableIterator
      */
     public function seek($line): void
     {
+        $currentLine = $this->currentLine;
         $this->currentLine = $line;
 
-        if (!$this->valid()) {
-            throw new \OutOfBoundsException(
-                sprintf(
-                    'Line "%s" does not exists.',
-                    $this->currentLine
-                )
-            );
+        try {
+            $this->validate();
+        } catch (\OutOfBoundsException $exception) {
+            $this->currentLine = $currentLine;
+            throw $exception;
         }
     }
 
     public function __clone()
     {
         $this->rewind();
+    }
+
+    private function validate(): void
+    {
+        if (!$this->valid()) {
+            throw new \OutOfBoundsException(
+                sprintf(
+                    'Line "%d" does not exists.',
+                    $this->currentLine
+                )
+            );
+        }
     }
 }

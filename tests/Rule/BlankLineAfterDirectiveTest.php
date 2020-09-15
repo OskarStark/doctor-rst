@@ -70,6 +70,13 @@ class BlankLineAfterDirectiveTest extends TestCase
                     'temp',
                 ]),
             ];
+
+            yield [
+                $errorMessage,
+                new RstSample([
+                    $directive,
+                ]),
+            ];
         }
 
         yield [
