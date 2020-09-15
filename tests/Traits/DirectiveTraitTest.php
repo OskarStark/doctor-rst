@@ -22,7 +22,7 @@ class DirectiveTraitTest extends TestCase
 {
     private $traitWrapper;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->traitWrapper = new class() {
             use DirectiveTrait {
