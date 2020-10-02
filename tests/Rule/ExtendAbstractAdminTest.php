@@ -26,7 +26,7 @@ class ExtendAbstractAdminTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new ExtendAbstractAdmin())->check($sample->lines(), $sample->lineNumber())
         );

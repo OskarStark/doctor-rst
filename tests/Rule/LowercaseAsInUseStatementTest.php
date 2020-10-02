@@ -26,7 +26,7 @@ class LowercaseAsInUseStatementTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new LowercaseAsInUseStatements())->check($sample->lines(), $sample->lineNumber())
         );

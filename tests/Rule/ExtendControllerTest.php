@@ -26,7 +26,7 @@ class ExtendControllerTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new ExtendController())->check($sample->lines(), $sample->lineNumber())
         );

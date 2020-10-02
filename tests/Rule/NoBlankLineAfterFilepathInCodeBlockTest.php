@@ -31,7 +31,7 @@ class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new NoBlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );

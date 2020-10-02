@@ -26,7 +26,7 @@ class NoComposerReqTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new NoComposerReq())->check($sample->lines(), $sample->lineNumber())
         );

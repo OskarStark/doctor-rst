@@ -29,7 +29,7 @@ class DeprecatedDirectiveMinVersionTest extends TestCase
         $rule = (new DeprecatedDirectiveMinVersion());
         $rule->setOptions(['min_version' => $minVersion]);
 
-        $this->assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
     }
 
     /**

@@ -26,7 +26,7 @@ class ExtendAbstractControllerTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new ExtendAbstractController())->check($sample->lines(), $sample->lineNumber())
         );

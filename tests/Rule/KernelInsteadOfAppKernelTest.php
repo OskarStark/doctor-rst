@@ -26,7 +26,7 @@ class KernelInsteadOfAppKernelTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new KernelInsteadOfAppKernel())->check($sample->lines(), $sample->lineNumber())
         );

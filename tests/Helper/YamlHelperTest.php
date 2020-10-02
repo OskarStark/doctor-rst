@@ -26,7 +26,7 @@ class YamlHelperTest extends TestCase
      */
     public function isComment(bool $expected, string $line)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             YamlHelper::isComment(new Line($line))
         );

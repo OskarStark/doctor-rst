@@ -30,7 +30,7 @@ class DeprecatedDirectiveMajorVersionTest extends TestCase
         $rule = (new DeprecatedDirectiveMajorVersion(new VersionParser()));
         $rule->setOptions(['major_version' => $majorVersion]);
 
-        $this->assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
     }
 
     /**

@@ -27,7 +27,7 @@ class VersionaddedDirectiveShouldHaveVersionTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new VersionaddedDirectiveShouldHaveVersion(new VersionParser()))
                 ->check($sample->lines(), $sample->lineNumber())

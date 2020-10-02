@@ -26,7 +26,7 @@ class NoAdminYamlTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new NoAdminYaml())->check($sample->lines(), $sample->lineNumber())
         );

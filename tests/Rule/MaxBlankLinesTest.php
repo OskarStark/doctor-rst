@@ -29,7 +29,7 @@ class MaxBlankLinesTest extends TestCase
         $rule = (new MaxBlankLines());
         $rule->setOptions(['max' => $max]);
 
-        $this->assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
     }
 
     public function checkProvider(): \Generator

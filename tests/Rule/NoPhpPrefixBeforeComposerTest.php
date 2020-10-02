@@ -26,7 +26,7 @@ class NoPhpPrefixBeforeComposerTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new NoPhpPrefixBeforeComposer())->check($sample->lines(), $sample->lineNumber())
         );

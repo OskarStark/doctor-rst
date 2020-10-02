@@ -27,7 +27,7 @@ class BlankLineBeforeDirectiveTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new BlankLineBeforeDirective())->check($sample->lines(), $sample->lineNumber())
         );

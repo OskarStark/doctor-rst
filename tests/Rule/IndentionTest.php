@@ -29,7 +29,7 @@ class IndentionTest extends TestCase
         $rule = (new Indention());
         $rule->setOptions(['size' => $size]);
 
-        $this->assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
     }
 
     public function checkProvider(): \Generator
@@ -353,7 +353,7 @@ RST
      */
     public function isPartOfMultilineXmlComment(bool $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new Indention())->isPartOrMultilineXmlComment($sample->lines(), $sample->lineNumber())
         );
@@ -425,7 +425,7 @@ RST
      */
     public function isPartOfMultilineTwigComment(bool $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new Indention())->isPartOrMultilineTwigComment($sample->lines(), $sample->lineNumber())
         );

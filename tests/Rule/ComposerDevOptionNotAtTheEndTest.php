@@ -26,7 +26,7 @@ class ComposerDevOptionNotAtTheEndTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new ComposerDevOptionNotAtTheEnd())->check($sample->lines(), $sample->lineNumber())
         );

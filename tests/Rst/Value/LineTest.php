@@ -25,7 +25,7 @@ final class LineTest extends TestCase
      */
     public function clean(string $expected, string $string): void
     {
-        $this->assertSame($expected, (new Line($string))->clean());
+        static::assertSame($expected, (new Line($string))->clean());
     }
 
     public function cleanProvider(): array
@@ -73,7 +73,7 @@ final class LineTest extends TestCase
      */
     public function isBlank(bool $expected, string $string): void
     {
-        $this->assertSame($expected, (new Line($string))->isBlank());
+        static::assertSame($expected, (new Line($string))->isBlank());
     }
 
     public function isBlankLineProvider(): array
@@ -93,7 +93,7 @@ final class LineTest extends TestCase
      */
     public function indention(int $expected, string $string): void
     {
-        $this->assertSame($expected, (new Line($string))->indention());
+        static::assertSame($expected, (new Line($string))->indention());
     }
 
     public function indentionProvider(): \Generator

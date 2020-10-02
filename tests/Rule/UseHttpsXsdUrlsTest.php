@@ -26,7 +26,7 @@ class UseHttpsXsdUrlsTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new UseHttpsXsdUrls())->check($sample->lines(), $sample->lineNumber())
         );

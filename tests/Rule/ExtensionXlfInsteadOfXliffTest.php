@@ -26,7 +26,7 @@ class ExtensionXlfInsteadOfXliffTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new ExtensionXlfInsteadOfXliff())->check($sample->lines(), $sample->lineNumber())
         );

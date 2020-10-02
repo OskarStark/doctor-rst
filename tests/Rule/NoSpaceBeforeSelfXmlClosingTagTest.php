@@ -26,7 +26,7 @@ class NoSpaceBeforeSelfXmlClosingTagTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new NoSpaceBeforeSelfXmlClosingTag())->check($sample->lines(), $sample->lineNumber())
         );

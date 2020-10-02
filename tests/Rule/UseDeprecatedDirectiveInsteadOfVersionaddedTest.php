@@ -27,7 +27,7 @@ class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->lines(), $sample->lineNumber())
         );
