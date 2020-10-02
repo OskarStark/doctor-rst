@@ -45,6 +45,10 @@ class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends TestCase
 
         test
 
+    .. code-block:: php-attributes
+
+        test
+
     .. code-block:: yaml
 
         test
@@ -69,6 +73,10 @@ RST;
 
         test
 
+    .. code-block:: php-attributes
+
+        test
+
     .. code-block:: yaml
 
         test
@@ -90,6 +98,10 @@ RST;
         <xliff version="1.2">test</xliff>
 
     .. code-block:: php-annotations
+
+        test
+
+    .. code-block:: php-attributes
 
         test
 
@@ -267,7 +279,7 @@ RST;
             new RstSample($invalid),
         ];
         yield [
-            'Please use the following order for your code blocks: "php-attributes, php-annotations, yaml, xml, php"',
+            'Please use the following order for your code blocks: "php-annotations, php-attributes, yaml, xml, php"',
             new RstSample($invalid2),
         ];
     }

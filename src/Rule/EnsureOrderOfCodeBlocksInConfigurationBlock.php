@@ -124,8 +124,8 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
     private static function validOrder(): array
     {
         return [
-            '.. code-block:: php-attributes',
             '.. code-block:: php-annotations',
+            '.. code-block:: php-attributes',
             '.. code-block:: yaml',
             '.. code-block:: xml',
             '.. code-block:: php',
@@ -136,8 +136,8 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
     {
         return [
             '.. code-block:: xml',
-            '.. code-block:: php-attributes',
             '.. code-block:: php-annotations',
+            '.. code-block:: php-attributes',
             '.. code-block:: yaml',
             '.. code-block:: php',
         ];
