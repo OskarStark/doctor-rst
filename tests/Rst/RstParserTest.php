@@ -304,11 +304,13 @@ final class RstParserTest extends TestCase
             [true, '.. code-block:: php', RstParser::CODE_BLOCK_PHP],
             [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP],
             [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS],
+            [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES],
             [true, ' .. code-block:: text', RstParser::CODE_BLOCK_TEXT],
             [true, ' .. code-block:: rst', RstParser::CODE_BLOCK_RST],
             [false, 'foo', RstParser::CODE_BLOCK_PHP],
             [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP, true],
             [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS, false],
+            [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES, false],
             [true, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, false],
             [false, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, true],
         ];

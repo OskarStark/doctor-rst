@@ -37,6 +37,7 @@ class NoNamespaceAfterUseStatementsTest extends TestCase
         $codeBlocks = [
             '.. code-block:: php',
             '.. code-block:: php-annotations',
+            '.. code-block:: php-attributes',
             'A php code block follows::',
         ];
 

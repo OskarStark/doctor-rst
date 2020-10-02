@@ -249,6 +249,10 @@ RST;
 
         test
         
+    .. code-block:: php-attributes
+
+        test
+        
     .. code-block:: php
 
         test
@@ -263,7 +267,7 @@ RST;
             new RstSample($invalid),
         ];
         yield [
-            'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
+            'Please use the following order for your code blocks: "php-attributes, php-annotations, yaml, xml, php"',
             new RstSample($invalid2),
         ];
     }

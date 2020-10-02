@@ -33,6 +33,7 @@ class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Rul
 
         if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS)
+            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ATTRIBUTES)
         ) {
             return null;
         }
