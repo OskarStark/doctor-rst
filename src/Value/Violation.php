@@ -20,8 +20,9 @@ final class Violation
     private string $message;
     private string $filename;
     private int $lineno;
+    private string $rawLine;
 
-    private function __construct(string $message, string $filename, int $lineno)
+    private function __construct(string $message, string $filename, int $lineno, string $rawLine)
     {
         $message = trim($message);
         Assert::stringNotEmpty($message);
@@ -36,11 +37,12 @@ final class Violation
         $this->message = $message;
         $this->filename = $filename;
         $this->lineno = $lineno;
+        $this->rawLine = $rawLine;
     }
 
-    public static function from(string $message, string $filename, int $lineno): self
+    public static function from(string $message, string $filename, int $lineno, string $rawLine): self
     {
-        return new self($message, $filename, $lineno);
+        return new self($message, $filename, $lineno, $rawLine);
     }
 
     public function message(): string
@@ -56,5 +58,10 @@ final class Violation
     public function lineno(): int
     {
         return $this->lineno;
+    }
+
+    public function rawLine(): string
+    {
+        return $this->rawLine;
     }
 }

@@ -27,6 +27,10 @@ services:
     App\Command\RulesCommand:
         public: true
 
+    App\Formatter\Registry:
+        - '@App\Formatter\ConsoleFormatter'
+        - '@App\Formatter\GithubFormatter'
+
     App\Rule\:
         resource: '../src/Rule'
         tags: ['doctor_rst.rule']

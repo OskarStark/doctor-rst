@@ -14,12 +14,15 @@ declare(strict_types=1);
 namespace App\Analyser;
 
 use App\Rule\Rule;
+use App\Value\Violation;
 use SplFileInfo;
 
 interface Analyser
 {
     /**
      * @param Rule[] $rules
+     *
+     * @return Violation[]
      */
     public function analyse(SplFileInfo $file, array $rules): array;
 }

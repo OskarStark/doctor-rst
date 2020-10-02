@@ -15,6 +15,7 @@ namespace App\Analyser;
 
 use App\Rule\Rule;
 use App\Value\Lines;
+use App\Value\Violation;
 use SplFileInfo;
 use Symfony\Contracts\Service\ResetInterface;
 
@@ -22,6 +23,8 @@ final class RstAnalyser implements Analyser
 {
     /**
      * @param Rule[] $rules
+     *
+     * @return Violation[]
      */
     public function analyse(SplFileInfo $file, array $rules): array
     {
@@ -50,15 +53,15 @@ final class RstAnalyser implements Analyser
                     continue;
                 }
 
-                $violation = $rule->check($lines, $no);
+                $violationMessage = $rule->check($lines, $no);
 
-                if (null !== $violation) {
-                    $violations[] = [
-                        $rule::getName(),
-                        $violation,
+                if (null !== $violationMessage) {
+                    $violations[] = Violation::from(
+                        $violationMessage,
+                        (string) $file->getRealPath(),
                         $no + 1,
-                        Rule::TYPE_FILE === $rule::getType() ? '' : trim($line->raw()),
-                    ];
+                        Rule::TYPE_FILE === $rule::getType() ? '' : trim($line->raw())
+                    );
                 }
 
                 if ($rule instanceof ResetInterface) {
