@@ -45,6 +45,7 @@ class NoInheritdocInCodeExamples extends AbstractRule implements Rule
                 [
                     RstParser::CODE_BLOCK_PHP,
                     RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
+                    RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
                 ]
             )
         ) {

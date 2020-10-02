@@ -90,6 +90,7 @@ class Indention extends AbstractRule implements Rule, Configurable
         if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [
             RstParser::CODE_BLOCK_PHP,
             RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
+            RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
             RstParser::CODE_BLOCK_JAVASCRIPT,
             RstParser::CODE_BLOCK_SQL,
         ])) {
