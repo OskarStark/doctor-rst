@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Analyser;
 
 use App\Application;
+use App\Value\Violation;
 use SplFileInfo;
 
 final class FileCache implements Cache
@@ -96,7 +97,7 @@ final class FileCache implements Cache
             throw new \RuntimeException(sprintf('Cache file could not be read "%s".', $this->cacheFile));
         }
 
-        $cache = unserialize($contents, ['allowed_classes' => false]);
+        $cache = unserialize($contents, ['allowed_classes' => [Violation::class]]);
 
         $this->loaded = true;
 
