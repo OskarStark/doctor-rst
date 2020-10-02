@@ -38,7 +38,15 @@ class NoInheritdocInCodeExamples extends AbstractRule implements Rule
         $line = $lines->current();
 
         if (u($line->raw())->match('/@inheritdoc/')
-            && $this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_ANNOTATIONS])
+            && $this->in(
+                RstParser::DIRECTIVE_CODE_BLOCK,
+                $lines,
+                $number,
+                [
+                    RstParser::CODE_BLOCK_PHP,
+                    RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
+                ]
+            )
         ) {
             return 'Please do not use "@inheritdoc"';
         }
