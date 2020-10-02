@@ -27,7 +27,7 @@ class PhpHelperTest extends TestCase
      */
     public function isComment(bool $expected, string $line)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             PhpHelper::isComment(new Line($line))
         );
@@ -50,7 +50,7 @@ class PhpHelperTest extends TestCase
      */
     public function containsBackslash(bool $expected, string $string)
     {
-        $this->assertSame($expected, PhpHelper::containsBackslash($string));
+        static::assertSame($expected, PhpHelper::containsBackslash($string));
     }
 
     /**
@@ -73,7 +73,7 @@ class PhpHelperTest extends TestCase
      */
     public function isUsingTwoBackslashes(bool $expected, string $string)
     {
-        $this->assertSame($expected, PhpHelper::isUsingTwoBackslashes($string));
+        static::assertSame($expected, PhpHelper::isUsingTwoBackslashes($string));
     }
 
     /**
@@ -95,7 +95,7 @@ class PhpHelperTest extends TestCase
      */
     public function isUsingOneBackslash(bool $expected, string $string)
     {
-        $this->assertSame($expected, PhpHelper::isUsingOneBackslash($string));
+        static::assertSame($expected, PhpHelper::isUsingOneBackslash($string));
     }
 
     /**
@@ -116,7 +116,7 @@ class PhpHelperTest extends TestCase
      */
     public function isStartingWithOneBackslash(bool $expected, string $string)
     {
-        $this->assertSame($expected, PhpHelper::isStartingWithOneBackslash($string));
+        static::assertSame($expected, PhpHelper::isStartingWithOneBackslash($string));
     }
 
     /**
@@ -136,7 +136,7 @@ class PhpHelperTest extends TestCase
      */
     public function isStartingWithTwoBackslashes(bool $expected, string $string)
     {
-        $this->assertSame($expected, PhpHelper::isStartingWithTwoBackslashes($string));
+        static::assertSame($expected, PhpHelper::isStartingWithTwoBackslashes($string));
     }
 
     /**
@@ -155,7 +155,7 @@ class PhpHelperTest extends TestCase
      */
     public function isLastLineOfMultilineComment(bool $expected, string $line)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             PhpHelper::isLastLineOfMultilineComment(new Line($line))
         );
@@ -178,7 +178,7 @@ class PhpHelperTest extends TestCase
      */
     public function isPartOfDocBlock(bool $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new PhpHelper())->isPartOfDocBlock($sample->lines(), $sample->lineNumber())
         );
@@ -212,7 +212,7 @@ RST;
      */
     public function isPartOfMultilineComment(bool $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new PhpHelper())->isPartOfMultilineComment($sample->lines(), $sample->lineNumber())
         );
@@ -255,7 +255,7 @@ RST;
      */
     public function isFirstLineOfMultilineComment(bool $expected, string $line)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             PhpHelper::isFirstLineOfMultilineComment(new Line($line))
         );
@@ -279,7 +279,7 @@ RST;
      */
     public function isFirstLineOfDocBlock(bool $expected, string $line)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             PhpHelper::isFirstLineOfDocBlock(new Line($line))
         );
@@ -303,7 +303,7 @@ RST;
      */
     public function isLastLineOfDocBlock(bool $expected, string $line)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             PhpHelper::isLastLineOfDocBlock(new Line($line))
         );

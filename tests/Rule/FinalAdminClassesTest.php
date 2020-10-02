@@ -25,8 +25,8 @@ class FinalAdminClassesTest extends TestCase
      */
     public function name()
     {
-        $this->assertInstanceOf(RuleName::class, FinalAdminClasses::getName());
-        $this->assertSame('final_admin_classes', FinalAdminClasses::getName()->asString());
+        static::assertInstanceOf(RuleName::class, FinalAdminClasses::getName());
+        static::assertSame('final_admin_classes', FinalAdminClasses::getName()->asString());
     }
 
     /**
@@ -36,7 +36,7 @@ class FinalAdminClassesTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new FinalAdminClasses())->check($sample->lines(), $sample->lineNumber())
         );

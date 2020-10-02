@@ -42,10 +42,10 @@ class TypoTest extends TestCase
         }
 
         if (null === $expected) {
-            $this->assertCount(0, $violations);
+            static::assertCount(0, $violations);
         } else {
-            $this->assertCount(1, $violations);
-            $this->assertStringStartsWith($expected, $violations[0]);
+            static::assertCount(1, $violations);
+            static::assertStringStartsWith($expected, $violations[0]);
         }
     }
 

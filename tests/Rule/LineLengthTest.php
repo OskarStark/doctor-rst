@@ -26,7 +26,7 @@ class LineLengthTest extends TestCase
      */
     public function check(?string $expected, int $max, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new LineLength($max))->check($sample->lines(), $sample->lineNumber())
         );

@@ -38,7 +38,7 @@ class ListTraitTest extends TestCase
      */
     public function methodExists()
     {
-        $this->assertTrue(method_exists($this->traitWrapper, 'isPartOfListItem'));
+        static::assertTrue(method_exists($this->traitWrapper, 'isPartOfListItem'));
     }
 
     /**
@@ -48,7 +48,7 @@ class ListTraitTest extends TestCase
      */
     public function isPartOfListItem(bool $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             $this->traitWrapper->isPartOfListItem($sample->lines(), $sample->lineNumber())
         );
@@ -153,7 +153,7 @@ RST
      */
     public function isPartOfFootnote(bool $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             $this->traitWrapper->isPartOfFootnote($sample->lines(), $sample->lineNumber())
         );
@@ -180,7 +180,7 @@ RST;
      */
     public function isPartOfRstComment(bool $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             $this->traitWrapper->isPartOfRstComment($sample->lines(), $sample->lineNumber())
         );
@@ -207,7 +207,7 @@ RST;
      */
     public function isPartOfLineNumberAnnotation(bool $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines(), $sample->lineNumber())
         );

@@ -22,7 +22,7 @@ final class LinesTest extends TestCase
     {
         $lines = Lines::fromArray([]);
 
-        self::assertFalse($lines->valid());
+        static::assertFalse($lines->valid());
 
         $this->expectException(\OutOfBoundsException::class);
         $this->expectExceptionMessage('Line "0" does not exists.');
@@ -34,7 +34,7 @@ final class LinesTest extends TestCase
     {
         $lines = Lines::fromArray([]);
 
-        self::assertFalse($lines->valid());
+        static::assertFalse($lines->valid());
 
         $this->expectException(\OutOfBoundsException::class);
         $this->expectExceptionMessage('Line "0" does not exists.');
@@ -55,10 +55,10 @@ final class LinesTest extends TestCase
         try {
             $lines->seek(54);
         } catch (\OutOfBoundsException $exception) {
-            self::assertSame('Line "54" does not exists.', $exception->getMessage());
+            static::assertSame('Line "54" does not exists.', $exception->getMessage());
         }
 
-        self::assertNotNull($exception, sprintf('Expected "%s" exception to be thrown.', \OutOfBoundsException::class));
-        self::assertSame(1, $lines->key());
+        static::assertNotNull($exception, sprintf('Expected "%s" exception to be thrown.', \OutOfBoundsException::class));
+        static::assertSame(1, $lines->key());
     }
 }

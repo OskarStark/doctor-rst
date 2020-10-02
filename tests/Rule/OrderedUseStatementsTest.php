@@ -26,7 +26,7 @@ class OrderedUseStatementsTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new OrderedUseStatements())->check($sample->lines(), $sample->lineNumber())
         );

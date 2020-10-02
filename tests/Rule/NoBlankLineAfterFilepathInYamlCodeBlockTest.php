@@ -26,7 +26,7 @@ class NoBlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new NoBlankLineAfterFilepathInYamlCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );

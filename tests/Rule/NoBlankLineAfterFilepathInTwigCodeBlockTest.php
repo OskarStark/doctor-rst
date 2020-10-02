@@ -26,7 +26,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new NoBlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines(), $sample->lineNumber())
         );

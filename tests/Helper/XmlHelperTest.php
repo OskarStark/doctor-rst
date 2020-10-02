@@ -26,7 +26,7 @@ class XmlHelperTest extends TestCase
      */
     public function isComment(bool $expected, string $line, ?bool $closed)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             XmlHelper::isComment(new Line($line), $closed)
         );

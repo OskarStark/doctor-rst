@@ -26,7 +26,7 @@ class NoBashPromptTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new NoBashPrompt())->check($sample->lines(), $sample->lineNumber())
         );

@@ -26,7 +26,7 @@ class PhpPrefixBeforeBinConsoleTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new PhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber())
         );

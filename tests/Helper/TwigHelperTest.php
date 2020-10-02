@@ -26,7 +26,7 @@ class TwigHelperTest extends TestCase
      */
     public function isComment(bool $expected, string $line, ?bool $closed)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             TwigHelper::isComment(new Line($line), $closed)
         );

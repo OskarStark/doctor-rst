@@ -26,7 +26,7 @@ class YarnDevOptionNotAtTheEndTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new YarnDevOptionNotAtTheEnd())->check($sample->lines(), $sample->lineNumber())
         );

@@ -26,7 +26,7 @@ class NoPhpPrefixBeforeBinConsoleTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new NoPhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber())
         );

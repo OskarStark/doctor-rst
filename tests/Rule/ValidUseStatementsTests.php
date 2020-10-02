@@ -26,7 +26,7 @@ class ValidUseStatementsTests extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new ValidUseStatements())->check($sample->lines(), $sample->lineNumber())
         );

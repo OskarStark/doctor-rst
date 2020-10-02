@@ -28,7 +28,7 @@ final class LinkUsageTest extends TestCase
     {
         $usage = LinkUsage::fromLine($line);
 
-        $this->assertSame($expected, $usage->name()->value());
+        static::assertSame($expected, $usage->name()->value());
     }
 
     public function fromLineProvider(): \Generator
@@ -44,7 +44,7 @@ final class LinkUsageTest extends TestCase
     {
         $name = 'foo';
 
-        $this->assertSame(
+        static::assertSame(
             $name,
             (LinkUsage::fromLinkName(LinkName::fromString($name)))->name()->value()
         );

@@ -26,7 +26,7 @@ class YamlInsteadOfYmlSuffixTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new YamlInsteadOfYmlSuffix())->check($sample->lines(), $sample->lineNumber())
         );

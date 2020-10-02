@@ -37,7 +37,7 @@ class DirectiveTraitTest extends TestCase
      */
     public function methodExists()
     {
-        $this->assertTrue(method_exists($this->traitWrapper, 'in'));
+        static::assertTrue(method_exists($this->traitWrapper, 'in'));
     }
 
     /**
@@ -47,7 +47,7 @@ class DirectiveTraitTest extends TestCase
      */
     public function in(bool $expected, RstSample $sample, string $directive, ?array $types = null)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             $this->traitWrapper->in($directive, clone $sample->lines(), $sample->lineNumber(), $types)
         );
@@ -417,7 +417,7 @@ RST;
      */
     public function previousDirectiveIs(bool $expected, RstSample $sample, string $directive, ?array $types = null)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             $this->traitWrapper->previousDirectiveIs($directive, $sample->lines(), $sample->lineNumber(), $types)
         );

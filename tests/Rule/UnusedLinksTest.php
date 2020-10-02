@@ -27,7 +27,7 @@ class UnusedLinksTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new UnusedLinks())->check($sample->lines(), $sample->lineNumber())
         );

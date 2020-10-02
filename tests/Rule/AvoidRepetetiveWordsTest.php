@@ -27,7 +27,7 @@ class AvoidRepetetiveWordsTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new AvoidRepetetiveWords())->check($sample->lines(), $sample->lineNumber())
         );

@@ -26,7 +26,7 @@ class ShortArraySyntaxTest extends TestCase
      */
     public function check(?string $expected, RstSample $sample)
     {
-        $this->assertSame(
+        static::assertSame(
             $expected,
             (new ShortArraySyntax())->check($sample->lines(), $sample->lineNumber())
         );
