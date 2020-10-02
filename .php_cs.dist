@@ -18,24 +18,24 @@ return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
-        'ordered_imports' => true,
-        'no_unused_imports' => true,
-        'psr4' => true,
         'array_syntax' => ['syntax' => 'short'],
-        'no_superfluous_phpdoc_tags' => true,
+        'declare_strict_types' => true,
+        'header_comment' => [
+            'header' => $header,
+        ],
         'linebreak_after_opening_tag' => true,
         'logical_operators' => true,
         'native_function_invocation' => [
             'include' => ['@compiler_optimized'],
             'scope' => 'namespaced'
         ],
-        'declare_strict_types' => true,
-        'header_comment' => [
-            'header' => $header,
-        ],
-        'single_line_throw' => false,
+        'no_superfluous_phpdoc_tags' => true,
+        'no_unused_imports' => true,
+        'ordered_imports' => true,
         'php_unit_construct' => true,
         'php_unit_test_case_static_method_calls' => true,
+        'psr4' => true,
+        'single_line_throw' => false,
     ])
     ->setFinder($finder)
 ;
