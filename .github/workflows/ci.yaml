@@ -16,7 +16,9 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@master
+            - name: "Checkout"
+              uses: actions/checkout@v2
+
             - name: PHPStan
               uses: docker://oskarstark/phpstan-ga:0.12.8
               with:
@@ -28,7 +30,9 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@master
+            - name: "Checkout"
+              uses: actions/checkout@v2
+
             - name: PHP-CS-Fixer
               uses: docker://oskarstark/php-cs-fixer-ga:2.16.4
               with:
@@ -46,7 +50,7 @@ jobs:
 
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v2.0.0
+              uses: actions/checkout@v2
 
             - name: "Install PHP with extensions"
               uses: "shivammathur/setup-php@v1"
