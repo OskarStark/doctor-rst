@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-final class AnalyserResult
+final class AnalyzerResult
 {
     /** @var FileResult[] */
     private array $results;

@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Analyser;
+namespace App\Tests\Analyzer;
 
-use App\Analyser\FileCache;
+use App\Analyzer\FileCache;
 use App\Application;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;

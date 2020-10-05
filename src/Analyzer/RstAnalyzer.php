@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Analyser;
+namespace App\Analyzer;
 
 use App\Rule\Rule;
 use App\Value\Lines;
@@ -19,14 +19,14 @@ use App\Value\Violation;
 use SplFileInfo;
 use Symfony\Contracts\Service\ResetInterface;
 
-final class RstAnalyser implements Analyser
+final class RstAnalyzer implements Analyzer
 {
     /**
      * @param Rule[] $rules
      *
      * @return Violation[]
      */
-    public function analyse(SplFileInfo $file, array $rules): array
+    public function analyze(SplFileInfo $file, array $rules): array
     {
         $realpath = $file->getRealPath();
         if (false === $realpath) {

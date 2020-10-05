@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Formatter;
 
-use App\Value\AnalyserResult;
+use App\Value\AnalyzerResult;
 use Symfony\Component\Console\Style\OutputStyle;
 
 class GithubFormatter implements Formatter
 {
-    public function format(OutputStyle $style, AnalyserResult $analyserResult, string $analyseDir, bool $showValidFiles): void
+    public function format(OutputStyle $style, AnalyzerResult $analyzerResult, string $analyseDir, bool $showValidFiles): void
     {
-        foreach ($analyserResult->all() as $fileResult) {
+        foreach ($analyzerResult->all() as $fileResult) {
             foreach ($fileResult->violationList()->violations() as $violation) {
                 $style->writeln(sprintf(
                     '::error file=%s,line=%s::%s',

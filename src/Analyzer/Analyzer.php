@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Analyser;
+namespace App\Analyzer;
 
 use App\Rule\Rule;
 use App\Value\Violation;
 use SplFileInfo;
 
-interface Analyser
+interface Analyzer
 {
     /**
      * @param Rule[] $rules
      *
      * @return Violation[]
      */
-    public function analyse(SplFileInfo $file, array $rules): array;
+    public function analyze(SplFileInfo $file, array $rules): array;
 }

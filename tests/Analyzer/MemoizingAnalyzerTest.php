@@ -11,32 +11,32 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Analyser;
+namespace App\Tests\Analyzer;
 
-use App\Analyser\Analyser;
-use App\Analyser\Cache;
-use App\Analyser\MemoizingAnalyser;
+use App\Analyzer\Analyzer;
+use App\Analyzer\Cache;
+use App\Analyzer\MemoizingAnalyzer;
 use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 
-class MemoizingAnalyserTest extends TestCase
+class MemoizingAnalyzerTest extends TestCase
 {
     /**
-     * @var Analyser|\PHPUnit\Framework\MockObject\MockObject
+     * @var Analyzer|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $analyser;
+    private $analyzer;
     /**
      * @var Cache|\PHPUnit\Framework\MockObject\MockObject
      */
     private $cache;
 
-    private MemoizingAnalyser $memoizingAnalyser;
+    private MemoizingAnalyzer $memoizingAnalyzer;
 
     protected function setUp(): void
     {
-        $this->analyser = $this->createMock(Analyser::class);
+        $this->analyzer = $this->createMock(Analyzer::class);
         $this->cache = $this->createMock(Cache::class);
-        $this->memoizingAnalyser = new MemoizingAnalyser($this->analyser, $this->cache);
+        $this->memoizingAnalyzer = new MemoizingAnalyzer($this->analyzer, $this->cache);
     }
 
     public function testCacheHitReturnsCacheContent(): void
@@ -56,12 +56,12 @@ class MemoizingAnalyserTest extends TestCase
             ->with($fileInfo, $rules)
             ->willReturn([]);
 
-        $this->analyser->expects(static::never())->method('analyse');
+        $this->analyzer->expects(static::never())->method('analyze');
 
-        $this->memoizingAnalyser->analyse($fileInfo, $rules);
+        $this->memoizingAnalyzer->analyze($fileInfo, $rules);
     }
 
-    public function testNoCacheHitCallsAnalyserAndSavesResultsToCache(): void
+    public function testNoCacheHitCallsAnalyzerAndSavesResultsToCache(): void
     {
         $fileInfo = new SplFileInfo('test.rst');
         $rules = ['test'];
@@ -79,12 +79,12 @@ class MemoizingAnalyserTest extends TestCase
             ->method('set')
             ->with($fileInfo, $rules, []);
 
-        $this->analyser
+        $this->analyzer
             ->expects(static::once())
-            ->method('analyse')
+            ->method('analyze')
             ->with($fileInfo, $rules)
             ->willReturn([]);
 
-        $this->memoizingAnalyser->analyse($fileInfo, $rules);
+        $this->memoizingAnalyzer->analyze($fileInfo, $rules);
     }
 }

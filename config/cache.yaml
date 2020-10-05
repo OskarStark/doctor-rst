@@ -3,6 +3,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    App\Analyser\Cache: '@App\Analyser\FileCache'
-    App\Analyser\FileCache:
+    App\Analyzer\Cache: '@App\Analyzer\FileCache'
+    App\Analyzer\FileCache:
         $cacheFile: '%cache.file%'
