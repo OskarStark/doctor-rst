@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\OutputStyle;
 
 interface Formatter
 {
-    public function format(OutputStyle $style, AnalyzerResult $analyzerResult, string $analyseDir, bool $showValidFiles): void;
+    public function format(OutputStyle $style, AnalyzerResult $analyzerResult, string $analyzeDir, bool $showValidFiles): void;
 
     public function name(): string;
 }

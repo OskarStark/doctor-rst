@@ -27,29 +27,29 @@ class GithubFormatterTest extends TestCase
 {
     public function testFormat(): void
     {
-        $analyseDir = \dirname(__DIR__, 2).'/dummy';
+        $analyzeDir = \dirname(__DIR__, 2).'/dummy';
 
         $bufferedOutput = new BufferedOutput();
         $style = new SymfonyStyle($this->createMock(InputInterface::class), $bufferedOutput);
 
         $fileResultWithViolations = new FileResult(
-            new \SplFileInfo($analyseDir.'/docs/index.rst'),
+            new \SplFileInfo($analyzeDir.'/docs/index.rst'),
             new ExcludedViolationList(
                 [],
-                [Violation::from('violation message', $analyseDir.'/docs/index.rst', 2, 'dummy text')]
+                [Violation::from('violation message', $analyzeDir.'/docs/index.rst', 2, 'dummy text')]
             )
         );
         $validFileResult = new FileResult(
-            new \SplFileInfo($analyseDir.'/docs/tutorial/introduction.rst'),
+            new \SplFileInfo($analyzeDir.'/docs/tutorial/introduction.rst'),
             new ExcludedViolationList([], [])
         );
 
         $analyzerResult = new AnalyzerResult([$fileResultWithViolations, $validFileResult]);
 
-        (new GithubFormatter())->format($style, $analyzerResult, $analyseDir, true);
+        (new GithubFormatter())->format($style, $analyzerResult, $analyzeDir, true);
 
         $expected = <<<OUTPUT
-::error file=$analyseDir/docs/index.rst,line=2::violation message
+::error file=$analyzeDir/docs/index.rst,line=2::violation message
 
 OUTPUT;
 

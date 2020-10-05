@@ -23,17 +23,17 @@ class ConsoleFormatter implements Formatter
     public function format(
         OutputStyle $style,
         AnalyzerResult $analyzerResult,
-        string $analyseDir,
+        string $analyzeDir,
         bool $showValidFiles
     ): void {
         $violatedFiles = 0;
         foreach ($analyzerResult->all() as $fileResult) {
             if ($fileResult->violationList()->hasViolations()) {
                 ++$violatedFiles;
-                $this->formatViolationList($style, $analyseDir, $fileResult);
+                $this->formatViolationList($style, $analyzeDir, $fileResult);
                 $style->newLine();
             } elseif ($showValidFiles) {
-                $this->formatValidFile($style, $analyseDir, $fileResult);
+                $this->formatValidFile($style, $analyzeDir, $fileResult);
                 $style->newLine();
             }
         }
@@ -54,11 +54,11 @@ class ConsoleFormatter implements Formatter
         return 'console';
     }
 
-    private function formatViolationList(OutputStyle $style, string $analyseDir, FileResult $fileResult): void
+    private function formatViolationList(OutputStyle $style, string $analyzeDir, FileResult $fileResult): void
     {
         $style->writeln(sprintf(
             '%s %s',
-            ltrim(str_replace($analyseDir, '', $fileResult->filename()), '/'),
+            ltrim(str_replace($analyzeDir, '', $fileResult->filename()), '/'),
             sprintf('<fg=red;options=bold>%s</>', "\xE2\x9C\x98" /* HEAVY BALLOT X (U+2718) */)
         ));
 
@@ -76,11 +76,11 @@ class ConsoleFormatter implements Formatter
         }
     }
 
-    private function formatValidFile(OutputStyle $style, string $analyseDir, FileResult $fileResult): void
+    private function formatValidFile(OutputStyle $style, string $analyzeDir, FileResult $fileResult): void
     {
         $style->writeln(sprintf(
             '%s %s',
-            ltrim(str_replace($analyseDir, '', $fileResult->filename()), '/'),
+            ltrim(str_replace($analyzeDir, '', $fileResult->filename()), '/'),
             sprintf('<fg=green;options=bold>%s</>', "\xE2\x9C\x94" /* HEAVY CHECK MARK (U+2714) */)
         ));
     }

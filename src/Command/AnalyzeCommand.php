@@ -56,7 +56,7 @@ class AnalyzeCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Analyse *.rst files')
+            ->setDescription('Analyze *.rst files')
             ->setAliases(['analyse'])
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
@@ -72,15 +72,15 @@ class AnalyzeCommand extends Command
         $dir = $input->getArgument('dir');
         \assert(\is_string($dir));
 
-        if (!$analyseDir = realpath($dir)) {
+        if (!$analyzeDir = realpath($dir)) {
             $io->error(sprintf('Could not find directory: %s', $dir));
 
             return 1;
         }
 
-        $io->text(sprintf('Analyse *.rst(.inc) files in: <info>%s</info>', $analyseDir));
+        $io->text(sprintf('Analyze *.rst(.inc) files in: <info>%s</info>', $analyzeDir));
 
-        if (!is_file($configFile = $analyseDir.'/.doctor-rst.yaml')) {
+        if (!is_file($configFile = $analyzeDir.'/.doctor-rst.yaml')) {
             $io->error(sprintf('Could not find config file: %s', $configFile));
 
             return 1;
@@ -136,7 +136,7 @@ class AnalyzeCommand extends Command
         $showValidFiles = $input->getOption('short') ? false : true;
 
         $finder = new Finder();
-        $finder->files()->name(['*.rst', '*.rst.inc'])->in($analyseDir);
+        $finder->files()->name(['*.rst', '*.rst.inc'])->in($analyzeDir);
 
         $fileResults = [];
         foreach ($finder as $file) {
@@ -154,7 +154,7 @@ class AnalyzeCommand extends Command
 
         $this->formatterRegistry
             ->get($errorFormat)
-            ->format($io, $analyzerResult, $analyseDir, $showValidFiles);
+            ->format($io, $analyzerResult, $analyzeDir, $showValidFiles);
 
         return $analyzerResult->hasViolations() ? 1 : 0;
     }

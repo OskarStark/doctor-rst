@@ -41,13 +41,13 @@ class Application extends BaseApplication
     {
         $container = $this->buildContainer($input);
 
-        /** @var AnalyzeCommand $analyseCommand */
-        $analyseCommand = $container->get(AnalyzeCommand::class);
+        /** @var AnalyzeCommand $analyzeCommand */
+        $analyzeCommand = $container->get(AnalyzeCommand::class);
 
         /** @var RulesCommand $rulesCommand */
         $rulesCommand = $container->get(RulesCommand::class);
 
-        $this->addCommands([$analyseCommand, $rulesCommand]);
+        $this->addCommands([$analyzeCommand, $rulesCommand]);
 
         return parent::doRun($input, $output);
     }
