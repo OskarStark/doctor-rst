@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Formatter;
 
 use App\Formatter\ConsoleFormatter;
-use App\Value\AnalyserResult;
+use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
 use App\Value\Violation;
@@ -44,9 +44,9 @@ class ConsoleFormatterTest extends TestCase
             new ExcludedViolationList([], [])
         );
 
-        $analyserResult = new AnalyserResult([$fileResultWithViolations, $validFileResult]);
+        $analyzerResult = new AnalyzerResult([$fileResultWithViolations, $validFileResult]);
 
-        (new ConsoleFormatter())->format($style, $analyserResult, $analyseDir, true);
+        (new ConsoleFormatter())->format($style, $analyzerResult, $analyseDir, true);
 
         $expected = <<<OUTPUT
 docs/index.rst ✘

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Formatter;
 
-use App\Value\AnalyserResult;
+use App\Value\AnalyzerResult;
 use Symfony\Component\Console\Style\OutputStyle;
 
 interface Formatter
 {
-    public function format(OutputStyle $style, AnalyserResult $analyserResult, string $analyseDir, bool $showValidFiles): void;
+    public function format(OutputStyle $style, AnalyzerResult $analyzerResult, string $analyseDir, bool $showValidFiles): void;
 
     public function name(): string;
 }

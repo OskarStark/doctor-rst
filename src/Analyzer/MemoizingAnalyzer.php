@@ -11,31 +11,31 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Analyser;
+namespace App\Analyzer;
 
 use SplFileInfo;
 
-final class MemoizingAnalyser implements Analyser
+final class MemoizingAnalyzer implements Analyzer
 {
-    private Analyser $analyser;
+    private Analyzer $analyzer;
     private Cache $cache;
 
-    public function __construct(Analyser $analyser, Cache $cache)
+    public function __construct(Analyzer $analyzer, Cache $cache)
     {
-        $this->analyser = $analyser;
+        $this->analyzer = $analyzer;
         $this->cache = $cache;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function analyse(SplFileInfo $file, array $rules): array
+    public function analyze(SplFileInfo $file, array $rules): array
     {
         if ($this->cache->has($file, $rules)) {
             return $this->cache->get($file, $rules);
         }
 
-        $violations = $this->analyser->analyse($file, $rules);
+        $violations = $this->analyzer->analyze($file, $rules);
         $this->cache->set($file, $rules, $violations);
 
         return $violations;

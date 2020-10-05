@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Formatter;
 
-use App\Value\AnalyserResult;
+use App\Value\AnalyzerResult;
 use App\Value\FileResult;
 use App\Value\Violation;
 use Symfony\Component\Console\Style\OutputStyle;
@@ -22,12 +22,12 @@ class ConsoleFormatter implements Formatter
 {
     public function format(
         OutputStyle $style,
-        AnalyserResult $analyserResult,
+        AnalyzerResult $analyzerResult,
         string $analyseDir,
         bool $showValidFiles
     ): void {
         $violatedFiles = 0;
-        foreach ($analyserResult->all() as $fileResult) {
+        foreach ($analyzerResult->all() as $fileResult) {
             if ($fileResult->violationList()->hasViolations()) {
                 ++$violatedFiles;
                 $this->formatViolationList($style, $analyseDir, $fileResult);

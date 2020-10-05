@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Command\AnalyseCommand;
+use App\Command\AnalyzeCommand;
 use App\Command\RulesCommand;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application as BaseApplication;
@@ -41,8 +41,8 @@ class Application extends BaseApplication
     {
         $container = $this->buildContainer($input);
 
-        /** @var AnalyseCommand $analyseCommand */
-        $analyseCommand = $container->get(AnalyseCommand::class);
+        /** @var AnalyzeCommand $analyseCommand */
+        $analyseCommand = $container->get(AnalyzeCommand::class);
 
         /** @var RulesCommand $rulesCommand */
         $rulesCommand = $container->get(RulesCommand::class);

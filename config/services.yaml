@@ -17,12 +17,12 @@ services:
         resource: '../src/*'
         exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
-    App\Analyser\Cache: '@App\Analyser\InMemoryCache'
+    App\Analyzer\Cache: '@App\Analyzer\InMemoryCache'
 
-    App\Analyser\MemoizingAnalyser:
-        $analyser: '@App\Analyser\RstAnalyser'
+    App\Analyzer\MemoizingAnalyzer:
+        $analyzer: '@App\Analyzer\RstAnalyzer'
 
-    App\Command\AnalyseCommand:
+    App\Command\AnalyzeCommand:
         public: true
     App\Command\RulesCommand:
         public: true

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Analyser\MemoizingAnalyser;
+use App\Analyzer\MemoizingAnalyzer;
 use App\Formatter\Registry as FormatterRegistry;
 use App\Handler\Registry;
 use App\Rule\Configurable;
 use App\Rule\Rule;
-use App\Value\AnalyserResult;
+use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
 use App\Value\RuleGroup;
@@ -32,22 +32,22 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
-class AnalyseCommand extends Command
+class AnalyzeCommand extends Command
 {
-    protected static $defaultName = 'analyse';
+    protected static $defaultName = 'analyze';
 
     private Registry $registry;
 
     /** @var Rule[] */
     private array $rules = [];
 
-    private MemoizingAnalyser $analyser;
+    private MemoizingAnalyzer $analyzer;
     private FormatterRegistry $formatterRegistry;
 
-    public function __construct(Registry $registry, MemoizingAnalyser $analyser, FormatterRegistry $formatterRegistry)
+    public function __construct(Registry $registry, MemoizingAnalyzer $analyzer, FormatterRegistry $formatterRegistry)
     {
         $this->registry = $registry;
-        $this->analyser = $analyser;
+        $this->analyzer = $analyzer;
         $this->formatterRegistry = $formatterRegistry;
 
         parent::__construct();
@@ -57,6 +57,7 @@ class AnalyseCommand extends Command
     {
         $this
             ->setDescription('Analyse *.rst files')
+            ->setAliases(['analyse'])
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
             ->addOption('group', 'g', InputOption::VALUE_REQUIRED, 'Which groups should be used?')
@@ -143,18 +144,18 @@ class AnalyseCommand extends Command
                 $file,
                 new ExcludedViolationList(
                     $config['whitelist'] ?? [],
-                    $this->analyser->analyse($file, $this->rules)
+                    $this->analyzer->analyze($file, $this->rules)
                 )
             );
         }
-        $analyserResult = new AnalyserResult($fileResults);
+        $analyzerResult = new AnalyzerResult($fileResults);
 
-        $this->analyser->write();
+        $this->analyzer->write();
 
         $this->formatterRegistry
             ->get($errorFormat)
-            ->format($io, $analyserResult, $analyseDir, $showValidFiles);
+            ->format($io, $analyzerResult, $analyseDir, $showValidFiles);
 
-        return $analyserResult->hasViolations() ? 1 : 0;
+        return $analyzerResult->hasViolations() ? 1 : 0;
     }
 }
