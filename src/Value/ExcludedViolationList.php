@@ -18,13 +18,11 @@ final class ExcludedViolationList
     /** @var Violation[] */
     private array $violations;
     private bool $hasViolations;
-    private array $excludedViolationConfig;
 
     public function __construct(array $excludedViolationConfig, array $violations)
     {
-        $this->violations = $this->filterViolations($violations);
+        $this->violations = $this->filterViolations($excludedViolationConfig, $violations);
         $this->hasViolations = \count($this->violations) > 0;
-        $this->excludedViolationConfig = $excludedViolationConfig;
     }
 
     public function violations(): array
@@ -37,12 +35,17 @@ final class ExcludedViolationList
         return $this->hasViolations;
     }
 
-    private function filterViolations(array $violations): array
+    /**
+     * @param Violation[] $violations
+     *
+     * @return Violation[]
+     */
+    private function filterViolations(array $excludedViolationConfig, array $violations): array
     {
         foreach ($violations as $key => $violation) {
-            if (isset($this->excludedViolationConfig['regex'])) {
-                foreach ($this->excludedViolationConfig['regex'] as $pattern) {
-                    if (preg_match($pattern, $violation[3])) {
+            if (isset($excludedViolationConfig['regex'])) {
+                foreach ($excludedViolationConfig['regex'] as $pattern) {
+                    if (preg_match($pattern, $violation->rawLine())) {
                         unset($violations[$key]);
 
                         break;
@@ -50,9 +53,9 @@ final class ExcludedViolationList
                 }
             }
 
-            if (isset($this->excludedViolationConfig['lines'])) {
-                foreach ($this->excludedViolationConfig['lines'] as $line) {
-                    if ($line === $violation[3]) {
+            if (isset($excludedViolationConfig['lines'])) {
+                foreach ($excludedViolationConfig['lines'] as $line) {
+                    if ($line === $violation->rawLine()) {
                         unset($violations[$key]);
 
                         break;
