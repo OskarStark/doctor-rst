@@ -60,11 +60,11 @@ You can run it in any given directory like this:
 Local usage
 -----------
 
-`bin/console analyse dummy/docs --group=@Symfony`
+`bin/console analyze dummy/docs --group=@Symfony`
 
 or
 
-`bin/console analyse dummy/docs --group=@Sonata`
+`bin/console analyze dummy/docs --group=@Sonata`
 
 Todo:
 -----
