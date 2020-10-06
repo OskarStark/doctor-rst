@@ -56,6 +56,7 @@
 * [replacement](#replacement)
 * [short_array_syntax](#short_array_syntax)
 * [space_before_self_xml_closing_tag](#space_before_self_xml_closing_tag)
+* [space_between_label_and_link_in_ref](#space_between_label_and_link_in_ref)
 * [typo](#typo)
 * [unused_links](#unused_links)
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
@@ -526,6 +527,24 @@ Pattern | Message
 #### Groups [`@Sonata`]
 
 ## `space_before_self_xml_closing_tag`
+
+## `space_between_label_and_link_in_ref`
+
+  > _Ensure a space between label and link in :ref: directive._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+:ref:`receiving them via a worker <messenger-worker>`
+```
+
+##### Invalid Examples :-1:
+
+```rst
+:ref:`receiving them via a worker<messenger-worker>`
+```
 
 ## `typo`
 
