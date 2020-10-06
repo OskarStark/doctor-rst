@@ -17,8 +17,7 @@ use App\Value\Lines;
 
 final class RstSample
 {
-    /** @var int */
-    private $lineNumber = 0;
+    private int $lineNumber = 0;
 
     /**
      * @var array<string>
