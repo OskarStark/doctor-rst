@@ -38,6 +38,7 @@
 * [no_blank_line_after_filepath_in_twig_code_block](#no_blank_line_after_filepath_in_twig_code_block)
 * [no_blank_line_after_filepath_in_xml_code_block](#no_blank_line_after_filepath_in_xml_code_block)
 * [no_blank_line_after_filepath_in_yaml_code_block](#no_blank_line_after_filepath_in_yaml_code_block)
+* [no_brackets_in_method_directive](#no_brackets_in_method_directive)
 * [no_composer_phar](#no_composer_phar)
 * [no_composer_req](#no_composer_req)
 * [no_config_yaml](#no_config_yaml)
@@ -378,6 +379,24 @@ $ bin/console list
 ## `no_blank_line_after_filepath_in_yaml_code_block`
 
 #### Groups [`@Symfony`]
+
+## `no_brackets_in_method_directive`
+
+  > _Ensure a :method: directive has special format._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+:method:`Symfony\\Component\\OptionsResolver\\Options::offsetGet`
+```
+
+##### Invalid Examples :-1:
+
+```rst
+:method:`Symfony\\Component\\OptionsResolver\\Options::offsetGet()`
+```
 
 ## `no_composer_phar`
 
