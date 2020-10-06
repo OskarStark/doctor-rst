@@ -2,7 +2,7 @@
 
 * [american_english](#american_english)
 * [avoid_repetetive_words](#avoid_repetetive_words)
-* [be_kind_to_newcomers](#be_kind_to_newcomers)
+* [be_kind_to_newcomers](#be_kind_to_newcomers) :exclamation:
 * [blank_line_after_directive](#blank_line_after_directive)
 * [blank_line_after_filepath_in_code_block](#blank_line_after_filepath_in_code_block)
 * [blank_line_after_filepath_in_php_code_block](#blank_line_after_filepath_in_php_code_block)
@@ -17,14 +17,14 @@
 * [deprecated_directive_min_version](#deprecated_directive_min_version)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
-* [even_brackets_count](#even_brackets_count)
+* [even_brackets_count](#even_brackets_count) :exclamation:
 * [extend_abstract_admin](#extend_abstract_admin)
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
 * [extension_xlf_instead_of_xliff](#extension_xlf_instead_of_xliff)
 * [final_admin_classes](#final_admin_classes)
 * [final_admin_extension_classes](#final_admin_extension_classes)
-* [indention](#indention)
+* [indention](#indention) :exclamation:
 * [kernel_instead_of_app_kernel](#kernel_instead_of_app_kernel)
 * [line_length](#line_length)
 * [lowercase_as_in_use_statements](#lowercase_as_in_use_statements)
@@ -132,11 +132,8 @@ Pattern | Message
 `/easily/i` | Please remove the word: %s
 `/obvious/i` | Please remove the word: %s
 `/trivial/i` | Please remove the word: %s
-`/just/i` | Please remove the word: %s
-`/quick/i` | Please remove the word: %s
 `/of course/i` | Please remove the word: %s
 `/logically/i` | Please remove the word: %s
-`/clear/i` | Please remove the word: %s
 `/merely/i` | Please remove the word: %s
 `/basic/i` | Please remove the word: %s
 
@@ -502,6 +499,8 @@ Pattern | Message
 `/performances/` | Please replace "%s" with "performance"
 `/Performances/` | Please replace "%s" with "Performance"
 `/``'%kernel.debug%'``/` | Please replace "%s" with "``%%kernel.debug%%``"
+`/PHPdoc/` | Please replace "%s" with "PHPDoc"
+`/eg\./` | Please replace "%s" with "e.g."
 
 ## `short_array_syntax`
 
@@ -531,6 +530,8 @@ Pattern | Message
 `/recalcuate/i` | Typo in word "%s"
 `/achived/i` | Typo in word "%s"
 `/overriden/i` | Typo in word "%s"
+`/succesfully/i` | Typo in word "%s"
+`/optionnally/i` | Typo in word "%s"
 
 ## `unused_links`
 
@@ -671,4 +672,3 @@ yarn add --dev jquery
 ```rst
 yarn add jquery --dev
 ```
-
