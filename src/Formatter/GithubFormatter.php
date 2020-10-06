@@ -18,8 +18,17 @@ use Symfony\Component\Console\Style\OutputStyle;
 
 class GithubFormatter implements Formatter
 {
+    private ConsoleFormatter $consoleFormatter;
+
+    public function __construct(ConsoleFormatter $consoleFormatter)
+    {
+        $this->consoleFormatter = $consoleFormatter;
+    }
+
     public function format(OutputStyle $style, AnalyzerResult $analyzerResult, string $analyzeDir, bool $showValidFiles): void
     {
+        $this->consoleFormatter->format($style, $analyzerResult, $analyzeDir, $showValidFiles);
+
         foreach ($analyzerResult->all() as $fileResult) {
             foreach ($fileResult->violationList()->violations() as $violation) {
                 $style->writeln(sprintf(
