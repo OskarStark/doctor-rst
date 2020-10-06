@@ -56,6 +56,7 @@
 * [replacement](#replacement)
 * [short_array_syntax](#short_array_syntax)
 * [space_before_self_xml_closing_tag](#space_before_self_xml_closing_tag)
+* [space_between_label_and_link_in_doc](#space_between_label_and_link_in_doc)
 * [space_between_label_and_link_in_ref](#space_between_label_and_link_in_ref)
 * [typo](#typo)
 * [unused_links](#unused_links)
@@ -527,6 +528,24 @@ Pattern | Message
 #### Groups [`@Sonata`]
 
 ## `space_before_self_xml_closing_tag`
+
+## `space_between_label_and_link_in_doc`
+
+  > _Ensure a space between label and link in :doc: directive._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+:doc:`File </reference/constraints/File>`
+```
+
+##### Invalid Examples :-1:
+
+```rst
+:doc:`File</reference/constraints/File>`
+```
 
 ## `space_between_label_and_link_in_ref`
 
