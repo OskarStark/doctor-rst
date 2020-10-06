@@ -26,7 +26,7 @@ jobs:
             - name: DOCtor-RST
               uses: docker://oskarstark/doctor-rst
               with:
-                  args: --short
+                  args: --short --error-formatter=github
 ```
 
 If your `*.rst` files are not located in root:
@@ -42,10 +42,16 @@ jobs:
             - name: DOCtor-RST
               uses: docker://oskarstark/doctor-rst
               with:
-                  args: --short
+                  args: --short --error-formatter=github
 +              env:
 +                  DOCS_DIR: 'docs/'
 ```
+
+Error formatter
+---------------
+DOCtor-RST has two error formatters `console` *(default)* and `github`. 
+
+`github` is useful in the context of GitHub actions and can be activated with the option `--error-formatter=github`.
 
 Docker
 ------
