@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Formatter;
 
-use App\Formatter\GithubFormatter;
+use App\Formatter\ConsoleFormatter;
 use App\Formatter\Registry;
 use PHPUnit\Framework\TestCase;
 
@@ -24,13 +24,13 @@ class RegistryTest extends TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Formatter "invalid" not found');
 
-        (new Registry(new GithubFormatter()))->get('invalid');
+        (new Registry(new ConsoleFormatter()))->get('invalid');
     }
 
     public function testValidName(): void
     {
-        $formatter = new GithubFormatter();
+        $formatter = new ConsoleFormatter();
 
-        static::assertSame($formatter, (new Registry($formatter))->get('github'));
+        static::assertSame($formatter, (new Registry($formatter))->get('console'));
     }
 }

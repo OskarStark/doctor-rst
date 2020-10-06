@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Formatter;
 
+use App\Formatter\ConsoleFormatter;
 use App\Formatter\GithubFormatter;
 use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
@@ -46,9 +47,15 @@ class GithubFormatterTest extends TestCase
 
         $analyzerResult = new AnalyzerResult([$fileResultWithViolations, $validFileResult]);
 
-        (new GithubFormatter())->format($style, $analyzerResult, $analyzeDir, true);
+        (new GithubFormatter(new ConsoleFormatter()))->format($style, $analyzerResult, $analyzeDir, false);
 
         $expected = <<<OUTPUT
+docs/index.rst ✘
+    2: violation message
+   ->  dummy text
+
+ [WARNING] Found "1" invalid file!                                              
+
 ::error file=$analyzeDir/docs/index.rst,line=2::violation message
 
 OUTPUT;
