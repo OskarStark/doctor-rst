@@ -12,9 +12,9 @@ Usage
 -----
 
 You can use it as a Github Action like this:
+```yaml
+# .github/workflows/lint.yaml
 
-_.github/workflows/lint.yaml_
-```
 on: [push, pull_request]
 name: Lint
 jobs:
@@ -31,15 +31,6 @@ jobs:
 
 If your `*.rst` files are not located in root:
 ```diff
-on: [push, pull_request]
-name: Lint
-jobs:
-    doctor-rst:
-        name: DOCtor-RST
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@master
-            - name: DOCtor-RST
               uses: docker://oskarstark/doctor-rst
               with:
                   args: --short --error-formatter=github
@@ -47,8 +38,9 @@ jobs:
 +                  DOCS_DIR: 'docs/'
 ```
 
-Error formatter
+Error Formatter
 ---------------
+
 DOCtor-RST has two error formatters `console` *(default)* and `github`. 
 
 `github` is useful in the context of GitHub actions and can be activated with the option `--error-formatter=github`.
