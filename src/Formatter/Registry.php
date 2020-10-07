@@ -29,7 +29,7 @@ final class Registry
 
     public function get(string $name): Formatter
     {
-        if (!isset($this->formatters[$name])) {
+        if (!\array_key_exists($name, $this->formatters)) {
             throw FormatterNotFound::byName($name);
         }
 
