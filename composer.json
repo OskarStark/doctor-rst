@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "composer/semver": "^1.4",
         "doctrine/annotations": "^1.8",
+        "ondram/ci-detector": "^3.5",
         "symfony/config": "^5.0",
         "symfony/console": "^5.0",
         "symfony/dependency-injection": "^5.0",
