@@ -16,7 +16,6 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
-use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
@@ -30,7 +29,7 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
+        return [RuleGroup::Symfony()];
     }
 
     public function check(Lines $lines, int $number): ?string

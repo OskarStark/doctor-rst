@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
@@ -51,7 +50,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Co
 
     public static function getGroups(): array
     {
-        return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
+        return [RuleGroup::Symfony()];
     }
 
     public function check(Lines $lines, int $number): ?string

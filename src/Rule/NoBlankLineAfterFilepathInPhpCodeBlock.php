@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\Registry;
 use App\Helper\PhpHelper;
 use App\Rst\RstParser;
 use App\Value\Lines;
@@ -23,7 +22,7 @@ class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Rul
 {
     public static function getGroups(): array
     {
-        return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
+        return [RuleGroup::Symfony()];
     }
 
     public function check(Lines $lines, int $number): ?string

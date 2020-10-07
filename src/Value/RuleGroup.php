@@ -13,15 +13,21 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-use App\Handler\Registry;
 use Webmozart\Assert\Assert;
 
 final class RuleGroup
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private const GROUP_EXPERIMENTAL = '@Experimental';
+    private const GROUP_SONATA = '@Sonata';
+    private const GROUP_SYMFONY = '@Symfony';
+
+    private const ALLOWED_GROUPS = [
+        self::GROUP_EXPERIMENTAL,
+        self::GROUP_SONATA,
+        self::GROUP_SYMFONY,
+    ];
+
+    private string $name;
 
     private function __construct(string $name)
     {
@@ -29,11 +35,7 @@ final class RuleGroup
 
         Assert::stringNotEmpty($name);
         Assert::notWhitespaceOnly($name);
-        Assert::oneOf($name, [
-            Registry::GROUP_SONATA,
-            Registry::GROUP_SYMFONY,
-            Registry::GROUP_EXPERIMENTAL,
-        ]);
+        Assert::oneOf($name, self::ALLOWED_GROUPS);
 
         $this->name = $name;
     }
@@ -43,7 +45,27 @@ final class RuleGroup
         return new self($name);
     }
 
-    public function asString(): string
+    public static function Experimental(): self
+    {
+        return new self(self::GROUP_EXPERIMENTAL);
+    }
+
+    public static function Sonata(): self
+    {
+        return new self(self::GROUP_SONATA);
+    }
+
+    public static function Symfony(): self
+    {
+        return new self(self::GROUP_SYMFONY);
+    }
+
+    public function equals(self $other): bool
+    {
+        return $this->name === $other->name();
+    }
+
+    public function name(): string
     {
         return $this->name;
     }

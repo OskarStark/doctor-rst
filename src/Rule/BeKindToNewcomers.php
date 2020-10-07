@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
-use App\Handler\Registry;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
@@ -25,7 +24,7 @@ class BeKindToNewcomers extends CheckListRule
 {
     public static function getGroups(): array
     {
-        return [RuleGroup::fromString(Registry::GROUP_EXPERIMENTAL)];
+        return [RuleGroup::Experimental()];
     }
 
     public function check(Lines $lines, int $number): ?string

@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\Registry;
 use App\Helper\PhpHelper;
 use App\Helper\TwigHelper;
 use App\Helper\XmlHelper;
@@ -53,7 +52,7 @@ class Indention extends AbstractRule implements Rule, Configurable
 
     public static function getGroups(): array
     {
-        return [RuleGroup::fromString(Registry::GROUP_EXPERIMENTAL)];
+        return [RuleGroup::Experimental()];
     }
 
     public function check(Lines $lines, int $number): ?string

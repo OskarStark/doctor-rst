@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
@@ -24,8 +23,8 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
     public static function getGroups(): array
     {
         return [
-            RuleGroup::fromString(Registry::GROUP_SONATA),
-            RuleGroup::fromString(Registry::GROUP_SYMFONY),
+            RuleGroup::Sonata(),
+            RuleGroup::Symfony(),
         ];
     }
 
