@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
-use App\Handler\Registry;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 use function Symfony\Component\String\u;
@@ -26,7 +25,7 @@ class ExtendAbstractAdmin extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
-        return [RuleGroup::fromString(Registry::GROUP_SONATA)];
+        return [RuleGroup::Sonata()];
     }
 
     public function check(Lines $lines, int $number): ?string

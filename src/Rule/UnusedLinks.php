@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
-use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Rst\Value\LinkDefinition;
 use App\Rst\Value\LinkUsage;
@@ -36,8 +35,8 @@ class UnusedLinks extends AbstractRule implements Rule, ResetInterface
     public static function getGroups(): array
     {
         return [
-            RuleGroup::fromString(Registry::GROUP_SONATA),
-            RuleGroup::fromString(Registry::GROUP_SYMFONY),
+            RuleGroup::Sonata(),
+            RuleGroup::Symfony(),
         ];
     }
 

@@ -16,7 +16,6 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
-use App\Handler\Registry;
 use App\Helper\PhpHelper;
 use App\Value\Lines;
 use App\Value\RuleGroup;
@@ -33,8 +32,8 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements Rule
     public static function getGroups(): array
     {
         return [
-            RuleGroup::fromString(Registry::GROUP_SONATA),
-            RuleGroup::fromString(Registry::GROUP_SYMFONY),
+            RuleGroup::Sonata(),
+            RuleGroup::Symfony(),
         ];
     }
 

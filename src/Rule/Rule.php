@@ -35,4 +35,6 @@ interface Rule
     public static function getType(): int;
 
     public static function runOnlyOnBlankline(): bool;
+
+    public static function isExperimental(): bool;
 }

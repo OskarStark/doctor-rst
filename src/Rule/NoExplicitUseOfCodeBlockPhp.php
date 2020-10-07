@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Handler\Registry;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
@@ -25,7 +24,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
     public static function getGroups(): array
     {
-        return [RuleGroup::fromString(Registry::GROUP_SYMFONY)];
+        return [RuleGroup::Symfony()];
     }
 
     public function check(Lines $lines, int $number): ?string

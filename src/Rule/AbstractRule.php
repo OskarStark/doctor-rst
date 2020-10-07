@@ -43,4 +43,15 @@ abstract class AbstractRule
     {
         return false;
     }
+
+    public static function isExperimental(): bool
+    {
+        foreach (static::getGroups() as $group) {
+            if ($group->equals(RuleGroup::Experimental())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

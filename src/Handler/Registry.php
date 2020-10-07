@@ -20,16 +20,6 @@ use App\Value\RuleName;
 
 final class Registry
 {
-    const GROUP_EXPERIMENTAL = '@Experimental';
-    const GROUP_SONATA = '@Sonata';
-    const GROUP_SYMFONY = '@Symfony';
-
-    private const GROUPS = [
-        self::GROUP_EXPERIMENTAL,
-        self::GROUP_SONATA,
-        self::GROUP_SYMFONY,
-    ];
-
     /** @var array<string, Rule> */
     private array $rules = [];
 

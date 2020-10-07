@@ -65,15 +65,11 @@ class RulesCommand extends Command
         }
 
         foreach ($rules as $rule) {
-            $groups = array_map(static function (RuleGroup $group) {
-                return $group->asString();
-            }, $rule::getGroups());
-
             $this->io->writeln(sprintf(
                 '* [%s](#%s)%s',
                 $rule::getName()->asString(),
                 $rule::getName()->asString(),
-                \in_array(Registry::GROUP_EXPERIMENTAL, $groups, true) ? ' :exclamation:' : ''
+                $rule::isExperimental() ? ' :exclamation:' : ''
             ));
         }
 
@@ -104,10 +100,9 @@ class RulesCommand extends Command
         }
 
         if (!empty($rule::getGroups())) {
-            $groupNames = [];
-            foreach ($rule::getGroups() as $group) {
-                $groupNames[] = $group->asString();
-            }
+            $groupNames = array_map(static function (RuleGroup $group): string {
+                return $group->name();
+            }, $rule::getGroups());
 
             $this->io->writeln(sprintf('#### Groups [`%s`]', implode('`, `', $groupNames)));
             $this->io->newLine();
