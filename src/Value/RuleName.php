@@ -17,10 +17,7 @@ use Webmozart\Assert\Assert;
 
 final class RuleName
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
     private function __construct(string $name)
     {
