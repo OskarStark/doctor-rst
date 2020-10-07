@@ -67,8 +67,8 @@ class RulesCommand extends Command
         foreach ($rules as $rule) {
             $this->io->writeln(sprintf(
                 '* [%s](#%s)%s',
-                $rule::getName()->asString(),
-                $rule::getName()->asString(),
+                $rule::getName()->toString(),
+                $rule::getName()->toString(),
                 $rule::isExperimental() ? ' :exclamation:' : ''
             ));
         }
@@ -88,7 +88,7 @@ class RulesCommand extends Command
             RuleAnnotation\Description::class
         );
 
-        $this->io->writeln(sprintf('## `%s`', $rule::getName()->asString()));
+        $this->io->writeln(sprintf('## `%s`', $rule::getName()->toString()));
         $this->io->newLine();
 
         if (null !== $description) {

@@ -26,7 +26,7 @@ class FinalAdminClassesTest extends TestCase
     public function name()
     {
         static::assertInstanceOf(RuleName::class, FinalAdminClasses::getName());
-        static::assertSame('final_admin_classes', FinalAdminClasses::getName()->asString());
+        static::assertSame('final_admin_classes', FinalAdminClasses::getName()->toString());
     }
 
     /**

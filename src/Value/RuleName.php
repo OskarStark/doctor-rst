@@ -13,28 +13,41 @@ declare(strict_types=1);
 
 namespace App\Value;
 
+use function Symfony\Component\String\u;
 use Webmozart\Assert\Assert;
 
 final class RuleName
 {
     private string $name;
 
-    private function __construct(string $name)
+    private function __construct(string $value)
     {
-        $name = trim($name);
+        $value = trim($value);
 
-        Assert::stringNotEmpty($name);
-        Assert::notWhitespaceOnly($name);
+        Assert::stringNotEmpty($value);
+        Assert::notWhitespaceOnly($value);
 
-        $this->name = $name;
+        $this->name = $value;
     }
 
-    public static function fromString(string $name): self
+    public static function fromClassString(string $class): self
     {
-        return new self($name);
+        $class = trim($class);
+
+        Assert::stringNotEmpty($class);
+        Assert::notWhitespaceOnly($class);
+
+        return self::fromString(
+            u(substr((string) strrchr($class, '\\'), 1))->snake()->toString()
+        );
     }
 
-    public function asString(): string
+    public static function fromString(string $value): self
+    {
+        return new self($value);
+    }
+
+    public function toString(): string
     {
         return $this->name;
     }

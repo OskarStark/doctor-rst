@@ -37,13 +37,13 @@ final class Registry
                 $i = 0;
                 foreach ($rule::getList() as $search => $message) {
                     $clonedRule = clone $rule;
-                    $this->rules[$rule::getName()->asString().'_'.$i] = $clonedRule->configure($search, $message);
+                    $this->rules[$rule::getName()->toString().'_'.$i] = $clonedRule->configure($search, $message);
                     ++$i;
                 }
                 continue;
             }
 
-            $this->rules[$rule::getName()->asString()] = $rule;
+            $this->rules[$rule::getName()->toString()] = $rule;
         }
     }
 
@@ -87,11 +87,11 @@ final class Registry
 
     public function getRule(RuleName $name): Rule
     {
-        if (!isset($this->rules[$name->asString()])) {
-            throw new \InvalidArgumentException(sprintf('Could not find rule:: %s', $name->asString()));
+        if (!isset($this->rules[$name->toString()])) {
+            throw new \InvalidArgumentException(sprintf('Could not find rule:: %s', $name->toString()));
         }
 
-        return $this->rules[$name->asString()];
+        return $this->rules[$name->toString()];
     }
 
     /**
@@ -105,7 +105,7 @@ final class Registry
             $rules[] = $this->getRule($name);
         } catch (\InvalidArgumentException $e) {
             foreach ($this->rules as $key => $rule) {
-                if (preg_match(sprintf('/%s/', $name->asString()), $key)) {
+                if (preg_match(sprintf('/%s/', $name->toString()), $key)) {
                     $rules[] = $rule;
                 }
             }
