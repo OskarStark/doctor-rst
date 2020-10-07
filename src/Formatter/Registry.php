@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Formatter;
 
+use App\Formatter\Exception\FormatterNotFound;
+
 class Registry
 {
     /** @var Formatter[] */
@@ -28,7 +30,7 @@ class Registry
     public function get(string $name): Formatter
     {
         if (!isset($this->formatters[$name])) {
-            throw new \InvalidArgumentException(sprintf('Formatter "%s" not found', $name));
+            throw FormatterNotFound::byName($name);
         }
 
         return $this->formatters[$name];

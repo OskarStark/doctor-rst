@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Formatter;
 
 use App\Formatter\ConsoleFormatter;
+use App\Formatter\Exception\FormatterNotFound;
 use App\Formatter\Registry;
 use PHPUnit\Framework\TestCase;
 
@@ -21,7 +22,7 @@ class RegistryTest extends TestCase
 {
     public function testInvalidNameThrowsException(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(FormatterNotFound::class);
         $this->expectExceptionMessage('Formatter "invalid" not found');
 
         (new Registry(new ConsoleFormatter()))->get('invalid');
