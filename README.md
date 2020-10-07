@@ -41,9 +41,13 @@ If your `*.rst` files are not located in root:
 Error Formatter
 ---------------
 
-DOCtor-RST has two error formatters `console` *(default)* and `github`. 
+* **detect** _(default)_ If running inside GithubActions CI environment, `github` is used, otherwise `console`.
 
-`github` is useful in the context of GitHub actions and can be activated with the option `--error-formatter=github`.
+* **github** Used to annotate your pull requests.
+
+* **console** Used as to generate a human readable output.
+
+To force the usage of a formatter, use the `--error-formatter` option.
 
 Docker
 ------
