@@ -23,6 +23,8 @@ use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
 use App\Value\RuleGroup;
 use App\Value\RuleName;
+use OndraM\CiDetector\CiDetector;
+use OndraM\CiDetector\Exception\CiNotDetectedException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -62,7 +64,7 @@ class AnalyzeCommand extends Command
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
             ->addOption('group', 'g', InputOption::VALUE_REQUIRED, 'Which groups should be used?')
             ->addOption('short', null, InputOption::VALUE_NONE, 'Do not output valid files.')
-            ->addOption('error-format', null, InputOption::VALUE_OPTIONAL, 'Format in which to print the result of the analysis', 'console');
+            ->addOption('error-format', null, InputOption::VALUE_OPTIONAL, 'Format in which to print the result of the analysis');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -131,7 +133,21 @@ class AnalyzeCommand extends Command
         }
 
         $errorFormat = $input->getOption('error-format');
-        \assert(\is_string($errorFormat));
+        \assert(\is_string($errorFormat) || null === $errorFormat);
+
+        if (null === $errorFormat) {
+            $ciDetector = new CiDetector();
+            $errorFormat = 'console';
+
+            try {
+                $ci = $ciDetector->detect();
+                if (CiDetector::CI_GITHUB_ACTIONS === $ci->getCiName()) {
+                    $errorFormat = 'github';
+                }
+            } catch (CiNotDetectedException $e) {
+                // pass and use default
+            }
+        }
 
         $showValidFiles = $input->getOption('short') ? false : true;
 
