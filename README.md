@@ -47,7 +47,7 @@ Error Formatter
 
 * **console** Used as to generate a human readable output.
 
-To force the usage of a specific formatter, use the `--error-formatter` option.
+To force the usage of a specific formatter, use the `--error-format` option.
 
 Docker
 ------
