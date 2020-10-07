@@ -64,7 +64,7 @@ class AnalyzeCommand extends Command
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
             ->addOption('group', 'g', InputOption::VALUE_REQUIRED, 'Which groups should be used?')
             ->addOption('short', null, InputOption::VALUE_NONE, 'Do not output valid files.')
-            ->addOption('error-format', null, InputOption::VALUE_OPTIONAL, 'Format in which to print the result of the analysis');
+            ->addOption('error-format', null, InputOption::VALUE_OPTIONAL, 'Format in which to print the result of the analysis. Can be: "detect", "console", "github"', 'detect');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -133,9 +133,9 @@ class AnalyzeCommand extends Command
         }
 
         $errorFormat = $input->getOption('error-format');
-        \assert(\is_string($errorFormat) || null === $errorFormat);
+        \assert(\is_string($errorFormat));
 
-        if (null === $errorFormat) {
+        if ('detect' === $errorFormat) {
             $ciDetector = new CiDetector();
             $errorFormat = 'console';
 
