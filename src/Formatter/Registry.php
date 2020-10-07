@@ -15,7 +15,7 @@ namespace App\Formatter;
 
 use App\Formatter\Exception\FormatterNotFound;
 
-class Registry
+final class Registry
 {
     /** @var Formatter[] */
     private array $formatters = [];
