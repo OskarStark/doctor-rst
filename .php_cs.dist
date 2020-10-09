@@ -12,6 +12,7 @@ HEADER;
 $finder = PhpCsFixer\Finder::create()
     ->in('src')
     ->in('tests')
+    ->in('config')
 ;
 
 return PhpCsFixer\Config::create()
