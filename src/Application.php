@@ -21,7 +21,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 class Application extends BaseApplication
 {
@@ -56,8 +56,8 @@ class Application extends BaseApplication
     {
         $container = new ContainerBuilder();
 
-        $fileLoader = new YamlFileLoader($container, new FileLocator(\dirname(__DIR__).'/config/'));
-        $fileLoader->load('services.yaml');
+        $fileLoader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__).'/config/'));
+        $fileLoader->load('services.php');
 
         if (false === $input->hasParameterOption('--no-cache')) {
             $container->setParameter(
@@ -65,7 +65,7 @@ class Application extends BaseApplication
                 $input->getParameterOption('--cache-file', getcwd().'/.doctor-rst.cache')
             );
 
-            $fileLoader->load('cache.yaml');
+            $fileLoader->load('cache.php');
         }
 
         $container->compile();
