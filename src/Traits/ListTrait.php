@@ -40,7 +40,7 @@ trait ListTrait
                 continue;
             }
 
-            if (RstParser::isHeadline($lines->current())) {
+            if ($lines->current()->isHeadline()) {
                 return false;
             }
 
@@ -76,7 +76,7 @@ trait ListTrait
                 continue;
             }
 
-            if (RstParser::isHeadline($lines->current())) {
+            if ($lines->current()->isHeadline()) {
                 return false;
             }
 
@@ -112,7 +112,7 @@ trait ListTrait
                 continue;
             }
 
-            if (RstParser::isHeadline($lines->current())) {
+            if ($lines->current()->isHeadline()) {
                 return false;
             }
 
@@ -157,7 +157,7 @@ trait ListTrait
                 continue;
             }
 
-            if (RstParser::isHeadline($lines->current())) {
+            if ($lines->current()->isHeadline()) {
                 return false;
             }
 

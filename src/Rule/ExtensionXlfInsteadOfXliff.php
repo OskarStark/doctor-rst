@@ -18,7 +18,6 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 /**
  * @Description("Make sure to only use `.xlf` instead of `.xliff`.")
@@ -38,9 +37,8 @@ class ExtensionXlfInsteadOfXliff extends AbstractRule implements Rule
     public function check(Lines $lines, int $number): ?string
     {
         $lines->seek($number);
-        $line = $lines->current()->raw();
 
-        if ($matches = u($line)->match('/\.xliff/i')) {
+        if ($matches = $lines->current()->rawU()->match('/\.xliff/i')) {
             return sprintf('Please use ".xlf" extension instead of "%s"', $matches[0]);
         }
 

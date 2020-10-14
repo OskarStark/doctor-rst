@@ -34,14 +34,14 @@ trait DirectiveTrait
                 continue;
             }
 
-            if (RstParser::isHeadline($lines->current())) {
+            if ($lines->current()->isHeadline()) {
                 return false;
             }
 
             $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention
-                && RstParser::isDirective($lines->current())
+                && $lines->current()->isDirective()
             ) {
                 if (RstParser::directiveIs($lines->current(), $directive)) {
                     if (null !== $directiveTypes) {
@@ -88,13 +88,13 @@ trait DirectiveTrait
                 return false;
             }
 
-            if ($lineIndention === $initialIndention && !RstParser::isDirective($lines->current())) {
+            if ($lineIndention === $initialIndention && !$lines->current()->isDirective()) {
                 return false;
             }
 
             if ((
                     $lineIndention === $initialIndention
-                    && RstParser::isDirective($lines->current())
+                    && $lines->current()->isDirective()
                     && RstParser::directiveIs($lines->current(), $directive)
                 ) || (0 === $lineIndention
                     && (

@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class NoSpaceBeforeSelfXmlClosingTag extends AbstractRule implements Rule
 {
@@ -29,7 +28,7 @@ class NoSpaceBeforeSelfXmlClosingTag extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ('/>' !== $line->clean() && u($line->raw())->match('/\ \/>/')) {
+        if ('/>' !== $line->clean() && $line->rawU()->match('/\ \/>/')) {
             return 'Please remove space before "/>"';
         }
 

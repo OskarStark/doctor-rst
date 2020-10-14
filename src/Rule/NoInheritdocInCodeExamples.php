@@ -17,7 +17,6 @@ use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class NoInheritdocInCodeExamples extends AbstractRule implements Rule
 {
@@ -36,7 +35,7 @@ class NoInheritdocInCodeExamples extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line->raw())->match('/@inheritdoc/')
+        if ($line->rawU()->match('/@inheritdoc/')
             && $this->in(
                 RstParser::DIRECTIVE_CODE_BLOCK,
                 $lines,

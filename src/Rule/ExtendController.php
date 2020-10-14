@@ -16,7 +16,6 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensure `Controller` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\Controller` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\AbstractController`.")
@@ -31,13 +30,13 @@ class ExtendController extends AbstractRule implements Rule
     public function check(Lines $lines, int $number): ?string
     {
         $lines->seek($number);
-        $line = $lines->current();
+        $line = $lines->current()->cleanU();
 
-        if (u($line->clean())->match('/^class(.*)extends AbstractController$/')) {
+        if ($line->match('/^class(.*)extends AbstractController$/')) {
             return 'Please extend Controller instead of AbstractController';
         }
 
-        if (u($line->clean())->match('/^use Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController;/')) {
+        if ($line->match('/^use Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController;/')) {
             return 'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"';
         }
 

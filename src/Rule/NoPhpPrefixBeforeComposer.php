@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class NoPhpPrefixBeforeComposer extends AbstractRule implements Rule
 {
@@ -29,7 +28,7 @@ class NoPhpPrefixBeforeComposer extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line->raw())->match('/php composer/')) {
+        if ($line->rawU()->match('/php composer/')) {
             return 'Please remove "php" prefix';
         }
 

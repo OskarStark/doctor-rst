@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class Replacement extends CheckListRule implements Rule
 {
@@ -32,7 +31,7 @@ class Replacement extends CheckListRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($matches = u($line->clean())->match($this->pattern)) {
+        if ($matches = $line->cleanU()->match($this->pattern)) {
             return sprintf($this->message, $matches[0]);
         }
 

@@ -18,7 +18,6 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 /**
  * @Description("Make sure yarn `--dev` option for `add` command is used at the end.")
@@ -40,7 +39,7 @@ class YarnDevOptionAtTheEnd extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line->clean())->match('/yarn add \-\-dev(.*)$/')) {
+        if ($line->cleanU()->match('/yarn add \-\-dev(.*)$/')) {
             return 'Please move "--dev" option to the end of the command';
         }
 

@@ -36,12 +36,12 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::isDirective($line)) {
+        if (!$line->isDirective()) {
             return null;
         }
 
         foreach (self::unSupportedDirectives() as $type) {
-            if (RstParser::directiveIs($line, $type) || !\in_array($type, RstParser::DIRECTIVES, true)) {
+            if (RstParser::directiveIs($line, $type)) {
                 return null;
             }
         }

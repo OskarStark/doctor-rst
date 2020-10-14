@@ -98,7 +98,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
                 continue;
             }
 
-            if (RstParser::isHeadline($lines->current())) {
+            if ($lines->current()->isHeadline()) {
                 return true;
             }
 

@@ -18,7 +18,6 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensure a :method: directive has special format.")
@@ -38,9 +37,8 @@ class NoBracketsInMethodDirective extends AbstractRule implements Rule
     public function check(Lines $lines, int $number): ?string
     {
         $lines->seek($number);
-        $line = $lines->current()->raw();
 
-        if (u($line)->match('/:method:`.*::.*\(\)`/')) {
+        if ($lines->current()->rawU()->match('/:method:`.*::.*\(\)`/')) {
             return 'Please remove "()" inside :method: directive';
         }
 

@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class ValidUseStatements extends AbstractRule implements Rule
 {
@@ -32,12 +31,10 @@ class ValidUseStatements extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $line = $line->clean();
-
         /*
          * @todo do it in one regex instead of regex + string search
          */
-        if (u($line)->match('/^use (.*);$/') && false !== strpos($line, '\\\\')) {
+        if ($line->cleanU()->match('/^use (.*);$/') && false !== strpos($line->clean(), '\\\\')) {
             return 'Please do not escape the backslashes in a use statement.';
         }
 

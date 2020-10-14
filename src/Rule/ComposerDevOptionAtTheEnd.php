@@ -18,7 +18,6 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 /**
  * @Description("Make sure Composer `--dev` option for `require` command is used at the end.")
@@ -37,7 +36,7 @@ class ComposerDevOptionAtTheEnd extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line->clean())->match('/composer require \-\-dev(.*)$/')) {
+        if ($line->cleanU()->match('/composer require \-\-dev(.*)$/')) {
             return 'Please move "--dev" option to the end of the command';
         }
 

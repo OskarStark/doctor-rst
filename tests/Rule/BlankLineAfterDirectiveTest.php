@@ -59,7 +59,7 @@ class BlankLineAfterDirectiveTest extends TestCase
             ];
 
             $errorMessage = sprintf('Please add a blank line after "%s" directive', $directive);
-            if (\in_array($directive, BlankLineAfterDirective::unSupportedDirectives())) {
+            if (\in_array($directive, BlankLineAfterDirective::unSupportedDirectives(), true)) {
                 $errorMessage = null;
             }
 

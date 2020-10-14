@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class NoComposerReq extends AbstractRule implements Rule
 {
@@ -29,7 +28,7 @@ class NoComposerReq extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line->clean())->match('/composer req /')) {
+        if ($line->cleanU()->match('/composer req /')) {
             return 'Please "composer require" instead of "composer req"';
         }
 

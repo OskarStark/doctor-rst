@@ -43,26 +43,6 @@ final class RstParserTest extends TestCase
     /**
      * @test
      *
-     * @dataProvider isDefaultDirectiveProvider
-     */
-    public function isDefaultDirective(bool $expected, string $string)
-    {
-        static::assertSame($expected, RstParser::isDefaultDirective(new Line($string)));
-    }
-
-    public function isDefaultDirectiveProvider(): \Generator
-    {
-        yield [true, 'this is using the default directive::'];
-        yield [true, 'prefixed classes included in doc block comments (``/** ... */``). For example::'];
-
-        yield [false, ''];
-        yield [false, '.. code-block:: php'];
-        yield [false, '.. index::'];
-    }
-
-    /**
-     * @test
-     *
      * @dataProvider isCommentProvider
      */
     public function isComment(bool $expected, string $string)
@@ -181,84 +161,6 @@ final class RstParserTest extends TestCase
         yield [false, '^^^'];
         yield [false, ''];
         yield [false, 'I am text::'];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider isHeadlineProvider
-     */
-    public function isHeadline(bool $expected, string $string)
-    {
-        static::assertSame($expected, RstParser::isHeadline(new Line($string)));
-    }
-
-    public function isHeadlineProvider()
-    {
-        yield [true, '==='];
-        yield [true, '~~~'];
-        yield [true, '***'];
-        yield [true, '---'];
-        yield [true, '...'];
-        yield [true, '^^^'];
-
-        yield [false, ''];
-        yield [false, 'I am text::'];
-        yield 'no spaces allowed' => [false, '--- ---'];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider hasNewlineProvider
-     */
-    public function hasNewline(bool $expected, string $string)
-    {
-        static::assertSame($expected, RstParser::hasNewline(new Line($string)));
-    }
-
-    public function hasNewlineProvider()
-    {
-        return [
-            [
-                true,
-                'test\n',
-            ],
-            [
-                false,
-                '',
-            ],
-            [
-                false,
-                'foo',
-            ],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider isDirectiveProvider
-     */
-    public function isDirective(bool $expected, string $string)
-    {
-        static::assertSame($expected, RstParser::isDirective(new Line($string)));
-    }
-
-    public function isDirectiveProvider()
-    {
-        yield [true, 'the following code is php::'];
-        yield [true, '.. code-block:: php'];
-        yield [true, '.. code-block:: text'];
-        yield [true, '.. code-block:: php-annotations'];
-        yield [true, ' .. code-block:: php'];
-        yield [true, '.. code-block:: html+php'];
-        yield [true, '.. image:: /foo/bar.jpg'];
-        yield [true, '.. admonition:: Screencast'];
-
-        yield [false, 'foo'];
-        yield [false, '.. _`they can be cached`: https://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-20#section-2.3.4'];
-        yield [false, '.. _security-firewalls:'];
     }
 
     /**

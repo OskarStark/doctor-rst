@@ -19,7 +19,6 @@ use App\Annotations\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 /**
  * @Description("Make sure to only use `yaml` instead of `yml`.")
@@ -41,7 +40,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line->raw())->match('/\.travis\.yml/')) {
+        if ($line->rawU()->match('/\.travis\.yml/')) {
             return null;
         }
 
@@ -49,7 +48,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
             return 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
         }
 
-        if ($matches = u($line->raw())->match('/\.yml/i')) {
+        if ($matches = $line->rawU()->match('/\.yml/i')) {
             return sprintf('Please use ".yaml" instead of "%s"', $matches[0]);
         }
 
