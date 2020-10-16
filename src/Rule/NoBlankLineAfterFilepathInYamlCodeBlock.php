@@ -40,7 +40,7 @@ class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Ru
         $lines->next();
 
         // YML / YAML
-        if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean(), $matches)) {
+        if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean()->toString(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 

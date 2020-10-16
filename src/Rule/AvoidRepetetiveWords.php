@@ -47,7 +47,7 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (RstParser::isDirective($line)
+        if ($line->isDirective()
             || RstParser::isLinkDefinition($line)
             || $line->isBlank()
             || RstParser::isTable($line)
@@ -60,7 +60,7 @@ class AvoidRepetetiveWords extends AbstractRule implements Rule
             return null;
         }
 
-        $words = explode(' ', $line->clean());
+        $words = explode(' ', $line->clean()->toString());
 
         foreach ($words as $key => $word) {
             if (0 === $key || \in_array($word, self::whitelist(), true)) {

@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class FinalAdminExtensionClasses extends AbstractRule implements Rule
 {
@@ -29,7 +28,7 @@ class FinalAdminExtensionClasses extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line->clean())->match('/^class(.*)extends AbstractAdminExtension$/')) {
+        if ($line->clean()->match('/^class(.*)extends AbstractAdminExtension$/')) {
             return 'Please use "final" for AdminExtension class';
         }
 

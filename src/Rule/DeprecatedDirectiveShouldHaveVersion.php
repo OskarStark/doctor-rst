@@ -52,7 +52,7 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements Rule
             return null;
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED), $lines->current()->clean(), $matches)) {
+        if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim($matches[1]);
 
             if (empty($version)) {

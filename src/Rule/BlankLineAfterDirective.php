@@ -36,12 +36,12 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::isDirective($line)) {
+        if (!$line->isDirective()) {
             return null;
         }
 
         foreach (self::unSupportedDirectives() as $type) {
-            if (RstParser::directiveIs($line, $type) || !\in_array($type, RstParser::DIRECTIVES, true)) {
+            if (RstParser::directiveIs($line, $type)) {
                 return null;
             }
         }
@@ -52,7 +52,7 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
         }
 
         if (!$lines->valid() || !$lines->current()->isBlank()) {
-            return sprintf('Please add a blank line after "%s" directive', $line->raw());
+            return sprintf('Please add a blank line after "%s" directive', $line->raw()->toString());
         }
 
         return null;

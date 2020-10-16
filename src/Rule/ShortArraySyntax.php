@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class ShortArraySyntax extends AbstractRule implements Rule
 {
@@ -29,7 +28,7 @@ class ShortArraySyntax extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (u($line->clean())->match('/[\\s|\()]array\(/')) {
+        if ($line->clean()->match('/[\\s|\()]array\(/')) {
             return 'Please use short array syntax';
         }
 

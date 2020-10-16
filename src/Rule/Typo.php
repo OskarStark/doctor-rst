@@ -16,7 +16,6 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 /**
  * @Description("Report common typos.")
@@ -36,7 +35,7 @@ class Typo extends CheckListRule
         $lines->seek($number);
         $line = $lines->current()->raw();
 
-        if ($matches = u($line)->match($this->pattern)) {
+        if ($matches = $line->match($this->pattern)) {
             return sprintf($this->message, $matches[0]);
         }
 

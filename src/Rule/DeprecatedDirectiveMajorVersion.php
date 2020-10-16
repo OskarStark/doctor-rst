@@ -62,7 +62,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements Rule, Conf
             return null;
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED), $lines->current()->clean(), $matches)) {
+        if ($matches = $lines->current()->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim($matches[1]);
 
             try {

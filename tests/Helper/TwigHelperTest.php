@@ -24,7 +24,7 @@ class TwigHelperTest extends TestCase
      *
      * @dataProvider isCommentProvider
      */
-    public function isComment(bool $expected, string $line, ?bool $closed)
+    public function isComment(bool $expected, string $line, ?bool $closed): void
     {
         static::assertSame(
             $expected,
@@ -32,7 +32,7 @@ class TwigHelperTest extends TestCase
         );
     }
 
-    public function isCommentProvider()
+    public function isCommentProvider(): iterable
     {
         yield [true, '{#', null];
         yield [true, '#}', null];

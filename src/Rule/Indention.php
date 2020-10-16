@@ -61,7 +61,7 @@ class Indention extends AbstractRule implements Rule, Configurable
         $line = $lines->current();
 
         if ($line->isBlank()
-            || preg_match('/([├└])/u', $line->clean())
+            || preg_match('/([├└])/u', $line->clean()->toString())
             || $this->isPartOfListItem($lines, $number)
             || $this->isPartOfFootnote($lines, $number)
             || $this->isPartOfRstComment($lines, $number)

@@ -20,7 +20,7 @@ class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements Rule
     public function check(Lines $lines, int $number): ?string
     {
         $lines->seek($number);
-        $line = $lines->current()->raw();
+        $line = $lines->current()->raw()->toString();
 
         if (!preg_match('/\/>/', $line)) {
             return null;

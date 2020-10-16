@@ -55,7 +55,7 @@ class DeprecatedDirectiveMinVersion extends AbstractRule implements Rule, Config
             return null;
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED), $lines->current()->clean(), $matches)) {
+        if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim($matches[1]);
 
             if (-1 === version_compare($version, $this->minVersion)) {

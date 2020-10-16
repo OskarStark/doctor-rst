@@ -44,10 +44,10 @@ class LowercaseAsInUseStatements extends AbstractRule implements Rule
         $lines->next();
 
         while ($lines->valid()
-            && !RstParser::isDirective($lines->current())
+            && !$lines->current()->isDirective()
             && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
-            if (preg_match('/^use (.*) (AS|As|aS) (.*);$/', $lines->current()->clean(), $matches)) {
+            if ($matches = $lines->current()->clean()->match('/^use (.*) (AS|As|aS) (.*);$/')) {
                 return sprintf('Please use lowercase "as" instead of "%s"', $matches[2]);
             }
 

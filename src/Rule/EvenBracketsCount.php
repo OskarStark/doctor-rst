@@ -44,26 +44,26 @@ class EvenBracketsCount extends AbstractRule implements Rule
         $lines->seek($number);
 
         while ($lines->valid()) {
-            if (preg_match_all('/(\(|\))/', $lines->current()->raw(), $matches)) {
+            if (preg_match_all('/(\(|\))/', $lines->current()->raw()->toString(), $matches)) {
                 $this->round = $this->round + \count($matches[0]);
 
                 // allow smilies
-                if (preg_match_all('/(\:\)|\:\()/', $lines->current()->raw(), $matches)) {
+                if (preg_match_all('/(\:\)|\:\()/', $lines->current()->raw()->toString(), $matches)) {
                     $this->round = $this->round - \count($matches[0]);
                 }
 
                 // allow sth like: "1) Chapter" or "A) Chapter"
                 // and: * `A) Chapter`
-                if (preg_match_all('/^(\* (\`)?|Step )?[a-zA-Z0-9]\)/', $lines->current()->raw(), $matches)) {
+                if (preg_match_all('/^(\* (\`)?|Step )?[a-zA-Z0-9]\)/', $lines->current()->raw()->toString(), $matches)) {
                     $this->round = $this->round - \count($matches[0]);
                 }
             }
 
-            if (preg_match_all('/(\{|\})/', $lines->current()->raw(), $matches)) {
+            if (preg_match_all('/(\{|\})/', $lines->current()->raw()->toString(), $matches)) {
                 $this->curly = $this->curly + \count($matches[0]);
             }
 
-            if (preg_match_all('/(\[|\])/', $lines->current()->raw(), $matches)) {
+            if (preg_match_all('/(\[|\])/', $lines->current()->raw()->toString(), $matches)) {
                 $this->square = $this->square + \count($matches[0]);
             }
 //

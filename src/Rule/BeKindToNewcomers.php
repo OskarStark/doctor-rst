@@ -32,7 +32,7 @@ class BeKindToNewcomers extends CheckListRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match($this->pattern, $line->raw(), $matches)) {
+        if (preg_match($this->pattern, $line->raw()->toString(), $matches)) {
             return sprintf($this->message, $matches[0]);
         }
 

@@ -37,12 +37,12 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
         }
 
         // :: is a php code block, but its ok
-        if (preg_match('/\:\:$/', $lines->current()->clean())) {
+        if (preg_match('/\:\:$/', $lines->current()->clean()->toString())) {
             return null;
         }
 
         // it has no indention, check if it comes after a headline, in this case its ok
-        if (!preg_match('/^[\s]+/', $lines->current()->raw(), $matches)) {
+        if (!preg_match('/^[\s]+/', $lines->current()->raw()->toString(), $matches)) {
             if ($this->directAfterHeadline($lines, $number)
                 || $this->directAfterTable($lines, $number)
                 || $this->previousParagraphEndsWithQuestionMark($lines, $number)
@@ -53,7 +53,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 
         // check if the code block is not on the first level, in this case
         // it could not be in a configuration block which would be ok
-        if (preg_match('/^[\s]+/', $lines->current()->raw(), $matches)
+        if (preg_match('/^[\s]+/', $lines->current()->raw()->toString(), $matches)
             && RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)
             && $number > 0
         ) {
@@ -98,7 +98,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
                 continue;
             }
 
-            if (RstParser::isHeadline($lines->current())) {
+            if ($lines->current()->isHeadline()) {
                 return true;
             }
 
@@ -146,7 +146,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
                 continue;
             }
 
-            if (preg_match('/\?$/', $lines->current()->clean())) {
+            if (preg_match('/\?$/', $lines->current()->clean()->toString())) {
                 return true;
             }
 

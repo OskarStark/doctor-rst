@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class NoAdminYaml extends AbstractRule implements Rule
 {
@@ -29,15 +28,15 @@ class NoAdminYaml extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current()->raw();
 
-        if (u($line)->match('/_admin\.yaml/')) {
+        if ($line->match('/_admin\.yaml/')) {
             return null;
         }
 
-        if (u($line)->match('/admin\.yml/')) {
+        if ($line->match('/admin\.yml/')) {
             return 'Please use "services.yaml" instead of "admin.yml"';
         }
 
-        if (u($line)->match('/admin\.yaml/')) {
+        if ($line->match('/admin\.yaml/')) {
             return 'Please use "services.yaml" instead of "admin.yaml"';
         }
 

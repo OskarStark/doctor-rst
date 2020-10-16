@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 class NoComposerPhar extends AbstractRule implements Rule
 {
@@ -27,9 +26,8 @@ class NoComposerPhar extends AbstractRule implements Rule
     public function check(Lines $lines, int $number): ?string
     {
         $lines->seek($number);
-        $line = $lines->current();
 
-        if (u($line->raw())->match('/composer\.phar/')) {
+        if ($lines->current()->raw()->match('/composer\.phar/')) {
             return 'Please use "composer" instead of "composer.phar"';
         }
 

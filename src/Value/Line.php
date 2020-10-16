@@ -15,29 +15,33 @@ namespace App\Value;
 
 use App\Rst\RstParser;
 use function Symfony\Component\String\u;
+use Symfony\Component\String\UnicodeString;
 
 final class Line
 {
-    private string $raw;
-    private string $clean;
+    private UnicodeString $raw;
+    private UnicodeString $clean;
     private bool $blank;
     private ?int $indention = null;
+    private ?bool $headline = null;
+    private ?bool $isDirective = null;
+    private ?bool $isDefaultDirective = null;
 
     public function __construct(string $line)
     {
-        $this->raw = $line;
-        $this->clean = RstParser::clean($line);
-        $this->blank = '' === $this->clean;
+        $this->raw = u($line);
+        $this->clean = u(RstParser::clean($line));
+        $this->blank = $this->clean->isEmpty();
     }
 
-    public function clean(): string
-    {
-        return $this->clean;
-    }
-
-    public function raw(): string
+    public function raw(): UnicodeString
     {
         return $this->raw;
+    }
+
+    public function clean(): UnicodeString
+    {
+        return $this->clean;
     }
 
     public function isBlank(): bool
@@ -48,7 +52,7 @@ final class Line
     public function indention(): int
     {
         if (null === $this->indention) {
-            if ($matches = u($this->raw)->match('/^[\s]+/')) {
+            if ($matches = $this->raw->match('/^[\s]+/')) {
                 return $this->indention = \strlen($matches[0]);
             }
 
@@ -56,5 +60,39 @@ final class Line
         }
 
         return $this->indention;
+    }
+
+    public function isHeadline(): bool
+    {
+        if (null === $this->headline) {
+            $this->headline = [] !== $this->raw->match('/^([\=]+|[\~]+|[\*]+|[\-]+|[\.]+|[\^]+)$/');
+        }
+
+        return $this->headline;
+    }
+
+    /**
+     * @todo use regex here
+     */
+    public function isDirective(): bool
+    {
+        if (null === $this->isDirective) {
+            $this->isDirective = (0 === strpos(ltrim($this->raw->toString()), '.. ')
+                    && 0 !== strpos(ltrim($this->raw->toString()), '.. _`')
+                    && false !== strpos($this->raw->toString(), '::')
+                ) || $this->isDefaultDirective();
+        }
+
+        return $this->isDirective;
+    }
+
+    public function isDefaultDirective(): bool
+    {
+        if (null === $this->isDefaultDirective) {
+            $this->isDefaultDirective = !preg_match('/^\.\. (.*)::/', $this->raw->toString())
+                && preg_match('/::$/', $this->raw->toString());
+        }
+
+        return $this->isDefaultDirective;
     }
 }

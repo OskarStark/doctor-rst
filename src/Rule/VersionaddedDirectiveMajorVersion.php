@@ -62,7 +62,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Co
             return null;
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $lines->current()->clean(), $matches)) {
+        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $lines->current()->clean()->toString(), $matches)) {
             $version = trim($matches[1]);
 
             try {

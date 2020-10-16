@@ -45,8 +45,8 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
             while ($lines->valid()
                 && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
             ) {
-                if (preg_match('/[<]+/', $lines->current()->clean(), $matches)
-                    && !preg_match('/<3/', $lines->current()->clean())
+                if (preg_match('/[<]+/', $lines->current()->clean()->toString(), $matches)
+                    && !preg_match('/<3/', $lines->current()->clean()->toString())
                 ) {
                     return $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
                 }
@@ -65,7 +65,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                 && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
                 && false === $foundHtml
             ) {
-                if (preg_match('/[<]+/', $lines->current()->clean())) {
+                if (preg_match('/[<]+/', $lines->current()->clean()->toString())) {
                     $foundHtml = true;
                 }
 

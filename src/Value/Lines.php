@@ -31,9 +31,7 @@ final class Lines implements \SeekableIterator
      */
     public static function fromArray(array $array): self
     {
-        return new self(array_map(static function (string $string) {
-            return new Line($string);
-        }, $array));
+        return new self(array_map(static fn (string $string) => new Line($string), $array));
     }
 
     /**
@@ -46,7 +44,9 @@ final class Lines implements \SeekableIterator
 
     public function current(): Line
     {
-        $this->validate();
+        if (!isset($this->array[$this->currentLine])) {
+            throw $this->createOutOfBoundException($this->currentLine);
+        }
 
         return $this->array[$this->currentLine];
     }
@@ -58,7 +58,9 @@ final class Lines implements \SeekableIterator
 
     public function key(): int
     {
-        $this->validate();
+        if (!isset($this->array[$this->currentLine])) {
+            throw $this->createOutOfBoundException($this->currentLine);
+        }
 
         return $this->currentLine;
     }
@@ -81,11 +83,9 @@ final class Lines implements \SeekableIterator
         $currentLine = $this->currentLine;
         $this->currentLine = $line;
 
-        try {
-            $this->validate();
-        } catch (\OutOfBoundsException $exception) {
+        if (!isset($this->array[$this->currentLine])) {
             $this->currentLine = $currentLine;
-            throw $exception;
+            throw $this->createOutOfBoundException($line);
         }
     }
 
@@ -94,15 +94,8 @@ final class Lines implements \SeekableIterator
         $this->rewind();
     }
 
-    private function validate(): void
+    private function createOutOfBoundException(int $line): \OutOfBoundsException
     {
-        if (!$this->valid()) {
-            throw new \OutOfBoundsException(
-                sprintf(
-                    'Line "%d" does not exists.',
-                    $this->currentLine
-                )
-            );
-        }
+        return new \OutOfBoundsException(sprintf('Line "%d" does not exists.', $line));
     }
 }

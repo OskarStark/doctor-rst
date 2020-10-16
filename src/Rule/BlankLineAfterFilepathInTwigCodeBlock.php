@@ -40,7 +40,7 @@ class BlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Rule
         $lines->next();
 
         // TWIG
-        if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean(), $matches)) {
+        if ($matches = $lines->current()->clean()->match('/^{#(.*)\.twig(.*)#}/')) {
             return $this->validateBlankLine($lines, $matches);
         }
 

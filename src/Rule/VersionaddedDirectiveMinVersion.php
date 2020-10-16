@@ -55,7 +55,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Conf
             return null;
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $lines->current()->clean(), $matches)) {
+        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $lines->current()->clean()->toString(), $matches)) {
             $version = trim($matches[1]);
 
             if (-1 === version_compare($version, $this->minVersion)) {
