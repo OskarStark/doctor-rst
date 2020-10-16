@@ -30,7 +30,7 @@ class ExtendAbstractController extends AbstractRule implements Rule
     public function check(Lines $lines, int $number): ?string
     {
         $lines->seek($number);
-        $line = $lines->current()->cleanU();
+        $line = $lines->current()->clean();
 
         if ($line->match('/^class(.*)extends Controller$/')) {
             return 'Please extend AbstractController instead of Controller';

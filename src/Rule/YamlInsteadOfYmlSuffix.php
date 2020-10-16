@@ -40,7 +40,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->rawU()->match('/\.travis\.yml/')) {
+        if ($line->raw()->match('/\.travis\.yml/')) {
             return null;
         }
 
@@ -48,7 +48,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
             return 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
         }
 
-        if ($matches = $line->rawU()->match('/\.yml/i')) {
+        if ($matches = $line->raw()->match('/\.yml/i')) {
             return sprintf('Please use ".yaml" instead of "%s"', $matches[0]);
         }
 

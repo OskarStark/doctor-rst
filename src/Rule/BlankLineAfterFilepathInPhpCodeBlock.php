@@ -39,7 +39,7 @@ class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Rule
         $lines->next();
 
         // PHP
-        if (preg_match('/^\/\/(.*)\.php$/', $lines->current()->clean(), $matches)) {
+        if ($matches = $lines->current()->clean()->match('/^\/\/(.*)\.php$/')) {
             return $this->validateBlankLine($lines, $matches);
         }
 

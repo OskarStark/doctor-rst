@@ -49,7 +49,7 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
             && !$lines->current()->isDirective()
             && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
-            $line = $lines->current()->cleanU();
+            $line = $lines->current()->clean();
 
             if ($line->match('/^use (.*);$/')) {
                 $useStatementFound = true;

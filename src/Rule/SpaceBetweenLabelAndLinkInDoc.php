@@ -38,7 +38,7 @@ class SpaceBetweenLabelAndLinkInDoc extends AbstractRule implements Rule
     public function check(Lines $lines, int $number): ?string
     {
         $lines->seek($number);
-        $line = $lines->current()->rawU();
+        $line = $lines->current()->raw();
 
         if ($matches = $line->match('/:doc:`(?P<label>.*)<(?P<link>.*)>`/')) {
             if (!u($matches['label'])->endsWith(' ')) {

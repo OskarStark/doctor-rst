@@ -30,7 +30,7 @@ class NoConfigYaml extends AbstractRule implements Rule
     {
         $lines->seek($number);
 
-        if ($lines->current()->rawU()->match('/app\/config\/config\.yml/')) {
+        if ($lines->current()->raw()->match('/app\/config\/config\.yml/')) {
             return 'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"';
         }
 

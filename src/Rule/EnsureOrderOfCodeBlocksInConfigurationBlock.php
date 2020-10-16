@@ -49,7 +49,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         $codeBlocks = [];
         while ($lines->valid() && ($indention < $lines->current()->indention() || $lines->current()->isBlank())) {
             if (RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CODE_BLOCK)) {
-                $codeBlocks[] = $lines->current()->clean();
+                $codeBlocks[] = $lines->current()->clean()->toString();
 
                 // if its an xml code-block, check if it contains xliff
                 // @todo refactor in extra method: getDirectiveContent
@@ -58,7 +58,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
                     $content->seek($lines->key() + 1);
 
                     while ($content->valid() && ($content->current()->isBlank() || $lines->current()->indention() < $content->current()->indention())) {
-                        if (false !== strpos($content->current()->raw(), 'xliff')) {
+                        if (false !== strpos($content->current()->raw()->toString(), 'xliff')) {
                             $xliff = true;
 
                             break;

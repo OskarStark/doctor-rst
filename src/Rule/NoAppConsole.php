@@ -31,7 +31,7 @@ class NoAppConsole extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->rawU()->match('/app\/console/')) {
+        if ($line->raw()->match('/app\/console/')) {
             return 'Please use "bin/console" instead of "app/console"';
         }
 

@@ -36,8 +36,8 @@ class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
         // check if next line is "<?php"
         $nextLine = $lines->current();
 
-        if (!$nextLine->cleanU()->startsWith('<?php')) {
-            return sprintf('Please add PHP open tag after "%s" directive', $line->raw());
+        if (!$nextLine->clean()->startsWith('<?php')) {
+            return sprintf('Please add PHP open tag after "%s" directive', $line->raw()->toString());
         }
 
         return null;

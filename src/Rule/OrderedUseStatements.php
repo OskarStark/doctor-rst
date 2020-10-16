@@ -51,18 +51,18 @@ class OrderedUseStatements extends AbstractRule implements Rule
         while ($lines->valid()
             && !$lines->current()->isDirective()
             && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
-            && (!preg_match('/^((class|trait) (.*)|\$)/', $lines->current()->clean()))
+            && (!preg_match('/^((class|trait) (.*)|\$)/', $lines->current()->clean()->toString()))
         ) {
-            if ($lines->current()->cleanU()->match('/^use (.*);$/')) {
+            if ($lines->current()->clean()->match('/^use (.*);$/')) {
                 if (null === $indentionOfFirstFoundUseStatement) {
                     $indentionOfFirstFoundUseStatement = $lines->current()->indention();
-                    $statements[] = $this->extractClass($lines->current()->clean());
+                    $statements[] = $this->extractClass($lines->current()->clean()->toString());
                 } else {
                     if ($indentionOfFirstFoundUseStatement !== $lines->current()->indention()) {
                         break;
                     }
 
-                    $statements[] = $this->extractClass($lines->current()->clean());
+                    $statements[] = $this->extractClass($lines->current()->clean()->toString());
                 }
             }
 

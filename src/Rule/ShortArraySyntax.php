@@ -28,7 +28,7 @@ class ShortArraySyntax extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->cleanU()->match('/[\\s|\()]array\(/')) {
+        if ($line->clean()->match('/[\\s|\()]array\(/')) {
             return 'Please use short array syntax';
         }
 

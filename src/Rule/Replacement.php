@@ -31,7 +31,7 @@ class Replacement extends CheckListRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($matches = $line->cleanU()->match($this->pattern)) {
+        if ($matches = $line->clean()->match($this->pattern)) {
             return sprintf($this->message, $matches[0]);
         }
 

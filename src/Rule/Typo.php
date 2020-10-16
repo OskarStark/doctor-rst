@@ -33,7 +33,7 @@ class Typo extends CheckListRule
     public function check(Lines $lines, int $number): ?string
     {
         $lines->seek($number);
-        $line = $lines->current()->rawU();
+        $line = $lines->current()->raw();
 
         if ($matches = $line->match($this->pattern)) {
             return sprintf($this->message, $matches[0]);

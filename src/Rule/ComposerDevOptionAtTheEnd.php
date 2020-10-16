@@ -36,7 +36,7 @@ class ComposerDevOptionAtTheEnd extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->cleanU()->match('/composer require \-\-dev(.*)$/')) {
+        if ($line->clean()->match('/composer require \-\-dev(.*)$/')) {
             return 'Please move "--dev" option to the end of the command';
         }
 

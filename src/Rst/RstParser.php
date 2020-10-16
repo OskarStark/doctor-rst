@@ -122,7 +122,7 @@ class RstParser
 
         Assert::oneOf($directive, self::DIRECTIVES);
 
-        if (false !== strpos($line->raw(), $directive)) {
+        if (false !== strpos($line->raw()->toString(), $directive)) {
             return true;
         }
 
@@ -130,7 +130,7 @@ class RstParser
             $directivesExcludedCodeBlock = array_diff(self::DIRECTIVES, [$directive]);
 
             foreach ($directivesExcludedCodeBlock as $other) {
-                if (false !== strpos($line->raw(), $other)) {
+                if (false !== strpos($line->raw()->toString(), $other)) {
                     return false;
                 }
             }
@@ -180,13 +180,13 @@ class RstParser
             ]
         );
 
-        if (substr($line->clean(), -(\strlen(($type)))) === $type
+        if (substr($line->clean()->toString(), -(\strlen(($type)))) === $type
             || (self::CODE_BLOCK_PHP === $type && $line->isDefaultDirective())) {
             if (!$strict) {
                 return true;
             }
 
-            if (($matches = $line->cleanU()->match('/\:\: (.*)$/')) && $type === $matches[1]) {
+            if (($matches = $line->clean()->match('/\:\: (.*)$/')) && $type === $matches[1]) {
                 return true;
             }
 
@@ -198,12 +198,12 @@ class RstParser
 
     public static function isTable(Line $line): bool
     {
-        return [] !== $line->rawU()->match('/^[\=\-]+([\s\=\-]+)?$/');
+        return [] !== $line->raw()->match('/^[\=\-]+([\s\=\-]+)?$/');
     }
 
     public static function isLinkDefinition(Line $line): bool
     {
-        return [] !== $line->rawU()->match('/^\.\. _(`([^`]+)`|([^`]+)): (.*)$/');
+        return [] !== $line->raw()->match('/^\.\. _(`([^`]+)`|([^`]+)): (.*)$/');
     }
 
     public static function isLinkUsage(string $string): bool
@@ -213,7 +213,7 @@ class RstParser
 
     public static function isListItem(Line $line): bool
     {
-        return [] !== $line->cleanU()->match('/^(\* |\#. |[A-Za-z]{1}\) |-\ |[0-9]\. |[0-9]\) )/');
+        return [] !== $line->clean()->match('/^(\* |\#. |[A-Za-z]{1}\) |-\ |[0-9]\. |[0-9]\) )/');
     }
 
     /**
@@ -221,7 +221,7 @@ class RstParser
      */
     public static function isFootnote(Line $line): bool
     {
-        return [] !== $line->cleanU()->match('/^\.\. \[[0-9]\]/');
+        return [] !== $line->clean()->match('/^\.\. \[[0-9]\]/');
     }
 
     /**
@@ -229,7 +229,7 @@ class RstParser
      */
     public static function isComment(Line $line): bool
     {
-        return !self::isFootnote($line) && preg_match('/^\.\. /', $line->clean());
+        return !self::isFootnote($line) && $line->clean()->match('/^\.\. /');
     }
 
     /**
@@ -237,11 +237,11 @@ class RstParser
      */
     public static function isLineNumberAnnotation(Line $line): bool
     {
-        return [] !== $line->cleanU()->match('/^Line [0-9]+(\s?-\s?[0-9]+)?$/');
+        return [] !== $line->clean()->match('/^Line [0-9]+(\s?-\s?[0-9]+)?$/');
     }
 
     public static function isOption(Line $line): bool
     {
-        return [] !== $line->cleanU()->match('/^(:[a-zA-Z]+:).*/');
+        return [] !== $line->clean()->match('/^(:[a-zA-Z]+:).*/');
     }
 }

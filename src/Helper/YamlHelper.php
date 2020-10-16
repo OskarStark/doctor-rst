@@ -19,10 +19,6 @@ final class YamlHelper
 {
     public static function isComment(Line $line): bool
     {
-        if (preg_match('/^#(.*)/', $line->clean())) {
-            return true;
-        }
-
-        return false;
+        return [] !== $line->clean()->match('/^#(.*)/');
     }
 }

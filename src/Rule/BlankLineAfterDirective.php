@@ -52,7 +52,7 @@ class BlankLineAfterDirective extends AbstractRule implements Rule
         }
 
         if (!$lines->valid() || !$lines->current()->isBlank()) {
-            return sprintf('Please add a blank line after "%s" directive', $line->raw());
+            return sprintf('Please add a blank line after "%s" directive', $line->raw()->toString());
         }
 
         return null;

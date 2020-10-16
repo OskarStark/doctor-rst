@@ -47,7 +47,7 @@ class NoBashPrompt extends AbstractRule implements Rule
         $lines->next();
         $lines->next();
 
-        if ($lines->current()->cleanU()->match('/^\$ /')) {
+        if ($lines->current()->clean()->match('/^\$ /')) {
             return 'Please remove the "$" prefix in .. code-block:: directive';
         }
 

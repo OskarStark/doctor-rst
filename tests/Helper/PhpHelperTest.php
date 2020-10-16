@@ -25,7 +25,7 @@ class PhpHelperTest extends TestCase
      *
      * @dataProvider isCommentProvider
      */
-    public function isComment(bool $expected, string $line)
+    public function isComment(bool $expected, string $line): void
     {
         static::assertSame(
             $expected,
@@ -89,16 +89,6 @@ class PhpHelperTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @dataProvider isUsingOneBackslashProvider
-     */
-    public function isUsingOneBackslash(bool $expected, string $string)
-    {
-        static::assertSame($expected, PhpHelper::isUsingOneBackslash($string));
-    }
-
-    /**
      * @return \Generator<array{0: bool, 1: string}>
      */
     public function isUsingOneBackslashProvider(): \Generator
@@ -107,46 +97,6 @@ class PhpHelperTest extends TestCase
         yield 'one backslash' => [true, 'Test\Test'];
         yield 'no backslash' => [false, 'Test'];
         yield 'two backslashes' => [false, '\\\\Test'];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider isStartingWithOneBackslashProvider
-     */
-    public function isStartingWithOneBackslash(bool $expected, string $string)
-    {
-        static::assertSame($expected, PhpHelper::isStartingWithOneBackslash($string));
-    }
-
-    /**
-     * @return \Generator<array{0: bool, 1: string}>
-     */
-    public function isStartingWithOneBackslashProvider(): \Generator
-    {
-        yield 'one backslash' => [true, '\Test'];
-        yield 'no backslash' => [false, 'Test'];
-        yield 'two backslashes' => [false, '\\\\Test'];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider isStartingWithTwoBackslashesProvider
-     */
-    public function isStartingWithTwoBackslashes(bool $expected, string $string)
-    {
-        static::assertSame($expected, PhpHelper::isStartingWithTwoBackslashes($string));
-    }
-
-    /**
-     * @return \Generator<array{0: bool, 1: string}>
-     */
-    public function isStartingWithTwoBackslashesProvider(): \Generator
-    {
-        yield 'one backslash' => [false, '\Test'];
-        yield 'no backslash' => [false, 'Test'];
-        yield 'two backslashes' => [true, '\\\\Test'];
     }
 
     /**

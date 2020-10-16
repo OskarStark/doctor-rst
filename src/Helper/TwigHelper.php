@@ -19,28 +19,21 @@ final class TwigHelper
 {
     public static function isComment(Line $line, bool $closed = null): bool
     {
-        $line = $line->clean();
+        $string = $line->clean();
 
-        if ('{#' === $line || '#}' === $line) {
+        if ($string->equalsTo(['{#', '#}'])) {
             return true;
         }
 
-        if (null === $closed) {
-            if (preg_match('/^{#(.*)/', $line)) {
-                return true;
-            }
-        } else {
-            if (preg_match('/^{#(.*)/', $line)
-                && (
-                    ($closed && preg_match('/(.*)#}$/', $line))
-                    || (!$closed && !preg_match('/(.*)#}$/', $line)
-                    )
-                )
-            ) {
-                return true;
-            }
+        if (null === $closed && $string->startsWith('{#')) {
+            return true;
         }
 
-        return false;
+        return $string->startsWith('{#')
+            && (
+                ($closed && $string->endsWith('#}'))
+                || (!$closed && !$string->endsWith('#}'))
+            )
+        ;
     }
 }

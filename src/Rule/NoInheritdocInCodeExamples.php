@@ -35,7 +35,7 @@ class NoInheritdocInCodeExamples extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->rawU()->match('/@inheritdoc/')
+        if ($line->raw()->match('/@inheritdoc/')
             && $this->in(
                 RstParser::DIRECTIVE_CODE_BLOCK,
                 $lines,

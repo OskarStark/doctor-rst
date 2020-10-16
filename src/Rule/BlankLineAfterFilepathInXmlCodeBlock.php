@@ -36,7 +36,7 @@ class BlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Rule
         $lines->next();
 
         // XML
-        if (preg_match('/^<!--(.*)\.(xml|xlf|xliff)(.*)-->$/', $lines->current()->clean(), $matches)) {
+        if ($matches = $lines->current()->clean()->match('/^<!--(.*)\.(xml|xlf|xliff)(.*)-->$/')) {
             return $this->validateBlankLine($lines, $matches);
         }
 

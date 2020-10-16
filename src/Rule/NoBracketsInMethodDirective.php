@@ -38,7 +38,7 @@ class NoBracketsInMethodDirective extends AbstractRule implements Rule
     {
         $lines->seek($number);
 
-        if ($lines->current()->rawU()->match('/:method:`.*::.*\(\)`/')) {
+        if ($lines->current()->raw()->match('/:method:`.*::.*\(\)`/')) {
             return 'Please remove "()" inside :method: directive';
         }
 

@@ -38,7 +38,7 @@ class ExtensionXlfInsteadOfXliff extends AbstractRule implements Rule
     {
         $lines->seek($number);
 
-        if ($matches = $lines->current()->rawU()->match('/\.xliff/i')) {
+        if ($matches = $lines->current()->raw()->match('/\.xliff/i')) {
             return sprintf('Please use ".xlf" extension instead of "%s"', $matches[0]);
         }
 

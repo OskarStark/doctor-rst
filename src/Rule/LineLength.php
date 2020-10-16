@@ -29,7 +29,7 @@ class LineLength extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        $count = mb_strlen($line->clean());
+        $count = mb_strlen($line->clean()->toString());
 
         if ($count > $this->max) {
             return sprintf('Line is to long (max %s) currently: %s', $this->max, $count);

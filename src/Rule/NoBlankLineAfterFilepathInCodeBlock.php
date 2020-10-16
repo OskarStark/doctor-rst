@@ -31,22 +31,22 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
         $lines->next();
 
         // PHP
-        if (preg_match('/^\/\/(.*)\.php$/', $lines->current()->clean(), $matches)) {
+        if (preg_match('/^\/\/(.*)\.php$/', $lines->current()->clean()->toString(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         // YML / YAML
-        if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean(), $matches)) {
+        if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean()->toString(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         // XML
-        if (preg_match('/^<!--(.*)\.xml(.*)-->$/', $lines->current()->clean(), $matches)) {
+        if (preg_match('/^<!--(.*)\.xml(.*)-->$/', $lines->current()->clean()->toString(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 
         // TWIG
-        if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean(), $matches)) {
+        if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean()->toString(), $matches)) {
             return $this->validateBlankLine($lines, $matches);
         }
 

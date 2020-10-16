@@ -28,7 +28,7 @@ class FinalAdminClasses extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->cleanU()->match('/^class(.*)extends AbstractAdmin$/')) {
+        if ($line->clean()->match('/^class(.*)extends AbstractAdmin$/')) {
             return 'Please use "final" for Admin class';
         }
 

@@ -39,7 +39,7 @@ class YarnDevOptionAtTheEnd extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->cleanU()->match('/yarn add \-\-dev(.*)$/')) {
+        if ($line->clean()->match('/yarn add \-\-dev(.*)$/')) {
             return 'Please move "--dev" option to the end of the command';
         }
 

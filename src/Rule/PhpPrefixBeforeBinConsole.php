@@ -37,17 +37,17 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!preg_match('/bin\/console/', $line->raw())) {
+        if (!preg_match('/bin\/console/', $line->raw()->toString())) {
             return null;
         }
 
-        if (preg_match('/(`|"|_|├─ )bin\/console/u', $line->raw())
-            || preg_match('/php "%s\/\.\.\/bin\/console"/', $line->raw())) {
+        if (preg_match('/(`|"|_|├─ )bin\/console/u', $line->raw()->toString())
+            || preg_match('/php "%s\/\.\.\/bin\/console"/', $line->raw()->toString())) {
             return null;
         }
 
-        if (preg_match('@/bin/console:\d+@u', $line->raw())
-            || preg_match('/php "%s\/\.\.\/bin\/console"/', $line->raw())) {
+        if (preg_match('@/bin/console:\d+@u', $line->raw()->toString())
+            || preg_match('/php "%s\/\.\.\/bin\/console"/', $line->raw()->toString())) {
             return null;
         }
 
@@ -55,7 +55,7 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements Rule
             return null;
         }
 
-        if (!preg_match('/php(.*)bin\/console/', $line->raw())) {
+        if (!preg_match('/php(.*)bin\/console/', $line->raw()->toString())) {
             return 'Please add "php" prefix before "bin/console"';
         }
 

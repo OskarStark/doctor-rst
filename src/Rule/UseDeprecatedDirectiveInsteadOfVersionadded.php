@@ -43,7 +43,7 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
         while ($lines->valid()
             && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
-            if ($lines->current()->rawU()->match('/[^`]deprecated/')) {
+            if ($lines->current()->raw()->match('/[^`]deprecated/')) {
                 return 'Please use ".. deprecated::" instead of ".. versionadded::"';
             }
 

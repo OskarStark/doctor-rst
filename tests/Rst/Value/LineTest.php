@@ -25,7 +25,7 @@ final class LineTest extends TestCase
      */
     public function clean(string $expected, string $string): void
     {
-        static::assertSame($expected, (new Line($string))->clean());
+        static::assertSame($expected, (new Line($string))->clean()->toString());
     }
 
     public function cleanProvider(): array

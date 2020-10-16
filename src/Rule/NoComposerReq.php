@@ -28,7 +28,7 @@ class NoComposerReq extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->cleanU()->match('/composer req /')) {
+        if ($line->clean()->match('/composer req /')) {
             return 'Please "composer require" instead of "composer req"';
         }
 

@@ -34,7 +34,7 @@ class ValidUseStatements extends AbstractRule implements Rule
         /*
          * @todo do it in one regex instead of regex + string search
          */
-        if ($line->cleanU()->match('/^use (.*);$/') && false !== strpos($line->clean(), '\\\\')) {
+        if ($line->clean()->match('/^use (.*);$/') && false !== strpos($line->clean()->toString(), '\\\\')) {
             return 'Please do not escape the backslashes in a use statement.';
         }
 

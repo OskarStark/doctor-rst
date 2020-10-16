@@ -60,7 +60,7 @@ final class RstAnalyzer implements Analyzer
                         $violationMessage,
                         (string) $file->getRealPath(),
                         $no + 1,
-                        Rule::TYPE_FILE === $rule::getType() ? '' : trim($line->raw())
+                        Rule::TYPE_FILE === $rule::getType() ? '' : trim($line->raw()->toString())
                     );
                 }
 

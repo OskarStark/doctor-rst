@@ -19,21 +19,21 @@ final class XmlHelper
 {
     public static function isComment(Line $line, bool $closed = null): bool
     {
-        $line = $line->clean();
+        $string = $line->clean()->toString();
 
-        if ('<!--' === $line || '-->' === $line) {
+        if ('<!--' === $string || '-->' === $string) {
             return true;
         }
 
         if (null === $closed) {
-            if (preg_match('/^<!--(.*)/', $line)) {
+            if (preg_match('/^<!--(.*)/', $string)) {
                 return true;
             }
         } else {
-            if (preg_match('/^<!--(.*)/', $line)
+            if (preg_match('/^<!--(.*)/', $string)
                 && (
-                      ($closed && preg_match('/(.*)-->$/', $line))
-                      || (!$closed && !preg_match('/(.*)-->$/', $line)
+                      ($closed && preg_match('/(.*)-->$/', $string))
+                      || (!$closed && !preg_match('/(.*)-->$/', $string)
                    )
                 )
             ) {
