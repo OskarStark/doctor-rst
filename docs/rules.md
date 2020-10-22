@@ -49,6 +49,7 @@
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
 * [no_php_prefix_before_composer](#no_php_prefix_before_composer)
 * [no_space_before_self_xml_closing_tag](#no_space_before_self_xml_closing_tag)
+* [only_backslashes_in_namespace_in_php_code_block](#only_backslashes_in_namespace_in_php_code_block)
 * [ordered_use_statements](#ordered_use_statements)
 * [php_open_tag_in_code_block_php_directive](#php_open_tag_in_code_block_php_directive)
 * [php_prefix_before_bin_console](#php_prefix_before_bin_console)
@@ -454,6 +455,22 @@ php bin/console list
 
 #### Groups [`@Sonata`]
 
+## `only_backslashes_in_namespace_in_php_code_block`
+
+  > _A namespace declaration in a PHP code-block should only contain backslashes._
+
+##### Valid Examples :+1:
+
+```rst
+namespace Foo\Bar;
+```
+
+##### Invalid Examples :-1:
+
+```rst
+namespace Foo/Bar;
+```
+
 ## `ordered_use_statements`
 
 #### Groups [`@Sonata`, `@Symfony`]
@@ -729,3 +746,4 @@ yarn add --dev jquery
 ```rst
 yarn add jquery --dev
 ```
+
