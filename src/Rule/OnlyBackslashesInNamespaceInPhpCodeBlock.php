@@ -16,7 +16,6 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
-use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 
@@ -36,16 +35,7 @@ class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements R
 
         if ($line->clean()->lower()->startsWith('namespace')
             && $line->clean()->containsAny('/')
-            && $this->in(
-                RstParser::DIRECTIVE_CODE_BLOCK,
-                $lines,
-                $number,
-                [
-                    RstParser::CODE_BLOCK_PHP,
-                    RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-                    RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-                ]
-            )
+            && $this->inPhpCodeBlock($lines, $number)
         ) {
             return sprintf(
                 'Please check "%s", it should not contain "/"',
