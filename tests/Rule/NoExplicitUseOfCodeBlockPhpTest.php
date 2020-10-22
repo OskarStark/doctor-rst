@@ -33,63 +33,71 @@ class NoExplicitUseOfCodeBlockPhpTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array<string|null, RstSample>>
+     */
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                null,
-                new RstSample('Check the following controller syntax::'),
-            ],
-            [
-                'Please do not use ".. code-block:: php", use "::" instead.',
-                new RstSample('.. code-block:: php'),
-            ],
-            [
-                null,
-                new RstSample('.. code-block:: html+php'),
-            ],
-            [
-                'Please do not use ".. code-block:: php", use "::" instead.',
-                new RstSample('    .. code-block:: php'),
-            ],
-            [
-                'Please do not use ".. code-block:: php", use "::" instead.',
-                new RstSample([
-                    'Welcome to our tutorial!',
-                    '',
-                    '     .. code-block:: php',
-                    '',
-                    '         namespace App\Entity;',
-                ], 2),
-            ],
-            [
-                null,
-                new RstSample([
-                    '.. configuration-block::',
-                    '',
-                    '    .. code-block:: php',
-                    '',
-                    '        namespace App\Entity;',
-                ], 2),
-            ],
-            [
-                null,
-                new RstSample([
-                    '    .. configuration-block::',
-                    '',
-                    '        .. code-block:: xml',
-                    '',
-                    '            <!-- foo-bar -->',
-                    '',
-                    '    .. code-block:: php',
-                    '',
-                    '        namespace App\Entity;',
-                ], 6),
-            ],
+        yield [
+            null,
+            new RstSample('Check the following controller syntax::'),
+        ];
+
+        yield [
+            'Please do not use ".. code-block:: php", use "::" instead.',
+            new RstSample('.. code-block:: php'),
+        ];
+
+        yield [
+            null,
+            new RstSample('.. code-block:: html+php'),
+        ];
+        yield [
+            'Please do not use ".. code-block:: php", use "::" instead.',
+            new RstSample('    .. code-block:: php'),
+        ];
+
+        yield [
+            'Please do not use ".. code-block:: php", use "::" instead.',
+            new RstSample([
+                'Welcome to our tutorial!',
+                '',
+                '     .. code-block:: php',
+                '',
+                '         namespace App\Entity;',
+            ], 2),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '.. configuration-block::',
+                '',
+                '    .. code-block:: php',
+                '',
+                '        namespace App\Entity;',
+            ], 2),
+        ];
+        yield [
+            null,
+            new RstSample([
+                '    .. configuration-block::',
+                '',
+                '        .. code-block:: xml',
+                '',
+                '            <!-- foo-bar -->',
+                '',
+                '    .. code-block:: php',
+                '',
+                '        namespace App\Entity;',
+            ], 6),
         ];
     }
 
-    public function realSymfonyFileProvider()
+    /**
+     * @return \Generator<array<string|null, RstSample>>
+     */
+    public function realSymfonyFileProvider(): \Generator
     {
         $content = <<<'RST'
 .. configuration-block::
@@ -433,77 +441,90 @@ option of its parents, so buttons can reuse and/or override any of the parent
 placeholders.
 RST;
 
-        return [
-            [
-                null,
-                new RstSample($content, 26),
-            ],
-            [
-                null,
-                new RstSample($content_with_blank_line_at_the_beginning, 27),
-            ],
-            [
-                'Please do not use ".. code-block:: php", use "::" instead.',
-                new RstSample($invalid_content, 14),
-            ],
-            [
-                null,
-                new RstSample($valid_code_block_after_headline, 3),
-            ],
-            [
-                null,
-                new RstSample($valid_two_following_php_code_blocks, 15),
-            ],
-            [
-                null,
-                new RstSample($valid_two_following_php_code_blocks_after_headline, 2),
-            ],
-            [
-                null,
-                new RstSample($valid_two_following_php_code_blocks_after_headline, 13),
-            ],
-            [
-                null,
-                new RstSample($valid_two_following_php_code_blocks_in_configuration_block, 5),
-            ],
-            [
-                null,
-                new RstSample($valid_two_following_php_code_blocks_in_configuration_block, 15),
-            ],
-            [
-                null,
-                new RstSample($valid_valid_in_code_block_text, 21),
-            ],
-            [
-                null,
-                new RstSample($valid_valid_in_code_block_rst, 21),
-            ],
-            [
-                null,
-                new RstSample($valid_follows_code_block, 11),
-            ],
-            'valid_code_block_after_table' => [
-                null,
-                new RstSample($valid_code_block_after_table, 11),
-            ],
-            [
-                'Please do not use ".. code-block:: php", use "::" instead.',
-                new RstSample($invalid_content2, 18),
-            ],
-            'valid because previous paragraph ends with question mark (?)' => [
-                null,
-                new RstSample(<<<RST
+        yield [
+            null,
+            new RstSample($content, 26),
+        ];
+
+        yield [
+            null,
+            new RstSample($content_with_blank_line_at_the_beginning, 27),
+        ];
+
+        yield [
+            'Please do not use ".. code-block:: php", use "::" instead.',
+            new RstSample($invalid_content, 14),
+        ];
+
+        yield [
+            null,
+            new RstSample($valid_code_block_after_headline, 3),
+        ];
+
+        yield [
+            null,
+            new RstSample($valid_two_following_php_code_blocks, 15),
+        ];
+
+        yield [
+            null,
+            new RstSample($valid_two_following_php_code_blocks_after_headline, 2),
+        ];
+
+        yield [
+            null,
+            new RstSample($valid_two_following_php_code_blocks_after_headline, 13),
+        ];
+
+        yield [
+            null,
+            new RstSample($valid_two_following_php_code_blocks_in_configuration_block, 5),
+        ];
+
+        yield [
+            null,
+            new RstSample($valid_two_following_php_code_blocks_in_configuration_block, 15),
+        ];
+
+        yield [
+            null,
+            new RstSample($valid_valid_in_code_block_text, 21),
+        ];
+
+        yield [
+            null,
+            new RstSample($valid_valid_in_code_block_rst, 21),
+        ];
+        yield [
+            null,
+            new RstSample($valid_follows_code_block, 11),
+        ];
+
+        yield 'valid_code_block_after_table' => [
+            null,
+            new RstSample($valid_code_block_after_table, 11),
+        ];
+
+        yield [
+            'Please do not use ".. code-block:: php", use "::" instead.',
+            new RstSample($invalid_content2, 18),
+        ];
+
+        yield 'valid because previous paragraph ends with question mark (?)' => [
+            null,
+            new RstSample(<<<RST
 This is nice PHP code, isn't it?
 
 .. code-block:: php
 
     echo 'Hello World!';
 RST
-                , 2),
-            ],
-            'php code block following a configuration-block' => [
-                null,
-                new RstSample(<<<RST
+            , 2),
+        ];
+
+        yield 'php code block following a configuration-block' => [
+            null,
+            new RstSample(<<<RST
 .. configuration-block::
 
     .. code-block:: xml
@@ -514,18 +535,18 @@ RST
 
     echo 'Hello World!';
 RST
-                , 6),
-            ],
-            'php code block unsing an option' => [
-                null,
-                new RstSample(<<<RST
+            , 6),
+        ];
+
+        yield 'php code block unsing an option' => [
+            null,
+            new RstSample(<<<RST
 .. code-block:: php
    :lineos:
 
     echo 'Hello World!';
 RST
-                    , 1),
-            ],
+                , 1),
         ];
     }
 }
