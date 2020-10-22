@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\RuleGroup;
@@ -36,16 +35,7 @@ class NoInheritdocInCodeExamples extends AbstractRule implements Rule
         $line = $lines->current();
 
         if ($line->raw()->match('/@inheritdoc/')
-            && $this->in(
-                RstParser::DIRECTIVE_CODE_BLOCK,
-                $lines,
-                $number,
-                [
-                    RstParser::CODE_BLOCK_PHP,
-                    RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-                    RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-                ]
-            )
+            && $this->inPhpCodeBlock($lines, $number)
         ) {
             return 'Please do not use "@inheritdoc"';
         }

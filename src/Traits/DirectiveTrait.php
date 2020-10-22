@@ -18,6 +18,20 @@ use App\Value\Lines;
 
 trait DirectiveTrait
 {
+    private function inPhpCodeBlock(Lines $lines, int $number): bool
+    {
+        return $this->in(
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            $lines,
+            $number,
+            [
+                RstParser::CODE_BLOCK_PHP,
+                RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
+                RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
+            ]
+        );
+    }
+
     private function in(string $directive, Lines $lines, int $number, array $directiveTypes = null): bool
     {
         $lines->seek($number);
