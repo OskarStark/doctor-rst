@@ -22,6 +22,21 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
 {
     use DirectiveTrait;
 
+    /**
+     * @var string[]
+     */
+    public const ALLOWED_PREVIOUS_DIRECTIVES = [
+        RstParser::DIRECTIVE_CAUTION,
+        RstParser::DIRECTIVE_CONFIGURATION_BLOCK,
+        RstParser::DIRECTIVE_DEPRECATED,
+        RstParser::DIRECTIVE_NOTE,
+        RstParser::DIRECTIVE_NOTICE,
+        RstParser::DIRECTIVE_SEEALSO,
+        RstParser::DIRECTIVE_VERSIONADDED,
+        RstParser::DIRECTIVE_VERSIONCHANGED,
+        RstParser::DIRECTIVE_WARNING,
+    ];
+
     public static function getGroups(): array
     {
         return [RuleGroup::Symfony()];
@@ -71,9 +86,11 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
             return null;
         }
 
-        // check if the previous directive is a configuration-block
-        if ($this->previousDirectiveIs(RstParser::DIRECTIVE_CONFIGURATION_BLOCK, $lines, $number)) {
-            return null;
+        foreach (self::ALLOWED_PREVIOUS_DIRECTIVES as $previousDirective) {
+            // check if the previous directive is ...
+            if ($this->previousDirectiveIs($previousDirective, $lines, $number)) {
+                return null;
+            }
         }
 
         $lines->next();

@@ -548,5 +548,23 @@ RST
 RST
                 , 1),
         ];
+
+        foreach (NoExplicitUseOfCodeBlockPhp::ALLOWED_PREVIOUS_DIRECTIVES as $previousDirective) {
+            yield sprintf(
+                'php code block following %s',
+                $previousDirective
+            ) => [
+                null,
+                new RstSample(sprintf(<<<RST
+%s
+
+    Here is text.
+
+.. code-block:: php
+
+    echo 'Hello World!';
+RST, $previousDirective), 4),
+            ];
+        }
     }
 }
