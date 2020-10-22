@@ -43,6 +43,7 @@ class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implemen
         $line = $lines->current();
 
         if ($line->clean()->lower()->startsWith('use ')
+            && $line->clean()->lower()->endsWith(';')
             && $line->clean()->containsAny('/')
             && $this->inPhpCodeBlock($lines, $number)
         ) {

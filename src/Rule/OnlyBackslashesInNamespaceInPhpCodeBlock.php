@@ -42,7 +42,8 @@ class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements R
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->clean()->lower()->startsWith('namespace')
+        if ($line->clean()->lower()->startsWith('namespace ')
+            && $line->clean()->lower()->endsWith(';')
             && $line->clean()->containsAny('/')
             && $this->inPhpCodeBlock($lines, $number)
         ) {
