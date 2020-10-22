@@ -18,6 +18,7 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
+use App\Value\RuleGroup;
 
 /**
  * @Description("A namespace declaration in a PHP code-block should only contain backslashes.")
@@ -27,6 +28,14 @@ use App\Value\Lines;
 class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements Rule
 {
     use DirectiveTrait;
+
+    public static function getGroups(): array
+    {
+        return [
+            RuleGroup::Sonata(),
+            RuleGroup::Symfony(),
+        ];
+    }
 
     public function check(Lines $lines, int $number): ?string
     {

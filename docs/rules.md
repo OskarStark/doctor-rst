@@ -460,6 +460,8 @@ php bin/console list
 
   > _A namespace declaration in a PHP code-block should only contain backslashes._
 
+#### Groups [`@Sonata`, `@Symfony`]
+
 ##### Valid Examples :+1:
 
 ```rst
@@ -475,6 +477,8 @@ namespace Foo/Bar;
 ## `only_backslashes_in_use_statements_in_php_code_block`
 
   > _A use statement in a PHP code-block should only contain backslashes._
+
+#### Groups [`@Sonata`, `@Symfony`]
 
 ##### Valid Examples :+1:
 
