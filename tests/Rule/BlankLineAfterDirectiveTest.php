@@ -83,5 +83,23 @@ class BlankLineAfterDirectiveTest extends TestCase
             null,
             new RstSample('temp'),
         ];
+
+        # see https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#comments
+        yield [
+            null,
+            new RstSample([
+                '.. This is a RST comment',
+                '.. This is the second line of the comment',
+            ]),
+        ];
+
+        # see https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#comments
+        yield [
+            null,
+            new RstSample([
+                '..',
+                '   This is also a RST comment',
+            ]),
+        ];
     }
 }
