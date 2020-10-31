@@ -197,7 +197,7 @@ RST
     public function invalidProvider(): \Generator
     {
         yield [
-            'The following link definitions aren\'t used anymore and should be removed: unused',
+            'The following link definitions aren\'t used anymore and should be removed: "unused"',
             new RstSample(<<<RST
 I am a `Link`_
 
@@ -208,12 +208,25 @@ RST
         ];
 
         yield [
-            'The following link definitions aren\'t used anymore and should be removed: unused',
+            'The following link definitions aren\'t used anymore and should be removed: "unused"',
             new RstSample(<<<RST
 I am a `Link`_
 
 .. _Link: https://example.com
 .. _unused: https://404.com
+RST
+            ),
+        ];
+
+        yield [
+            'The following link definitions aren\'t used anymore and should be removed: "unused2", "unused1", "unused 3"',
+            new RstSample(<<<RST
+I am a `Link`_
+
+.. _unused2: https://example.com/foo
+.. _Link: https://example.com
+.. _unused1: https://404.com
+.. _`unused 3`: https://example.org
 RST
             ),
         ];
