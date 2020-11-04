@@ -22,7 +22,9 @@ jobs:
         name: DOCtor-RST
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@master
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
             - name: DOCtor-RST
               uses: docker://oskarstark/doctor-rst
               with:
