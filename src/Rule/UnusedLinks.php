@@ -71,8 +71,8 @@ class UnusedLinks extends AbstractRule implements Rule, ResetInterface
 
         if (!empty($this->linkDefinitions)) {
             return sprintf(
-                'The following link definitions aren\'t used anymore and should be removed: %s',
-                implode(', ', array_unique(array_keys($this->linkDefinitions)))
+                'The following link definitions aren\'t used anymore and should be removed: "%s"',
+                implode('", "', array_unique(array_keys($this->linkDefinitions)))
             );
         }
 
