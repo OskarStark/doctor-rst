@@ -28,14 +28,14 @@ jobs:
             - name: DOCtor-RST
               uses: docker://oskarstark/doctor-rst
               with:
-                  args: --short --error-formatter=github
+                  args: --short --error-format=github
 ```
 
 If your `*.rst` files are not located in root:
 ```diff
               uses: docker://oskarstark/doctor-rst
               with:
-                  args: --short --error-formatter=github
+                  args: --short --error-format=github
 +              env:
 +                  DOCS_DIR: 'docs/'
 ```
