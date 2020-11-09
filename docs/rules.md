@@ -323,6 +323,12 @@ Name | Required
 
 ## `line_length`
 
+#### Configuration options
+
+Name | Required | Default
+--- | --- | ---
+`max` | `false` | 80
+
 ## `lowercase_as_in_use_statements`
 
 #### Groups [`@Sonata`, `@Symfony`]
