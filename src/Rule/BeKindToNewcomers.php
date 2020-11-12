@@ -32,14 +32,14 @@ class BeKindToNewcomers extends CheckListRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (preg_match($this->pattern, $line->raw()->toString(), $matches)) {
+        if (preg_match($this->search, $line->raw()->toString(), $matches)) {
             return sprintf($this->message, $matches[0]);
         }
 
         return null;
     }
 
-    public function getDefaultMessage(): string
+    public static function getDefaultMessage(): string
     {
         return 'Please remove the word: %s';
     }

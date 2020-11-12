@@ -16,7 +16,7 @@ namespace App\Rule;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class Replacement extends CheckListRule implements Rule
+class Replacement extends CheckListRule
 {
     public static function getGroups(): array
     {
@@ -31,14 +31,14 @@ class Replacement extends CheckListRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($matches = $line->clean()->match($this->pattern)) {
+        if ($matches = $line->clean()->match($this->search)) {
             return sprintf($this->message, $matches[0]);
         }
 
         return null;
     }
 
-    public function getDefaultMessage(): string
+    public static function getDefaultMessage(): string
     {
         return 'Please don\'t use: %s';
     }

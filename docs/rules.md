@@ -60,6 +60,7 @@
 * [space_before_self_xml_closing_tag](#space_before_self_xml_closing_tag)
 * [space_between_label_and_link_in_doc](#space_between_label_and_link_in_doc)
 * [space_between_label_and_link_in_ref](#space_between_label_and_link_in_ref)
+* [string_replacement](#string_replacement)
 * [typo](#typo)
 * [unused_links](#unused_links)
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
@@ -602,6 +603,17 @@ Pattern | Message
 ```rst
 :ref:`receiving them via a worker<messenger-worker>`
 ```
+
+## `string_replacement`
+
+#### Groups [`@Symfony`]
+
+#### Checks
+
+Pattern | Message
+--- | ---
+`**type**: ``int``` | Please replace "%s" with "**type**: ``integer``"
+`**type**: ``bool``` | Please replace "%s" with "**type**: ``boolean``"
 
 ## `typo`
 

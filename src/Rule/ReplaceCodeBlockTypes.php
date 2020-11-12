@@ -21,7 +21,7 @@ use App\Value\RuleGroup;
 /**
  * @Description("Propose alternatives for disallowed code block types.")
  */
-class ReplaceCodeBlockTypes extends CheckListRule implements Rule
+class ReplaceCodeBlockTypes extends CheckListRule
 {
     public static function getGroups(): array
     {
@@ -36,14 +36,14 @@ class ReplaceCodeBlockTypes extends CheckListRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (RstParser::codeBlockDirectiveIsTypeOf($line, $this->pattern, true)) {
+        if (RstParser::codeBlockDirectiveIsTypeOf($line, $this->search, true)) {
             return $this->message;
         }
 
         return null;
     }
 
-    public function getDefaultMessage(): string
+    public static function getDefaultMessage(): string
     {
         return 'Please do not use type "%s" for code-block.';
     }
