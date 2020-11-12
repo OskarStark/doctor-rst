@@ -15,24 +15,24 @@ namespace App\Rule;
 
 abstract class CheckListRule extends AbstractRule implements Rule
 {
-    public string $pattern;
+    public string $search;
     public ?string $message;
 
     public function configure(string $pattern, ?string $message): self
     {
-        $this->pattern = $pattern;
-        $this->message = $message ?: $this->getDefaultMessage();
+        $this->search = $pattern;
+        $this->message = $message ?: static::getDefaultMessage();
 
         return $this;
     }
 
-    abstract public function getDefaultMessage(): string;
+    public static function getDefaultMessage(): string
+    {
+        return 'Please don\'t use: %s';
+    }
 
     /**
      * @return array<string, string|null>
      */
-    public static function getList(): array
-    {
-        return [];
-    }
+    abstract public static function getList(): array;
 }

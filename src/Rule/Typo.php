@@ -35,14 +35,14 @@ class Typo extends CheckListRule
         $lines->seek($number);
         $line = $lines->current()->raw();
 
-        if ($matches = $line->match($this->pattern)) {
+        if ($matches = $line->match($this->search)) {
             return sprintf($this->message, $matches[0]);
         }
 
         return null;
     }
 
-    public function getDefaultMessage(): string
+    public static function getDefaultMessage(): string
     {
         return 'Typo in word "%s"';
     }
