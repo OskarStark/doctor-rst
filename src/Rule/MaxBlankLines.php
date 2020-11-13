@@ -66,6 +66,7 @@ class MaxBlankLines extends AbstractRule implements Rule, Configurable
         $lines->next();
 
         while ($lines->valid() && $lines->current()->isBlank()) {
+            $lines->current()->markProcessedBy(self::class);
             ++$blanklines;
 
             $lines->next();
