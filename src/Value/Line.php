@@ -26,6 +26,8 @@ final class Line
     private ?bool $headline = null;
     private ?bool $isDirective = null;
     private ?bool $isDefaultDirective = null;
+    /** @var string[] */
+    private array $processedBy = [];
 
     public function __construct(string $line)
     {
@@ -94,5 +96,15 @@ final class Line
         }
 
         return $this->isDefaultDirective;
+    }
+
+    public function markProcessedBy(string $rule): void
+    {
+        $this->processedBy[] = $rule;
+    }
+
+    public function isProcessedBy(string $rule): bool
+    {
+        return \in_array($rule, $this->processedBy, true);
     }
 }

@@ -46,6 +46,9 @@ final class RstAnalyzer implements Analyzer
             \assert(\is_int($no));
 
             foreach ($rules as $rule) {
+                if ($lines->isProcessedBy($no, \get_class($rule))) {
+                    continue;
+                }
                 if (!$rule::runOnlyOnBlankline() && $line->isBlank()) {
                     continue;
                 }

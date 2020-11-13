@@ -98,4 +98,13 @@ final class Lines implements \SeekableIterator
     {
         return new \OutOfBoundsException(sprintf('Line "%d" does not exists.', $line));
     }
+
+    public function isProcessedBy(int $no, string $rule): bool
+    {
+        if (!isset($this->array[$no])) {
+            return false;
+        }
+
+        return $this->array[$no]->isProcessedBy($rule);
+    }
 }
