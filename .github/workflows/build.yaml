@@ -20,16 +20,18 @@ jobs:
             -   name: "Checkout"
                 uses: actions/checkout@v2
 
-            -   name: "Cache dependencies installed with composer"
-                uses: actions/cache@v1
+            -   name: "Install PHP with extensions"
+                uses: "shivammathur/setup-php@v2"
                 with:
-                    path: ~/.composer/cache
-                    key: composer-cache-${{ hashFiles('**/composer.lock') }}
-                    restore-keys: |
-                        composer-cache-
+                    coverage: "none"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: composer:v2
 
-            -   name: "Install dependencies with composer"
-                run: composer install --no-interaction --no-progress --no-suggest --optimize-autoloader
+            -   name: "Composer install"
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: "--optimize-autoloader"
 
             -   name: "Download humbug/box"
                 run: wget --no-clobber --output-document=./box https://github.com/humbug/box/releases/download/3.8.5/box.phar || true
