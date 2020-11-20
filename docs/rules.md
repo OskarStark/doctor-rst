@@ -16,6 +16,7 @@
 * [deprecated_directive_major_version](#deprecated_directive_major_version)
 * [deprecated_directive_min_version](#deprecated_directive_min_version)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
+* [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
 * [even_brackets_count](#even_brackets_count) :exclamation:
 * [extend_abstract_admin](#extend_abstract_admin)
@@ -256,6 +257,24 @@ Name | Required
 
 ```rst
 .. deprecated:: foo-bar
+```
+
+## `ensure_exactly_one_space_between_link_definition_and_link`
+
+  > _Ensure exactly one space between link definition and link._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST
+```
+
+##### Invalid Examples :-1:
+
+```rst
+.. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST
 ```
 
 ## `ensure_order_of_code_blocks_in_configuration_block`
