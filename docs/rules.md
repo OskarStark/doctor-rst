@@ -42,6 +42,7 @@
 * [no_composer_phar](#no_composer_phar)
 * [no_composer_req](#no_composer_req)
 * [no_config_yaml](#no_config_yaml)
+* [no_directive_after_default_directive](#no_directive_after_default_directive)
 * [no_explicit_use_of_code_block_php](#no_explicit_use_of_code_block_php)
 * [no_inheritdoc_in_code_examples](#no_inheritdoc_in_code_examples)
 * [no_namespace_after_use_statements](#no_namespace_after_use_statements)
@@ -412,6 +413,12 @@ $ bin/console list
 #### Groups [`@Symfony`]
 
 ## `no_config_yaml`
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+## `no_directive_after_default_directive`
+
+  > _Ensure that no directive follows the default directive `::`. This could lead to broken markup._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
