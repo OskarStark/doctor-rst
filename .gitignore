@@ -2,6 +2,7 @@
 /.php_cs
 /.php_cs.cache
 .doctor-rst.cache
+phpstan.neon
 
 ###> symfony/phpunit-bridge ###
 .phpunit
