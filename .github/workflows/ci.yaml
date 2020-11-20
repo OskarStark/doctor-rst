@@ -38,7 +38,7 @@ jobs:
               with:
                   args: --diff --dry-run
 
-    phpunit:
+    tests:
         name: PHPUnit
 
         runs-on: ubuntu-latest
@@ -76,7 +76,7 @@ jobs:
         needs:
             - "phpstan"
             - "php-cs-fixer"
-            - "phpunit"
+            - "tests"
 
         if: >
             github.event_name == 'pull_request' &&
