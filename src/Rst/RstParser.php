@@ -19,6 +19,8 @@ use Webmozart\Assert\Assert;
 
 class RstParser
 {
+    public const SHORTHAND = '::';
+
     const DIRECTIVE_CODE_BLOCK = '.. code-block::';
     const DIRECTIVE_NOTE = '.. note::';
     const DIRECTIVE_WARNING = '.. warning::';

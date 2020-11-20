@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
+use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
 /**
- * @Description("Ensure that no directive follows the default directive `::`. This could lead to broken markup.")
+ * @Description("Ensure that no directive follows the shorthand `::`. This could lead to broken markup.")
  */
-class NoDirectiveAfterDefaultDirective extends AbstractRule implements Rule
+class NoDirectiveAfterShorthand extends AbstractRule implements Rule
 {
     public static function getGroups(): array
     {
@@ -35,7 +36,7 @@ class NoDirectiveAfterDefaultDirective extends AbstractRule implements Rule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!$line->isDefaultDirective()) {
+        if (!$line->raw()->endsWith(RstParser::SHORTHAND)) {
             return null;
         }
 
@@ -50,8 +51,9 @@ class NoDirectiveAfterDefaultDirective extends AbstractRule implements Rule
         }
 
         return sprintf(
-            'A "%s" directive is following a shorthand notation "::", this will lead to a broken markup!',
-            $lines->current()->clean()->toString()
+            'A "%s" directive is following a shorthand notation "%s", this will lead to a broken markup!',
+            $lines->current()->clean()->toString(),
+            RstParser::SHORTHAND
         );
     }
 }

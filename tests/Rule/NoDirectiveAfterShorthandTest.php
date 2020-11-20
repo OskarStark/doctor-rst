@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rule\NoDirectiveAfterDefaultDirective;
+use App\Rule\NoDirectiveAfterShorthand;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class NoDirectiveAfterDefaultDirectiveTest extends TestCase
+class NoDirectiveAfterShorthandTest extends TestCase
 {
     /**
      * @test
@@ -29,7 +29,7 @@ class NoDirectiveAfterDefaultDirectiveTest extends TestCase
     {
         static::assertSame(
             $expected,
-            (new NoDirectiveAfterDefaultDirective())->check($sample->lines(), $sample->lineNumber())
+            (new NoDirectiveAfterShorthand())->check($sample->lines(), $sample->lineNumber())
         );
     }
 
