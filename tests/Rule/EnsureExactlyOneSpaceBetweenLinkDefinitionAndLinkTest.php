@@ -65,7 +65,7 @@ class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends TestCase
 
         foreach ($invalidCases as $invalidCase) {
             yield $invalidCase => [
-                'Please use only one whitspace between the link definition and the link.',
+                'Please use only one whitespace between the link definition and the link.',
                 new RstSample($invalidCase),
             ];
         }

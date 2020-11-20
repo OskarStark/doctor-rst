@@ -46,7 +46,7 @@ class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule imp
 
         if ($line->clean()->containsAny(':  ')) {
             return sprintf(
-                'Please use only one whitspace between the link definition and the link.'
+                'Please use only one whitespace between the link definition and the link.'
             );
         }
 
