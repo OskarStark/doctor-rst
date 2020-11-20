@@ -5,7 +5,7 @@ cs:
 	docker run --rm -it -w /app -v ${PWD}:/app oskarstark/php-cs-fixer-ga:2.16.4
 
 phpstan:
-	docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/phpstan-ga:0.12.8 analyse src/ --level=7
+	docker run --rm -it -w=/app -v ${PWD}:/app oskarstark/phpstan-ga:0.12.56 analyse -c phpstan.neon.dist
 
 update-rules.md-file:
 	php bin/console rules > docs/rules.md
