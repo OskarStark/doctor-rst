@@ -1,7 +1,6 @@
 parameters:
     paths:
         - src
-        - tests
     level: 7
     inferPrivatePropertyTypeFromConstructor: true
     checkGenericClassInNonGenericObjectType: false
