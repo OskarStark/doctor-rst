@@ -1,2 +1,0 @@
-"https://{default}/": { type: upstream, upstream: "rst-checker:http" }
-"http://{default}/": { type: redirect, to: "https://{default}/" }
