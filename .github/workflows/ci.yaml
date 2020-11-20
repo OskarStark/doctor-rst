@@ -22,7 +22,7 @@ jobs:
             - name: PHPStan
               uses: docker://oskarstark/phpstan-ga:0.12.8
               with:
-                  args: analyse src/ --level=7
+                  args: analyse -c phpstan.neon.dist
 
     php-cs-fixer:
         name: PHP-CS-Fixer
