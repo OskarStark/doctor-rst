@@ -12,4 +12,4 @@ name: 'DOCtor-RST'
 
 runs:
     using: 'docker'
-    image: 'docker://oskarstark/doctor-rst:1.15.1'
+    image: 'docker://oskarstark/doctor-rst:1.16.0'
