@@ -28,6 +28,9 @@ final class LineTest extends TestCase
         static::assertSame($expected, (new Line($string))->clean()->toString());
     }
 
+    /**
+     * @return array<array{0: string, 1: string}>
+     */
     public function cleanProvider(): array
     {
         return [
@@ -76,6 +79,9 @@ final class LineTest extends TestCase
         static::assertSame($expected, (new Line($string))->isBlank());
     }
 
+    /**
+     * @return array<array{0: bool, 1: string}>
+     */
     public function isBlankLineProvider(): array
     {
         return [
@@ -96,6 +102,9 @@ final class LineTest extends TestCase
         static::assertSame($expected, (new Line($string))->indention());
     }
 
+    /**
+     * @return \Generator<array{0: int, 1: string}>
+     */
     public function indentionProvider(): \Generator
     {
         yield [0, ''];
@@ -113,7 +122,10 @@ final class LineTest extends TestCase
         static::assertSame($expected, (new Line($string))->isHeadline());
     }
 
-    public function isHeadlineProvider()
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
+    public function isHeadlineProvider(): \Generator
     {
         yield [true, '==='];
         yield [true, '~~~'];
@@ -137,7 +149,10 @@ final class LineTest extends TestCase
         static::assertSame($expected, (new Line($string))->isDirective());
     }
 
-    public function isDirectiveProvider(): iterable
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
+    public function isDirectiveProvider(): \Generator
     {
         yield [true, 'the following code is php::'];
         yield [true, '.. code-block:: php'];
@@ -163,7 +178,10 @@ final class LineTest extends TestCase
         static::assertSame($expected, (new Line($string))->isDefaultDirective());
     }
 
-    public function isDefaultDirectiveProvider(): iterable
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
+    public function isDefaultDirectiveProvider(): \Generator
     {
         yield [true, 'this is using the default directive::'];
         yield [true, 'prefixed classes included in doc block comments (``/** ... */``). For example::'];

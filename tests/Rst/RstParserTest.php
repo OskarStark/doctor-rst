@@ -29,6 +29,9 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::isLineNumberAnnotation(new Line($string)));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isLineNumberAnnotationProvider(): \Generator
     {
         yield [true, 'Line 15'];
@@ -50,6 +53,9 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::isComment(new Line($string)));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isCommentProvider(): \Generator
     {
         yield [true, '.. I am a comment'];
@@ -70,6 +76,9 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::isFootnote(new Line($string)));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isFootnoteProvider(): \Generator
     {
         yield [false, ''];
@@ -88,6 +97,9 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::isListItem(new Line($string)));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isListItemProvider(): \Generator
     {
         yield [false, ''];
@@ -107,6 +119,9 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::isLinkDefinition(new Line($string)));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isLinkDefinitionProvider()
     {
         yield [true, '.. _`Symfony`: https://symfony.com'];
@@ -129,6 +144,9 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::isLinkUsage($string));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isLinkUsageProvider()
     {
         yield [true, '`Symfony`_'];
@@ -148,6 +166,9 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::isTable(new Line($string)));
     }
 
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
     public function isTableProvider()
     {
         yield [true, '==='];
@@ -173,19 +194,20 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::directiveIs(new Line($string), $directive));
     }
 
-    public function directiveIsProvider()
+    /**
+     * @return \Generator<array{0: bool, 1: string, 2: string}>
+     */
+    public function directiveIsProvider(): \Generator
     {
-        return [
-            [false, '.. note::', RstParser::DIRECTIVE_CODE_BLOCK],
-            [true, '.. note::', RstParser::DIRECTIVE_NOTE],
-            [true, 'the following code is php::', RstParser::DIRECTIVE_CODE_BLOCK],
-            [true, '.. code-block:: php', RstParser::DIRECTIVE_CODE_BLOCK],
-            [true, '.. code-block:: text', RstParser::DIRECTIVE_CODE_BLOCK],
-            [true, '.. code-block:: rst', RstParser::DIRECTIVE_CODE_BLOCK],
-            [true, ' .. code-block:: php', RstParser::DIRECTIVE_CODE_BLOCK],
-            [true, '.. code-block:: php-annotations', RstParser::DIRECTIVE_CODE_BLOCK],
-            [false, 'foo', RstParser::DIRECTIVE_CODE_BLOCK],
-        ];
+        yield [false, '.. note::', RstParser::DIRECTIVE_CODE_BLOCK];
+        yield [true, '.. note::', RstParser::DIRECTIVE_NOTE];
+        yield [true, 'the following code is php::', RstParser::DIRECTIVE_CODE_BLOCK];
+        yield [true, '.. code-block:: php', RstParser::DIRECTIVE_CODE_BLOCK];
+        yield [true, '.. code-block:: text', RstParser::DIRECTIVE_CODE_BLOCK];
+        yield [true, '.. code-block:: rst', RstParser::DIRECTIVE_CODE_BLOCK];
+        yield [true, ' .. code-block:: php', RstParser::DIRECTIVE_CODE_BLOCK];
+        yield [true, '.. code-block:: php-annotations', RstParser::DIRECTIVE_CODE_BLOCK];
+        yield [false, 'foo', RstParser::DIRECTIVE_CODE_BLOCK];
     }
 
     /**
@@ -198,24 +220,25 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::codeBlockDirectiveIsTypeOf(new Line($string), $type, $strict));
     }
 
-    public function codeBlockDirectiveIsTypeOfProvider()
+    /**
+     * @return \Generator<array{0: bool, 1: string, 2: string}>
+     */
+    public function codeBlockDirectiveIsTypeOfProvider(): \Generator
     {
-        return [
-            [false, '.. note::', RstParser::CODE_BLOCK_PHP],
-            [true, 'the following code is php::', RstParser::CODE_BLOCK_PHP],
-            [true, '.. code-block:: php', RstParser::CODE_BLOCK_PHP],
-            [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP],
-            [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS],
-            [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES],
-            [true, ' .. code-block:: text', RstParser::CODE_BLOCK_TEXT],
-            [true, ' .. code-block:: rst', RstParser::CODE_BLOCK_RST],
-            [false, 'foo', RstParser::CODE_BLOCK_PHP],
-            [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP, true],
-            [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS, false],
-            [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES, false],
-            [true, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, false],
-            [false, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, true],
-        ];
+        yield [false, '.. note::', RstParser::CODE_BLOCK_PHP];
+        yield [true, 'the following code is php::', RstParser::CODE_BLOCK_PHP];
+        yield [true, '.. code-block:: php', RstParser::CODE_BLOCK_PHP];
+        yield [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP];
+        yield [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS];
+        yield [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES];
+        yield [true, ' .. code-block:: text', RstParser::CODE_BLOCK_TEXT];
+        yield [true, ' .. code-block:: rst', RstParser::CODE_BLOCK_RST];
+        yield [false, 'foo', RstParser::CODE_BLOCK_PHP];
+        yield [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP, true];
+        yield [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS, false];
+        yield [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES, false];
+        yield [true, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, false];
+        yield [false, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, true];
     }
 
     /**
@@ -228,16 +251,17 @@ final class RstParserTest extends TestCase
         static::assertSame($expected, RstParser::isOption(new Line($string)));
     }
 
-    public function isOptionProvider()
+    /**
+     * @return \Generator<array{0: bool, 1: string, 2: string}>
+     */
+    public function isOptionProvider(): \Generator
     {
-        return [
-            [true, ':lineos:'],
-            [true, ' :lineos: '],
-            [true, ':language: text'],
-            [true, ' :language: text '],
-            [false, ' '],
-            [false, ''],
-            [false, '.. class::'],
-        ];
+        yield [true, ':lineos:'];
+        yield [true, ' :lineos: '];
+        yield [true, ':language: text'];
+        yield [true, ' :language: text '];
+        yield [false, ' '];
+        yield [false, ''];
+        yield [false, '.. class::'];
     }
 }

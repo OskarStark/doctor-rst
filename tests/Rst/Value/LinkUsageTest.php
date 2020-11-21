@@ -31,6 +31,9 @@ final class LinkUsageTest extends TestCase
         static::assertSame($expected, $usage->name()->value());
     }
 
+    /**
+     * @return \Generator<array{0: string, 1: string}>
+     */
     public function fromLineProvider(): \Generator
     {
         yield ['Link1', '`Link1`_'];
