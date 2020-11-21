@@ -227,7 +227,8 @@ composer require symfony/var-dumper --dev
 
 Name | Required
 --- | ---
-`major_version` | `true`
+`major_version` | `true` | `int`
+
 ## `deprecated_directive_min_version`
 
 #### Groups [`@Symfony`]
@@ -236,7 +237,8 @@ Name | Required
 
 Name | Required
 --- | ---
-`min_version` | `true`
+`min_version` | `true` | `string`
+
 ## `deprecated_directive_should_have_version`
 
   > _Ensure a deprecated directive has a version which follows SemVer._
@@ -335,9 +337,10 @@ messages.xliff
 
 #### Configuration options
 
-Name | Required
---- | ---
-`size` | `true`
+Name | Required | Allowed Types | Default
+--- | --- | --- | ---
+`size` | `false` | `int` | `4`
+
 ## `kernel_instead_of_app_kernel`
 
 #### Groups [`@Sonata`]
@@ -346,9 +349,9 @@ Name | Required
 
 #### Configuration options
 
-Name | Required | Default
---- | --- | ---
-`max` | `false` | 80
+Name | Required | Allowed Types | Default
+--- | --- | --- | ---
+`max` | `false` | `int` | `80`
 
 ## `lowercase_as_in_use_statements`
 
@@ -360,9 +363,10 @@ Name | Required | Default
 
 #### Configuration options
 
-Name | Required
---- | ---
-`max` | `true`
+Name | Required | Allowed Types | Default
+--- | --- | --- | ---
+`max` | `false` | `int` | `2`
+
 ## `no_admin_yaml`
 
 #### Groups [`@Sonata`]
@@ -716,7 +720,8 @@ Pattern | Message
 
 Name | Required
 --- | ---
-`major_version` | `true`
+`major_version` | `true` | `int`
+
 ## `versionadded_directive_min_version`
 
 #### Groups [`@Symfony`]
@@ -725,7 +730,8 @@ Name | Required
 
 Name | Required
 --- | ---
-`min_version` | `true`
+`min_version` | `true` | `string`
+
 ## `versionadded_directive_should_have_version`
 
   > _Ensure a versionadded directive has a version which follows SemVer._
