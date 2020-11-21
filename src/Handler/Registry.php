@@ -88,7 +88,7 @@ final class Registry
     public function getRule(RuleName $name): Rule
     {
         if (!isset($this->rules[$name->toString()])) {
-            throw new \InvalidArgumentException(sprintf('Could not find rule:: %s', $name->toString()));
+            throw new \InvalidArgumentException(sprintf('Could not find rule: %s', $name->toString()));
         }
 
         return $this->rules[$name->toString()];
