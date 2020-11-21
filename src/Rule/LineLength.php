@@ -14,14 +14,30 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LineLength extends AbstractRule implements Rule
+class LineLength extends AbstractRule implements Rule, Configurable
 {
     private int $max;
 
-    public function __construct(int $max = 80)
+    public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {
-        $this->max = $max;
+        $resolver
+            ->setDefault('max', 80)
+            ->setRequired('max')
+            ->setAllowedTypes('max', 'int')
+        ;
+
+        return $resolver;
+    }
+
+    public function setOptions(array $options): void
+    {
+        $resolver = $this->configureOptions(new OptionsResolver());
+
+        $resolvedOptions = $resolver->resolve($options);
+
+        $this->max = $resolvedOptions['max'];
     }
 
     public function check(Lines $lines, int $number): ?string
