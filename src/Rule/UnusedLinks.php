@@ -87,6 +87,6 @@ class UnusedLinks extends AbstractRule implements Rule, ResetInterface
 
     public static function getType(): int
     {
-        return Rule::TYPE_FILE;
+        return Rule::TYPE_FILE_CONTENT;
     }
 }
