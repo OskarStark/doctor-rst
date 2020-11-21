@@ -27,6 +27,8 @@
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
 * [extension_xlf_instead_of_xliff](#extension_xlf_instead_of_xliff)
+* [filename_uses_dashes_only](#filename_uses_dashes_only)
+* [filename_uses_underscores_only](#filename_uses_underscores_only)
 * [final_admin_classes](#final_admin_classes)
 * [final_admin_extension_classes](#final_admin_extension_classes)
 * [indention](#indention) :exclamation:
@@ -383,6 +385,42 @@ messages.xlf
 
 ```rst
 messages.xliff
+```
+
+## `filename_uses_dashes_only`
+
+  > _Ensures a filename uses only dashes (`-`)._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+custom-extensions.rst
+```
+
+##### Invalid Examples :-1:
+
+```rst
+custom_extensions.rst
+```
+
+## `filename_uses_underscores_only`
+
+  > _Ensures a filename uses only underscores (`_`)._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+custom_extensions.rst
+```
+
+##### Invalid Examples :-1:
+
+```rst
+custom-extensions.rst
 ```
 
 ## `final_admin_classes`
