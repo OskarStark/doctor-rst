@@ -22,14 +22,14 @@ interface Rule
     /**
      * Rules using this type run for every line of the file content.
      */
-    const TYPE_LINE_CONTENT = 1;
+    public const TYPE_LINE_CONTENT = 1;
 
     /**
      * Rules using this type are only run once, and are responsible
      * to check the whole file content on its own, if needed. They always
      * start on the first line of the document.
      */
-    const TYPE_FILE_CONTENT = 2;
+    public const TYPE_FILE_CONTENT = 2;
 
     public static function getName(): RuleName;
 
