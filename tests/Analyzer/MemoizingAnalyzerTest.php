@@ -19,7 +19,7 @@ use App\Analyzer\MemoizingAnalyzer;
 use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 
-class MemoizingAnalyzerTest extends TestCase
+final class MemoizingAnalyzerTest extends TestCase
 {
     /**
      * @var Analyzer|\PHPUnit\Framework\MockObject\MockObject

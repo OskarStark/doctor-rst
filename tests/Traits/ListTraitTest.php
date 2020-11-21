@@ -17,7 +17,7 @@ use App\Tests\RstSample;
 use App\Traits\ListTrait;
 use PHPUnit\Framework\TestCase;
 
-class ListTraitTest extends TestCase
+final class ListTraitTest extends TestCase
 {
     private $traitWrapper;
 

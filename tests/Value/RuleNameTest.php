@@ -17,7 +17,7 @@ use App\Value\RuleName;
 use Ergebnis\Test\Util\Helper;
 use PHPUnit\Framework\TestCase;
 
-class RuleNameTest extends TestCase
+final class RuleNameTest extends TestCase
 {
     use Helper;
 

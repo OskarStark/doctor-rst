@@ -18,7 +18,7 @@ use App\Tests\RstSample;
 use App\Value\Line;
 use PHPUnit\Framework\TestCase;
 
-class PhpHelperTest extends TestCase
+final class PhpHelperTest extends TestCase
 {
     /**
      * @test
