@@ -17,7 +17,7 @@ use App\Rule\SpaceBetweenLabelAndLinkInRef;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class SpaceBetweenLabelAndLinkInRefTest extends TestCase
+final class SpaceBetweenLabelAndLinkInRefTest extends TestCase
 {
     /**
      * @test

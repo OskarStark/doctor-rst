@@ -17,7 +17,7 @@ use App\Rule\NoAdminYaml;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class NoAdminYamlTest extends TestCase
+final class NoAdminYamlTest extends TestCase
 {
     /**
      * @test

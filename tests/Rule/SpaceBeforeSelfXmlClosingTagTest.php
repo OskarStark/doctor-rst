@@ -17,7 +17,7 @@ use App\Rule\SpaceBeforeSelfXmlClosingTag;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class SpaceBeforeSelfXmlClosingTagTest extends TestCase
+final class SpaceBeforeSelfXmlClosingTagTest extends TestCase
 {
     /**
      * @test

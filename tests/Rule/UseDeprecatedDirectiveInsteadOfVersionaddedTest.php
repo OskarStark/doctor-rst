@@ -17,7 +17,7 @@ use App\Rule\UseDeprecatedDirectiveInsteadOfVersionadded;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends TestCase
+final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends TestCase
 {
     /**
      * @test

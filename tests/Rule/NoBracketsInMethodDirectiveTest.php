@@ -17,7 +17,7 @@ use App\Rule\NoBracketsInMethodDirective;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class NoBracketsInMethodDirectiveTest extends TestCase
+final class NoBracketsInMethodDirectiveTest extends TestCase
 {
     /**
      * @test

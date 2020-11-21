@@ -17,7 +17,7 @@ use App\Rule\ExtensionXlfInsteadOfXliff;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class ExtensionXlfInsteadOfXliffTest extends TestCase
+final class ExtensionXlfInsteadOfXliffTest extends TestCase
 {
     /**
      * @test

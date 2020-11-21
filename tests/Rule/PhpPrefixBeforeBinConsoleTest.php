@@ -17,7 +17,7 @@ use App\Rule\PhpPrefixBeforeBinConsole;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class PhpPrefixBeforeBinConsoleTest extends TestCase
+final class PhpPrefixBeforeBinConsoleTest extends TestCase
 {
     /**
      * @test

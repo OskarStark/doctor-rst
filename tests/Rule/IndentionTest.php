@@ -17,7 +17,7 @@ use App\Rule\Indention;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class IndentionTest extends TestCase
+final class IndentionTest extends TestCase
 {
     /**
      * @test
@@ -107,7 +107,7 @@ RST
         $php_comment_example = <<<'RST'
 Code here::
 
-    class MicroController extends Controller
+    final class MicroController extends Controller
     {
         /**
          * @Route("/random/{limit}")

@@ -17,7 +17,7 @@ use App\Rule\DeprecatedDirectiveMinVersion;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class DeprecatedDirectiveMinVersionTest extends TestCase
+final class DeprecatedDirectiveMinVersionTest extends TestCase
 {
     /**
      * @test

@@ -17,7 +17,7 @@ use App\Rule\ExtendAbstractAdmin;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class ExtendAbstractAdminTest extends TestCase
+final class ExtendAbstractAdminTest extends TestCase
 {
     /**
      * @test

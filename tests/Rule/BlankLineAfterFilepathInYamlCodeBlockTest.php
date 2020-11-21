@@ -17,7 +17,7 @@ use App\Rule\BlankLineAfterFilepathInYamlCodeBlock;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
+final class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
 {
     /**
      * @test

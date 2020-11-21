@@ -18,7 +18,7 @@ use App\Rule\OnlyBackslashesInUseStatementsInPhpCodeBlock;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends TestCase
+final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends TestCase
 {
     /**
      * @test

@@ -17,7 +17,7 @@ use App\Rule\ShortArraySyntax;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class ShortArraySyntaxTest extends TestCase
+final class ShortArraySyntaxTest extends TestCase
 {
     /**
      * @test

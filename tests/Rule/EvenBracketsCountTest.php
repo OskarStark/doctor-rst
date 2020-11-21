@@ -17,7 +17,7 @@ use App\Rule\EvenBracketsCount;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class EvenBracketsCountTest extends TestCase
+final class EvenBracketsCountTest extends TestCase
 {
     /**
      * @test

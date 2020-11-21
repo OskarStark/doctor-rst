@@ -18,7 +18,7 @@ use App\Rule\NoInheritdocInCodeExamples;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class NoInheritdocInCodeExamplesTest extends TestCase
+final class NoInheritdocInCodeExamplesTest extends TestCase
 {
     /**
      * @test

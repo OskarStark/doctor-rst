@@ -17,7 +17,7 @@ use App\Rule\YarnDevOptionAtTheEnd;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class YarnDevOptionAtTheEndTest extends TestCase
+final class YarnDevOptionAtTheEndTest extends TestCase
 {
     /**
      * @test
