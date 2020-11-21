@@ -17,7 +17,7 @@ use App\Rule\NoPhpPrefixBeforeComposer;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class NoPhpPrefixBeforeComposerTest extends TestCase
+final class NoPhpPrefixBeforeComposerTest extends TestCase
 {
     /**
      * @test

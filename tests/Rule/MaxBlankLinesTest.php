@@ -17,7 +17,7 @@ use App\Rule\MaxBlankLines;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class MaxBlankLinesTest extends TestCase
+final class MaxBlankLinesTest extends TestCase
 {
     /**
      * @test

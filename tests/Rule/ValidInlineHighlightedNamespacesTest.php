@@ -17,7 +17,7 @@ use App\Rule\ValidInlineHighlightedNamespaces;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class ValidInlineHighlightedNamespacesTest extends TestCase
+final class ValidInlineHighlightedNamespacesTest extends TestCase
 {
     /**
      * @test

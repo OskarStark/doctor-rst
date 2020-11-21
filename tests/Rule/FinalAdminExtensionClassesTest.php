@@ -17,7 +17,7 @@ use App\Rule\FinalAdminExtensionClasses;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class FinalAdminExtensionClassesTest extends TestCase
+final class FinalAdminExtensionClassesTest extends TestCase
 {
     /**
      * @test

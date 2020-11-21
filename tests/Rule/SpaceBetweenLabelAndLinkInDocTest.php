@@ -17,7 +17,7 @@ use App\Rule\SpaceBetweenLabelAndLinkInDoc;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class SpaceBetweenLabelAndLinkInDocTest extends TestCase
+final class SpaceBetweenLabelAndLinkInDocTest extends TestCase
 {
     /**
      * @test

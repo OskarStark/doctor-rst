@@ -17,7 +17,7 @@ use App\Rule\OrderedUseStatements;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class OrderedUseStatementsTest extends TestCase
+final class OrderedUseStatementsTest extends TestCase
 {
     /**
      * @test

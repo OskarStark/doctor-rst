@@ -18,7 +18,7 @@ use App\Rule\Typo;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class TypoTest extends TestCase
+final class TypoTest extends TestCase
 {
     /**
      * @test

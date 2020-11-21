@@ -17,7 +17,7 @@ use App\Rule\BlankLineAfterFilepathInXmlCodeBlock;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class BlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
+final class BlankLineAfterFilepathInXmlCodeBlockTest extends TestCase
 {
     /**
      * @test

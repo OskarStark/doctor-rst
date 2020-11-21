@@ -18,7 +18,7 @@ use App\Tests\RstSample;
 use Composer\Semver\VersionParser;
 use PHPUnit\Framework\TestCase;
 
-class VersionaddedDirectiveMajorVersionTest extends TestCase
+final class VersionaddedDirectiveMajorVersionTest extends TestCase
 {
     /**
      * @test

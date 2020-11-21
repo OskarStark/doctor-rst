@@ -17,7 +17,7 @@ use App\Rule\BlankLineAfterFilepathInTwigCodeBlock;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
+final class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
 {
     /**
      * @test

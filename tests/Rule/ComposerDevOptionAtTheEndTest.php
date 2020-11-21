@@ -17,7 +17,7 @@ use App\Rule\ComposerDevOptionAtTheEnd;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class ComposerDevOptionAtTheEndTest extends TestCase
+final class ComposerDevOptionAtTheEndTest extends TestCase
 {
     /**
      * @test

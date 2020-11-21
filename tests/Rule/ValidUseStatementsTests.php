@@ -17,7 +17,7 @@ use App\Rule\ValidUseStatements;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class ValidUseStatementsTests extends TestCase
+final class ValidUseStatementsTests extends TestCase
 {
     /**
      * @test

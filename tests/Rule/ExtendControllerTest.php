@@ -17,7 +17,7 @@ use App\Rule\ExtendController;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class ExtendControllerTest extends TestCase
+final class ExtendControllerTest extends TestCase
 {
     /**
      * @test

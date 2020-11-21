@@ -18,7 +18,7 @@ use App\Tests\RstSample;
 use App\Value\RuleName;
 use PHPUnit\Framework\TestCase;
 
-class FinalAdminClassesTest extends TestCase
+final class FinalAdminClassesTest extends TestCase
 {
     /**
      * @test

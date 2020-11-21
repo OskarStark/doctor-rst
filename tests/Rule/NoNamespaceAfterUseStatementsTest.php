@@ -17,7 +17,7 @@ use App\Rule\NoNamespaceAfterUseStatements;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class NoNamespaceAfterUseStatementsTest extends TestCase
+final class NoNamespaceAfterUseStatementsTest extends TestCase
 {
     /**
      * @test

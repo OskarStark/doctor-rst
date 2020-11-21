@@ -18,7 +18,7 @@ use App\Rule\BlankLineAfterDirective;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class BlankLineAfterDirectiveTest extends TestCase
+final class BlankLineAfterDirectiveTest extends TestCase
 {
     /**
      * @test

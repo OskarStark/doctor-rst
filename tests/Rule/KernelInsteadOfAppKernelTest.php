@@ -17,7 +17,7 @@ use App\Rule\KernelInsteadOfAppKernel;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class KernelInsteadOfAppKernelTest extends TestCase
+final class KernelInsteadOfAppKernelTest extends TestCase
 {
     /**
      * @test

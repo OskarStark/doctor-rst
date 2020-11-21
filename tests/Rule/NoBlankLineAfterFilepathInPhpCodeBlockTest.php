@@ -18,7 +18,7 @@ use App\Rule\NoBlankLineAfterFilepathInPhpCodeBlock;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
+final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
 {
     /**
      * @test

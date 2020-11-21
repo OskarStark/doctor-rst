@@ -18,7 +18,7 @@ use App\Rule\Rule;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class AmericanEnglishTest extends TestCase
+final class AmericanEnglishTest extends TestCase
 {
     /**
      * @test

@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @Description("propose to replace a string with another string.")
  */
-class StringReplacementTest extends TestCase
+final class StringReplacementTest extends TestCase
 {
     /**
      * @test

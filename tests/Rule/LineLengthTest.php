@@ -17,7 +17,7 @@ use App\Rule\LineLength;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class LineLengthTest extends TestCase
+final class LineLengthTest extends TestCase
 {
     /**
      * @test

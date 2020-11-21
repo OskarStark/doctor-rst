@@ -17,7 +17,7 @@ use App\Rule\NoComposerReq;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class NoComposerReqTest extends TestCase
+final class NoComposerReqTest extends TestCase
 {
     /**
      * @test

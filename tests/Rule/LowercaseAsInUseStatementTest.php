@@ -17,7 +17,7 @@ use App\Rule\LowercaseAsInUseStatements;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class LowercaseAsInUseStatementTest extends TestCase
+final class LowercaseAsInUseStatementTest extends TestCase
 {
     /**
      * @test

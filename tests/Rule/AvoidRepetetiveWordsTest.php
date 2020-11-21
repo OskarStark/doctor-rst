@@ -17,7 +17,7 @@ use App\Rule\AvoidRepetetiveWords;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
 
-class AvoidRepetetiveWordsTest extends TestCase
+final class AvoidRepetetiveWordsTest extends TestCase
 {
     /**
      * @test
