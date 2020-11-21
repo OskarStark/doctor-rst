@@ -22,7 +22,7 @@ interface Rule
     /**
      * Rules using this type run for every line of the file content.
      */
-    const TYPE_LINE = 1;
+    const TYPE_LINE_CONTENT = 1;
 
     /**
      * Rules using this type are only run once, and are responsible

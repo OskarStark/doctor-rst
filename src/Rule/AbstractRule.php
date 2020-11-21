@@ -33,7 +33,7 @@ abstract class AbstractRule
 
     public static function getType(): int
     {
-        return Rule::TYPE_LINE;
+        return Rule::TYPE_LINE_CONTENT;
     }
 
     public static function runOnlyOnBlankline(): bool
