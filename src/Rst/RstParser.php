@@ -45,6 +45,7 @@ class RstParser
     const DIRECTIVE_RST_CLASS = '.. rst-class::';
     const DIRECTIVE_LITERALINCLUDE = '.. literalinclude::';
     const DIRECTIVE_CONTENTS = '.. contents::';
+    const DIRECTIVE_CODEIMPORT = '.. codeimport::';
 
     const DIRECTIVES = [
         self::DIRECTIVE_CODE_BLOCK,
@@ -71,6 +72,7 @@ class RstParser
         self::DIRECTIVE_RST_CLASS,
         self::DIRECTIVE_LITERALINCLUDE,
         self::DIRECTIVE_CONTENTS,
+        self::DIRECTIVE_CODEIMPORT,
     ];
 
     const CODE_BLOCK_PHP = 'php';
