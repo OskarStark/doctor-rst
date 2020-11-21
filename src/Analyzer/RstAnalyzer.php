@@ -52,7 +52,7 @@ final class RstAnalyzer implements Analyzer
                 if (!$rule::runOnlyOnBlankline() && $line->isBlank()) {
                     continue;
                 }
-                if (Rule::TYPE_FILE === $rule::getType() && $no > 0) {
+                if (Rule::TYPE_FILE_CONTENT === $rule::getType() && $no > 0) {
                     continue;
                 }
 
@@ -63,7 +63,7 @@ final class RstAnalyzer implements Analyzer
                         $violationMessage,
                         (string) $file->getRealPath(),
                         $no + 1,
-                        Rule::TYPE_FILE === $rule::getType() ? '' : trim($line->raw()->toString())
+                        Rule::TYPE_FILE_CONTENT === $rule::getType() ? '' : trim($line->raw()->toString())
                     );
                 }
 

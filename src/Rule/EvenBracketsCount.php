@@ -26,7 +26,7 @@ class EvenBracketsCount extends AbstractRule implements Rule
 
     public static function getType(): int
     {
-        return Rule::TYPE_FILE;
+        return Rule::TYPE_FILE_CONTENT;
     }
 
     public static function getGroups(): array

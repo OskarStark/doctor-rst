@@ -19,8 +19,18 @@ use App\Value\RuleName;
 
 interface Rule
 {
+    /**
+     * Rules using this type run for every line of the file content.
+     */
     const TYPE_LINE = 1;
-    const TYPE_FILE = 2;
+
+    /**
+     * Rules using this type are only run once, and are responsible
+     * to check the whole file content on its own, if needed. They always
+     * start on the first line of the document.
+     */
+    const TYPE_FILE_CONTENT = 2;
+
     const TYPE_WHOLE_DOCUMENT = 3;
 
     public static function getName(): RuleName;
