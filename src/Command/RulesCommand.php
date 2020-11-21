@@ -24,6 +24,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\OptionsResolver\Debug\OptionsResolverIntrospector;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RulesCommand extends Command
@@ -111,12 +112,67 @@ class RulesCommand extends Command
         if ($rule instanceof Configurable) {
             $this->io->writeln('#### Configuration options');
             $this->io->newLine();
-            $this->io->writeln('Name | Required');
-            $this->io->writeln('--- | ---');
+
+            /** @var array{name: string, required: bool, types: array, default: mixed} $options */
+            $options = [];
+
+            $hasAnOptionWithDefaultValue = false;
 
             $resolver = $rule->configureOptions(new OptionsResolver());
+            $introspector = new OptionsResolverIntrospector($resolver);
             foreach ($resolver->getDefinedOptions() as $option) {
-                $this->io->writeln(sprintf('`%s` | `%s`', $option, $resolver->isRequired($option) ? 'true' : 'false'));
+                $required = false;
+                $default = null;
+
+                $allowedTypes = $introspector->getAllowedTypes($option);
+                if ($resolver->isRequired($option)) {
+                    $required = true;
+
+                    if ($resolver->hasDefault($option)) {
+                        $hasAnOptionWithDefaultValue = true;
+                        $required = false;
+
+                        $default = $introspector->getDefault($option);
+                    }
+                }
+
+                $options[] = [
+                    'name' => $option,
+                    'required' => $required,
+                    'types' => $allowedTypes,
+                    'default' => $default,
+                ];
+            }
+
+            if ([] !== $options) {
+                if ($hasAnOptionWithDefaultValue) {
+                    $this->io->writeln('Name | Required | Allowed Types | Default');
+                    $this->io->writeln('--- | --- | --- | ---');
+
+                    foreach ($options as $option) {
+                        $this->io->writeln(sprintf(
+                            '%s | %s | %s | %s',
+                            sprintf('`%s`', $option['name']),
+                            sprintf('`%s`', $option['required'] ? 'true' : 'false'),
+                            sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
+                            null === $option['default'] ? '' : sprintf('`%s`', $option['default'])
+                        ));
+                    }
+                } else {
+                    $this->io->writeln('Name | Required');
+                    $this->io->writeln('--- | ---');
+
+                    foreach ($options as $option) {
+                        $this->io->writeln(sprintf(
+                            '%s | %s | %s',
+                            sprintf('`%s`', $option['name']),
+                            sprintf('`%s`', $option['required'] ? 'true' : 'false'),
+                            sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
+                        ));
+                    }
+                }
+
+                $this->io->newLine();
             }
         }
 
