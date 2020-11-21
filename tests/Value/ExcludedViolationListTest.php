@@ -17,7 +17,7 @@ use App\Value\ExcludedViolationList;
 use App\Value\Violation;
 use PHPUnit\Framework\TestCase;
 
-class ExcludedViolationListTest extends TestCase
+final class ExcludedViolationListTest extends TestCase
 {
     public function testFilterExcludedViolations(): void
     {

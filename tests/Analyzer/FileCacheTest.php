@@ -20,7 +20,7 @@ use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 
-class FileCacheTest extends TestCase
+final class FileCacheTest extends TestCase
 {
     private vfsStreamDirectory $root;
 

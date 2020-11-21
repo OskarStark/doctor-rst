@@ -23,7 +23,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class ConsoleFormatterTest extends TestCase
+final class ConsoleFormatterTest extends TestCase
 {
     public function testFormat(): void
     {

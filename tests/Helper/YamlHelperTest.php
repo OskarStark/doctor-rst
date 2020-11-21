@@ -17,7 +17,7 @@ use App\Helper\YamlHelper;
 use App\Value\Line;
 use PHPUnit\Framework\TestCase;
 
-class YamlHelperTest extends TestCase
+final class YamlHelperTest extends TestCase
 {
     /**
      * @test
