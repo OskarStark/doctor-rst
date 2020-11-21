@@ -18,11 +18,7 @@ use App\Value\Lines;
 final class RstSample
 {
     private int $lineNumber = 0;
-
-    /**
-     * @var array<string>
-     */
-    private $lines;
+    private Lines $lines;
 
     /**
      * @param string|array<string> $content
