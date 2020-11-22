@@ -29,7 +29,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends TestCase
      * @dataProvider checkXmlProvider
      * @dataProvider checkTwigProvider
      */
-    public function check(?string $expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,

@@ -25,7 +25,7 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends TestCa
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,

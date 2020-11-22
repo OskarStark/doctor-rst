@@ -29,7 +29,7 @@ final class StringReplacementTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample): void
     {
         $configuredRules = [];
         foreach (StringReplacement::getList() as $search => $message) {

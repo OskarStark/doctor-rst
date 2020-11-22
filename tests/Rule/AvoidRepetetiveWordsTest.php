@@ -25,7 +25,7 @@ final class AvoidRepetetiveWordsTest extends TestCase
      * @dataProvider checkProvider
      * @dataProvider whitelistProvider
      */
-    public function check(?string $expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,

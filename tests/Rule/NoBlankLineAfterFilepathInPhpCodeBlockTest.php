@@ -25,7 +25,7 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,

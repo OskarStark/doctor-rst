@@ -24,7 +24,7 @@ final class ComposerDevOptionNotAtTheEndTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample)
+    public function check(?string $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,
