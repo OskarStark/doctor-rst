@@ -16,12 +16,12 @@ namespace App\Rule;
 abstract class CheckListRule extends AbstractRule implements Rule
 {
     public string $search;
-    public ?string $message;
+    public string $message;
 
     public function configure(string $pattern, ?string $message): self
     {
         $this->search = $pattern;
-        $this->message = $message ?: static::getDefaultMessage();
+        $this->message = $message ?? static::getDefaultMessage();
 
         return $this;
     }

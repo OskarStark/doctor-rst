@@ -1,7 +1,7 @@
 parameters:
     paths:
         - src
-    level: 7
+    level: max
     inferPrivatePropertyTypeFromConstructor: true
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
