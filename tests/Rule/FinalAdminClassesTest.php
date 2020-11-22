@@ -23,7 +23,7 @@ final class FinalAdminClassesTest extends TestCase
     /**
      * @test
      */
-    public function name()
+    public function name(): void
     {
         static::assertInstanceOf(RuleName::class, FinalAdminClasses::getName());
         static::assertSame('final_admin_classes', FinalAdminClasses::getName()->toString());
@@ -42,7 +42,10 @@ final class FinalAdminClassesTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return array<array{0: string|null, 1: RstSample}>
+     */
+    public function checkProvider(): array
     {
         return [
             [

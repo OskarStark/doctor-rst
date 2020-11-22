@@ -103,7 +103,7 @@ final class PhpHelperTest extends TestCase
      * @test
      * @dataProvider isLastLineOfMultilineCommentProvider
      */
-    public function isLastLineOfMultilineComment(bool $expected, string $line)
+    public function isLastLineOfMultilineComment(bool $expected, string $line): void
     {
         static::assertSame(
             $expected,
@@ -126,7 +126,7 @@ final class PhpHelperTest extends TestCase
      *
      * @dataProvider isPartOfDocBlockProvider
      */
-    public function isPartOfDocBlock(bool $expected, RstSample $sample)
+    public function isPartOfDocBlock(bool $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,
@@ -160,7 +160,7 @@ RST;
      *
      * @dataProvider isPartOfMultilineCommentProvider
      */
-    public function isPartOfMultilineComment(bool $expected, RstSample $sample)
+    public function isPartOfMultilineComment(bool $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,
@@ -203,7 +203,7 @@ RST;
      *
      * @dataProvider isFirstLineOfMultilineCommentProvider
      */
-    public function isFirstLineOfMultilineComment(bool $expected, string $line)
+    public function isFirstLineOfMultilineComment(bool $expected, string $line): void
     {
         static::assertSame(
             $expected,
@@ -227,7 +227,7 @@ RST;
      *
      * @dataProvider isFirstLineOfDocBlockProvider
      */
-    public function isFirstLineOfDocBlock(bool $expected, string $line)
+    public function isFirstLineOfDocBlock(bool $expected, string $line): void
     {
         static::assertSame(
             $expected,
@@ -251,7 +251,7 @@ RST;
      *
      * @dataProvider isLastLineOfDocBlockProvider
      */
-    public function isLastLineOfDocBlock(bool $expected, string $line)
+    public function isLastLineOfDocBlock(bool $expected, string $line): void
     {
         static::assertSame(
             $expected,

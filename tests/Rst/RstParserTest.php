@@ -189,7 +189,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider directiveIsProvider
      */
-    public function directiveIs(bool $expected, string $string, string $directive)
+    public function directiveIs(bool $expected, string $string, string $directive): void
     {
         static::assertSame($expected, RstParser::directiveIs(new Line($string), $directive));
     }
@@ -215,7 +215,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider codeBlockDirectiveIsTypeOfProvider
      */
-    public function codeBlockDirectiveIsTypeOf(bool $expected, string $string, string $type, bool $strict = false)
+    public function codeBlockDirectiveIsTypeOf(bool $expected, string $string, string $type, bool $strict = false): void
     {
         static::assertSame($expected, RstParser::codeBlockDirectiveIsTypeOf(new Line($string), $type, $strict));
     }
@@ -252,7 +252,7 @@ final class RstParserTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{0: bool, 1: string, 2: string}>
+     * @return \Generator<array{0: bool, 1: string}>
      */
     public function isOptionProvider(): \Generator
     {

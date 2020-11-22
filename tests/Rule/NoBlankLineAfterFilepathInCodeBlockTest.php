@@ -37,7 +37,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    public function checkProvider(): array
     {
         return [
             [
@@ -47,7 +47,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         ];
     }
 
-    public function checkPhpProvider()
+    public function checkPhpProvider(): array
     {
         return [
             [
@@ -72,7 +72,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         ];
     }
 
-    public function checkYmlProvider()
+    public function checkYmlProvider(): array
     {
         return [
             [
@@ -97,7 +97,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         ];
     }
 
-    public function checkYamlProvider()
+    public function checkYamlProvider(): array
     {
         return [
             [
@@ -122,7 +122,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         ];
     }
 
-    public function checkXmlProvider()
+    public function checkXmlProvider(): array
     {
         return [
             [
@@ -166,7 +166,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
         ];
     }
 
-    public function checkTwigProvider()
+    public function checkTwigProvider(): array
     {
         return [
             [

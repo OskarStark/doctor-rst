@@ -24,15 +24,23 @@ final class VersionaddedDirectiveMinVersionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, string $minVersion, RstSample $sample)
+    public function check(?string $expected, string $minVersion, RstSample $sample): void
     {
-        $rule = (new VersionaddedDirectiveMinVersion());
-        $rule->setOptions(['min_version' => $minVersion]);
+        $rule = new VersionaddedDirectiveMinVersion();
+        $rule->setOptions([
+            'min_version' => $minVersion,
+        ]);
 
-        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertSame(
+            $expected,
+            $rule->check($sample->lines(), $sample->lineNumber())
+        );
     }
 
-    public function checkProvider()
+    /**
+     * @return array<array{0: string|null, 1: string, 2: RstSample}>
+     */
+    public function checkProvider(): array
     {
         return [
             [

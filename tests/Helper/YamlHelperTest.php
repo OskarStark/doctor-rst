@@ -24,7 +24,7 @@ final class YamlHelperTest extends TestCase
      *
      * @dataProvider isCommentProvider
      */
-    public function isComment(bool $expected, string $line)
+    public function isComment(bool $expected, string $line): void
     {
         static::assertSame(
             $expected,
@@ -32,7 +32,10 @@ final class YamlHelperTest extends TestCase
         );
     }
 
-    public function isCommentProvider()
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
+    public function isCommentProvider(): \Generator
     {
         yield [true, '# comment'];
         yield [false, 'no comment'];

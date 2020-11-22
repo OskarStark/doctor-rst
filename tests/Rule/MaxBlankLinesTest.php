@@ -24,7 +24,7 @@ final class MaxBlankLinesTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, int $max, RstSample $sample)
+    public function check(?string $expected, int $max, RstSample $sample): void
     {
         $rule = (new MaxBlankLines());
         $rule->setOptions(['max' => $max]);

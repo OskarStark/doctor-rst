@@ -32,7 +32,7 @@ final class NoSpaceBeforeSelfXmlClosingTagTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    public function checkProvider(): array
     {
         return [
             [

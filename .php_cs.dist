@@ -37,6 +37,7 @@ return PhpCsFixer\Config::create()
         'php_unit_test_case_static_method_calls' => true,
         'psr4' => true,
         'single_line_throw' => false,
+        'void_return' => true,
     ])
     ->setFinder($finder)
 ;

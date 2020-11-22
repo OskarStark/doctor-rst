@@ -53,7 +53,7 @@ final class StringReplacementTest extends TestCase
         }
     }
 
-    public function checkProvider()
+    public function checkProvider(): \Generator
     {
         yield 'empty string' => [null, new RstSample('')];
 

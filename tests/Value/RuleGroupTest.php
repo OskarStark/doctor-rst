@@ -92,7 +92,7 @@ final class RuleGroupTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{0: string, 1: string, 2: RuleGroup}>
+     * @return \Generator<array{0: bool, 1: RuleGroup, 2: RuleGroup}>
      */
     public function equalsProvider(): \Generator
     {

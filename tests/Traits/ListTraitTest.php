@@ -14,29 +14,22 @@ declare(strict_types=1);
 namespace App\Tests\Traits;
 
 use App\Tests\RstSample;
-use App\Traits\ListTrait;
+use App\Tests\Util\ListItemTraitWrapper;
 use PHPUnit\Framework\TestCase;
 
 final class ListTraitTest extends TestCase
 {
-    private $traitWrapper;
+    private ListItemTraitWrapper $traitWrapper;
 
     protected function setUp(): void
     {
-        $this->traitWrapper = new class() {
-            use ListTrait {
-                ListTrait::isPartOfListItem as public;
-                ListTrait::isPartOfFootnote as public;
-                ListTrait::isPartOfRstComment as public;
-                ListTrait::isPartOfLineNumberAnnotation as public;
-            }
-        };
+        $this->traitWrapper = new ListItemTraitWrapper();
     }
 
     /**
      * @test
      */
-    public function methodExists()
+    public function methodExists(): void
     {
         static::assertTrue(method_exists($this->traitWrapper, 'isPartOfListItem'));
     }
@@ -46,7 +39,7 @@ final class ListTraitTest extends TestCase
      *
      * @dataProvider isPartOfListItemProvider
      */
-    public function isPartOfListItem(bool $expected, RstSample $sample)
+    public function isPartOfListItem(bool $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,
@@ -57,7 +50,7 @@ final class ListTraitTest extends TestCase
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public function isPartOfListItemProvider()
+    public function isPartOfListItemProvider(): \Generator
     {
         yield [
             false,
@@ -151,7 +144,7 @@ RST
      *
      * @dataProvider isPartOfFootnoteProvider
      */
-    public function isPartOfFootnote(bool $expected, RstSample $sample)
+    public function isPartOfFootnote(bool $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,
@@ -178,7 +171,7 @@ RST;
      *
      * @dataProvider isPartOfRstCommentProvider
      */
-    public function isPartOfRstComment(bool $expected, RstSample $sample)
+    public function isPartOfRstComment(bool $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,
@@ -205,7 +198,7 @@ RST;
      *
      * @dataProvider isPartOfLineNumberAnnotationProvider
      */
-    public function isPartOfLineNumberAnnotation(bool $expected, RstSample $sample)
+    public function isPartOfLineNumberAnnotation(bool $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,

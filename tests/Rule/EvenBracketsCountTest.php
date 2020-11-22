@@ -272,9 +272,12 @@ final class EvenBracketsCountTest extends TestCase
      */
     public function realSymfonyFileProvider(): \Generator
     {
+        $content = file_get_contents(__DIR__.'/../Fixtures/testfile.rst');
+        \assert(\is_string($content));
+
         yield [
             null,
-            new RstSample(file_get_contents(__DIR__.'/../Fixtures/testfile.rst')),
+            new RstSample($content),
         ];
     }
 }
