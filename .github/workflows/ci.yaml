@@ -15,14 +15,30 @@ jobs:
 
         runs-on: ubuntu-latest
 
+        strategy:
+            matrix:
+                php-version:
+                    - "7.4"
+
         steps:
             - name: "Checkout code"
               uses: actions/checkout@v2
 
-            - name: PHPStan
-              uses: docker://oskarstark/phpstan-ga:0.12.56
+            - name: "Install PHP with extensions"
+              uses: "shivammathur/setup-php@v2"
               with:
-                  args: analyse -c phpstan.neon.dist
+                  coverage: "none"
+                  extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
+                  php-version: "${{ matrix.php-version }}"
+                  tools: composer:v2
+
+            -   name: "Composer install"
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: "--no-scripts"
+
+            - name: "Run PHPStan"
+              run: vendor/bin/phpstan analyse -c phpstan.neon.dist
 
     php-cs-fixer:
         name: PHP-CS-Fixer
@@ -65,8 +81,11 @@ jobs:
                 with:
                     composer-options: "--no-scripts"
 
-            - name: "Run unit tests via bin/phpunit"
-              run: bin/phpunit
+            - name: "PHPUnit version"
+              run: vendor/bin/phpunit --version
+
+            - name: "Run tests"
+              run: vendor/bin/phpunit
 
     auto-merge:
         name: "Auto-Merge"
