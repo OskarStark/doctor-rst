@@ -48,7 +48,7 @@ final class PhpHelperTest extends TestCase
      *
      * @dataProvider containsBackslashProvider
      */
-    public function containsBackslash(bool $expected, string $string)
+    public function containsBackslash(bool $expected, string $string): void
     {
         static::assertSame($expected, PhpHelper::containsBackslash($string));
     }
@@ -71,7 +71,7 @@ final class PhpHelperTest extends TestCase
      *
      * @dataProvider isUsingTwoBackSlashesProvider
      */
-    public function isUsingTwoBackslashes(bool $expected, string $string)
+    public function isUsingTwoBackslashes(bool $expected, string $string): void
     {
         static::assertSame($expected, PhpHelper::isUsingTwoBackslashes($string));
     }

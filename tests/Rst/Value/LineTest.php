@@ -117,7 +117,7 @@ final class LineTest extends TestCase
      *
      * @dataProvider isHeadlineProvider
      */
-    public function isHeadline(bool $expected, string $string)
+    public function isHeadline(bool $expected, string $string): void
     {
         static::assertSame($expected, (new Line($string))->isHeadline());
     }

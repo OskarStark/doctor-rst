@@ -24,7 +24,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider isLineNumberAnnotationProvider
      */
-    public function isLineNumberAnnotation(bool $expected, string $string)
+    public function isLineNumberAnnotation(bool $expected, string $string): void
     {
         static::assertSame($expected, RstParser::isLineNumberAnnotation(new Line($string)));
     }
@@ -48,7 +48,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider isCommentProvider
      */
-    public function isComment(bool $expected, string $string)
+    public function isComment(bool $expected, string $string): void
     {
         static::assertSame($expected, RstParser::isComment(new Line($string)));
     }
@@ -71,7 +71,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider isFootnoteProvider
      */
-    public function isFootnote(bool $expected, string $string)
+    public function isFootnote(bool $expected, string $string): void
     {
         static::assertSame($expected, RstParser::isFootnote(new Line($string)));
     }
@@ -92,7 +92,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider isListItemProvider
      */
-    public function isListItem(bool $expected, string $string)
+    public function isListItem(bool $expected, string $string): void
     {
         static::assertSame($expected, RstParser::isListItem(new Line($string)));
     }
@@ -114,7 +114,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider isLinkDefinitionProvider
      */
-    public function isLinkDefinition(bool $expected, string $string)
+    public function isLinkDefinition(bool $expected, string $string): void
     {
         static::assertSame($expected, RstParser::isLinkDefinition(new Line($string)));
     }
@@ -139,7 +139,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider isLinkUsageProvider
      */
-    public function isLinkUsage(bool $expected, string $string)
+    public function isLinkUsage(bool $expected, string $string): void
     {
         static::assertSame($expected, RstParser::isLinkUsage($string));
     }
@@ -161,7 +161,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider isTableProvider
      */
-    public function isTable(bool $expected, string $string)
+    public function isTable(bool $expected, string $string): void
     {
         static::assertSame($expected, RstParser::isTable(new Line($string)));
     }
@@ -246,7 +246,7 @@ final class RstParserTest extends TestCase
      *
      * @dataProvider isOptionProvider
      */
-    public function isOption(bool $expected, string $string)
+    public function isOption(bool $expected, string $string): void
     {
         static::assertSame($expected, RstParser::isOption(new Line($string)));
     }
