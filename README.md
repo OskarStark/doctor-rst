@@ -50,7 +50,7 @@ Error Formatter
 
 * **github** Used to annotate your pull requests.
 
-* **console** Used as to generate a human readable output.
+* **console** Used to generate a human readable output.
 
 To force the usage of a specific formatter, use the `--error-format` option.
 
