@@ -104,7 +104,7 @@ or
 
 `bin/console analyze dummy/docs --group=@Sonata`
 
-Todo:
+Todos
 -----
 
 * Allow to register custom Rules
