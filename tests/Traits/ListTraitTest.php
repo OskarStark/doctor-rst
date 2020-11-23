@@ -97,16 +97,16 @@ RST;
    Line 2
 RST;
 
-        yield 'first line (numeric + dot + parenthesis)' => [true, new RstSample($list_5)];
-        yield 'second line (numeric + dot + parenthesis)' => [true, new RstSample($list_5, 1)];
+        yield 'first line (numeric with dot)' => [true, new RstSample($list_5)];
+        yield 'second line (numeric with dot)' => [true, new RstSample($list_5, 1)];
 
-//        $list_6 = <<<'RST'
-//1.) Line 1
-//    Line 2
-//RST;
-//
-//        yield 'first line (numeric with dot + parenthesis)' => [true, new RstSample($list_6)];
-//        yield 'second line (numeric  with dot + parenthesis)' => [true, new RstSample($list_6, 1)];
+        $list_6 = <<<'RST'
+1.) Line 1
+    Line 2
+RST;
+
+        yield 'first line (numeric with dot + parenthesis)' => [true, new RstSample($list_6)];
+        yield 'second line (numeric  with dot + parenthesis)' => [true, new RstSample($list_6, 1)];
 
         $list_7 = <<<'RST'
 a) Line 1
