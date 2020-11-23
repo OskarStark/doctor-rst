@@ -1,7 +1,7 @@
 DOCtor-RST
 ==========
 
-**This is a POC under development!**
+Lint your documentation against given rules.
 
 Available rules
 ---------------
