@@ -35,6 +35,7 @@ jobs:
             -   name: "Composer install"
                 uses: "ramsey/composer-install@v1"
                 with:
+                    dependency-versions: "highest"
                     composer-options: "--no-scripts"
 
             - name: "Run PHPStan"
