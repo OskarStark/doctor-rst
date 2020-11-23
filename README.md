@@ -73,7 +73,10 @@ Use Caching to Speedup your GithubActions builds
 +              uses: actions/cache@v2
 +              with:
 +                  path: .cache
-+                  key: ${{ runner.os }}-doctor-rst-${{ steps.extract_base_branch.outputs.branch }}
++                  key: doctor-rst-${{ runner.os }}-${{ steps.extract_base_branch.outputs.branch }}
++                  restore-keys: |
++                      doctor-rst-${{ runner.os }}-
++                      doctor-rst-   
 +
             - name: "Run DOCtor-RST"
               uses: docker://oskarstark/doctor-rst
