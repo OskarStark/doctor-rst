@@ -32,7 +32,7 @@ final class NoPhpPrefixBeforeComposerTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    public function checkProvider(): array
     {
         return [
             [

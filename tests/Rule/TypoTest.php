@@ -23,7 +23,8 @@ final class TypoTest extends TestCase
     /**
      * @test
      *
-     * @dataProvider checkProvider
+     * @dataProvider validProvider
+     * @dataProvider invalidProvider
      */
     public function check(?string $expected, RstSample $sample): void
     {
@@ -49,7 +50,10 @@ final class TypoTest extends TestCase
         }
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<string, array{0: null, 1: RstSample}>
+     */
+    public function validProvider(): \Generator
     {
         yield 'empty string' => [null, new RstSample('')];
 
@@ -85,7 +89,13 @@ final class TypoTest extends TestCase
             // add leading spaces
             yield sprintf('"%s" with leading spaces', $valid) => [null, new RstSample(sprintf('    %s', $valid))];
         }
+    }
 
+    /**
+     * @return \Generator<string, array{0: string, 1: RstSample}>
+     */
+    public function invalidProvider(): \Generator
+    {
         $invalids = [
             'Compsoer',
             'compsoer',

@@ -33,7 +33,10 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends TestCase
         );
     }
 
-    public function validProvider()
+    /**
+     * @return array<int|string, array{0: null, 1: RstSample}>
+     */
+    public function validProvider(): array
     {
         return [
             [
@@ -76,7 +79,10 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends TestCase
         ];
     }
 
-    public function invalidProvider()
+    /**
+     * @return array<array{0: string, 1: RstSample}>
+     */
+    public function invalidProvider(): array
     {
         return [
             [

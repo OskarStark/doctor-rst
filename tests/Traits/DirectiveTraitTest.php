@@ -15,27 +15,22 @@ namespace App\Tests\Traits;
 
 use App\Rst\RstParser;
 use App\Tests\RstSample;
-use App\Traits\DirectiveTrait;
+use App\Tests\Util\DirectiveTraitWrapper;
 use PHPUnit\Framework\TestCase;
 
 final class DirectiveTraitTest extends TestCase
 {
-    private $traitWrapper;
+    private DirectiveTraitWrapper $traitWrapper;
 
     protected function setUp(): void
     {
-        $this->traitWrapper = new class() {
-            use DirectiveTrait {
-                DirectiveTrait::in as public;
-                DirectiveTrait::previousDirectiveIs as public;
-            }
-        };
+        $this->traitWrapper = new DirectiveTraitWrapper();
     }
 
     /**
      * @test
      */
-    public function methodExists()
+    public function methodExists(): void
     {
         static::assertTrue(method_exists($this->traitWrapper, 'in'));
     }
@@ -45,7 +40,7 @@ final class DirectiveTraitTest extends TestCase
      *
      * @dataProvider inProvider
      */
-    public function in(bool $expected, RstSample $sample, string $directive, ?array $types = null)
+    public function in(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
     {
         static::assertSame(
             $expected,
@@ -415,7 +410,7 @@ RST;
      *
      * @dataProvider previousDirectiveIsProvider
      */
-    public function previousDirectiveIs(bool $expected, RstSample $sample, string $directive, ?array $types = null)
+    public function previousDirectiveIs(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
     {
         static::assertSame(
             $expected,
@@ -423,7 +418,10 @@ RST;
         );
     }
 
-    public function previousDirectiveIsProvider()
+    /**
+     * @return \Generator<array{0: bool, 1: RstSample}>
+     */
+    public function previousDirectiveIsProvider(): \Generator
     {
         yield [
             false,

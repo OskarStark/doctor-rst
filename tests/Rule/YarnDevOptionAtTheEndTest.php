@@ -32,17 +32,19 @@ final class YarnDevOptionAtTheEndTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<array{0: string|null, 1: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
-        return [
-            [
-                'Please move "--dev" option to the end of the command',
-                new RstSample('yarn add --dev jquery'),
-            ],
-            [
-                null,
-                new RstSample('yarn add jquery --dev'),
-            ],
+        yield [
+            'Please move "--dev" option to the end of the command',
+            new RstSample('yarn add --dev jquery'),
+        ];
+
+        yield [
+            null,
+            new RstSample('yarn add jquery --dev'),
         ];
     }
 }

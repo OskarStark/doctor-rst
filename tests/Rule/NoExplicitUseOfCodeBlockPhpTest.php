@@ -34,7 +34,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends TestCase
     }
 
     /**
-     * @return \Generator<array<string|null, RstSample>>
+     * @return \Generator<array{0: string|null, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
@@ -95,7 +95,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends TestCase
     }
 
     /**
-     * @return \Generator<array<string|null, RstSample>>
+     * @return \Generator<int|string, array{0: null|string, 1: RstSample}>
      */
     public function realSymfonyFileProvider(): \Generator
     {

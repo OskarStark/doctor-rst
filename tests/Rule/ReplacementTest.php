@@ -49,7 +49,10 @@ final class ReplacementTest extends TestCase
         }
     }
 
-    public function checkProvider()
+    /**
+     * @return \Generator<string, array{0: null|string, 1: RstSample}>
+     */
+    public function checkProvider(): \Generator
     {
         yield 'empty string' => [null, new RstSample('')];
 

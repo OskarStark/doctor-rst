@@ -24,7 +24,7 @@ final class IndentionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, int $size, RstSample $sample)
+    public function check(?string $expected, int $size, RstSample $sample): void
     {
         $rule = (new Indention());
         $rule->setOptions(['size' => $size]);
@@ -351,7 +351,7 @@ RST
      *
      * @dataProvider multilineXmlProvider
      */
-    public function isPartOfMultilineXmlComment(bool $expected, RstSample $sample)
+    public function isPartOfMultilineXmlComment(bool $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,
@@ -423,7 +423,7 @@ RST
      *
      * @dataProvider multilineTwigProvider
      */
-    public function isPartOfMultilineTwigComment(bool $expected, RstSample $sample)
+    public function isPartOfMultilineTwigComment(bool $expected, RstSample $sample): void
     {
         static::assertSame(
             $expected,

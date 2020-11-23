@@ -34,7 +34,10 @@ final class VersionaddedDirectiveShouldHaveVersionTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return array<array{0: string|null, 1: RstSample}>
+     */
+    public function checkProvider(): array
     {
         return [
             [

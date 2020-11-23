@@ -32,7 +32,7 @@ final class PhpPrefixBeforeBinConsoleTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    public function checkProvider(): \Generator
     {
         yield [null, new RstSample('please execute php bin/console foo')];
         yield [null, new RstSample('you can use `bin/console` to execute')];

@@ -25,15 +25,23 @@ final class VersionaddedDirectiveMajorVersionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, int $majorVersion, RstSample $sample)
+    public function check(?string $expected, int $majorVersion, RstSample $sample): void
     {
-        $rule = (new VersionaddedDirectiveMajorVersion(new VersionParser()));
-        $rule->setOptions(['major_version' => $majorVersion]);
+        $rule = new VersionaddedDirectiveMajorVersion(new VersionParser());
+        $rule->setOptions([
+            'major_version' => $majorVersion,
+        ]);
 
-        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertSame(
+            $expected,
+            $rule->check($sample->lines(), $sample->lineNumber())
+        );
     }
 
-    public function checkProvider()
+    /**
+     * @return array<array{0: string|null, 1: int, 2: RstSample}>
+     */
+    public function checkProvider(): array
     {
         return [
             [

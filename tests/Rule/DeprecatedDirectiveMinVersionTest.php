@@ -24,7 +24,7 @@ final class DeprecatedDirectiveMinVersionTest extends TestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, string $minVersion, RstSample $sample)
+    public function check(?string $expected, string $minVersion, RstSample $sample): void
     {
         $rule = (new DeprecatedDirectiveMinVersion());
         $rule->setOptions(['min_version' => $minVersion]);

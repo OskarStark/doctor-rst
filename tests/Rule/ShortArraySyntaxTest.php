@@ -32,7 +32,10 @@ final class ShortArraySyntaxTest extends TestCase
         );
     }
 
-    public function checkProvider()
+    /**
+     * @return array<array{0: null|string, 1: RstSample}>
+     */
+    public function checkProvider(): array
     {
         return [
             [

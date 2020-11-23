@@ -24,7 +24,7 @@ final class XmlHelperTest extends TestCase
      *
      * @dataProvider isCommentProvider
      */
-    public function isComment(bool $expected, string $line, ?bool $closed)
+    public function isComment(bool $expected, string $line, ?bool $closed): void
     {
         static::assertSame(
             $expected,
@@ -32,7 +32,10 @@ final class XmlHelperTest extends TestCase
         );
     }
 
-    public function isCommentProvider()
+    /**
+     * @return \Generator<array{0: bool, 1: string, 2: null|bool}>
+     */
+    public function isCommentProvider(): \Generator
     {
         yield [true, '<!--', null];
         yield [true, '-->', null];

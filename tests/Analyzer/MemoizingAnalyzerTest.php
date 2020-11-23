@@ -16,17 +16,19 @@ namespace App\Tests\Analyzer;
 use App\Analyzer\Analyzer;
 use App\Analyzer\Cache;
 use App\Analyzer\MemoizingAnalyzer;
+use App\Tests\Fixtures\Rule\Dummy;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 
 final class MemoizingAnalyzerTest extends TestCase
 {
     /**
-     * @var Analyzer|\PHPUnit\Framework\MockObject\MockObject
+     * @var Analyzer|MockObject
      */
     private $analyzer;
     /**
-     * @var Cache|\PHPUnit\Framework\MockObject\MockObject
+     * @var Cache|MockObject
      */
     private $cache;
 
@@ -42,7 +44,9 @@ final class MemoizingAnalyzerTest extends TestCase
     public function testCacheHitReturnsCacheContent(): void
     {
         $fileInfo = new SplFileInfo('test.rst');
-        $rules = ['test'];
+        $rules = [
+            new Dummy(),
+        ];
 
         $this->cache
             ->expects(static::once())
@@ -64,7 +68,9 @@ final class MemoizingAnalyzerTest extends TestCase
     public function testNoCacheHitCallsAnalyzerAndSavesResultsToCache(): void
     {
         $fileInfo = new SplFileInfo('test.rst');
-        $rules = ['test'];
+        $rules = [
+            new Dummy(),
+        ];
 
         $this->cache->expects(static::never())->method('get');
 

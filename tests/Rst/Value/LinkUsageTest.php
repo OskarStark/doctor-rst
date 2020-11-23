@@ -24,7 +24,7 @@ final class LinkUsageTest extends TestCase
      *
      * @dataProvider fromLineProvider
      */
-    public function fromLine(string $expected, string $line)
+    public function fromLine(string $expected, string $line): void
     {
         $usage = LinkUsage::fromLine($line);
 
@@ -43,7 +43,7 @@ final class LinkUsageTest extends TestCase
     /**
      * @test
      */
-    public function fromLinkName()
+    public function fromLinkName(): void
     {
         $name = 'foo';
 

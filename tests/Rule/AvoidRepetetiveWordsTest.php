@@ -50,7 +50,7 @@ final class AvoidRepetetiveWordsTest extends TestCase
     /**
      * @return \Generator<array{0: string|null, 1: RstSample}>
      */
-    public function checkProvider()
+    public function checkProvider(): \Generator
     {
         $valid = '';
         $invalid = 'the cached items will not not be invalidated unless you clear OPcache.';
