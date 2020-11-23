@@ -14,9 +14,12 @@ Usage
 You can use it as a Github Action like this:
 ```yaml
 # .github/workflows/lint.yaml
-
-on: [push, pull_request]
 name: Lint
+
+on:
+    push:
+    pull_request:
+
 jobs:
     doctor-rst:
         name: DOCtor-RST
@@ -50,6 +53,34 @@ Error Formatter
 * **console** Used as to generate a human readable output.
 
 To force the usage of a specific formatter, use the `--error-format` option.
+
+Use Caching to Speedup your GithubActions builds
+----------------------------------
+
+```diff
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@v2
+
++            - name: "Create cache dir"
++              run: mkdir .cache
++
++            - name: "Extract base branch name"
++              run: echo "##[set-output name=branch;]$(echo ${GITHUB_BASE_REF:=${GITHUB_REF##*/}})"
++              id: extract_base_branch
++
++            - name: "Cache DOCtor-RST"
++              uses: actions/cache@v2
++              with:
++                  path: .cache
++                  key: ${{ runner.os }}-doctor-rst-${{ steps.extract_base_branch.outputs.branch }}
++
+            - name: "Run DOCtor-RST"
+              uses: docker://oskarstark/doctor-rst
+              with:
+-                 args: --short --error-format=github
++                 args: --short --error-format=github --cache-file=/github/workspace/.cache/doctor-rst.cache
+```
 
 Docker
 ------
