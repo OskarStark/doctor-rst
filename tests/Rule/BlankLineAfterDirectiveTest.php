@@ -99,7 +99,7 @@ class BlankLineAfterDirectiveTest extends TestCase
             new RstSample([
                 '..',
                 '   This is also a RST comment',
-            ]),
+            ], 1),
         ];
     }
 }
