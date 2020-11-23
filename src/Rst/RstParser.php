@@ -217,7 +217,7 @@ class RstParser
 
     public static function isListItem(Line $line): bool
     {
-        return [] !== $line->clean()->match('/^(\* |\#. |[A-Za-z]{1}\) |-\ |[0-9]\. |[0-9]\) )/');
+        return [] !== $line->clean()->match('/^(\* |\#. |[A-Za-z]{1}\) |-\ |[0-9]\.(\))? |[0-9]\) )/');
     }
 
     /**
