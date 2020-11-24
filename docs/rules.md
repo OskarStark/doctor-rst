@@ -399,6 +399,10 @@ messages.xliff
 custom-extensions.rst
 ```
 
+```rst
+_custom-extensions.rst
+```
+
 ##### Invalid Examples :-1:
 
 ```rst
