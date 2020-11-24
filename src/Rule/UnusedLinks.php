@@ -22,7 +22,7 @@ use App\Value\RuleGroup;
 use Symfony\Contracts\Service\ResetInterface;
 
 /**
- * @Description("Report all links which are not used in the file anymore.")
+ * @Description("Report all links which are defined, but not used in the file anymore.")
  */
 class UnusedLinks extends AbstractRule implements Rule, ResetInterface
 {
