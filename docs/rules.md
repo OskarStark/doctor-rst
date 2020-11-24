@@ -673,7 +673,7 @@ Pattern | Message
 
 ## `unused_links`
 
-  > _Report all links which are not used in the file anymore._
+  > _Report all links which are defined, but not used in the file anymore._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
