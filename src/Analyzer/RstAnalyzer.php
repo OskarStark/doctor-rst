@@ -16,6 +16,7 @@ namespace App\Analyzer;
 use App\Rule\FileContentRule;
 use App\Rule\LineContentRule;
 use App\Rule\Rule;
+use App\Value\Line;
 use App\Value\Lines;
 use App\Value\Violation;
 use SplFileInfo;
@@ -44,6 +45,11 @@ final class RstAnalyzer implements Analyzer
         $lines = Lines::fromArray($content);
 
         $violations = [];
+
+        /**
+         * @var int $no
+         * @var Line $line
+         */
         foreach ($lines->toIterator() as $no => $line) {
             \assert(\is_int($no));
 
@@ -73,7 +79,7 @@ final class RstAnalyzer implements Analyzer
                         $violationMessage,
                         (string) $file->getRealPath(),
                         $no + 1,
-                        $rule instanceof FileContentRule ? '' : trim($line->raw()->toString())
+                        $rule instanceof FileContentRule ? '' : $line->raw()->trim()->toString()
                     );
                 }
 
