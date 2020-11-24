@@ -21,7 +21,7 @@ use App\Value\Lines;
 /**
  * @Description("Make sure you have a blank line after a filepath in a YAML code block.")
  */
-class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Rule
+class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number): ?string
     {

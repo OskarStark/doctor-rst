@@ -16,7 +16,7 @@ namespace App\Rule;
 use App\Value\Lines;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LineLength extends AbstractRule implements Rule, Configurable
+class LineLength extends AbstractRule implements LineContentRule, Configurable
 {
     private int $max;
 

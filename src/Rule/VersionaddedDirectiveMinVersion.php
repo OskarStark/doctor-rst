@@ -18,7 +18,7 @@ use App\Value\Lines;
 use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VersionaddedDirectiveMinVersion extends AbstractRule implements Rule, Configurable
+class VersionaddedDirectiveMinVersion extends AbstractRule implements LineContentRule, Configurable
 {
     private string $minVersion;
 

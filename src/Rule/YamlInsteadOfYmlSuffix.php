@@ -25,7 +25,7 @@ use App\Value\RuleGroup;
  * @ValidExample({".travis.yml", "..code-block:: yaml", "Please add this to your services.yaml file."})
  * @InvalidExample({"..code-block:: yml", "Please add this to your services.yml file."})
  */
-class YamlInsteadOfYmlSuffix extends AbstractRule implements Rule
+class YamlInsteadOfYmlSuffix extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

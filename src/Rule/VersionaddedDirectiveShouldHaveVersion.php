@@ -26,7 +26,7 @@ use Composer\Semver\VersionParser;
  * @ValidExample(".. versionadded:: 3.4")
  * @InvalidExample({".. versionadded::", ".. versionadded:: foo-bar"})
  */
-class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Rule
+class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
 {
     private VersionParser $versionParser;
 

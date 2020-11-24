@@ -21,7 +21,7 @@ use App\Value\RuleGroup;
 /**
  * @Description("Make sure you have a blank line after a filepath in a code block. This rule respects PHP, YAML, XML and Twig.")
  */
-class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements Rule
+class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

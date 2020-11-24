@@ -30,7 +30,7 @@ use App\Value\RuleGroup;
  * @ValidExample("Please do not use it this way...")
  * @InvalidExample("Please do not not use it this way...")
  */
-class AvoidRepetetiveWords extends AbstractRule implements Rule
+class AvoidRepetetiveWords extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

@@ -17,7 +17,7 @@ use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements Rule
+class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

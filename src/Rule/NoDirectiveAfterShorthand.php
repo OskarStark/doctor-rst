@@ -21,7 +21,7 @@ use App\Value\RuleGroup;
 /**
  * @Description("Ensure that no directive follows the shorthand `::`. This could lead to broken markup.")
  */
-class NoDirectiveAfterShorthand extends AbstractRule implements Rule
+class NoDirectiveAfterShorthand extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

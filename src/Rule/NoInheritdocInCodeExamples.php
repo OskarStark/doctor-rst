@@ -17,7 +17,7 @@ use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class NoInheritdocInCodeExamples extends AbstractRule implements Rule
+class NoInheritdocInCodeExamples extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

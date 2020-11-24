@@ -18,7 +18,7 @@ use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Rule
+class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

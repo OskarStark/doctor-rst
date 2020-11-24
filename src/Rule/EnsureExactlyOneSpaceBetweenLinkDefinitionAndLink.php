@@ -25,7 +25,7 @@ use App\Value\RuleGroup;
  * @InvalidExample(".. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST")
  * @ValidExample(".. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST")
  */
-class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule implements Rule
+class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

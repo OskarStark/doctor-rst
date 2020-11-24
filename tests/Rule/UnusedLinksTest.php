@@ -29,7 +29,7 @@ final class UnusedLinksTest extends TestCase
     {
         static::assertSame(
             $expected,
-            (new UnusedLinks())->check($sample->lines(), $sample->lineNumber())
+            (new UnusedLinks())->check($sample->lines())
         );
     }
 

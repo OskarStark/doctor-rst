@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Analyzer;
 
+use App\Rule\FileContentRule;
+use App\Rule\LineContentRule;
 use App\Rule\Rule;
 use App\Value\Lines;
 use App\Value\Violation;
@@ -49,21 +51,29 @@ final class RstAnalyzer implements Analyzer
                 if ($lines->isProcessedBy($no, \get_class($rule))) {
                     continue;
                 }
+
                 if (!$rule::runOnlyOnBlankline() && $line->isBlank()) {
                     continue;
                 }
-                if (Rule::TYPE_FILE_CONTENT === $rule::getType() && $no > 0) {
-                    continue;
-                }
 
-                $violationMessage = $rule->check($lines, $no);
+                if ($rule instanceof LineContentRule) {
+                    $violationMessage = $rule->check($lines, $no);
+                } elseif ($rule instanceof FileContentRule) {
+                    if ($no > 0) {
+                        continue;
+                    }
+
+                    $violationMessage = $rule->check($lines);
+                } else {
+                    throw new \RuntimeException('Unknown type of rule provided!');
+                }
 
                 if (null !== $violationMessage) {
                     $violations[] = Violation::from(
                         $violationMessage,
                         (string) $file->getRealPath(),
                         $no + 1,
-                        Rule::TYPE_FILE_CONTENT === $rule::getType() ? '' : trim($line->raw()->toString())
+                        $rule instanceof FileContentRule ? '' : trim($line->raw()->toString())
                     );
                 }
 

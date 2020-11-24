@@ -19,7 +19,7 @@ use App\Value\RuleGroup;
 use function Symfony\Component\String\u;
 use Webmozart\Assert\Assert;
 
-class OrderedUseStatements extends AbstractRule implements Rule
+class OrderedUseStatements extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -17,7 +17,7 @@ use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class NoNamespaceAfterUseStatements extends AbstractRule implements Rule
+class NoNamespaceAfterUseStatements extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

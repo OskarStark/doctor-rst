@@ -24,7 +24,7 @@ use Symfony\Contracts\Service\ResetInterface;
 /**
  * @Description("Report all links which are defined, but not used in the file anymore.")
  */
-class UnusedLinks extends AbstractRule implements Rule, ResetInterface
+class UnusedLinks extends AbstractRule implements FileContentRule, ResetInterface
 {
     /** @var LinkUsage[] */
     private array $linkUsages = [];
@@ -40,9 +40,10 @@ class UnusedLinks extends AbstractRule implements Rule, ResetInterface
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines): ?string
     {
-        $lines->seek($number);
+        /* @todo this should not be needed, make sure its always at position 0 */
+        $lines->seek(0);
 
         while ($lines->valid()) {
             if (RstParser::isLinkDefinition($lines->current())) {
@@ -83,10 +84,5 @@ class UnusedLinks extends AbstractRule implements Rule, ResetInterface
     {
         $this->linkUsages = [];
         $this->linkDefinitions = [];
-    }
-
-    public static function getType(): int
-    {
-        return Rule::TYPE_FILE_CONTENT;
     }
 }

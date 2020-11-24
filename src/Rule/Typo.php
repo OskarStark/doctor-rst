@@ -20,7 +20,7 @@ use App\Value\RuleGroup;
 /**
  * @Description("Report common typos.")
  */
-class Typo extends CheckListRule
+class Typo extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

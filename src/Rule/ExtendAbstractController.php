@@ -20,7 +20,7 @@ use App\Value\RuleGroup;
 /**
  * @Description("Ensure `AbstractController` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\AbstractController` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\Controller`.")
  */
-class ExtendAbstractController extends AbstractRule implements Rule
+class ExtendAbstractController extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

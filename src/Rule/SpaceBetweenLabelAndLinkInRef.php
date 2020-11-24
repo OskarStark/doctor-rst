@@ -25,7 +25,7 @@ use function Symfony\Component\String\u;
  * @InvalidExample(":ref:`receiving them via a worker<messenger-worker>`")
  * @ValidExample(":ref:`receiving them via a worker <messenger-worker>`")
  */
-class SpaceBetweenLabelAndLinkInRef extends AbstractRule implements Rule
+class SpaceBetweenLabelAndLinkInRef extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

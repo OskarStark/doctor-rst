@@ -20,7 +20,7 @@ use App\Value\RuleGroup;
 /**
  * @Description("Do not use belittling words!")
  */
-class BeKindToNewcomers extends CheckListRule
+class BeKindToNewcomers extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

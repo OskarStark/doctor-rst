@@ -18,7 +18,7 @@ use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements Rule
+class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

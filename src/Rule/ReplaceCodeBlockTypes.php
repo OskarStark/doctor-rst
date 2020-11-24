@@ -21,7 +21,7 @@ use App\Value\RuleGroup;
 /**
  * @Description("Propose alternatives for disallowed code block types.")
  */
-class ReplaceCodeBlockTypes extends CheckListRule
+class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -27,7 +27,7 @@ use App\Value\RuleGroup;
  * @InvalidExample("``App\\Entity\\Foo``")
  * @InvalidExample("`App\Entity\Foo`")
  */
-class ValidInlineHighlightedNamespaces extends AbstractRule implements Rule
+class ValidInlineHighlightedNamespaces extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

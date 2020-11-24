@@ -24,7 +24,7 @@ use App\Value\RuleGroup;
  * @InvalidExample("This is a nice behaviour...")
  * @ValidExample("This is a nice behavior...")
  */
-class AmericanEnglish extends CheckListRule
+class AmericanEnglish extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

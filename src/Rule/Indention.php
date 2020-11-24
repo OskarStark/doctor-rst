@@ -23,7 +23,7 @@ use App\Value\Lines;
 use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class Indention extends AbstractRule implements Rule, Configurable
+class Indention extends AbstractRule implements LineContentRule, Configurable
 {
     use DirectiveTrait;
     use ListTrait;

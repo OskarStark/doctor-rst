@@ -18,7 +18,7 @@ use App\Value\Lines;
 use App\Value\RuleGroup;
 use Webmozart\Assert\Assert;
 
-class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implements Rule
+class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

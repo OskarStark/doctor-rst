@@ -18,7 +18,7 @@ use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Rule
+class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {
