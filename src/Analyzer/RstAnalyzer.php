@@ -47,7 +47,7 @@ final class RstAnalyzer implements Analyzer
         $violations = [];
 
         /**
-         * @var int $no
+         * @var int  $no
          * @var Line $line
          */
         foreach ($lines->toIterator() as $no => $line) {
