@@ -59,7 +59,7 @@ class RulesCommand extends Command
 
         $rules = $this->registry->getRawRules();
 
-        if (empty($rules)) {
+        if ([] === $rules) {
             $this->io->warning('No rules available!');
 
             return 1;
@@ -100,7 +100,7 @@ class RulesCommand extends Command
             $this->io->newLine();
         }
 
-        if (!empty($rule::getGroups())) {
+        if ([] !== $rule::getGroups()) {
             $groupNames = array_map(static function (RuleGroup $group): string {
                 return $group->name();
             }, $rule::getGroups());
@@ -208,6 +208,9 @@ class RulesCommand extends Command
         }
     }
 
+    /**
+     * @param string[] $examples
+     */
     private function renderExamples(string $headline, array $examples): void
     {
         $this->io->writeln($headline);
