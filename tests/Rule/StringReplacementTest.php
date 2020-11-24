@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Annotations\Rule\Description;
-use App\Rule\Rule;
 use App\Rule\StringReplacement;
 use App\Tests\RstSample;
 use PHPUnit\Framework\TestCase;
@@ -37,7 +36,6 @@ final class StringReplacementTest extends TestCase
         }
 
         $violations = [];
-        /** @var Rule $rule */
         foreach ($configuredRules as $rule) {
             $violation = $rule->check($sample->lines(), $sample->lineNumber());
             if (null !== $violation) {
