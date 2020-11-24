@@ -25,7 +25,7 @@ use App\Value\RuleGroup;
  * @InvalidExample("use Foo/Bar;")
  * @ValidExample("use Foo\Bar;")
  */
-class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implements Rule
+class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

@@ -24,7 +24,7 @@ use App\Value\RuleGroup;
  * @ValidExample({"messages.xlf"})
  * @InvalidExample({"messages.xliff"})
  */
-class ExtensionXlfInsteadOfXliff extends AbstractRule implements Rule
+class ExtensionXlfInsteadOfXliff extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

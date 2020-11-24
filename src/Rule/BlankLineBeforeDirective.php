@@ -21,7 +21,7 @@ use App\Value\RuleGroup;
 /**
  * @Description("Make sure you have a blank line before each directive.")
  */
-class BlankLineBeforeDirective extends AbstractRule implements Rule
+class BlankLineBeforeDirective extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

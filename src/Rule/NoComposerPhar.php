@@ -16,7 +16,7 @@ namespace App\Rule;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class NoComposerPhar extends AbstractRule implements Rule
+class NoComposerPhar extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

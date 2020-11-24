@@ -15,7 +15,7 @@ namespace App\Rule;
 
 use App\Value\Lines;
 
-class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements Rule
+class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number): ?string
     {

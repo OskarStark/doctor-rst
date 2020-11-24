@@ -24,7 +24,7 @@ use App\Value\RuleGroup;
  * @InvalidExample("php bin/console list")
  * @ValidExample("bin/console list")
  */
-class NoPhpPrefixBeforeBinConsole extends AbstractRule implements Rule
+class NoPhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -24,7 +24,7 @@ use App\Value\RuleGroup;
  * @InvalidExample("composer require symfony/var-dumper --dev")
  * @ValidExample("composer require --dev symfony/var-dumper")
  */
-class ComposerDevOptionNotAtTheEnd extends AbstractRule implements Rule
+class ComposerDevOptionNotAtTheEnd extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -19,7 +19,7 @@ use App\Value\RuleGroup;
 use Composer\Semver\VersionParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VersionaddedDirectiveMajorVersion extends AbstractRule implements Rule, Configurable
+class VersionaddedDirectiveMajorVersion extends AbstractRule implements LineContentRule, Configurable
 {
     private VersionParser $versionParser;
     private int $majorVersion;

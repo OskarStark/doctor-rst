@@ -24,7 +24,7 @@ use App\Value\RuleGroup;
  * @InvalidExample("yarn add --dev jquery")
  * @ValidExample("yarn add jquery --dev")
  */
-class YarnDevOptionAtTheEnd extends AbstractRule implements Rule
+class YarnDevOptionAtTheEnd extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -16,7 +16,7 @@ namespace App\Rule;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class Replacement extends CheckListRule
+class Replacement extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

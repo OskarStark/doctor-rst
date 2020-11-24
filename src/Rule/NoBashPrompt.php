@@ -25,7 +25,7 @@ use App\Value\RuleGroup;
  * @InvalidExample("$ bin/console list")
  * @ValidExample("bin/console list")
  */
-class NoBashPrompt extends AbstractRule implements Rule
+class NoBashPrompt extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

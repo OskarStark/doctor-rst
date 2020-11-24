@@ -17,7 +17,7 @@ use App\Value\Lines;
 use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MaxBlankLines extends AbstractRule implements Rule, Configurable
+class MaxBlankLines extends AbstractRule implements LineContentRule, Configurable
 {
     private int $max;
 

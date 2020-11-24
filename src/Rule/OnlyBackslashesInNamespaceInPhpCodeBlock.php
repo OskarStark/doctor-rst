@@ -25,7 +25,7 @@ use App\Value\RuleGroup;
  * @InvalidExample("namespace Foo/Bar;")
  * @ValidExample("namespace Foo\Bar;")
  */
-class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements Rule
+class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

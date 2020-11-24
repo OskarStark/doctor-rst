@@ -40,6 +40,7 @@ final class Registry
                     $this->rules[$rule::getName()->toString().'_'.$i] = $clonedRule->configure($search, $message);
                     ++$i;
                 }
+
                 continue;
             }
 
@@ -110,7 +111,7 @@ final class Registry
                 }
             }
 
-            if (empty($rules)) {
+            if ([] === $rules) {
                 throw $e;
             }
         }

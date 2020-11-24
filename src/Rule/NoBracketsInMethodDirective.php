@@ -24,7 +24,7 @@ use App\Value\RuleGroup;
  * @InvalidExample(":method:`Symfony\\Component\\OptionsResolver\\Options::offsetGet()`")
  * @ValidExample(":method:`Symfony\\Component\\OptionsResolver\\Options::offsetGet`")
  */
-class NoBracketsInMethodDirective extends AbstractRule implements Rule
+class NoBracketsInMethodDirective extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

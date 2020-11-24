@@ -16,7 +16,7 @@ namespace App\Rule;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class NoAppBundle extends AbstractRule implements Rule
+class NoAppBundle extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

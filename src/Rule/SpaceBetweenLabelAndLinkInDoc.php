@@ -25,7 +25,7 @@ use function Symfony\Component\String\u;
  * @InvalidExample(":doc:`File</reference/constraints/File>`")
  * @ValidExample(":doc:`File </reference/constraints/File>`")
  */
-class SpaceBetweenLabelAndLinkInDoc extends AbstractRule implements Rule
+class SpaceBetweenLabelAndLinkInDoc extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

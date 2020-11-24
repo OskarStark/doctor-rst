@@ -17,7 +17,7 @@ use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
-class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implements Rule
+class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

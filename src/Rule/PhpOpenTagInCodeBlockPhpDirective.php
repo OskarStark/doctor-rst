@@ -16,7 +16,7 @@ namespace App\Rule;
 use App\Rst\RstParser;
 use App\Value\Lines;
 
-class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements Rule
+class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number): ?string
     {

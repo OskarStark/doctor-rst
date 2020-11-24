@@ -31,11 +31,6 @@ abstract class AbstractRule
         return [];
     }
 
-    public static function getType(): int
-    {
-        return Rule::TYPE_LINE_CONTENT;
-    }
-
     public static function runOnlyOnBlankline(): bool
     {
         return false;
