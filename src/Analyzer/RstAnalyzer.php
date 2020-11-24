@@ -46,6 +46,33 @@ final class RstAnalyzer implements Analyzer
 
         $violations = [];
 
+        /** @var FileContentRule[] $fileContentRules */
+        $fileContentRules = array_filter($rules, static function (Rule $rule): bool {
+            return $rule instanceof FileContentRule;
+        });
+
+        foreach ($fileContentRules as $rule) {
+            $violationMessage = $rule->check(clone $lines);
+
+            if (null !== $violationMessage) {
+                $violations[] = Violation::from(
+                    $violationMessage,
+                    (string) $file->getRealPath(),
+                    1,
+                    ''
+                );
+            }
+
+            if ($rule instanceof ResetInterface) {
+                $rule->reset();
+            }
+        }
+
+        /** @var LineContentRule[] $lineContentRules */
+        $lineContentRules = array_filter($rules, static function (Rule $rule): bool {
+            return $rule instanceof LineContentRule;
+        });
+
         /**
          * @var int  $no
          * @var Line $line
@@ -53,7 +80,7 @@ final class RstAnalyzer implements Analyzer
         foreach ($lines->toIterator() as $no => $line) {
             \assert(\is_int($no));
 
-            foreach ($rules as $rule) {
+            foreach ($lineContentRules as $rule) {
                 if ($lines->isProcessedBy($no, \get_class($rule))) {
                     continue;
                 }
@@ -62,24 +89,14 @@ final class RstAnalyzer implements Analyzer
                     continue;
                 }
 
-                if ($rule instanceof LineContentRule) {
-                    $violationMessage = $rule->check($lines, $no);
-                } elseif ($rule instanceof FileContentRule) {
-                    if ($no > 0) {
-                        continue;
-                    }
-
-                    $violationMessage = $rule->check($lines);
-                } else {
-                    throw new \RuntimeException('Unknown type of rule provided!');
-                }
+                $violationMessage = $rule->check($lines, $no);
 
                 if (null !== $violationMessage) {
                     $violations[] = Violation::from(
                         $violationMessage,
                         (string) $file->getRealPath(),
                         $no + 1,
-                        $rule instanceof FileContentRule ? '' : $line->raw()->trim()->toString()
+                        $line->raw()->trim()->toString()
                     );
                 }
 
