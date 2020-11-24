@@ -21,8 +21,8 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Make sure to only use `.xlf` instead of `.xliff`.")
- * @ValidExample({"messages.xlf"})
- * @InvalidExample({"messages.xliff"})
+ * @ValidExample("messages.xlf")
+ * @InvalidExample("messages.xliff")
  */
 class ExtensionXlfInsteadOfXliff extends AbstractRule implements LineContentRule
 {
