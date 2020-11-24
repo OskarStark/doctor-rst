@@ -18,7 +18,6 @@
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
-* [even_brackets_count](#even_brackets_count) :exclamation:
 * [extend_abstract_admin](#extend_abstract_admin)
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
@@ -282,10 +281,6 @@ Name | Required
 ## `ensure_order_of_code_blocks_in_configuration_block`
 
 #### Groups [`@Sonata`, `@Symfony`]
-
-## `even_brackets_count`
-
-#### Groups [`@Experimental`]
 
 ## `extend_abstract_admin`
 
