@@ -42,14 +42,14 @@ final class RstAnalyzer implements Analyzer
             throw new \RuntimeException(sprintf('Cannot parse file: %s', (string) $file->getRealPath()));
         }
 
-        $lines = Lines::fromArray($content);
-
         $violations = [];
 
         /** @var FileContentRule[] $fileContentRules */
         $fileContentRules = array_filter($rules, static function (Rule $rule): bool {
             return $rule instanceof FileContentRule;
         });
+
+        $lines = Lines::fromArray($content);
 
         foreach ($fileContentRules as $rule) {
             $violationMessage = $rule->check(clone $lines);
