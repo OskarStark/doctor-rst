@@ -3,6 +3,7 @@
 * [american_english](#american_english)
 * [avoid_repetetive_words](#avoid_repetetive_words)
 * [be_kind_to_newcomers](#be_kind_to_newcomers) :exclamation:
+* [blank_line_after_colon](#blank_line_after_colon)
 * [blank_line_after_directive](#blank_line_after_directive)
 * [blank_line_after_filepath_in_code_block](#blank_line_after_filepath_in_code_block)
 * [blank_line_after_filepath_in_php_code_block](#blank_line_after_filepath_in_php_code_block)
@@ -143,6 +144,12 @@ Pattern | Message
 `/logically/i` | Please remove the word: %s
 `/merely/i` | Please remove the word: %s
 `/basic/i` | Please remove the word: %s
+
+## `blank_line_after_colon`
+
+  > _Make sure you have a blank line after a sentence which ends with a colon (`:`)._
+
+#### Groups [`@Sonata`, `@Symfony`]
 
 ## `blank_line_after_directive`
 
