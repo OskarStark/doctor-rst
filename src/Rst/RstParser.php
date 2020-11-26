@@ -103,21 +103,6 @@ class RstParser
     const CODE_BLOCK_VARNISH_4 = 'varnish4';
     const CODE_BLOCK_APACHE = 'apache';
 
-    public static function clean(string $string): string
-    {
-        $string = trim($string);
-
-        if ('\n' === substr($string, -2)) {
-            $string = substr($string, 0, -2);
-        }
-
-        if ('\r' === substr($string, -2)) {
-            $string = substr($string, 0, -2);
-        }
-
-        return trim($string);
-    }
-
     public static function directiveIs(Line $line, string $directive, ?bool $strict = false): bool
     {
         if (!$line->isDirective()) {

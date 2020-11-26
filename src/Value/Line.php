@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-use App\Rst\RstParser;
 use function Symfony\Component\String\u;
 use Symfony\Component\String\UnicodeString;
 
@@ -32,7 +31,7 @@ final class Line
     public function __construct(string $line)
     {
         $this->raw = u($line);
-        $this->clean = u(RstParser::clean($line));
+        $this->clean = $this->cleanString($this->raw);
         $this->blank = $this->clean->isEmpty();
     }
 
@@ -106,5 +105,20 @@ final class Line
     public function isProcessedBy(string $rule): bool
     {
         return \in_array($rule, $this->processedBy, true);
+    }
+
+    private function cleanString(UnicodeString $string): UnicodeString
+    {
+        $clean = $string->trim()->toUnicodeString();
+
+        if ($clean->endsWith('\n')) {
+            $clean = $clean->slice(0, -2)->toUnicodeString();
+        }
+
+        if ($clean->endsWith('\r')) {
+            $clean = $clean->slice(0, -2)->toUnicodeString();
+        }
+
+        return $clean->trim()->toUnicodeString();
     }
 }
