@@ -2,10 +2,10 @@
     "type": "project",
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^8.0",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "composer/semver": "^1.4",
+        "composer/semver": "^3.0",
         "doctrine/annotations": "^1.8",
         "ondram/ci-detector": "^3.5",
         "symfony/config": "^5.0",
