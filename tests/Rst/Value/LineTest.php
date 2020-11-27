@@ -72,7 +72,7 @@ final class LineTest extends TestCase
     /**
      * @test
      *
-     * @dataProvider isBlankLineProvider
+     * @dataProvider isBlankProvider
      */
     public function isBlank(bool $expected, string $string): void
     {
@@ -82,7 +82,7 @@ final class LineTest extends TestCase
     /**
      * @return array<array{0: bool, 1: string}>
      */
-    public function isBlankLineProvider(): array
+    public function isBlankProvider(): array
     {
         return [
             [true, '\r\n'],
