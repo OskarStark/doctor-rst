@@ -260,8 +260,34 @@ final class RstParserTest extends TestCase
         yield [true, ' :lineos: '];
         yield [true, ':language: text'];
         yield [true, ' :language: text '];
+
         yield [false, ' '];
         yield [false, ''];
         yield [false, '.. class::'];
+        yield [false, '.. _env-var-processors:'];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider isAnchorProvider
+     */
+    public function isAnchor(bool $expected, string $string): void
+    {
+        static::assertSame($expected, RstParser::isAnchor(new Line($string)));
+    }
+
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
+    public function isAnchorProvider(): \Generator
+    {
+        yield [true, '.. _env-var-processors:'];
+
+        yield [false, ' '];
+        yield [false, ''];
+        yield [false, '.. _`foo-bar`: https://google.com'];
+        yield [false, '.. _foo-bar: https://google.com'];
+        yield [false, '.. _foo: https://google.com'];
     }
 }

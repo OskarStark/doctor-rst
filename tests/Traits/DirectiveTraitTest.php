@@ -86,6 +86,20 @@ RST;
             [RstParser::CODE_BLOCK_JAVASCRIPT],
         ];
 
+        yield [
+            false,
+            new RstSample(<<<RST
+
+.. _env-var-processors:
+
+Environment Variable Processors
+===============================
+RST
+, 1),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            [RstParser::CODE_BLOCK_YAML],
+        ];
+
         $invalid = <<<'RST'
 Coding Standards
 ================

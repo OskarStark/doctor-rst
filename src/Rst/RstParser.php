@@ -233,4 +233,9 @@ class RstParser
     {
         return [] !== $line->clean()->match('/^(:[a-zA-Z]+:).*/');
     }
+
+    public static function isAnchor(Line $line): bool
+    {
+        return [] !== $line->raw()->match('/^\.\. _.*:$/');
+    }
 }
