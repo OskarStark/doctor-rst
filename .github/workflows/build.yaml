@@ -1,4 +1,6 @@
-on: push
+on:
+    push:
+    pull_request:
 
 name: Build
 
@@ -14,7 +16,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "7.4"
+                    - "8.0"
 
         steps:
             -   name: "Checkout code"
@@ -34,7 +36,7 @@ jobs:
                     composer-options: "--optimize-autoloader"
 
             -   name: "Download humbug/box"
-                run: wget --no-clobber --output-document=./box https://github.com/humbug/box/releases/download/3.8.5/box.phar || true
+                run: wget --no-clobber --output-document=./box https://github.com/humbug/box/releases/download/3.11.0/box.phar || true
 
             -   name: "Make humbug/box executable"
                 run: chmod +x ./box
