@@ -286,6 +286,7 @@ final class RstParserTest extends TestCase
     public function isAnchorProvider(): \Generator
     {
         yield [true, '.. _env-var-processors:'];
+        yield [true, '.. _`security-authorization`:'];
 
         yield [false, ' '];
         yield [false, ''];

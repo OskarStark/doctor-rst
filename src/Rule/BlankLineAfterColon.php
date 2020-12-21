@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
+use App\Traits\ListTrait;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
@@ -25,6 +26,7 @@ use App\Value\RuleGroup;
 class BlankLineAfterColon extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
+    use ListTrait;
 
     public static function getGroups(): array
     {
@@ -45,7 +47,8 @@ class BlankLineAfterColon extends AbstractRule implements LineContentRule
 
         if ($line->clean()->endsWith('::')
             || RstParser::isOption($line)
-            || $this->in(RstParser::DIRECTIVE_CODE_BLOCK, clone $lines, $number, [RstParser::CODE_BLOCK_YAML])
+            || $this->in(RstParser::DIRECTIVE_CODE_BLOCK, clone $lines, $number)
+            || $this->isPartOfListItem($lines, $number)
         ) {
             return null;
         }
@@ -54,6 +57,12 @@ class BlankLineAfterColon extends AbstractRule implements LineContentRule
 
         if (!$lines->valid()) {
             return null;
+        }
+
+        if (RstParser::isAnchor($lines->current())) {
+            while ($lines->valid() && RstParser::isAnchor($lines->current())) {
+                $lines->next();
+            }
         }
 
         if ($lines->current()->isBlank()) {

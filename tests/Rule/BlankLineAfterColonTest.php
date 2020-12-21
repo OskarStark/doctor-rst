@@ -88,6 +88,16 @@ final class BlankLineAfterColonTest extends TestCase
         yield [
             null,
             new RstSample([
+                '.. code-block:: php',
+                '',
+                '    /* Result:',
+                '    [',
+            ], 2),
+        ];
+
+        yield [
+            null,
+            new RstSample([
                 '',
                 '.. _env-var-processors:',
                 '',
@@ -95,6 +105,41 @@ final class BlankLineAfterColonTest extends TestCase
                 '===============================',
                 '',
             ], 1),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '',
+                '.. _env-var-processors:',
+                '.. _`special-env-var-processors`:',
+                '',
+                'Environment Variable Processors',
+                '===============================',
+                '',
+            ], 1),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '',
+                '.. _env-var-processors:',
+                '.. _`special-env-var-processors`:',
+                '.. _`super-special-env-var-processors`:',
+                '',
+                'Environment Variable Processors',
+                '===============================',
+                '',
+            ], 1),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArgument`:',
+                '   Getter for all arguments;',
+            ]),
         ];
     }
 }
