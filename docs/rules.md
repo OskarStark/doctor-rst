@@ -30,6 +30,7 @@
 * [line_length](#line_length)
 * [lowercase_as_in_use_statements](#lowercase_as_in_use_statements)
 * [max_blank_lines](#max_blank_lines)
+* [max_colons](#max_colons)
 * [no_admin_yaml](#no_admin_yaml)
 * [no_app_bundle](#no_app_bundle)
 * [no_app_console](#no_app_console)
@@ -368,6 +369,24 @@ Name | Required | Allowed Types | Default
 Name | Required | Allowed Types | Default
 --- | --- | --- | ---
 `max` | `false` | `int` | `2`
+
+## `max_colons`
+
+  > _Make sure you have max 2 colons (`::`)._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+composer require symfony/var-dumper --dev
+```
+
+##### Invalid Examples :-1:
+
+```rst
+composer require --dev symfony/var-dumper
+```
 
 ## `no_admin_yaml`
 
