@@ -41,7 +41,7 @@ final class ComposerDevOptionNotAtTheEndTest extends TestCase
             null,
             new RstSample('composer require --dev symfony/debug'),
         ];
-        yield[
+        yield [
             'Please move "--dev" option before the package',
             new RstSample('composer require symfony/debug --dev'),
         ];

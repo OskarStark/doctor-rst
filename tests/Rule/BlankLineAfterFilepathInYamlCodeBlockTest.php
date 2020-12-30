@@ -56,7 +56,7 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
                 '    services:',
             ]),
         ];
-        yield[
+        yield [
             'Please add a blank line after "# config/services.yaml"',
             new RstSample([
                 '.. code-block:: yaml',
@@ -65,7 +65,7 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
                 '    services:',
             ]),
         ];
-        yield[
+        yield [
             null,
             new RstSample([
                 '.. code-block:: yaml',
@@ -75,7 +75,7 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
                 '    services:',
             ]),
         ];
-        yield[
+        yield [
             null,
             new RstSample([
                 '.. code-block:: yaml',
@@ -85,7 +85,7 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends TestCase
                 '    services:',
             ]),
         ];
-        yield[
+        yield [
             null,
             new RstSample('temp'),
         ];

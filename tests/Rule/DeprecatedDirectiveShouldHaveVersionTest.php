@@ -47,7 +47,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends TestCase
             null,
             new RstSample('.. deprecated:: 1.2'),
         ];
-        yield[
+        yield [
             null,
             new RstSample('.. deprecated:: 1.2.0'),
         ];
@@ -55,11 +55,11 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends TestCase
             null,
             new RstSample('.. deprecated:: 1.2   '),
         ];
-        yield[
+        yield [
             'Please provide a version behind ".. deprecated::"',
             new RstSample('.. deprecated::'),
         ];
-        yield[
+        yield [
             'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
             new RstSample('.. deprecated:: foo'),
         ];

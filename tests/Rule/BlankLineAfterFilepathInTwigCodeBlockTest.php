@@ -46,7 +46,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 '    {% set foo = "bar" %}',
             ]),
         ];
-        yield[
+        yield [
             null,
             new RstSample([
                 '.. code-block:: twig',
@@ -75,7 +75,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 '    {% set foo = "bar" %}',
             ]),
         ];
-        yield[
+        yield [
             'Please add a blank line after "{# templates/index.html.twig #}"',
             new RstSample([
                 '.. code-block:: html+jinja',
@@ -94,7 +94,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 '    {% set foo = "bar" %}',
             ]),
         ];
-        yield[
+        yield [
             'Please add a blank line after "{# templates/index.html.twig #}"',
             new RstSample([
                 '.. code-block:: html+twig',
@@ -103,7 +103,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 '    {% set foo = "bar" %}',
             ]),
         ];
-        yield[
+        yield [
             null,
             new RstSample([
                 '.. code-block:: html+twig',
@@ -113,7 +113,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends TestCase
                 '    {% set foo = "bar" %}',
             ]),
         ];
-        yield[
+        yield [
             null,
             new RstSample([
                 '.. code-block:: html+twig',

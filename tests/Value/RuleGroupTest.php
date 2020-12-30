@@ -108,7 +108,7 @@ final class RuleGroupTest extends TestCase
             RuleGroup::fromString('@Symfony'),
         ];
 
-        yield[
+        yield [
             false,
             RuleGroup::Sonata(),
             RuleGroup::Symfony(),

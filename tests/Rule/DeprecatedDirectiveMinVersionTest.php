@@ -42,12 +42,12 @@ final class DeprecatedDirectiveMinVersionTest extends TestCase
             '3.4',
             new RstSample('.. deprecated:: 3.4'),
         ];
-        yield[
+        yield [
             null,
             '3.4',
             new RstSample('.. deprecated:: 4.2'),
         ];
-        yield[
+        yield [
             'Please only provide ".. deprecated::" if the version is greater/equal "3.4"',
             '3.4',
             new RstSample('.. deprecated:: 2.8'),
