@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
+use App\Annotations\Rule\InvalidExample;
+use App\Annotations\Rule\ValidExample;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use App\Annotations\Rule\InvalidExample;
-use App\Annotations\Rule\ValidExample;
 
 /**
  * @Description("Make sure you have max 2 colons (`::`).")
