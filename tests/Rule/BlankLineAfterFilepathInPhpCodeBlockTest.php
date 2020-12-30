@@ -97,7 +97,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
             ];
         }
 
-        yield[
+        yield [
             null,
             new RstSample('temp'),
         ];

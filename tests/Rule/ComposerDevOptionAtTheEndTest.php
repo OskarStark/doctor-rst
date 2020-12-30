@@ -37,11 +37,11 @@ final class ComposerDevOptionAtTheEndTest extends TestCase
      */
     public function checkProvider(): \Generator
     {
-        yield[
+        yield [
             'Please move "--dev" option to the end of the command',
             new RstSample('composer require --dev symfony/debug'),
         ];
-        yield[
+        yield [
             null,
             new RstSample('composer require symfony/debug --dev'),
         ];
