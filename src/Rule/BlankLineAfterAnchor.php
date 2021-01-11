@@ -15,8 +15,6 @@ namespace App\Rule;
 
 use App\Annotations\Rule\Description;
 use App\Rst\RstParser;
-use App\Traits\DirectiveTrait;
-use App\Traits\ListTrait;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 
@@ -25,9 +23,6 @@ use App\Value\RuleGroup;
  */
 class BlankLineAfterAnchor extends AbstractRule implements LineContentRule
 {
-    use DirectiveTrait;
-    use ListTrait;
-
     public static function getGroups(): array
     {
         return [
