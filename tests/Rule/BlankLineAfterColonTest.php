@@ -110,6 +110,17 @@ final class BlankLineAfterColonTest extends TestCase
         yield [
             null,
             new RstSample([
+                '.. _env-var-processors:',
+                '',
+                'Environment Variable Processors',
+                '===============================',
+                '',
+            ]),
+        ];
+
+        yield [
+            null,
+            new RstSample([
                 '',
                 '.. _env-var-processors:',
                 '.. _`special-env-var-processors`:',
@@ -132,6 +143,34 @@ final class BlankLineAfterColonTest extends TestCase
                 '===============================',
                 '',
             ], 1),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '.. index::',
+                '    single: Deployment; Deployment tools',
+                '',
+                '.. _how-to-deploy-a-symfony2-application:',
+                '',
+                'How to Deploy a Symfony Application',
+                '===================================',
+                '',
+            ], 3),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '.. index::',
+                '    single: Deployment; Deployment tools',
+                '',
+                '.. _`how-to-deploy-a-symfony2-application`:',
+                '',
+                'How to Deploy a Symfony Application',
+                '===================================',
+                '',
+            ], 3),
         ];
 
         yield [

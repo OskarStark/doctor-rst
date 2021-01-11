@@ -48,7 +48,7 @@ class BlankLineAfterColon extends AbstractRule implements LineContentRule
         if ($line->clean()->endsWith('::')
             || RstParser::isOption($line)
             || $this->in(RstParser::DIRECTIVE_CODE_BLOCK, clone $lines, $number)
-            || $this->isPartOfListItem($lines, $number)
+            || $this->isPartOfListItem(clone $lines, $number)
         ) {
             return null;
         }
