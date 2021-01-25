@@ -1395,12 +1395,12 @@
             "version": "1.9.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/webmozart/assert.git",
+                "url": "https://github.com/webmozarts/assert.git",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
                 "shasum": ""
             },
@@ -2313,16 +2313,16 @@
         },
         {
             "name": "phpstan/phpstan-webmozart-assert",
-            "version": "0.12.8",
+            "version": "0.12.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-webmozart-assert.git",
-                "reference": "5b4554e272c6c58133f487d32d07e8a83e820a4b"
+                "reference": "dcb38393a99d4562bd21137ecb179c43dff3fd70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-webmozart-assert/zipball/5b4554e272c6c58133f487d32d07e8a83e820a4b",
-                "reference": "5b4554e272c6c58133f487d32d07e8a83e820a4b",
+                "url": "https://api.github.com/repos/phpstan/phpstan-webmozart-assert/zipball/dcb38393a99d4562bd21137ecb179c43dff3fd70",
+                "reference": "dcb38393a99d4562bd21137ecb179c43dff3fd70",
                 "shasum": ""
             },
             "require": {
@@ -2358,7 +2358,7 @@
                 "MIT"
             ],
             "description": "PHPStan webmozart/assert extension",
-            "time": "2020-12-12T16:14:30+00:00"
+            "time": "2021-01-24T16:10:12+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
