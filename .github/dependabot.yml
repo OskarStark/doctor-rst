@@ -11,7 +11,7 @@ updates:
             prefix: "composer"
         directory: "/"
         labels:
-            - "dependency"
+            - "dependencies"
             - "automerge"
         open-pull-requests-limit: 5
         package-ecosystem: "composer"
@@ -25,7 +25,7 @@ updates:
             prefix: "github-actions"
         directory: "/"
         labels:
-            - "dependency"
+            - "dependencies"
             - "automerge"
         open-pull-requests-limit: 5
         package-ecosystem: "github-actions"
