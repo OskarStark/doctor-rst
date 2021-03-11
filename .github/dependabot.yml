@@ -6,11 +6,28 @@ updates:
     -
         allow:
             - dependency-type: "direct"
+        commit-message:
+            include: "scope"
+            prefix: "composer"
         directory: "/"
         labels:
-            - "dependencies"
-        open-pull-requests-limit: 99
-        package-ecosystem: composer
+            - "dependency"
+            - "automerge"
+        open-pull-requests-limit: 5
+        package-ecosystem: "composer"
         schedule:
-            interval: daily
+            interval: "daily"
         versioning-strategy: "lockfile-only"
+
+    -
+        commit-message:
+            include: "scope"
+            prefix: "github-actions"
+        directory: "/"
+        labels:
+            - "dependency"
+            - "automerge"
+        open-pull-requests-limit: 5
+        package-ecosystem: "github-actions"
+        schedule:
+            interval: "daily"
