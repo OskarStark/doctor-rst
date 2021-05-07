@@ -19,6 +19,7 @@
 * [deprecated_directive_min_version](#deprecated_directive_min_version)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
+* [ensure_link_definition_contains_valid_url](#ensure_link_definition_contains_valid_url)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
 * [extend_abstract_admin](#extend_abstract_admin)
 * [extend_abstract_controller](#extend_abstract_controller)
@@ -291,6 +292,24 @@ Name | Required
 
 ```rst
 .. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST
+```
+
+## `ensure_link_definition_contains_valid_url`
+
+  > _Ensure link definition contains valid link._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST
+```
+
+##### Invalid Examples :-1:
+
+```rst
+.. _DOCtor-RST: htt//github.com/OskarStark/DOCtor-RST
 ```
 
 ## `ensure_order_of_code_blocks_in_configuration_block`

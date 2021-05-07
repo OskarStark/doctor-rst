@@ -17,15 +17,17 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Rst\RstParser;
+use App\Rst\Value\LinkDefinition;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+use function Symfony\Component\String\u;
 
 /**
- * @Description("Ensure exactly one space between link definition and link.")
- * @InvalidExample(".. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST")
+ * @Description("Ensure link definition contains valid link.")
+ * @InvalidExample(".. _DOCtor-RST: htt//github.com/OskarStark/DOCtor-RST")
  * @ValidExample(".. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST")
  */
-class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule implements LineContentRule
+class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {
@@ -40,12 +42,23 @@ class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule imp
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::isLinkDefinition($line)) {
+        if ($line->isBlank()
+            || !RstParser::isLinkDefinition($line)
+        ) {
             return null;
         }
 
-        if ($line->clean()->containsAny(':  ')) {
-            return 'Please use only one whitespace between the link definition and the link.';
+        $linkDefinition = LinkDefinition::fromLine($line->raw()->toString());
+
+        $url = u($linkDefinition->url()->value());
+
+        if (!$url->startsWith('https://')
+            && !$url->startsWith('http://')
+        ) {
+            return sprintf(
+                'Invalid url in "%s"',
+                $line->clean()->toString()
+            );
         }
 
         return null;
