@@ -9,13 +9,13 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 HEADER;
 
-$finder = PhpCsFixer\Finder::create()
+$finder = (new PhpCsFixer\Finder())
     ->in('src')
     ->in('tests')
     ->in('config')
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
@@ -35,7 +35,6 @@ return PhpCsFixer\Config::create()
         'ordered_imports' => true,
         'php_unit_construct' => true,
         'php_unit_test_case_static_method_calls' => true,
-        'psr4' => true,
         'single_line_throw' => false,
         'void_return' => true,
     ])
