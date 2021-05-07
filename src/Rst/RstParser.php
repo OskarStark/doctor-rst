@@ -21,33 +21,33 @@ class RstParser
 {
     public const SHORTHAND = '::';
 
-    const DIRECTIVE_CODE_BLOCK = '.. code-block::';
-    const DIRECTIVE_NOTE = '.. note::';
-    const DIRECTIVE_WARNING = '.. warning::';
-    const DIRECTIVE_NOTICE = '.. notice::';
-    const DIRECTIVE_VERSIONADDED = '.. versionadded::';
-    const DIRECTIVE_VERSIONCHANGED = '.. versionchanged::';
-    const DIRECTIVE_DEPRECATED = '.. deprecated::';
-    const DIRECTIVE_TIP = '.. tip::';
-    const DIRECTIVE_CAUTION = '.. caution::';
-    const DIRECTIVE_TOCTREE = '.. toctree::';
-    const DIRECTIVE_INDEX = '.. index::';
-    const DIRECTIVE_IMPORTANT = '.. important::';
-    const DIRECTIVE_CONFIGURATION_BLOCK = '.. configuration-block::';
-    const DIRECTIVE_BEST_PRACTICE = '.. best-practice::';
-    const DIRECTIVE_INCLUDE = '.. include::';
-    const DIRECTIVE_IMAGE = '.. image::';
-    const DIRECTIVE_ADMONITION = '.. admonition::';
-    const DIRECTIVE_ROLE = '.. role::';
-    const DIRECTIVE_FIGURE = '.. figure::';
-    const DIRECTIVE_SEEALSO = '.. seealso::';
-    const DIRECTIVE_CLASS = '.. class::';
-    const DIRECTIVE_RST_CLASS = '.. rst-class::';
-    const DIRECTIVE_LITERALINCLUDE = '.. literalinclude::';
-    const DIRECTIVE_CONTENTS = '.. contents::';
-    const DIRECTIVE_CODEIMPORT = '.. codeimport::';
+    public const DIRECTIVE_CODE_BLOCK = '.. code-block::';
+    public const DIRECTIVE_NOTE = '.. note::';
+    public const DIRECTIVE_WARNING = '.. warning::';
+    public const DIRECTIVE_NOTICE = '.. notice::';
+    public const DIRECTIVE_VERSIONADDED = '.. versionadded::';
+    public const DIRECTIVE_VERSIONCHANGED = '.. versionchanged::';
+    public const DIRECTIVE_DEPRECATED = '.. deprecated::';
+    public const DIRECTIVE_TIP = '.. tip::';
+    public const DIRECTIVE_CAUTION = '.. caution::';
+    public const DIRECTIVE_TOCTREE = '.. toctree::';
+    public const DIRECTIVE_INDEX = '.. index::';
+    public const DIRECTIVE_IMPORTANT = '.. important::';
+    public const DIRECTIVE_CONFIGURATION_BLOCK = '.. configuration-block::';
+    public const DIRECTIVE_BEST_PRACTICE = '.. best-practice::';
+    public const DIRECTIVE_INCLUDE = '.. include::';
+    public const DIRECTIVE_IMAGE = '.. image::';
+    public const DIRECTIVE_ADMONITION = '.. admonition::';
+    public const DIRECTIVE_ROLE = '.. role::';
+    public const DIRECTIVE_FIGURE = '.. figure::';
+    public const DIRECTIVE_SEEALSO = '.. seealso::';
+    public const DIRECTIVE_CLASS = '.. class::';
+    public const DIRECTIVE_RST_CLASS = '.. rst-class::';
+    public const DIRECTIVE_LITERALINCLUDE = '.. literalinclude::';
+    public const DIRECTIVE_CONTENTS = '.. contents::';
+    public const DIRECTIVE_CODEIMPORT = '.. codeimport::';
 
-    const DIRECTIVES = [
+    public const DIRECTIVES = [
         self::DIRECTIVE_CODE_BLOCK,
         self::DIRECTIVE_NOTE,
         self::DIRECTIVE_WARNING,
@@ -75,33 +75,33 @@ class RstParser
         self::DIRECTIVE_CODEIMPORT,
     ];
 
-    const CODE_BLOCK_PHP = 'php';
-    const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
-    const CODE_BLOCK_PHP_ATTRIBUTES = 'php-attributes';
-    const CODE_BLOCK_XML = 'xml';
-    const CODE_BLOCK_TWIG = 'twig';
-    const CODE_BLOCK_JINJA = 'jinja';
-    const CODE_BLOCK_HTML = 'html';
-    const CODE_BLOCK_HTML_JINJA = 'html+jinja';
-    const CODE_BLOCK_HTML_TWIG = 'html+twig';
-    const CODE_BLOCK_HTML_PHP = 'html+php';
-    const CODE_BLOCK_YML = 'yml';
-    const CODE_BLOCK_YAML = 'yaml';
-    const CODE_BLOCK_BASH = 'bash';
-    const CODE_BLOCK_SHELL = 'shell';
-    const CODE_BLOCK_TERMINAL = 'terminal';
-    const CODE_BLOCK_TEXT = 'text';
-    const CODE_BLOCK_RST = 'rst';
-    const CODE_BLOCK_DIFF = 'diff';
-    const CODE_BLOCK_JSON = 'json';
-    const CODE_BLOCK_JAVASCRIPT = 'javascript';
-    const CODE_BLOCK_JS = 'js';
-    const CODE_BLOCK_JSX = 'jsx';
-    const CODE_BLOCK_SQL = 'sql';
-    const CODE_BLOCK_INI = 'ini';
-    const CODE_BLOCK_VARNISH_3 = 'varnish3';
-    const CODE_BLOCK_VARNISH_4 = 'varnish4';
-    const CODE_BLOCK_APACHE = 'apache';
+    public const CODE_BLOCK_PHP = 'php';
+    public const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
+    public const CODE_BLOCK_PHP_ATTRIBUTES = 'php-attributes';
+    public const CODE_BLOCK_XML = 'xml';
+    public const CODE_BLOCK_TWIG = 'twig';
+    public const CODE_BLOCK_JINJA = 'jinja';
+    public const CODE_BLOCK_HTML = 'html';
+    public const CODE_BLOCK_HTML_JINJA = 'html+jinja';
+    public const CODE_BLOCK_HTML_TWIG = 'html+twig';
+    public const CODE_BLOCK_HTML_PHP = 'html+php';
+    public const CODE_BLOCK_YML = 'yml';
+    public const CODE_BLOCK_YAML = 'yaml';
+    public const CODE_BLOCK_BASH = 'bash';
+    public const CODE_BLOCK_SHELL = 'shell';
+    public const CODE_BLOCK_TERMINAL = 'terminal';
+    public const CODE_BLOCK_TEXT = 'text';
+    public const CODE_BLOCK_RST = 'rst';
+    public const CODE_BLOCK_DIFF = 'diff';
+    public const CODE_BLOCK_JSON = 'json';
+    public const CODE_BLOCK_JAVASCRIPT = 'javascript';
+    public const CODE_BLOCK_JS = 'js';
+    public const CODE_BLOCK_JSX = 'jsx';
+    public const CODE_BLOCK_SQL = 'sql';
+    public const CODE_BLOCK_INI = 'ini';
+    public const CODE_BLOCK_VARNISH_3 = 'varnish3';
+    public const CODE_BLOCK_VARNISH_4 = 'varnish4';
+    public const CODE_BLOCK_APACHE = 'apache';
 
     public static function directiveIs(Line $line, string $directive, ?bool $strict = false): bool
     {
