@@ -51,10 +51,9 @@ class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineC
         $linkDefinition = LinkDefinition::fromLine($line->raw()->toString());
 
         $url = u($linkDefinition->url()->value());
+        $urlParts = parse_url($url);
 
-        if (!$url->startsWith('https://')
-            && !$url->startsWith('http://')
-        ) {
+        if (!in_array($urlParts['scheme'] ?? null, ['http', 'https'], true) || !isset($urlParts['host']) || !isset($urlParts['path'])) {
             return sprintf(
                 'Invalid url in "%s"',
                 $line->clean()->toString()
