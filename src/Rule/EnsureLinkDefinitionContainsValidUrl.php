@@ -20,7 +20,6 @@ use App\Rst\RstParser;
 use App\Rst\Value\LinkDefinition;
 use App\Value\Lines;
 use App\Value\RuleGroup;
-use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensure link definition contains valid link.")
@@ -50,17 +49,19 @@ class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineC
 
         $linkDefinition = LinkDefinition::fromLine($line->raw()->toString());
 
-        $url = u($linkDefinition->url()->value());
+        $parsed = parse_url($linkDefinition->url()->value());
 
-        if (!$url->startsWith('https://')
-            && !$url->startsWith('http://')
+        if (\is_array($parsed)
+            && isset($parsed['scheme'])
+            && \in_array($parsed['scheme'], ['http', 'https'])
+            && isset($parsed['host'])
         ) {
-            return sprintf(
-                'Invalid url in "%s"',
-                $line->clean()->toString()
-            );
+            return null;
         }
 
-        return null;
+        return sprintf(
+            'Invalid url in "%s"',
+            $line->clean()->toString()
+        );
     }
 }

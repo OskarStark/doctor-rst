@@ -45,6 +45,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends TestCase
             '.. _DOCtor-RST: http://github.com/OskarStark/DOCtor-RST',
             '.. _`DOCtor-RST`: http://github.com/OskarStark/DOCtor-RST',
             '.. _`use DOCtor-RST`: http://github.com/OskarStark/DOCtor-RST',
+            '.. _`use DOCtor-RST`: http://google.com',
         ];
 
         foreach ($validCases as $validCase) {
