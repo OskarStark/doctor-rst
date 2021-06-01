@@ -8,13 +8,13 @@
         "composer/semver": "^3.0",
         "doctrine/annotations": "^1.8",
         "ondram/ci-detector": "^3.5",
-        "symfony/config": "^5.0",
-        "symfony/console": "^5.0",
-        "symfony/dependency-injection": "^5.0",
-        "symfony/finder": "^5.0",
-        "symfony/options-resolver": "^5.0",
-        "symfony/string": "^5.0",
-        "symfony/yaml": "^5.0",
+        "symfony/config": "^5.3",
+        "symfony/console": "^5.3",
+        "symfony/dependency-injection": "^5.3",
+        "symfony/finder": "^5.3",
+        "symfony/options-resolver": "^5.3",
+        "symfony/string": "^5.3",
+        "symfony/yaml": "^5.3",
         "webmozart/assert": "^1.4"
     },
     "require-dev": {
@@ -25,7 +25,7 @@
         "phpstan/phpstan-phpunit": "^0.12.16",
         "phpstan/phpstan-webmozart-assert": "^0.12.7",
         "phpunit/phpunit": "^9.4",
-        "symfony/var-dumper": "^5.1"
+        "symfony/var-dumper": "^5.3"
     },
     "config": {
         "preferred-install": {
