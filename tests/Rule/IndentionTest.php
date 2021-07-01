@@ -344,6 +344,21 @@ RST
 RST
             , 5),
         ];
+
+        yield 'table' => [
+            null,
+            4,
+            new RstSample(<<<'RST'
+=======================  ====================================================  =======
+Option                   Description                                           Default
+=======================  ====================================================  =======
+``csv_delimiter``        Sets the field delimiter separating values (one       ``,``
+                         character only)
+``csv_enclosure``        Sets the field enclosure (one character only)         ``"``
+=======================  ====================================================  =======
+RST
+            , 4),
+        ];
     }
 
     /**
