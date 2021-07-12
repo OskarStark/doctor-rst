@@ -88,6 +88,16 @@ final class BlankLineAfterColonTest extends TestCase
         yield [
             null,
             new RstSample([
+                '.. code-block:: php',
+                '',
+                '    /* Result:',
+                '    [',
+            ], 2),
+        ];
+
+        yield [
+            null,
+            new RstSample([
                 '',
                 '.. _env-var-processors:',
                 '',
@@ -95,6 +105,80 @@ final class BlankLineAfterColonTest extends TestCase
                 '===============================',
                 '',
             ], 1),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '.. _env-var-processors:',
+                '',
+                'Environment Variable Processors',
+                '===============================',
+                '',
+            ]),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '',
+                '.. _env-var-processors:',
+                '.. _`special-env-var-processors`:',
+                '',
+                'Environment Variable Processors',
+                '===============================',
+                '',
+            ], 1),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '',
+                '.. _env-var-processors:',
+                '.. _`special-env-var-processors`:',
+                '.. _`super-special-env-var-processors`:',
+                '',
+                'Environment Variable Processors',
+                '===============================',
+                '',
+            ], 1),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '.. index::',
+                '    single: Deployment; Deployment tools',
+                '',
+                '.. _how-to-deploy-a-symfony2-application:',
+                '',
+                'How to Deploy a Symfony Application',
+                '===================================',
+                '',
+            ], 3),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '.. index::',
+                '    single: Deployment; Deployment tools',
+                '',
+                '.. _`how-to-deploy-a-symfony2-application`:',
+                '',
+                'How to Deploy a Symfony Application',
+                '===================================',
+                '',
+            ], 3),
+        ];
+
+        yield [
+            null,
+            new RstSample([
+                '* :method:`Symfony\\Component\\EventDispatcher\\GenericEvent::getArgument`:',
+                '   Getter for all arguments;',
+            ]),
         ];
     }
 }
