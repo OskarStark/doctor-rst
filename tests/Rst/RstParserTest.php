@@ -260,6 +260,7 @@ final class RstParserTest extends TestCase
         yield [true, ' :lineos: '];
         yield [true, ':language: text'];
         yield [true, ' :language: text '];
+        yield [true, ' :emphasize-lines: 3,11'];
 
         yield [false, ' '];
         yield [false, ''];
