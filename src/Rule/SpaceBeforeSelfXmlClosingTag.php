@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Rst\RstParser;
 use App\Value\Lines;
 
 class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContentRule
@@ -26,7 +27,7 @@ class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContentRu
             return null;
         }
 
-        if (!preg_match('/\ \/>/', $line)) {
+        if (!preg_match('/\ \/>/', $line) && !RstParser::isLinkUsage($line)) {
             return 'Please add space before "/>"';
         }
 

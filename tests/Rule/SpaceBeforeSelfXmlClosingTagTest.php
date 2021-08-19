@@ -58,6 +58,10 @@ final class SpaceBeforeSelfXmlClosingTagTest extends TestCase
                 null,
                 new RstSample('<br />'),
             ],
+            [
+                null,
+                new RstSample('`Twig docs <https://twig.symfony.com/doc/2.x/>`_;'),
+            ],
         ];
     }
 }

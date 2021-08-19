@@ -101,7 +101,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends TestCase
                 '         :option: foo',
                 '',
                 '         namespace App\Entity;',
-            ], 3)
+            ], 3),
         ];
     }
 
