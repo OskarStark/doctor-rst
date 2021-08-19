@@ -81,6 +81,18 @@ final class BlankLineAfterDirectiveTest extends TestCase
 
         yield [
             null,
+            new RstSample(<<<SAMPLE
+.. code-block:: text
+    :caption: src/app.js
+    :emphasize-lines: 3,11
+
+    import {h, render} from 'preact';
+SAMPLE
+),
+        ];
+
+        yield [
+            null,
             new RstSample('temp'),
         ];
     }

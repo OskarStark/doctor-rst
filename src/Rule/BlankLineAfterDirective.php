@@ -47,7 +47,8 @@ class BlankLineAfterDirective extends AbstractRule implements LineContentRule
         }
 
         $lines->next();
-        if ($lines->valid() && RstParser::isOption($lines->current())) {
+
+        while ($lines->valid() && RstParser::isOption($lines->current())) {
             $lines->next();
         }
 

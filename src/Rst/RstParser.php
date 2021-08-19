@@ -231,7 +231,7 @@ class RstParser
 
     public static function isOption(Line $line): bool
     {
-        return [] !== $line->clean()->match('/^(:[a-zA-Z]+:).*/');
+        return [] !== $line->clean()->match('/^(:[a-zA-Z\-]+:).*/');
     }
 
     public static function isAnchor(Line $line): bool
