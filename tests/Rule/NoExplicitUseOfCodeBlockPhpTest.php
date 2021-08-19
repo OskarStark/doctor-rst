@@ -92,6 +92,17 @@ final class NoExplicitUseOfCodeBlockPhpTest extends TestCase
                 '        namespace App\Entity;',
             ], 6),
         ];
+        yield [
+            null,
+            new RstSample([
+                'Welcome to our tutorial!',
+                '',
+                '     .. code-block:: php',
+                '         :option: foo',
+                '',
+                '         namespace App\Entity;',
+            ], 3)
+        ];
     }
 
     /**
