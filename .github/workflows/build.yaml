@@ -36,7 +36,7 @@ jobs:
                     composer-options: "--optimize-autoloader"
 
             -   name: "Download humbug/box"
-                run: wget --no-clobber --output-document=./box https://github.com/humbug/box/releases/download/3.11.0/box.phar || true
+                run: wget --no-clobber --output-document=./box https://github.com/humbug/box/releases/download/3.14.0/box.phar || true
 
             -   name: "Make humbug/box executable"
                 run: chmod +x ./box
