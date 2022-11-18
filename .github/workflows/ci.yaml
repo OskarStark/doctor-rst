@@ -33,7 +33,7 @@ jobs:
                   tools: composer:v2
 
             -   name: "Composer install"
-                uses: "ramsey/composer-install@v1"
+                uses: "ramsey/composer-install@v2"
 
             - name: "Run PHPStan"
               run: vendor/bin/phpstan analyse -c phpstan.neon.dist
@@ -75,7 +75,7 @@ jobs:
                   tools: composer:v2
 
             -   name: "Composer install"
-                uses: "ramsey/composer-install@v1"
+                uses: "ramsey/composer-install@v2"
                 with:
                     composer-options: "--no-scripts"
 
