@@ -6,3 +6,6 @@ cs:
 
 phpstan:
 	vendor/bin/phpstan analyse -c phpstan.neon.dist
+
+phpstan-baseline:
+	vendor/bin/phpstan analyse -c phpstan.neon.dist --generate-baseline=phpstan-baseline.neon

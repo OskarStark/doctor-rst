@@ -1,0 +1,96 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot access offset 'payload' on mixed\\.$#"
+			count: 1
+			path: src/Analyzer/FileCache.php
+
+		-
+			message: "#^Cannot access offset 'version' on mixed\\.$#"
+			count: 1
+			path: src/Analyzer/FileCache.php
+
+		-
+			message: "#^Property App\\\\Analyzer\\\\FileCache\\:\\:\\$cache \\(array\\<string, array\\>\\) does not accept mixed\\.$#"
+			count: 1
+			path: src/Analyzer/FileCache.php
+
+		-
+			message: "#^Parameter \\#2 \\$value of method Symfony\\\\Component\\\\DependencyInjection\\\\Container\\:\\:setParameter\\(\\) expects array\\|bool\\|float\\|int\\|string\\|UnitEnum\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Application.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Command/AnalyzeCommand.php
+
+		-
+			message: "#^Cannot access offset 'rules' on mixed\\.$#"
+			count: 1
+			path: src/Command/AnalyzeCommand.php
+
+		-
+			message: "#^Cannot access offset 'whitelist' on mixed\\.$#"
+			count: 1
+			path: src/Command/AnalyzeCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$excludedViolationConfig of class App\\\\Value\\\\ExcludedViolationList constructor expects array, mixed given\\.$#"
+			count: 1
+			path: src/Command/AnalyzeCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$options of method App\\\\Rule\\\\Configurable\\:\\:setOptions\\(\\) expects array, mixed given\\.$#"
+			count: 1
+			path: src/Command/AnalyzeCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of static method App\\\\Value\\\\RuleName\\:\\:fromString\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Command/AnalyzeCommand.php
+
+		-
+			message: "#^Cannot access offset 'default' on mixed\\.$#"
+			count: 2
+			path: src/Command/RulesCommand.php
+
+		-
+			message: "#^Cannot access offset 'name' on mixed\\.$#"
+			count: 2
+			path: src/Command/RulesCommand.php
+
+		-
+			message: "#^Cannot access offset 'required' on mixed\\.$#"
+			count: 2
+			path: src/Command/RulesCommand.php
+
+		-
+			message: "#^Cannot access offset 'types' on mixed\\.$#"
+			count: 4
+			path: src/Command/RulesCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$array of function implode expects array\\<string\\>, mixed given\\.$#"
+			count: 2
+			path: src/Command/RulesCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$array of function implode expects array\\|null, mixed given\\.$#"
+			count: 2
+			path: src/Command/RulesCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#"
+			count: 3
+			path: src/Command/RulesCommand.php
+
+		-
+			message: "#^Right side of \\|\\| is always false\\.$#"
+			count: 1
+			path: src/Rule/PhpPrefixBeforeBinConsole.php
+
+		-
+			message: "#^Cannot access offset 'payload' on mixed\\.$#"
+			count: 1
+			path: tests/Analyzer/FileCacheTest.php
