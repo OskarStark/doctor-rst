@@ -16,7 +16,7 @@ namespace App\Tests\Analyzer;
 use App\Analyzer\Analyzer;
 use App\Analyzer\Cache;
 use App\Analyzer\MemoizingAnalyzer;
-use App\Tests\Fixtures\Rule\Dummy;
+use App\Tests\Fixtures\Rule\DummyRule;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use SplFileInfo;
@@ -45,7 +45,7 @@ final class MemoizingAnalyzerTest extends TestCase
     {
         $fileInfo = new SplFileInfo('test.rst');
         $rules = [
-            new Dummy(),
+            new DummyRule(),
         ];
 
         $this->cache
@@ -69,7 +69,7 @@ final class MemoizingAnalyzerTest extends TestCase
     {
         $fileInfo = new SplFileInfo('test.rst');
         $rules = [
-            new Dummy(),
+            new DummyRule(),
         ];
 
         $this->cache->expects(static::never())->method('get');
