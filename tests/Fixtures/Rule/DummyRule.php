@@ -17,7 +17,7 @@ use App\Rule\AbstractRule;
 use App\Rule\Rule;
 use App\Value\Lines;
 
-class DummyRule extends AbstractRule implements Rule
+final class DummyRule extends AbstractRule implements Rule
 {
     public function check(Lines $lines, int $number): ?string
     {
