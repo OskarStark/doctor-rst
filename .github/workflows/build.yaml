@@ -44,8 +44,6 @@ jobs:
             -   name: "Compile phar"
                 run: ./box compile
 
-            - run: "ls -la"
-
             -   name: "Run phar without cache"
                 run: bin/doctor-rst.phar analyze dummy/ --no-cache
 
