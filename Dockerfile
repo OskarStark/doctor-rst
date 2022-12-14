@@ -8,7 +8,7 @@ COPY --from=composer:2.4.4 /usr/bin/composer /usr/bin/composer
 WORKDIR /usr/src/app
 ADD . /usr/src/app
 
-RUN composer install --classmap-authoritative --no-interaction
+RUN composer install --classmap-authoritative --no-interaction --no-dev --optimize-autoloader
 
 ADD https://github.com/humbug/box/releases/download/4.2.0/box.phar ./box.phar
 RUN php box.phar compile
