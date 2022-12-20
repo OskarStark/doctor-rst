@@ -7,7 +7,7 @@ on:
 name: CI
 
 env:
-    REQUIRED_PHP_EXTENSIONS: "ctype, filter, hash, iconv, json"
+    REQUIRED_PHP_EXTENSIONS: "ctype, filter, hash, iconv"
 
 jobs:
     phpstan:
