@@ -6,7 +6,7 @@ on: # yamllint disable-line rule:truthy
 env:
     COMMITTER_EMAIL: "oskarstark@googlemail.com"
     COMMITTER_NAME: "Oskar Stark"
-    REQUIRED_PHP_EXTENSIONS: "ctype, filter, hash, iconv, json"
+    REQUIRED_PHP_EXTENSIONS: "ctype, filter, hash, iconv"
 
 jobs:
     generate:
