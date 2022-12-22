@@ -22,7 +22,7 @@
         "mikey179/vfsstream": "^1.6.11",
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan": "^1.9.4",
-        "phpstan/phpstan-phpunit": "^1.3.2",
+        "phpstan/phpstan-phpunit": "^1.3.3",
         "phpstan/phpstan-webmozart-assert": "^1.2.2",
         "phpunit/phpunit": "^9.5.27",
         "symfony/var-dumper": "^6.2.2"
