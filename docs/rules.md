@@ -18,6 +18,7 @@
 * [deprecated_directive_major_version](#deprecated_directive_major_version)
 * [deprecated_directive_min_version](#deprecated_directive_min_version)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
+* [ensure_exactly_one_space_before_directive_type](#ensure_exactly_one_space_before_directive_type)
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
 * [ensure_link_definition_contains_valid_url](#ensure_link_definition_contains_valid_url)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
@@ -274,6 +275,24 @@ Name | Required
 
 ```rst
 .. deprecated:: foo-bar
+```
+
+## `ensure_exactly_one_space_before_directive_type`
+
+> _Ensure exactly one space before directive type._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+.. code-block:: php
+```
+
+##### Invalid Examples :-1:
+
+```rst
+..  code-block:: php
 ```
 
 ## `ensure_exactly_one_space_between_link_definition_and_link`
