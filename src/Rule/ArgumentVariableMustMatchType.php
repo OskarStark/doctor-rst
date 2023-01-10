@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ArgumentVariableMustMatchType extends AbstractRule implements LineContentRule, Configurable
 {
-    /** @var array<array{type: string, name:string}> */
+    /** @var array<array{type: string, name: string}> */
     private array $arguments;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
