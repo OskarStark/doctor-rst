@@ -13,22 +13,30 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Annotations\Rule\Description;
+use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ArgumentTypeMatchName extends AbstractRule implements LineContentRule, Configurable
+/**
+ * @Description("Make sure argument variable name match for type")
+ */
+class ArgumentVariableMustMatchType extends AbstractRule implements LineContentRule, Configurable
 {
     /** @var array<array{type: string, name:string}> */
     private array $arguments;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {
-        $resolver->setDefault('arguments', function (OptionsResolver $connResolver) {
-            $connResolver
-                ->setPrototype(true)
-                ->setRequired(['type', 'name']);
-        });
+        $resolver
+            ->setRequired('arguments')
+            ->setAllowedTypes('arguments', 'array')
+            ->setDefault('arguments', function (OptionsResolver $connResolver): void {
+                $connResolver
+                    ->setPrototype(true)
+                    ->setRequired(['type', 'name']);
+            });
 
         return $resolver;
     }
@@ -50,21 +58,31 @@ class ArgumentTypeMatchName extends AbstractRule implements LineContentRule, Con
     public function check(Lines $lines, int $number): ?string
     {
         $lines->seek($number);
-        $line = $lines->current()->clean();
+        $line = $lines->current();
+
+        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)
+            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS)
+            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ATTRIBUTES)
+        ) {
+            return null;
+        }
+
+        $lines->next();
+        $lines->next();
 
         $messageParts = [];
         foreach ($this->arguments as $argument) {
             // This regex match argument type with bad argument name
             $regex = sprintf(
-                '/%s \$(?!%s)/',
+                '/%s \$(?!%s)(?<actualName>[a-z-A-Z\$]+)/',
                 $argument['type'],
                 $argument['name']
             );
 
-            if ($line->match($regex)) {
+            if ($match = $lines->current()->clean()->match($regex)) {
                 $messageParts[] = sprintf(
-                    'Please name the argument "%s $%s"',
-                    $argument['type'],
+                    'Please rename "$%s" to "$%s"',
+                    $match['actualName'],
                     $argument['name']
                 );
             }

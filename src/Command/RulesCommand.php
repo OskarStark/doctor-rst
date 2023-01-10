@@ -150,12 +150,21 @@ class RulesCommand extends Command
                     $this->io->writeln('--- | --- | --- | ---');
 
                     foreach ($options as $option) {
+                        if ((null === $defaultValue = $option['default'])) {
+                            $default = '';
+                        } else {
+                            if (\is_array($defaultValue)) {
+                                $defaultValue = '[]';
+                            }
+                            $default = sprintf('`%s`', $defaultValue);
+                        }
+
                         $this->io->writeln(sprintf(
                             '%s | %s | %s | %s',
                             sprintf('`%s`', $option['name']),
                             sprintf('`%s`', $option['required'] ? 'true' : 'false'),
                             sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
-                            null === $option['default'] ? '' : sprintf('`%s`', $option['default'])
+                            $default
                         ));
                     }
                 } else {

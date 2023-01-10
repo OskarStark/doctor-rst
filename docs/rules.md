@@ -1,6 +1,7 @@
 # Rules Overview
 
 * [american_english](#american_english)
+* [argument_variable_must_match_type](#argument_variable_must_match_type)
 * [avoid_repetetive_words](#avoid_repetetive_words)
 * [be_kind_to_newcomers](#be_kind_to_newcomers) :exclamation:
 * [blank_line_after_anchor](#blank_line_after_anchor)
@@ -110,6 +111,18 @@ This is a nice behavior...
 ```rst
 This is a nice behaviour...
 ```
+
+## `argument_variable_must_match_type`
+
+> _Make sure argument variable name match for type_
+
+#### Groups [`@Symfony`]
+
+#### Configuration options
+
+Name | Required | Allowed Types | Default
+--- | --- | --- | ---
+`arguments` | `false` | `array` | `[]`
 
 ## `avoid_repetetive_words`
 
@@ -279,7 +292,7 @@ Name | Required
 
 ## `ensure_exactly_one_space_before_directive_type`
 
-> _Ensure exactly one space before directive type._
+  > _Ensure exactly one space before directive type._
 
 #### Groups [`@Symfony`]
 
