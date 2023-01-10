@@ -279,7 +279,7 @@ Name | Required
 
 ## `ensure_exactly_one_space_before_directive_type`
 
-> _Ensure exactly one space before directive type._
+  > _Ensure exactly one space before directive type._
 
 #### Groups [`@Symfony`]
 
