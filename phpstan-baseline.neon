@@ -52,7 +52,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'default' on mixed\\.$#"
-			count: 2
+			count: 1
 			path: src/Command/RulesCommand.php
 
 		-
