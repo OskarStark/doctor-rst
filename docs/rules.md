@@ -114,7 +114,7 @@ This is a nice behaviour...
 
 ## `argument_variable_must_match_type`
 
-> _Make sure argument variable name match for type_
+  > _Make sure argument variable name match for type_
 
 #### Groups [`@Symfony`]
 
