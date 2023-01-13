@@ -68,24 +68,33 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
         }
 
         $lines->next();
-        $lines->next();
 
         $messageParts = [];
-        foreach ($this->arguments as $argument) {
-            // This regex match argument type with bad argument name
-            $regex = sprintf(
-                '/%s \$(?!%s)(?<actualName>[a-z-A-Z\$]+)/',
-                $argument['type'],
-                $argument['name']
-            );
 
-            if ($match = $lines->current()->clean()->match($regex)) {
-                $messageParts[] = sprintf(
-                    'Please rename "$%s" to "$%s"',
-                    $match['actualName'],
+        while ($lines->valid()
+            && !$lines->current()->isDirective()
+        ) {
+            $line = $lines->current()->clean();
+
+            foreach ($this->arguments as $argument) {
+                // This regex match argument type with bad argument name
+                $regex = sprintf(
+                    '/%s \$(?!%s)(?<actualName>[a-z-A-Z\$]+)/',
+                    $argument['type'],
                     $argument['name']
                 );
+                $match = $line->match($regex);
+
+                if ($match) {
+                    $messageParts[] = sprintf(
+                        'Please rename "$%s" to "$%s"',
+                        $match['actualName'],
+                        $argument['name']
+                    );
+                }
             }
+
+            $lines->next();
         }
 
         return $messageParts ? implode('. ', $messageParts) : null;
