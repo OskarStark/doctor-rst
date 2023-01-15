@@ -48,6 +48,7 @@
 * [no_composer_phar](#no_composer_phar)
 * [no_composer_req](#no_composer_req)
 * [no_config_yaml](#no_config_yaml)
+* [no_contraction](#no_contraction)
 * [no_directive_after_shorthand](#no_directive_after_shorthand)
 * [no_explicit_use_of_code_block_php](#no_explicit_use_of_code_block_php)
 * [no_inheritdoc_in_code_examples](#no_inheritdoc_in_code_examples)
@@ -523,6 +524,36 @@ $ bin/console list
 ## `no_config_yaml`
 
 #### Groups [`@Sonata`, `@Symfony`]
+
+## `no_contraction`
+
+  > _Ensure contractions are not used._
+
+#### Groups [`@Symfony`]
+
+#### Checks
+
+Pattern | Message
+--- | ---
+`/i'm/i` | Please do not use contraction for: %s
+`/(you\|we\|they)'re/i` | Please do not use contraction for: %s
+`/(he\|she\|it)'s/i` | Please do not use contraction for: %s
+`/(you\|we\|they)'ve/i` | Please do not use contraction for: %s
+`/(i\|you\|he\|she\|it\|we\|they)'ll/i` | Please do not use contraction for: %s
+`/(i\|you\|he\|she\|it\|we\|they)'d/i` | Please do not use contraction for: %s
+`/(aren\|can\|couldn\|didn\|hasn\|haven\|isn\|mustn\|shan\|shouldn\|wasn\|weren\|won\|wouldn)'t/i` | Please do not use contraction for: %s
+
+##### Valid Examples :+1:
+
+```rst
+It is an example
+```
+
+##### Invalid Examples :-1:
+
+```rst
+It's an example
+```
 
 ## `no_directive_after_shorthand`
 
