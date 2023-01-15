@@ -530,7 +530,7 @@ This is nice PHP code, isn't it?
 
     echo 'Hello World!';
 RST
-            , 2),
+                , 2),
         ];
 
         yield 'php code block following a configuration-block' => [
@@ -546,7 +546,22 @@ RST
 
     echo 'Hello World!';
 RST
-            , 6),
+                , 6),
+        ];
+
+        yield 'php code block following a terminal block' => [
+            null,
+            new RstSample(<<<'RST'
+.. code-block:: terminal
+
+    $ php bin/console make:user
+
+.. code-block:: php
+
+    echo 'Hello World!';
+    }
+RST
+                , 4),
         ];
 
         yield 'php code block unsing an option' => [

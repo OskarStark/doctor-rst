@@ -35,6 +35,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         RstParser::DIRECTIVE_VERSIONADDED,
         RstParser::DIRECTIVE_VERSIONCHANGED,
         RstParser::DIRECTIVE_WARNING,
+        RstParser::DIRECTIVE_IMAGE,
     ];
 
     public static function getGroups(): array
@@ -81,8 +82,14 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
             }
         }
 
-        // check if the previous code block is php code block
-        if ($this->previousDirectiveIs(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_YAML])) {
+        $previousAllowedDirectiveTypes = [
+            RstParser::CODE_BLOCK_PHP,
+            RstParser::CODE_BLOCK_YAML,
+            RstParser::CODE_BLOCK_TERMINAL,
+        ];
+
+        // check if the previous code block is php, yaml or terminal code block
+        if ($this->previousDirectiveIs(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, $previousAllowedDirectiveTypes)) {
             return null;
         }
 
