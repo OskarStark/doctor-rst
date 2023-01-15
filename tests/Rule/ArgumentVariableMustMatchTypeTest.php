@@ -55,16 +55,17 @@ final class ArgumentVariableMustMatchTypeTest extends TestCase
     public function checkProvider(): \Generator
     {
         $codeBlocks = [
-            RstParser::CODE_BLOCK_PHP,
-            RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-            RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
+            '.. code-block:: '.RstParser::CODE_BLOCK_PHP,
+            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
+            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
+            'A php code block follows::',
         ];
 
         foreach ($codeBlocks as $codeBlock) {
             yield [
                 'Please rename "$builder" to "$containerBuilder"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     'public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $builder): void',
                 ]),
@@ -73,7 +74,7 @@ final class ArgumentVariableMustMatchTypeTest extends TestCase
             yield [
                 'Please rename "$builder" to "$containerBuilder". Please rename "$configurator" to "$containerConfigurator"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     'public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $builder): void',
                 ]),
@@ -82,7 +83,7 @@ final class ArgumentVariableMustMatchTypeTest extends TestCase
             yield [
                 null,
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     'public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void',
                 ]),
@@ -91,7 +92,7 @@ final class ArgumentVariableMustMatchTypeTest extends TestCase
             yield [
                 'Please rename "$configurator" to "$containerConfigurator"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     'ContainerConfigurator $configurator',
                 ]),
@@ -100,9 +101,24 @@ final class ArgumentVariableMustMatchTypeTest extends TestCase
             yield [
                 null,
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     'ContainerConfigurator $containerConfigurator',
+                ]),
+            ];
+
+            yield [
+                'Please rename "$configurator" to "$containerConfigurator"',
+                new RstSample([
+                    $codeBlock,
+                    'some',
+                    'text',
+                    'before',
+                    'violation',
+                    'ContainerConfigurator $configurator',
+                    'some',
+                    'text',
+                    'after',
                 ]),
             ];
         }
