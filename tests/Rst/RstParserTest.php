@@ -231,12 +231,14 @@ final class RstParserTest extends TestCase
         yield [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP];
         yield [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS];
         yield [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES];
+        yield [true, ' .. code-block:: php-symfony', RstParser::CODE_BLOCK_PHP_SYMFONY];
         yield [true, ' .. code-block:: text', RstParser::CODE_BLOCK_TEXT];
         yield [true, ' .. code-block:: rst', RstParser::CODE_BLOCK_RST];
         yield [false, 'foo', RstParser::CODE_BLOCK_PHP];
         yield [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP, true];
         yield [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS, false];
         yield [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES, false];
+        yield [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_SYMFONY, false];
         yield [true, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, false];
         yield [false, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, true];
     }

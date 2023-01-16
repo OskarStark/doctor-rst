@@ -49,6 +49,7 @@ final class NoInheritdocInCodeExamplesTest extends TestCase
             RstParser::CODE_BLOCK_PHP,
             RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
             RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
+            RstParser::CODE_BLOCK_PHP_SYMFONY,
         ];
         foreach ($codeBlocks as $codeBlock) {
             yield [

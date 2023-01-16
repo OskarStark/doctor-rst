@@ -123,6 +123,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
     private static function validOrder(): array
     {
         return [
+            '.. code-block:: php-symfony',
             '.. code-block:: php-annotations',
             '.. code-block:: php-attributes',
             '.. code-block:: yaml',
