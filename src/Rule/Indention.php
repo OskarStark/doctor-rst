@@ -90,6 +90,7 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
             RstParser::CODE_BLOCK_PHP,
             RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
             RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
+            RstParser::CODE_BLOCK_PHP_SYMFONY,
             RstParser::CODE_BLOCK_JAVASCRIPT,
             RstParser::CODE_BLOCK_SQL,
         ])) {
