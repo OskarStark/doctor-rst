@@ -105,6 +105,8 @@ final class NoContractionTest extends TestCase
             'were not',
             'will not',
             'would not',
+            // valid usages
+            "use PHPUnit's",
         ];
 
         foreach ($valids as $valid) {
