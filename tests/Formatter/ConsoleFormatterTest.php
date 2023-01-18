@@ -39,7 +39,7 @@ final class ConsoleFormatterTest extends \App\Tests\UnitTestCase
             )
         );
         $validFileResult = new FileResult(
-            new \SplFileInfo($analyzeDir.'/docs/tutorial/introduction.rst'),
+            new \SplFileInfo($analyzeDir.'/docs/tutorial/introduction_one.rst'),
             new ExcludedViolationList([], [])
         );
 
