@@ -16,9 +16,8 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\BlankLineBeforeDirective;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class BlankLineBeforeDirectiveTest extends TestCase
+final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -76,7 +75,7 @@ Headline
 This is cool php
 code::
 RST
-            , 3),
+                , 3),
         ];
 
         foreach (RstParser::DIRECTIVES as $directive) {

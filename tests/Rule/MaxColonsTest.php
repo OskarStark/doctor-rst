@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\MaxColons;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class MaxColonsTest extends TestCase
+final class MaxColonsTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

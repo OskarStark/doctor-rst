@@ -29,6 +29,7 @@ trait DirectiveTrait
                 RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
                 RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
                 RstParser::CODE_BLOCK_PHP_SYMFONY,
+                RstParser::CODE_BLOCK_PHP_STANDALONE,
             ]
         );
     }
@@ -108,14 +109,14 @@ trait DirectiveTrait
             }
 
             if ((
-                    $lineIndention === $initialIndention
-                    && $lines->current()->isDirective()
-                    && RstParser::directiveIs($lines->current(), $directive)
-                ) || (0 === $lineIndention
-                    && (
-                        RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)
-                        || RstParser::directiveIs($lines->current(), $directive)
-                    ))
+                $lineIndention === $initialIndention
+                && $lines->current()->isDirective()
+                && RstParser::directiveIs($lines->current(), $directive)
+            ) || (0 === $lineIndention
+                && (
+                    RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)
+                    || RstParser::directiveIs($lines->current(), $directive)
+                ))
             ) {
                 if (null !== $directiveTypes) {
                     $found = false;

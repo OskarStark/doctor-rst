@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\SpaceBeforeSelfXmlClosingTag;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class SpaceBeforeSelfXmlClosingTagTest extends TestCase
+final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -33,7 +32,7 @@ final class SpaceBeforeSelfXmlClosingTagTest extends TestCase
     }
 
     /**
-     * @return array<array{0: null|string, 1: RstSample}>
+     * @return array<array{0: string|null, 1: RstSample}>
      */
     public function checkProvider(): array
     {

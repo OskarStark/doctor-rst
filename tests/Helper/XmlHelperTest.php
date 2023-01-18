@@ -15,9 +15,8 @@ namespace App\Tests\Helper;
 
 use App\Helper\XmlHelper;
 use App\Value\Line;
-use PHPUnit\Framework\TestCase;
 
-final class XmlHelperTest extends TestCase
+final class XmlHelperTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -33,7 +32,7 @@ final class XmlHelperTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{0: bool, 1: string, 2: null|bool}>
+     * @return \Generator<array{0: bool, 1: string, 2: bool|null}>
      */
     public function isCommentProvider(): \Generator
     {

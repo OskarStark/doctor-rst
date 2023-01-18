@@ -15,7 +15,6 @@ namespace App\Analyzer;
 
 use App\Application;
 use App\Value\Violation;
-use SplFileInfo;
 
 final class FileCache implements Cache
 {
@@ -32,7 +31,7 @@ final class FileCache implements Cache
         $this->cacheFile = $cacheFile;
     }
 
-    public function has(SplFileInfo $file, array $rules): bool
+    public function has(\SplFileInfo $file, array $rules): bool
     {
         $this->load();
 
@@ -53,7 +52,7 @@ final class FileCache implements Cache
         return true;
     }
 
-    public function get(SplFileInfo $file, array $rules): array
+    public function get(\SplFileInfo $file, array $rules): array
     {
         $this->load();
 
@@ -67,7 +66,7 @@ final class FileCache implements Cache
         return [];
     }
 
-    public function set(SplFileInfo $file, array $rules, array $violations): void
+    public function set(\SplFileInfo $file, array $rules, array $violations): void
     {
         $this->load();
 

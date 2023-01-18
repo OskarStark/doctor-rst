@@ -15,9 +15,8 @@ namespace App\Tests\Helper;
 
 use App\Helper\TwigHelper;
 use App\Value\Line;
-use PHPUnit\Framework\TestCase;
 
-final class TwigHelperTest extends TestCase
+final class TwigHelperTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

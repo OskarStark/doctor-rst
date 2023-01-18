@@ -16,9 +16,8 @@ namespace App\Tests\Traits;
 use App\Rst\RstParser;
 use App\Tests\RstSample;
 use App\Tests\Util\DirectiveTraitWrapper;
-use PHPUnit\Framework\TestCase;
 
-final class DirectiveTraitTest extends TestCase
+final class DirectiveTraitTest extends \App\Tests\UnitTestCase
 {
     private DirectiveTraitWrapper $traitWrapper;
 
@@ -95,7 +94,7 @@ RST;
 Environment Variable Processors
 ===============================
 RST
-, 1),
+                , 1),
             RstParser::DIRECTIVE_CODE_BLOCK,
             [RstParser::CODE_BLOCK_YAML],
         ];
@@ -415,6 +414,42 @@ RST;
             RstParser::DIRECTIVE_CODE_BLOCK,
             [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_ANNOTATIONS],
         ];
+
+        yield [
+            true,
+            new RstSample([
+                '.. code-block:: php-attributes',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+            ], 3),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_ATTRIBUTES],
+        ];
+
+        yield [
+            true,
+            new RstSample([
+                '.. code-block:: php-symfony',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+            ], 3),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_SYMFONY],
+        ];
+
+        yield [
+            true,
+            new RstSample([
+                '.. code-block:: php-standalone',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+            ], 3),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_STANDALONE],
+        ];
     }
 
     /**
@@ -450,7 +485,7 @@ RST;
 
     // I am just a cool text!
 RST
-            , 2),
+                , 2),
             RstParser::DIRECTIVE_CODE_BLOCK,
         ];
 
@@ -463,7 +498,7 @@ RST
     
 .. code-block:: yaml
 RST
-            , 4),
+                , 4),
             RstParser::DIRECTIVE_CODE_BLOCK,
             [RstParser::CODE_BLOCK_PHP],
         ];

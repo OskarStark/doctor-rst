@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\SpaceBetweenLabelAndLinkInRef;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class SpaceBetweenLabelAndLinkInRefTest extends TestCase
+final class SpaceBetweenLabelAndLinkInRefTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

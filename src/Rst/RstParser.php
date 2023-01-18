@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace App\Rst;
 
 use App\Value\Line;
+
 use function Symfony\Component\String\u;
+
 use Webmozart\Assert\Assert;
 
 class RstParser
@@ -79,6 +81,7 @@ class RstParser
     public const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
     public const CODE_BLOCK_PHP_ATTRIBUTES = 'php-attributes';
     public const CODE_BLOCK_PHP_SYMFONY = 'php-symfony';
+    public const CODE_BLOCK_PHP_STANDALONE = 'php-standalone';
     public const CODE_BLOCK_XML = 'xml';
     public const CODE_BLOCK_TWIG = 'twig';
     public const CODE_BLOCK_JINJA = 'jinja';
@@ -144,6 +147,7 @@ class RstParser
                 self::CODE_BLOCK_PHP_ANNOTATIONS,
                 self::CODE_BLOCK_PHP_ATTRIBUTES,
                 self::CODE_BLOCK_PHP_SYMFONY,
+                self::CODE_BLOCK_PHP_STANDALONE,
                 self::CODE_BLOCK_XML,
                 self::CODE_BLOCK_TWIG,
                 self::CODE_BLOCK_JINJA,
@@ -171,7 +175,7 @@ class RstParser
             ]
         );
 
-        if (substr($line->clean()->toString(), -(\strlen(($type)))) === $type
+        if (substr($line->clean()->toString(), -\strlen($type)) === $type
             || (self::CODE_BLOCK_PHP === $type && $line->isDefaultDirective())) {
             if (!$strict) {
                 return true;

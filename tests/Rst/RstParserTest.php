@@ -15,9 +15,8 @@ namespace App\Tests\Rst;
 
 use App\Rst\RstParser;
 use App\Value\Line;
-use PHPUnit\Framework\TestCase;
 
-final class RstParserTest extends TestCase
+final class RstParserTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -232,6 +231,7 @@ final class RstParserTest extends TestCase
         yield [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS];
         yield [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES];
         yield [true, ' .. code-block:: php-symfony', RstParser::CODE_BLOCK_PHP_SYMFONY];
+        yield [true, ' .. code-block:: php-standalone', RstParser::CODE_BLOCK_PHP_STANDALONE];
         yield [true, ' .. code-block:: text', RstParser::CODE_BLOCK_TEXT];
         yield [true, ' .. code-block:: rst', RstParser::CODE_BLOCK_RST];
         yield [false, 'foo', RstParser::CODE_BLOCK_PHP];
@@ -239,6 +239,7 @@ final class RstParserTest extends TestCase
         yield [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS, false];
         yield [true, ' .. code-block:: php-attributes', RstParser::CODE_BLOCK_PHP_ATTRIBUTES, false];
         yield [true, ' .. code-block:: php-symfony', RstParser::CODE_BLOCK_PHP_SYMFONY, false];
+        yield [true, ' .. code-block:: php-standalone', RstParser::CODE_BLOCK_PHP_STANDALONE, false];
         yield [true, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, false];
         yield [false, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, true];
     }

@@ -19,12 +19,11 @@ use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
 use App\Value\Violation;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class GithubFormatterTest extends TestCase
+final class GithubFormatterTest extends \App\Tests\UnitTestCase
 {
     public function testFormat(): void
     {

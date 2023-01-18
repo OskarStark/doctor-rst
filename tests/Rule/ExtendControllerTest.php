@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\ExtendController;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class ExtendControllerTest extends TestCase
+final class ExtendControllerTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

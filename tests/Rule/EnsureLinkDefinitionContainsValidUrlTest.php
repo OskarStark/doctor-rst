@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureLinkDefinitionContainsValidUrl;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class EnsureLinkDefinitionContainsValidUrlTest extends TestCase
+final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

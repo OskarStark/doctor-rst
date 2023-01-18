@@ -6,6 +6,7 @@ rules:
     composer_dev_option_not_at_the_end: ~
     yarn_dev_option_at_the_end: ~
     versionadded_directive_should_have_version: ~
+    unused_links: ~
 
 # do not report as violation
 whitelist:

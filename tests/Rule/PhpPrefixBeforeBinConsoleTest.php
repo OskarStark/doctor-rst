@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\PhpPrefixBeforeBinConsole;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class PhpPrefixBeforeBinConsoleTest extends TestCase
+final class PhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

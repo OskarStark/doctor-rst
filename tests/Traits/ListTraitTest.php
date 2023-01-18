@@ -15,9 +15,8 @@ namespace App\Tests\Traits;
 
 use App\Tests\RstSample;
 use App\Tests\Util\ListItemTraitWrapper;
-use PHPUnit\Framework\TestCase;
 
-final class ListTraitTest extends TestCase
+final class ListTraitTest extends \App\Tests\UnitTestCase
 {
     private ListItemTraitWrapper $traitWrapper;
 
@@ -135,7 +134,7 @@ Code here::
         protected $name;
     }
 RST
-                , 5),
+            , 5),
         ];
     }
 

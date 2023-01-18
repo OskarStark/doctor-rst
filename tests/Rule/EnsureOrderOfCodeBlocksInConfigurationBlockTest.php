@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureOrderOfCodeBlocksInConfigurationBlock;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends TestCase
+final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -40,6 +39,14 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends TestCase
     {
         $valid = <<<RST
 .. configuration-block::
+
+    .. code-block:: php-symfony
+
+        test
+
+    .. code-block:: php-standalone
+
+        test
 
     .. code-block:: php-annotations
 
@@ -68,6 +75,14 @@ RST;
     .. code-block:: html
 
         test
+        
+    .. code-block:: php-symfony
+
+        test
+
+    .. code-block:: php-standalone
+
+        test        
 
     .. code-block:: php-annotations
 

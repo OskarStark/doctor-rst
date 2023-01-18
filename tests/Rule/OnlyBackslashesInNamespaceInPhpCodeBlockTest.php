@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rst\RstParser;
 use App\Rule\OnlyBackslashesInNamespaceInPhpCodeBlock;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends TestCase
+final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -35,18 +33,11 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends TestCase
 
     public function checkProvider(): \Generator
     {
-        $codeBlocks = [
-            RstParser::CODE_BLOCK_PHP,
-            RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-            RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-            RstParser::CODE_BLOCK_PHP_SYMFONY,
-        ];
-
-        foreach ($codeBlocks as $codeBlock) {
+        foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
                 'Please check "namespace App/Handler;", it should not contain "/"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
@@ -57,7 +48,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends TestCase
             yield [
                 'Please check "NaMeSpaCe App/Handler;", it should not contain "/"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',

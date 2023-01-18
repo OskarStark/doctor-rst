@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoExplicitUseOfCodeBlockPhp;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoExplicitUseOfCodeBlockPhpTest extends TestCase
+final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -106,7 +105,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends TestCase
     }
 
     /**
-     * @return \Generator<int|string, array{0: null|string, 1: RstSample}>
+     * @return \Generator<int|string, array{0: string|null, 1: RstSample}>
      */
     public function realSymfonyFileProvider(): \Generator
     {

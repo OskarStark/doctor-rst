@@ -16,9 +16,8 @@ namespace App\Tests\Rule;
 use App\Rule\DeprecatedDirectiveShouldHaveVersion;
 use App\Tests\RstSample;
 use Composer\Semver\VersionParser;
-use PHPUnit\Framework\TestCase;
 
-final class DeprecatedDirectiveShouldHaveVersionTest extends TestCase
+final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -35,7 +34,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends TestCase
     }
 
     /**
-     * @return \Generator<array{0: null|string, 1: RstSample}>
+     * @return \Generator<array{0: string|null, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {

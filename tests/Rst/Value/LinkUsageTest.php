@@ -15,9 +15,8 @@ namespace App\Tests\Rst\Value;
 
 use App\Rst\Value\LinkName;
 use App\Rst\Value\LinkUsage;
-use PHPUnit\Framework\TestCase;
 
-final class LinkUsageTest extends TestCase
+final class LinkUsageTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -49,7 +48,7 @@ final class LinkUsageTest extends TestCase
 
         static::assertSame(
             $name,
-            (LinkUsage::fromLinkName(LinkName::fromString($name)))->name()->value()
+            LinkUsage::fromLinkName(LinkName::fromString($name))->name()->value()
         );
     }
 }

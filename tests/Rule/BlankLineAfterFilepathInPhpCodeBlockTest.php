@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rst\RstParser;
 use App\Rule\BlankLineAfterFilepathInPhpCodeBlock;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
+final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -38,19 +36,12 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
      */
     public function checkProvider(): \Generator
     {
-        $codeBlocks = [
-            RstParser::CODE_BLOCK_PHP,
-            RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-            RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-            RstParser::CODE_BLOCK_PHP_SYMFONY,
-        ];
-
-        foreach ($codeBlocks as $codeBlock) {
+        foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
                 'Please add a blank line after "// src/Handler/Collection.php"',
                 new RstSample(
                     [
-                        '.. code-block:: '.$codeBlock,
+                        $codeBlock,
                         '',
                         '    // src/Handler/Collection.php',
                         '    namespace App\\Handler;',
@@ -62,7 +53,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
                 null,
                 new RstSample(
                     [
-                        '.. code-block:: '.$codeBlock,
+                        $codeBlock,
                         '',
                         '    // src/Handler/Collection.php',
                         '',
@@ -75,7 +66,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
                 null,
                 new RstSample(
                     [
-                        '.. code-block:: '.$codeBlock,
+                        $codeBlock,
                         '',
                         '    // src/Handler/Collection.php',
                         '    // a comment',
@@ -88,7 +79,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
                 null,
                 new RstSample(
                     [
-                        '.. code-block:: '.$codeBlock,
+                        $codeBlock,
                         '',
                         '    // src/Handler/Collection.php',
                         '    # a comment',

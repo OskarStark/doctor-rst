@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\OrderedUseStatements;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class OrderedUseStatementsTest extends TestCase
+final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -34,12 +33,7 @@ final class OrderedUseStatementsTest extends TestCase
 
     public function checkProvider(): \Generator
     {
-        $codeBlocks = [
-            '.. code-block:: php',
-            '.. code-block:: php-annotations',
-            '.. code-block:: php-attributes',
-            'A php code block follows::',
-        ];
+        $codeBlocks = self::phpCodeBlocks();
 
         // VALID
         foreach ($codeBlocks as $codeBlock) {

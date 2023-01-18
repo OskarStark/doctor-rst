@@ -15,13 +15,12 @@ namespace App\Tests\Value;
 
 use App\Value\ExcludedViolationList;
 use App\Value\Violation;
-use PHPUnit\Framework\TestCase;
 
-final class ExcludedViolationListTest extends TestCase
+final class ExcludedViolationListTest extends \App\Tests\UnitTestCase
 {
     public function testFilterExcludedViolations(): void
     {
-        $filename = \dirname(__DIR__, 2).'/dummy'.'/docs/index.rst';
+        $filename = \dirname(__DIR__, 2).'/dummy/docs/index.rst';
 
         $list = new ExcludedViolationList(
             [

@@ -15,9 +15,8 @@ namespace App\Tests\Analyzer;
 
 use App\Analyzer\RstAnalyzer;
 use App\Rule\MaxBlankLines;
-use PHPUnit\Framework\TestCase;
 
-final class RstAnalyzerTest extends TestCase
+final class RstAnalyzerTest extends \App\Tests\UnitTestCase
 {
     public function testOnlyOneMaxBlankLineViolationMessageOccurs(): void
     {

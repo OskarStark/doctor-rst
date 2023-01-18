@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBracketsInMethodDirective;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoBracketsInMethodDirectiveTest extends TestCase
+final class NoBracketsInMethodDirectiveTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

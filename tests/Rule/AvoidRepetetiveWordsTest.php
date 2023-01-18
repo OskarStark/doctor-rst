@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\AvoidRepetetiveWords;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class AvoidRepetetiveWordsTest extends TestCase
+final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\ShortArraySyntax;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class ShortArraySyntaxTest extends TestCase
+final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -33,7 +32,7 @@ final class ShortArraySyntaxTest extends TestCase
     }
 
     /**
-     * @return array<array{0: null|string, 1: RstSample}>
+     * @return array<array{0: string|null, 1: RstSample}>
      */
     public function checkProvider(): array
     {

@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rst\RstParser;
 use App\Rule\NoBlankLineAfterFilepathInPhpCodeBlock;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
+final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -35,18 +33,11 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
 
     public function checkProvider(): \Generator
     {
-        $codeBlocks = [
-            RstParser::CODE_BLOCK_PHP,
-            RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-            RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-            RstParser::CODE_BLOCK_PHP_SYMFONY,
-        ];
-
-        foreach ($codeBlocks as $codeBlock) {
+        foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
                 'Please remove blank line after "// src/Handler/Collection.php"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
@@ -57,7 +48,7 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
             yield [
                 null,
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '    namespace App\\Handler;',
@@ -67,7 +58,7 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
             yield [
                 null,
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
@@ -79,7 +70,7 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
             yield [
                 null,
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',

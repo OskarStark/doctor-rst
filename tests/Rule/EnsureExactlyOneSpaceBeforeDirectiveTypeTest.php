@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureExactlyOneSpaceBeforeDirectiveType;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends TestCase
+final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

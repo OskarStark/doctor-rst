@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\YamlInsteadOfYmlSuffix;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class YamlInsteadOfYmlSuffixTest extends TestCase
+final class YamlInsteadOfYmlSuffixTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

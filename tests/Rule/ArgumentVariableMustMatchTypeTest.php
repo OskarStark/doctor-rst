@@ -13,14 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rst\RstParser;
 use App\Rule\ArgumentVariableMustMatchType;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 
-final class ArgumentVariableMustMatchTypeTest extends TestCase
+final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -54,15 +52,7 @@ final class ArgumentVariableMustMatchTypeTest extends TestCase
      */
     public function checkProvider(): \Generator
     {
-        $codeBlocks = [
-            '.. code-block:: '.RstParser::CODE_BLOCK_PHP,
-            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_SYMFONY,
-            'A php code block follows::',
-        ];
-
-        foreach ($codeBlocks as $codeBlock) {
+        foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
                 'Please rename "$builder" to "$containerBuilder"',
                 new RstSample([

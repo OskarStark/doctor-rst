@@ -15,9 +15,8 @@ namespace App\Tests\Value;
 
 use App\Value\RuleGroup;
 use Ergebnis\Test\Util\Helper;
-use PHPUnit\Framework\TestCase;
 
-final class RuleGroupTest extends TestCase
+final class RuleGroupTest extends \App\Tests\UnitTestCase
 {
     use Helper;
 

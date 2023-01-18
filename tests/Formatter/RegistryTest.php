@@ -16,9 +16,8 @@ namespace App\Tests\Formatter;
 use App\Formatter\ConsoleFormatter;
 use App\Formatter\Exception\FormatterNotFound;
 use App\Formatter\Registry;
-use PHPUnit\Framework\TestCase;
 
-final class RegistryTest extends TestCase
+final class RegistryTest extends \App\Tests\UnitTestCase
 {
     public function testInvalidNameThrowsException(): void
     {

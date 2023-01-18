@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoContraction;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoContractionTest extends TestCase
+final class NoContractionTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

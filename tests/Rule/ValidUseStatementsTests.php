@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\ValidUseStatements;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class ValidUseStatementsTests extends TestCase
+final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
 {
     /**
      * @test

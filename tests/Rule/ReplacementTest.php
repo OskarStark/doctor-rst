@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\Replacement;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class ReplacementTest extends TestCase
+final class ReplacementTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -48,7 +47,7 @@ final class ReplacementTest extends TestCase
     }
 
     /**
-     * @return \Generator<string, array{0: null|string, 1: RstSample}>
+     * @return \Generator<string, array{0: string|null, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {

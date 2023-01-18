@@ -17,10 +17,8 @@ use App\Analyzer\FileCache;
 use App\Application;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
-use PHPUnit\Framework\TestCase;
-use SplFileInfo;
 
-final class FileCacheTest extends TestCase
+final class FileCacheTest extends \App\Tests\UnitTestCase
 {
     private vfsStreamDirectory $root;
 
@@ -36,7 +34,7 @@ final class FileCacheTest extends TestCase
             ->at($this->root);
 
         $cache = new FileCache($this->root->url().'/.doctor-rst.cache');
-        $cache->set(new SplFileInfo($rstFile->url()), ['test'], []);
+        $cache->set(new \SplFileInfo($rstFile->url()), ['test'], []);
         $cache->write();
 
         static::assertTrue($this->root->hasChild('.doctor-rst.cache'));
@@ -67,7 +65,7 @@ final class FileCacheTest extends TestCase
 
         $cache = new FileCache($cacheFile->url());
 
-        static::assertTrue($cache->has(new SplFileInfo($rstFile->url()), $rules));
+        static::assertTrue($cache->has(new \SplFileInfo($rstFile->url()), $rules));
     }
 
     public function testCacheDoesNotHitWhenVersionNumberDoesNotMatch(): void
@@ -82,7 +80,7 @@ final class FileCacheTest extends TestCase
 
         $cache = new FileCache($cacheFile->url());
 
-        static::assertFalse($cache->has(new SplFileInfo($rstFile->url()), ['test']));
+        static::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), ['test']));
     }
 
     public function testCacheDoesNotHitWhenFileHashDoesNotMatch(): void
@@ -110,7 +108,7 @@ final class FileCacheTest extends TestCase
 
         $cache = new FileCache($cacheFile->url());
 
-        static::assertFalse($cache->has(new SplFileInfo($rstFile->url()), $rules));
+        static::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), $rules));
     }
 
     public function testCacheDoesNotHitWhenRulesHashDoesNotMatch(): void
@@ -138,7 +136,7 @@ final class FileCacheTest extends TestCase
 
         $cache = new FileCache($cacheFile->url());
 
-        static::assertFalse($cache->has(new SplFileInfo($rstFile->url()), $rules));
+        static::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), $rules));
     }
 
     public function testUnparsedFilesWillDeletedFromCacheFile(): void

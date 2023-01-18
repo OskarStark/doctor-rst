@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\UseHttpsXsdUrls;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class UseHttpsXsdUrlsTest extends TestCase
+final class UseHttpsXsdUrlsTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

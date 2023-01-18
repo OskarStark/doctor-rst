@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInCodeBlock;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoBlankLineAfterFilepathInCodeBlockTest extends TestCase
+final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

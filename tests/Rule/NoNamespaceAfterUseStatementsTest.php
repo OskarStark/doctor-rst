@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoNamespaceAfterUseStatements;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoNamespaceAfterUseStatementsTest extends TestCase
+final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -34,12 +33,7 @@ final class NoNamespaceAfterUseStatementsTest extends TestCase
 
     public function checkProvider(): \Generator
     {
-        $codeBlocks = [
-            '.. code-block:: php',
-            '.. code-block:: php-annotations',
-            '.. code-block:: php-attributes',
-            'A php code block follows::',
-        ];
+        $codeBlocks = self::phpCodeBlocks();
 
         // VALID
         foreach ($codeBlocks as $codeBlock) {
