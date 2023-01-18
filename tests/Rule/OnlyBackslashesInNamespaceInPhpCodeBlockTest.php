@@ -34,11 +34,11 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
 
     public function checkProvider(): \Generator
     {
-        foreach (RstParser::PHP_CODE_BLOCKS as $codeBlock) {
+        foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
                 'Please check "namespace App/Handler;", it should not contain "/"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
@@ -49,7 +49,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
             yield [
                 'Please check "NaMeSpaCe App/Handler;", it should not contain "/"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
