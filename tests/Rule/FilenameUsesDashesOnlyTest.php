@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\FilenameUsesDashesOnly;
-use PHPUnit\Framework\TestCase;
+use App\Tests\UnitTestCase;
 
-final class FilenameUsesDashesOnlyTest extends TestCase
+final class FilenameUsesDashesOnlyTest extends UnitTestCase
 {
     /**
      * @test

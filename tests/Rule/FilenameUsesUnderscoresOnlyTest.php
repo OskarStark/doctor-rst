@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\FilenameUsesUnderscoresOnly;
-use PHPUnit\Framework\TestCase;
+use App\Tests\UnitTestCase;
 
-final class FilenameUsesUnderscoresOnlyTest extends TestCase
+final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
 {
     /**
      * @test
