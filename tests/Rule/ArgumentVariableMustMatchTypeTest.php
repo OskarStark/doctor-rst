@@ -16,11 +16,10 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\ArgumentVariableMustMatchType;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 
-final class ArgumentVariableMustMatchTypeTest extends TestCase
+final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

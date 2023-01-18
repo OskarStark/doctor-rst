@@ -14,9 +14,8 @@ declare(strict_types=1);
 namespace App\Tests\Value;
 
 use App\Value\Lines;
-use PHPUnit\Framework\TestCase;
 
-final class LinesTest extends TestCase
+final class LinesTest extends \App\Tests\UnitTestCase
 {
     public function testCurrentThrowsOutOfBoundsExceptionWhenLinesIsInvalid(): void
     {

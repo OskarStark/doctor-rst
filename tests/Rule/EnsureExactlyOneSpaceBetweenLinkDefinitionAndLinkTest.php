@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends TestCase
+final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

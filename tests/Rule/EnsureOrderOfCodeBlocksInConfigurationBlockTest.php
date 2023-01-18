@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureOrderOfCodeBlocksInConfigurationBlock;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends TestCase
+final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

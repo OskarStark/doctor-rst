@@ -16,9 +16,8 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\BlankLineAfterDirective;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class BlankLineAfterDirectiveTest extends TestCase
+final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

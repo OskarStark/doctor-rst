@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\ExtensionXlfInsteadOfXliff;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class ExtensionXlfInsteadOfXliffTest extends TestCase
+final class ExtensionXlfInsteadOfXliffTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

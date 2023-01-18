@@ -16,9 +16,8 @@ namespace App\Tests\Rule;
 use App\Rule\DeprecatedDirectiveShouldHaveVersion;
 use App\Tests\RstSample;
 use Composer\Semver\VersionParser;
-use PHPUnit\Framework\TestCase;
 
-final class DeprecatedDirectiveShouldHaveVersionTest extends TestCase
+final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\AmericanEnglish;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class AmericanEnglishTest extends TestCase
+final class AmericanEnglishTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

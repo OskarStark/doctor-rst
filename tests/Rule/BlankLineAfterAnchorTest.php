@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterAnchor;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class BlankLineAfterAnchorTest extends TestCase
+final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

@@ -16,9 +16,8 @@ namespace App\Tests\Rule;
 use App\Rule\VersionaddedDirectiveMajorVersion;
 use App\Tests\RstSample;
 use Composer\Semver\VersionParser;
-use PHPUnit\Framework\TestCase;
 
-final class VersionaddedDirectiveMajorVersionTest extends TestCase
+final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoDirectiveAfterShorthand;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoDirectiveAfterShorthandTest extends TestCase
+final class NoDirectiveAfterShorthandTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

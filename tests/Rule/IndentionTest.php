@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\Indention;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class IndentionTest extends TestCase
+final class IndentionTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBashPrompt;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoBashPromptTest extends TestCase
+final class NoBashPromptTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

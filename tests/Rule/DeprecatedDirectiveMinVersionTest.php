@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\DeprecatedDirectiveMinVersion;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class DeprecatedDirectiveMinVersionTest extends TestCase
+final class DeprecatedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

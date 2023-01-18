@@ -16,9 +16,8 @@ namespace App\Tests\Traits;
 use App\Rst\RstParser;
 use App\Tests\RstSample;
 use App\Tests\Util\DirectiveTraitWrapper;
-use PHPUnit\Framework\TestCase;
 
-final class DirectiveTraitTest extends TestCase
+final class DirectiveTraitTest extends \App\Tests\UnitTestCase
 {
     private DirectiveTraitWrapper $traitWrapper;
 

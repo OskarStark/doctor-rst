@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\UnusedLinks;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class UnusedLinksTest extends TestCase
+final class UnusedLinksTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

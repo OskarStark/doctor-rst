@@ -16,9 +16,8 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\BlankLineAfterFilepathInPhpCodeBlock;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
+final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

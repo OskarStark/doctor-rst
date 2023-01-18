@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoPhpPrefixBeforeComposer;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoPhpPrefixBeforeComposerTest extends TestCase
+final class NoPhpPrefixBeforeComposerTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

@@ -15,9 +15,8 @@ namespace App\Tests\Value;
 
 use App\Value\ExcludedViolationList;
 use App\Value\Violation;
-use PHPUnit\Framework\TestCase;
 
-final class ExcludedViolationListTest extends TestCase
+final class ExcludedViolationListTest extends \App\Tests\UnitTestCase
 {
     public function testFilterExcludedViolations(): void
     {

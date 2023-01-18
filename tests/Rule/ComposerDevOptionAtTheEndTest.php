@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\ComposerDevOptionAtTheEnd;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class ComposerDevOptionAtTheEndTest extends TestCase
+final class ComposerDevOptionAtTheEndTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

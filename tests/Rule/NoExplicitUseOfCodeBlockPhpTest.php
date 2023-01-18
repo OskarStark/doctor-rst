@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoExplicitUseOfCodeBlockPhp;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoExplicitUseOfCodeBlockPhpTest extends TestCase
+final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

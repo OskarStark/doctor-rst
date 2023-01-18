@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveMinVersion;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class VersionaddedDirectiveMinVersionTest extends TestCase
+final class VersionaddedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
