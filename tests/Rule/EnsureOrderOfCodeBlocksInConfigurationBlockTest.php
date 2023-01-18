@@ -41,6 +41,14 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends TestCase
         $valid = <<<RST
 .. configuration-block::
 
+    .. code-block:: php-symfony
+
+        test
+
+    .. code-block:: php-standalone
+
+        test
+
     .. code-block:: php-annotations
 
         test
@@ -68,6 +76,14 @@ RST;
     .. code-block:: html
 
         test
+        
+    .. code-block:: php-symfony
+
+        test
+
+    .. code-block:: php-standalone
+
+        test        
 
     .. code-block:: php-annotations
 

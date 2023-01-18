@@ -59,6 +59,7 @@ final class ArgumentVariableMustMatchTypeTest extends TestCase
             '.. code-block:: '.RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
             '.. code-block:: '.RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
             '.. code-block:: '.RstParser::CODE_BLOCK_PHP_SYMFONY,
+            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_STANDALONE,
             'A php code block follows::',
         ];
 

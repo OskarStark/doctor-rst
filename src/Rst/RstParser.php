@@ -79,6 +79,7 @@ class RstParser
     public const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
     public const CODE_BLOCK_PHP_ATTRIBUTES = 'php-attributes';
     public const CODE_BLOCK_PHP_SYMFONY = 'php-symfony';
+    public const CODE_BLOCK_PHP_STANDALONE = 'php-standalone';
     public const CODE_BLOCK_XML = 'xml';
     public const CODE_BLOCK_TWIG = 'twig';
     public const CODE_BLOCK_JINJA = 'jinja';
@@ -144,6 +145,7 @@ class RstParser
                 self::CODE_BLOCK_PHP_ANNOTATIONS,
                 self::CODE_BLOCK_PHP_ATTRIBUTES,
                 self::CODE_BLOCK_PHP_SYMFONY,
+                self::CODE_BLOCK_PHP_STANDALONE,
                 self::CODE_BLOCK_XML,
                 self::CODE_BLOCK_TWIG,
                 self::CODE_BLOCK_JINJA,

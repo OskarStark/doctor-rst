@@ -43,6 +43,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
             RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
             RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
             RstParser::CODE_BLOCK_PHP_SYMFONY,
+            RstParser::CODE_BLOCK_PHP_STANDALONE,
         ];
 
         foreach ($codeBlocks as $codeBlock) {

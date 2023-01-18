@@ -415,6 +415,42 @@ RST;
             RstParser::DIRECTIVE_CODE_BLOCK,
             [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_ANNOTATIONS],
         ];
+
+        yield [
+            true,
+            new RstSample([
+                '.. code-block:: php-attributes',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+            ], 3),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_ATTRIBUTES],
+        ];
+
+        yield [
+            true,
+            new RstSample([
+                '.. code-block:: php-symfony',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+            ], 3),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_SYMFONY],
+        ];
+
+        yield [
+            true,
+            new RstSample([
+                '.. code-block:: php-standalone',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+            ], 3),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            [RstParser::CODE_BLOCK_PHP, RstParser::CODE_BLOCK_PHP_STANDALONE],
+        ];
     }
 
     /**
