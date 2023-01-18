@@ -118,63 +118,70 @@ final class NoContractionTest extends TestCase
 
         $invalids = [
             // am
-            "i'm",
+            "i'm" => null,
             // are
-            "you're",
-            "we're",
-            "they're",
+            "you're" => null,
+            "we're" => null,
+            "they're" => null,
             // is and hase
-            "he's",
-            "she's",
-            "it's",
+            "he's" => null,
+            "she's" => null,
+            "it's" => null,
             // have
-            "you've",
-            "we've",
-            "they've",
+            "you've" => null,
+            "we've" => null,
+            "they've" => null,
             // will
-            "i'll",
-            "you'll",
-            "he'll",
-            "she'll",
-            "it'll",
-            "we'll",
-            "they'll",
+            "i'll" => null,
+            "you'll" => null,
+            "he'll" => null,
+            "she'll" => null,
+            "it'll" => null,
+            "we'll" => null,
+            "they'll" => null,
             // had and would
-            "i'd",
-            "you'd",
-            "he'd",
-            "she'd",
-            "it'd",
-            "we'd",
-            "they'd",
+            "i'd" => null,
+            "you'd" => null,
+            "he'd" => null,
+            "she'd" => null,
+            "it'd" => null,
+            "we'd" => null,
+            "they'd" => null,
             // not
-            "aren't",
-            "can't",
-            "couldn't",
-            "didn't",
-            "hasn't",
-            "haven't",
-            "isn't",
-            "mustn't",
-            "shan't",
-            "shouldn't",
-            "wasn't",
-            "weren't",
-            "won't",
-            "wouldn't",
+            "aren't" => null,
+            "can't" => null,
+            "couldn't" => null,
+            "didn't" => null,
+            "hasn't" => null,
+            "haven't" => null,
+            "isn't" => null,
+            "mustn't" => null,
+            "shan't" => null,
+            "shouldn't" => null,
+            "wasn't" => null,
+            "weren't" => null,
+            "won't" => null,
+            "wouldn't" => null,
+            // invalid usages
+            "foobar it's" => "it's",
+            "(it's" => "it's",
+            " it's" => "it's",
         ];
 
-        foreach ($invalids as $invalid) {
+        foreach ($invalids as $invalid => $matched) {
             yield $invalid => [
-                sprintf('Please do not use contraction for: %s', $invalid),
+                sprintf('Please do not use contraction for: %s', $matched ?? $invalid),
                 new RstSample($invalid),
             ];
 
             $invalidUppercase = ucfirst($invalid);
-            yield $invalidUppercase => [
-                sprintf('Please do not use contraction for: %s', $invalidUppercase),
-                new RstSample($invalidUppercase),
-            ];
+
+            if ($invalidUppercase !== $invalid) {
+                yield $invalidUppercase => [
+                    sprintf('Please do not use contraction for: %s', $matched ?? $invalidUppercase),
+                    new RstSample($invalidUppercase),
+                ];
+            }
         }
     }
 }
