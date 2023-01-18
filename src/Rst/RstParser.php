@@ -105,14 +105,6 @@ class RstParser
     public const CODE_BLOCK_VARNISH_4 = 'varnish4';
     public const CODE_BLOCK_APACHE = 'apache';
 
-    public const PHP_CODE_BLOCKS = [
-        self::CODE_BLOCK_PHP,
-        self::CODE_BLOCK_PHP_ANNOTATIONS,
-        self::CODE_BLOCK_PHP_ATTRIBUTES,
-        self::CODE_BLOCK_PHP_SYMFONY,
-        self::CODE_BLOCK_PHP_STANDALONE,
-    ];
-
     public static function directiveIs(Line $line, string $directive, ?bool $strict = false): bool
     {
         if (!$line->isDirective()) {
