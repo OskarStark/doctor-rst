@@ -45,14 +45,7 @@ final class NoInheritdocInCodeExamplesTest extends TestCase
             new RstSample('fine'),
         ];
 
-        $codeBlocks = [
-            RstParser::CODE_BLOCK_PHP,
-            RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-            RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-            RstParser::CODE_BLOCK_PHP_SYMFONY,
-            RstParser::CODE_BLOCK_PHP_STANDALONE,
-        ];
-        foreach ($codeBlocks as $codeBlock) {
+        foreach (RstParser::PHP_CODE_BLOCKS as $codeBlock) {
             yield [
                 'Please do not use "@inheritdoc"',
                 new RstSample([
