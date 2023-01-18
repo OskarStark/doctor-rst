@@ -57,12 +57,12 @@ final class FilenameUsesUnderscoresOnlyTest extends TestCase
     public function invalidProvider(): \Generator
     {
         yield [
-            'Please don\'t use dashes (-) in filename: custom-extensions.rst',
+            'Please use underscores (_) for the filename: custom-extensions.rst',
             'custom-extensions.rst',
         ];
 
         yield [
-            'Please don\'t use dashes (-) in filename: _custom-extensions.rst',
+            'Please use underscores (_) for the filename: _custom-extensions.rst',
             '_custom-extensions.rst',
         ];
     }

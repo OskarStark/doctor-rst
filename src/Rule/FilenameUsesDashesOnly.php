@@ -48,7 +48,7 @@ final class FilenameUsesDashesOnly extends AbstractRule implements FileInfoRule
 
         if ($filename->containsAny('_')) {
             return sprintf(
-                'Please don\'t use underscores (_) in filename: %s',
+                'Please use dashes (-) for the filename: %s',
                 $fileInfo->getFilename()
             );
         }
