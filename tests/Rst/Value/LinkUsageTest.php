@@ -48,7 +48,7 @@ final class LinkUsageTest extends \App\Tests\UnitTestCase
 
         static::assertSame(
             $name,
-            (LinkUsage::fromLinkName(LinkName::fromString($name)))->name()->value()
+            LinkUsage::fromLinkName(LinkName::fromString($name))->name()->value()
         );
     }
 }

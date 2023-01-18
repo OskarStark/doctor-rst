@@ -94,7 +94,7 @@ RST;
 Environment Variable Processors
 ===============================
 RST
-, 1),
+                , 1),
             RstParser::DIRECTIVE_CODE_BLOCK,
             [RstParser::CODE_BLOCK_YAML],
         ];
@@ -485,7 +485,7 @@ RST;
 
     // I am just a cool text!
 RST
-            , 2),
+                , 2),
             RstParser::DIRECTIVE_CODE_BLOCK,
         ];
 
@@ -498,7 +498,7 @@ RST
     
 .. code-block:: yaml
 RST
-            , 4),
+                , 4),
             RstParser::DIRECTIVE_CODE_BLOCK,
             [RstParser::CODE_BLOCK_PHP],
         ];

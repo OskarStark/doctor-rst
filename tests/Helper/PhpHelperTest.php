@@ -100,6 +100,7 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
 
     /**
      * @test
+     *
      * @dataProvider isLastLineOfMultilineCommentProvider
      */
     public function isLastLineOfMultilineComment(bool $expected, string $line): void

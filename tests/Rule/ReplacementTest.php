@@ -47,7 +47,7 @@ final class ReplacementTest extends \App\Tests\UnitTestCase
     }
 
     /**
-     * @return \Generator<string, array{0: null|string, 1: RstSample}>
+     * @return \Generator<string, array{0: string|null, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {

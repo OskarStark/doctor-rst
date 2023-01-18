@@ -18,7 +18,6 @@ use App\Analyzer\Cache;
 use App\Analyzer\MemoizingAnalyzer;
 use App\Tests\Fixtures\Rule\DummyRule;
 use PHPUnit\Framework\MockObject\MockObject;
-use SplFileInfo;
 
 final class MemoizingAnalyzerTest extends \App\Tests\UnitTestCase
 {
@@ -42,7 +41,7 @@ final class MemoizingAnalyzerTest extends \App\Tests\UnitTestCase
 
     public function testCacheHitReturnsCacheContent(): void
     {
-        $fileInfo = new SplFileInfo('test.rst');
+        $fileInfo = new \SplFileInfo('test.rst');
         $rules = [
             new DummyRule(),
         ];
@@ -66,7 +65,7 @@ final class MemoizingAnalyzerTest extends \App\Tests\UnitTestCase
 
     public function testNoCacheHitCallsAnalyzerAndSavesResultsToCache(): void
     {
-        $fileInfo = new SplFileInfo('test.rst');
+        $fileInfo = new \SplFileInfo('test.rst');
         $rules = [
             new DummyRule(),
         ];

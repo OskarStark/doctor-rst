@@ -16,7 +16,9 @@ namespace App\Rule;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+
 use function Symfony\Component\String\u;
+
 use Webmozart\Assert\Assert;
 
 class OrderedUseStatements extends AbstractRule implements LineContentRule

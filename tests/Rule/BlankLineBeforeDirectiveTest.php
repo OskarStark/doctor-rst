@@ -75,7 +75,7 @@ Headline
 This is cool php
 code::
 RST
-            , 3),
+                , 3),
         ];
 
         foreach (RstParser::DIRECTIVES as $directive) {

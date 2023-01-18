@@ -19,7 +19,6 @@ use App\Rule\Rule;
 use App\Value\Line;
 use App\Value\Lines;
 use App\Value\Violation;
-use SplFileInfo;
 use Symfony\Contracts\Service\ResetInterface;
 
 final class RstAnalyzer implements Analyzer
@@ -29,7 +28,7 @@ final class RstAnalyzer implements Analyzer
      *
      * @return Violation[]
      */
-    public function analyze(SplFileInfo $file, array $rules): array
+    public function analyze(\SplFileInfo $file, array $rules): array
     {
         $realpath = $file->getRealPath();
         if (false === $realpath) {

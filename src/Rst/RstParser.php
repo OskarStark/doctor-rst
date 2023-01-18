@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace App\Rst;
 
 use App\Value\Line;
+
 use function Symfony\Component\String\u;
+
 use Webmozart\Assert\Assert;
 
 class RstParser
@@ -173,7 +175,7 @@ class RstParser
             ]
         );
 
-        if (substr($line->clean()->toString(), -(\strlen(($type)))) === $type
+        if (substr($line->clean()->toString(), -\strlen($type)) === $type
             || (self::CODE_BLOCK_PHP === $type && $line->isDefaultDirective())) {
             if (!$strict) {
                 return true;

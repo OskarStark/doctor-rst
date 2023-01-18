@@ -15,7 +15,6 @@ namespace App\Analyzer;
 
 use App\Rule\Rule;
 use App\Value\Violation;
-use SplFileInfo;
 
 interface Analyzer
 {
@@ -24,5 +23,5 @@ interface Analyzer
      *
      * @return Violation[]
      */
-    public function analyze(SplFileInfo $file, array $rules): array;
+    public function analyze(\SplFileInfo $file, array $rules): array;
 }

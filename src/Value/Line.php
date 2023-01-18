@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Value;
 
 use function Symfony\Component\String\u;
+
 use Symfony\Component\String\UnicodeString;
 
 final class Line
@@ -81,7 +82,7 @@ final class Line
             $this->isDirective = (0 === strpos(ltrim($this->raw->toString()), '.. ')
                     && 0 !== strpos(ltrim($this->raw->toString()), '.. _`')
                     && false !== strpos($this->raw->toString(), '::')
-                ) || $this->isDefaultDirective();
+            ) || $this->isDefaultDirective();
         }
 
         return $this->isDirective;

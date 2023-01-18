@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Value;
 
 use function Symfony\Component\String\u;
+
 use Webmozart\Assert\Assert;
 
 final class RuleName

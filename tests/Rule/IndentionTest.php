@@ -42,7 +42,7 @@ Headline
 
     Content
 RST
-            , 2),
+                , 2),
         ];
 
         yield [
@@ -52,7 +52,7 @@ RST
 Headline
 Content
 RST
-            , 1),
+                , 1),
         ];
 
         yield [
@@ -62,7 +62,7 @@ RST
 Headline
 
 RST
-            , 1),
+                , 1),
         ];
 
         yield 'wrong without blank line' => [
@@ -73,7 +73,7 @@ Headline
 ========
   Content
 RST
-            , 2),
+                , 2),
         ];
 
         yield 'wrong with blank line' => [
@@ -85,7 +85,7 @@ Headline
 
   Content
 RST
-            , 3),
+                , 3),
         ];
 
         yield [
@@ -100,7 +100,7 @@ HTTP Cache
 
 The nature of rich web applications means that they're dynamic. No matter
 RST
-            , 1),
+                , 1),
         ];
 
         $php_comment_example = <<<'RST'
@@ -147,7 +147,7 @@ Code here::
         protected $name;
     }
 RST
-            , 5),
+                , 5),
         ];
 
         yield 'valid multiline php comment' => [
@@ -165,7 +165,7 @@ Code here::
         }
     */
 RST
-            , 4),
+                , 4),
         ];
 
         yield 'valid multiline php comment 2' => [
@@ -223,7 +223,7 @@ RST
 #. At the beginning of the request, the Firewall checks the firewall map
    to see if any firewall should be active for this URL;
 RST
-            , 1),
+                , 1),
         ];
 
         yield 'list item (*) first line' => [
@@ -243,7 +243,7 @@ RST
 * At the beginning of the request, the Firewall checks the firewall map
   to see if any firewall should be active for this URL;
 RST
-            , 1),
+                , 1),
         ];
 
         yield 'comment (rst) first line' => [
@@ -293,7 +293,7 @@ RST
     {# if the controller is associated with a route, use the path() or
         url() functions to generate the URI used by render() #}
 RST
-            , 3),
+                , 3),
         ];
 
         yield 'twig multiline comment on second level' => [
@@ -341,7 +341,7 @@ RST
         - map: ~/projects
           to: /home/vagrant/projects
 RST
-            , 5),
+                , 5),
         ];
     }
 
@@ -375,7 +375,7 @@ RST
 <!-- appends the '@app.username_checker' argument to the parent
      argument list -->
 RST
-            , 1),
+                , 1),
         ];
 
         yield [
@@ -394,7 +394,7 @@ RST
     method="createNewsletterManager"
 />        
 RST
-            , 2),
+                , 2),
         ];
 
         yield [

@@ -18,6 +18,7 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\RuleGroup;
+
 use function Symfony\Component\String\u;
 
 /**

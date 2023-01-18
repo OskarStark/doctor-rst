@@ -32,7 +32,7 @@ final class XmlHelperTest extends \App\Tests\UnitTestCase
     }
 
     /**
-     * @return \Generator<array{0: bool, 1: string, 2: null|bool}>
+     * @return \Generator<array{0: bool, 1: string, 2: bool|null}>
      */
     public function isCommentProvider(): \Generator
     {

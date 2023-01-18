@@ -20,7 +20,7 @@ final class ExcludedViolationListTest extends \App\Tests\UnitTestCase
 {
     public function testFilterExcludedViolations(): void
     {
-        $filename = \dirname(__DIR__, 2).'/dummy'.'/docs/index.rst';
+        $filename = \dirname(__DIR__, 2).'/dummy/docs/index.rst';
 
         $list = new ExcludedViolationList(
             [
