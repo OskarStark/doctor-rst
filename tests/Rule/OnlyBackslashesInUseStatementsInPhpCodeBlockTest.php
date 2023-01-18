@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rst\RstParser;
 use App\Rule\OnlyBackslashesInUseStatementsInPhpCodeBlock;
 use App\Tests\RstSample;
 
@@ -34,11 +33,11 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
 
     public function checkProvider(): \Generator
     {
-        foreach (RstParser::PHP_CODE_BLOCKS as $codeBlock) {
+        foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
                 'Please check "use App/Handler;", it should not contain "/"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
@@ -49,7 +48,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
             yield [
                 'Please check "UsE App/Handler;", it should not contain "/"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
