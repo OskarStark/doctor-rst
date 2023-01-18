@@ -24,12 +24,12 @@ abstract class UnitTestCase extends TestCase
     public static function phpCodeBlocks(): array
     {
         $codeBlocks = [
-        RstParser::CODE_BLOCK_PHP,
-        RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-        RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-        RstParser::CODE_BLOCK_PHP_SYMFONY,
-        RstParser::CODE_BLOCK_PHP_STANDALONE,
-    ];
+            RstParser::CODE_BLOCK_PHP,
+            RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
+            RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
+            RstParser::CODE_BLOCK_PHP_SYMFONY,
+            RstParser::CODE_BLOCK_PHP_STANDALONE,
+        ];
 
         $result = [];
 
