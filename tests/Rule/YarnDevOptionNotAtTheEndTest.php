@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\YarnDevOptionNotAtTheEnd;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class YarnDevOptionNotAtTheEndTest extends TestCase
+final class YarnDevOptionNotAtTheEndTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\FinalAdminExtensionClasses;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class FinalAdminExtensionClassesTest extends TestCase
+final class FinalAdminExtensionClassesTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

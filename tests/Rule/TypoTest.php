@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\Typo;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class TypoTest extends TestCase
+final class TypoTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

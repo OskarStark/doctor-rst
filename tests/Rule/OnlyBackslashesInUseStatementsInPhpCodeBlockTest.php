@@ -16,9 +16,8 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\OnlyBackslashesInUseStatementsInPhpCodeBlock;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends TestCase
+final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

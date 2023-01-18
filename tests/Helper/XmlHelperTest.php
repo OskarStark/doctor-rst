@@ -15,9 +15,8 @@ namespace App\Tests\Helper;
 
 use App\Helper\XmlHelper;
 use App\Value\Line;
-use PHPUnit\Framework\TestCase;
 
-final class XmlHelperTest extends TestCase
+final class XmlHelperTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

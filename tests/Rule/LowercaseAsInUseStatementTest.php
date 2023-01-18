@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\LowercaseAsInUseStatements;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class LowercaseAsInUseStatementTest extends TestCase
+final class LowercaseAsInUseStatementTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

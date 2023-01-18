@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterColon;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class BlankLineAfterColonTest extends TestCase
+final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

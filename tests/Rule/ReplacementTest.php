@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\Replacement;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class ReplacementTest extends TestCase
+final class ReplacementTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

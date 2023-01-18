@@ -16,9 +16,8 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\NoInheritdocInCodeExamples;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class NoInheritdocInCodeExamplesTest extends TestCase
+final class NoInheritdocInCodeExamplesTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

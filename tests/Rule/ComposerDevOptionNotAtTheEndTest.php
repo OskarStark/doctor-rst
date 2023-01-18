@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\ComposerDevOptionNotAtTheEnd;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class ComposerDevOptionNotAtTheEndTest extends TestCase
+final class ComposerDevOptionNotAtTheEndTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

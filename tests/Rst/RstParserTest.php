@@ -15,9 +15,8 @@ namespace App\Tests\Rst;
 
 use App\Rst\RstParser;
 use App\Value\Line;
-use PHPUnit\Framework\TestCase;
 
-final class RstParserTest extends TestCase
+final class RstParserTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

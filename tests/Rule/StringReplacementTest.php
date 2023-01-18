@@ -16,12 +16,11 @@ namespace App\Tests\Rule;
 use App\Annotations\Rule\Description;
 use App\Rule\StringReplacement;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @Description("propose to replace a string with another string.")
  */
-final class StringReplacementTest extends TestCase
+final class StringReplacementTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

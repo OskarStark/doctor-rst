@@ -15,9 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\OrderedUseStatements;
 use App\Tests\RstSample;
-use PHPUnit\Framework\TestCase;
 
-final class OrderedUseStatementsTest extends TestCase
+final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test

@@ -18,10 +18,9 @@ use App\Analyzer\Cache;
 use App\Analyzer\MemoizingAnalyzer;
 use App\Tests\Fixtures\Rule\DummyRule;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use SplFileInfo;
 
-final class MemoizingAnalyzerTest extends TestCase
+final class MemoizingAnalyzerTest extends \App\Tests\UnitTestCase
 {
     /**
      * @var Analyzer|MockObject
