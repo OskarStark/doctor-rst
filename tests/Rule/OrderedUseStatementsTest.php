@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rst\RstParser;
 use App\Rule\OrderedUseStatements;
 use App\Tests\RstSample;
 
@@ -34,14 +33,7 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
 
     public function checkProvider(): \Generator
     {
-        $codeBlocks = [
-            '.. code-block:: '.RstParser::CODE_BLOCK_PHP,
-            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_SYMFONY,
-            '.. code-block:: '.RstParser::CODE_BLOCK_PHP_STANDALONE,
-            'A php code block follows::',
-        ];
+        $codeBlocks = self::phpCodeBlocks();
 
         // VALID
         foreach ($codeBlocks as $codeBlock) {

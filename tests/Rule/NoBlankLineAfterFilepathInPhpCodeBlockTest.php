@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rst\RstParser;
 use App\Rule\NoBlankLineAfterFilepathInPhpCodeBlock;
 use App\Tests\RstSample;
 
@@ -34,11 +33,11 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTe
 
     public function checkProvider(): \Generator
     {
-        foreach (RstParser::PHP_CODE_BLOCKS as $codeBlock) {
+        foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
                 'Please remove blank line after "// src/Handler/Collection.php"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
@@ -49,7 +48,7 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTe
             yield [
                 null,
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '    namespace App\\Handler;',
@@ -59,7 +58,7 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTe
             yield [
                 null,
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
@@ -71,7 +70,7 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTe
             yield [
                 null,
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    // src/Handler/Collection.php',
                     '',
