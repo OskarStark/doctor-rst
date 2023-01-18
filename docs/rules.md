@@ -389,7 +389,7 @@ messages.xliff
 
 ## `filename_uses_dashes_only`
 
-  > _Ensures a filename uses only dashes (`-`)._
+  > _Ensures a filename uses only dashes (`-`), but are allowed to start with underscore (`_`). It is a common practice to prefix included files with underscores (`_`)._
 
 #### Groups [`@Sonata`, `@Symfony`]
 
