@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rst\RstParser;
 use App\Rule\BlankLineAfterFilepathInPhpCodeBlock;
 use App\Tests\RstSample;
 
@@ -37,12 +36,12 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
      */
     public function checkProvider(): \Generator
     {
-        foreach (RstParser::PHP_CODE_BLOCKS as $codeBlock) {
+        foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
                 'Please add a blank line after "// src/Handler/Collection.php"',
                 new RstSample(
                     [
-                        '.. code-block:: '.$codeBlock,
+                        $codeBlock,
                         '',
                         '    // src/Handler/Collection.php',
                         '    namespace App\\Handler;',
@@ -54,7 +53,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
                 null,
                 new RstSample(
                     [
-                        '.. code-block:: '.$codeBlock,
+                        $codeBlock,
                         '',
                         '    // src/Handler/Collection.php',
                         '',
@@ -67,7 +66,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
                 null,
                 new RstSample(
                     [
-                        '.. code-block:: '.$codeBlock,
+                        $codeBlock,
                         '',
                         '    // src/Handler/Collection.php',
                         '    // a comment',
@@ -80,7 +79,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
                 null,
                 new RstSample(
                     [
-                        '.. code-block:: '.$codeBlock,
+                        $codeBlock,
                         '',
                         '    // src/Handler/Collection.php',
                         '    # a comment',

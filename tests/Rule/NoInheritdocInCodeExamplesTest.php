@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rst\RstParser;
 use App\Rule\NoInheritdocInCodeExamples;
 use App\Tests\RstSample;
 
@@ -44,11 +43,11 @@ final class NoInheritdocInCodeExamplesTest extends \App\Tests\UnitTestCase
             new RstSample('fine'),
         ];
 
-        foreach (RstParser::PHP_CODE_BLOCKS as $codeBlock) {
+        foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
                 'Please do not use "@inheritdoc"',
                 new RstSample([
-                    '.. code-block:: '.$codeBlock,
+                    $codeBlock,
                     '',
                     '    /*',
                     '     * {@inheritdoc}',
