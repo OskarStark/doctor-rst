@@ -87,7 +87,7 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
 
     import {h, render} from 'preact';
 SAMPLE
-),
+            ),
         ];
 
         yield [

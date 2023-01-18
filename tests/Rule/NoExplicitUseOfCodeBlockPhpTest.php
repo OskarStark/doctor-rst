@@ -105,7 +105,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
     }
 
     /**
-     * @return \Generator<int|string, array{0: null|string, 1: RstSample}>
+     * @return \Generator<int|string, array{0: string|null, 1: RstSample}>
      */
     public function realSymfonyFileProvider(): \Generator
     {

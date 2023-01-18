@@ -134,7 +134,7 @@ Code here::
         protected $name;
     }
 RST
-                , 5),
+            , 5),
         ];
     }
 

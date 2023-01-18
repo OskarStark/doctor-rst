@@ -13,14 +13,12 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-use SplFileInfo;
-
 final class FileResult
 {
-    private SplFileInfo $file;
+    private \SplFileInfo $file;
     private ExcludedViolationList $violationList;
 
-    public function __construct(SplFileInfo $file, ExcludedViolationList $violationList)
+    public function __construct(\SplFileInfo $file, ExcludedViolationList $violationList)
     {
         $this->file = $file;
         $this->violationList = $violationList;

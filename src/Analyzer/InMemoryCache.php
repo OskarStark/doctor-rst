@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Analyzer;
 
-use SplFileInfo;
-
 final class InMemoryCache implements Cache
 {
     /** @var array<string, array> */
@@ -25,17 +23,17 @@ final class InMemoryCache implements Cache
         $this->cache = [];
     }
 
-    public function has(SplFileInfo $file, array $rules): bool
+    public function has(\SplFileInfo $file, array $rules): bool
     {
         return isset($this->cache[$file->getPathname()]);
     }
 
-    public function get(SplFileInfo $file, array $rules): array
+    public function get(\SplFileInfo $file, array $rules): array
     {
         return $this->cache[$file->getPathname()] ?? [];
     }
 
-    public function set(SplFileInfo $file, array $rules, array $violations): void
+    public function set(\SplFileInfo $file, array $rules, array $violations): void
     {
         $this->cache[$file->getPathname()] = $violations;
     }

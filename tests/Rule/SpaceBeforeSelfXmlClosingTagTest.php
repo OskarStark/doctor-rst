@@ -32,7 +32,7 @@ final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
     }
 
     /**
-     * @return array<array{0: null|string, 1: RstSample}>
+     * @return array<array{0: string|null, 1: RstSample}>
      */
     public function checkProvider(): array
     {

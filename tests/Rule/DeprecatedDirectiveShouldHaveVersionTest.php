@@ -34,7 +34,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTest
     }
 
     /**
-     * @return \Generator<array{0: null|string, 1: RstSample}>
+     * @return \Generator<array{0: string|null, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {

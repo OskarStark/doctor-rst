@@ -13,15 +13,13 @@ declare(strict_types=1);
 
 namespace App\Analyzer;
 
-use SplFileInfo;
-
 interface Cache
 {
-    public function has(SplFileInfo $file, array $rules): bool;
+    public function has(\SplFileInfo $file, array $rules): bool;
 
-    public function get(SplFileInfo $file, array $rules): array;
+    public function get(\SplFileInfo $file, array $rules): array;
 
-    public function set(SplFileInfo $file, array $rules, array $violations): void;
+    public function set(\SplFileInfo $file, array $rules, array $violations): void;
 
     public function write(): void;
 }

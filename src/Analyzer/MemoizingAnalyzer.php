@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Analyzer;
 
-use SplFileInfo;
-
 final class MemoizingAnalyzer implements Analyzer
 {
     private Analyzer $analyzer;
@@ -29,7 +27,7 @@ final class MemoizingAnalyzer implements Analyzer
     /**
      * {@inheritdoc}
      */
-    public function analyze(SplFileInfo $file, array $rules): array
+    public function analyze(\SplFileInfo $file, array $rules): array
     {
         if ($this->cache->has($file, $rules)) {
             return $this->cache->get($file, $rules);

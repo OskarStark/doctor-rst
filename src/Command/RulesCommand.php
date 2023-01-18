@@ -150,7 +150,7 @@ class RulesCommand extends Command
                     $this->io->writeln('--- | --- | --- | ---');
 
                     foreach ($options as $option) {
-                        if ((null === $defaultValue = $option['default'])) {
+                        if (null === $defaultValue = $option['default']) {
                             $default = '';
                         } else {
                             if (\is_array($defaultValue)) {
