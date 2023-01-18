@@ -38,15 +38,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends TestCase
      */
     public function checkProvider(): \Generator
     {
-        $codeBlocks = [
-            RstParser::CODE_BLOCK_PHP,
-            RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
-            RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-            RstParser::CODE_BLOCK_PHP_SYMFONY,
-            RstParser::CODE_BLOCK_PHP_STANDALONE,
-        ];
-
-        foreach ($codeBlocks as $codeBlock) {
+        foreach (RstParser::PHP_CODE_BLOCKS as $codeBlock) {
             yield [
                 'Please add a blank line after "// src/Handler/Collection.php"',
                 new RstSample(
