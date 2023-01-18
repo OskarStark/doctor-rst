@@ -44,6 +44,24 @@ final class RstAnalyzer implements Analyzer
 
         $violations = [];
 
+        /** @var FileInfoRule[] $fileInfoRules */
+        $fileInfoRules = array_filter($rules, static function (Rule $rule): bool {
+            return $rule instanceof FileInfoRule;
+        });
+
+        foreach ($fileInfoRules as $rule) {
+            $violationMessage = $rule->check($file);
+
+            if (null !== $violationMessage) {
+                $violations[] = Violation::from(
+                    $violationMessage,
+                    (string) $file->getRealPath(),
+                    1,
+                    ''
+                );
+            }
+        }
+
         /** @var FileContentRule[] $fileContentRules */
         $fileContentRules = array_filter($rules, static function (Rule $rule): bool {
             return $rule instanceof FileContentRule;
@@ -89,23 +107,7 @@ final class RstAnalyzer implements Analyzer
                     continue;
                 }
 
-                if ($rule instanceof LineContentRule) {
-                    $violationMessage = $rule->check($lines, $no);
-                } elseif ($rule instanceof FileContentRule) {
-                    if ($no > 0) {
-                        continue;
-                    }
-
-                    $violationMessage = $rule->check($lines);
-                } elseif ($rule instanceof FileInfoRule) {
-                    if ($no > 0) {
-                        continue;
-                    }
-
-                    $violationMessage = $rule->check($file);
-                } else {
-                    throw new \RuntimeException('Unknown type of rule provided!');
-                }
+                $violationMessage = $rule->check($lines, $no);
 
                 if (null !== $violationMessage) {
                     $violations[] = Violation::from(
