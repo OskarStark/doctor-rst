@@ -31,7 +31,7 @@ final class FilenameUsesDashesOnlyTest extends TestCase
 
         static::assertSame(
             $expected,
-            (new FilenameUsesDashesOnly())->checkFileInfo($fileInfo)
+            (new FilenameUsesDashesOnly())->check($fileInfo)
         );
     }
 

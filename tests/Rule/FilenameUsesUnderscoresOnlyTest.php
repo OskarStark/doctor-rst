@@ -31,7 +31,7 @@ final class FilenameUsesUnderscoresOnlyTest extends TestCase
 
         static::assertSame(
             $expected,
-            (new FilenameUsesUnderscoresOnly())->checkFileInfo($fileInfo)
+            (new FilenameUsesUnderscoresOnly())->check($fileInfo)
         );
     }
 
