@@ -39,7 +39,7 @@ final class ConsoleFormatterTest extends \App\Tests\UnitTestCase
             )
         );
         $validFileResult = new FileResult(
-            new \SplFileInfo($analyzeDir.'/docs/tutorial/introduction.rst'),
+            new \SplFileInfo($analyzeDir.'/docs/tutorial/introduction_one.rst'),
             new ExcludedViolationList([], [])
         );
 
@@ -52,7 +52,7 @@ docs/index.rst ✘
     2: violation message
    ->  dummy text
 
-docs/tutorial/introduction.rst ✔
+docs/tutorial/introduction_one.rst ✔
 
  [WARNING] Found "1" invalid file!                                              
 

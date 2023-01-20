@@ -39,7 +39,7 @@ class NoContraction extends CheckListRule implements LineContentRule
         $line = $lines->current();
 
         if (preg_match($this->search, $line->raw()->toString(), $matches)) {
-            return sprintf($this->message, $matches[0]);
+            return sprintf($this->message, $matches['contraction']);
         }
 
         return null;
@@ -55,14 +55,17 @@ class NoContraction extends CheckListRule implements LineContentRule
      */
     public static function getList(): array
     {
+        // We match contraction when it is start of string or char before is not an alnum
+        $baseRegex = '/(^|[^[:alnum:]])(?<contraction>%s)/i';
+
         return [
-            '/i\'m/i' => null,
-            '/(you|we|they)\'re/i' => null,
-            '/(he|she|it)\'s/i' => null,
-            '/(you|we|they)\'ve/i' => null,
-            '/(i|you|he|she|it|we|they)\'ll/i' => null,
-            '/(i|you|he|she|it|we|they)\'d/i' => null,
-            '/(aren|can|couldn|didn|hasn|haven|isn|mustn|shan|shouldn|wasn|weren|won|wouldn)\'t/i' => null,
+            sprintf($baseRegex, "i\'m") => null,
+            sprintf($baseRegex, "(you|we|they)\'re") => null,
+            sprintf($baseRegex, "(he|she|it)\'s") => null,
+            sprintf($baseRegex, "(you|we|they)\'ve") => null,
+            sprintf($baseRegex, "(i|you|he|she|it|we|they)\'ll") => null,
+            sprintf($baseRegex, "(i|you|he|she|it|we|they)\'d") => null,
+            sprintf($baseRegex, "(aren|can|couldn|didn|hasn|haven|isn|mustn|shan|shouldn|wasn|weren|won|wouldn)\'t") => null,
         ];
     }
 }

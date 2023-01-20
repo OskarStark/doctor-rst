@@ -27,6 +27,8 @@
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
 * [extension_xlf_instead_of_xliff](#extension_xlf_instead_of_xliff)
+* [filename_uses_dashes_only](#filename_uses_dashes_only)
+* [filename_uses_underscores_only](#filename_uses_underscores_only)
 * [final_admin_classes](#final_admin_classes)
 * [final_admin_extension_classes](#final_admin_extension_classes)
 * [indention](#indention) :exclamation:
@@ -385,6 +387,46 @@ messages.xlf
 messages.xliff
 ```
 
+## `filename_uses_dashes_only`
+
+  > _Ensures a filename uses only dashes (`-`), but are allowed to start with underscore (`_`). It is a common practice to prefix included files with underscores (`_`)._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+custom-extensions.rst
+```
+
+```rst
+_custom-extensions.rst
+```
+
+##### Invalid Examples :-1:
+
+```rst
+custom_extensions.rst
+```
+
+## `filename_uses_underscores_only`
+
+  > _Ensures a filename uses only underscores (`_`)._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+custom_extensions.rst
+```
+
+##### Invalid Examples :-1:
+
+```rst
+custom-extensions.rst
+```
+
 ## `final_admin_classes`
 
 #### Groups [`@Sonata`]
@@ -535,13 +577,13 @@ $ bin/console list
 
 Pattern | Message
 --- | ---
-`/i'm/i` | Please do not use contraction for: %s
-`/(you\|we\|they)'re/i` | Please do not use contraction for: %s
-`/(he\|she\|it)'s/i` | Please do not use contraction for: %s
-`/(you\|we\|they)'ve/i` | Please do not use contraction for: %s
-`/(i\|you\|he\|she\|it\|we\|they)'ll/i` | Please do not use contraction for: %s
-`/(i\|you\|he\|she\|it\|we\|they)'d/i` | Please do not use contraction for: %s
-`/(aren\|can\|couldn\|didn\|hasn\|haven\|isn\|mustn\|shan\|shouldn\|wasn\|weren\|won\|wouldn)'t/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>i\'m)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(you\|we\|they)\'re)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(he\|she\|it)\'s)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(you\|we\|they)\'ve)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(i\|you\|he\|she\|it\|we\|they)\'ll)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(i\|you\|he\|she\|it\|we\|they)\'d)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(aren\|can\|couldn\|didn\|hasn\|haven\|isn\|mustn\|shan\|shouldn\|wasn\|weren\|won\|wouldn)\'t)/i` | Please do not use contraction for: %s
 
 ##### Valid Examples :+1:
 

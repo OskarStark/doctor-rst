@@ -7,6 +7,7 @@ rules:
     yarn_dev_option_at_the_end: ~
     versionadded_directive_should_have_version: ~
     unused_links: ~
+    filename_uses_underscores_only: ~
 
 # do not report as violation
 whitelist:
