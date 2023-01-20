@@ -535,13 +535,13 @@ $ bin/console list
 
 Pattern | Message
 --- | ---
-`/i'm/i` | Please do not use contraction for: %s
-`/(you\|we\|they)'re/i` | Please do not use contraction for: %s
-`/(he\|she\|it)'s/i` | Please do not use contraction for: %s
-`/(you\|we\|they)'ve/i` | Please do not use contraction for: %s
-`/(i\|you\|he\|she\|it\|we\|they)'ll/i` | Please do not use contraction for: %s
-`/(i\|you\|he\|she\|it\|we\|they)'d/i` | Please do not use contraction for: %s
-`/(aren\|can\|couldn\|didn\|hasn\|haven\|isn\|mustn\|shan\|shouldn\|wasn\|weren\|won\|wouldn)'t/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>i\'m)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(you\|we\|they)\'re)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(he\|she\|it)\'s)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(you\|we\|they)\'ve)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(i\|you\|he\|she\|it\|we\|they)\'ll)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(i\|you\|he\|she\|it\|we\|they)\'d)/i` | Please do not use contraction for: %s
+`/(^\|[^[:alnum:]])(?<contraction>(aren\|can\|couldn\|didn\|hasn\|haven\|isn\|mustn\|shan\|shouldn\|wasn\|weren\|won\|wouldn)\'t)/i` | Please do not use contraction for: %s
 
 ##### Valid Examples :+1:
 
