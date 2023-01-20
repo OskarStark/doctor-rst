@@ -17,6 +17,7 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\RuleGroup;
+
 use function Symfony\Component\String\u;
 
 /**
