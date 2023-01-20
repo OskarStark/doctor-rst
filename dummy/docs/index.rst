@@ -9,4 +9,4 @@ The ``Doctrine ORM Admin`` provides services to work with the ``Admin Bundle`` a
    :maxdepth: 1
    :numbered:
 
-   tutorial/introduction
+   tutorial/introduction_one

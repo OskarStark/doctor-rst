@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Analyzer;
 
 use App\Rule\FileContentRule;
+use App\Rule\FileInfoRule;
 use App\Rule\LineContentRule;
 use App\Rule\Rule;
 use App\Value\Line;
@@ -42,6 +43,24 @@ final class RstAnalyzer implements Analyzer
         }
 
         $violations = [];
+
+        /** @var FileInfoRule[] $fileInfoRules */
+        $fileInfoRules = array_filter($rules, static function (Rule $rule): bool {
+            return $rule instanceof FileInfoRule;
+        });
+
+        foreach ($fileInfoRules as $rule) {
+            $violationMessage = $rule->check($file);
+
+            if (null !== $violationMessage) {
+                $violations[] = Violation::from(
+                    $violationMessage,
+                    (string) $file->getRealPath(),
+                    1,
+                    ''
+                );
+            }
+        }
 
         /** @var FileContentRule[] $fileContentRules */
         $fileContentRules = array_filter($rules, static function (Rule $rule): bool {
