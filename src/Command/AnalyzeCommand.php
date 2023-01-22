@@ -154,17 +154,19 @@ class AnalyzeCommand extends Command
         $finder = new Finder();
         $finder->files()->name(['*.rst', '*.rst.inc'])->in($analyzeDir);
 
+        $whitelistConfig = $config['whitelist'] ?? [];
+
         $fileResults = [];
         foreach ($finder as $file) {
             $fileResults[] = new FileResult(
                 $file,
                 new ExcludedViolationList(
-                    $config['whitelist'] ?? [],
+                    $whitelistConfig,
                     $this->analyzer->analyze($file, $this->rules)
                 )
             );
         }
-        $analyzerResult = new AnalyzerResult($fileResults);
+        $analyzerResult = new AnalyzerResult($fileResults, $whitelistConfig);
 
         $this->analyzer->write();
 

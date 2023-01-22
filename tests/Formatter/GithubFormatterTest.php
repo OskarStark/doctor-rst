@@ -44,7 +44,11 @@ final class GithubFormatterTest extends \App\Tests\UnitTestCase
             new ExcludedViolationList([], [])
         );
 
-        $analyzerResult = new AnalyzerResult([$fileResultWithViolations, $validFileResult]);
+        $analyzerResult = new AnalyzerResult([$fileResultWithViolations, $validFileResult], [
+            'regex' => [
+                '/foo/',
+            ],
+        ]);
 
         (new GithubFormatter(new ConsoleFormatter()))->format($style, $analyzerResult, $analyzeDir, false);
 
@@ -52,6 +56,8 @@ final class GithubFormatterTest extends \App\Tests\UnitTestCase
 docs/index.rst ✘
     2: violation message
    ->  dummy text
+
+ [WARNING] Whitelisted regex "/foo/" was not matched.                           
 
  [WARNING] Found "1" invalid file!                                              
 

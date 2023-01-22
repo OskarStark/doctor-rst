@@ -35,9 +35,22 @@ final class ExcludedViolationListTest extends \App\Tests\UnitTestCase
                 $dummy = Violation::from('violation message', $filename, 2, 'dummy text'),
                 Violation::from('violation message', $filename, 3, 'excluded line'),
                 Violation::from('violation message', $filename, 4, 'excluded regex'),
+                Violation::from('violation message', $filename, 4, 'excluded regex'),
             ]
         );
 
         static::assertSame([$dummy], $list->violations());
+        static::assertSame(
+            [
+                'excluded line' => 1,
+            ],
+            $list->getMatchedWhitelistLines()
+        );
+        static::assertSame(
+            [
+                '/regex/' => 2,
+            ],
+            $list->getMatchedWhitelistRegex()
+        );
     }
 }
