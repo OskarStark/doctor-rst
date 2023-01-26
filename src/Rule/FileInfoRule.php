@@ -13,11 +13,13 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Value\ViolationInterface;
+
 /**
  * Rules using this interface are only run once,
  * and get a \SplFileInfo containing infos of the file.
  */
 interface FileInfoRule extends Rule
 {
-    public function check(\SplFileInfo $file): ?string;
+    public function check(\SplFileInfo $file): ViolationInterface;
 }

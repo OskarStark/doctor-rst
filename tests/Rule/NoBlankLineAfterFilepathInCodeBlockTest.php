@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInCodeBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCase
 {
@@ -28,11 +31,11 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
      * @dataProvider checkXmlProvider
      * @dataProvider checkTwigProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber())
+            (new NoBlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -40,7 +43,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
     {
         return [
             [
-                null,
+                NullViolation::create(),
                 new RstSample('temp'),
             ],
         ];
@@ -50,7 +53,12 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
     {
         return [
             [
-                'Please remove blank line after "// src/Handler/Collection.php"',
+                Violation::from(
+                    'Please remove blank line after "// src/Handler/Collection.php"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: php',
                     '',
@@ -60,7 +68,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: php',
                     '',
@@ -75,7 +83,12 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
     {
         return [
             [
-                'Please remove blank line after "# config/services.yml"',
+                Violation::from(
+                    'Please remove blank line after "# config/services.yml"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: yml',
                     '',
@@ -85,7 +98,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: yml',
                     '',
@@ -100,7 +113,12 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
     {
         return [
             [
-                'Please remove blank line after "# config/services.yaml"',
+                Violation::from(
+                    'Please remove blank line after "# config/services.yaml"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: yaml',
                     '',
@@ -110,7 +128,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: yaml',
                     '',
@@ -125,7 +143,12 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
     {
         return [
             [
-                'Please remove blank line after "<!-- config/services.xml -->"',
+                Violation::from(
+                    'Please remove blank line after "<!-- config/services.xml -->"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -135,7 +158,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -144,7 +167,12 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                'Please remove blank line after "<!--config/services.xml-->"',
+                Violation::from(
+                    'Please remove blank line after "<!--config/services.xml-->"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -154,7 +182,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -169,7 +197,12 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
     {
         return [
             [
-                'Please remove blank line after "{# templates/index.html.twig #}"',
+                Violation::from(
+                    'Please remove blank line after "{# templates/index.html.twig #}"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: twig',
                     '',
@@ -179,7 +212,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: twig',
                     '',
@@ -188,7 +221,12 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                'Please remove blank line after "{# templates/index.html.twig #}"',
+                Violation::from(
+                    'Please remove blank line after "{# templates/index.html.twig #}"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: jinja',
                     '',
@@ -198,7 +236,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: jinja',
                     '',
@@ -207,7 +245,12 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                'Please remove blank line after "{# templates/index.html.twig #}"',
+                Violation::from(
+                    'Please remove blank line after "{# templates/index.html.twig #}"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: html+jinja',
                     '',
@@ -217,7 +260,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: html+jinja',
                     '',

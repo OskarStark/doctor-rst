@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\SpaceBeforeSelfXmlClosingTag;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
 {
@@ -23,42 +26,52 @@ final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new SpaceBeforeSelfXmlClosingTag())->check($sample->lines(), $sample->lineNumber())
+            (new SpaceBeforeSelfXmlClosingTag())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return array<array{0: string|null, 1: RstSample}>
+     * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): array
     {
         return [
             [
-                'Please add space before "/>"',
+                Violation::from(
+                    'Please add space before "/>"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('<argument type="service" id="sonata.admin.search.handler"/>'),
             ],
             [
-                'Please add space before "/>"',
+                Violation::from(
+                    'Please add space before "/>"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('<argument/>'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample(' />'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('<argument type="service" id="sonata.admin.search.handler" />'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('<br />'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('`Twig docs <https://twig.symfony.com/doc/2.x/>`_;'),
             ],
         ];

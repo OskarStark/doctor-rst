@@ -16,6 +16,9 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\BlankLineAfterDirective;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
 {
@@ -24,22 +27,22 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new BlankLineAfterDirective())->check($sample->lines(), $sample->lineNumber())
+            (new BlankLineAfterDirective())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         foreach (RstParser::DIRECTIVES as $directive) {
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $directive,
                     '',
@@ -48,7 +51,7 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $directive,
                     ':lineos:',
@@ -58,12 +61,18 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
             ];
 
             $errorMessage = sprintf('Please add a blank line after "%s" directive', $directive);
+            $violation = Violation::from(
+                $errorMessage,
+                'filename',
+                1,
+                ''
+            );
             if (\in_array($directive, BlankLineAfterDirective::unSupportedDirectives(), true)) {
-                $errorMessage = null;
+                $violation = NullViolation::create();
             }
 
             yield [
-                $errorMessage,
+                $violation,
                 new RstSample([
                     $directive,
                     'temp',
@@ -71,7 +80,7 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
             ];
 
             yield [
-                $errorMessage,
+                $violation,
                 new RstSample([
                     $directive,
                 ]),
@@ -79,7 +88,7 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
         }
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(<<<SAMPLE
 .. code-block:: text
     :caption: src/app.js
@@ -91,7 +100,7 @@ SAMPLE
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }

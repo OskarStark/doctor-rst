@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\ViolationInterface;
 
 /**
  * Rules using this interface are only run once per file, and are
@@ -22,5 +23,5 @@ use App\Value\Lines;
  */
 interface FileContentRule extends Rule
 {
-    public function check(Lines $lines): ?string;
+    public function check(Lines $lines, string $filename): ViolationInterface;
 }

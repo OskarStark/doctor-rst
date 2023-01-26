@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\UnusedLinks;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class UnusedLinksTest extends \App\Tests\UnitTestCase
 {
@@ -24,23 +27,23 @@ final class UnusedLinksTest extends \App\Tests\UnitTestCase
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new UnusedLinks())->check($sample->lines())
+            (new UnusedLinks())->check($sample->lines(), 'filename')
         );
     }
 
     public function validProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('this is a test'),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 I am a `Link`_
 
@@ -50,7 +53,7 @@ RST
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 I am a `Link`_ and `Link2`_
 
@@ -61,7 +64,7 @@ RST
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 I am a `Link`_
 
@@ -71,7 +74,7 @@ RST
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 I am a `Link`_ and `Link2`_
 
@@ -82,7 +85,7 @@ RST
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 I am `a Link`_, `some other Link`_ and Link2_
 
@@ -94,7 +97,7 @@ RST
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 Date Handling
 ~~~~~~~~~~~~~
@@ -109,7 +112,7 @@ RST
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 Active Core Members
 ~~~~~~~~~~~~~~~~~~~
@@ -196,7 +199,12 @@ RST
     public function invalidProvider(): \Generator
     {
         yield [
-            'The following link definitions aren\'t used anymore and should be removed: "unused"',
+            Violation::from(
+                'The following link definitions aren\'t used anymore and should be removed: "unused"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample(<<<RST
 I am a `Link`_
 
@@ -207,7 +215,12 @@ RST
         ];
 
         yield [
-            'The following link definitions aren\'t used anymore and should be removed: "unused"',
+            Violation::from(
+                'The following link definitions aren\'t used anymore and should be removed: "unused"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample(<<<RST
 I am a `Link`_
 
@@ -218,7 +231,12 @@ RST
         ];
 
         yield [
-            'The following link definitions aren\'t used anymore and should be removed: "unused2", "unused1", "unused 3"',
+            Violation::from(
+                'The following link definitions aren\'t used anymore and should be removed: "unused2", "unused1", "unused 3"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample(<<<RST
 I am a `Link`_
 

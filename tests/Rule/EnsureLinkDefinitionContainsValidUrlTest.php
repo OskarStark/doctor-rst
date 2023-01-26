@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureLinkDefinitionContainsValidUrl;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTestCase
 {
@@ -24,16 +27,16 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new EnsureLinkDefinitionContainsValidUrl())->check($sample->lines(), $sample->lineNumber())
+            (new EnsureLinkDefinitionContainsValidUrl())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<string, array{0: null, 1: RstSample}>
+     * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
     public function validProvider(): \Generator
     {
@@ -49,14 +52,14 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
 
         foreach ($validCases as $validCase) {
             yield $validCase => [
-                null,
+                NullViolation::create(),
                 new RstSample($validCase),
             ];
         }
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: RstSample}>
+     * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
     public function invalidProvider(): \Generator
     {
@@ -69,9 +72,14 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
 
         foreach ($invalidCases as $invalidCase) {
             yield $invalidCase => [
-                sprintf(
-                    'Invalid url in "%s"',
-                    $invalidCase
+                Violation::from(
+                    sprintf(
+                        'Invalid url in "%s"',
+                        $invalidCase
+                    ),
+                    'filename',
+                    1,
+                    ''
                 ),
                 new RstSample($invalidCase),
             ];

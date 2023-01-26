@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInPhpCodeBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTestCase
 {
@@ -23,22 +26,27 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber())
+            (new BlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
-                'Please add a blank line after "// src/Handler/Collection.php"',
+                Violation::from(
+                    'Please add a blank line after "// src/Handler/Collection.php"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample(
                     [
                         $codeBlock,
@@ -50,7 +58,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample(
                     [
                         $codeBlock,
@@ -63,7 +71,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample(
                     [
                         $codeBlock,
@@ -76,7 +84,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample(
                     [
                         $codeBlock,
@@ -90,7 +98,7 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
         }
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }

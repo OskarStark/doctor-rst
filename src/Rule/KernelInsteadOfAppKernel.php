@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class KernelInsteadOfAppKernel extends AbstractRule implements LineContentRule
 {
@@ -23,19 +26,33 @@ class KernelInsteadOfAppKernel extends AbstractRule implements LineContentRule
         return [RuleGroup::Sonata()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current()->raw();
 
         if ($line->match('/app\/AppKernel\.php/')) {
-            return 'Please use "src/Kernel.php" instead of "app/AppKernel.php"';
+            $message = 'Please use "src/Kernel.php" instead of "app/AppKernel.php"';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
         if ($line->match('/AppKernel/')) {
-            return 'Please use "Kernel" instead of "AppKernel"';
+            $message = 'Please use "Kernel" instead of "AppKernel"';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

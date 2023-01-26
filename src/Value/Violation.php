@@ -15,7 +15,7 @@ namespace App\Value;
 
 use Webmozart\Assert\Assert;
 
-final class Violation
+final class Violation implements ViolationInterface
 {
     private string $message;
     private string $filename;
@@ -63,5 +63,10 @@ final class Violation
     public function rawLine(): string
     {
         return $this->rawLine;
+    }
+
+    public function isNull(): bool
+    {
+        return false;
     }
 }

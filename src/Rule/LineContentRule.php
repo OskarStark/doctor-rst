@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\ViolationInterface;
 
 /**
  * Rules using this interface run for every line of the file content.
  */
 interface LineContentRule extends Rule
 {
-    public function check(Lines $lines, int $number): ?string;
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface;
 }

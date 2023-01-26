@@ -16,6 +16,9 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\BlankLineBeforeDirective;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
 {
@@ -24,33 +27,33 @@ final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new BlankLineBeforeDirective())->check($sample->lines(), $sample->lineNumber())
+            (new BlankLineBeforeDirective())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield 'no directive' => [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
 
         yield 'directive on the first line' => [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. index::',
             ]),
         ];
 
         yield 'directive with ".. class::" directive before' => [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '',
                 '.. class:: foo',
@@ -59,7 +62,7 @@ final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
         ];
 
         yield 'directive with a comment directive before' => [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '',
                 '.. I am a comment',
@@ -68,7 +71,7 @@ final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
         ];
 
         yield 'valid short php directive' => [
-            null,
+            NullViolation::create(),
             new RstSample(<<<'RST'
 Headline
 
@@ -84,7 +87,7 @@ RST
             }
 
             yield sprintf('valid %s', $directive) => [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '',
                     $directive,
@@ -92,7 +95,12 @@ RST
             ];
 
             yield sprintf('invalid %s', $directive) => [
-                sprintf('Please add a blank line before "%s" directive', $directive),
+                Violation::from(
+                    sprintf('Please add a blank line before "%s" directive', $directive),
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     'content',
                     $directive,

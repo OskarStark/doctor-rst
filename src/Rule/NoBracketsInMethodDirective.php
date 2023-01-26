@@ -17,7 +17,10 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Ensure a :method: directive has special format.")
@@ -36,14 +39,21 @@ class NoBracketsInMethodDirective extends AbstractRule implements LineContentRul
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
 
         if ($lines->current()->raw()->match('/:method:`.*::.*\(\)`/')) {
-            return 'Please remove "()" inside :method: directive';
+            $message = 'Please remove "()" inside :method: directive';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

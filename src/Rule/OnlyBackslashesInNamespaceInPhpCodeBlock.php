@@ -18,7 +18,10 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("A namespace declaration in a PHP code-block should only contain backslashes.")
@@ -39,7 +42,7 @@ class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements L
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -49,12 +52,19 @@ class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements L
             && $line->clean()->containsAny('/')
             && $this->inPhpCodeBlock($lines, $number)
         ) {
-            return sprintf(
+            $message = sprintf(
                 'Please check "%s", it should not contain "/"',
                 $line->clean()->toString()
             );
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

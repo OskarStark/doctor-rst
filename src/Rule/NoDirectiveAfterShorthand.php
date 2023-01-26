@@ -16,7 +16,10 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Ensure that no directive follows the shorthand `::`. This could lead to broken markup.")
@@ -31,13 +34,13 @@ class NoDirectiveAfterShorthand extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!$line->raw()->endsWith(RstParser::SHORTHAND)) {
-            return null;
+            return NullViolation::create();
         }
 
         $lines->next();
@@ -47,13 +50,20 @@ class NoDirectiveAfterShorthand extends AbstractRule implements LineContentRule
         }
 
         if (!$lines->current()->isDirective()) {
-            return null;
+            return NullViolation::create();
         }
 
-        return sprintf(
+        $message = sprintf(
             'A "%s" directive is following a shorthand notation "%s", this will lead to a broken markup!',
             $lines->current()->clean()->toString(),
             RstParser::SHORTHAND
+        );
+
+        return Violation::from(
+            $message,
+            $filename,
+            1,
+            ''
         );
     }
 }

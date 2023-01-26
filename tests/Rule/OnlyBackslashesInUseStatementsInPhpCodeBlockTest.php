@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\OnlyBackslashesInUseStatementsInPhpCodeBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new OnlyBackslashesInUseStatementsInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber())
+            (new OnlyBackslashesInUseStatementsInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -35,7 +38,12 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
-                'Please check "use App/Handler;", it should not contain "/"',
+                Violation::from(
+                    'Please check "use App/Handler;", it should not contain "/"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -46,7 +54,12 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
             ];
 
             yield [
-                'Please check "UsE App/Handler;", it should not contain "/"',
+                Violation::from(
+                    'Please check "UsE App/Handler;", it should not contain "/"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -58,7 +71,12 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
         }
 
         yield [
-            'Please check "use App/Handler;", it should not contain "/"',
+            Violation::from(
+                'Please check "use App/Handler;", it should not contain "/"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '::',
                 '',
@@ -69,7 +87,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }

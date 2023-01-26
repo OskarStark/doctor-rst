@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\UseHttpsXsdUrls;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class UseHttpsXsdUrlsTest extends \App\Tests\UnitTestCase
 {
@@ -23,23 +26,28 @@ final class UseHttpsXsdUrlsTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new UseHttpsXsdUrls())->check($sample->lines(), $sample->lineNumber())
+            (new UseHttpsXsdUrls())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     public function checkProvider(): \Generator
     {
-        yield [null, new RstSample('')];
+        yield [NullViolation::create(), new RstSample('')];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('https://symfony.com/schema/dic/services/services-1.0.xsd'),
         ];
         yield [
-            'Please use "https" for http://symfony.com/schema/dic/services/services-1.0.xsd',
+            Violation::from(
+                'Please use "https" for http://symfony.com/schema/dic/services/services-1.0.xsd',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('http://symfony.com/schema/dic/services/services-1.0.xsd'),
         ];
     }

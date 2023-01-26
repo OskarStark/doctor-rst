@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveShouldHaveVersion;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
 final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTestCase
@@ -24,43 +27,53 @@ final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTe
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
             (new VersionaddedDirectiveShouldHaveVersion(new VersionParser()))
-                ->check($sample->lines(), $sample->lineNumber())
+                ->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return array<array{0: string|null, 1: RstSample}>
+     * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): array
     {
         return [
             [
-                null,
+                NullViolation::create(),
                 new RstSample('.. versionadded:: 1'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('.. versionadded:: 1.2'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('.. versionadded:: 1.2.0'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('.. versionadded:: 1.2   '),
             ],
             [
-                'Please provide a version behind ".. versionadded::"',
+                Violation::from(
+                    'Please provide a version behind ".. versionadded::"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('.. versionadded::'),
             ],
             [
-                'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
+                Violation::from(
+                    'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('.. versionadded:: foo'),
             ],
         ];

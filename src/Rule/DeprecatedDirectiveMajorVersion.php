@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -53,13 +56,13 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
         return [RuleGroup::Symfony()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_DEPRECATED)) {
-            return null;
+            return NullViolation::create();
         }
 
         if ($matches = $lines->current()->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
@@ -73,21 +76,35 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
                 $major = (int) $major;
 
                 if ($this->majorVersion !== $major) {
-                    return sprintf(
+                    $message = sprintf(
                         'You are not allowed to use version "%s". Only major version "%s" is allowed.',
                         $version,
                         $this->majorVersion
                     );
+
+                    return Violation::from(
+                        $message,
+                        $filename,
+                        1,
+                        ''
+                    );
                 }
             } catch (\UnexpectedValueException $e) {
-                return sprintf(
+                $message = sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
                     $version
                 );
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

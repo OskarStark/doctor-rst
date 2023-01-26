@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInXmlCodeBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTestCase
 {
@@ -23,16 +26,16 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInXmlCodeBlock())->check($sample->lines(), $sample->lineNumber())
+            (new BlankLineAfterFilepathInXmlCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
@@ -44,7 +47,12 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
 
         foreach ($paths as $path) {
             yield [
-                sprintf('Please add a blank line after "<!-- %s -->"', $path),
+                Violation::from(
+                    sprintf('Please add a blank line after "<!-- %s -->"', $path),
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -54,7 +62,7 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -65,7 +73,12 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
             ];
 
             yield [
-                sprintf('Please add a blank line after "<!--%s-->"', $path),
+                Violation::from(
+                    sprintf('Please add a blank line after "<!--%s-->"', $path),
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -75,7 +88,7 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -86,7 +99,7 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -98,7 +111,7 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
         }
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }

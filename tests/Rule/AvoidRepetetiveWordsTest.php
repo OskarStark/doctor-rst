@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\AvoidRepetetiveWords;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
 {
@@ -24,16 +27,16 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
      * @dataProvider checkProvider
      * @dataProvider whitelistProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new AvoidRepetetiveWords())->check($sample->lines(), $sample->lineNumber())
+            (new AvoidRepetetiveWords())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function whitelistProvider(): \Generator
     {
@@ -42,36 +45,46 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
         ];
 
         foreach ($whitelist as $word) {
-            yield sprintf('valid whitelist: %s', $word) => [null, new RstSample(sprintf('%s %s %s', $word, $word, $word))];
+            yield sprintf('valid whitelist: %s', $word) => [NullViolation::create(), new RstSample(sprintf('%s %s %s', $word, $word, $word))];
         }
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         $valid = '';
         $invalid = 'the cached items will not not be invalidated unless you clear OPcache.';
 
-        yield 'empty' => [null, new RstSample('')];
-        yield 'blank line' => [null, new RstSample('\n')];
-        yield 'directive' => [null, new RstSample('.. code-block:: php')];
-        yield 'link' => [null, new RstSample('.. _`Symfony`: https://symfony.com')];
-        yield [null, new RstSample($valid)];
+        yield 'empty' => [NullViolation::create(), new RstSample('')];
+        yield 'blank line' => [NullViolation::create(), new RstSample('\n')];
+        yield 'directive' => [NullViolation::create(), new RstSample('.. code-block:: php')];
+        yield 'link' => [NullViolation::create(), new RstSample('.. _`Symfony`: https://symfony.com')];
+        yield [NullViolation::create(), new RstSample($valid)];
 
         yield [
-            'The word "not" is used more times in a row.',
+            Violation::from(
+                'The word "not" is used more times in a row.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample($invalid),
         ];
 
-        yield [null, new RstSample([
+        yield [NullViolation::create(), new RstSample([
             '.. code-block:: php',
             '',
             '    public function foo($bar, $bar)',
         ], 2)];
         yield 'php comment' => [
-            'The word "is" is used more times in a row.',
+            Violation::from(
+                'The word "is" is used more times in a row.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: php',
                 '',
@@ -80,13 +93,18 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
             ], 2),
         ];
 
-        yield [null, new RstSample([
+        yield [NullViolation::create(), new RstSample([
             '.. code-block:: xml',
             '',
             '    <xml value="1" value="1">',
         ], 2)];
         yield 'xml comment' => [
-            'The word "is" is used more times in a row.',
+            Violation::from(
+                'The word "is" is used more times in a row.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: xml',
                 '',
@@ -95,13 +113,18 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
             ], 2),
         ];
 
-        yield [null, new RstSample([
+        yield [NullViolation::create(), new RstSample([
             '.. code-block:: twig',
             '',
             '    {{ value }}',
         ], 2)];
         yield 'twig comment' => [
-            'The word "is" is used more times in a row.',
+            Violation::from(
+                'The word "is" is used more times in a row.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: twig',
                 '',
@@ -110,13 +133,18 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
             ], 2),
         ];
 
-        yield [null, new RstSample([
+        yield [NullViolation::create(), new RstSample([
             '.. code-block:: yaml',
             '',
             '    services: ~',
         ], 2)];
         yield 'yaml comment' => [
-            'The word "is" is used more times in a row.',
+            Violation::from(
+                'The word "is" is used more times in a row.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: yaml',
                 '',
@@ -126,12 +154,12 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
         ];
 
         yield 'numeric repetition' => [
-            null,
+            NullViolation::create(),
             new RstSample('This is valid 123 123'),
         ];
 
         yield 'numeric repetition with comma' => [
-            null,
+            NullViolation::create(),
             new RstSample('224, 165, 141, 224, 164, 164, 224, 165, 135])'),
         ];
     }

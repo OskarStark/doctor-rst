@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\MaxBlankLines;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
 {
@@ -23,23 +26,28 @@ final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, int $max, RstSample $sample): void
+    public function check(ViolationInterface $expected, int $max, RstSample $sample): void
     {
         $rule = (new MaxBlankLines());
         $rule->setOptions(['max' => $max]);
 
-        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
     public function checkProvider(): \Generator
     {
-        yield [null, 2, new RstSample('')];
-        yield [null, 2, new RstSample([
+        yield [NullViolation::create(), 2, new RstSample('')];
+        yield [NullViolation::create(), 2, new RstSample([
             '',
             '',
         ])];
         yield [
-            'Please use max 2 blank lines, you used 3',
+            Violation::from(
+                'Please use max 2 blank lines, you used 3',
+                'filename',
+                1,
+                ''
+            ),
             2,
             new RstSample([
                 '',
@@ -48,7 +56,12 @@ final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
             ]),
         ];
         yield [
-            'Please use max 1 blank lines, you used 2',
+            Violation::from(
+                'Please use max 1 blank lines, you used 2',
+                'filename',
+                1,
+                ''
+            ),
             1,
             new RstSample([
                 '',
@@ -75,7 +88,12 @@ Learn more about Routing
 RST;
 
         yield [
-            'Please use max 2 blank lines, you used 3',
+            Violation::from(
+                'Please use max 2 blank lines, you used 3',
+                'filename',
+                1,
+                ''
+            ),
             2,
             new RstSample($invalid, 8),
         ];

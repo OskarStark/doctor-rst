@@ -17,7 +17,10 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 use function Symfony\Component\String\u;
 
@@ -38,21 +41,28 @@ class SpaceBetweenLabelAndLinkInDoc extends AbstractRule implements LineContentR
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current()->raw();
 
         if ($matches = $line->match('/:doc:`(?P<label>.*)<(?P<link>.*)>`/')) {
             if (!u($matches['label'])->endsWith(' ')) {
-                return sprintf(
+                $message = sprintf(
                     'Please add a space between "%s" and "<%s>" inside :doc: directive',
                     $matches['label'],
                     $matches['link']
                 );
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

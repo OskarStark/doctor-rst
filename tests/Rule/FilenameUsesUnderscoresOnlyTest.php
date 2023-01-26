@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\FilenameUsesUnderscoresOnly;
 use App\Tests\UnitTestCase;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
 {
@@ -24,45 +27,56 @@ final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, string $filename): void
+    public function check(ViolationInterface $expected, string $filename): void
     {
         $fileInfo = $this->createMock(\SplFileInfo::class);
         $fileInfo->method('getFilename')->willReturn($filename);
 
-        static::assertSame(
+        $violation = (new FilenameUsesUnderscoresOnly())->check($fileInfo);
+        static::assertEquals(
             $expected,
-            (new FilenameUsesUnderscoresOnly())->check($fileInfo)
+            $violation
         );
     }
 
     /**
-     * @return \Generator<array{0: null, 1: string}>
+     * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
     public function validProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             'custom_extensions.rst',
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             '_custom_extensions.rst',
         ];
     }
 
     /**
-     * @return \Generator<array{0: string, 1: string}>
+     * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
     public function invalidProvider(): \Generator
     {
         yield [
-            'Please use underscores (_) for the filename: custom-extensions.rst',
+            Violation::from(
+                'Please use underscores (_) for the filename: custom-extensions.rst',
+                'custom-extensions.rst',
+                1,
+                ''
+            ),
             'custom-extensions.rst',
         ];
 
         yield [
-            'Please use underscores (_) for the filename: _custom-extensions.rst',
+            Violation::from(
+                'Please use underscores (_) for the filename: _custom-extensions.rst',
+                '_custom-extensions.rst',
+                1,
+                ''
+            ),
             '_custom-extensions.rst',
         ];
     }

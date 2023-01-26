@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implements LineContentRule
 {
@@ -27,13 +30,13 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_VERSIONADDED)) {
-            return null;
+            return NullViolation::create();
         }
 
         $indention = $line->indention();
@@ -44,12 +47,19 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
             && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
             if ($lines->current()->raw()->match('/[^`]deprecated/')) {
-                return 'Please use ".. deprecated::" instead of ".. versionadded::"';
+                $message = 'Please use ".. deprecated::" instead of ".. versionadded::"';
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
 
             $lines->next();
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

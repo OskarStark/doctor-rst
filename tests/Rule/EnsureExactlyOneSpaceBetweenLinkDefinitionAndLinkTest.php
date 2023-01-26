@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\Tests\UnitTestCase
 {
@@ -24,16 +27,16 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink())->check($sample->lines(), $sample->lineNumber())
+            (new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<string, array{0: null, 1: RstSample}>
+     * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
     public function validProvider(): \Generator
     {
@@ -45,14 +48,14 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
 
         foreach ($validCases as $validCase) {
             yield $validCase => [
-                null,
+                NullViolation::create(),
                 new RstSample($validCase),
             ];
         }
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: RstSample}>
+     * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
     public function invalidProvider(): \Generator
     {
@@ -64,7 +67,12 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
 
         foreach ($invalidCases as $invalidCase) {
             yield $invalidCase => [
-                'Please use only one whitespace between the link definition and the link.',
+                Violation::from(
+                    'Please use only one whitespace between the link definition and the link.',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample($invalidCase),
             ];
         }

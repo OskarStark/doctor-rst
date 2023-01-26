@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInCodeBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCase
 {
@@ -28,32 +31,37 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
      * @dataProvider checkXmlProvider
      * @dataProvider checkTwigProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber())
+            (new BlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkPhpProvider(): \Generator
     {
         yield [
-            'Please add a blank line after "// src/Handler/Collection.php"',
+            Violation::from(
+                'Please add a blank line after "// src/Handler/Collection.php"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: php',
                 '',
@@ -62,7 +70,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: php',
                 '',
@@ -74,12 +82,17 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkYmlProvider(): \Generator
     {
         yield [
-            'Please add a blank line after "# config/services.yml"',
+            Violation::from(
+                'Please add a blank line after "# config/services.yml"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: yml',
                 '',
@@ -88,7 +101,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: yml',
                 '',
@@ -100,12 +113,17 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkYamlProvider(): \Generator
     {
         yield [
-            'Please add a blank line after "# config/services.yaml"',
+            Violation::from(
+                'Please add a blank line after "# config/services.yaml"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: yaml',
                 '',
@@ -114,7 +132,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: yaml',
                 '',
@@ -126,12 +144,17 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkXmlProvider(): \Generator
     {
         yield [
-            'Please add a blank line after "<!-- config/services.xml -->"',
+            Violation::from(
+                'Please add a blank line after "<!-- config/services.xml -->"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: xml',
                 '',
@@ -140,7 +163,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: xml',
                 '',
@@ -150,7 +173,12 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            'Please add a blank line after "<!--config/services.xml-->"',
+            Violation::from(
+                'Please add a blank line after "<!--config/services.xml-->"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: xml',
                 '',
@@ -159,7 +187,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: xml',
                 '',
@@ -171,12 +199,17 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkTwigProvider(): \Generator
     {
         yield [
-            'Please add a blank line after "{# templates/index.html.twig #}"',
+            Violation::from(
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: twig',
                 '',
@@ -185,7 +218,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: twig',
                 '',
@@ -195,7 +228,12 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            'Please add a blank line after "{# templates/index.html.twig #}"',
+            Violation::from(
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: jinja',
                 '',
@@ -204,7 +242,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: jinja',
                 '',
@@ -214,7 +252,12 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            'Please add a blank line after "{# templates/index.html.twig #}"',
+            Violation::from(
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: html+jinja',
                 '',
@@ -223,7 +266,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: html+jinja',
                 '',

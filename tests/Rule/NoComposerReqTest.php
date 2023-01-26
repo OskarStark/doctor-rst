@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoComposerReq;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoComposerReqTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class NoComposerReqTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoComposerReq())->check($sample->lines(), $sample->lineNumber())
+            (new NoComposerReq())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -35,11 +38,16 @@ final class NoComposerReqTest extends \App\Tests\UnitTestCase
     {
         return [
             [
-                'Please "composer require" instead of "composer req"',
+                Violation::from(
+                    'Please "composer require" instead of "composer req"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('composer req symfony/form'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('composer require symfony/form'),
             ],
         ];

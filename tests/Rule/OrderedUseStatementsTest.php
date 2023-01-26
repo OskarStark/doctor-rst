@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\OrderedUseStatements;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new OrderedUseStatements())->check($sample->lines(), $sample->lineNumber())
+            (new OrderedUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -39,7 +42,7 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
         foreach ($codeBlocks as $codeBlock) {
             // WITH blank line after directive
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -50,7 +53,7 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
 
             // WITHOUT blank line after directive
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $codeBlock,
                     '    use Symfony\A;',
@@ -63,7 +66,12 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
         foreach ($codeBlocks as $codeBlock) {
             // WITH blank line after directive
             yield [
-                'Please reorder the use statements alphabetically',
+                Violation::from(
+                    'Please reorder the use statements alphabetically',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -74,7 +82,12 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
 
             // WITHOUT blank line after directive
             yield [
-                'Please reorder the use statements alphabetically',
+                Violation::from(
+                    'Please reorder the use statements alphabetically',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '    use Symfony\B;',
@@ -255,35 +268,35 @@ and compose your services with them::
 RST;
 
         yield 'valid with trait' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_with_trait, 1),
         ];
         yield 'valid with 2 code examples in one block' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_with_two_code_examples_in_one_block),
         ];
         yield 'valid with nsort' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_with_nsort),
         ];
         yield 'valid with use statement in comment' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_with_use_statement_in_comment),
         ];
         yield 'valid without class but variable in between' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_without_class_but_variable_in_between, 2),
         ];
         yield 'valid with uppercase' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_with_uppercase),
         ];
         yield 'valid 2' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid2),
         ];
         yield 'valid in trait definition' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_in_trait_definition, 1),
         ];
     }

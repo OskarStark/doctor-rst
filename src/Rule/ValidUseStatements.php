@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class ValidUseStatements extends AbstractRule implements LineContentRule
 {
@@ -26,7 +29,7 @@ class ValidUseStatements extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -35,9 +38,16 @@ class ValidUseStatements extends AbstractRule implements LineContentRule
          * @todo do it in one regex instead of regex + string search
          */
         if ($line->clean()->match('/^use (.*);$/') && false !== strpos($line->clean()->toString(), '\\\\')) {
-            return 'Please do not escape the backslashes in a use statement.';
+            $message = 'Please do not escape the backslashes in a use statement.';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

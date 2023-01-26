@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBracketsInMethodDirective;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoBracketsInMethodDirectiveTest extends \App\Tests\UnitTestCase
 {
@@ -23,26 +26,31 @@ final class NoBracketsInMethodDirectiveTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoBracketsInMethodDirective())->check($sample->lines(), $sample->lineNumber())
+            (new NoBracketsInMethodDirective())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            'Please remove "()" inside :method: directive',
+            Violation::from(
+                'Please remove "()" inside :method: directive',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample(':method:`Symfony\\Component\\OptionsResolver\\Options::offsetGet()`'),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(':method:`Symfony\\Component\\OptionsResolver\\Options::offsetGet`'),
         ];
     }

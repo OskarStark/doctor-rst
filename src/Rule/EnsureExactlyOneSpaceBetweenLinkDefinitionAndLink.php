@@ -18,7 +18,10 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Ensure exactly one space between link definition and link.")
@@ -37,19 +40,26 @@ class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule imp
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::isLinkDefinition($line)) {
-            return null;
+            return NullViolation::create();
         }
 
         if ($line->clean()->containsAny(':  ')) {
-            return 'Please use only one whitespace between the link definition and the link.';
+            $message = 'Please use only one whitespace between the link definition and the link.';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

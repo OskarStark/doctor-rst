@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Annotations\Rule\Description;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Do not use belittling words!")
@@ -27,16 +30,23 @@ class BeKindToNewcomers extends CheckListRule implements LineContentRule
         return [RuleGroup::Experimental()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match($this->search, $line->raw()->toString(), $matches)) {
-            return sprintf($this->message, $matches[0]);
+            $message = sprintf($this->message, $matches[0]);
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     public static function getDefaultMessage(): string
