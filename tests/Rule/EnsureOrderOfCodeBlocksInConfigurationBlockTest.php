@@ -16,9 +16,6 @@ namespace App\Tests\Rule;
 use App\Rule\EnsureOrderOfCodeBlocksInConfigurationBlock;
 use App\Tests\RstSample;
 
-/**
- * @group temp
- */
 final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\UnitTestCase
 {
     /**
