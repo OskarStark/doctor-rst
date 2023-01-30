@@ -17,13 +17,16 @@ final class AnalyzerResult
 {
     /** @var FileResult[] */
     private array $results;
+    private array $whitelistConfig;
 
     /**
-     * @param FileResult[] $fileResults
+     * @param FileResult[]                              $fileResults
+     * @param array{regex?: string[], lines?: string[]} $whitelistConfig
      */
-    public function __construct(array $fileResults)
+    public function __construct(array $fileResults, array $whitelistConfig)
     {
         $this->results = $fileResults;
+        $this->whitelistConfig = $whitelistConfig;
     }
 
     public function all(): array
@@ -40,5 +43,52 @@ final class AnalyzerResult
         }
 
         return false;
+    }
+
+    /**
+     * @return array{regex: string[], lines: string[]}
+     */
+    public function getUnusedWhitelistRules(): array
+    {
+        $unused = [
+            'regex' => [],
+            'lines' => [],
+        ];
+
+        [$matchedRegex, $matchedLines] = $this->getMatchedWhitelistRules();
+
+        foreach ($this->whitelistConfig['regex'] ?? [] as $regex) {
+            if (!\array_key_exists($regex, $matchedRegex)) {
+                $unused['regex'][] = $regex;
+            }
+        }
+
+        foreach ($this->whitelistConfig['lines'] ?? [] as $line) {
+            if (!\array_key_exists($line, $matchedLines)) {
+                $unused['lines'][] = $line;
+            }
+        }
+
+        return $unused;
+    }
+
+    /**
+     * @return array{0: array<string, int>, 1: array<string, int>}
+     */
+    private function getMatchedWhitelistRules(): array
+    {
+        $allMatchedRegex = [];
+        $allMatchedLines = [];
+
+        foreach ($this->results as $fileResult) {
+            foreach ($fileResult->violationList()->getMatchedWhitelistRegex() as $pattern => $count) {
+                $allMatchedRegex[$pattern] = isset($allMatchedRegex[$pattern]) ? $count + $allMatchedRegex[$pattern] : $count;
+            }
+            foreach ($fileResult->violationList()->getMatchedWhitelistLines() as $line => $count) {
+                $allMatchedLines[$line] = isset($allMatchedLines[$line]) ? $count + $allMatchedLines[$line] : $count;
+            }
+        }
+
+        return [$allMatchedRegex, $allMatchedLines];
     }
 }

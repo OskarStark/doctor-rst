@@ -51,6 +51,11 @@ parameters:
 			path: src/Command/AnalyzeCommand.php
 
 		-
+			message: "#^Parameter \\#2 \\$whitelistConfig of class App\\\\Value\\\\AnalyzerResult constructor expects array\\{regex\\?\\: array\\<string\\>, lines\\?\\: array\\<string\\>\\}, mixed given\\.$#"
+			count: 1
+			path: src/Command/AnalyzeCommand.php
+
+		-
 			message: "#^Cannot access offset 'default' on mixed\\.$#"
 			count: 1
 			path: src/Command/RulesCommand.php

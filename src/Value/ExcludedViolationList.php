@@ -18,11 +18,19 @@ final class ExcludedViolationList
     /** @var Violation[] */
     private array $violations;
     private bool $hasViolations;
+    /** @var array<string, int> */
+    private array $matchedWhitelistRegex;
+    /** @var array<string, int> */
+    private array $matchedWhitelistLines;
 
     public function __construct(array $excludedViolationConfig, array $violations)
     {
-        $this->violations = $this->filterViolations($excludedViolationConfig, $violations);
+        $filteredViolations = $this->filterViolations($excludedViolationConfig, $violations);
+
+        $this->violations = $filteredViolations['violations'];
         $this->hasViolations = \count($this->violations) > 0;
+        $this->matchedWhitelistRegex = $filteredViolations['matchedWhitelistRegex'];
+        $this->matchedWhitelistLines = $filteredViolations['matchedWhitelistLines'];
     }
 
     public function violations(): array
@@ -36,16 +44,37 @@ final class ExcludedViolationList
     }
 
     /**
+     * @return array<string, int>
+     */
+    public function getMatchedWhitelistRegex(): array
+    {
+        return $this->matchedWhitelistRegex;
+    }
+
+    /**
+     * @return array<string, int>
+     */
+    public function getMatchedWhitelistLines(): array
+    {
+        return $this->matchedWhitelistLines;
+    }
+
+    /**
      * @param Violation[] $violations
      *
-     * @return Violation[]
+     * @return array{violations: Violation[], matchedWhitelistRegex: array<string, int>, matchedWhitelistLines: array<string, int>}
      */
     private function filterViolations(array $excludedViolationConfig, array $violations): array
     {
+        $matchedWhitelistRegex = [];
+        $matchedWhitelistLines = [];
+
         foreach ($violations as $key => $violation) {
             if (isset($excludedViolationConfig['regex'])) {
+                /** @var string $pattern */
                 foreach ($excludedViolationConfig['regex'] as $pattern) {
                     if (preg_match($pattern, $violation->rawLine())) {
+                        $matchedWhitelistRegex[$pattern] = isset($matchedWhitelistRegex[$pattern]) ? 1 + $matchedWhitelistRegex[$pattern] : 1;
                         unset($violations[$key]);
 
                         break;
@@ -54,8 +83,10 @@ final class ExcludedViolationList
             }
 
             if (isset($excludedViolationConfig['lines'])) {
+                /** @var string $line */
                 foreach ($excludedViolationConfig['lines'] as $line) {
                     if ($line === $violation->rawLine()) {
+                        $matchedWhitelistLines[$line] = isset($matchedWhitelistLines[$line]) ? 1 + $matchedWhitelistLines[$line] : 1;
                         unset($violations[$key]);
 
                         break;
@@ -64,6 +95,10 @@ final class ExcludedViolationList
             }
         }
 
-        return $violations;
+        return [
+            'violations' => $violations,
+            'matchedWhitelistRegex' => $matchedWhitelistRegex,
+            'matchedWhitelistLines' => $matchedWhitelistLines,
+        ];
     }
 }
