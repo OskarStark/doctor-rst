@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\ValidUseStatements;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
 {
@@ -23,30 +26,35 @@ final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new ValidUseStatements())->check($sample->lines(), $sample->lineNumber())
+            (new ValidUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return array<array{0: string|null, 1: RstSample}>
+     * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): array
     {
         return [
             [
-                'Please do not escape the backslashes in a use statement.',
+                Violation::from(
+                    'Please do not escape the backslashes in a use statement.',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('use Symfony\Component\Form\Extension\Core\Type\FormType;'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('don\'t use the :class:`Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\ControllerTrait`'),
             ],
         ];

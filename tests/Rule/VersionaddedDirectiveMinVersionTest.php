@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveMinVersion;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class VersionaddedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
 {
@@ -23,37 +26,42 @@ final class VersionaddedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, string $minVersion, RstSample $sample): void
+    public function check(ViolationInterface $expected, string $minVersion, RstSample $sample): void
     {
         $rule = new VersionaddedDirectiveMinVersion();
         $rule->setOptions([
             'min_version' => $minVersion,
         ]);
 
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber())
+            $rule->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return array<array{0: string|null, 1: string, 2: RstSample}>
+     * @return array<array{0: ViolationInterface, 1: string, 2: RstSample}>
      */
     public function checkProvider(): array
     {
         return [
             [
-                null,
+                NullViolation::create(),
                 '3.4',
                 new RstSample('.. versionadded:: 3.4'),
             ],
             [
-                null,
+                NullViolation::create(),
                 '3.4',
                 new RstSample('.. versionadded:: 4.2'),
             ],
             [
-                'Please only provide ".. versionadded::" if the version is greater/equal "3.4"',
+                Violation::from(
+                    'Please only provide ".. versionadded::" if the version is greater/equal "3.4"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 '3.4',
                 new RstSample('.. versionadded:: 2.8'),
             ],

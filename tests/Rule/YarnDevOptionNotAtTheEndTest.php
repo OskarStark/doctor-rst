@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\YarnDevOptionNotAtTheEnd;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class YarnDevOptionNotAtTheEndTest extends \App\Tests\UnitTestCase
 {
@@ -23,26 +26,31 @@ final class YarnDevOptionNotAtTheEndTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new YarnDevOptionNotAtTheEnd())->check($sample->lines(), $sample->lineNumber())
+            (new YarnDevOptionNotAtTheEnd())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('yarn add --dev jquery'),
         ];
 
         yield [
-            'Please move "--dev" option before the package',
+            Violation::from(
+                'Please move "--dev" option before the package',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('yarn add jquery --dev'),
         ];
     }

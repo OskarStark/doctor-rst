@@ -16,7 +16,10 @@ namespace App\Rule;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRule
 {
@@ -43,18 +46,18 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         return [RuleGroup::Symfony()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
 
         // only interesting if a PHP code block
         if (!RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP, true)) {
-            return null;
+            return NullViolation::create();
         }
 
         // :: is a php code block, but its ok
         if (preg_match('/\:\:$/', $lines->current()->clean()->toString())) {
-            return null;
+            return NullViolation::create();
         }
 
         // it has no indention, check if it comes after a headline, in this case its ok
@@ -63,7 +66,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
                 || $this->directAfterTable($lines, $number)
                 || $this->previousParagraphEndsWithQuestionMark($lines, $number)
             ) {
-                return null;
+                return NullViolation::create();
             }
         }
 
@@ -74,11 +77,11 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
             && $number > 0
         ) {
             if ($this->in(RstParser::DIRECTIVE_CONFIGURATION_BLOCK, $lines, $number)) {
-                return null;
+                return NullViolation::create();
             }
 
             if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_TEXT, RstParser::CODE_BLOCK_RST])) {
-                return null;
+                return NullViolation::create();
             }
         }
 
@@ -90,22 +93,29 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
 
         // check if the previous code block is php, yaml or terminal code block
         if ($this->previousDirectiveIs(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, $previousAllowedDirectiveTypes)) {
-            return null;
+            return NullViolation::create();
         }
 
         foreach (self::ALLOWED_PREVIOUS_DIRECTIVES as $previousDirective) {
             // check if the previous directive is ...
             if ($this->previousDirectiveIs($previousDirective, $lines, $number)) {
-                return null;
+                return NullViolation::create();
             }
         }
 
         $lines->next();
         if ($lines->valid() && RstParser::isOption($lines->current())) {
-            return null;
+            return NullViolation::create();
         }
 
-        return 'Please do not use ".. code-block:: php", use "::" instead.';
+        $message = 'Please do not use ".. code-block:: php", use "::" instead.';
+
+        return Violation::from(
+            $message,
+            $filename,
+            1,
+            ''
+        );
     }
 
     private function directAfterHeadline(Lines $lines, int $number): bool

@@ -19,7 +19,10 @@ use App\Annotations\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Rst\Value\LinkDefinition;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Ensure link definition contains valid link.")
@@ -38,7 +41,7 @@ class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineC
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -46,7 +49,7 @@ class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineC
         if ($line->isBlank()
             || !RstParser::isLinkDefinition($line)
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $linkDefinition = LinkDefinition::fromLine($line->raw()->toString());
@@ -58,12 +61,19 @@ class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineC
             && \in_array($parsed['scheme'], ['http', 'https'])
             && isset($parsed['host'])
         ) {
-            return null;
+            return NullViolation::create();
         }
 
-        return sprintf(
+        $message = sprintf(
             'Invalid url in "%s"',
             $line->clean()->toString()
+        );
+
+        return Violation::from(
+            $message,
+            $filename,
+            1,
+            ''
         );
     }
 }

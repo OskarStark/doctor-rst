@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoExplicitUseOfCodeBlockPhp;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
 {
@@ -24,40 +27,55 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
      * @dataProvider checkProvider
      * @dataProvider realSymfonyFileProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines(), $sample->lineNumber())
+            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('Check the following controller syntax::'),
         ];
 
         yield [
-            'Please do not use ".. code-block:: php", use "::" instead.',
+            Violation::from(
+                'Please do not use ".. code-block:: php", use "::" instead.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('.. code-block:: php'),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('.. code-block:: html+php'),
         ];
         yield [
-            'Please do not use ".. code-block:: php", use "::" instead.',
+            Violation::from(
+                'Please do not use ".. code-block:: php", use "::" instead.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('    .. code-block:: php'),
         ];
 
         yield [
-            'Please do not use ".. code-block:: php", use "::" instead.',
+            Violation::from(
+                'Please do not use ".. code-block:: php", use "::" instead.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 'Welcome to our tutorial!',
                 '',
@@ -68,7 +86,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. configuration-block::',
                 '',
@@ -78,7 +96,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
             ], 2),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '    .. configuration-block::',
                 '',
@@ -92,7 +110,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
             ], 6),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 'Welcome to our tutorial!',
                 '',
@@ -105,7 +123,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
     }
 
     /**
-     * @return \Generator<int|string, array{0: string|null, 1: RstSample}>
+     * @return \Generator<int|string, array{0: ViolationInterface, 1: RstSample}>
      */
     public function realSymfonyFileProvider(): \Generator
     {
@@ -452,76 +470,86 @@ placeholders.
 RST;
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($content, 26),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($content_with_blank_line_at_the_beginning, 27),
         ];
 
         yield [
-            'Please do not use ".. code-block:: php", use "::" instead.',
+            Violation::from(
+                'Please do not use ".. code-block:: php", use "::" instead.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample($invalid_content, 14),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($valid_code_block_after_headline, 3),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($valid_two_following_php_code_blocks, 15),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($valid_two_following_php_code_blocks_after_headline, 2),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($valid_two_following_php_code_blocks_after_headline, 13),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($valid_two_following_php_code_blocks_in_configuration_block, 5),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($valid_two_following_php_code_blocks_in_configuration_block, 15),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($valid_valid_in_code_block_text, 21),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($valid_valid_in_code_block_rst, 21),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample($valid_follows_code_block, 11),
         ];
 
         yield 'valid_code_block_after_table' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_code_block_after_table, 11),
         ];
 
         yield [
-            'Please do not use ".. code-block:: php", use "::" instead.',
+            Violation::from(
+                'Please do not use ".. code-block:: php", use "::" instead.',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample($invalid_content2, 18),
         ];
 
         yield 'valid because previous paragraph ends with question mark (?)' => [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 This is nice PHP code, isn't it?
 
@@ -533,7 +561,7 @@ RST
         ];
 
         yield 'php code block following a configuration-block' => [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 .. configuration-block::
 
@@ -549,7 +577,7 @@ RST
         ];
 
         yield 'php code block following a terminal block' => [
-            null,
+            NullViolation::create(),
             new RstSample(<<<'RST'
 .. code-block:: terminal
 
@@ -564,7 +592,7 @@ RST
         ];
 
         yield 'php code block unsing an option' => [
-            null,
+            NullViolation::create(),
             new RstSample(<<<RST
 .. code-block:: php
    :lineos:
@@ -579,7 +607,7 @@ RST
                 'php code block following %s',
                 $previousDirective
             ) => [
-                null,
+                NullViolation::create(),
                 new RstSample(sprintf(<<<RST
 %s
 

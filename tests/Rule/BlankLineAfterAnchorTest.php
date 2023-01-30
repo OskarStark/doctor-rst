@@ -15,6 +15,8 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterAnchor;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\ViolationInterface;
 
 final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
 {
@@ -23,26 +25,26 @@ final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new BlankLineAfterAnchor())->check($sample->lines(), $sample->lineNumber())
+            (new BlankLineAfterAnchor())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '',
                 '.. _env-var-processors:',
@@ -54,7 +56,7 @@ final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. _env-var-processors:',
                 '',
@@ -65,7 +67,7 @@ final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '',
                 '.. _env-var-processors:',
@@ -78,7 +80,7 @@ final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '',
                 '.. _env-var-processors:',
@@ -92,7 +94,7 @@ final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. index::',
                 '    single: Deployment; Deployment tools',
@@ -106,7 +108,7 @@ final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. index::',
                 '    single: Deployment; Deployment tools',

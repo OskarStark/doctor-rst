@@ -14,6 +14,9 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LineLength extends AbstractRule implements LineContentRule, Configurable
@@ -40,7 +43,7 @@ class LineLength extends AbstractRule implements LineContentRule, Configurable
         $this->max = $resolvedOptions['max'];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -48,9 +51,16 @@ class LineLength extends AbstractRule implements LineContentRule, Configurable
         $count = mb_strlen($line->clean()->toString());
 
         if ($count > $this->max) {
-            return sprintf('Line is to long (max %s) currently: %s', $this->max, $count);
+            $message = sprintf('Line is to long (max %s) currently: %s', $this->max, $count);
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

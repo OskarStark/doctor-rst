@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoInheritdocInCodeExamples;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoInheritdocInCodeExamplesTest extends \App\Tests\UnitTestCase
 {
@@ -23,29 +26,34 @@ final class NoInheritdocInCodeExamplesTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoInheritdocInCodeExamples())->check($sample->lines(), $sample->lineNumber())
+            (new NoInheritdocInCodeExamples())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     public function checkProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('* {@inheritdoc}'),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('fine'),
         ];
 
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
-                'Please do not use "@inheritdoc"',
+                Violation::from(
+                    'Please do not use "@inheritdoc"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',

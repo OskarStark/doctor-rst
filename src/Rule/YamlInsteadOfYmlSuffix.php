@@ -18,7 +18,10 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure to only use `yaml` instead of `yml`.")
@@ -37,23 +40,37 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if ($line->raw()->match('/\.travis\.yml/')) {
-            return null;
+            return NullViolation::create();
         }
 
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_YML)) {
-            return 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
+            $message = 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
         if ($matches = $line->raw()->match('/\.yml/i')) {
-            return sprintf('Please use ".yaml" instead of "%s"', $matches[0]);
+            $message = sprintf('Please use ".yaml" instead of "%s"', $matches[0]);
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

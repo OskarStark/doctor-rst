@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\PhpPrefixBeforeBinConsole;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class PhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
 {
@@ -23,22 +26,30 @@ final class PhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new PhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber())
+            (new PhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     public function checkProvider(): \Generator
     {
-        yield [null, new RstSample('please execute php bin/console foo')];
-        yield [null, new RstSample('you can use `bin/console` to execute')];
-        yield [null, new RstSample('php "%s/../bin/console"')];
-        yield [null, new RstSample('.. _`copying Symfony\'s bin/console source`: https://github.com/symfony/recipes/blob/master/symfony/console/3.3/bin/console')];
-        yield [null, new RstSample('├─ bin/console')];
-        yield [null, new RstSample('Symfony\Component\Console\Application->run() at /home/greg/demo/bin/console:42')];
-        yield ['Please add "php" prefix before "bin/console"', new RstSample('please execute bin/console foo')];
+        yield [NullViolation::create(), new RstSample('please execute php bin/console foo')];
+        yield [NullViolation::create(), new RstSample('you can use `bin/console` to execute')];
+        yield [NullViolation::create(), new RstSample('php "%s/../bin/console"')];
+        yield [NullViolation::create(), new RstSample('.. _`copying Symfony\'s bin/console source`: https://github.com/symfony/recipes/blob/master/symfony/console/3.3/bin/console')];
+        yield [NullViolation::create(), new RstSample('├─ bin/console')];
+        yield [NullViolation::create(), new RstSample('Symfony\Component\Console\Application->run() at /home/greg/demo/bin/console:42')];
+        yield [
+            Violation::from(
+                'Please add "php" prefix before "bin/console"',
+                'filename',
+                1,
+                ''
+            ),
+            new RstSample('please execute bin/console foo'),
+        ];
     }
 }

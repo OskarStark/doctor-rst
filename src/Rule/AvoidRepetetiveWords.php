@@ -23,7 +23,10 @@ use App\Helper\YamlHelper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure that a word is not used twice in a row.")
@@ -44,7 +47,7 @@ class AvoidRepetetiveWords extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -59,7 +62,7 @@ class AvoidRepetetiveWords extends AbstractRule implements LineContentRule
                 && !TwigHelper::isComment($line)
                 && !YamlHelper::isComment($line)))
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $words = explode(' ', $line->clean()->toString());
@@ -70,11 +73,18 @@ class AvoidRepetetiveWords extends AbstractRule implements LineContentRule
             }
 
             if (isset($words[$key + 1]) && !empty($words[$key + 1]) && 1 < \strlen($word) && $words[$key + 1] === $word && (!is_numeric(rtrim($word, ',')))) {
-                return sprintf('The word "%s" is used more times in a row.', $word);
+                $message = sprintf('The word "%s" is used more times in a row.', $word);
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     private static function whitelist(): array

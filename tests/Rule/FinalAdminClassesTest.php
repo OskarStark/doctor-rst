@@ -15,7 +15,10 @@ namespace App\Tests\Rule;
 
 use App\Rule\FinalAdminClasses;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
 use App\Value\RuleName;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
 {
@@ -33,31 +36,41 @@ final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new FinalAdminClasses())->check($sample->lines(), $sample->lineNumber())
+            (new FinalAdminClasses())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return array<array{0: string|null, 1: RstSample}>
+     * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): array
     {
         return [
             [
-                'Please use "final" for Admin class',
+                Violation::from(
+                    'Please use "final" for Admin class',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('class TestAdmin extends AbstractAdmin'),
             ],
 
             [
-                'Please use "final" for Admin class',
+                Violation::from(
+                    'Please use "final" for Admin class',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('    class TestAdmin extends AbstractAdmin'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('final class TestAdmin extends AbstractAdmin'),
             ],
         ];

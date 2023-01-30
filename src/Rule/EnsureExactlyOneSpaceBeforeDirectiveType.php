@@ -17,7 +17,10 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Ensure exactly one space before directive type.")
@@ -35,19 +38,26 @@ class EnsureExactlyOneSpaceBeforeDirectiveType extends AbstractRule implements L
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!$line->clean()->match('/\.\.\s*[a-z\-]+::/')) {
-            return null;
+            return NullViolation::create();
         }
 
         if (!$line->clean()->match('/\.\.\ [a-z\-]+::/')) {
-            return 'Please use only one whitespace between ".." and the directive type.';
+            $message = 'Please use only one whitespace between ".." and the directive type.';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

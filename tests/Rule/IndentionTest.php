@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\Indention;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class IndentionTest extends \App\Tests\UnitTestCase
 {
@@ -23,19 +26,19 @@ final class IndentionTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, int $size, RstSample $sample): void
+    public function check(ViolationInterface $expected, int $size, RstSample $sample): void
     {
         $rule = (new Indention());
         $rule->setOptions(['size' => $size]);
 
-        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
     public function checkProvider(): \Generator
     {
-        yield [null, 4, new RstSample('')];
+        yield [NullViolation::create(), 4, new RstSample('')];
         yield [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<RST
 Headline
@@ -46,7 +49,7 @@ RST
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<RST
 Headline
@@ -56,7 +59,7 @@ RST
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<RST
 Headline
@@ -66,7 +69,12 @@ RST
         ];
 
         yield 'wrong without blank line' => [
-            'Please add 4 spaces for every indention.',
+            Violation::from(
+                'Please add 4 spaces for every indention.',
+                'filename',
+                1,
+                ''
+            ),
             4,
             new RstSample(<<<RST
 Headline
@@ -77,7 +85,12 @@ RST
         ];
 
         yield 'wrong with blank line' => [
-            'Please add 4 spaces for every indention.',
+            Violation::from(
+                'Please add 4 spaces for every indention.',
+                'filename',
+                1,
+                ''
+            ),
             4,
             new RstSample(<<<RST
 Headline
@@ -89,7 +102,7 @@ RST
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<RST
 .. index::
@@ -116,25 +129,30 @@ Code here::
 RST;
 
         yield 'first line of the php comment' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample($php_comment_example, 4),
         ];
 
         yield 'middle of the php comment' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample($php_comment_example, 5),
         ];
 
         yield 'last line of the php comment' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample($php_comment_example, 6),
         ];
 
         yield 'wrong indention in php DocBlock' => [
-            'Please fix the indention of the PHP DocBlock.',
+            Violation::from(
+                'Please fix the indention of the PHP DocBlock.',
+                'filename',
+                1,
+                ''
+            ),
             4,
             new RstSample(<<<'RST'
 Code here::
@@ -151,7 +169,7 @@ RST
         ];
 
         yield 'valid multiline php comment' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 Code here::
@@ -169,7 +187,7 @@ RST
         ];
 
         yield 'valid multiline php comment 2' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 Code here::
@@ -187,7 +205,7 @@ RST
         ];
 
         yield 'valid multiline php comment 3' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 Code here::
@@ -207,7 +225,7 @@ RST
         ];
 
         yield 'list item (#) first line' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 #. At the beginning of the request, the Firewall checks the firewall map
@@ -217,7 +235,7 @@ RST
         ];
 
         yield 'list item (#) second line' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 #. At the beginning of the request, the Firewall checks the firewall map
@@ -227,7 +245,7 @@ RST
         ];
 
         yield 'list item (*) first line' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 * At the beginning of the request, the Firewall checks the firewall map
@@ -237,7 +255,7 @@ RST
         ];
 
         yield 'list item (*) second line' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 * At the beginning of the request, the Firewall checks the firewall map
@@ -247,7 +265,7 @@ RST
         ];
 
         yield 'comment (rst) first line' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 .. I am a comment
@@ -257,7 +275,7 @@ RST
         ];
 
         yield 'comment (rst) second line' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 .. I am a comment
@@ -267,7 +285,7 @@ RST
         ];
 
         yield 'special char "├─"' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
   ├─ app.php
@@ -276,7 +294,7 @@ RST
         ];
 
         yield 'special char "└─"' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
   └─ ...
@@ -285,7 +303,7 @@ RST
         ];
 
         yield 'twig multiline comment' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 .. code-block:: twig
@@ -297,7 +315,7 @@ RST
         ];
 
         yield 'twig multiline comment on second level' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 Info here:
@@ -311,7 +329,7 @@ RST
         ];
 
         yield 'xml multiline comment' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 .. code-block:: xml
@@ -331,7 +349,7 @@ RST
         ];
 
         yield 'yaml array' => [
-            null,
+            NullViolation::create(),
             4,
             new RstSample(<<<'RST'
 .. code-block:: yaml

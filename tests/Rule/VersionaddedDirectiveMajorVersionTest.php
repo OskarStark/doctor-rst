@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveMajorVersion;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
 final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
@@ -24,62 +27,77 @@ final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCas
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, int $majorVersion, RstSample $sample): void
+    public function check(ViolationInterface $expected, int $majorVersion, RstSample $sample): void
     {
         $rule = new VersionaddedDirectiveMajorVersion(new VersionParser());
         $rule->setOptions([
             'major_version' => $majorVersion,
         ]);
 
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber())
+            $rule->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return array<array{0: string|null, 1: int, 2: RstSample}>
+     * @return array<array{0: ViolationInterface, 1: int, 2: RstSample}>
      */
     public function checkProvider(): array
     {
         return [
             [
-                null,
+                NullViolation::create(),
                 3,
                 new RstSample('.. versionadded:: 3'),
             ],
             [
-                null,
+                NullViolation::create(),
                 3,
                 new RstSample('.. versionadded:: 3.4'),
             ],
             [
-                null,
+                NullViolation::create(),
                 3,
                 new RstSample('.. versionadded:: 3.4.0'),
             ],
             [
-                null,
+                NullViolation::create(),
                 3,
                 new RstSample('.. versionadded:: 3.4.0.0'),
             ],
             [
-                null,
+                NullViolation::create(),
                 3,
                 new RstSample('.. versionadded:: 3.4   '),
             ],
             [
-                'You are not allowed to use version "2.7". Only major version "3" is allowed.',
+                Violation::from(
+                    'You are not allowed to use version "2.7". Only major version "3" is allowed.',
+                    'filename',
+                    1,
+                    ''
+                ),
                 3,
                 new RstSample('.. versionadded:: 2.7'),
             ],
             [
-                'You are not allowed to use version "4.0". Only major version "3" is allowed.',
+                Violation::from(
+                    'You are not allowed to use version "4.0". Only major version "3" is allowed.',
+                    'filename',
+                    1,
+                    ''
+                ),
                 3,
                 new RstSample('.. versionadded:: 4.0'),
             ],
             [
-                'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
+                Violation::from(
+                    'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 3,
                 new RstSample('.. versionadded:: foo'),
             ],

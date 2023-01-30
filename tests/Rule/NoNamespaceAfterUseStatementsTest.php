@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoNamespaceAfterUseStatements;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoNamespaceAfterUseStatements())->check($sample->lines(), $sample->lineNumber())
+            (new NoNamespaceAfterUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -39,7 +42,7 @@ final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
         foreach ($codeBlocks as $codeBlock) {
             // WITH blank line after directive
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -50,7 +53,7 @@ final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
 
             // WITHOUT blank line after directive
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $codeBlock,
                     '    namespace App;',
@@ -63,7 +66,12 @@ final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
         foreach ($codeBlocks as $codeBlock) {
             // WITH blank line after directive
             yield [
-                'Please move the namespace before the use statement(s)',
+                Violation::from(
+                    'Please move the namespace before the use statement(s)',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -74,7 +82,12 @@ final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
 
             // WITHOUT blank line after directive
             yield [
-                'Please move the namespace before the use statement(s)',
+                Violation::from(
+                    'Please move the namespace before the use statement(s)',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '    use Symfony\A;',

@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class UseHttpsXsdUrls extends AbstractRule implements LineContentRule
 {
@@ -26,15 +29,22 @@ class UseHttpsXsdUrls extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if ($matches = $line->raw()->match('/http\:\/\/([^\s]+)\.xsd/')) {
-            return sprintf('Please use "https" for %s', $matches[0]);
+            $message = sprintf('Please use "https" for %s', $matches[0]);
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

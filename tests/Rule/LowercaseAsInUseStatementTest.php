@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\LowercaseAsInUseStatements;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class LowercaseAsInUseStatementTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class LowercaseAsInUseStatementTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new LowercaseAsInUseStatements())->check($sample->lines(), $sample->lineNumber())
+            (new LowercaseAsInUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -39,7 +42,7 @@ final class LowercaseAsInUseStatementTest extends \App\Tests\UnitTestCase
         foreach ($codeBlocks as $codeBlock) {
             // WITH blank line after directive
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -49,7 +52,7 @@ final class LowercaseAsInUseStatementTest extends \App\Tests\UnitTestCase
 
             // WITHOUT blank line after directive
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $codeBlock,
                     '    use Symfony\A as A;',
@@ -62,7 +65,12 @@ final class LowercaseAsInUseStatementTest extends \App\Tests\UnitTestCase
             foreach (['AS', 'As', 'aS'] as $invalid) {
                 // WITH blank line after directive
                 yield [
-                    sprintf('Please use lowercase "as" instead of "%s"', $invalid),
+                    Violation::from(
+                        sprintf('Please use lowercase "as" instead of "%s"', $invalid),
+                        'filename',
+                        1,
+                        ''
+                    ),
                     new RstSample([
                         $codeBlock,
                         '',
@@ -72,7 +80,12 @@ final class LowercaseAsInUseStatementTest extends \App\Tests\UnitTestCase
 
                 // WITHOUT blank line after directive
                 yield [
-                    sprintf('Please use lowercase "as" instead of "%s"', $invalid),
+                    Violation::from(
+                        sprintf('Please use lowercase "as" instead of "%s"', $invalid),
+                        'filename',
+                        1,
+                        ''
+                    ),
                     new RstSample([
                         $codeBlock,
                         sprintf('    use Symfony\A %s A;', $invalid),

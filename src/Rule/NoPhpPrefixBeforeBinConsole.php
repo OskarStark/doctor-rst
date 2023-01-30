@@ -17,7 +17,10 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Ensure `bin/console` is not prefixed with `php`.")
@@ -33,15 +36,22 @@ class NoPhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRul
         return [RuleGroup::Sonata()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if ($line->raw()->match('/php bin\/console/')) {
-            return 'Please remove "php" prefix before "bin/console"';
+            $message = 'Please remove "php" prefix before "bin/console"';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

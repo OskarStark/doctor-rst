@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class NoAdminYaml extends AbstractRule implements LineContentRule
 {
@@ -23,23 +26,37 @@ class NoAdminYaml extends AbstractRule implements LineContentRule
         return [RuleGroup::Sonata()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current()->raw();
 
         if ($line->match('/_admin\.yaml/')) {
-            return null;
+            return NullViolation::create();
         }
 
         if ($line->match('/admin\.yml/')) {
-            return 'Please use "services.yaml" instead of "admin.yml"';
+            $message = 'Please use "services.yaml" instead of "admin.yml"';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
         if ($line->match('/admin\.yaml/')) {
-            return 'Please use "services.yaml" instead of "admin.yaml"';
+            $message = 'Please use "services.yaml" instead of "admin.yaml"';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

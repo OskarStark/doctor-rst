@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\OnlyBackslashesInNamespaceInPhpCodeBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new OnlyBackslashesInNamespaceInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber())
+            (new OnlyBackslashesInNamespaceInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -35,7 +38,12 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
-                'Please check "namespace App/Handler;", it should not contain "/"',
+                Violation::from(
+                    'Please check "namespace App/Handler;", it should not contain "/"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -46,7 +54,12 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
             ];
 
             yield [
-                'Please check "NaMeSpaCe App/Handler;", it should not contain "/"',
+                Violation::from(
+                    'Please check "NaMeSpaCe App/Handler;", it should not contain "/"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -58,7 +71,12 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
         }
 
         yield [
-            'Please check "namespace App/Handler;", it should not contain "/"',
+            Violation::from(
+                'Please check "namespace App/Handler;", it should not contain "/"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '::',
                 '',
@@ -69,7 +87,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }

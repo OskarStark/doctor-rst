@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureExactlyOneSpaceBeforeDirectiveType;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\UnitTestCase
 {
@@ -24,16 +27,16 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new EnsureExactlyOneSpaceBeforeDirectiveType())->check($sample->lines(), $sample->lineNumber())
+            (new EnsureExactlyOneSpaceBeforeDirectiveType())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<string, array{0: null, 1: RstSample}>
+     * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
     public function validProvider(): \Generator
     {
@@ -44,14 +47,14 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
 
         foreach ($validCases as $validCase) {
             yield $validCase => [
-                null,
+                NullViolation::create(),
                 new RstSample($validCase),
             ];
         }
     }
 
     /**
-     * @return \Generator<string, array{0: string, 1: RstSample}>
+     * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
     public function invalidProvider(): \Generator
     {
@@ -63,7 +66,12 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
 
         foreach ($invalidCases as $invalidCase) {
             yield $invalidCase => [
-                'Please use only one whitespace between ".." and the directive type.',
+                Violation::from(
+                    'Please use only one whitespace between ".." and the directive type.',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample($invalidCase),
             ];
         }

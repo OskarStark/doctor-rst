@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class MaxBlankLines extends AbstractRule implements LineContentRule, Configurable
@@ -54,12 +57,12 @@ class MaxBlankLines extends AbstractRule implements LineContentRule, Configurabl
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
 
         if (!$lines->current()->isBlank()) {
-            return null;
+            return NullViolation::create();
         }
 
         $blanklines = 1;
@@ -73,9 +76,16 @@ class MaxBlankLines extends AbstractRule implements LineContentRule, Configurabl
         }
 
         if ($blanklines > $this->max) {
-            return sprintf('Please use max %s blank lines, you used %s', $this->max, $blanklines);
+            $message = sprintf('Please use max %s blank lines, you used %s', $this->max, $blanklines);
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

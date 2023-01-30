@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterColon;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
 {
@@ -23,31 +26,31 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new BlankLineAfterColon())->check($sample->lines(), $sample->lineNumber())
+            (new BlankLineAfterColon())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp:'),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 'For example:',
                 '',
@@ -56,7 +59,12 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            'Please add a blank line after "For example:"',
+            Violation::from(
+                'Please add a blank line after "For example:"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 'For example:',
                 'For example::',
@@ -64,7 +72,7 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: yaml',
                 '',
@@ -74,7 +82,7 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: yml',
                 '    :option:',
@@ -85,7 +93,7 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '',
                 '.. _env-var-processors:',

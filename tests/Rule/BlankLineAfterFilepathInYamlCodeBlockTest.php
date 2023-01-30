@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInYamlCodeBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class BlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTestCase
 {
@@ -23,21 +26,26 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTes
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInYamlCodeBlock())->check($sample->lines(), $sample->lineNumber())
+            (new BlankLineAfterFilepathInYamlCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            'Please add a blank line after "# config/services.yml"',
+            Violation::from(
+                'Please add a blank line after "# config/services.yml"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: yml',
                 '',
@@ -46,7 +54,7 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: yml',
                 '',
@@ -56,7 +64,12 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            'Please add a blank line after "# config/services.yaml"',
+            Violation::from(
+                'Please add a blank line after "# config/services.yaml"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: yaml',
                 '',
@@ -65,7 +78,7 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: yaml',
                 '',
@@ -75,7 +88,7 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: yaml',
                 '',
@@ -85,7 +98,7 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }

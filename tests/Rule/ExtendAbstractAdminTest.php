@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\ExtendAbstractAdmin;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new ExtendAbstractAdmin())->check($sample->lines(), $sample->lineNumber())
+            (new ExtendAbstractAdmin())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -35,36 +38,56 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
     {
         return [
             [
-                'Please extend AbstractAdmin instead of Admin',
+                Violation::from(
+                    'Please extend AbstractAdmin instead of Admin',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('class TestAdmin extends Admin'),
             ],
 
             [
-                'Please extend AbstractAdmin instead of Admin',
+                Violation::from(
+                    'Please extend AbstractAdmin instead of Admin',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('    class TestAdmin extends Admin'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('class TestAdmin extends AbstractAdmin'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('    class TestAdmin extends AbstractAdmin'),
             ],
             [
-                'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
+                Violation::from(
+                    'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('use Sonata\AdminBundle\Admin\Admin;'),
             ],
             [
-                'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
+                Violation::from(
+                    'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('    use Sonata\AdminBundle\Admin\Admin;'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('use Sonata\AdminBundle\Admin\AbstractAdmin;'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('    use Sonata\AdminBundle\Admin\AbstractAdmin;'),
             ],
         ];

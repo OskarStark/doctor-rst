@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\DeprecatedDirectiveMajorVersion;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
 final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
@@ -24,56 +27,71 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, int $majorVersion, RstSample $sample): void
+    public function check(ViolationInterface $expected, int $majorVersion, RstSample $sample): void
     {
         $rule = (new DeprecatedDirectiveMajorVersion(new VersionParser()));
         $rule->setOptions(['major_version' => $majorVersion]);
 
-        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: int, 2: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: int, 2: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             3,
             new RstSample('.. deprecated:: 3'),
         ];
         yield [
-            null,
+            NullViolation::create(),
             3,
             new RstSample('.. deprecated:: 3.4'),
         ];
         yield [
-            null,
+            NullViolation::create(),
             3,
             new RstSample('.. deprecated:: 3.4.0'),
         ];
         yield [
-            null,
+            NullViolation::create(),
             3,
             new RstSample('.. deprecated:: 3.4.0.0'),
         ];
         yield [
-            null,
+            NullViolation::create(),
             3,
             new RstSample('.. deprecated:: 3.4   '),
         ];
         yield [
-            'You are not allowed to use version "2.7". Only major version "3" is allowed.',
+            Violation::from(
+                'You are not allowed to use version "2.7". Only major version "3" is allowed.',
+                'filename',
+                1,
+                ''
+            ),
             3,
             new RstSample('.. deprecated:: 2.7'),
         ];
         yield [
-            'You are not allowed to use version "4.0". Only major version "3" is allowed.',
+            Violation::from(
+                'You are not allowed to use version "4.0". Only major version "3" is allowed.',
+                'filename',
+                1,
+                ''
+            ),
             3,
             new RstSample('.. deprecated:: 4.0'),
         ];
         yield [
-            'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
+            Violation::from(
+                'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
+                'filename',
+                1,
+                ''
+            ),
             3,
             new RstSample('.. deprecated:: foo'),
         ];

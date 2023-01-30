@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class NoPhpPrefixBeforeComposer extends AbstractRule implements LineContentRule
 {
@@ -23,15 +26,22 @@ class NoPhpPrefixBeforeComposer extends AbstractRule implements LineContentRule
         return [RuleGroup::Sonata()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if ($line->raw()->match('/php composer/')) {
-            return 'Please remove "php" prefix';
+            $message = 'Please remove "php" prefix';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\ExtendController;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class ExtendControllerTest extends \App\Tests\UnitTestCase
 {
@@ -23,52 +26,72 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new ExtendController())->check($sample->lines(), $sample->lineNumber())
+            (new ExtendController())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return array<array{0: string|null, 1: RstSample}>
+     * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): array
     {
         return [
             [
-                'Please extend Controller instead of AbstractController',
+                Violation::from(
+                    'Please extend Controller instead of AbstractController',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('class TestController extends AbstractController'),
             ],
 
             [
-                'Please extend Controller instead of AbstractController',
+                Violation::from(
+                    'Please extend Controller instead of AbstractController',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('    class TestController extends AbstractController'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('class TestController extends Controller'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('    class TestController extends Controller'),
             ],
             [
-                'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
+                Violation::from(
+                    'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
             ],
 
             [
-                'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
+                Violation::from(
+                    'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('use Symfony\Bundle\FrameworkBundle\Controller\Controller;'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('    use Symfony\Bundle\FrameworkBundle\Controller\Controller;'),
             ],
         ];

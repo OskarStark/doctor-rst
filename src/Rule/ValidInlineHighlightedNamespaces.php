@@ -18,7 +18,10 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Helper\PhpHelper;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Ensures to have 2 backslashes when highlighting a namespace to have valid output.")
@@ -39,7 +42,7 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -52,7 +55,14 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
                 }
 
                 if (PhpHelper::isUsingTwoBackslashes($lala = str_replace('``', '', $occurence))) {
-                    return sprintf('Please use 1 backslash when highlighting a namespace with double backticks: %s', $occurence);
+                    $message = sprintf('Please use 1 backslash when highlighting a namespace with double backticks: %s', $occurence);
+
+                    return Violation::from(
+                        $message,
+                        $filename,
+                        1,
+                        ''
+                    );
                 }
             }
 
@@ -66,7 +76,14 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
                 }
 
                 if (!PhpHelper::isUsingTwoBackslashes(str_replace('`', '', $occurence))) {
-                    return sprintf('Please use 2 backslashes when highlighting a namespace with single backticks: %s', $occurence);
+                    $message = sprintf('Please use 2 backslashes when highlighting a namespace with single backticks: %s', $occurence);
+
+                    return Violation::from(
+                        $message,
+                        $filename,
+                        1,
+                        ''
+                    );
                 }
             }
 
@@ -74,6 +91,6 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
         }
 
         end:
-        return null;
+        return NullViolation::create();
     }
 }

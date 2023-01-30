@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\LineLength;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class LineLengthTest extends \App\Tests\UnitTestCase
 {
@@ -23,24 +26,29 @@ final class LineLengthTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, int $max, RstSample $sample): void
+    public function check(ViolationInterface $expected, int $max, RstSample $sample): void
     {
         $rule = (new LineLength());
         $rule->setOptions(['max' => $max]);
 
-        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
     public function checkProvider(): array
     {
         return [
             [
-                'Line is to long (max 20) currently: 23',
+                Violation::from(
+                    'Line is to long (max 20) currently: 23',
+                    'filename',
+                    1,
+                    ''
+                ),
                 20,
                 new RstSample('This is a cool sentence'),
             ],
             [
-                null,
+                NullViolation::create(),
                 20,
                 new RstSample('This is a sentence'),
             ],

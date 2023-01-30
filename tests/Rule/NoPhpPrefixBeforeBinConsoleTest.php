@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoPhpPrefixBeforeBinConsole;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoPhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber())
+            (new NoPhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -35,11 +38,16 @@ final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
     {
         return [
             [
-                'Please remove "php" prefix before "bin/console"',
+                Violation::from(
+                    'Please remove "php" prefix before "bin/console"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('please execute php bin/console foo'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('please execute bin/console foo'),
             ],
         ];

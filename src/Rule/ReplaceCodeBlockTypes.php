@@ -16,7 +16,10 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Propose alternatives for disallowed code block types.")
@@ -31,16 +34,23 @@ class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (RstParser::codeBlockDirectiveIsTypeOf($line, $this->search, true)) {
-            return $this->message;
+            $message = $this->message;
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     public static function getDefaultMessage(): string

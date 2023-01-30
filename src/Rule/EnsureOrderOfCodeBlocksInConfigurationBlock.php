@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Webmozart\Assert\Assert;
 
 class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implements LineContentRule
@@ -28,13 +31,13 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_CONFIGURATION_BLOCK)) {
-            return null;
+            return NullViolation::create();
         }
 
         $indention = $line->indention();
@@ -104,17 +107,31 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         if ($onlyPhpSymfonyAndPhpStandalone
             && !$this->equal($codeBlocks, $validOrderOnlyPhpSymfonyAndPhpStandalone)
         ) {
-            return sprintf(
+            $message = sprintf(
                 'Please use the following order for your code blocks: "%s"',
                 str_replace('.. code-block:: ', '', implode(', ', $validOrderOnlyPhpSymfonyAndPhpStandalone))
+            );
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
             );
         }
 
         // no xliff
         if (!$xliff && !$this->equal($codeBlocks, $validOrder) && 1 !== \count($validOrder)) {
-            return sprintf(
+            $message = sprintf(
                 'Please use the following order for your code blocks: "%s"',
                 str_replace('.. code-block:: ', '', implode(', ', $validOrder))
+            );
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
             );
         }
 
@@ -126,13 +143,20 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         }
 
         if ($xliff && !$this->equal($codeBlocks, $validXliffOrder) && !$this->equal($codeBlocks, $validOrder)) {
-            return sprintf(
+            $message = sprintf(
                 'Please use the following order for your code blocks: "%s"',
                 str_replace('.. code-block:: ', '', implode(', ', $validXliffOrder))
             );
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     public function equal(array $codeBlocks, array $validOrder): bool

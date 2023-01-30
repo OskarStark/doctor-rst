@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\DeprecatedDirectiveShouldHaveVersion;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
 final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTestCase
@@ -24,42 +27,52 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTest
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
             (new DeprecatedDirectiveShouldHaveVersion(new VersionParser()))
-                ->check($sample->lines(), $sample->lineNumber())
+                ->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('.. deprecated:: 1'),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('.. deprecated:: 1.2'),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('.. deprecated:: 1.2.0'),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('.. deprecated:: 1.2   '),
         ];
         yield [
-            'Please provide a version behind ".. deprecated::"',
+            Violation::from(
+                'Please provide a version behind ".. deprecated::"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('.. deprecated::'),
         ];
         yield [
-            'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
+            Violation::from(
+                'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('.. deprecated:: foo'),
         ];
     }

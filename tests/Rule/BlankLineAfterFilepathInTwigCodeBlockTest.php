@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInTwigCodeBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTestCase
 {
@@ -23,21 +26,26 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines(), $sample->lineNumber())
+            (new BlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            'Please add a blank line after "{# templates/index.html.twig #}"',
+            Violation::from(
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: twig',
                 '',
@@ -46,7 +54,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: twig',
                 '',
@@ -56,7 +64,12 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            'Please add a blank line after "{# templates/index.html.twig #}"',
+            Violation::from(
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: jinja',
                 '',
@@ -65,7 +78,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: jinja',
                 '',
@@ -75,7 +88,12 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            'Please add a blank line after "{# templates/index.html.twig #}"',
+            Violation::from(
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: html+jinja',
                 '',
@@ -84,7 +102,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: html+jinja',
                 '',
@@ -94,7 +112,12 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            'Please add a blank line after "{# templates/index.html.twig #}"',
+            Violation::from(
+                'Please add a blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample([
                 '.. code-block:: html+twig',
                 '',
@@ -103,7 +126,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: html+twig',
                 '',
@@ -113,7 +136,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample([
                 '.. code-block:: html+twig',
                 '',
@@ -123,7 +146,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             ]),
         ];
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }

@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureOrderOfCodeBlocksInConfigurationBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\UnitTestCase
 {
@@ -24,16 +27,16 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\U
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new EnsureOrderOfCodeBlocksInConfigurationBlock())->check($sample->lines(), $sample->lineNumber())
+            (new EnsureOrderOfCodeBlocksInConfigurationBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function validProvider(): \Generator
     {
@@ -223,37 +226,37 @@ RST;
 RST;
 
         yield 'valid 1' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid),
         ];
         yield 'valid 2' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid2),
         ];
         yield 'valid 3' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid3),
         ];
         yield 'first invalid, but valid because of xliff' => [
-            null,
+            NullViolation::create(),
             new RstSample($invalid_but_valid_because_of_xliff),
         ];
         yield 'valid too with xliff' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_too_with_xliff),
         ];
         yield 'valid all the same' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid_all_the_same),
         ];
         yield 'translation debug' => [
-            null,
+            NullViolation::create(),
             new RstSample($translationDebug),
         ];
     }
 
     /**
-     * @return \Generator<array{0: string, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function invalidProvider(): \Generator
     {
@@ -318,15 +321,30 @@ RST;
 RST;
 
         yield [
-            'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
+            Violation::from(
+                'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample($invalid),
         ];
         yield [
-            'Please use the following order for your code blocks: "php-annotations, php-attributes, yaml, xml, php"',
+            Violation::from(
+                'Please use the following order for your code blocks: "php-annotations, php-attributes, yaml, xml, php"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample($invalid2),
         ];
         yield [
-            'Please use the following order for your code blocks: "php-symfony, php-standalone"',
+            Violation::from(
+                'Please use the following order for your code blocks: "php-symfony, php-standalone"',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample($invalid3),
         ];
     }

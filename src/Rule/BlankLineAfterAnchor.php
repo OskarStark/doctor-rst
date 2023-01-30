@@ -16,7 +16,10 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure you have a blank line after anchor (`.. anchor:`).")
@@ -31,19 +34,19 @@ class BlankLineAfterAnchor extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if ($line->isBlank() || !RstParser::isAnchor($lines->current())) {
-            return null;
+            return NullViolation::create();
         }
 
         $lines->next();
 
         if (!$lines->valid()) {
-            return null;
+            return NullViolation::create();
         }
 
         while ($lines->valid() && RstParser::isAnchor($lines->current())) {
@@ -51,12 +54,19 @@ class BlankLineAfterAnchor extends AbstractRule implements LineContentRule
         }
 
         if ($lines->current()->isBlank()) {
-            return null;
+            return NullViolation::create();
         }
 
-        return sprintf(
+        $message = sprintf(
             'Please add a blank line after the anchor "%s"',
             $line->clean()->toString()
+        );
+
+        return Violation::from(
+            $message,
+            $filename,
+            1,
+            ''
         );
     }
 }

@@ -16,7 +16,10 @@ namespace App\Rule;
 use App\Helper\XmlHelper;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements LineContentRule
 {
@@ -25,13 +28,13 @@ class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Lin
         return [RuleGroup::Symfony()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_XML)) {
-            return null;
+            return NullViolation::create();
         }
 
         $lines->next();
@@ -39,23 +42,30 @@ class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Lin
 
         // XML
         if (preg_match('/^<!--(.*)\.(xml|xlf|xliff)(.*)-->$/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches);
+            return $this->validateBlankLine($lines, $matches, $filename);
         }
 
-        return null;
+        return NullViolation::create();
     }
 
-    private function validateBlankLine(Lines $lines, array $matches): ?string
+    private function validateBlankLine(Lines $lines, array $matches, string $filename): ViolationInterface
     {
         $lines->next();
 
         if ($lines->current()->isBlank()) {
             $lines->next();
             if (!XmlHelper::isComment($lines->current())) {
-                return sprintf('Please remove blank line after "%s"', trim($matches[0]));
+                $message = sprintf('Please remove blank line after "%s"', trim($matches[0]));
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
         }
 
-        return null;
+        return NullViolation::create();
     }
 }
