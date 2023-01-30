@@ -43,12 +43,23 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
 
         $validOrder = self::validOrder();
         $validXliffOrder = self::validOrderIncludingXliff();
+        $validOrderOnlyPhpSymfonyAndPhpStandalone = self::validOrderOnlyPhpSymfonyAndPhpStandalone();
 
         $xliff = false;
+        $phpSymfony = false;
+        $phpStandalone = false;
 
         $codeBlocks = [];
         while ($lines->valid() && ($indention < $lines->current()->indention() || $lines->current()->isBlank())) {
             if (RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CODE_BLOCK)) {
+                if ($lines->current()->raw()->endsWith(RstParser::CODE_BLOCK_PHP_SYMFONY)) {
+                    $phpSymfony = true;
+                }
+
+                if ($lines->current()->raw()->endsWith(RstParser::CODE_BLOCK_PHP_STANDALONE)) {
+                    $phpStandalone = true;
+                }
+
                 $codeBlocks[] = $lines->current()->clean()->toString();
 
                 // if its an xml code-block, check if it contains xliff
@@ -72,6 +83,11 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             $lines->next();
         }
 
+        $onlyPhpSymfonyAndPhpStandalone = false;
+        if ($phpSymfony && $phpStandalone && 2 === \count($codeBlocks)) {
+            $onlyPhpSymfonyAndPhpStandalone = true;
+        }
+
         foreach ($codeBlocks as $key => $codeBlock) {
             if (!\in_array($codeBlock, $validOrder, true)) {
                 unset($codeBlocks[$key]);
@@ -82,6 +98,16 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             if (!\in_array($order, $codeBlocks, true)) {
                 unset($validOrder[$key]);
             }
+        }
+
+        // only php-symfony and php-standalone
+        if ($onlyPhpSymfonyAndPhpStandalone
+            && !$this->equal($codeBlocks, $validOrderOnlyPhpSymfonyAndPhpStandalone)
+        ) {
+            return sprintf(
+                'Please use the following order for your code blocks: "%s"',
+                str_replace('.. code-block:: ', '', implode(', ', $validOrderOnlyPhpSymfonyAndPhpStandalone))
+            );
         }
 
         // no xliff
@@ -124,12 +150,12 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
     {
         return [
             '.. code-block:: php-symfony',
-            '.. code-block:: php-standalone',
             '.. code-block:: php-annotations',
             '.. code-block:: php-attributes',
             '.. code-block:: yaml',
             '.. code-block:: xml',
             '.. code-block:: php',
+            '.. code-block:: php-standalone',
         ];
     }
 
@@ -141,6 +167,14 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             '.. code-block:: php-attributes',
             '.. code-block:: yaml',
             '.. code-block:: php',
+        ];
+    }
+
+    private static function validOrderOnlyPhpSymfonyAndPhpStandalone(): array
+    {
+        return [
+            '.. code-block:: php-symfony',
+            '.. code-block:: php-standalone',
         ];
     }
 }

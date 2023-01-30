@@ -44,10 +44,6 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\U
 
         test
 
-    .. code-block:: php-standalone
-
-        test
-
     .. code-block:: php-annotations
 
         test
@@ -67,6 +63,10 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\U
     .. code-block:: php
 
         test
+        
+    .. code-block:: php-standalone
+
+        test        
 RST;
 
         $valid2 = <<<RST
@@ -78,11 +78,7 @@ RST;
         
     .. code-block:: php-symfony
 
-        test
-
-    .. code-block:: php-standalone
-
-        test        
+        test  
 
     .. code-block:: php-annotations
 
@@ -101,6 +97,22 @@ RST;
         test
         
     .. code-block:: php
+
+        test
+        
+    .. code-block:: php-standalone
+
+        test
+RST;
+
+        $valid3 = <<<RST
+.. configuration-block::
+
+    .. code-block:: php-symfony
+
+        test
+        
+    .. code-block:: php-standalone
 
         test
 RST;
@@ -218,6 +230,10 @@ RST;
             null,
             new RstSample($valid2),
         ];
+        yield 'valid 3' => [
+            null,
+            new RstSample($valid3),
+        ];
         yield 'first invalid, but valid because of xliff' => [
             null,
             new RstSample($invalid_but_valid_because_of_xliff),
@@ -289,6 +305,18 @@ RST;
         test         
 RST;
 
+        $invalid3 = <<<RST
+.. configuration-block::
+
+    .. code-block:: php-standalone
+
+        test
+
+    .. code-block:: php-symfony
+
+        test
+RST;
+
         yield [
             'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
             new RstSample($invalid),
@@ -296,6 +324,10 @@ RST;
         yield [
             'Please use the following order for your code blocks: "php-annotations, php-attributes, yaml, xml, php"',
             new RstSample($invalid2),
+        ];
+        yield [
+            'Please use the following order for your code blocks: "php-symfony, php-standalone"',
+            new RstSample($invalid3),
         ];
     }
 }
