@@ -22,7 +22,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure exactly one space between link definition and link.")
+ *
  * @InvalidExample(".. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST")
+ *
  * @ValidExample(".. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST")
  */
 class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule implements LineContentRule

@@ -21,7 +21,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure exactly one space before directive type.")
+ *
  * @InvalidExample("..  code-block:: php")
+ *
  * @ValidExample(".. code-block:: php")
  */
 class EnsureExactlyOneSpaceBeforeDirectiveType extends AbstractRule implements LineContentRule

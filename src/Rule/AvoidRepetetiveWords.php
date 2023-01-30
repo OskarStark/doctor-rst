@@ -27,7 +27,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Make sure that a word is not used twice in a row.")
+ *
  * @ValidExample("Please do not use it this way...")
+ *
  * @InvalidExample("Please do not not use it this way...")
  */
 class AvoidRepetetiveWords extends AbstractRule implements LineContentRule

@@ -22,7 +22,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Make sure you have max 2 colons (`::`).")
+ *
  * @InvalidExample("composer require --dev symfony/var-dumper")
+ *
  * @ValidExample("composer require symfony/var-dumper --dev")
  */
 final class MaxColons extends AbstractRule implements LineContentRule

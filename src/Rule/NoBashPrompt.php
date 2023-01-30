@@ -22,7 +22,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure no bash prompt `$` is used before commands in `bash`, `shell` or `terminal` code blocks.")
+ *
  * @InvalidExample("$ bin/console list")
+ *
  * @ValidExample("bin/console list")
  */
 class NoBashPrompt extends AbstractRule implements LineContentRule
