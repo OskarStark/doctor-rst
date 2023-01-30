@@ -43,7 +43,11 @@ final class ConsoleFormatterTest extends \App\Tests\UnitTestCase
             new ExcludedViolationList([], [])
         );
 
-        $analyzerResult = new AnalyzerResult([$fileResultWithViolations, $validFileResult]);
+        $analyzerResult = new AnalyzerResult([$fileResultWithViolations, $validFileResult], [
+            'regex' => [
+                '/foo/',
+            ],
+        ]);
 
         (new ConsoleFormatter())->format($style, $analyzerResult, $analyzeDir, true);
 
@@ -53,6 +57,8 @@ docs/index.rst ✘
    ->  dummy text
 
 docs/tutorial/introduction_one.rst ✔
+
+ [WARNING] Whitelisted regex "/foo/" was not matched.                           
 
  [WARNING] Found "1" invalid file!                                              
 

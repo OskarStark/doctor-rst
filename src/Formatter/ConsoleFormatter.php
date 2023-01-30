@@ -38,6 +38,24 @@ class ConsoleFormatter implements Formatter
             }
         }
 
+        if ($unusedWhitelistRegex = $analyzerResult->getUnusedWhitelistRules()['regex']) {
+            foreach ($unusedWhitelistRegex as $rule) {
+                $style->warning(sprintf(
+                    'Whitelisted regex "%s" was not matched.',
+                    $rule
+                ));
+            }
+        }
+
+        if ($unusedWhitelistLines = $analyzerResult->getUnusedWhitelistRules()['lines']) {
+            foreach ($unusedWhitelistLines as $rule) {
+                $style->warning(sprintf(
+                    'Whitelisted line "%s" was not matched.',
+                    $rule
+                ));
+            }
+        }
+
         if ($violatedFiles > 0) {
             $style->warning(sprintf(
                 'Found "%s" invalid %s!',

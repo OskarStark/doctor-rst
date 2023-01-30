@@ -2,6 +2,7 @@ name: "Documentation"
 
 on: # yamllint disable-line rule:truthy
     push:
+    pull_request: ~
 
 env:
     COMMITTER_EMAIL: "oskarstark@googlemail.com"
@@ -29,7 +30,7 @@ jobs:
 
             -
                 name: "Install PHP with extensions"
-                uses: "shivammathur/setup-php@2.23.0"
+                uses: "shivammathur/setup-php@2.24.0"
                 with:
                     coverage: "none"
                     extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
