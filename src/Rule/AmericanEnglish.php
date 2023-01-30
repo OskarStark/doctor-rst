@@ -21,7 +21,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure only American English is used.")
+ *
  * @InvalidExample("This is a nice behaviour...")
+ *
  * @ValidExample("This is a nice behavior...")
  */
 class AmericanEnglish extends CheckListRule implements LineContentRule

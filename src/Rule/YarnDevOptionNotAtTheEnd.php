@@ -20,7 +20,9 @@ use App\Value\Lines;
 
 /**
  * @Description("Make sure yarn `--dev` option for `add` command is used at the end.")
+ *
  * @ValidExample("yarn add --dev jquery")
+ *
  * @InvalidExample("yarn add jquery --dev")
  */
 class YarnDevOptionNotAtTheEnd extends AbstractRule implements LineContentRule

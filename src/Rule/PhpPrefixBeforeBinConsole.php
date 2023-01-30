@@ -22,7 +22,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure `bin/console` is prefixed with `php` to be safe executable on Microsoft Windows.")
+ *
  * @InvalidExample("bin/console list")
+ *
  * @ValidExample("php bin/console list")
  */
 class PhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule

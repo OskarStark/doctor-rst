@@ -23,7 +23,9 @@ use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensure a space between label and link in :ref: directive.")
+ *
  * @InvalidExample(":ref:`receiving them via a worker<messenger-worker>`")
+ *
  * @ValidExample(":ref:`receiving them via a worker <messenger-worker>`")
  */
 class SpaceBetweenLabelAndLinkInRef extends AbstractRule implements LineContentRule
