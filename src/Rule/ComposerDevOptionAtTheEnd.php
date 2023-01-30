@@ -21,7 +21,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Make sure Composer `--dev` option for `require` command is used at the end.")
+ *
  * @InvalidExample("composer require --dev symfony/var-dumper")
+ *
  * @ValidExample("composer require symfony/var-dumper --dev")
  */
 class ComposerDevOptionAtTheEnd extends AbstractRule implements LineContentRule

@@ -23,7 +23,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure link definition contains valid link.")
+ *
  * @InvalidExample(".. _DOCtor-RST: htt//github.com/OskarStark/DOCtor-RST")
+ *
  * @ValidExample(".. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST")
  */
 class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineContentRule

@@ -23,7 +23,9 @@ use Composer\Semver\VersionParser;
 
 /**
  * @Description("Ensure a versionadded directive has a version which follows SemVer.")
+ *
  * @ValidExample(".. versionadded:: 3.4")
+ *
  * @InvalidExample({".. versionadded::", ".. versionadded:: foo-bar"})
  */
 class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule

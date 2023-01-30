@@ -22,8 +22,10 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Ensures to have 2 backslashes when highlighting a namespace to have valid output.")
+ *
  * @ValidExample("``App\Entity\Foo``")
  * @ValidExample("`App\\Entity\\Foo`")
+ *
  * @InvalidExample("``App\\Entity\\Foo``")
  * @InvalidExample("`App\Entity\Foo`")
  */

@@ -22,7 +22,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("A use statement in a PHP code-block should only contain backslashes.")
+ *
  * @InvalidExample("use Foo/Bar;")
+ *
  * @ValidExample("use Foo\Bar;")
  */
 class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implements LineContentRule

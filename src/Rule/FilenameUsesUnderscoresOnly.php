@@ -22,7 +22,9 @@ use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensures a filename uses only underscores (`_`).")
+ *
  * @InvalidExample("custom-extensions.rst")
+ *
  * @ValidExample("custom_extensions.rst")
  * @ValidExample("_custom_extensions.rst")
  */

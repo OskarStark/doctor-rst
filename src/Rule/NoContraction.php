@@ -21,7 +21,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure contractions are not used.")
+ *
  * @InvalidExample("It's an example")
+ *
  * @ValidExample("It is an example")
  */
 class NoContraction extends CheckListRule implements LineContentRule

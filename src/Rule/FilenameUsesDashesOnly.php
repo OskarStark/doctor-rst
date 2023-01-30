@@ -22,7 +22,9 @@ use function Symfony\Component\String\u;
 
 /**
  * @Description("Ensures a filename uses only dashes (`-`), but are allowed to start with underscore (`_`). It is a common practice to prefix included files with underscores (`_`).")
+ *
  * @InvalidExample("custom_extensions.rst")
+ *
  * @ValidExample({"custom-extensions.rst", "_custom-extensions.rst"})
  */
 final class FilenameUsesDashesOnly extends AbstractRule implements FileInfoRule

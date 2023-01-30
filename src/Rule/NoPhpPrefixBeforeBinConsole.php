@@ -21,7 +21,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("Ensure `bin/console` is not prefixed with `php`.")
+ *
  * @InvalidExample("php bin/console list")
+ *
  * @ValidExample("bin/console list")
  */
 class NoPhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule

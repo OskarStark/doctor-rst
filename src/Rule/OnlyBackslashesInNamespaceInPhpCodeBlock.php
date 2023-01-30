@@ -22,7 +22,9 @@ use App\Value\RuleGroup;
 
 /**
  * @Description("A namespace declaration in a PHP code-block should only contain backslashes.")
+ *
  * @InvalidExample("namespace Foo/Bar;")
+ *
  * @ValidExample("namespace Foo\Bar;")
  */
 class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements LineContentRule

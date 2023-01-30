@@ -23,7 +23,9 @@ use Composer\Semver\VersionParser;
 
 /**
  * @Description("Ensure a deprecated directive has a version which follows SemVer.")
+ *
  * @ValidExample(".. deprecated:: 3.4")
+ *
  * @InvalidExample({".. deprecated::", ".. deprecated:: foo-bar"})
  */
 class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
