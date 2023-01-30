@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\UseDeprecatedDirectiveInsteadOfVersionadded;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\UnitTestCase
 {
@@ -24,22 +27,22 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->lines(), $sample->lineNumber())
+            (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return array<int|string, array{0: null, 1: RstSample}>
+     * @return array<int|string, array{0: ViolationInterface, 1: RstSample}>
      */
     public function validProvider(): array
     {
         return [
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. versionadded:: 3.4',
                     '',
@@ -47,14 +50,14 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. versionadded:: 3.4',
                     '    Foo was added in Symfony 3.4.',
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. deprecated:: 3.4',
                     '',
@@ -62,14 +65,14 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. deprecated:: 3.4',
                     '    Foo was deprecated in Symfony 3.4.',
                 ]),
             ],
             'versionadded directive with deprecated option' => [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. versionadded:: 4.3',
                     '    The ``deprecated`` option for service aliases was introduced in Symfony 4.3.',
@@ -79,13 +82,18 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
     }
 
     /**
-     * @return array<array{0: string, 1: RstSample}>
+     * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
     public function invalidProvider(): array
     {
         return [
             [
-                'Please use ".. deprecated::" instead of ".. versionadded::"',
+                Violation::from(
+                    'Please use ".. deprecated::" instead of ".. versionadded::"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. versionadded:: 3.4',
                     '',
@@ -93,7 +101,12 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
                 ]),
             ],
             [
-                'Please use ".. deprecated::" instead of ".. versionadded::"',
+                Violation::from(
+                    'Please use ".. deprecated::" instead of ".. versionadded::"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. versionadded:: 3.4',
                     '    Foo was deprecated in Symfony 3.4.',

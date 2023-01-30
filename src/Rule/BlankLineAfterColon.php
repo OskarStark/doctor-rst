@@ -17,7 +17,10 @@ use App\Annotations\Rule\Description;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure you have a blank line after a sentence which ends with a colon (`:`).")
@@ -34,35 +37,42 @@ class BlankLineAfterColon extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if ($line->isBlank() || !$line->clean()->endsWith(':')) {
-            return null;
+            return NullViolation::create();
         }
 
         if ($line->clean()->endsWith('::')
             || RstParser::isOption($line)
             || $this->in(RstParser::DIRECTIVE_CODE_BLOCK, clone $lines, $number, [RstParser::CODE_BLOCK_YAML])
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $lines->next();
 
         if (!$lines->valid()) {
-            return null;
+            return NullViolation::create();
         }
 
         if ($lines->current()->isBlank()) {
-            return null;
+            return NullViolation::create();
         }
 
-        return sprintf(
+        $message = sprintf(
             'Please add a blank line after "%s"',
             $line->clean()->toString()
+        );
+
+        return Violation::from(
+            $message,
+            $filename,
+            1,
+            ''
         );
     }
 }

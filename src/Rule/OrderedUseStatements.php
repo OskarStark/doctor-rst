@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 use function Symfony\Component\String\u;
 
@@ -31,7 +34,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -42,7 +45,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE)
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $indention = $line->indention();
@@ -74,7 +77,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
         }
 
         if (empty($statements) || 1 === \count($statements)) {
-            return null;
+            return NullViolation::create();
         }
 
         $sortedUseStatements = $statements;
@@ -82,10 +85,17 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
         natsort($sortedUseStatements);
 
         if ($statements !== $sortedUseStatements) {
-            return 'Please reorder the use statements alphabetically';
+            $message = 'Please reorder the use statements alphabetically';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     private function extractClass(string $useStatement): string

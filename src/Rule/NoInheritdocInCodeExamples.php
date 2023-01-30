@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class NoInheritdocInCodeExamples extends AbstractRule implements LineContentRule
 {
@@ -29,7 +32,7 @@ class NoInheritdocInCodeExamples extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -37,9 +40,16 @@ class NoInheritdocInCodeExamples extends AbstractRule implements LineContentRule
         if ($line->raw()->match('/@inheritdoc/')
             && $this->inPhpCodeBlock($lines, $number)
         ) {
-            return 'Please do not use "@inheritdoc"';
+            $message = 'Please do not use "@inheritdoc"';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

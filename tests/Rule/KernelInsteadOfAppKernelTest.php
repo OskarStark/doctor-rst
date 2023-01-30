@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\KernelInsteadOfAppKernel;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new KernelInsteadOfAppKernel())->check($sample->lines(), $sample->lineNumber())
+            (new KernelInsteadOfAppKernel())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -35,19 +38,29 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
     {
         return [
             [
-                'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
+                Violation::from(
+                    'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('register the bundle in app/AppKernel.php'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('register the bundle in src/Kernel.php'),
             ],
             [
-                'Please use "Kernel" instead of "AppKernel"',
+                Violation::from(
+                    'Please use "Kernel" instead of "AppKernel"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('register the bundle via AppKernel'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('register the bundle via Kernel'),
             ],
         ];

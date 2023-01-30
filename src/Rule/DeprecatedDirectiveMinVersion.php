@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DeprecatedDirectiveMinVersion extends AbstractRule implements LineContentRule, Configurable
@@ -46,27 +49,34 @@ class DeprecatedDirectiveMinVersion extends AbstractRule implements LineContentR
         return [RuleGroup::Symfony()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_DEPRECATED)) {
-            return null;
+            return NullViolation::create();
         }
 
         if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim($matches[1]);
 
             if (-1 === version_compare($version, $this->minVersion)) {
-                return sprintf(
+                $message = sprintf(
                     'Please only provide "%s" if the version is greater/equal "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
                     $this->minVersion
                 );
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

@@ -17,7 +17,10 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure yarn `--dev` option for `add` command is used at the end.")
@@ -36,15 +39,22 @@ class YarnDevOptionAtTheEnd extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if ($line->clean()->match('/yarn add \-\-dev(.*)$/')) {
-            return 'Please move "--dev" option to the end of the command';
+            $message = 'Please move "--dev" option to the end of the command';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

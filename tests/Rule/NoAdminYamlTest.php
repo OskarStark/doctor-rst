@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoAdminYaml;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoAdminYamlTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoAdminYaml())->check($sample->lines(), $sample->lineNumber())
+            (new NoAdminYaml())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -35,31 +38,41 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
     {
         return [
             [
-                'Please use "services.yaml" instead of "admin.yml"',
+                Violation::from(
+                    'Please use "services.yaml" instead of "admin.yml"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('register the admin class in admin.yml'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('register the admin class in services.yaml'),
             ],
             [
-                'Please use "services.yaml" instead of "admin.yaml"',
+                Violation::from(
+                    'Please use "services.yaml" instead of "admin.yaml"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample('register the admin class in admin.yaml'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('register the admin class in services.yaml'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('# config/packages/sonata_admin.yaml'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('# config/packages/sonata_doctrine_orm_admin.yaml'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('# config/packages/sonata_doctrine_mongodb_admin.yaml'),
             ],
         ];

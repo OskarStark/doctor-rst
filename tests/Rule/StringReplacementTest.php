@@ -16,6 +16,9 @@ namespace App\Tests\Rule;
 use App\Annotations\Rule\Description;
 use App\Rule\StringReplacement;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("propose to replace a string with another string.")
@@ -27,7 +30,7 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];
         foreach (StringReplacement::getList() as $search => $message) {
@@ -36,23 +39,23 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
 
         $violations = [];
         foreach ($configuredRules as $rule) {
-            $violation = $rule->check($sample->lines(), $sample->lineNumber());
-            if (null !== $violation) {
+            $violation = $rule->check($sample->lines(), $sample->lineNumber(), 'filename');
+            if (!$violation->isNull()) {
                 $violations[] = $violation;
             }
         }
 
-        if (null === $expected) {
+        if ($expected->isNull()) {
             static::assertCount(0, $violations);
         } else {
             static::assertCount(1, $violations);
-            static::assertSame($expected, $violations[0]);
+            static::assertEquals($expected, $violations[0]);
         }
     }
 
     public function checkProvider(): \Generator
     {
-        yield 'empty string' => [null, new RstSample('')];
+        yield 'empty string' => [NullViolation::create(), new RstSample('')];
 
         $valids = [
             '**type**: ``integer``',
@@ -61,13 +64,13 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
 
         foreach ($valids as $valid) {
             yield $valid => [
-                null,
+                NullViolation::create(),
                 new RstSample($valid),
             ];
 
             // add leading spaces
             yield sprintf('"%s" with leading spaces', $valid) => [
-                null,
+                NullViolation::create(),
                 new RstSample(sprintf(
                     '    %s',
                     $valid
@@ -82,20 +85,30 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
 
         foreach ($invalids as $invalid => $valid) {
             yield $invalid => [
-                sprintf(
-                    'Please replace "%s" with "%s"',
-                    $invalid,
-                    $valid
+                Violation::from(
+                    sprintf(
+                        'Please replace "%s" with "%s"',
+                        $invalid,
+                        $valid
+                    ),
+                    'filename',
+                    1,
+                    ''
                 ),
                 new RstSample($invalid),
             ];
 
             // add leading spaces
             yield sprintf('"%s" with leading spaces', $invalid) => [
-                sprintf(
-                    'Please replace "%s" with "%s"',
-                    $invalid,
-                    $valid
+                Violation::from(
+                    sprintf(
+                        'Please replace "%s" with "%s"',
+                        $invalid,
+                        $valid
+                    ),
+                    'filename',
+                    1,
+                    ''
                 ),
                 new RstSample(sprintf(
                     '    %s',

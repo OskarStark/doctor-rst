@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInXmlCodeBlock;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInXmlCodeBlock())->check($sample->lines(), $sample->lineNumber())
+            (new NoBlankLineAfterFilepathInXmlCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -41,7 +44,12 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
 
         foreach ($paths as $path) {
             yield [
-                sprintf('Please remove blank line after "<!-- %s -->"', $path),
+                Violation::from(
+                    sprintf('Please remove blank line after "<!-- %s -->"', $path),
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -52,7 +60,7 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -62,7 +70,12 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
             ];
 
             yield [
-                sprintf('Please remove blank line after "<!--%s-->"', $path),
+                Violation::from(
+                    sprintf('Please remove blank line after "<!--%s-->"', $path),
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -73,7 +86,7 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -86,7 +99,7 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
@@ -97,7 +110,7 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
         }
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }

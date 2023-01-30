@@ -18,7 +18,10 @@ use App\Rst\RstParser;
 use App\Rst\Value\LinkDefinition;
 use App\Rst\Value\LinkUsage;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Symfony\Contracts\Service\ResetInterface;
 
 /**
@@ -40,7 +43,7 @@ class UnusedLinks extends AbstractRule implements FileContentRule, ResetInterfac
         ];
     }
 
-    public function check(Lines $lines): ?string
+    public function check(Lines $lines, string $filename): ViolationInterface
     {
         /* @todo this should not be needed, make sure its always at position 0 */
         $lines->seek(0);
@@ -71,13 +74,20 @@ class UnusedLinks extends AbstractRule implements FileContentRule, ResetInterfac
         }
 
         if (!empty($this->linkDefinitions)) {
-            return sprintf(
+            $message = sprintf(
                 'The following link definitions aren\'t used anymore and should be removed: "%s"',
                 implode('", "', array_unique(array_keys($this->linkDefinitions)))
             );
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     public function reset(): void

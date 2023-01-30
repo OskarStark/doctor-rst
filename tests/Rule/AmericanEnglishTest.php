@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\AmericanEnglish;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class AmericanEnglishTest extends \App\Tests\UnitTestCase
 {
@@ -23,7 +26,7 @@ final class AmericanEnglishTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];
         foreach (AmericanEnglish::getList() as $search => $message) {
@@ -32,22 +35,22 @@ final class AmericanEnglishTest extends \App\Tests\UnitTestCase
 
         $violations = [];
         foreach ($configuredRules as $rule) {
-            $violation = $rule->check($sample->lines(), $sample->lineNumber());
-            if (null !== $violation) {
+            $violation = $rule->check($sample->lines(), $sample->lineNumber(), 'filename');
+            if (!$violation->isNull()) {
                 $violations[] = $violation;
             }
         }
 
-        if (null === $expected) {
+        if ($expected->isNull()) {
             static::assertCount(0, $violations);
         } else {
             static::assertCount(1, $violations);
-            static::assertSame($expected, $violations[0]);
+            static::assertEquals($expected, $violations[0]);
         }
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
@@ -65,10 +68,10 @@ final class AmericanEnglishTest extends \App\Tests\UnitTestCase
         ];
 
         foreach ($valids as $valid) {
-            yield $valid => [null, new RstSample($valid)];
+            yield $valid => [NullViolation::create(), new RstSample($valid)];
 
             $validUppercase = ucfirst($valid);
-            yield $validUppercase => [null, new RstSample($validUppercase)];
+            yield $validUppercase => [NullViolation::create(), new RstSample($validUppercase)];
         }
 
         $invalids = [
@@ -86,13 +89,23 @@ final class AmericanEnglishTest extends \App\Tests\UnitTestCase
 
         foreach ($invalids as $invalid) {
             yield $invalid => [
-                sprintf('Please use American English for: %s', $invalid),
+                Violation::from(
+                    sprintf('Please use American English for: %s', $invalid),
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample($invalid),
             ];
 
             $invalidUppercase = ucfirst($invalid);
             yield $invalidUppercase => [
-                sprintf('Please use American English for: %s', $invalidUppercase),
+                Violation::from(
+                    sprintf('Please use American English for: %s', $invalidUppercase),
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample($invalidUppercase),
             ];
         }

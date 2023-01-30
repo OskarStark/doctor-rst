@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class NoConfigYaml extends AbstractRule implements LineContentRule
 {
@@ -26,14 +29,21 @@ class NoConfigYaml extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
 
         if ($lines->current()->raw()->match('/app\/config\/config\.yml/')) {
-            return 'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"';
+            $message = 'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

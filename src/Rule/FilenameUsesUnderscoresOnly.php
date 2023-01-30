@@ -16,7 +16,10 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 use function Symfony\Component\String\u;
 
@@ -38,17 +41,24 @@ final class FilenameUsesUnderscoresOnly extends AbstractRule implements FileInfo
         ];
     }
 
-    public function check(\SplFileInfo $fileInfo): ?string
+    public function check(\SplFileInfo $fileInfo): ViolationInterface
     {
         $filename = u($fileInfo->getFilename());
 
         if ($filename->containsAny('-')) {
-            return sprintf(
+            $message = sprintf(
                 'Please use underscores (_) for the filename: %s',
                 $fileInfo->getFilename()
             );
+
+            return Violation::from(
+                $message,
+                $fileInfo->getFilename(),
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

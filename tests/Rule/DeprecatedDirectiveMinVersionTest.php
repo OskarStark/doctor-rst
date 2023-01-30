@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\DeprecatedDirectiveMinVersion;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class DeprecatedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
 {
@@ -23,31 +26,36 @@ final class DeprecatedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, string $minVersion, RstSample $sample): void
+    public function check(ViolationInterface $expected, string $minVersion, RstSample $sample): void
     {
         $rule = (new DeprecatedDirectiveMinVersion());
         $rule->setOptions(['min_version' => $minVersion]);
 
-        static::assertSame($expected, $rule->check($sample->lines(), $sample->lineNumber()));
+        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: string, 2: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: string, 2: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             '3.4',
             new RstSample('.. deprecated:: 3.4'),
         ];
         yield [
-            null,
+            NullViolation::create(),
             '3.4',
             new RstSample('.. deprecated:: 4.2'),
         ];
         yield [
-            'Please only provide ".. deprecated::" if the version is greater/equal "3.4"',
+            Violation::from(
+                'Please only provide ".. deprecated::" if the version is greater/equal "3.4"',
+                'filename',
+                1,
+                ''
+            ),
             '3.4',
             new RstSample('.. deprecated:: 2.8'),
         ];

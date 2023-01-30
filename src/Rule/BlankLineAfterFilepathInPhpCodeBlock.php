@@ -17,13 +17,16 @@ use App\Annotations\Rule\Description;
 use App\Helper\PhpHelper;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure you have a blank line after a filepath in a PHP code block.")
  */
 class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineContentRule
 {
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -34,7 +37,7 @@ class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineC
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE)
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $lines->next();
@@ -42,20 +45,27 @@ class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineC
 
         // PHP
         if ($matches = $lines->current()->clean()->match('/^\/\/(.*)\.php$/')) {
-            return $this->validateBlankLine($lines, $matches);
+            return $this->validateBlankLine($lines, $matches, $filename);
         }
 
-        return null;
+        return NullViolation::create();
     }
 
-    private function validateBlankLine(Lines $lines, array $matches): ?string
+    private function validateBlankLine(Lines $lines, array $matches, string $filename): ViolationInterface
     {
         $lines->next();
 
         if (!$lines->current()->isBlank() && !PhpHelper::isComment($lines->current())) {
-            return sprintf('Please add a blank line after "%s"', trim($matches[0]));
+            $message = sprintf('Please add a blank line after "%s"', trim($matches[0]));
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

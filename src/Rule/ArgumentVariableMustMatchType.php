@@ -16,7 +16,10 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -55,7 +58,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
         return [RuleGroup::Symfony()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -66,7 +69,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE)
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $lines->next();
@@ -99,6 +102,16 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
             $lines->next();
         }
 
-        return $messageParts ? implode('. ', $messageParts) : null;
+        $message = $messageParts ? implode('. ', $messageParts) : null;
+        if (null === $message) {
+            return NullViolation::create();
+        }
+
+        return Violation::from(
+            $message,
+            $filename,
+            1,
+            ''
+        );
     }
 }

@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements LineContentRule
 {
@@ -27,13 +30,13 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_CODE_BLOCK)) {
-            return null;
+            return NullViolation::create();
         }
 
         $indention = $line->indention();
@@ -48,7 +51,14 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                 if (preg_match('/[<]+/', $lines->current()->clean()->toString(), $matches)
                     && !preg_match('/<3/', $lines->current()->clean()->toString())
                 ) {
-                    return $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
+                    $message = $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
+
+                    return Violation::from(
+                        $message,
+                        $filename,
+                        1,
+                        ''
+                    );
                 }
 
                 $lines->next();
@@ -73,11 +83,18 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
             }
 
             if (!$foundHtml) {
-                return $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG);
+                $message = $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG);
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     private function getErrorMessage(string $new, string $current): string

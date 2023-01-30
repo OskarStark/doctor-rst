@@ -18,7 +18,10 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure you have max 2 colons (`::`).")
@@ -39,15 +42,22 @@ final class MaxColons extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if ($line->isBlank() || !$line->clean()->endsWith(':::')) {
-            return null;
+            return NullViolation::create();
         }
 
-        return 'Please use max 2 colons at the end.';
+        $message = 'Please use max 2 colons at the end.';
+
+        return Violation::from(
+            $message,
+            $filename,
+            1,
+            ''
+        );
     }
 }

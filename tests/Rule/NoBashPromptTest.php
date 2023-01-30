@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBashPrompt;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoBashPromptTest extends \App\Tests\UnitTestCase
 {
@@ -23,11 +26,11 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoBashPrompt())->check($sample->lines(), $sample->lineNumber())
+            (new NoBashPrompt())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
@@ -35,7 +38,12 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
     {
         return [
             [
-                'Please remove the "$" prefix in .. code-block:: directive',
+                Violation::from(
+                    'Please remove the "$" prefix in .. code-block:: directive',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: bash',
                     '',
@@ -43,7 +51,12 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
                 ]),
             ],
             [
-                'Please remove the "$" prefix in .. code-block:: directive',
+                Violation::from(
+                    'Please remove the "$" prefix in .. code-block:: directive',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: shell',
                     '',
@@ -51,7 +64,12 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
                 ]),
             ],
             [
-                'Please remove the "$" prefix in .. code-block:: directive',
+                Violation::from(
+                    'Please remove the "$" prefix in .. code-block:: directive',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     '.. code-block:: terminal',
                     '',
@@ -59,11 +77,11 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
                 ]),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('$ composer install sonata-project/admin-bundle'),
             ],
             [
-                null,
+                NullViolation::create(),
                 new RstSample('composer install sonata-project/admin-bundle'),
             ],
         ];

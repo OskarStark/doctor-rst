@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class LowercaseAsInUseStatements extends AbstractRule implements LineContentRule
 {
@@ -27,7 +30,7 @@ class LowercaseAsInUseStatements extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -38,7 +41,7 @@ class LowercaseAsInUseStatements extends AbstractRule implements LineContentRule
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE)
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $indention = $line->indention();
@@ -50,12 +53,19 @@ class LowercaseAsInUseStatements extends AbstractRule implements LineContentRule
             && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
             if ($matches = $lines->current()->clean()->match('/^use (.*) (AS|As|aS) (.*);$/')) {
-                return sprintf('Please use lowercase "as" instead of "%s"', $matches[2]);
+                $message = sprintf('Please use lowercase "as" instead of "%s"', $matches[2]);
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
 
             $lines->next();
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

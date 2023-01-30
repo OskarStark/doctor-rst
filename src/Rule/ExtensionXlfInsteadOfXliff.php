@@ -17,7 +17,10 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure to only use `.xlf` instead of `.xliff`.")
@@ -36,14 +39,21 @@ class ExtensionXlfInsteadOfXliff extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
 
         if ($matches = $lines->current()->raw()->match('/\.xliff/i')) {
-            return sprintf('Please use ".xlf" extension instead of "%s"', $matches[0]);
+            $message = sprintf('Please use ".xlf" extension instead of "%s"', $matches[0]);
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

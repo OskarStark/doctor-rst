@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\ValidInlineHighlightedNamespaces;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class ValidInlineHighlightedNamespacesTest extends \App\Tests\UnitTestCase
 {
@@ -23,60 +26,80 @@ final class ValidInlineHighlightedNamespacesTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new ValidInlineHighlightedNamespaces())->check($sample->lines(), $sample->lineNumber())
+            (new ValidInlineHighlightedNamespaces())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     public function checkProvider(): \Generator
     {
-        yield [null, new RstSample('')];
-        yield [null, new RstSample(' ')];
-        yield [null, new RstSample('``AppKernel``')];
-        yield [null, new RstSample('`AppKernel`')];
+        yield [NullViolation::create(), new RstSample('')];
+        yield [NullViolation::create(), new RstSample(' ')];
+        yield [NullViolation::create(), new RstSample('``AppKernel``')];
+        yield [NullViolation::create(), new RstSample('`AppKernel`')];
 
         yield 'valid with 1 tick and 2 backslashes' => [
-            null,
+            NullViolation::create(),
             new RstSample('`App\\\\Entity\\\\Foo`'),
         ];
 
         yield 'invalid with 1 tick and 1 backslash' => [
-            'Please use 2 backslashes when highlighting a namespace with single backticks: `App\Entity\Foo`',
+            Violation::from(
+                'Please use 2 backslashes when highlighting a namespace with single backticks: `App\Entity\Foo`',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('`App\\Entity\\Foo`'),
         ];
 
         yield 'valid with 2 ticks and 1 backslash' => [
-            null,
+            NullViolation::create(),
             new RstSample('``App\\Entity\\Foo``'),
         ];
 
         yield 'invalid with 2 ticks and 2 backslashes' => [
-            'Please use 1 backslash when highlighting a namespace with double backticks: ``App\\\\Entity\\\\Foo``',
+            Violation::from(
+                'Please use 1 backslash when highlighting a namespace with double backticks: ``App\\\\Entity\\\\Foo``',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('``App\\\\Entity\\\\Foo``'),
         ];
 
-        yield [null, new RstSample('`int` :class:`App\\\\Entity\\\\Foo`')];
+        yield [NullViolation::create(), new RstSample('`int` :class:`App\\\\Entity\\\\Foo`')];
         yield [
-            'Please use 2 backslashes when highlighting a namespace with single backticks: `App\Entity\Foo`',
+            Violation::from(
+                'Please use 2 backslashes when highlighting a namespace with single backticks: `App\Entity\Foo`',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('`int` :class:`App\\Entity\\Foo`'),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('the ``FormType`` object from initializing it to ``\DateTime``.'),
         ];
 
-        yield [null, new RstSample('``\Swift_Transport``')];
+        yield [NullViolation::create(), new RstSample('``\Swift_Transport``')];
         yield [
-            'Please use 2 backslashes when highlighting a namespace with single backticks: `\Swift_Transport`',
+            Violation::from(
+                'Please use 2 backslashes when highlighting a namespace with single backticks: `\Swift_Transport`',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample('`\Swift_Transport`'),
         ];
 
         // edge cases of the Symfony Documentation
-        yield [null, new RstSample('``"autoload": { "psr-4": { "SomeVendor\\BlogBundle\\": "" } }``')];
-        yield [null, new RstSample('look like ``@ORM\Table(name="`user`")``.')];
+        yield [NullViolation::create(), new RstSample('``"autoload": { "psr-4": { "SomeVendor\\BlogBundle\\": "" } }``')];
+        yield [NullViolation::create(), new RstSample('look like ``@ORM\Table(name="`user`")``.')];
     }
 }

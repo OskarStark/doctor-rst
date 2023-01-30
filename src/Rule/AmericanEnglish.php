@@ -17,7 +17,10 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Ensure only American English is used.")
@@ -36,16 +39,21 @@ class AmericanEnglish extends CheckListRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (preg_match($this->search, $line->raw()->toString(), $matches)) {
-            return sprintf($this->message, $matches[0]);
+            return Violation::from(
+                sprintf($this->message, $matches[0]),
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     public static function getDefaultMessage(): string

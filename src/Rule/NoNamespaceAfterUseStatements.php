@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class NoNamespaceAfterUseStatements extends AbstractRule implements LineContentRule
 {
@@ -27,7 +30,7 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements LineContentR
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -38,7 +41,7 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements LineContentR
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE)
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $indention = $line->indention();
@@ -59,7 +62,14 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements LineContentR
 
             if ($line->match('/^namespace (.*);$/')) {
                 if ($useStatementFound) {
-                    return 'Please move the namespace before the use statement(s)';
+                    $message = 'Please move the namespace before the use statement(s)';
+
+                    return Violation::from(
+                        $message,
+                        $filename,
+                        1,
+                        ''
+                    );
                 }
                 break;
             }
@@ -67,6 +77,6 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements LineContentR
             $lines->next();
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

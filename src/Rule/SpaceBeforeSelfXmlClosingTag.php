@@ -15,22 +15,32 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContentRule
 {
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current()->raw()->toString();
 
         if (!preg_match('/\/>/', $line)) {
-            return null;
+            return NullViolation::create();
         }
 
         if (!preg_match('/\ \/>/', $line) && !RstParser::isLinkUsage($line)) {
-            return 'Please add space before "/>"';
+            $message = 'Please add space before "/>"';
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

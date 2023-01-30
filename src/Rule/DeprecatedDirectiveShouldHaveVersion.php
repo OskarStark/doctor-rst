@@ -18,7 +18,10 @@ use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
 /**
@@ -45,33 +48,47 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineC
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!RstParser::directiveIs($line, RstParser::DIRECTIVE_DEPRECATED)) {
-            return null;
+            return NullViolation::create();
         }
 
         if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim($matches[1]);
 
             if (empty($version)) {
-                return sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_DEPRECATED);
+                $message = sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_DEPRECATED);
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
 
             try {
                 $this->versionParser->normalize($version);
             } catch (\UnexpectedValueException $e) {
-                return sprintf(
+                $message = sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
                     $version
                 );
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

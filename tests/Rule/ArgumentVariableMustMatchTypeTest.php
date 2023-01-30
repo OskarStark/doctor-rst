@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\ArgumentVariableMustMatchType;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 
@@ -25,7 +28,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $rule = new ArgumentVariableMustMatchType();
         $rule->setOptions([
@@ -41,20 +44,25 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
             ],
         ]);
 
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber())
+            $rule->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
-                'Please rename "$builder" to "$containerBuilder"',
+                Violation::from(
+                    'Please rename "$builder" to "$containerBuilder"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -63,7 +71,12 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
             ];
 
             yield [
-                'Please rename "$builder" to "$containerBuilder". Please rename "$configurator" to "$containerConfigurator"',
+                Violation::from(
+                    'Please rename "$builder" to "$containerBuilder". Please rename "$configurator" to "$containerConfigurator"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -72,7 +85,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -81,7 +94,12 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
             ];
 
             yield [
-                'Please rename "$configurator" to "$containerConfigurator"',
+                Violation::from(
+                    'Please rename "$configurator" to "$containerConfigurator"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -90,7 +108,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
             ];
 
             yield [
-                null,
+                NullViolation::create(),
                 new RstSample([
                     $codeBlock,
                     '',
@@ -99,7 +117,12 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
             ];
 
             yield [
-                'Please rename "$configurator" to "$containerConfigurator"',
+                Violation::from(
+                    'Please rename "$configurator" to "$containerConfigurator"',
+                    'filename',
+                    1,
+                    ''
+                ),
                 new RstSample([
                     $codeBlock,
                     'some',
@@ -115,7 +138,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
         }
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample('temp'),
         ];
     }

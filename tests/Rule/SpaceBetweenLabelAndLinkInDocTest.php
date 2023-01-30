@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\SpaceBetweenLabelAndLinkInDoc;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class SpaceBetweenLabelAndLinkInDocTest extends \App\Tests\UnitTestCase
 {
@@ -23,26 +26,31 @@ final class SpaceBetweenLabelAndLinkInDocTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new SpaceBetweenLabelAndLinkInDoc())->check($sample->lines(), $sample->lineNumber())
+            (new SpaceBetweenLabelAndLinkInDoc())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<array{0: string|null, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function checkProvider(): \Generator
     {
         yield [
-            'Please add a space between "File" and "</reference/constraints/File>" inside :doc: directive',
+            Violation::from(
+                'Please add a space between "File" and "</reference/constraints/File>" inside :doc: directive',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample(':doc:`File</reference/constraints/File>`'),
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             new RstSample(':doc:`File </reference/constraints/File>`'),
         ];
     }

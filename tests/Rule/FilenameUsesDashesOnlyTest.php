@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\FilenameUsesDashesOnly;
 use App\Tests\UnitTestCase;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class FilenameUsesDashesOnlyTest extends UnitTestCase
 {
@@ -24,45 +27,55 @@ final class FilenameUsesDashesOnlyTest extends UnitTestCase
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, string $filename): void
+    public function check(ViolationInterface $expected, string $filename): void
     {
         $fileInfo = $this->createMock(\SplFileInfo::class);
         $fileInfo->method('getFilename')->willReturn($filename);
 
-        static::assertSame(
+        static::assertEquals(
             $expected,
             (new FilenameUsesDashesOnly())->check($fileInfo)
         );
     }
 
     /**
-     * @return \Generator<array{0: null, 1: string}>
+     * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
     public function validProvider(): \Generator
     {
         yield [
-            null,
+            NullViolation::create(),
             'custom-extensions.rst',
         ];
 
         yield [
-            null,
+            NullViolation::create(),
             '_custom-extensions.rst',
         ];
     }
 
     /**
-     * @return \Generator<array{0: string, 1: string}>
+     * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
     public function invalidProvider(): \Generator
     {
         yield [
-            'Please use dashes (-) for the filename: custom_extensions.rst',
+            Violation::from(
+                'Please use dashes (-) for the filename: custom_extensions.rst',
+                'custom_extensions.rst',
+                1,
+                ''
+            ),
             'custom_extensions.rst',
         ];
 
         yield [
-            'Please use dashes (-) for the filename: _custom_extensions.rst',
+            Violation::from(
+                'Please use dashes (-) for the filename: _custom_extensions.rst',
+                '_custom_extensions.rst',
+                1,
+                ''
+            ),
             '_custom_extensions.rst',
         ];
     }

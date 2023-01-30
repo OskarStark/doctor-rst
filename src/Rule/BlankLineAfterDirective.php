@@ -16,7 +16,10 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure you have a blank line after each directive.")
@@ -31,18 +34,18 @@ class BlankLineAfterDirective extends AbstractRule implements LineContentRule
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if (!$line->isDirective()) {
-            return null;
+            return NullViolation::create();
         }
 
         foreach (self::unSupportedDirectives() as $type) {
             if (RstParser::directiveIs($line, $type)) {
-                return null;
+                return NullViolation::create();
             }
         }
 
@@ -53,10 +56,17 @@ class BlankLineAfterDirective extends AbstractRule implements LineContentRule
         }
 
         if (!$lines->valid() || !$lines->current()->isBlank()) {
-            return sprintf('Please add a blank line after "%s" directive', $line->raw()->toString());
+            $message = sprintf('Please add a blank line after "%s" directive', $line->raw()->toString());
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     /**

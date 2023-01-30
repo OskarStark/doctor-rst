@@ -20,7 +20,10 @@ use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Traits\ListTrait;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class Indention extends AbstractRule implements LineContentRule, Configurable
@@ -55,7 +58,7 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
         return [RuleGroup::Experimental()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -77,7 +80,7 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
                 RstParser::CODE_BLOCK_SQL,
             ])
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $lines->seek($number);
@@ -135,10 +138,17 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
         }
 
         if ($indention > 0 && 0 < (($indention - $minus) % $this->size)) {
-            return $customMessage ?? sprintf('Please add %s spaces for every indention.', $this->size);
+            $message = $customMessage ?? sprintf('Please add %s spaces for every indention.', $this->size);
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 
     public function isPartOrMultilineXmlComment(Lines $lines, int $number): bool

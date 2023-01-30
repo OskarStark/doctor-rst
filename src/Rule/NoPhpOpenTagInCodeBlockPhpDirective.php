@@ -15,7 +15,10 @@ namespace App\Rule;
 
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineContentRule
 {
@@ -27,7 +30,7 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineCo
         ];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -38,7 +41,7 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineCo
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY, true)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE, true)
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $lines->next();
@@ -48,9 +51,16 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineCo
         $nextLine = $lines->current();
 
         if ('<?php' === $nextLine->clean()->toString()) {
-            return sprintf('Please remove PHP open tag after "%s" directive', $line->raw()->toString());
+            $message = sprintf('Please remove PHP open tag after "%s" directive', $line->raw()->toString());
+
+            return Violation::from(
+                $message,
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

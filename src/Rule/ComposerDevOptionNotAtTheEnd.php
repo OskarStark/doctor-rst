@@ -17,7 +17,10 @@ use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 /**
  * @Description("Make sure Composer `--dev` option for `require` command is not used at the end.")
@@ -33,15 +36,20 @@ class ComposerDevOptionNotAtTheEnd extends AbstractRule implements LineContentRu
         return [RuleGroup::Symfony()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
         if ($line->clean()->match('/composer require(.*)\-\-dev$/')) {
-            return 'Please move "--dev" option before the package';
+            return Violation::from(
+                'Please move "--dev" option before the package',
+                $filename,
+                1,
+                ''
+            );
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

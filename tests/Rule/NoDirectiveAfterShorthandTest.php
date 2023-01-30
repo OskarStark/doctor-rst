@@ -15,6 +15,9 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoDirectiveAfterShorthand;
 use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 final class NoDirectiveAfterShorthandTest extends \App\Tests\UnitTestCase
 {
@@ -24,16 +27,16 @@ final class NoDirectiveAfterShorthandTest extends \App\Tests\UnitTestCase
      * @dataProvider validProvider
      * @dataProvider invalidProvider
      */
-    public function check(?string $expected, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertEquals(
             $expected,
-            (new NoDirectiveAfterShorthand())->check($sample->lines(), $sample->lineNumber())
+            (new NoDirectiveAfterShorthand())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 
     /**
-     * @return \Generator<string, array{0: null, 1: RstSample}>
+     * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
     public function validProvider(): \Generator
     {
@@ -58,23 +61,23 @@ RST;
 RST;
 
         yield 'valid' => [
-            null,
+            NullViolation::create(),
             new RstSample(''),
         ];
 
         yield 'valid 2' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid2),
         ];
 
         yield 'valid 3' => [
-            null,
+            NullViolation::create(),
             new RstSample($valid3),
         ];
     }
 
     /**
-     * @return \Generator<array{0: string, 1: RstSample}>
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
     public function invalidProvider(): \Generator
     {
@@ -91,12 +94,22 @@ RST;
 RST;
 
         yield [
-            'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
+            Violation::from(
+                'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample($invalid),
         ];
 
         yield [
-            'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
+            Violation::from(
+                'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
+                'filename',
+                1,
+                ''
+            ),
             new RstSample($invalid2),
         ];
     }

@@ -16,7 +16,10 @@ namespace App\Rule;
 use App\Helper\TwigHelper;
 use App\Rst\RstParser;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
+use App\Value\Violation;
+use App\Value\ViolationInterface;
 
 class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements LineContentRule
 {
@@ -25,7 +28,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Li
         return [RuleGroup::Symfony()];
     }
 
-    public function check(Lines $lines, int $number): ?string
+    public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
@@ -35,7 +38,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Li
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_JINJA)
             && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_HTML_JINJA)
         ) {
-            return null;
+            return NullViolation::create();
         }
 
         $lines->next();
@@ -43,23 +46,30 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Li
 
         // TWIG
         if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches);
+            return $this->validateBlankLine($lines, $matches, $filename);
         }
 
-        return null;
+        return NullViolation::create();
     }
 
-    private function validateBlankLine(Lines $lines, array $matches): ?string
+    private function validateBlankLine(Lines $lines, array $matches, string $filename): ViolationInterface
     {
         $lines->next();
 
         if ($lines->current()->isBlank()) {
             $lines->next();
             if (!TwigHelper::isComment($lines->current())) {
-                return sprintf('Please remove blank line after "%s"', trim($matches[0]));
+                $message = sprintf('Please remove blank line after "%s"', trim($matches[0]));
+
+                return Violation::from(
+                    $message,
+                    $filename,
+                    1,
+                    ''
+                );
             }
         }
 
-        return null;
+        return NullViolation::create();
     }
 }

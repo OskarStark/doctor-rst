@@ -19,7 +19,7 @@ use App\Rule\LineContentRule;
 use App\Rule\Rule;
 use App\Value\Line;
 use App\Value\Lines;
-use App\Value\Violation;
+use App\Value\ViolationInterface;
 use Symfony\Contracts\Service\ResetInterface;
 
 final class RstAnalyzer implements Analyzer
@@ -27,7 +27,7 @@ final class RstAnalyzer implements Analyzer
     /**
      * @param Rule[] $rules
      *
-     * @return Violation[]
+     * @return ViolationInterface[]
      */
     public function analyze(\SplFileInfo $file, array $rules): array
     {
@@ -50,15 +50,10 @@ final class RstAnalyzer implements Analyzer
         });
 
         foreach ($fileInfoRules as $rule) {
-            $violationMessage = $rule->check($file);
+            $violation = $rule->check($file);
 
-            if (null !== $violationMessage) {
-                $violations[] = Violation::from(
-                    $violationMessage,
-                    (string) $file->getRealPath(),
-                    1,
-                    ''
-                );
+            if (!$violation->isNull()) {
+                $violations[] = $violation;
             }
         }
 
@@ -70,15 +65,10 @@ final class RstAnalyzer implements Analyzer
         $lines = Lines::fromArray($content);
 
         foreach ($fileContentRules as $rule) {
-            $violationMessage = $rule->check(clone $lines);
+            $violation = $rule->check(clone $lines, (string) $file->getRealPath());
 
-            if (null !== $violationMessage) {
-                $violations[] = Violation::from(
-                    $violationMessage,
-                    (string) $file->getRealPath(),
-                    1,
-                    ''
-                );
+            if (!$violation->isNull()) {
+                $violations[] = $violation;
             }
 
             if ($rule instanceof ResetInterface) {
@@ -107,15 +97,10 @@ final class RstAnalyzer implements Analyzer
                     continue;
                 }
 
-                $violationMessage = $rule->check($lines, $no);
+                $violation = $rule->check($lines, $no, (string) $file->getRealPath());
 
-                if (null !== $violationMessage) {
-                    $violations[] = Violation::from(
-                        $violationMessage,
-                        (string) $file->getRealPath(),
-                        $no + 1,
-                        $line->raw()->trim()->toString()
-                    );
+                if (!$violation->isNull()) {
+                    $violations[] = $violation;
                 }
 
                 if ($rule instanceof ResetInterface) {
