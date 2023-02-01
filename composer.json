@@ -10,7 +10,7 @@
         "ondram/ci-detector": "^4.1.0",
         "symfony/config": "^6.2.5",
         "symfony/console": "^6.2.5",
-        "symfony/dependency-injection": "^6.2.5",
+        "symfony/dependency-injection": "^6.2.6",
         "symfony/finder": "^6.2.5",
         "symfony/options-resolver": "^6.2.5",
         "symfony/string": "^6.2.5",
