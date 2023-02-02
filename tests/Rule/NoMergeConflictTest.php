@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rule\LowercaseAsInUseStatements;
 use App\Rule\NoMergeConflict;
 use App\Tests\RstSample;
 use App\Value\NullViolation;
@@ -37,14 +36,14 @@ final class NoMergeConflictTest extends \App\Tests\UnitTestCase
 
     public function checkProvider(): \Generator
     {
-        yield [
+        yield 'valid' => [
             NullViolation::create(),
             new RstSample([
                 '',
             ]),
         ];
 
-        yield [
+        yield 'invalid in line 1' => [
             Violation::from(
                 'Please get rid of the merge conflict',
                 'filename',
@@ -58,7 +57,7 @@ final class NoMergeConflictTest extends \App\Tests\UnitTestCase
             ]),
         ];
 
-        yield [
+        yield 'invalid in line 2' => [
             Violation::from(
                 'Please get rid of the merge conflict',
                 'filename',
