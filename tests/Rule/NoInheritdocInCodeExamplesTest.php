@@ -51,7 +51,7 @@ final class NoInheritdocInCodeExamplesTest extends \App\Tests\UnitTestCase
                 Violation::from(
                     'Please do not use "@inheritdoc"',
                     'filename',
-                    1,
+                    4,
                     ''
                 ),
                 new RstSample([

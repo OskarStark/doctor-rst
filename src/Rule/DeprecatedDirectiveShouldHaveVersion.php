@@ -66,7 +66,7 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineC
                 return Violation::from(
                     $message,
                     $filename,
-                    1,
+                    $number + 1,
                     ''
                 );
             }
@@ -83,7 +83,7 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineC
                 return Violation::from(
                     $message,
                     $filename,
-                    1,
+                    $number + 1,
                     ''
                 );
             }

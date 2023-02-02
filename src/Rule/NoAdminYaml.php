@@ -41,7 +41,7 @@ class NoAdminYaml extends AbstractRule implements LineContentRule
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }
@@ -52,7 +52,7 @@ class NoAdminYaml extends AbstractRule implements LineContentRule
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

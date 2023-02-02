@@ -47,13 +47,13 @@ class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Lin
 
         // PHP
         if (preg_match('/^\/\/(.*)\.php$/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename);
+            return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
     }
 
-    private function validateBlankLine(Lines $lines, array $matches, string $filename): ViolationInterface
+    private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();
 
@@ -65,7 +65,7 @@ class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Lin
                 return Violation::from(
                     $message,
                     $filename,
-                    1,
+                    $number + 1,
                     ''
                 );
             }

@@ -40,13 +40,13 @@ class BlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements LineC
 
         // XML
         if ($matches = $lines->current()->clean()->match('/^<!--(.*)\.(xml|xlf|xliff)(.*)-->$/')) {
-            return $this->validateBlankLine($lines, $matches, $filename);
+            return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
     }
 
-    private function validateBlankLine(Lines $lines, array $matches, string $filename): ViolationInterface
+    private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();
 
@@ -56,7 +56,7 @@ class BlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements LineC
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

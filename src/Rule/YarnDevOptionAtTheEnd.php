@@ -50,7 +50,7 @@ class YarnDevOptionAtTheEnd extends AbstractRule implements LineContentRule
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

@@ -72,7 +72,7 @@ RST
             Violation::from(
                 'Please add 4 spaces for every indention.',
                 'filename',
-                1,
+                3,
                 ''
             ),
             4,
@@ -88,7 +88,7 @@ RST
             Violation::from(
                 'Please add 4 spaces for every indention.',
                 'filename',
-                1,
+                4,
                 ''
             ),
             4,
@@ -150,7 +150,7 @@ RST;
             Violation::from(
                 'Please fix the indention of the PHP DocBlock.',
                 'filename',
-                1,
+                6,
                 ''
             ),
             4,

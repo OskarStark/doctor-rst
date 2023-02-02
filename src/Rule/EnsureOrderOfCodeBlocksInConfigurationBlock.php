@@ -115,7 +115,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }
@@ -130,7 +130,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }
@@ -151,7 +151,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

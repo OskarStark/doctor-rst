@@ -52,7 +52,7 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
                 return Violation::from(
                     $message,
                     $filename,
-                    1,
+                    $number + 1,
                     ''
                 );
             }

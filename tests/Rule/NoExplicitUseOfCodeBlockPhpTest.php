@@ -73,7 +73,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
             Violation::from(
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
-                1,
+                3,
                 ''
             ),
             new RstSample([
@@ -483,7 +483,7 @@ RST;
             Violation::from(
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
-                1,
+                15,
                 ''
             ),
             new RstSample($invalid_content, 14),
@@ -542,7 +542,7 @@ RST;
             Violation::from(
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
-                1,
+                19,
                 ''
             ),
             new RstSample($invalid_content2, 18),

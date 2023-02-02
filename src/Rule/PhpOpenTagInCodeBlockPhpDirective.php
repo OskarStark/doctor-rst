@@ -47,7 +47,7 @@ class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineCont
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

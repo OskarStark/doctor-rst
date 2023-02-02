@@ -98,7 +98,7 @@ RST
                 Violation::from(
                     sprintf('Please add a blank line before "%s" directive', $directive),
                     'filename',
-                    1,
+                    2,
                     ''
                 ),
                 new RstSample([
