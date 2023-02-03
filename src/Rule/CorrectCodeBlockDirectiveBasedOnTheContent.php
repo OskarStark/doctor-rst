@@ -55,7 +55,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                         $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG),
                         $filename,
                         $number + 1,
-                        ''
+                        $lines->current()
                     );
                 }
 
@@ -85,7 +85,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                     $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG),
                     $filename,
                     $number + 1,
-                    ''
+                    $lines->current()
                 );
             }
         }

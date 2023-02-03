@@ -85,7 +85,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
                         $message,
                         $filename,
                         $number + 1,
-                        ''
+                        $line
                     );
                 }
             } catch (\UnexpectedValueException $e) {
@@ -99,7 +99,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
                     $message,
                     $filename,
                     $number + 1,
-                    ''
+                    $line
                 );
             }
         }

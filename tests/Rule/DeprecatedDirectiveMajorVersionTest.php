@@ -70,7 +70,7 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
                 'You are not allowed to use version "2.7". Only major version "3" is allowed.',
                 'filename',
                 1,
-                ''
+                '.. deprecated:: 2.7'
             ),
             3,
             new RstSample('.. deprecated:: 2.7'),
@@ -80,7 +80,7 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
                 'You are not allowed to use version "4.0". Only major version "3" is allowed.',
                 'filename',
                 1,
-                ''
+                '.. deprecated:: 4.0'
             ),
             3,
             new RstSample('.. deprecated:: 4.0'),
@@ -90,7 +90,7 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
                 'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
                 'filename',
                 1,
-                ''
+                '.. deprecated:: foo'
             ),
             3,
             new RstSample('.. deprecated:: foo'),
