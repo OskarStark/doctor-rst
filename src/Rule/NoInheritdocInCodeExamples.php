@@ -40,13 +40,11 @@ class NoInheritdocInCodeExamples extends AbstractRule implements LineContentRule
         if ($line->raw()->match('/@inheritdoc/')
             && $this->inPhpCodeBlock($lines, $number)
         ) {
-            $message = 'Please do not use "@inheritdoc"';
-
             return Violation::from(
-                $message,
+                'Please do not use "@inheritdoc"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
