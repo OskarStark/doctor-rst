@@ -55,24 +55,15 @@ class BlankLineAfterColon extends AbstractRule implements LineContentRule
 
         $lines->next();
 
-        if (!$lines->valid()) {
+        if (!$lines->valid() || $lines->current()->isBlank()) {
             return NullViolation::create();
         }
-
-        if ($lines->current()->isBlank()) {
-            return NullViolation::create();
-        }
-
-        $message = sprintf(
-            'Please add a blank line after "%s"',
-            $line->clean()->toString()
-        );
 
         return Violation::from(
-            $message,
+            sprintf('Please add a blank line after "%s"', $line->clean()->toString()),
             $filename,
             $number + 1,
-            ''
+            $line
         );
     }
 }
