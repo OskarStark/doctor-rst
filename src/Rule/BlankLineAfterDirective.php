@@ -62,7 +62,7 @@ class BlankLineAfterDirective extends AbstractRule implements LineContentRule
                 $message,
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

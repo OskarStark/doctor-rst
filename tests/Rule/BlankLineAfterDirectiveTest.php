@@ -60,12 +60,11 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
                 ]),
             ];
 
-            $errorMessage = sprintf('Please add a blank line after "%s" directive', $directive);
             $violation = Violation::from(
-                $errorMessage,
+                sprintf('Please add a blank line after "%s" directive', $directive),
                 'filename',
                 1,
-                ''
+                $directive
             );
             if (\in_array($directive, BlankLineAfterDirective::unSupportedDirectives(), true)) {
                 $violation = NullViolation::create();
