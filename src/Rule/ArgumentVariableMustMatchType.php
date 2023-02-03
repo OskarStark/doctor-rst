@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Annotations\Rule\Description;
-use App\Rst\RstParser;
+use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
@@ -27,6 +27,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ArgumentVariableMustMatchType extends AbstractRule implements LineContentRule, Configurable
 {
+    use DirectiveTrait;
+
     /** @var array<array{type: string, name: string}> */
     private array $arguments;
 
@@ -63,43 +65,28 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)
-            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS)
-            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ATTRIBUTES)
-            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY)
-            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE)
-        ) {
+        if (!$this->inPhpCodeBlock($lines, $number)) {
             return NullViolation::create();
         }
 
-        $lines->next();
-
         $messageParts = [];
 
-        while ($lines->valid()
-            && !$lines->current()->isDirective()
-        ) {
-            $line = $lines->current()->clean();
+        foreach ($this->arguments as $argument) {
+            // This regex match argument type with bad argument name
+            $regex = sprintf(
+                '/%s \$(?!%s)(?<actualName>[a-z-A-Z\$]+)/',
+                $argument['type'],
+                $argument['name']
+            );
+            $match = $line->clean()->match($regex);
 
-            foreach ($this->arguments as $argument) {
-                // This regex match argument type with bad argument name
-                $regex = sprintf(
-                    '/%s \$(?!%s)(?<actualName>[a-z-A-Z\$]+)/',
-                    $argument['type'],
+            if ($match) {
+                $messageParts[] = sprintf(
+                    'Please rename "$%s" to "$%s"',
+                    $match['actualName'],
                     $argument['name']
                 );
-                $match = $line->match($regex);
-
-                if ($match) {
-                    $messageParts[] = sprintf(
-                        'Please rename "$%s" to "$%s"',
-                        $match['actualName'],
-                        $argument['name']
-                    );
-                }
             }
-
-            $lines->next();
         }
 
         $message = $messageParts ? implode('. ', $messageParts) : null;
@@ -111,7 +98,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
             $message,
             $filename,
             $number + 1,
-            ''
+            $line
         );
     }
 }
