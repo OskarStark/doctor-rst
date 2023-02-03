@@ -42,7 +42,7 @@ class BeKindToNewcomers extends CheckListRule implements LineContentRule
                 $message,
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
