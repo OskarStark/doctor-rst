@@ -48,7 +48,7 @@ final class ComposerDevOptionNotAtTheEndTest extends \App\Tests\UnitTestCase
                 'Please move "--dev" option before the package',
                 'filename',
                 1,
-                ''
+                'composer require symfony/debug --dev'
             ),
             new RstSample('composer require symfony/debug --dev'),
         ];

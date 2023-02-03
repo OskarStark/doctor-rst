@@ -46,7 +46,7 @@ class ComposerDevOptionNotAtTheEnd extends AbstractRule implements LineContentRu
                 'Please move "--dev" option before the package',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
