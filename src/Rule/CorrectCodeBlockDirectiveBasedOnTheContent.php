@@ -51,10 +51,8 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                 if (preg_match('/[<]+/', $lines->current()->clean()->toString(), $matches)
                     && !preg_match('/<3/', $lines->current()->clean()->toString())
                 ) {
-                    $message = $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG);
-
                     return Violation::from(
-                        $message,
+                        $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG),
                         $filename,
                         $number + 1,
                         ''
@@ -83,10 +81,8 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
             }
 
             if (!$foundHtml) {
-                $message = $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG);
-
                 return Violation::from(
-                    $message,
+                    $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG),
                     $filename,
                     $number + 1,
                     ''
