@@ -98,11 +98,11 @@ You can run it in any given directory like this:
 Local usage
 -----------
 
-`bin/doctor-rst analyze dummy/docs --group=@Symfony`
+`bin/doctor-rst analyze dummy --group=@Symfony`
 
 or
 
-`bin/doctor-rst analyze dummy/docs --group=@Sonata`
+`bin/doctor-rst analyze dummy --group=@Sonata`
 
 Todos
 -----
