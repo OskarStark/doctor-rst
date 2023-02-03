@@ -93,7 +93,7 @@ final class AmericanEnglishTest extends \App\Tests\UnitTestCase
                     sprintf('Please use American English for: %s', $invalid),
                     'filename',
                     1,
-                    ''
+                    $invalid
                 ),
                 new RstSample($invalid),
             ];
@@ -104,7 +104,7 @@ final class AmericanEnglishTest extends \App\Tests\UnitTestCase
                     sprintf('Please use American English for: %s', $invalidUppercase),
                     'filename',
                     1,
-                    ''
+                    $invalidUppercase
                 ),
                 new RstSample($invalidUppercase),
             ];
