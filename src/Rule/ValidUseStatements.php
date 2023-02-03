@@ -38,13 +38,11 @@ class ValidUseStatements extends AbstractRule implements LineContentRule
          * @todo do it in one regex instead of regex + string search
          */
         if ($line->clean()->match('/^use (.*);$/') && false !== strpos($line->clean()->toString(), '\\\\')) {
-            $message = 'Please do not escape the backslashes in a use statement.';
-
             return Violation::from(
-                $message,
+                'Please do not escape the backslashes in a use statement.',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

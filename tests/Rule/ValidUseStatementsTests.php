@@ -45,7 +45,7 @@ final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
                     'Please do not escape the backslashes in a use statement.',
                     'filename',
                     1,
-                    ''
+                    'use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;'
                 ),
                 new RstSample('use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;'),
             ],
