@@ -49,19 +49,20 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
+        $line = $lines->current();
 
         // only interesting if a PHP code block
-        if (!RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP, true)) {
+        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP, true)) {
             return NullViolation::create();
         }
 
         // :: is a php code block, but its ok
-        if (preg_match('/\:\:$/', $lines->current()->clean()->toString())) {
+        if (preg_match('/\:\:$/', $line->clean()->toString())) {
             return NullViolation::create();
         }
 
         // it has no indention, check if it comes after a headline, in this case its ok
-        if (!preg_match('/^[\s]+/', $lines->current()->raw()->toString(), $matches)) {
+        if (!preg_match('/^[\s]+/', $line->raw()->toString(), $matches)) {
             if ($this->directAfterHeadline($lines, $number)
                 || $this->directAfterTable($lines, $number)
                 || $this->previousParagraphEndsWithQuestionMark($lines, $number)
@@ -72,7 +73,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
 
         // check if the code block is not on the first level, in this case
         // it could not be in a configuration block which would be ok
-        if (preg_match('/^[\s]+/', $lines->current()->raw()->toString(), $matches)
+        if (preg_match('/^[\s]+/', $line->raw()->toString(), $matches)
             && RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)
             && $number > 0
         ) {
@@ -108,13 +109,11 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
             return NullViolation::create();
         }
 
-        $message = 'Please do not use ".. code-block:: php", use "::" instead.';
-
         return Violation::from(
-            $message,
+            'Please do not use ".. code-block:: php", use "::" instead.',
             $filename,
             $number + 1,
-            ''
+            $line
         );
     }
 

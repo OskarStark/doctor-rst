@@ -50,7 +50,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
                 1,
-                ''
+                '.. code-block:: php'
             ),
             new RstSample('.. code-block:: php'),
         ];
@@ -64,7 +64,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
                 1,
-                ''
+                '.. code-block:: php'
             ),
             new RstSample('    .. code-block:: php'),
         ];
@@ -74,7 +74,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
                 3,
-                ''
+                '.. code-block:: php'
             ),
             new RstSample([
                 'Welcome to our tutorial!',
@@ -202,26 +202,7 @@ RST;
 
 RST;
 
-        $invalid_content = <<<RST
-.. configuration-block::
-
-    .. code-block:: yaml
-
-        # app/config/services.yml
-        services:
-            app.mailer:
-                class:        AppBundle\Mailer
-                arguments:    [sendmail]
-
-.. note::
-
-    Try to use it like this:
-
-    .. code-block:: php
-
-        echo 'foo';
-
-RST;
+        $invalid_content =
 
         $valid_code_block_after_headline = <<<'RST'
 Creating an ACL and Adding an ACE
@@ -433,42 +414,6 @@ Parameter                               Description
     }
 RST;
 
-        $invalid_content2 = <<<'RST'
-label_translation_parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**type**: ``array`` **default**: ``[]``
-
-The content of the `label`_ option is translated before displaying it, so it
-can contain :ref:`translation placeholders <component-translation-placeholders>`.
-This option defines the values used to replace those placeholders.
-
-Given this translation message:
-
-.. code-block:: yaml
-
-    # translations/messages.en.yaml
-    form.order.reset: 'Reset an order to %company%'
-
-You can specify the placeholder values as follows:
-
-.. code-block:: php
-
-    use Symfony\Component\Form\Extension\Core\Type\ResetType;
-    // ...
-
-    $builder->add('send', ResetType::class, [
-        'label' => 'form.order.reset',
-        'label_translation_parameters' => [
-            '%company%' => 'ACME Inc.',
-        ],
-    ]);
-
-The ``label_translation_parameters`` option of buttons is merged with the same
-option of its parents, so buttons can reuse and/or override any of the parent
-placeholders.
-RST;
-
         yield [
             NullViolation::create(),
             new RstSample($content, 26),
@@ -484,9 +429,29 @@ RST;
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
                 15,
-                ''
+                '.. code-block:: php',
             ),
-            new RstSample($invalid_content, 14),
+            new RstSample(
+                <<<RST
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # app/config/services.yml
+        services:
+            app.mailer:
+                class:        AppBundle\Mailer
+                arguments:    [sendmail]
+
+.. note::
+
+    Try to use it like this:
+
+    .. code-block:: php
+
+        echo 'foo';
+
+RST, 14),
         ];
 
         yield [
@@ -543,9 +508,44 @@ RST;
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
                 19,
-                ''
+                '.. code-block:: php'
             ),
-            new RstSample($invalid_content2, 18),
+            new RstSample(
+                <<<'RST'
+label_translation_parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**type**: ``array`` **default**: ``[]``
+
+The content of the `label`_ option is translated before displaying it, so it
+can contain :ref:`translation placeholders <component-translation-placeholders>`.
+This option defines the values used to replace those placeholders.
+
+Given this translation message:
+
+.. code-block:: yaml
+
+    # translations/messages.en.yaml
+    form.order.reset: 'Reset an order to %company%'
+
+You can specify the placeholder values as follows:
+
+.. code-block:: php
+
+    use Symfony\Component\Form\Extension\Core\Type\ResetType;
+    // ...
+
+    $builder->add('send', ResetType::class, [
+        'label' => 'form.order.reset',
+        'label_translation_parameters' => [
+            '%company%' => 'ACME Inc.',
+        ],
+    ]);
+
+The ``label_translation_parameters`` option of buttons is merged with the same
+option of its parents, so buttons can reuse and/or override any of the parent
+placeholders.
+RST, 18),
         ];
 
         yield 'valid because previous paragraph ends with question mark (?)' => [
