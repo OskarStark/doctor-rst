@@ -42,7 +42,7 @@ final class NoPhpPrefixBeforeComposerTest extends \App\Tests\UnitTestCase
                     'Please remove "php" prefix',
                     'filename',
                     1,
-                    ''
+                    'please execute php composer'
                 ),
                 new RstSample('please execute php composer'),
             ],
