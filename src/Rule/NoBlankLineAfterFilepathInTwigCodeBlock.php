@@ -42,7 +42,10 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Li
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // TWIG
         if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean()->toString(), $matches)) {
@@ -59,13 +62,13 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Li
         if ($lines->current()->isBlank()) {
             $lines->next();
             if (!TwigHelper::isComment($lines->current())) {
-                $message = sprintf('Please remove blank line after "%s"', trim($matches[0]));
+                $match = trim($matches[0]);
 
                 return Violation::from(
-                    $message,
+                    sprintf('Please remove blank line after "%s"', $match),
                     $filename,
                     $number + 1,
-                    ''
+                    $match
                 );
             }
         }

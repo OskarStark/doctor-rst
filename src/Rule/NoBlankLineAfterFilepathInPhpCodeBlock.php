@@ -43,7 +43,10 @@ class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Lin
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // PHP
         if (preg_match('/^\/\/(.*)\.php$/', $lines->current()->clean()->toString(), $matches)) {
@@ -60,13 +63,13 @@ class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements Lin
         if ($lines->current()->isBlank()) {
             $lines->next();
             if (!PhpHelper::isComment($lines->current())) {
-                $message = sprintf('Please remove blank line after "%s"', trim($matches[0]));
+                $match = trim($matches[0]);
 
                 return Violation::from(
-                    $message,
+                    sprintf('Please remove blank line after "%s"', $match),
                     $filename,
                     $number + 1,
-                    ''
+                    $match
                 );
             }
         }

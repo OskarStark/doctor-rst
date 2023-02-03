@@ -47,8 +47,8 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
                 Violation::from(
                     sprintf('Please remove blank line after "<!-- %s -->"', $path),
                     'filename',
-                    1,
-                    ''
+                    3,
+                    sprintf('<!-- %s -->', $path),
                 ),
                 new RstSample([
                     '.. code-block:: xml',
@@ -73,8 +73,8 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
                 Violation::from(
                     sprintf('Please remove blank line after "<!--%s-->"', $path),
                     'filename',
-                    1,
-                    ''
+                    3,
+                    sprintf('<!--%s-->', $path),
                 ),
                 new RstSample([
                     '.. code-block:: xml',

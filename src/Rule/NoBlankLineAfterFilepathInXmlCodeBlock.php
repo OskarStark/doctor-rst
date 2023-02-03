@@ -38,7 +38,10 @@ class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Lin
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // XML
         if (preg_match('/^<!--(.*)\.(xml|xlf|xliff)(.*)-->$/', $lines->current()->clean()->toString(), $matches)) {
@@ -55,13 +58,13 @@ class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Lin
         if ($lines->current()->isBlank()) {
             $lines->next();
             if (!XmlHelper::isComment($lines->current())) {
-                $message = sprintf('Please remove blank line after "%s"', trim($matches[0]));
+                $match = trim($matches[0]);
 
                 return Violation::from(
-                    $message,
+                    sprintf('Please remove blank line after "%s"', $match),
                     $filename,
                     $number + 1,
-                    ''
+                    $match
                 );
             }
         }
