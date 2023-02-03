@@ -62,7 +62,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTest
                 'Please provide a version behind ".. deprecated::"',
                 'filename',
                 1,
-                ''
+                '.. deprecated::'
             ),
             new RstSample('.. deprecated::'),
         ];
@@ -71,7 +71,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTest
                 'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
                 'filename',
                 1,
-                ''
+                '.. deprecated:: foo'
             ),
             new RstSample('.. deprecated:: foo'),
         ];

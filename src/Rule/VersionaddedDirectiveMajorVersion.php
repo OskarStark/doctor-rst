@@ -85,10 +85,10 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements LineCont
                         $message,
                         $filename,
                         $number + 1,
-                        ''
+                        $line
                     );
                 }
-            } catch (\UnexpectedValueException $e) {
+            } catch (\UnexpectedValueException) {
                 $message = sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_VERSIONADDED,
@@ -99,7 +99,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements LineCont
                     $message,
                     $filename,
                     $number + 1,
-                    ''
+                    $line
                 );
             }
         }

@@ -72,7 +72,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements LineConten
                     $message,
                     $filename,
                     $number + 1,
-                    ''
+                    $line
                 );
             }
         }

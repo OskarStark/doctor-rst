@@ -88,7 +88,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
                         $line
                     );
                 }
-            } catch (\UnexpectedValueException $e) {
+            } catch (\UnexpectedValueException) {
                 $message = sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
