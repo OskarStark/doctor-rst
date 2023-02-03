@@ -176,7 +176,7 @@ final class NoContractionTest extends \App\Tests\UnitTestCase
                     sprintf('Please do not use contraction for: %s', $matched ?? $invalid),
                     'filename',
                     1,
-                    ''
+                    trim($invalid)
                 ),
                 new RstSample($invalid),
             ];
@@ -189,7 +189,7 @@ final class NoContractionTest extends \App\Tests\UnitTestCase
                     sprintf('Please do not use contraction for: %s', $matched ?? $invalidUppercase),
                     'filename',
                     1,
-                    ''
+                    $invalidUppercase
                 ),
                     new RstSample($invalidUppercase),
                 ];

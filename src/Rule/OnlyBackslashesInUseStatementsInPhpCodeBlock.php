@@ -61,7 +61,7 @@ class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implemen
                 $message,
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

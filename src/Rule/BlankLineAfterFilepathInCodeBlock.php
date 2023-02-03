@@ -44,7 +44,10 @@ class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCont
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // PHP
         if ($matches = $lines->current()->clean()->match('/^\/\/(.*)\.php$/')) {
@@ -73,17 +76,17 @@ class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCont
     {
         $lines->next();
 
-        if (!$lines->current()->isBlank()) {
-            $message = sprintf('Please add a blank line after "%s"', trim($matches[0]));
-
-            return Violation::from(
-                $message,
-                $filename,
-                $number + 1,
-                ''
-            );
+        if ($lines->current()->isBlank()) {
+            return NullViolation::create();
         }
 
-        return NullViolation::create();
+        $match = trim($matches[0]);
+
+        return Violation::from(
+            sprintf('Please add a blank line after "%s"', $match),
+            $filename,
+            $number + 1,
+            $match
+        );
     }
 }

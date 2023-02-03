@@ -42,12 +42,12 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
                     'Please remove the "$" prefix in .. code-block:: directive',
                     'filename',
                     1,
-                    ''
+                    '$ composer install sonata-project/admin-bundle'
                 ),
                 new RstSample([
                     '.. code-block:: bash',
                     '',
-                    '$ composer install sonata-project/admin-bundle',
+                    '    $ composer install sonata-project/admin-bundle',
                 ]),
             ],
             [
@@ -55,12 +55,12 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
                     'Please remove the "$" prefix in .. code-block:: directive',
                     'filename',
                     1,
-                    ''
+                    '$ composer install sonata-project/admin-bundle'
                 ),
                 new RstSample([
                     '.. code-block:: shell',
                     '',
-                    '$ composer install sonata-project/admin-bundle',
+                    '    $ composer install sonata-project/admin-bundle',
                 ]),
             ],
             [
@@ -68,12 +68,12 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
                     'Please remove the "$" prefix in .. code-block:: directive',
                     'filename',
                     1,
-                    ''
+                    '$ composer install sonata-project/admin-bundle'
                 ),
                 new RstSample([
                     '.. code-block:: terminal',
                     '',
-                    '$ composer install sonata-project/admin-bundle',
+                    '    $ composer install sonata-project/admin-bundle',
                 ]),
             ],
             [

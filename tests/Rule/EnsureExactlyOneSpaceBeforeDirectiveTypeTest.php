@@ -70,7 +70,7 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
                     'Please use only one whitespace between ".." and the directive type.',
                     'filename',
                     1,
-                    ''
+                    $invalidCase
                 ),
                 new RstSample($invalidCase),
             ];

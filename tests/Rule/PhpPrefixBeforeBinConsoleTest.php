@@ -47,7 +47,7 @@ final class PhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
                 'Please add "php" prefix before "bin/console"',
                 'filename',
                 1,
-                ''
+                'please execute bin/console foo'
             ),
             new RstSample('please execute bin/console foo'),
         ];

@@ -61,13 +61,11 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule
         }
 
         if (!preg_match('/php(.*)bin\/console/', $line->raw()->toString())) {
-            $message = 'Please add "php" prefix before "bin/console"';
-
             return Violation::from(
-                $message,
+                'Please add "php" prefix before "bin/console"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

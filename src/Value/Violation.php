@@ -40,9 +40,9 @@ final class Violation implements ViolationInterface
         $this->rawLine = $rawLine;
     }
 
-    public static function from(string $message, string $filename, int $lineno, string $rawLine): self
+    public static function from(string $message, string $filename, int $lineno, Line|string $rawLine): self
     {
-        return new self($message, $filename, $lineno, $rawLine);
+        return new self($message, $filename, $lineno, $rawLine instanceof Line ? $rawLine->clean()->toString() : $rawLine);
     }
 
     public function message(): string

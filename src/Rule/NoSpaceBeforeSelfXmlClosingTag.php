@@ -32,13 +32,11 @@ class NoSpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContent
         $line = $lines->current();
 
         if ('/>' !== $line->clean()->toString() && $line->raw()->match('/\ \/>/')) {
-            $message = 'Please remove space before "/>"';
-
             return Violation::from(
-                $message,
+                'Please remove space before "/>"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

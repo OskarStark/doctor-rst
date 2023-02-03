@@ -33,27 +33,23 @@ class ExtendAbstractController extends AbstractRule implements LineContentRule
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
-        $line = $lines->current()->clean();
+        $line = $lines->current();
 
-        if ($line->match('/^class(.*)extends Controller$/')) {
-            $message = 'Please extend AbstractController instead of Controller';
-
+        if ($line->clean()->match('/^class(.*)extends Controller$/')) {
             return Violation::from(
-                $message,
+                'Please extend AbstractController instead of Controller',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
-        if ($line->match('/^use Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\Controller;/')) {
-            $message = 'Please use "Symfony\Bundle\FrameworkBundle\Controller\AbstractController" instead of "Symfony\Bundle\FrameworkBundle\Controller\Controller"';
-
+        if ($line->clean()->match('/^use Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\Controller;/')) {
             return Violation::from(
-                $message,
+                'Please use "Symfony\Bundle\FrameworkBundle\Controller\AbstractController" instead of "Symfony\Bundle\FrameworkBundle\Controller\Controller"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

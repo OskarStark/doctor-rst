@@ -42,7 +42,7 @@ final class NoSpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
                     'Please remove space before "/>"',
                     'filename',
                     1,
-                    ''
+                    '<argument type="service" id="sonata.admin.search.handler" />'
                 ),
                 new RstSample('<argument type="service" id="sonata.admin.search.handler" />'),
             ],
@@ -51,7 +51,7 @@ final class NoSpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
                     'Please remove space before "/>"',
                     'filename',
                     1,
-                    ''
+                    '<argument />'
                 ),
                 new RstSample('<argument />'),
             ],

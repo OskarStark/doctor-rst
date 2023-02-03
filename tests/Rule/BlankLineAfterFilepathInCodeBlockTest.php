@@ -59,8 +59,8 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             Violation::from(
                 'Please add a blank line after "// src/Handler/Collection.php"',
                 'filename',
-                1,
-                ''
+                3,
+                '// src/Handler/Collection.php',
             ),
             new RstSample([
                 '.. code-block:: php',
@@ -90,8 +90,8 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             Violation::from(
                 'Please add a blank line after "# config/services.yml"',
                 'filename',
-                1,
-                ''
+                3,
+                '# config/services.yml',
             ),
             new RstSample([
                 '.. code-block:: yml',
@@ -121,8 +121,8 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             Violation::from(
                 'Please add a blank line after "# config/services.yaml"',
                 'filename',
-                1,
-                ''
+                3,
+                '# config/services.yaml',
             ),
             new RstSample([
                 '.. code-block:: yaml',
@@ -152,8 +152,8 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             Violation::from(
                 'Please add a blank line after "<!-- config/services.xml -->"',
                 'filename',
-                1,
-                ''
+                3,
+                '<!-- config/services.xml -->',
             ),
             new RstSample([
                 '.. code-block:: xml',
@@ -176,8 +176,8 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             Violation::from(
                 'Please add a blank line after "<!--config/services.xml-->"',
                 'filename',
-                1,
-                ''
+                3,
+                '<!--config/services.xml-->',
             ),
             new RstSample([
                 '.. code-block:: xml',
@@ -207,8 +207,8 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             Violation::from(
                 'Please add a blank line after "{# templates/index.html.twig #}"',
                 'filename',
-                1,
-                ''
+                3,
+                '{# templates/index.html.twig #}',
             ),
             new RstSample([
                 '.. code-block:: twig',
@@ -231,8 +231,8 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             Violation::from(
                 'Please add a blank line after "{# templates/index.html.twig #}"',
                 'filename',
-                1,
-                ''
+                3,
+                '{# templates/index.html.twig #}',
             ),
             new RstSample([
                 '.. code-block:: jinja',
@@ -255,8 +255,8 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
             Violation::from(
                 'Please add a blank line after "{# templates/index.html.twig #}"',
                 'filename',
-                1,
-                ''
+                3,
+                '{# templates/index.html.twig #}',
             ),
             new RstSample([
                 '.. code-block:: html+jinja',

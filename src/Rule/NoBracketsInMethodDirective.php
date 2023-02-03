@@ -42,15 +42,14 @@ class NoBracketsInMethodDirective extends AbstractRule implements LineContentRul
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
+        $line = $lines->current();
 
-        if ($lines->current()->raw()->match('/:method:`.*::.*\(\)`/')) {
-            $message = 'Please remove "()" inside :method: directive';
-
+        if ($line->raw()->match('/:method:`.*::.*\(\)`/')) {
             return Violation::from(
-                $message,
+                'Please remove "()" inside :method: directive',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

@@ -40,7 +40,10 @@ class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Li
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // YML / YAML
         if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean()->toString(), $matches)) {
@@ -57,13 +60,13 @@ class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Li
         if ($lines->current()->isBlank()) {
             $lines->next();
             if (!YamlHelper::isComment($lines->current())) {
-                $message = sprintf('Please remove blank line after "%s"', trim($matches[0]));
+                $match = trim($matches[0]);
 
                 return Violation::from(
-                    $message,
+                    sprintf('Please remove blank line after "%s"', $match),
                     $filename,
                     $number + 1,
-                    ''
+                    $match
                 );
             }
         }

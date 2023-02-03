@@ -55,7 +55,7 @@ final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
                     'Please use "final" for Admin class',
                     'filename',
                     1,
-                    ''
+                    'class TestAdmin extends AbstractAdmin'
                 ),
                 new RstSample('class TestAdmin extends AbstractAdmin'),
             ],
@@ -65,7 +65,7 @@ final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
                     'Please use "final" for Admin class',
                     'filename',
                     1,
-                    ''
+                    'class TestAdmin extends AbstractAdmin'
                 ),
                 new RstSample('    class TestAdmin extends AbstractAdmin'),
             ],

@@ -42,13 +42,11 @@ class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineCont
         $nextLine = $lines->current();
 
         if (!$nextLine->clean()->startsWith('<?php')) {
-            $message = sprintf('Please add PHP open tag after "%s" directive', $line->raw()->toString());
-
             return Violation::from(
-                $message,
+                sprintf('Please add PHP open tag after "%s" directive', $line->raw()->toString()),
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

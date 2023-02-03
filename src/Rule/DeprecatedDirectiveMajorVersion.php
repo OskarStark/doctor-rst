@@ -24,12 +24,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineContentRule, Configurable
 {
-    private VersionParser $versionParser;
     private int $majorVersion;
 
-    public function __construct(VersionParser $versionParser)
-    {
-        $this->versionParser = $versionParser;
+    public function __construct(
+        private readonly VersionParser $versionParser
+    ) {
     }
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
@@ -65,7 +64,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
             return NullViolation::create();
         }
 
-        if ($matches = $lines->current()->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
+        if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim($matches[1]);
 
             try {
@@ -86,10 +85,10 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
                         $message,
                         $filename,
                         $number + 1,
-                        ''
+                        $line
                     );
                 }
-            } catch (\UnexpectedValueException $e) {
+            } catch (\UnexpectedValueException) {
                 $message = sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
@@ -100,7 +99,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
                     $message,
                     $filename,
                     $number + 1,
-                    ''
+                    $line
                 );
             }
         }

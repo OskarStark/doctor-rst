@@ -44,7 +44,7 @@ final class NoBracketsInMethodDirectiveTest extends \App\Tests\UnitTestCase
                 'Please remove "()" inside :method: directive',
                 'filename',
                 1,
-                ''
+                ':method:`Symfony\\Component\\OptionsResolver\\Options::offsetGet()`'
             ),
             new RstSample(':method:`Symfony\\Component\\OptionsResolver\\Options::offsetGet()`'),
         ];

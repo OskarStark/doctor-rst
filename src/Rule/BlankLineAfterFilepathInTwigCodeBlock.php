@@ -40,7 +40,10 @@ class BlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Line
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // TWIG
         if ($matches = $lines->current()->clean()->match('/^{#(.*)\.twig(.*)#}/')) {
@@ -55,13 +58,13 @@ class BlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Line
         $lines->next();
 
         if (!$lines->current()->isBlank() && !TwigHelper::isComment($lines->current())) {
-            $message = sprintf('Please add a blank line after "%s"', trim($matches[0]));
+            $match = trim($matches[0]);
 
             return Violation::from(
-                $message,
+                sprintf('Please add a blank line after "%s"', $match),
                 $filename,
                 $number + 1,
-                ''
+                $match
             );
         }
 

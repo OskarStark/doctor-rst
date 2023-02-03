@@ -49,7 +49,7 @@ final class YarnDevOptionNotAtTheEndTest extends \App\Tests\UnitTestCase
                 'Please move "--dev" option before the package',
                 'filename',
                 1,
-                ''
+                'yarn add jquery --dev'
             ),
             new RstSample('yarn add jquery --dev'),
         ];

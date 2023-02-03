@@ -33,11 +33,9 @@ use Composer\Semver\VersionParser;
  */
 class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
 {
-    private VersionParser $versionParser;
-
-    public function __construct(VersionParser $versionParser)
-    {
-        $this->versionParser = $versionParser;
+    public function __construct(
+        private readonly VersionParser $versionParser
+    ) {
     }
 
     public static function getGroups(): array
@@ -57,23 +55,21 @@ class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Lin
             return NullViolation::create();
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $lines->current()->clean()->toString(), $matches)) {
+        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $line->clean()->toString(), $matches)) {
             $version = trim($matches[1]);
 
             if (empty($version)) {
-                $message = sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_VERSIONADDED);
-
                 return Violation::from(
-                    $message,
+                    sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_VERSIONADDED),
                     $filename,
                     $number + 1,
-                    ''
+                    $line
                 );
             }
 
             try {
                 $this->versionParser->normalize($version);
-            } catch (\UnexpectedValueException $e) {
+            } catch (\UnexpectedValueException) {
                 $message = sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_VERSIONADDED,
@@ -84,7 +80,7 @@ class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Lin
                     $message,
                     $filename,
                     $number + 1,
-                    ''
+                    $line
                 );
             }
         }

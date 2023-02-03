@@ -70,7 +70,7 @@ final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
                     'Please move the namespace before the use statement(s)',
                     'filename',
                     1,
-                    ''
+                    'namespace App;',
                 ),
                 new RstSample([
                     $codeBlock,
@@ -86,7 +86,7 @@ final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
                     'Please move the namespace before the use statement(s)',
                     'filename',
                     1,
-                    ''
+                    'namespace App;',
                 ),
                 new RstSample([
                     $codeBlock,

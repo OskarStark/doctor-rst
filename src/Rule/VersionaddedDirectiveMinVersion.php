@@ -58,7 +58,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements LineConten
             return NullViolation::create();
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $lines->current()->clean()->toString(), $matches)) {
+        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $line->clean()->toString(), $matches)) {
             $version = trim($matches[1]);
 
             if (-1 === version_compare($version, $this->minVersion)) {
@@ -72,7 +72,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements LineConten
                     $message,
                     $filename,
                     $number + 1,
-                    ''
+                    $line
                 );
             }
         }

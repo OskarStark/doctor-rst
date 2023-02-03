@@ -60,7 +60,7 @@ final class VersionaddedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
                     'Please only provide ".. versionadded::" if the version is greater/equal "3.4"',
                     'filename',
                     1,
-                    ''
+                    '.. versionadded:: 2.8'
                 ),
                 '3.4',
                 new RstSample('.. versionadded:: 2.8'),

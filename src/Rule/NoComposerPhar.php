@@ -29,15 +29,14 @@ class NoComposerPhar extends AbstractRule implements LineContentRule
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
+        $line = $lines->current();
 
-        if ($lines->current()->raw()->match('/composer\.phar/')) {
-            $message = 'Please use "composer" instead of "composer.phar"';
-
+        if ($line->raw()->match('/composer\.phar/')) {
             return Violation::from(
-                $message,
+                'Please use "composer" instead of "composer.phar"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

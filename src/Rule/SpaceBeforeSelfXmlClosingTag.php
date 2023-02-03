@@ -31,13 +31,11 @@ class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContentRu
         }
 
         if (!preg_match('/\ \/>/', $line) && !RstParser::isLinkUsage($line)) {
-            $message = 'Please add space before "/>"';
-
             return Violation::from(
-                $message,
+                'Please add space before "/>"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

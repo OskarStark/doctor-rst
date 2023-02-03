@@ -41,8 +41,8 @@ final class NoBlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitT
                 Violation::from(
                     'Please remove blank line after "{# templates/index.html.twig #}"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '{# templates/index.html.twig #}',
                 ),
                 new RstSample([
                     '.. code-block:: twig',
@@ -65,8 +65,8 @@ final class NoBlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitT
                 Violation::from(
                     'Please remove blank line after "{# templates/index.html.twig #}"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '{# templates/index.html.twig #}',
                 ),
                 new RstSample([
                     '.. code-block:: jinja',
@@ -89,8 +89,8 @@ final class NoBlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitT
                 Violation::from(
                     'Please remove blank line after "{# templates/index.html.twig #}"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '{# templates/index.html.twig #}',
                 ),
                 new RstSample([
                     '.. code-block:: html+jinja',
@@ -113,8 +113,8 @@ final class NoBlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitT
                 Violation::from(
                     'Please remove blank line after "{# templates/index.html.twig #}"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '{# templates/index.html.twig #}',
                 ),
                 new RstSample([
                     '.. code-block:: html+twig',

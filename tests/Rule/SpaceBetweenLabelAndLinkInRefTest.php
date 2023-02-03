@@ -44,7 +44,7 @@ final class SpaceBetweenLabelAndLinkInRefTest extends \App\Tests\UnitTestCase
                 'Please add a space between "receiving them via a worker" and "<messenger-worker>" inside :ref: directive',
                 'filename',
                 1,
-                ''
+                ':ref:`receiving them via a worker<messenger-worker>`'
             ),
             new RstSample(':ref:`receiving them via a worker<messenger-worker>`'),
         ];

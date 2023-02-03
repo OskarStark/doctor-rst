@@ -128,7 +128,7 @@ final class TypoTest extends \App\Tests\UnitTestCase
                     sprintf('Typo in word "%s"', $invalid),
                     'filename',
                     1,
-                    ''
+                    $invalid
                 ),
                 new RstSample($invalid),
             ];
@@ -139,7 +139,7 @@ final class TypoTest extends \App\Tests\UnitTestCase
                     sprintf('Typo in word "%s"', $invalid),
                     'filename',
                     1,
-                    ''
+                    trim($invalid)
                 ),
                 new RstSample(sprintf('    %s', $invalid)),
             ];

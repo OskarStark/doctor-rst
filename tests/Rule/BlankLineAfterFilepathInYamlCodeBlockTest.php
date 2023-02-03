@@ -43,8 +43,8 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTes
             Violation::from(
                 'Please add a blank line after "# config/services.yml"',
                 'filename',
-                1,
-                ''
+                3,
+                '# config/services.yml',
             ),
             new RstSample([
                 '.. code-block:: yml',
@@ -67,8 +67,8 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTes
             Violation::from(
                 'Please add a blank line after "# config/services.yaml"',
                 'filename',
-                1,
-                ''
+                3,
+                '# config/services.yaml',
             ),
             new RstSample([
                 '.. code-block:: yaml',

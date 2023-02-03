@@ -45,7 +45,7 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
                     'Please extend Controller instead of AbstractController',
                     'filename',
                     1,
-                    ''
+                    'class TestController extends AbstractController'
                 ),
                 new RstSample('class TestController extends AbstractController'),
             ],
@@ -55,7 +55,7 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
                     'Please extend Controller instead of AbstractController',
                     'filename',
                     1,
-                    ''
+                    'class TestController extends AbstractController'
                 ),
                 new RstSample('    class TestController extends AbstractController'),
             ],
@@ -72,7 +72,7 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
                     'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
                     'filename',
                     1,
-                    ''
+                    'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'
                 ),
                 new RstSample('use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
             ],
@@ -82,7 +82,7 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
                     'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
                     'filename',
                     1,
-                    ''
+                    'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'
                 ),
                 new RstSample('    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
             ],

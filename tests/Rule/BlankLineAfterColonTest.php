@@ -63,7 +63,7 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
                 'Please add a blank line after "For example:"',
                 'filename',
                 1,
-                ''
+                'For example:',
             ),
             new RstSample([
                 'For example:',

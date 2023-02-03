@@ -42,9 +42,18 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
                     'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
                     'filename',
                     1,
-                    ''
+                    'register the bundle in app/AppKernel.php'
                 ),
                 new RstSample('register the bundle in app/AppKernel.php'),
+            ],
+            [
+                Violation::from(
+                    'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
+                    'filename',
+                    1,
+                    'register the bundle in app/AppKernel.php'
+                ),
+                new RstSample('    register the bundle in app/AppKernel.php'),
             ],
             [
                 NullViolation::create(),
@@ -55,9 +64,18 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
                     'Please use "Kernel" instead of "AppKernel"',
                     'filename',
                     1,
-                    ''
+                    'register the bundle via AppKernel'
                 ),
                 new RstSample('register the bundle via AppKernel'),
+            ],
+            [
+                Violation::from(
+                    'Please use "Kernel" instead of "AppKernel"',
+                    'filename',
+                    1,
+                    'register the bundle via AppKernel'
+                ),
+                new RstSample('    register the bundle via AppKernel'),
             ],
             [
                 NullViolation::create(),

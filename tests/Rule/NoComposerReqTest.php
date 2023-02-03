@@ -42,7 +42,7 @@ final class NoComposerReqTest extends \App\Tests\UnitTestCase
                     'Please "composer require" instead of "composer req"',
                     'filename',
                     1,
-                    ''
+                    'composer req symfony/form'
                 ),
                 new RstSample('composer req symfony/form'),
             ],

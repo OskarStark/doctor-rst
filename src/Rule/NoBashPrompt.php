@@ -52,14 +52,14 @@ class NoBashPrompt extends AbstractRule implements LineContentRule
         $lines->next();
         $lines->next();
 
-        if ($lines->current()->clean()->match('/^\$ /')) {
-            $message = 'Please remove the "$" prefix in .. code-block:: directive';
+        $line = $lines->current();
 
+        if ($line->clean()->match('/^\$ /')) {
             return Violation::from(
-                $message,
+                'Please remove the "$" prefix in .. code-block:: directive',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

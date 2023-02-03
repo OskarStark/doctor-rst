@@ -49,7 +49,7 @@ class AmericanEnglish extends CheckListRule implements LineContentRule
                 sprintf($this->message, $matches[0]),
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

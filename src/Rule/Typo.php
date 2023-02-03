@@ -36,16 +36,14 @@ class Typo extends CheckListRule implements LineContentRule
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
-        $line = $lines->current()->raw();
+        $line = $lines->current();
 
-        if ($matches = $line->match($this->search)) {
-            $message = sprintf($this->message, $matches[0]);
-
+        if ($matches = $line->raw()->match($this->search)) {
             return Violation::from(
-                $message,
+                sprintf($this->message, $matches[0]),
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

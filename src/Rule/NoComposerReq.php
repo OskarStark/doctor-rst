@@ -32,13 +32,11 @@ class NoComposerReq extends AbstractRule implements LineContentRule
         $line = $lines->current();
 
         if ($line->clean()->match('/composer req /')) {
-            $message = 'Please "composer require" instead of "composer req"';
-
             return Violation::from(
-                $message,
+                'Please "composer require" instead of "composer req"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

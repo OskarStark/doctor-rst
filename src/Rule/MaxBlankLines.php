@@ -60,8 +60,9 @@ class MaxBlankLines extends AbstractRule implements LineContentRule, Configurabl
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
+        $line = $lines->current();
 
-        if (!$lines->current()->isBlank()) {
+        if (!$line->isBlank()) {
             return NullViolation::create();
         }
 
@@ -76,13 +77,11 @@ class MaxBlankLines extends AbstractRule implements LineContentRule, Configurabl
         }
 
         if ($blanklines > $this->max) {
-            $message = sprintf('Please use max %s blank lines, you used %s', $this->max, $blanklines);
-
             return Violation::from(
-                $message,
+                sprintf('Please use max %s blank lines, you used %s', $this->max, $blanklines),
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

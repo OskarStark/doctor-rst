@@ -42,7 +42,7 @@ final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
                     'Please remove "php" prefix before "bin/console"',
                     'filename',
                     1,
-                    ''
+                    'please execute php bin/console foo'
                 ),
                 new RstSample('please execute php bin/console foo'),
             ],

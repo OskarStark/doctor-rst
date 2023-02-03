@@ -44,9 +44,9 @@ class SpaceBetweenLabelAndLinkInRef extends AbstractRule implements LineContentR
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
-        $line = $lines->current()->raw();
+        $line = $lines->current();
 
-        if ($matches = $line->match('/:ref:`(?P<label>.*)<(?P<link>.*)>`/')) {
+        if ($matches = $line->raw()->match('/:ref:`(?P<label>.*)<(?P<link>.*)>`/')) {
             if (!u($matches['label'])->endsWith(' ')) {
                 $message = sprintf(
                     'Please add a space between "%s" and "<%s>" inside :ref: directive',
@@ -58,7 +58,7 @@ class SpaceBetweenLabelAndLinkInRef extends AbstractRule implements LineContentR
                     $message,
                     $filename,
                     $number + 1,
-                    ''
+                    $line
                 );
             }
         }

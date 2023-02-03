@@ -44,7 +44,7 @@ final class YarnDevOptionAtTheEndTest extends \App\Tests\UnitTestCase
                 'Please move "--dev" option to the end of the command',
                 'filename',
                 1,
-                ''
+                'yarn add --dev jquery'
             ),
             new RstSample('yarn add --dev jquery'),
         ];

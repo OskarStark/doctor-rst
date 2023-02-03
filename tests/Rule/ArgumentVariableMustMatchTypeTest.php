@@ -60,28 +60,28 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 Violation::from(
                     'Please rename "$builder" to "$containerBuilder"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    'public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $builder): void',
                 ),
                 new RstSample([
                     $codeBlock,
                     '',
-                    'public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $builder): void',
-                ]),
+                    '    public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $builder): void',
+                ], 2),
             ];
 
             yield [
                 Violation::from(
                     'Please rename "$builder" to "$containerBuilder". Please rename "$configurator" to "$containerConfigurator"',
                     'filename',
-                    1,
-                    ''
-                ),
-                new RstSample([
-                    $codeBlock,
-                    '',
+                    3,
                     'public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $builder): void',
-                ]),
+                ),
+                new RstSample([
+                    $codeBlock,
+                    '',
+                    '    public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $builder): void',
+                ], 2),
             ];
 
             yield [
@@ -89,7 +89,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 new RstSample([
                     $codeBlock,
                     '',
-                    'public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void',
+                    '    public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void',
                 ]),
             ];
 
@@ -97,14 +97,14 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 Violation::from(
                     'Please rename "$configurator" to "$containerConfigurator"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    'ContainerConfigurator $configurator',
                 ),
                 new RstSample([
                     $codeBlock,
                     '',
-                    'ContainerConfigurator $configurator',
-                ]),
+                    '    ContainerConfigurator $configurator',
+                ], 2),
             ];
 
             yield [
@@ -112,7 +112,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 new RstSample([
                     $codeBlock,
                     '',
-                    'ContainerConfigurator $containerConfigurator',
+                    '    ContainerConfigurator $containerConfigurator',
                 ]),
             ];
 
@@ -120,20 +120,20 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 Violation::from(
                     'Please rename "$configurator" to "$containerConfigurator"',
                     'filename',
-                    1,
-                    ''
+                    6,
+                    'ContainerConfigurator $configurator',
                 ),
                 new RstSample([
                     $codeBlock,
-                    'some',
-                    'text',
-                    'before',
-                    'violation',
-                    'ContainerConfigurator $configurator',
-                    'some',
-                    'text',
-                    'after',
-                ]),
+                    '    some',
+                    '    text',
+                    '    before',
+                    '    violation',
+                    '    ContainerConfigurator $configurator',
+                    '    some',
+                    '    text',
+                    '    after',
+                ], 5),
             ];
         }
 

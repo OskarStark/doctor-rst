@@ -32,13 +32,11 @@ class NoPhpPrefixBeforeComposer extends AbstractRule implements LineContentRule
         $line = $lines->current();
 
         if ($line->raw()->match('/php composer/')) {
-            $message = 'Please remove "php" prefix';
-
             return Violation::from(
-                $message,
+                'Please remove "php" prefix',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

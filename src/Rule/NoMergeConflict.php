@@ -40,7 +40,7 @@ final class NoMergeConflict extends AbstractRule implements LineContentRule
                 'Please get rid of the merge conflict',
                 $filename,
                 $number + 1,
-                $line->raw()->trim()->toString()
+                $line
             );
         }
 

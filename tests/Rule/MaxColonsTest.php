@@ -59,7 +59,7 @@ final class MaxColonsTest extends \App\Tests\UnitTestCase
                 'Please use max 2 colons at the end.',
                 'filename',
                 1,
-                ''
+                'temp:::'
             ),
             new RstSample('temp:::'),
         ];
@@ -69,7 +69,7 @@ final class MaxColonsTest extends \App\Tests\UnitTestCase
                 'Please use max 2 colons at the end.',
                 'filename',
                 1,
-                ''
+                'temp:::'
             ),
             new RstSample(' temp:::'),
         ];
@@ -79,7 +79,7 @@ final class MaxColonsTest extends \App\Tests\UnitTestCase
                 'Please use max 2 colons at the end.',
                 'filename',
                 1,
-                ''
+                'temp:::'
             ),
             new RstSample(' temp::: '),
         ];

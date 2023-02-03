@@ -52,10 +52,11 @@ class NoDirectiveAfterShorthand extends AbstractRule implements LineContentRule
         if (!$lines->current()->isDirective()) {
             return NullViolation::create();
         }
+        $line = $lines->current();
 
         $message = sprintf(
             'A "%s" directive is following a shorthand notation "%s", this will lead to a broken markup!',
-            $lines->current()->clean()->toString(),
+            $line->clean()->toString(),
             RstParser::SHORTHAND
         );
 
@@ -63,7 +64,7 @@ class NoDirectiveAfterShorthand extends AbstractRule implements LineContentRule
             $message,
             $filename,
             $number + 1,
-            ''
+            $line
         );
     }
 }

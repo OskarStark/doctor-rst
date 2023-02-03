@@ -63,7 +63,7 @@ final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTe
                     'Please provide a version behind ".. versionadded::"',
                     'filename',
                     1,
-                    ''
+                    '.. versionadded::'
                 ),
                 new RstSample('.. versionadded::'),
             ],
@@ -72,7 +72,7 @@ final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTe
                     'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
                     'filename',
                     1,
-                    ''
+                    '.. versionadded:: foo'
                 ),
                 new RstSample('.. versionadded:: foo'),
             ],

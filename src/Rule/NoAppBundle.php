@@ -29,15 +29,14 @@ class NoAppBundle extends AbstractRule implements LineContentRule
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
+        $line = $lines->current();
 
-        if ($lines->current()->raw()->match('/AppBundle/')) {
-            $message = 'Please don\'t use "AppBundle" anymore';
-
+        if ($line->raw()->match('/AppBundle/')) {
             return Violation::from(
-                $message,
+                'Please don\'t use "AppBundle" anymore',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
