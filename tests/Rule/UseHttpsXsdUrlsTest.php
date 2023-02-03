@@ -46,7 +46,7 @@ final class UseHttpsXsdUrlsTest extends \App\Tests\UnitTestCase
                 'Please use "https" for http://symfony.com/schema/dic/services/services-1.0.xsd',
                 'filename',
                 1,
-                ''
+                'http://symfony.com/schema/dic/services/services-1.0.xsd'
             ),
             new RstSample('http://symfony.com/schema/dic/services/services-1.0.xsd'),
         ];

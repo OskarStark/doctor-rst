@@ -35,13 +35,11 @@ class UseHttpsXsdUrls extends AbstractRule implements LineContentRule
         $line = $lines->current();
 
         if ($matches = $line->raw()->match('/http\:\/\/([^\s]+)\.xsd/')) {
-            $message = sprintf('Please use "https" for %s', $matches[0]);
-
             return Violation::from(
-                $message,
+                sprintf('Please use "https" for %s', $matches[0]),
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
