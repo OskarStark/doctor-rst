@@ -65,8 +65,6 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
         $lines->seek($number);
         $line = $lines->current();
 
-        dump($this->inPhpCodeBlock($lines, $number));
-
         if (!$this->inPhpCodeBlock($lines, $number)) {
             return NullViolation::create();
         }

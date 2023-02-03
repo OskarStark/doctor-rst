@@ -66,7 +66,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 new RstSample([
                     $codeBlock,
                     '',
-                    'public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $builder): void',
+                    '    public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $builder): void',
                 ], 2),
             ];
 
@@ -80,7 +80,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 new RstSample([
                     $codeBlock,
                     '',
-                    'public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $builder): void',
+                    '    public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $builder): void',
                 ], 2),
             ];
 
@@ -89,7 +89,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 new RstSample([
                     $codeBlock,
                     '',
-                    'public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void',
+                    '    public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void',
                 ]),
             ];
 
@@ -103,8 +103,8 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 new RstSample([
                     $codeBlock,
                     '',
-                    'ContainerConfigurator $configurator',
-                ],2),
+                    '    ContainerConfigurator $configurator',
+                ], 2),
             ];
 
             yield [
@@ -112,7 +112,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 new RstSample([
                     $codeBlock,
                     '',
-                    'ContainerConfigurator $containerConfigurator',
+                    '    ContainerConfigurator $containerConfigurator',
                 ]),
             ];
 
@@ -125,14 +125,14 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 ),
                 new RstSample([
                     $codeBlock,
-                    'some',
-                    'text',
-                    'before',
-                    'violation',
-                    'ContainerConfigurator $configurator',
-                    'some',
-                    'text',
-                    'after',
+                    '    some',
+                    '    text',
+                    '    before',
+                    '    violation',
+                    '    ContainerConfigurator $configurator',
+                    '    some',
+                    '    text',
+                    '    after',
                 ], 5),
             ];
         }
