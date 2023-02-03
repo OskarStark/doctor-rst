@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Rst\RstParser;
+use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
@@ -22,6 +22,8 @@ use App\Value\ViolationInterface;
 
 class LowercaseAsInUseStatements extends AbstractRule implements LineContentRule
 {
+    use DirectiveTrait;
+
     public static function getGroups(): array
     {
         return [
@@ -35,35 +37,17 @@ class LowercaseAsInUseStatements extends AbstractRule implements LineContentRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)
-            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS)
-            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ATTRIBUTES)
-            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY)
-            && !RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE)
-        ) {
+        if (!$this->inPhpCodeBlock($lines, $number)) {
             return NullViolation::create();
         }
 
-        $indention = $line->indention();
-
-        $lines->next();
-
-        while ($lines->valid()
-            && !$lines->current()->isDirective()
-            && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
-        ) {
-            if ($matches = $lines->current()->clean()->match('/^use (.*) (AS|As|aS) (.*);$/')) {
-                $message = sprintf('Please use lowercase "as" instead of "%s"', $matches[2]);
-
-                return Violation::from(
-                    $message,
-                    $filename,
-                    $number + 1,
-                    ''
-                );
-            }
-
-            $lines->next();
+        if ($matches = $line->clean()->match('/^use (.*) (AS|As|aS) (.*);$/')) {
+            return Violation::from(
+                sprintf('Please use lowercase "as" instead of "%s"', $matches[2]),
+                $filename,
+                $number + 1,
+                $line
+            );
         }
 
         return NullViolation::create();
