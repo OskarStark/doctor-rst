@@ -35,28 +35,28 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCo
 
         // PHP
         if (preg_match('/^\/\/(.*)\.php$/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename);
+            return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         // YML / YAML
         if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename);
+            return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         // XML
         if (preg_match('/^<!--(.*)\.xml(.*)-->$/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename);
+            return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         // TWIG
         if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename);
+            return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
     }
 
-    private function validateBlankLine(Lines $lines, array $matches, string $filename): ViolationInterface
+    private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();
 
@@ -66,7 +66,7 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCo
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

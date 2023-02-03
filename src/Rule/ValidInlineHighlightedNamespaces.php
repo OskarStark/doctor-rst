@@ -60,7 +60,7 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
                     return Violation::from(
                         $message,
                         $filename,
-                        1,
+                        $number + 1,
                         ''
                     );
                 }
@@ -81,7 +81,7 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
                     return Violation::from(
                         $message,
                         $filename,
-                        1,
+                        $number + 1,
                         ''
                     );
                 }

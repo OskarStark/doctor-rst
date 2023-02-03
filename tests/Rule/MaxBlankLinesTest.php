@@ -91,7 +91,7 @@ RST;
             Violation::from(
                 'Please use max 2 blank lines, you used 3',
                 'filename',
-                1,
+                9,
                 ''
             ),
             2,

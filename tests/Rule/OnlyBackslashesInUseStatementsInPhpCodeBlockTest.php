@@ -41,7 +41,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
                 Violation::from(
                     'Please check "use App/Handler;", it should not contain "/"',
                     'filename',
-                    1,
+                    5,
                     ''
                 ),
                 new RstSample([
@@ -57,7 +57,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
                 Violation::from(
                     'Please check "UsE App/Handler;", it should not contain "/"',
                     'filename',
-                    1,
+                    5,
                     ''
                 ),
                 new RstSample([
@@ -74,7 +74,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
             Violation::from(
                 'Please check "use App/Handler;", it should not contain "/"',
                 'filename',
-                1,
+                5,
                 ''
             ),
             new RstSample([

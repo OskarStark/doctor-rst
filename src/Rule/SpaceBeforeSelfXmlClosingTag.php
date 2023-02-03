@@ -36,7 +36,7 @@ class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContentRu
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

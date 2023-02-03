@@ -81,7 +81,7 @@ class MaxBlankLines extends AbstractRule implements LineContentRule, Configurabl
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

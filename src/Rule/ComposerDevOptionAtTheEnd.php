@@ -45,7 +45,7 @@ class ComposerDevOptionAtTheEnd extends AbstractRule implements LineContentRule
             return Violation::from(
                 'Please move "--dev" option to the end of the command',
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

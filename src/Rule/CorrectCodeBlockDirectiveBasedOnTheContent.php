@@ -56,7 +56,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                     return Violation::from(
                         $message,
                         $filename,
-                        1,
+                        $number + 1,
                         ''
                     );
                 }
@@ -88,7 +88,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                 return Violation::from(
                     $message,
                     $filename,
-                    1,
+                    $number + 1,
                     ''
                 );
             }

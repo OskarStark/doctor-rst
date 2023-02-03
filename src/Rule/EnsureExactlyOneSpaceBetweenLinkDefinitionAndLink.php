@@ -55,7 +55,7 @@ class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule imp
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

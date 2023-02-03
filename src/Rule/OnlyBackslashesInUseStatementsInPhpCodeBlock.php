@@ -60,7 +60,7 @@ class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implemen
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

@@ -82,7 +82,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
             Violation::from(
                 'The word "is" is used more times in a row.',
                 'filename',
-                1,
+                3,
                 ''
             ),
             new RstSample([
@@ -102,7 +102,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
             Violation::from(
                 'The word "is" is used more times in a row.',
                 'filename',
-                1,
+                3,
                 ''
             ),
             new RstSample([
@@ -122,7 +122,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
             Violation::from(
                 'The word "is" is used more times in a row.',
                 'filename',
-                1,
+                3,
                 ''
             ),
             new RstSample([
@@ -142,7 +142,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
             Violation::from(
                 'The word "is" is used more times in a row.',
                 'filename',
-                1,
+                3,
                 ''
             ),
             new RstSample([

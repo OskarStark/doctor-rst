@@ -48,7 +48,7 @@ class AmericanEnglish extends CheckListRule implements LineContentRule
             return Violation::from(
                 sprintf($this->message, $matches[0]),
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }
