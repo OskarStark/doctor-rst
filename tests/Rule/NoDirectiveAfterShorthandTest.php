@@ -98,7 +98,7 @@ RST;
                 'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
                 'filename',
                 1,
-                ''
+                '.. configuration-block::'
             ),
             new RstSample($invalid),
         ];
@@ -108,7 +108,7 @@ RST;
                 'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
                 'filename',
                 1,
-                ''
+                '.. configuration-block::'
             ),
             new RstSample($invalid2),
         ];
