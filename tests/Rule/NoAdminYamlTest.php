@@ -42,7 +42,7 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
                     'Please use "services.yaml" instead of "admin.yml"',
                     'filename',
                     1,
-                    ''
+                    'register the admin class in admin.yml'
                 ),
                 new RstSample('register the admin class in admin.yml'),
             ],
@@ -55,7 +55,7 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
                     'Please use "services.yaml" instead of "admin.yaml"',
                     'filename',
                     1,
-                    ''
+                    'register the admin class in admin.yaml'
                 ),
                 new RstSample('register the admin class in admin.yaml'),
             ],

@@ -35,13 +35,11 @@ class NoAppConsole extends AbstractRule implements LineContentRule
         $line = $lines->current();
 
         if ($line->raw()->match('/app\/console/')) {
-            $message = 'Please use "bin/console" instead of "app/console"';
-
             return Violation::from(
-                $message,
+                'Please use "bin/console" instead of "app/console"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

@@ -51,13 +51,11 @@ final class MaxColons extends AbstractRule implements LineContentRule
             return NullViolation::create();
         }
 
-        $message = 'Please use max 2 colons at the end.';
-
         return Violation::from(
-            $message,
+            'Please use max 2 colons at the end.',
             $filename,
             $number + 1,
-            ''
+            $line
         );
     }
 }

@@ -29,31 +29,29 @@ class NoAdminYaml extends AbstractRule implements LineContentRule
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
-        $line = $lines->current()->raw();
+        $line = $lines->current();
 
-        if ($line->match('/_admin\.yaml/')) {
+        if ($line->raw()->match('/_admin\.yaml/')) {
             return NullViolation::create();
         }
 
-        if ($line->match('/admin\.yml/')) {
-            $message = 'Please use "services.yaml" instead of "admin.yml"';
-
+        if ($line->raw()->match('/admin\.yml/')) {
             return Violation::from(
-                $message,
+                'Please use "services.yaml" instead of "admin.yml"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
-        if ($line->match('/admin\.yaml/')) {
+        if ($line->raw()->match('/admin\.yaml/')) {
             $message = 'Please use "services.yaml" instead of "admin.yaml"';
 
             return Violation::from(
                 $message,
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
