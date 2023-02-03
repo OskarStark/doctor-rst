@@ -85,10 +85,8 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
         natsort($sortedUseStatements);
 
         if ($statements !== $sortedUseStatements) {
-            $message = 'Please reorder the use statements alphabetically';
-
             return Violation::from(
-                $message,
+                'Please reorder the use statements alphabetically',
                 $filename,
                 $number + 1,
                 ''
