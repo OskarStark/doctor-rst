@@ -45,13 +45,11 @@ class YarnDevOptionAtTheEnd extends AbstractRule implements LineContentRule
         $line = $lines->current();
 
         if ($line->clean()->match('/yarn add \-\-dev(.*)$/')) {
-            $message = 'Please move "--dev" option to the end of the command';
-
             return Violation::from(
-                $message,
+                'Please move "--dev" option to the end of the command',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

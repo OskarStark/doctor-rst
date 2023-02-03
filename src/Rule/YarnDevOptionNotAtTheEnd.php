@@ -36,13 +36,11 @@ class YarnDevOptionNotAtTheEnd extends AbstractRule implements LineContentRule
         $line = $lines->current();
 
         if ($line->clean()->match('/yarn add(.*)\-\-dev$/')) {
-            $message = 'Please move "--dev" option before the package';
-
             return Violation::from(
-                $message,
+                'Please move "--dev" option before the package',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
