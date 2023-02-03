@@ -99,7 +99,7 @@ RST
                     sprintf('Please add a blank line before "%s" directive', $directive),
                     'filename',
                     2,
-                    ''
+                    $directive
                 ),
                 new RstSample([
                     'content',
