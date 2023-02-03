@@ -47,13 +47,11 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
             && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
             if ($lines->current()->raw()->match('/[^`]deprecated/')) {
-                $message = 'Please use ".. deprecated::" instead of ".. versionadded::"';
-
                 return Violation::from(
-                    $message,
+                    'Please use ".. deprecated::" instead of ".. versionadded::"',
                     $filename,
                     $number + 1,
-                    ''
+                    $line
                 );
             }
 

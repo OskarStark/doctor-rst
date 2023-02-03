@@ -92,7 +92,7 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
                     'Please use ".. deprecated::" instead of ".. versionadded::"',
                     'filename',
                     1,
-                    ''
+                    '.. versionadded:: 3.4'
                 ),
                 new RstSample([
                     '.. versionadded:: 3.4',
@@ -105,7 +105,7 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
                     'Please use ".. deprecated::" instead of ".. versionadded::"',
                     'filename',
                     1,
-                    ''
+                    '.. versionadded:: 3.4'
                 ),
                 new RstSample([
                     '.. versionadded:: 3.4',
