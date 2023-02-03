@@ -73,7 +73,7 @@ RST
                 'Please add 4 spaces for every indention.',
                 'filename',
                 3,
-                ''
+                'Content'
             ),
             4,
             new RstSample(<<<RST
@@ -89,7 +89,7 @@ RST
                 'Please add 4 spaces for every indention.',
                 'filename',
                 4,
-                ''
+                'Content'
             ),
             4,
             new RstSample(<<<RST
@@ -151,7 +151,7 @@ RST;
                 'Please fix the indention of the PHP DocBlock.',
                 'filename',
                 6,
-                ''
+                '* @Assert\NotBlank'
             ),
             4,
             new RstSample(<<<'RST'

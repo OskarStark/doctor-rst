@@ -144,7 +144,7 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
                 $message,
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
