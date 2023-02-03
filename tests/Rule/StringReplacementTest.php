@@ -93,7 +93,7 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
                     ),
                     'filename',
                     1,
-                    ''
+                    $invalid
                 ),
                 new RstSample($invalid),
             ];
@@ -108,7 +108,7 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
                     ),
                     'filename',
                     1,
-                    ''
+                    trim($invalid)
                 ),
                 new RstSample(sprintf(
                     '    %s',
