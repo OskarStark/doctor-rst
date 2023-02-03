@@ -44,7 +44,7 @@ final class SpaceBetweenLabelAndLinkInDocTest extends \App\Tests\UnitTestCase
                 'Please add a space between "File" and "</reference/constraints/File>" inside :doc: directive',
                 'filename',
                 1,
-                ''
+                ':doc:`File</reference/constraints/File>`'
             ),
             new RstSample(':doc:`File</reference/constraints/File>`'),
         ];

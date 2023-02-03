@@ -32,13 +32,11 @@ class ShortArraySyntax extends AbstractRule implements LineContentRule
         $line = $lines->current();
 
         if ($line->clean()->match('/[\\s|\()]array\(/')) {
-            $message = 'Please use short array syntax';
-
             return Violation::from(
-                $message,
+                'Please use short array syntax',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

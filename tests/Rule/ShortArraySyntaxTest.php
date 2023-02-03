@@ -45,20 +45,20 @@ final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
                     'Please use short array syntax',
                     'filename',
                     1,
-                    ''
+                    "->add('foo', null, array('key' => 1));"
                 ),
-                new RstSample('->add(\'foo\', null, array(\'key\' => 1));'),
+                new RstSample("->add('foo', null, array('key' => 1));"),
             ],
             [
                 NullViolation::create(),
-                new RstSample('->add(\'foo\', null, [\'key\' => 1[);'),
+                new RstSample("->add('foo', null, ['key' => 1[);"),
             ],
             [
                 Violation::from(
                     'Please use short array syntax',
                     'filename',
                     1,
-                    ''
+                    'if (in_array(1, array())) {'
                 ),
                 new RstSample('if (in_array(1, array())) { '),
             ],
@@ -75,7 +75,7 @@ final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
                     'Please use short array syntax',
                     'filename',
                     1,
-                    ''
+                    "->add('tags', null, array('label' => 'les tags'), null, array('expanded' => true, 'multiple' => true));"
                 ),
                 new RstSample("->add('tags', null, array('label' => 'les tags'), null, array('expanded' => true, 'multiple' => true));"),
             ],
@@ -84,9 +84,9 @@ final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
                     'Please use short array syntax',
                     'filename',
                     1,
-                    ''
+                    "->assertLength(array('max' => 100))"
                 ),
-                new RstSample('->assertLength(array(\'max\' => 100))'),
+                new RstSample("->assertLength(array('max' => 100))"),
             ],
             [
                 NullViolation::create(),
