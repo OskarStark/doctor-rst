@@ -55,13 +55,11 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
                 }
 
                 if (PhpHelper::isUsingTwoBackslashes($lala = str_replace('``', '', $occurence))) {
-                    $message = sprintf('Please use 1 backslash when highlighting a namespace with double backticks: %s', $occurence);
-
                     return Violation::from(
-                        $message,
+                        sprintf('Please use 1 backslash when highlighting a namespace with double backticks: %s', $occurence),
                         $filename,
                         $number + 1,
-                        ''
+                        $line
                     );
                 }
             }
@@ -76,13 +74,11 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
                 }
 
                 if (!PhpHelper::isUsingTwoBackslashes(str_replace('`', '', $occurence))) {
-                    $message = sprintf('Please use 2 backslashes when highlighting a namespace with single backticks: %s', $occurence);
-
                     return Violation::from(
-                        $message,
+                        sprintf('Please use 2 backslashes when highlighting a namespace with single backticks: %s', $occurence),
                         $filename,
                         $number + 1,
-                        ''
+                        $line
                     );
                 }
             }
