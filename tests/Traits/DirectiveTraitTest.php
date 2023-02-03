@@ -37,6 +37,44 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
+     * @dataProvider inPhpCodeBlockProvider
+     */
+    public function inPhpCodeBlock(bool $expected, RstSample $sample): void
+    {
+        static::assertSame(
+            $expected,
+            $this->traitWrapper->inPhpCodeBlock(clone $sample->lines(), $sample->lineNumber())
+        );
+    }
+
+    public function inPhpCodeBlockProvider(): \Generator
+    {
+        yield [
+            true,
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+                '     */',
+            ], 2),
+        ];
+
+        yield [
+            false,
+            new RstSample([
+                '.. code-block:: xml',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+                '     */',
+            ], 2),
+        ];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider inProvider
      */
     public function in(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
