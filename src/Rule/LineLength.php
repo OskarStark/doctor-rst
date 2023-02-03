@@ -51,13 +51,11 @@ class LineLength extends AbstractRule implements LineContentRule, Configurable
         $count = mb_strlen($line->clean()->toString());
 
         if ($count > $this->max) {
-            $message = sprintf('Line is to long (max %s) currently: %s', $this->max, $count);
-
             return Violation::from(
-                $message,
+                sprintf('Line is to long (max %s) currently: %s', $this->max, $count),
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
