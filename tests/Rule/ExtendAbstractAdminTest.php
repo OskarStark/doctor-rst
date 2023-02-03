@@ -42,7 +42,7 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
                     'Please extend AbstractAdmin instead of Admin',
                     'filename',
                     1,
-                    ''
+                    'class TestAdmin extends Admin'
                 ),
                 new RstSample('class TestAdmin extends Admin'),
             ],
@@ -52,7 +52,7 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
                     'Please extend AbstractAdmin instead of Admin',
                     'filename',
                     1,
-                    ''
+                    'class TestAdmin extends Admin'
                 ),
                 new RstSample('    class TestAdmin extends Admin'),
             ],
@@ -69,7 +69,7 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
                     'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
                     'filename',
                     1,
-                    ''
+                    'use Sonata\AdminBundle\Admin\Admin;'
                 ),
                 new RstSample('use Sonata\AdminBundle\Admin\Admin;'),
             ],
@@ -78,7 +78,7 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
                     'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
                     'filename',
                     1,
-                    ''
+                    'use Sonata\AdminBundle\Admin\Admin;'
                 ),
                 new RstSample('    use Sonata\AdminBundle\Admin\Admin;'),
             ],

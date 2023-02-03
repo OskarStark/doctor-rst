@@ -33,27 +33,23 @@ class ExtendAbstractAdmin extends AbstractRule implements LineContentRule
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
-        $line = $lines->current()->clean();
+        $line = $lines->current();
 
-        if ($line->match('/^class(.*)extends Admin$/')) {
-            $message = 'Please extend AbstractAdmin instead of Admin';
-
+        if ($line->clean()->match('/^class(.*)extends Admin$/')) {
             return Violation::from(
-                $message,
+                'Please extend AbstractAdmin instead of Admin',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
-        if ($line->match('/^use Sonata\\\\AdminBundle\\\\Admin\\\\Admin;/')) {
-            $message = 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"';
-
+        if ($line->clean()->match('/^use Sonata\\\\AdminBundle\\\\Admin\\\\Admin;/')) {
             return Violation::from(
-                $message,
+                'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
