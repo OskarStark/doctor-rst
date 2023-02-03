@@ -54,21 +54,19 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements LineContentR
             && !$lines->current()->isDirective()
             && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
         ) {
-            $line = $lines->current()->clean();
+            $line = $lines->current();
 
-            if ($line->match('/^use (.*);$/')) {
+            if ($line->clean()->match('/^use (.*);$/')) {
                 $useStatementFound = true;
             }
 
-            if ($line->match('/^namespace (.*);$/')) {
+            if ($line->clean()->match('/^namespace (.*);$/')) {
                 if ($useStatementFound) {
-                    $message = 'Please move the namespace before the use statement(s)';
-
                     return Violation::from(
-                        $message,
+                        'Please move the namespace before the use statement(s)',
                         $filename,
                         $number + 1,
-                        ''
+                        $line
                     );
                 }
                 break;
