@@ -54,7 +54,7 @@ final class DeprecatedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
                 'Please only provide ".. deprecated::" if the version is greater/equal "3.4"',
                 'filename',
                 1,
-                ''
+                '.. deprecated:: 2.8'
             ),
             '3.4',
             new RstSample('.. deprecated:: 2.8'),
