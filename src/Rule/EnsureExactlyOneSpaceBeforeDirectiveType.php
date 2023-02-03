@@ -48,13 +48,11 @@ class EnsureExactlyOneSpaceBeforeDirectiveType extends AbstractRule implements L
         }
 
         if (!$line->clean()->match('/\.\.\ [a-z\-]+::/')) {
-            $message = 'Please use only one whitespace between ".." and the directive type.';
-
             return Violation::from(
-                $message,
+                'Please use only one whitespace between ".." and the directive type.',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

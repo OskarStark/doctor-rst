@@ -71,7 +71,7 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
                     'Please use only one whitespace between the link definition and the link.',
                     'filename',
                     1,
-                    ''
+                    $invalidCase
                 ),
                 new RstSample($invalidCase),
             ];

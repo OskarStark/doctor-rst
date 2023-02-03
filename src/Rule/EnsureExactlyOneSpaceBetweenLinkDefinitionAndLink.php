@@ -50,13 +50,11 @@ class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule imp
         }
 
         if ($line->clean()->containsAny(':  ')) {
-            $message = 'Please use only one whitespace between the link definition and the link.';
-
             return Violation::from(
-                $message,
+                'Please use only one whitespace between the link definition and the link.',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

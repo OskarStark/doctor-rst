@@ -79,7 +79,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
                     ),
                     'filename',
                     1,
-                    ''
+                    $invalidCase
                 ),
                 new RstSample($invalidCase),
             ];

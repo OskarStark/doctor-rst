@@ -73,7 +73,7 @@ class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineC
             $message,
             $filename,
             $number + 1,
-            ''
+            $line
         );
     }
 }
