@@ -44,13 +44,11 @@ class NoContraction extends CheckListRule implements LineContentRule
         $line = $lines->current();
 
         if (preg_match($this->search, $line->raw()->toString(), $matches)) {
-            $message = sprintf($this->message, $matches['contraction']);
-
             return Violation::from(
-                $message,
+                sprintf($this->message, $matches['contraction']),
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

@@ -32,15 +32,14 @@ class NoConfigYaml extends AbstractRule implements LineContentRule
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
+        $line = $lines->current();
 
-        if ($lines->current()->raw()->match('/app\/config\/config\.yml/')) {
-            $message = 'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"';
-
+        if ($line->raw()->match('/app\/config\/config\.yml/')) {
             return Violation::from(
-                $message,
+                'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
