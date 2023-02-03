@@ -16,6 +16,7 @@ namespace App\Tests\Rule;
 use App\Rule\BlankLineAfterAnchor;
 use App\Tests\RstSample;
 use App\Value\NullViolation;
+use App\Value\Violation;
 use App\Value\ViolationInterface;
 
 final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
@@ -119,6 +120,22 @@ final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
                 '===================================',
                 '',
             ], 3),
+        ];
+
+        yield [
+            Violation::from(
+                'Please add a blank line after the anchor ".. _env-var-processors:"',
+                'filename',
+                2,
+                '.. _env-var-processors:',
+            ),
+            new RstSample([
+                '',
+                '.. _env-var-processors:',
+                'Environment Variable Processors',
+                '===============================',
+                '',
+            ], 1),
         ];
     }
 }
