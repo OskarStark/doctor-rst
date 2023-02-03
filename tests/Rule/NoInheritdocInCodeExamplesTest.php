@@ -52,7 +52,7 @@ final class NoInheritdocInCodeExamplesTest extends \App\Tests\UnitTestCase
                     'Please do not use "@inheritdoc"',
                     'filename',
                     4,
-                    ''
+                    '* {@inheritdoc}',
                 ),
                 new RstSample([
                     $codeBlock,
