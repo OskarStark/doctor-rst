@@ -54,6 +54,7 @@
 * [no_directive_after_shorthand](#no_directive_after_shorthand)
 * [no_explicit_use_of_code_block_php](#no_explicit_use_of_code_block_php)
 * [no_inheritdoc_in_code_examples](#no_inheritdoc_in_code_examples)
+* [no_merge_conflict](#no_merge_conflict)
 * [no_namespace_after_use_statements](#no_namespace_after_use_statements)
 * [no_php_open_tag_in_code_block_php_directive](#no_php_open_tag_in_code_block_php_directive)
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
@@ -610,6 +611,12 @@ It's an example
 ## `no_inheritdoc_in_code_examples`
 
 #### Groups [`@Sonata`, `@Symfony`]
+
+## `no_merge_conflict`
+
+  > _Ensure that the files does not contain merge conflicts._
+
+#### Groups [`@Symfony`]
 
 ## `no_namespace_after_use_statements`
 
