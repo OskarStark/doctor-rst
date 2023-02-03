@@ -44,8 +44,8 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTest
                 Violation::from(
                     'Please add a blank line after "// src/Handler/Collection.php"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '// src/Handler/Collection.php',
                 ),
                 new RstSample(
                     [

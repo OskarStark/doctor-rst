@@ -43,8 +43,8 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             Violation::from(
                 'Please add a blank line after "{# templates/index.html.twig #}"',
                 'filename',
-                1,
-                ''
+                3,
+                '{# templates/index.html.twig #}',
             ),
             new RstSample([
                 '.. code-block:: twig',
@@ -67,8 +67,8 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             Violation::from(
                 'Please add a blank line after "{# templates/index.html.twig #}"',
                 'filename',
-                1,
-                ''
+                3,
+                '{# templates/index.html.twig #}',
             ),
             new RstSample([
                 '.. code-block:: jinja',
@@ -91,8 +91,8 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             Violation::from(
                 'Please add a blank line after "{# templates/index.html.twig #}"',
                 'filename',
-                1,
-                ''
+                3,
+                '{# templates/index.html.twig #}',
             ),
             new RstSample([
                 '.. code-block:: html+jinja',
@@ -115,8 +115,8 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
             Violation::from(
                 'Please add a blank line after "{# templates/index.html.twig #}"',
                 'filename',
-                1,
-                ''
+                3,
+                '{# templates/index.html.twig #}',
             ),
             new RstSample([
                 '.. code-block:: html+twig',

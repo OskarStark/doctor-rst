@@ -50,13 +50,13 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
                 Violation::from(
                     sprintf('Please add a blank line after "<!-- %s -->"', $path),
                     'filename',
-                    1,
-                    ''
+                    3,
+                    sprintf('<!-- %s -->', $path),
                 ),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    sprintf('    <!-- %s -->', $path),
+                    sprintf('<!-- %s -->', $path),
                     '    <foo\/>',
                 ]),
             ];
@@ -76,8 +76,8 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
                 Violation::from(
                     sprintf('Please add a blank line after "<!--%s-->"', $path),
                     'filename',
-                    1,
-                    ''
+                    3,
+                    sprintf('<!--%s-->', $path),
                 ),
                 new RstSample([
                     '.. code-block:: xml',
