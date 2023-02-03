@@ -70,7 +70,7 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
                     'Please reorder the use statements alphabetically',
                     'filename',
                     1,
-                    ''
+                    $codeBlock
                 ),
                 new RstSample([
                     $codeBlock,
@@ -86,7 +86,7 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
                     'Please reorder the use statements alphabetically',
                     'filename',
                     1,
-                    ''
+                    $codeBlock
                 ),
                 new RstSample([
                     $codeBlock,

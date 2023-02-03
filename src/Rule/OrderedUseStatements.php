@@ -89,7 +89,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
                 'Please reorder the use statements alphabetically',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
