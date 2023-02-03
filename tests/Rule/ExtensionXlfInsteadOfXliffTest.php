@@ -45,7 +45,7 @@ final class ExtensionXlfInsteadOfXliffTest extends \App\Tests\UnitTestCase
                     'Please use ".xlf" extension instead of ".xliff"',
                     'filename',
                     1,
-                    ''
+                    'messages.xliff'
                 ),
                 new RstSample('messages.xliff'),
             ],

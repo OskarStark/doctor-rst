@@ -32,13 +32,11 @@ class FinalAdminExtensionClasses extends AbstractRule implements LineContentRule
         $line = $lines->current();
 
         if ($line->clean()->match('/^class(.*)extends AbstractAdminExtension$/')) {
-            $message = 'Please use "final" for AdminExtension class';
-
             return Violation::from(
-                $message,
+                'Please use "final" for AdminExtension class',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
