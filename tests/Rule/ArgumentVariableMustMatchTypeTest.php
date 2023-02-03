@@ -75,7 +75,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                     'Please rename "$builder" to "$containerBuilder". Please rename "$configurator" to "$containerConfigurator"',
                     'filename',
                     3,
-                    'public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $builder): void', ''
+                    'public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $builder): void',
                 ),
                 new RstSample([
                     $codeBlock,
@@ -104,7 +104,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                     $codeBlock,
                     '',
                     'ContainerConfigurator $configurator',
-                ], 2),
+                ],2),
             ];
 
             yield [
@@ -121,7 +121,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                     'Please rename "$configurator" to "$containerConfigurator"',
                     'filename',
                     6,
-                    ''
+                    'ContainerConfigurator $configurator',
                 ),
                 new RstSample([
                     $codeBlock,
