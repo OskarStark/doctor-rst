@@ -40,13 +40,11 @@ class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
         $line = $lines->current();
 
         if (RstParser::codeBlockDirectiveIsTypeOf($line, $this->search, true)) {
-            $message = $this->message;
-
             return Violation::from(
-                $message,
+                $this->message,
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

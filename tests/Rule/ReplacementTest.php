@@ -124,7 +124,7 @@ final class ReplacementTest extends \App\Tests\UnitTestCase
                     sprintf('Please replace "%s" with "%s"', $invalid, $valid),
                     'filename',
                     1,
-                    ''
+                    $invalid
                 ),
                 new RstSample($invalid),
             ];
@@ -135,7 +135,7 @@ final class ReplacementTest extends \App\Tests\UnitTestCase
                     sprintf('Please replace "%s" with "%s"', $invalid, $valid),
                     'filename',
                     1,
-                    ''
+                    $invalid
                 ),
                 new RstSample(sprintf('    %s', $invalid)),
             ];
