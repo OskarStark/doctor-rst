@@ -68,7 +68,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
                 'The word "not" is used more times in a row.',
                 'filename',
                 1,
-                ''
+                $invalid
             ),
             new RstSample($invalid),
         ];
@@ -83,7 +83,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
                 'The word "is" is used more times in a row.',
                 'filename',
                 3,
-                ''
+                '// this is is a comment',
             ),
             new RstSample([
                 '.. code-block:: php',
@@ -103,7 +103,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
                 'The word "is" is used more times in a row.',
                 'filename',
                 3,
-                ''
+                '<!-- this is is a comment -->',
             ),
             new RstSample([
                 '.. code-block:: xml',
@@ -123,7 +123,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
                 'The word "is" is used more times in a row.',
                 'filename',
                 3,
-                ''
+                '{# this is is a comment #}',
             ),
             new RstSample([
                 '.. code-block:: twig',
@@ -143,7 +143,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
                 'The word "is" is used more times in a row.',
                 'filename',
                 3,
-                ''
+                '# this is is a comment',
             ),
             new RstSample([
                 '.. code-block:: yaml',
