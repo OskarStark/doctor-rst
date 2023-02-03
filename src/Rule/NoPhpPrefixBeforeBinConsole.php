@@ -47,7 +47,7 @@ class NoPhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRul
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

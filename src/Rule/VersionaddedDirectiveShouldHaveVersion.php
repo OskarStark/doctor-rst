@@ -66,7 +66,7 @@ class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Lin
                 return Violation::from(
                     $message,
                     $filename,
-                    1,
+                    $number + 1,
                     ''
                 );
             }
@@ -83,7 +83,7 @@ class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Lin
                 return Violation::from(
                     $message,
                     $filename,
-                    1,
+                    $number + 1,
                     ''
                 );
             }

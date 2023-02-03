@@ -85,7 +85,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
                     return Violation::from(
                         $message,
                         $filename,
-                        1,
+                        $number + 1,
                         ''
                     );
                 }
@@ -99,7 +99,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
                 return Violation::from(
                     $message,
                     $filename,
-                    1,
+                    $number + 1,
                     ''
                 );
             }

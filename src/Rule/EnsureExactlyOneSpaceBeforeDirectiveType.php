@@ -53,7 +53,7 @@ class EnsureExactlyOneSpaceBeforeDirectiveType extends AbstractRule implements L
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }

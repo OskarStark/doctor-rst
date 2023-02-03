@@ -41,7 +41,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
                 Violation::from(
                     'Please check "namespace App/Handler;", it should not contain "/"',
                     'filename',
-                    1,
+                    5,
                     ''
                 ),
                 new RstSample([
@@ -57,7 +57,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
                 Violation::from(
                     'Please check "NaMeSpaCe App/Handler;", it should not contain "/"',
                     'filename',
-                    1,
+                    5,
                     ''
                 ),
                 new RstSample([
@@ -74,7 +74,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
             Violation::from(
                 'Please check "namespace App/Handler;", it should not contain "/"',
                 'filename',
-                1,
+                5,
                 ''
             ),
             new RstSample([

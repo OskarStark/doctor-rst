@@ -57,7 +57,7 @@ class SpaceBetweenLabelAndLinkInDoc extends AbstractRule implements LineContentR
                 return Violation::from(
                     $message,
                     $filename,
-                    1,
+                    $number + 1,
                     ''
                 );
             }

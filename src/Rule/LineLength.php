@@ -56,7 +56,7 @@ class LineLength extends AbstractRule implements LineContentRule, Configurable
             return Violation::from(
                 $message,
                 $filename,
-                1,
+                $number + 1,
                 ''
             );
         }
