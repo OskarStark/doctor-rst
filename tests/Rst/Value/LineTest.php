@@ -24,7 +24,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     {
         $line = new Line(' test  ');
 
-        self::assertSame($line->clean()->toString(), $line->raw()->trim()->toString());
+        static::assertSame($line->clean()->toString(), $line->raw()->trim()->toString());
     }
 
     /**
