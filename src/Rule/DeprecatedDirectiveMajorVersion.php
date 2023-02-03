@@ -64,7 +64,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
             return NullViolation::create();
         }
 
-        if ($matches = $lines->current()->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
+        if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim($matches[1]);
 
             try {

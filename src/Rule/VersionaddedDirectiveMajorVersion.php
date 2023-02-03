@@ -64,7 +64,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements LineCont
             return NullViolation::create();
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $lines->current()->clean()->toString(), $matches)) {
+        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $line->clean()->toString(), $matches)) {
             $version = trim($matches[1]);
 
             try {
