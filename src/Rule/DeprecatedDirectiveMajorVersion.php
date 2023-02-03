@@ -24,12 +24,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineContentRule, Configurable
 {
-    private VersionParser $versionParser;
     private int $majorVersion;
 
-    public function __construct(VersionParser $versionParser)
-    {
-        $this->versionParser = $versionParser;
+    public function __construct(
+        private readonly VersionParser $versionParser
+    ) {
     }
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver

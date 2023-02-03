@@ -33,11 +33,9 @@ use Composer\Semver\VersionParser;
  */
 class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
 {
-    private VersionParser $versionParser;
-
-    public function __construct(VersionParser $versionParser)
-    {
-        $this->versionParser = $versionParser;
+    public function __construct(
+        private readonly VersionParser $versionParser
+    ) {
     }
 
     public static function getGroups(): array
