@@ -116,7 +116,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
                 $message,
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
@@ -131,7 +131,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
                 $message,
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
@@ -152,7 +152,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
                 $message,
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

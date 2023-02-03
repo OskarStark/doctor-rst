@@ -325,7 +325,7 @@ RST;
                 'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
                 'filename',
                 1,
-                ''
+                '.. configuration-block::'
             ),
             new RstSample($invalid),
         ];
@@ -334,7 +334,7 @@ RST;
                 'Please use the following order for your code blocks: "php-annotations, php-attributes, yaml, xml, php"',
                 'filename',
                 1,
-                ''
+                '.. configuration-block::'
             ),
             new RstSample($invalid2),
         ];
@@ -343,7 +343,7 @@ RST;
                 'Please use the following order for your code blocks: "php-symfony, php-standalone"',
                 'filename',
                 1,
-                ''
+                '.. configuration-block::'
             ),
             new RstSample($invalid3),
         ];
