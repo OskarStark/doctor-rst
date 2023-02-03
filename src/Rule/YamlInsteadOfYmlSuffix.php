@@ -50,24 +50,20 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements LineContentRule
         }
 
         if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_YML)) {
-            $message = 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"';
-
             return Violation::from(
-                $message,
+                'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
         if ($matches = $line->raw()->match('/\.yml/i')) {
-            $message = sprintf('Please use ".yaml" instead of "%s"', $matches[0]);
-
             return Violation::from(
-                $message,
+                sprintf('Please use ".yaml" instead of "%s"', $matches[0]),
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 

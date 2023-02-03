@@ -45,7 +45,7 @@ final class YamlInsteadOfYmlSuffixTest extends \App\Tests\UnitTestCase
                     'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"',
                     'filename',
                     1,
-                    ''
+                    '.. code-block:: yml'
                 ),
                 new RstSample('.. code-block:: yml'),
             ],
@@ -62,7 +62,7 @@ final class YamlInsteadOfYmlSuffixTest extends \App\Tests\UnitTestCase
                     'Please use ".yaml" instead of ".yml"',
                     'filename',
                     1,
-                    ''
+                    'Register your service in services.yml file'
                 ),
                 new RstSample('Register your service in services.yml file'),
             ],
