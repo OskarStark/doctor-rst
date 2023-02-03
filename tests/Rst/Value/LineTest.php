@@ -19,6 +19,16 @@ final class LineTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
+     */
+    public function cleanStringEqualsRawAndTrim(): void
+    {
+        $line = new Line(' test  ');
+
+        self::assertSame($line->clean()->toString(), $line->raw()->trim()->toString());
+    }
+
+    /**
+     * @test
      *
      * @dataProvider cleanProvider
      */
