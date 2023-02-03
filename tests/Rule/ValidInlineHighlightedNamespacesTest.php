@@ -51,7 +51,7 @@ final class ValidInlineHighlightedNamespacesTest extends \App\Tests\UnitTestCase
                 'Please use 2 backslashes when highlighting a namespace with single backticks: `App\Entity\Foo`',
                 'filename',
                 1,
-                ''
+                '`App\\Entity\\Foo`'
             ),
             new RstSample('`App\\Entity\\Foo`'),
         ];
@@ -66,7 +66,7 @@ final class ValidInlineHighlightedNamespacesTest extends \App\Tests\UnitTestCase
                 'Please use 1 backslash when highlighting a namespace with double backticks: ``App\\\\Entity\\\\Foo``',
                 'filename',
                 1,
-                ''
+                '``App\\\\Entity\\\\Foo``'
             ),
             new RstSample('``App\\\\Entity\\\\Foo``'),
         ];
@@ -77,7 +77,7 @@ final class ValidInlineHighlightedNamespacesTest extends \App\Tests\UnitTestCase
                 'Please use 2 backslashes when highlighting a namespace with single backticks: `App\Entity\Foo`',
                 'filename',
                 1,
-                ''
+                '`int` :class:`App\\Entity\\Foo`'
             ),
             new RstSample('`int` :class:`App\\Entity\\Foo`'),
         ];
@@ -93,7 +93,7 @@ final class ValidInlineHighlightedNamespacesTest extends \App\Tests\UnitTestCase
                 'Please use 2 backslashes when highlighting a namespace with single backticks: `\Swift_Transport`',
                 'filename',
                 1,
-                ''
+                '`\Swift_Transport`'
             ),
             new RstSample('`\Swift_Transport`'),
         ];
