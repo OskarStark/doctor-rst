@@ -41,8 +41,8 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTe
                 Violation::from(
                     'Please remove blank line after "// src/Handler/Collection.php"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '// src/Handler/Collection.php',
                 ),
                 new RstSample([
                     $codeBlock,

@@ -41,8 +41,8 @@ final class NoBlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitT
                 Violation::from(
                     'Please remove blank line after "# config/services.yml"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '# config/services.yml',
                 ),
                 new RstSample([
                     '.. code-block:: yml',
@@ -65,8 +65,8 @@ final class NoBlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitT
                 Violation::from(
                     'Please remove blank line after "# config/services.yaml"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '# config/services.yaml',
                 ),
                 new RstSample([
                     '.. code-block:: yaml',

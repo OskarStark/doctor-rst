@@ -56,8 +56,8 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 Violation::from(
                     'Please remove blank line after "// src/Handler/Collection.php"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '// src/Handler/Collection.php',
                 ),
                 new RstSample([
                     '.. code-block:: php',
@@ -86,8 +86,8 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 Violation::from(
                     'Please remove blank line after "# config/services.yml"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '# config/services.yml',
                 ),
                 new RstSample([
                     '.. code-block:: yml',
@@ -116,8 +116,8 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 Violation::from(
                     'Please remove blank line after "# config/services.yaml"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '# config/services.yaml',
                 ),
                 new RstSample([
                     '.. code-block:: yaml',
@@ -146,8 +146,8 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 Violation::from(
                     'Please remove blank line after "<!-- config/services.xml -->"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '<!-- config/services.xml -->',
                 ),
                 new RstSample([
                     '.. code-block:: xml',
@@ -170,8 +170,8 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 Violation::from(
                     'Please remove blank line after "<!--config/services.xml-->"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '<!--config/services.xml-->',
                 ),
                 new RstSample([
                     '.. code-block:: xml',
@@ -200,8 +200,8 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 Violation::from(
                     'Please remove blank line after "{# templates/index.html.twig #}"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '{# templates/index.html.twig #}',
                 ),
                 new RstSample([
                     '.. code-block:: twig',
@@ -224,8 +224,8 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 Violation::from(
                     'Please remove blank line after "{# templates/index.html.twig #}"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '{# templates/index.html.twig #}',
                 ),
                 new RstSample([
                     '.. code-block:: jinja',
@@ -248,8 +248,8 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
                 Violation::from(
                     'Please remove blank line after "{# templates/index.html.twig #}"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    '{# templates/index.html.twig #}',
                 ),
                 new RstSample([
                     '.. code-block:: html+jinja',
