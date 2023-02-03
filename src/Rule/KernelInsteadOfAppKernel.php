@@ -29,27 +29,23 @@ class KernelInsteadOfAppKernel extends AbstractRule implements LineContentRule
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
-        $line = $lines->current()->raw();
+        $line = $lines->current();
 
-        if ($line->match('/app\/AppKernel\.php/')) {
-            $message = 'Please use "src/Kernel.php" instead of "app/AppKernel.php"';
-
+        if ($line->raw()->match('/app\/AppKernel\.php/')) {
             return Violation::from(
-                $message,
+                'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
-        if ($line->match('/AppKernel/')) {
-            $message = 'Please use "Kernel" instead of "AppKernel"';
-
+        if ($line->raw()->match('/AppKernel/')) {
             return Violation::from(
-                $message,
+                'Please use "Kernel" instead of "AppKernel"',
                 $filename,
                 $number + 1,
-                ''
+                $line
             );
         }
 
