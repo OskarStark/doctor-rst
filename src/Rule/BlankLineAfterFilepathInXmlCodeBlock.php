@@ -36,7 +36,10 @@ class BlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements LineC
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // XML
         if ($matches = $lines->current()->clean()->match('/^<!--(.*)\.(xml|xlf|xliff)(.*)-->$/')) {

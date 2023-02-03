@@ -40,7 +40,10 @@ class BlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Line
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // TWIG
         if ($matches = $lines->current()->clean()->match('/^{#(.*)\.twig(.*)#}/')) {

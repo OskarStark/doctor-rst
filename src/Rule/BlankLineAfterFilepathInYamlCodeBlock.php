@@ -38,7 +38,10 @@ class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Line
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // YML / YAML
         if ($matches = $lines->current()->clean()->match('/^#(.*)\.(yml|yaml)$/')) {

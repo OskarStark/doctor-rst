@@ -41,7 +41,10 @@ class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineC
         }
 
         $lines->next();
+        ++$number;
+
         $lines->next();
+        ++$number;
 
         // PHP
         if ($matches = $lines->current()->clean()->match('/^\/\/(.*)\.php$/')) {
