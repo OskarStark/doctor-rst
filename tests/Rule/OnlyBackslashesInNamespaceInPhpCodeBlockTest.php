@@ -42,7 +42,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
                     'Please check "namespace App/Handler;", it should not contain "/"',
                     'filename',
                     5,
-                    ''
+                    'namespace App/Handler;'
                 ),
                 new RstSample([
                     $codeBlock,
@@ -58,7 +58,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
                     'Please check "NaMeSpaCe App/Handler;", it should not contain "/"',
                     'filename',
                     5,
-                    ''
+                    'NaMeSpaCe App/Handler;'
                 ),
                 new RstSample([
                     $codeBlock,
@@ -75,7 +75,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
                 'Please check "namespace App/Handler;", it should not contain "/"',
                 'filename',
                 5,
-                ''
+                'namespace App/Handler;'
             ),
             new RstSample([
                 '::',

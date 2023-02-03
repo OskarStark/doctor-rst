@@ -42,7 +42,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
                     'Please check "use App/Handler;", it should not contain "/"',
                     'filename',
                     5,
-                    ''
+                    'use App/Handler;'
                 ),
                 new RstSample([
                     $codeBlock,
@@ -58,7 +58,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
                     'Please check "UsE App/Handler;", it should not contain "/"',
                     'filename',
                     5,
-                    ''
+                    'UsE App/Handler;'
                 ),
                 new RstSample([
                     $codeBlock,
@@ -75,7 +75,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
                 'Please check "use App/Handler;", it should not contain "/"',
                 'filename',
                 5,
-                ''
+                'use App/Handler;'
             ),
             new RstSample([
                 '::',
