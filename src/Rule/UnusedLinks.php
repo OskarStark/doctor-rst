@@ -45,9 +45,6 @@ class UnusedLinks extends AbstractRule implements FileContentRule, ResetInterfac
 
     public function check(Lines $lines, string $filename): ViolationInterface
     {
-        /* @todo this should not be needed, make sure its always at position 0 */
-        $lines->seek(0);
-
         while ($lines->valid()) {
             if (RstParser::isLinkDefinition($lines->current())) {
                 $definition = LinkDefinition::fromLine($lines->current()->raw()->toString());
