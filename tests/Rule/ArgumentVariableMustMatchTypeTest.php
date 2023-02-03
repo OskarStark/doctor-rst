@@ -60,28 +60,28 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 Violation::from(
                     'Please rename "$builder" to "$containerBuilder"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    'public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $builder): void',
                 ),
                 new RstSample([
                     $codeBlock,
                     '',
                     'public function loadExtension(array $config, ContainerConfigurator $containerConfigurator, ContainerBuilder $builder): void',
-                ]),
+                ], 2),
             ];
 
             yield [
                 Violation::from(
                     'Please rename "$builder" to "$containerBuilder". Please rename "$configurator" to "$containerConfigurator"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    'public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $builder): void', ''
                 ),
                 new RstSample([
                     $codeBlock,
                     '',
                     'public function loadExtension(array $config, ContainerConfigurator $configurator, ContainerBuilder $builder): void',
-                ]),
+                ], 2),
             ];
 
             yield [
@@ -97,14 +97,14 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 Violation::from(
                     'Please rename "$configurator" to "$containerConfigurator"',
                     'filename',
-                    1,
-                    ''
+                    3,
+                    'ContainerConfigurator $configurator',
                 ),
                 new RstSample([
                     $codeBlock,
                     '',
                     'ContainerConfigurator $configurator',
-                ]),
+                ], 2),
             ];
 
             yield [
@@ -120,7 +120,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                 Violation::from(
                     'Please rename "$configurator" to "$containerConfigurator"',
                     'filename',
-                    1,
+                    6,
                     ''
                 ),
                 new RstSample([
@@ -133,7 +133,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
                     'some',
                     'text',
                     'after',
-                ]),
+                ], 5),
             ];
         }
 
