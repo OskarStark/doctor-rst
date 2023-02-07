@@ -103,7 +103,7 @@ SAMPLE
             new RstSample('temp'),
         ];
 
-        # see https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#comments
+        // see https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#comments
         yield [
             null,
             new RstSample([
@@ -112,7 +112,7 @@ SAMPLE
             ]),
         ];
 
-        # see https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#comments
+        // see https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#comments
         yield [
             null,
             new RstSample([
