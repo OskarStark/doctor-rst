@@ -75,6 +75,61 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
+     * @dataProvider inShellCodeBlockProvider
+     */
+    public function inShellCodeBlock(bool $expected, RstSample $sample): void
+    {
+        static::assertSame(
+            $expected,
+            $this->traitWrapper->inShellCodeBlock(clone $sample->lines(), $sample->lineNumber())
+        );
+    }
+
+    public function inShellCodeBlockProvider(): \Generator
+    {
+        yield [
+            false,
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+                '     */',
+            ], 2),
+        ];
+
+        $shellCodeBlocks = [
+            RstParser::CODE_BLOCK_BASH,
+            RstParser::CODE_BLOCK_SHELL,
+            RstParser::CODE_BLOCK_TERMINAL,
+        ];
+
+        foreach ($shellCodeBlocks as $shellCodeBlock) {
+            yield [
+                true,
+                new RstSample([
+                    '.. code-block:: '.$shellCodeBlock,
+                    '',
+                    '    foo',
+                ], 2),
+            ];
+        }
+
+        yield [
+            false,
+            new RstSample([
+                '.. code-block:: xml',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+                '     */',
+            ], 2),
+        ];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider inProvider
      */
     public function in(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
