@@ -18,10 +18,42 @@ use App\Value\Lines;
 
 trait DirectiveTrait
 {
+    private function getDirectiveContent(string $directive, Lines $lines, int $number): array
+    {
+        $content = [];
+
+        $number = $this->getLineNumberOfDirective($directive, $lines, $number);
+
+        $lines->seek($number);
+
+        $lines->next();
+
+        $startingLine = $lines->current();
+
+        if ($lines->current()->isBlank()) {
+            $lines->next();
+            $startingLine = $lines->current();
+        }
+
+        while ($lines->valid()) {
+            if ($startingLine->indention() > $lines->current()->indention()
+                && !$lines->current()->isBlank()) {
+                break;
+            }
+
+            $content[] = $lines->current()->raw()->toString();
+
+            $lines->next();
+        }
+
+        return $content;
+    }
+
     public function getLineNumberOfDirective(string $directive, Lines $lines, int $number): int
     {
         $lines->seek($number);
         $startingLine = $lines->current();
+
         while ((
             $lines->current()->indention() === $startingLine->indention()
             || $lines->current()->isBlank()
