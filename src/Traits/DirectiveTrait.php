@@ -23,9 +23,9 @@ trait DirectiveTrait
         $lines->seek($number);
         $startingLine = $lines->current();
         while ((
-                $lines->current()->indention() === $startingLine->indention()
-                || $lines->current()->isBlank()
-            ) && !$lines->current()->isDirective()
+            $lines->current()->indention() === $startingLine->indention()
+            || $lines->current()->isBlank()
+        ) && !$lines->current()->isDirective()
         ) {
             $lines->previous();
         }
