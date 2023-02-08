@@ -34,41 +34,8 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
         static::assertTrue(method_exists($this->traitWrapper, 'in'));
     }
 
-//    /**
-//     * @test
-//     *
-//     * @dataProvider getDirectiveContentProvider
-//     */
-//    public function getDirectiveContent(array $expected, string $directive, RstSample $sample): void
-//    {
-//        static::assertSame(
-//            $expected,
-//            $this->traitWrapper->getDirectiveContent($directive, clone $sample->lines(), $sample->lineNumber())
-//        );
-//    }
-//
-//    public function getDirectiveContentProvider(): \Generator
-//    {
-//        yield [
-//            [
-//                '    /*',
-//                '     * {@inheritdoc}',
-//                '     */',
-//            ],
-//            RstParser::DIRECTIVE_CODE_BLOCK,
-//            new RstSample([
-//                '.. code-block:: php',
-//                '',
-//                '    /*',
-//                '     * {@inheritdoc}',
-//                '     */',
-//            ], 2),
-//        ];
-//    }
-
     /**
      * @test
-     * @group temp
      *
      * @dataProvider getLineNumberOfDirectiveProvider
      */
