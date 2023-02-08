@@ -49,13 +49,13 @@ final class EnsureBashPromptBeforeComposerCommandTest extends \App\Tests\UnitTes
         foreach ($codeBlocks as $codeBlock) {
             yield [
                 Violation::from(
-                    'Please move "--dev" option to the end of the command',
+                    'Please add a bash prompt "$" before composer command',
                     'filename',
                     3,
                     'composer require --dev symfony/debug'
                 ),
                 new RstSample([
-                    $codeBlock,
+                    '.. code-block:: '.$codeBlock,
                     '',
                     '    composer require --dev symfony/debug'
                 ], 2),
@@ -64,7 +64,7 @@ final class EnsureBashPromptBeforeComposerCommandTest extends \App\Tests\UnitTes
             yield [
                 NullViolation::create(),
                 new RstSample([
-                    $codeBlock,
+                    '.. code-block:: '.$codeBlock,
                     '',
                     '    $ composer require --dev symfony/debug'
                 ], 2),
