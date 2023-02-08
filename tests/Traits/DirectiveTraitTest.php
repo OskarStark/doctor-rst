@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Traits;
 
 use App\Rst\RstParser;
+use App\Rst\Value\DirectiveContent;
 use App\Tests\RstSample;
 use App\Tests\Util\DirectiveTraitWrapper;
 
@@ -32,6 +33,151 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
     public function methodExists(): void
     {
         static::assertTrue(method_exists($this->traitWrapper, 'in'));
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider getDirectiveContentProvider
+     */
+    public function getDirectiveContent(DirectiveContent $expected, string $directive, RstSample $sample): void
+    {
+        static::assertDirectiveContentEquals(
+            $expected,
+            $this->traitWrapper->getDirectiveContent($directive, clone $sample->lines(), $sample->lineNumber())
+        );
+    }
+
+    private static function assertDirectiveContentEquals(DirectiveContent $expected, DirectiveContent $actual): void
+    {
+        static::assertSame($expected->raw, $actual->raw);
+    }
+
+    public function getDirectiveContentProvider(): \Generator
+    {
+        yield [
+            new DirectiveContent([
+                '    /*',
+                '     * {@inheritdoc}',
+                '     */',
+            ]),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+                '     */',
+            ], 2),
+        ];
+
+        yield [
+            new DirectiveContent([
+                '        echo $foo;',
+                '',
+                '        echo $bar;',
+                '',
+            ]),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            new RstSample([
+                'Text',
+                '',
+                '    .. code-block:: php',
+                '',
+                '        echo $foo;',
+                '',
+                '        echo $bar;',
+                '',
+                'New paragraph...',
+            ], 4),
+        ];
+
+//        yield [
+//            new DirectiveContent([
+//                '        .. code-block:: php',
+//                '',
+//                '            echo $foo;',
+//                '',
+//                '            echo $bar;',
+//                '',
+//                '        .. code-block:: xml',
+//                '',
+//                '            <foo>bar</foo>',
+//                '',
+//            ]),
+//            RstParser::DIRECTIVE_CODE_BLOCK,
+//            new RstSample([
+//                'Text',
+//                '',
+//                '    .. configuration-block::',
+//                '',
+//                '        .. code-block:: php',
+//                '',
+//                '            echo $foo;',
+//                '',
+//                '            echo $bar;',
+//                '',
+//                '        .. code-block:: xml',
+//                '',
+//                '            <foo>bar</foo>',
+//                '',
+//                'New paragraph...'
+//            ], 4),
+//        ];
+    }
+
+    /**
+     * @test
+     *
+     * @dataProvider getLineNumberOfDirectiveProvider
+     */
+    public function getLineNumberOfDirective(int $expected, string $directive, RstSample $sample): void
+    {
+        static::assertSame(
+            $expected,
+            $this->traitWrapper->getLineNumberOfDirective($directive, clone $sample->lines(), $sample->lineNumber())
+        );
+    }
+
+    public function getLineNumberOfDirectiveProvider(): \Generator
+    {
+        yield [
+            0,
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+                '     */',
+            ], 2),
+        ];
+
+        yield [
+            3,
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            new RstSample(<<<'MULTIPLE'
+You can use the special ``SYMFONY_REQUIRE`` environment variable together
+with Symfony Flex to install a specific Symfony version:
+
+.. code-block:: bash
+
+    # this requires Symfony 5.x for all Symfony packages
+    export SYMFONY_REQUIRE=5.*
+    # alternatively you can run this command to update composer.json config
+    # composer config extra.symfony.require "5.*"
+
+    # install Symfony Flex in the CI environment
+    composer global config --no-plugins allow-plugins.symfony/flex true
+    composer global require --no-progress --no-scripts --no-plugins symfony/flex
+
+    # install the dependencies (using --prefer-dist and --no-progress is
+    # recommended to have a better output and faster download time)
+    composer update --prefer-dist --no-progress
+
+New paragraph...
+MULTIPLE, 11),
+        ];
     }
 
     /**
@@ -114,17 +260,6 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
                 ], 2),
             ];
         }
-
-        yield [
-            false,
-            new RstSample([
-                '.. code-block:: xml',
-                '',
-                '    /*',
-                '     * {@inheritdoc}',
-                '     */',
-            ], 2),
-        ];
     }
 
     /**
@@ -547,8 +682,6 @@ RST;
 
     /**
      * @test
-     *
-     * @group temp
      *
      * @dataProvider previousDirectiveIsProvider
      */

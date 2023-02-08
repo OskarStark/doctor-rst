@@ -21,6 +21,8 @@ use App\Traits\DirectiveTrait;
 final class DirectiveTraitWrapper
 {
     use DirectiveTrait {
+        DirectiveTrait::getDirectiveContent as public;
+        DirectiveTrait::getLineNumberOfDirective as public;
         DirectiveTrait::in as public;
         DirectiveTrait::inPhpCodeBlock as public;
         DirectiveTrait::inShellCodeBlock as public;
