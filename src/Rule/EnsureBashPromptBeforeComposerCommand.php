@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Annotations\Rule\Description;
 use App\Annotations\Rule\InvalidExample;
 use App\Annotations\Rule\ValidExample;
+use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -44,27 +45,31 @@ class EnsureBashPromptBeforeComposerCommand extends AbstractRule implements Line
         $lines->seek($number);
         $line = $lines->current();
 
-        $indentation = $line->indention();
-
-        $lines->next();
-        $lines->next();
-
-        if ($indentation === $lines->current()->indention()) {
+        if ($line->isBlank()) {
             return NullViolation::create();
         }
 
         $cleanLine = $line->clean();
-        if ($cleanLine->startsWith('composer')
-            && $this->inShellCodeBlock($lines, $number)
-        ) {
-            return Violation::from(
-                'Please add a bash prompt "$" before composer command',
-                $filename,
-                $number + 1,
-                $line
-            );
+
+        if (!$cleanLine->startsWith('composer')) {
+            return NullViolation::create();
         }
 
-        return NullViolation::create();
+        if (!$this->inShellCodeBlock($lines, $number)) {
+            return NullViolation::create();
+        }
+
+        $content = $this->getDirectiveContent(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number);
+
+        if ($content->numberOfLines() > 1) {
+            return NullViolation::create();
+        }
+
+        return Violation::from(
+            'Please add a bash prompt "$" before composer command',
+            $filename,
+            $number + 1,
+            $line
+        );
     }
 }
