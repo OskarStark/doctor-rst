@@ -38,8 +38,6 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
-     * @group temp
-     *
      * @dataProvider getDirectiveContentProvider
      */
     public function getDirectiveContent(array $expected, string $directive, RstSample $sample): void
