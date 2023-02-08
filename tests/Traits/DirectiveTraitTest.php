@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Tests\Traits;
 
 use App\Rst\RstParser;
+use App\Rst\Value\DirectiveContent;
 use App\Tests\RstSample;
 use App\Tests\Util\DirectiveTraitWrapper;
 
@@ -39,22 +40,27 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
      *
      * @dataProvider getDirectiveContentProvider
      */
-    public function getDirectiveContent(array $expected, string $directive, RstSample $sample): void
+    public function getDirectiveContent(DirectiveContent $expected, string $directive, RstSample $sample): void
     {
-        static::assertSame(
+        static::assertDirectiveContentEquals(
             $expected,
             $this->traitWrapper->getDirectiveContent($directive, clone $sample->lines(), $sample->lineNumber())
         );
     }
 
+    private static function assertDirectiveContentEquals(DirectiveContent $expected, DirectiveContent $actual): void
+    {
+        static::assertSame($expected->raw, $actual->raw);
+    }
+
     public function getDirectiveContentProvider(): \Generator
     {
         yield [
-            [
+            new DirectiveContent([
                 '    /*',
                 '     * {@inheritdoc}',
                 '     */',
-            ],
+            ]),
             RstParser::DIRECTIVE_CODE_BLOCK,
             new RstSample([
                 '.. code-block:: php',
@@ -66,12 +72,12 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
         ];
 
         yield [
-            [
+            new DirectiveContent([
                 '        echo $foo;',
                 '',
                 '        echo $bar;',
                 '',
-            ],
+            ]),
             RstParser::DIRECTIVE_CODE_BLOCK,
             new RstSample([
                 'Text',
@@ -87,7 +93,7 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
         ];
 
 //        yield [
-//            [
+//            new DirectiveContent([
 //                '        .. code-block:: php',
 //                '',
 //                '            echo $foo;',
@@ -98,7 +104,7 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
 //                '',
 //                '            <foo>bar</foo>',
 //                '',
-//            ],
+//            ]),
 //            RstParser::DIRECTIVE_CODE_BLOCK,
 //            new RstSample([
 //                'Text',

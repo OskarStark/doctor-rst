@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace App\Traits;
 
 use App\Rst\RstParser;
+use App\Rst\Value\DirectiveContent;
 use App\Value\Lines;
 
 trait DirectiveTrait
 {
-    private function getDirectiveContent(string $directive, Lines $lines, int $number): array
+    private function getDirectiveContent(string $directive, Lines $lines, int $number): DirectiveContent
     {
         $content = [];
 
@@ -46,7 +47,7 @@ trait DirectiveTrait
             $lines->next();
         }
 
-        return $content;
+        return new DirectiveContent($content);
     }
 
     public function getLineNumberOfDirective(string $directive, Lines $lines, int $number): int
