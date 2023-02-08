@@ -57,7 +57,7 @@ final class EnsureBashPromptBeforeComposerCommandTest extends \App\Tests\UnitTes
                 new RstSample([
                     '.. code-block:: '.$codeBlock,
                     '',
-                    '    composer require --dev symfony/debug'
+                    '    composer require --dev symfony/debug',
                 ], 2),
             ];
 
@@ -66,11 +66,10 @@ final class EnsureBashPromptBeforeComposerCommandTest extends \App\Tests\UnitTes
                 new RstSample([
                     '.. code-block:: '.$codeBlock,
                     '',
-                    '    $ composer require --dev symfony/debug'
+                    '    $ composer require --dev symfony/debug',
                 ], 2),
         ];
-
-            }
+        }
 
         yield 'not in code-block' => [
             NullViolation::create(),
