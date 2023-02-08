@@ -19,6 +19,7 @@
 * [deprecated_directive_major_version](#deprecated_directive_major_version)
 * [deprecated_directive_min_version](#deprecated_directive_min_version)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
+* [ensure_bash_prompt_before_composer_command](#ensure_bash_prompt_before_composer_command)
 * [ensure_exactly_one_space_before_directive_type](#ensure_exactly_one_space_before_directive_type)
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
 * [ensure_link_definition_contains_valid_url](#ensure_link_definition_contains_valid_url)
@@ -292,6 +293,24 @@ Name | Required
 
 ```rst
 .. deprecated:: foo-bar
+```
+
+## `ensure_bash_prompt_before_composer_command`
+
+  > _Make sure Composer command in a terminal/bash code block is prefixed with a $._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+$ composer require symfony/var-dumper
+```
+
+##### Invalid Examples :-1:
+
+```rst
+composer require symfony/var-dumper
 ```
 
 ## `ensure_exactly_one_space_before_directive_type`
