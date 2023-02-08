@@ -23,6 +23,7 @@ final class DirectiveTraitWrapper
     use DirectiveTrait {
         DirectiveTrait::in as public;
         DirectiveTrait::inPhpCodeBlock as public;
+        DirectiveTrait::inShellCodeBlock as public;
         DirectiveTrait::previousDirectiveIs as public;
     }
 }
