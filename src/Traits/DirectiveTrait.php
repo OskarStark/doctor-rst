@@ -18,6 +18,28 @@ use App\Value\Lines;
 
 trait DirectiveTrait
 {
+    public function getLineNumberOfDirective(string $directive, Lines $lines, int $number): int
+    {
+        $lines->seek($number);
+        $startingLine = $lines->current();
+        while ((
+            $lines->current()->indention() === $startingLine->indention()
+            || $lines->current()->isBlank()
+        ) && !$lines->current()->isDirective()
+        ) {
+            $lines->previous();
+        }
+
+        if ($lines->valid()
+            && $lines->current()->isDirective()
+            && RstParser::directiveIs($lines->current(), $directive)
+        ) {
+            return $lines->key();
+        }
+
+        throw new \RuntimeException(sprintf('Directive "%s" not found', $directive));
+    }
+
     private function inPhpCodeBlock(Lines $lines, int $number): bool
     {
         return $this->in(

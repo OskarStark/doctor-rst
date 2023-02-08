@@ -56,6 +56,11 @@ final class Lines implements \SeekableIterator
         ++$this->currentLine;
     }
 
+    public function previous(): void
+    {
+        --$this->currentLine;
+    }
+
     public function key(): int
     {
         if (!isset($this->array[$this->currentLine])) {
