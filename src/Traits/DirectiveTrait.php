@@ -28,8 +28,22 @@ trait DirectiveTrait
                 RstParser::CODE_BLOCK_PHP,
                 RstParser::CODE_BLOCK_PHP_ANNOTATIONS,
                 RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
-                RstParser::CODE_BLOCK_PHP_SYMFONY,
                 RstParser::CODE_BLOCK_PHP_STANDALONE,
+                RstParser::CODE_BLOCK_PHP_SYMFONY,
+            ]
+        );
+    }
+
+    private function inShellCodeBlock(Lines $lines, int $number): bool
+    {
+        return $this->in(
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            $lines,
+            $number,
+            [
+                RstParser::CODE_BLOCK_BASH,
+                RstParser::CODE_BLOCK_SHELL,
+                RstParser::CODE_BLOCK_TERMINAL,
             ]
         );
     }
