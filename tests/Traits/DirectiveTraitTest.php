@@ -37,6 +37,92 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
+     * @dataProvider getDirectiveContentProvider
+     */
+    public function getDirectiveContent(array $expected, string $directive, RstSample $sample): void
+    {
+        static::assertSame(
+            $expected,
+            $this->traitWrapper->getDirectiveContent($directive, clone $sample->lines(), $sample->lineNumber())
+        );
+    }
+
+    public function getDirectiveContentProvider(): \Generator
+    {
+        yield [
+            [
+                '    /*',
+                '     * {@inheritdoc}',
+                '     */',
+            ],
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    /*',
+                '     * {@inheritdoc}',
+                '     */',
+            ], 2),
+        ];
+
+        yield [
+            [
+                '        echo $foo;',
+                '',
+                '        echo $bar;',
+                '',
+            ],
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            new RstSample([
+                'Text',
+                '',
+                '    .. code-block:: php',
+                '',
+                '        echo $foo;',
+                '',
+                '        echo $bar;',
+                '',
+                'New paragraph...',
+            ], 4),
+        ];
+
+//        yield [
+//            [
+//                '        .. code-block:: php',
+//                '',
+//                '            echo $foo;',
+//                '',
+//                '            echo $bar;',
+//                '',
+//                '        .. code-block:: xml',
+//                '',
+//                '            <foo>bar</foo>',
+//                '',
+//            ],
+//            RstParser::DIRECTIVE_CODE_BLOCK,
+//            new RstSample([
+//                'Text',
+//                '',
+//                '    .. configuration-block::',
+//                '',
+//                '        .. code-block:: php',
+//                '',
+//                '            echo $foo;',
+//                '',
+//                '            echo $bar;',
+//                '',
+//                '        .. code-block:: xml',
+//                '',
+//                '            <foo>bar</foo>',
+//                '',
+//                'New paragraph...'
+//            ], 4),
+//        ];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider getLineNumberOfDirectiveProvider
      */
     public function getLineNumberOfDirective(int $expected, string $directive, RstSample $sample): void
