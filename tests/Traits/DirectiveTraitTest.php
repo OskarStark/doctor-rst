@@ -85,7 +85,7 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
                 '',
                 '        echo $bar;',
                 '',
-                'New paragraph...'
+                'New paragraph...',
             ], 4),
         ];
 
