@@ -44,6 +44,15 @@ class EnsureBashPromptBeforeComposerCommand extends AbstractRule implements Line
         $lines->seek($number);
         $line = $lines->current();
 
+        $indentation = $line->indention();
+
+        $lines->next();
+        $lines->next();
+
+        if ($indentation === $lines->current()->indention()) {
+            return NullViolation::create();
+        }
+
         $cleanLine = $line->clean();
         if ($cleanLine->startsWith('composer')
             && $this->inShellCodeBlock($lines, $number)
