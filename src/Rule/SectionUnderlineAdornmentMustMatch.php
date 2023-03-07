@@ -37,10 +37,10 @@ class SectionUnderlineAdornmentMustMatch extends AbstractRule implements LineCon
             && !(mb_strlen($lines->current()->clean()->toString()) === $headLineLength)
         ) {
             return Violation::from(
-                sprintf('Please ensure title "%s" and underline length are matching', $line->raw()->toString()),
+                sprintf('Please ensure title "%s" and underline length are matching', $lines->current()->raw()->toString()),
                 $filename,
-                $number + 1,
-                $line
+                $number,
+                $lines->current()
             );
         }
 

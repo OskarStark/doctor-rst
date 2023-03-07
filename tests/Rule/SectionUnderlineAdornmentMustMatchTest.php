@@ -26,7 +26,7 @@ final class SectionUnderlineAdornmentMustMatchTest extends \App\Tests\UnitTestCa
      *
      * @dataProvider checkProvider
      */
-    public function check(ViolationInterface $expected, int $max, RstSample $sample): void
+    public function check(ViolationInterface $expected, RstSample $sample): void
     {
         static::assertEquals(
             $expected,
@@ -47,7 +47,7 @@ final class SectionUnderlineAdornmentMustMatchTest extends \App\Tests\UnitTestCa
                 new RstSample([
                     'Title with too short underline',
                     '~~~~~~~~~~~~~~~~~~~~~~~~',
-                ], 2),
+                ], 1),
             ],
             [
                 Violation::from(
@@ -59,14 +59,14 @@ final class SectionUnderlineAdornmentMustMatchTest extends \App\Tests\UnitTestCa
                 new RstSample([
                     'Title with too long underline',
                     '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
-                ], 2),
+                ], 1),
             ],
             [
                 NullViolation::create(),
                 new RstSample([
                     'Title with matching underline',
                     '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
-                ], 2),
+                ], 1),
             ],
         ];
     }
