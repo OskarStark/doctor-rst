@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rule\SectionUnderlineAdornmentMustMatch;
+use App\Rule\TitleUnderlineLengthMustMatchTitleLength;
 use App\Tests\RstSample;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class SectionUnderlineAdornmentMustMatchTest extends \App\Tests\UnitTestCase
+final class TitleUnderlineLengthMustMatchTitleLengthTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -30,7 +30,7 @@ final class SectionUnderlineAdornmentMustMatchTest extends \App\Tests\UnitTestCa
     {
         static::assertEquals(
             $expected,
-            (new SectionUnderlineAdornmentMustMatch())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new TitleUnderlineLengthMustMatchTitleLength())->check($sample->lines(), $sample->lineNumber(), 'filename')
         );
     }
 

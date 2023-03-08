@@ -18,7 +18,7 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-class SectionUnderlineAdornmentMustMatch extends AbstractRule implements LineContentRule
+class TitleUnderlineLengthMustMatchTitleLength extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
