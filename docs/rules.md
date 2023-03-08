@@ -73,6 +73,7 @@
 * [space_between_label_and_link_in_doc](#space_between_label_and_link_in_doc)
 * [space_between_label_and_link_in_ref](#space_between_label_and_link_in_ref)
 * [string_replacement](#string_replacement)
+* [title_underline_length_must_match_title_length](#title_underline_length_must_match_title_length)
 * [typo](#typo)
 * [unused_links](#unused_links)
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
@@ -828,6 +829,8 @@ Pattern | Message
 --- | ---
 `**type**: ``int``` | Please replace "%s" with "**type**: ``integer``"
 `**type**: ``bool``` | Please replace "%s" with "**type**: ``boolean``"
+
+## `title_underline_length_must_match_title_length`
 
 ## `typo`
 
