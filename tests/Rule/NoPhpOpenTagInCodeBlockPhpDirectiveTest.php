@@ -48,7 +48,7 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestC
                 new RstSample([
                     $codeBlock,
                     '',
-                    '<?php'
+                    '<?php',
                 ]),
             ];
 
@@ -57,7 +57,7 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestC
                 new RstSample([
                     $codeBlock,
                     '',
-                    '$this->somePhp();'
+                    '$this->somePhp();',
                 ]),
             ];
         }
