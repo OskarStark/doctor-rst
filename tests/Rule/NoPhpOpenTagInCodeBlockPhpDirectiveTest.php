@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rule\NoPhpPrefixBeforeBinConsole;
+use App\Rule\NoPhpOpenTagInCodeBlockPhpDirective;
 use App\Tests\RstSample;
 use App\Value\NullViolation;
 use App\Value\Violation;
@@ -34,31 +34,31 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestC
         );
     }
 
-    public function checkProvider(): array
+    public function checkProvider(): \Generator
     {
-        return foreach (self::phpCodeBlocks() as $codeBlock) {
-            [
-                [
-                    Violation::from(
-                        sprintf('Please remove PHP open tag after "%s" directive', $codeBlock),
-                        'filename',
-                        1,
-                        '<?php'
-                    ),
-                    new RstSample([
-                        $codeBlock,
-                        '',
-                        '<?php'
-                    ]),
-                ],
-                [
-                    NullViolation::create(),
-                    new RstSample([
-                        $codeBlock,
-                        '',
-                        '$this->somePhp();'
-                    ]),
-                ],
+        foreach (self::phpCodeBlocks() as $codeBlock) {
+            var_dump($codeBlock);
+            yield [
+                Violation::from(
+                    sprintf('Please remove PHP open tag after "%s" directive', $codeBlock),
+                    'filename',
+                    1,
+                    $codeBlock
+                ),
+                new RstSample([
+                    $codeBlock,
+                    '',
+                    '<?php'
+                ]),
+            ];
+
+            yield [
+                NullViolation::create(),
+                new RstSample([
+                    $codeBlock,
+                    '',
+                    '$this->somePhp();'
+                ]),
             ];
         }
     }
