@@ -37,7 +37,7 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestCas
     public function checkProvider(): \Generator
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
-            yield [
+            yield sprintf('Has violation for code-block "%s"', $codeBlock) => [
                 Violation::from(
                     sprintf('Please add PHP open tag after "%s" directive', $codeBlock),
                     'filename',
@@ -51,7 +51,7 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestCas
                 ]),
             ];
 
-            yield [
+            yield sprintf('No violation for code-block "%s"', $codeBlock) =>[
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
