@@ -67,7 +67,7 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestCas
             new RstSample([
                 $codeBlock,
                 '',
-                '<?php',
+                '<html>',
             ]),
         ];
     }
