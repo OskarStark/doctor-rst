@@ -37,8 +37,6 @@ abstract class UnitTestCase extends TestCase
             $result[] = '.. code-block:: '.$codeBlock;
         }
 
-        $result[] = 'A PHP code block follows::';
-
         return $result;
     }
 }

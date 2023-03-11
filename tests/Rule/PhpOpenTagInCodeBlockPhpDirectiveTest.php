@@ -60,5 +60,15 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestCas
                 ]),
             ];
         }
+
+        $codeBlock = '.. code-block:: html+php';
+        yield sprintf('No violation for code-block "%s"', $codeBlock) => [
+            NullViolation::create(),
+            new RstSample([
+                $codeBlock,
+                '',
+                '<?php',
+            ]),
+        ];
     }
 }
