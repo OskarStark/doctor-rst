@@ -51,11 +51,36 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestC
                 ]),
             ];
 
+            yield sprintf('Has violation for code-block "%s" with comment', $codeBlock) => [
+                Violation::from(
+                    sprintf('Please remove PHP open tag after "%s" directive', $codeBlock),
+                    'filename',
+                    1,
+                    $codeBlock
+                ),
+                new RstSample([
+                    $codeBlock,
+                    '',
+                    '// Some comment',
+                    '<?php',
+                ]),
+            ];
+
             yield sprintf('No violation for code-block "%s"', $codeBlock) => [
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
                     '',
+                    '$this->somePhp();',
+                ]),
+            ];
+
+            yield sprintf('No violation for code-block "%s" with comment', $codeBlock) => [
+                NullViolation::create(),
+                new RstSample([
+                    $codeBlock,
+                    '',
+                    '// Some comment',
                     '$this->somePhp();',
                 ]),
             ];
