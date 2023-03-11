@@ -50,6 +50,11 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineCo
         // check if next line is "<?php"
         $nextLine = $lines->current();
 
+        if (str_starts_with($nextLine->clean()->toString(), '//')) {
+            $lines->next();
+            $nextLine = $lines->current();
+        }
+
         if ('<?php' === $nextLine->clean()->toString()) {
             return Violation::from(
                 sprintf('Please remove PHP open tag after "%s" directive', $line->raw()->toString()),
