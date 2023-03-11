@@ -50,7 +50,7 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineCo
         // check if next line is "<?php"
         $nextLine = $lines->current();
 
-        if (str_starts_with($nextLine->clean()->toString(), '//')) {
+        if ($nextLine->clean()->startsWith('//')) {
             $lines->next();
             $nextLine = $lines->current();
         }
