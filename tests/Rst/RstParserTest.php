@@ -21,6 +21,30 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
+     * @dataProvider isPhpDirectiveProvider
+     */
+    public function isPhpDirective(bool $expected, string $string): void
+    {
+        static::assertSame($expected, RstParser::isPhpDirective(new Line($string)));
+    }
+
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
+    public function isPhpDirectiveProvider(): \Generator
+    {
+        foreach (self::phpCodeBlocks() as $phpCodeBlock) {
+            yield [true, $phpCodeBlock];
+        }
+
+        yield [false, ''];
+        yield [false, '.. code-block:: html+php'];
+        yield [false, '.. index::'];
+    }
+
+    /**
+     * @test
+     *
      * @dataProvider isLineNumberAnnotationProvider
      */
     public function isLineNumberAnnotation(bool $expected, string $string): void
