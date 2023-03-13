@@ -107,6 +107,20 @@ class RstParser
     public const CODE_BLOCK_VARNISH_4 = 'varnish4';
     public const CODE_BLOCK_APACHE = 'apache';
 
+    public static function isPhpDirective(Line $line): bool
+    {
+        if ($line->isDefaultDirective()
+            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP, true)
+            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS, true)
+            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ATTRIBUTES, true)
+            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY, true)
+            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE, true)
+         ) {
+            return true;
+        }
+        return false;
+    }
+
     public static function directiveIs(Line $line, string $directive, ?bool $strict = false): bool
     {
         if (!$line->isDirective()) {
