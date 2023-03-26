@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "composer/semver": "^3.3.2",
-        "doctrine/annotations": "^1.14.3",
+        "doctrine/annotations": "^2",
         "ondram/ci-detector": "^4.1.0",
         "symfony/config": "^6.2.7",
         "symfony/console": "^6.2.7",
