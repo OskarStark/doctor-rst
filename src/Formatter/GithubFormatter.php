@@ -19,7 +19,7 @@ use Symfony\Component\Console\Style\OutputStyle;
 class GithubFormatter implements Formatter
 {
     public function __construct(
-        private readonly ConsoleFormatter $consoleFormatter
+        private readonly ConsoleFormatter $consoleFormatter,
     ) {
     }
 
