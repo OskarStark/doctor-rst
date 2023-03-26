@@ -60,9 +60,9 @@ docs/index.rst ✘
     2: violation message
    ->  dummy text
 
- [WARNING] Whitelisted regex "/foo/" was not matched.
+ [WARNING] Whitelisted regex "/foo/" was not matched.                           
 
- [WARNING] Found "1" invalid file!
+ [WARNING] Found "1" invalid file!                                              
 
 ::error file={$analyzeDir}/docs/index.rst,line=2::violation message
 

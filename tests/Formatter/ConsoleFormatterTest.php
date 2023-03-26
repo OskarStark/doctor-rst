@@ -61,9 +61,9 @@ docs/index.rst ✘
 
 docs/tutorial/introduction_one.rst ✔
 
- [WARNING] Whitelisted regex "/foo/" was not matched.
+ [WARNING] Whitelisted regex "/foo/" was not matched.                           
 
- [WARNING] Found "1" invalid file!
+ [WARNING] Found "1" invalid file!                                              
 
 
 OUTPUT;

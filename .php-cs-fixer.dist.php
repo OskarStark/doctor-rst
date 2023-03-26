@@ -43,6 +43,7 @@ $config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\P
     'date_time_immutable' => false,
     'error_suppression' => false,
     'final_class' => false,
+    'final_public_method_for_abstract_class' => false,
     'mb_str_functions' => false,
     'native_function_invocation' => [
         'exclude' => [],
