@@ -21,10 +21,10 @@
         "ergebnis/test-util": "^1.6",
         "mikey179/vfsstream": "^1.6.11",
         "phpstan/extension-installer": "^1.2",
-        "phpstan/phpstan": "^1.10.3",
+        "phpstan/phpstan": "^1.10.8",
         "phpstan/phpstan-phpunit": "^1.3.10",
         "phpstan/phpstan-webmozart-assert": "^1.2.4",
-        "phpunit/phpunit": "^9.6.4",
+        "phpunit/phpunit": "^9.6.5",
         "symfony/var-dumper": "^6.2.7"
     },
     "config": {
