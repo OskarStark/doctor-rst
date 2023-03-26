@@ -53,6 +53,7 @@ $config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\P
         'scope' => 'all',
         'strict' => false,
     ],
+    'no_trailing_whitespace_in_string' => false,
     'php_unit_internal_class' => false,
     'php_unit_test_annotation' => [
         'style' => 'annotation',

@@ -18,11 +18,9 @@ use Symfony\Component\Console\Style\OutputStyle;
 
 class GithubFormatter implements Formatter
 {
-    private ConsoleFormatter $consoleFormatter;
-
-    public function __construct(ConsoleFormatter $consoleFormatter)
-    {
-        $this->consoleFormatter = $consoleFormatter;
+    public function __construct(
+        private readonly ConsoleFormatter $consoleFormatter,
+    ) {
     }
 
     public function format(OutputStyle $style, AnalyzerResult $analyzerResult, string $analyzeDir, bool $showValidFiles): void
@@ -32,7 +30,7 @@ class GithubFormatter implements Formatter
         foreach ($analyzerResult->all() as $fileResult) {
             foreach ($fileResult->violationList()->violations() as $violation) {
                 $style->writeln(sprintf(
-                    '::error file=%s,line=%s::%s',
+                    '::error file=%s,line=%d::%s',
                     $fileResult->filename(),
                     $violation->lineno(),
                     $violation->message(),
