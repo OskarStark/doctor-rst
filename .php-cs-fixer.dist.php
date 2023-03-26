@@ -60,8 +60,7 @@ $config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\P
 ]);
 
 $config->getFinder()
-    ->in('migrations')
     ->in('src')
-    ->in('tests');;
+    ->in('tests');
 
 return $config;
