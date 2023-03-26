@@ -54,7 +54,7 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends \App\Tests\Unit
                 sprintf('Please ensure title "%s" and underline length are matching', '``lowStrengthMessage``'),
                 'filename',
                 1,
-                '``lowStrengthMessage``'
+                '``lowStrengthMessage``',
             ),
             new RstSample([
                 '``lowStrengthMessage``',
