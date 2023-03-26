@@ -51,6 +51,19 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends \App\Tests\Unit
 
         yield [
             Violation::from(
+                sprintf('Please ensure title "%s" and underline length are matching', 'Title with too short underline'),
+                'filename',
+                1,
+                '``lowStrengthMessage``'
+            ),
+            new RstSample([
+                '``lowStrengthMessage``',
+                '~~~~~~~~~~~',
+            ], 1),
+        ];
+
+        yield [
+            Violation::from(
                 sprintf('Please ensure title "%s" and underline length are matching', 'Title with too long underline'),
                 'filename',
                 1,
