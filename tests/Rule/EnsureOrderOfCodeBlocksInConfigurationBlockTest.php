@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,23 +24,23 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\U
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new EnsureOrderOfCodeBlocksInConfigurationBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new EnsureOrderOfCodeBlocksInConfigurationBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function validProvider(): \Generator
+    public static function validProvider(): \Generator
     {
-        $valid = <<<RST
+        $valid = <<<'RST'
 .. configuration-block::
 
     .. code-block:: php-symfony
@@ -62,26 +62,26 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\U
     .. code-block:: xml
 
         test
-        
+
     .. code-block:: php
 
         test
-        
+
     .. code-block:: php-standalone
 
-        test        
+        test
 RST;
 
-        $valid2 = <<<RST
+        $valid2 = <<<'RST'
 .. configuration-block::
 
     .. code-block:: html
 
         test
-        
+
     .. code-block:: php-symfony
 
-        test  
+        test
 
     .. code-block:: php-annotations
 
@@ -98,29 +98,29 @@ RST;
     .. code-block:: xml
 
         test
-        
+
     .. code-block:: php
 
         test
-        
+
     .. code-block:: php-standalone
 
         test
 RST;
 
-        $valid3 = <<<RST
+        $valid3 = <<<'RST'
 .. configuration-block::
 
     .. code-block:: php-symfony
 
         test
-        
+
     .. code-block:: php-standalone
 
         test
 RST;
 
-        $invalid_but_valid_because_of_xliff = <<<RST
+        $invalid_but_valid_because_of_xliff = <<<'RST'
 .. configuration-block::
 
     .. code-block:: xml
@@ -144,7 +144,7 @@ RST;
         test
 RST;
 
-        $valid_too_with_xliff = <<<RST
+        $valid_too_with_xliff = <<<'RST'
 .. configuration-block::
 
     .. code-block:: yaml
@@ -160,7 +160,7 @@ RST;
         test
 RST;
 
-        $valid_all_the_same = <<<RST
+        $valid_all_the_same = <<<'RST'
 .. configuration-block::
 
     .. code-block:: yaml
@@ -194,7 +194,7 @@ RST;
             exception_controller: 'FOS\RestBundle\Controller\ExceptionController::showAction'
 RST;
 
-        $translationDebug = <<<RST
+        $translationDebug = <<<'RST'
 .. configuration-block::
 
     .. code-block:: xml
@@ -258,9 +258,9 @@ RST;
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function invalidProvider(): \Generator
+    public static function invalidProvider(): \Generator
     {
-        $invalid = <<<RST
+        $invalid = <<<'RST'
 .. configuration-block::
 
     .. code-block:: yaml
@@ -270,17 +270,17 @@ RST;
     .. code-block:: xml
 
         test
-        
+
     .. code-block:: php
 
         test
-        
+
     .. code-block:: php-annotations
 
-        test         
+        test
 RST;
 
-        $invalid2 = <<<RST
+        $invalid2 = <<<'RST'
 .. configuration-block::
 
     .. code-block:: html
@@ -294,21 +294,21 @@ RST;
     .. code-block:: xml
 
         test
-        
+
     .. code-block:: php-attributes
 
         test
-        
+
     .. code-block:: php
 
         test
-        
+
     .. code-block:: php-annotations
 
-        test         
+        test
 RST;
 
-        $invalid3 = <<<RST
+        $invalid3 = <<<'RST'
 .. configuration-block::
 
     .. code-block:: php-standalone
@@ -325,7 +325,7 @@ RST;
                 'Please use the following order for your code blocks: "php-annotations, yaml, xml, php"',
                 'filename',
                 1,
-                '.. configuration-block::'
+                '.. configuration-block::',
             ),
             new RstSample($invalid),
         ];
@@ -334,7 +334,7 @@ RST;
                 'Please use the following order for your code blocks: "php-annotations, php-attributes, yaml, xml, php"',
                 'filename',
                 1,
-                '.. configuration-block::'
+                '.. configuration-block::',
             ),
             new RstSample($invalid2),
         ];
@@ -343,7 +343,7 @@ RST;
                 'Please use the following order for your code blocks: "php-symfony, php-standalone"',
                 'filename',
                 1,
-                '.. configuration-block::'
+                '.. configuration-block::',
             ),
             new RstSample($invalid3),
         ];

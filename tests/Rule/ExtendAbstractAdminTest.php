@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new ExtendAbstractAdmin())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new ExtendAbstractAdmin())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -42,7 +42,7 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
                     'Please extend AbstractAdmin instead of Admin',
                     'filename',
                     1,
-                    'class TestAdmin extends Admin'
+                    'class TestAdmin extends Admin',
                 ),
                 new RstSample('class TestAdmin extends Admin'),
             ],
@@ -52,7 +52,7 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
                     'Please extend AbstractAdmin instead of Admin',
                     'filename',
                     1,
-                    'class TestAdmin extends Admin'
+                    'class TestAdmin extends Admin',
                 ),
                 new RstSample('    class TestAdmin extends Admin'),
             ],
@@ -69,7 +69,7 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
                     'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
                     'filename',
                     1,
-                    'use Sonata\AdminBundle\Admin\Admin;'
+                    'use Sonata\AdminBundle\Admin\Admin;',
                 ),
                 new RstSample('use Sonata\AdminBundle\Admin\Admin;'),
             ],
@@ -78,7 +78,7 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
                     'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
                     'filename',
                     1,
-                    'use Sonata\AdminBundle\Admin\Admin;'
+                    'use Sonata\AdminBundle\Admin\Admin;',
                 ),
                 new RstSample('    use Sonata\AdminBundle\Admin\Admin;'),
             ],

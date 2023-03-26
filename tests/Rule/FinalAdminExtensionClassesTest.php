@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class FinalAdminExtensionClassesTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new FinalAdminExtensionClasses())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new FinalAdminExtensionClasses())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -42,7 +42,7 @@ final class FinalAdminExtensionClassesTest extends \App\Tests\UnitTestCase
                     'Please use "final" for AdminExtension class',
                     'filename',
                     1,
-                    'class TestExtension extends AbstractAdminExtension'
+                    'class TestExtension extends AbstractAdminExtension',
                 ),
                 new RstSample('class TestExtension extends AbstractAdminExtension'),
             ],
@@ -51,7 +51,7 @@ final class FinalAdminExtensionClassesTest extends \App\Tests\UnitTestCase
                     'Please use "final" for AdminExtension class',
                     'filename',
                     1,
-                    'class TestExtension extends AbstractAdminExtension'
+                    'class TestExtension extends AbstractAdminExtension',
                 ),
                 new RstSample('    class TestExtension extends AbstractAdminExtension'),
             ],

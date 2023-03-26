@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-use function Symfony\Component\String\u;
-
 use Webmozart\Assert\Assert;
+use function Symfony\Component\String\u;
 
 final class RuleName
 {
@@ -39,7 +38,7 @@ final class RuleName
         Assert::notWhitespaceOnly($class);
 
         return self::fromString(
-            u(substr((string) strrchr($class, '\\'), 1))->snake()->toString()
+            u(substr((string) strrchr($class, '\\'), 1))->snake()->toString(),
         );
     }
 

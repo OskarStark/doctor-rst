@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -37,12 +37,12 @@ class ValidUseStatements extends AbstractRule implements LineContentRule
         /*
          * @todo do it in one regex instead of regex + string search
          */
-        if ($line->clean()->match('/^use (.*);$/') && false !== strpos($line->clean()->toString(), '\\\\')) {
+        if ($line->clean()->match('/^use (.*);$/') && str_contains($line->clean()->toString(), '\\\\')) {
             return Violation::from(
                 'Please do not escape the backslashes in a use statement.',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

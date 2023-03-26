@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -20,7 +20,10 @@ use App\Value\Violation;
 
 final class AnalyzerResultTest extends \App\Tests\UnitTestCase
 {
-    public function testAll(): void
+    /**
+     * @test
+     */
+    public function all(): void
     {
         $filename = \dirname(__DIR__, 2).'/dummy/docs/index.rst';
 
@@ -44,7 +47,7 @@ final class AnalyzerResultTest extends \App\Tests\UnitTestCase
                 Violation::from('violation message', $filename, 3, 'excluded line'),
                 Violation::from('violation message', $filename, 4, 'excluded regex'),
                 Violation::from('violation message', $filename, 4, 'excluded regex'),
-            ]
+            ],
         );
 
         $excludedViolationListTwo = new ExcludedViolationList(
@@ -53,24 +56,24 @@ final class AnalyzerResultTest extends \App\Tests\UnitTestCase
                 Violation::from('violation message', $filename, 2, 'dummy text'),
                 Violation::from('violation message', $filename, 3, 'excluded line'),
                 Violation::from('violation message', $filename, 4, 'excluded regex'),
-            ]
+            ],
         );
 
         $analyserResult = new AnalyzerResult(
             [
                 new FileResult(
                     $this->createMock(\SplFileInfo::class),
-                    $excludedViolationListOne
+                    $excludedViolationListOne,
                 ),
                 new FileResult(
                     $this->createMock(\SplFileInfo::class),
-                    $excludedViolationListTwo
+                    $excludedViolationListTwo,
                 ),
             ],
-            $excludedViolationConfig
+            $excludedViolationConfig,
         );
 
-        static::assertSame(
+        self::assertSame(
             [
                 'regex' => [
                     '/regex_not_match/',
@@ -81,7 +84,7 @@ final class AnalyzerResultTest extends \App\Tests\UnitTestCase
                     'excluded line not match bis',
                 ],
             ],
-            $analyserResult->getUnusedWhitelistRules()
+            $analyserResult->getUnusedWhitelistRules(),
         );
     }
 }

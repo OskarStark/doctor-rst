@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -75,7 +75,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         // it could not be in a configuration block which would be ok
         if (preg_match('/^[\s]+/', $line->raw()->toString(), $matches)
             && RstParser::codeBlockDirectiveIsTypeOf($lines->current(), RstParser::CODE_BLOCK_PHP)
-            && $number > 0
+            && 0 < $number
         ) {
             if ($this->in(RstParser::DIRECTIVE_CONFIGURATION_BLOCK, $lines, $number)) {
                 return NullViolation::create();
@@ -105,6 +105,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         }
 
         $lines->next();
+
         if ($lines->valid() && RstParser::isOption($lines->current())) {
             return NullViolation::create();
         }
@@ -113,7 +114,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
             'Please do not use ".. code-block:: php", use "::" instead.',
             $filename,
             $number + 1,
-            $line
+            $line,
         );
     }
 
@@ -122,7 +123,8 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         $lines->seek($number);
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);
@@ -146,7 +148,8 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         $lines->seek($number);
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);
@@ -170,7 +173,8 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         $lines->seek($number);
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,16 +28,16 @@ final class ComposerDevOptionNotAtTheEndTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new ComposerDevOptionNotAtTheEnd())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new ComposerDevOptionNotAtTheEnd())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -48,7 +48,7 @@ final class ComposerDevOptionNotAtTheEndTest extends \App\Tests\UnitTestCase
                 'Please move "--dev" option before the package',
                 'filename',
                 1,
-                'composer require symfony/debug --dev'
+                'composer require symfony/debug --dev',
             ),
             new RstSample('composer require symfony/debug --dev'),
         ];

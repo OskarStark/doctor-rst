@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,7 +24,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     {
         $line = new Line(' test  ');
 
-        static::assertSame($line->clean()->toString(), $line->raw()->trim()->toString());
+        self::assertSame($line->clean()->toString(), $line->raw()->trim()->toString());
     }
 
     /**
@@ -34,13 +34,13 @@ final class LineTest extends \App\Tests\UnitTestCase
      */
     public function clean(string $expected, string $string): void
     {
-        static::assertSame($expected, (new Line($string))->clean()->toString());
+        self::assertSame($expected, (new Line($string))->clean()->toString());
     }
 
     /**
      * @return array<array{0: string, 1: string}>
      */
-    public function cleanProvider(): array
+    public static function cleanProvider(): array
     {
         return [
             [
@@ -85,13 +85,13 @@ final class LineTest extends \App\Tests\UnitTestCase
      */
     public function isBlank(bool $expected, string $string): void
     {
-        static::assertSame($expected, (new Line($string))->isBlank());
+        self::assertSame($expected, (new Line($string))->isBlank());
     }
 
     /**
      * @return array<array{0: bool, 1: string}>
      */
-    public function isBlankProvider(): array
+    public static function isBlankProvider(): array
     {
         return [
             [true, '\r\n'],
@@ -108,13 +108,13 @@ final class LineTest extends \App\Tests\UnitTestCase
      */
     public function indention(int $expected, string $string): void
     {
-        static::assertSame($expected, (new Line($string))->indention());
+        self::assertSame($expected, (new Line($string))->indention());
     }
 
     /**
      * @return \Generator<array{0: int, 1: string}>
      */
-    public function indentionProvider(): \Generator
+    public static function indentionProvider(): \Generator
     {
         yield [0, ''];
         yield [1, ' foo'];
@@ -128,13 +128,13 @@ final class LineTest extends \App\Tests\UnitTestCase
      */
     public function isHeadline(bool $expected, string $string): void
     {
-        static::assertSame($expected, (new Line($string))->isHeadline());
+        self::assertSame($expected, (new Line($string))->isHeadline());
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isHeadlineProvider(): \Generator
+    public static function isHeadlineProvider(): \Generator
     {
         yield [true, '==='];
         yield [true, '~~~'];
@@ -155,13 +155,13 @@ final class LineTest extends \App\Tests\UnitTestCase
      */
     public function isDirective(bool $expected, string $string): void
     {
-        static::assertSame($expected, (new Line($string))->isDirective());
+        self::assertSame($expected, (new Line($string))->isDirective());
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isDirectiveProvider(): \Generator
+    public static function isDirectiveProvider(): \Generator
     {
         yield [true, 'the following code is php::'];
         yield [true, '.. code-block:: php'];
@@ -184,13 +184,13 @@ final class LineTest extends \App\Tests\UnitTestCase
      */
     public function isDefaultDirective(bool $expected, string $string): void
     {
-        static::assertSame($expected, (new Line($string))->isDefaultDirective());
+        self::assertSame($expected, (new Line($string))->isDefaultDirective());
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isDefaultDirectiveProvider(): \Generator
+    public static function isDefaultDirectiveProvider(): \Generator
     {
         yield [true, 'this is using the default directive::'];
         yield [true, 'prefixed classes included in doc block comments (``/** ... */``). For example::'];

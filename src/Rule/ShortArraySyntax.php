@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -36,7 +36,7 @@ class ShortArraySyntax extends AbstractRule implements LineContentRule
                 'Please use short array syntax',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

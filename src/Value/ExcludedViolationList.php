@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -15,12 +15,20 @@ namespace App\Value;
 
 final class ExcludedViolationList
 {
-    /** @var Violation[] */
+    /**
+     * @var Violation[]
+     */
     private array $violations;
     private bool $hasViolations;
-    /** @var array<string, int> */
+
+    /**
+     * @var array<string, int>
+     */
     private array $matchedWhitelistRegex;
-    /** @var array<string, int> */
+
+    /**
+     * @var array<string, int>
+     */
     private array $matchedWhitelistLines;
 
     public function __construct(array $excludedViolationConfig, array $violations)
@@ -85,7 +93,7 @@ final class ExcludedViolationList
             if (isset($excludedViolationConfig['lines'])) {
                 /** @var string $line */
                 foreach ($excludedViolationConfig['lines'] as $line) {
-                    if ($line === $violation->rawLine()) {
+                    if ($violation->rawLine() === $line) {
                         $matchedWhitelistLines[$line] = isset($matchedWhitelistLines[$line]) ? 1 + $matchedWhitelistLines[$line] : 1;
                         unset($violations[$key]);
 

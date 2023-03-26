@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -25,7 +25,7 @@ final class MemoizingAnalyzer implements Analyzer
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function analyze(\SplFileInfo $file, array $rules): array
     {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new OnlyBackslashesInUseStatementsInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new OnlyBackslashesInUseStatementsInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
@@ -42,7 +42,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
                     'Please check "use App/Handler;", it should not contain "/"',
                     'filename',
                     5,
-                    'use App/Handler;'
+                    'use App/Handler;',
                 ),
                 new RstSample([
                     $codeBlock,
@@ -58,7 +58,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
                     'Please check "UsE App/Handler;", it should not contain "/"',
                     'filename',
                     5,
-                    'UsE App/Handler;'
+                    'UsE App/Handler;',
                 ),
                 new RstSample([
                     $codeBlock,
@@ -75,7 +75,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends \App\Tests\
                 'Please check "use App/Handler;", it should not contain "/"',
                 'filename',
                 5,
-                'use App/Handler;'
+                'use App/Handler;',
             ),
             new RstSample([
                 '::',

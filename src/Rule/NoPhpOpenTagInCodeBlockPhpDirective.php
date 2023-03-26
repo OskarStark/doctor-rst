@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -55,7 +55,7 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineCo
                 sprintf('Please remove PHP open tag after "%s" directive', $line->raw()->toString()),
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

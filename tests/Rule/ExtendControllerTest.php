@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,16 +28,16 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new ExtendController())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new ExtendController())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -45,7 +45,7 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
                     'Please extend Controller instead of AbstractController',
                     'filename',
                     1,
-                    'class TestController extends AbstractController'
+                    'class TestController extends AbstractController',
                 ),
                 new RstSample('class TestController extends AbstractController'),
             ],
@@ -55,7 +55,7 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
                     'Please extend Controller instead of AbstractController',
                     'filename',
                     1,
-                    'class TestController extends AbstractController'
+                    'class TestController extends AbstractController',
                 ),
                 new RstSample('    class TestController extends AbstractController'),
             ],
@@ -72,7 +72,7 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
                     'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
                     'filename',
                     1,
-                    'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'
+                    'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;',
                 ),
                 new RstSample('use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
             ],
@@ -82,7 +82,7 @@ final class ExtendControllerTest extends \App\Tests\UnitTestCase
                     'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
                     'filename',
                     1,
-                    'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'
+                    'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;',
                 ),
                 new RstSample('    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
             ],

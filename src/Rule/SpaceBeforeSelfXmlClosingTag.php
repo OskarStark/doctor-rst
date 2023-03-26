@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -35,7 +35,7 @@ class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContentRu
                 'Please add space before "/>"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

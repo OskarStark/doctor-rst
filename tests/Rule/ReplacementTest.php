@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,30 +29,33 @@ final class ReplacementTest extends \App\Tests\UnitTestCase
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];
+
         foreach (Replacement::getList() as $search => $message) {
             $configuredRules[] = (new Replacement())->configure($search, $message);
         }
 
         $violations = [];
+
         foreach ($configuredRules as $rule) {
             $violation = $rule->check($sample->lines(), $sample->lineNumber(), 'filename');
+
             if (!$violation->isNull()) {
                 $violations[] = $violation;
             }
         }
 
         if ($expected->isNull()) {
-            static::assertCount(0, $violations);
+            self::assertCount(0, $violations);
         } else {
-            static::assertCount(1, $violations);
-            static::assertEquals($expected, $violations[0]);
+            self::assertCount(1, $violations);
+            self::assertEquals($expected, $violations[0]);
         }
     }
 
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield 'empty string' => [NullViolation::create(), new RstSample('')];
 
@@ -79,7 +82,7 @@ final class ReplacementTest extends \App\Tests\UnitTestCase
             '``%kernel.debug%``',
             'e.g.',
             'PHPDoc',
-//            '# username is your full Gmail or Google Apps email address', // todo this should be supported by the regex
+            //            '# username is your full Gmail or Google Apps email address', // todo this should be supported by the regex
         ];
 
         foreach ($valids as $valid) {
@@ -124,7 +127,7 @@ final class ReplacementTest extends \App\Tests\UnitTestCase
                     sprintf('Please replace "%s" with "%s"', $invalid, $valid),
                     'filename',
                     1,
-                    $invalid
+                    $invalid,
                 ),
                 new RstSample($invalid),
             ];
@@ -135,7 +138,7 @@ final class ReplacementTest extends \App\Tests\UnitTestCase
                     sprintf('Please replace "%s" with "%s"', $invalid, $valid),
                     'filename',
                     1,
-                    $invalid
+                    $invalid,
                 ),
                 new RstSample(sprintf('    %s', $invalid)),
             ];

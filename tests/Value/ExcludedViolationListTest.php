@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -18,7 +18,10 @@ use App\Value\Violation;
 
 final class ExcludedViolationListTest extends \App\Tests\UnitTestCase
 {
-    public function testFilterExcludedViolations(): void
+    /**
+     * @test
+     */
+    public function filterExcludedViolations(): void
     {
         $filename = \dirname(__DIR__, 2).'/dummy/docs/index.rst';
 
@@ -36,21 +39,21 @@ final class ExcludedViolationListTest extends \App\Tests\UnitTestCase
                 Violation::from('violation message', $filename, 3, 'excluded line'),
                 Violation::from('violation message', $filename, 4, 'excluded regex'),
                 Violation::from('violation message', $filename, 4, 'excluded regex'),
-            ]
+            ],
         );
 
-        static::assertSame([$dummy], $list->violations());
-        static::assertSame(
+        self::assertSame([$dummy], $list->violations());
+        self::assertSame(
             [
                 'excluded line' => 1,
             ],
-            $list->getMatchedWhitelistLines()
+            $list->getMatchedWhitelistLines(),
         );
-        static::assertSame(
+        self::assertSame(
             [
                 '/regex/' => 2,
             ],
-            $list->getMatchedWhitelistRegex()
+            $list->getMatchedWhitelistRegex(),
         );
     }
 }

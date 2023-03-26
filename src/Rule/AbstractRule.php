@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -18,7 +18,7 @@ use App\Value\RuleName;
 
 abstract class AbstractRule
 {
-    public static function getName(): RuleName
+    final public static function getName(): RuleName
     {
         return RuleName::fromClassString(static::class);
     }
@@ -26,17 +26,17 @@ abstract class AbstractRule
     /**
      * @return RuleGroup[]
      */
-    public static function getGroups(): array
+    final public static function getGroups(): array
     {
         return [];
     }
 
-    public static function runOnlyOnBlankline(): bool
+    final public static function runOnlyOnBlankline(): bool
     {
         return false;
     }
 
-    public static function isExperimental(): bool
+    final public static function isExperimental(): bool
     {
         foreach (static::getGroups() as $group) {
             if ($group->equals(RuleGroup::Experimental())) {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -25,13 +25,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isPhpDirective(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isPhpDirective(new Line($string)));
+        self::assertSame($expected, RstParser::isPhpDirective(new Line($string)));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isPhpDirectiveProvider(): \Generator
+    public static function isPhpDirectiveProvider(): \Generator
     {
         foreach (self::phpCodeBlocks() as $phpCodeBlock) {
             yield [true, $phpCodeBlock];
@@ -49,13 +49,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isLineNumberAnnotation(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isLineNumberAnnotation(new Line($string)));
+        self::assertSame($expected, RstParser::isLineNumberAnnotation(new Line($string)));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isLineNumberAnnotationProvider(): \Generator
+    public static function isLineNumberAnnotationProvider(): \Generator
     {
         yield [true, 'Line 15'];
         yield [true, 'Line 16 - 18'];
@@ -73,13 +73,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isComment(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isComment(new Line($string)));
+        self::assertSame($expected, RstParser::isComment(new Line($string)));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isCommentProvider(): \Generator
+    public static function isCommentProvider(): \Generator
     {
         yield [true, '.. I am a comment'];
 
@@ -96,13 +96,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isFootnote(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isFootnote(new Line($string)));
+        self::assertSame($expected, RstParser::isFootnote(new Line($string)));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isFootnoteProvider(): \Generator
+    public static function isFootnoteProvider(): \Generator
     {
         yield [false, ''];
         yield [true, '.. [1]'];
@@ -117,13 +117,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isListItem(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isListItem(new Line($string)));
+        self::assertSame($expected, RstParser::isListItem(new Line($string)));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isListItemProvider(): \Generator
+    public static function isListItemProvider(): \Generator
     {
         yield [false, ''];
         yield [true, '* Bullet point 1'];
@@ -139,13 +139,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isLinkDefinition(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isLinkDefinition(new Line($string)));
+        self::assertSame($expected, RstParser::isLinkDefinition(new Line($string)));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isLinkDefinitionProvider()
+    public static function isLinkDefinitionProvider()
     {
         yield [true, '.. _`Symfony`: https://symfony.com'];
         yield [true, '.. _`APCu`: https://github.com/krakjoe/apcu'];
@@ -164,13 +164,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isLinkUsage(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isLinkUsage($string));
+        self::assertSame($expected, RstParser::isLinkUsage($string));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isLinkUsageProvider()
+    public static function isLinkUsageProvider()
     {
         yield [true, '`Symfony`_'];
         yield [true, '`APCu`_'];
@@ -186,13 +186,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isTable(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isTable(new Line($string)));
+        self::assertSame($expected, RstParser::isTable(new Line($string)));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isTableProvider()
+    public static function isTableProvider()
     {
         yield [true, '==='];
         yield [true, '=== ==='];
@@ -214,13 +214,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function directiveIs(bool $expected, string $string, string $directive): void
     {
-        static::assertSame($expected, RstParser::directiveIs(new Line($string), $directive));
+        self::assertSame($expected, RstParser::directiveIs(new Line($string), $directive));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string, 2: string}>
      */
-    public function directiveIsProvider(): \Generator
+    public static function directiveIsProvider(): \Generator
     {
         yield [false, '.. note::', RstParser::DIRECTIVE_CODE_BLOCK];
         yield [true, '.. note::', RstParser::DIRECTIVE_NOTE];
@@ -240,13 +240,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function codeBlockDirectiveIsTypeOf(bool $expected, string $string, string $type, bool $strict = false): void
     {
-        static::assertSame($expected, RstParser::codeBlockDirectiveIsTypeOf(new Line($string), $type, $strict));
+        self::assertSame($expected, RstParser::codeBlockDirectiveIsTypeOf(new Line($string), $type, $strict));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string, 2: string}>
      */
-    public function codeBlockDirectiveIsTypeOfProvider(): \Generator
+    public static function codeBlockDirectiveIsTypeOfProvider(): \Generator
     {
         yield [false, '.. note::', RstParser::CODE_BLOCK_PHP];
         yield [true, 'the following code is php::', RstParser::CODE_BLOCK_PHP];
@@ -275,13 +275,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isOption(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isOption(new Line($string)));
+        self::assertSame($expected, RstParser::isOption(new Line($string)));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isOptionProvider(): \Generator
+    public static function isOptionProvider(): \Generator
     {
         yield [true, ':lineos:'];
         yield [true, ' :lineos: '];
@@ -302,13 +302,13 @@ final class RstParserTest extends \App\Tests\UnitTestCase
      */
     public function isAnchor(bool $expected, string $string): void
     {
-        static::assertSame($expected, RstParser::isAnchor(new Line($string)));
+        self::assertSame($expected, RstParser::isAnchor(new Line($string)));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isAnchorProvider(): \Generator
+    public static function isAnchorProvider(): \Generator
     {
         yield [true, '.. _env-var-processors:'];
 

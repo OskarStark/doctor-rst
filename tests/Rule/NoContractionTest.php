@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,30 +29,33 @@ final class NoContractionTest extends \App\Tests\UnitTestCase
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];
+
         foreach (NoContraction::getList() as $search => $message) {
             $configuredRules[] = (new NoContraction())->configure($search, $message);
         }
 
         $violations = [];
+
         foreach ($configuredRules as $rule) {
             $violation = $rule->check($sample->lines(), $sample->lineNumber(), 'filename');
+
             if (!$violation->isNull()) {
                 $violations[] = $violation;
             }
         }
 
         if ($expected->isNull()) {
-            static::assertCount(0, $violations);
+            self::assertCount(0, $violations);
         } else {
-            static::assertCount(1, $violations);
-            static::assertEquals($expected, $violations[0]);
+            self::assertCount(1, $violations);
+            self::assertEquals($expected, $violations[0]);
         }
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         $valids = [
             // am
@@ -176,7 +179,7 @@ final class NoContractionTest extends \App\Tests\UnitTestCase
                     sprintf('Please do not use contraction for: %s', $matched ?? $invalid),
                     'filename',
                     1,
-                    trim($invalid)
+                    trim($invalid),
                 ),
                 new RstSample($invalid),
             ];
@@ -185,12 +188,12 @@ final class NoContractionTest extends \App\Tests\UnitTestCase
 
             if ($invalidUppercase !== $invalid) {
                 yield $invalidUppercase => [
-                Violation::from(
-                    sprintf('Please do not use contraction for: %s', $matched ?? $invalidUppercase),
-                    'filename',
-                    1,
-                    $invalidUppercase
-                ),
+                    Violation::from(
+                        sprintf('Please do not use contraction for: %s', $matched ?? $invalidUppercase),
+                        'filename',
+                        1,
+                        $invalidUppercase,
+                    ),
                     new RstSample($invalidUppercase),
                 ];
             }

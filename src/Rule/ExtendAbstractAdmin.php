@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -40,7 +40,7 @@ class ExtendAbstractAdmin extends AbstractRule implements LineContentRule
                 'Please extend AbstractAdmin instead of Admin',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 
@@ -49,7 +49,7 @@ class ExtendAbstractAdmin extends AbstractRule implements LineContentRule
                 'Please use "Sonata\AdminBundle\Admin\AbstractAdmin" instead of "Sonata\AdminBundle\Admin\Admin"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

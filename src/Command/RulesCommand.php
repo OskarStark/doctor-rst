@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -30,7 +30,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class RulesCommand extends Command
 {
     protected static $defaultName = 'rules';
-
     private SymfonyStyle $io;
     private Registry $registry;
     private Reader $annotationReader;
@@ -46,8 +45,7 @@ class RulesCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('List available rules')
-        ;
+            ->setDescription('List available rules');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -70,7 +68,7 @@ class RulesCommand extends Command
                 '* [%s](#%s)%s',
                 $rule::getName()->toString(),
                 $rule::getName()->toString(),
-                $rule::isExperimental() ? ' :exclamation:' : ''
+                $rule::isExperimental() ? ' :exclamation:' : '',
             ));
         }
 
@@ -85,8 +83,8 @@ class RulesCommand extends Command
     {
         /** @var RuleAnnotation\Description $description */
         $description = $this->annotationReader->getClassAnnotation(
-            new \ReflectionClass(\get_class($rule)),
-            RuleAnnotation\Description::class
+            new \ReflectionClass($rule::class),
+            RuleAnnotation\Description::class,
         );
 
         $this->io->writeln(sprintf('## `%s`', $rule::getName()->toString()));
@@ -95,7 +93,7 @@ class RulesCommand extends Command
         if (null !== $description) {
             $this->io->writeln(sprintf(
                 '  > _%s_',
-                $description->value
+                $description->value,
             ));
             $this->io->newLine();
         }
@@ -120,11 +118,13 @@ class RulesCommand extends Command
 
             $resolver = $rule->configureOptions(new OptionsResolver());
             $introspector = new OptionsResolverIntrospector($resolver);
+
             foreach ($resolver->getDefinedOptions() as $option) {
                 $required = false;
                 $default = null;
 
                 $allowedTypes = $introspector->getAllowedTypes($option);
+
                 if ($resolver->isRequired($option)) {
                     $required = true;
 
@@ -164,7 +164,7 @@ class RulesCommand extends Command
                             sprintf('`%s`', $option['name']),
                             sprintf('`%s`', $option['required'] ? 'true' : 'false'),
                             sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
-                            $default
+                            $default,
                         ));
                     }
                 } else {
@@ -190,6 +190,7 @@ class RulesCommand extends Command
             $this->io->newLine();
             $this->io->writeln('Pattern | Message');
             $this->io->writeln('--- | ---');
+
             foreach ($rule::getList() as $pattern => $message) {
                 $this->io->writeln(sprintf('`%s` | %s', str_replace('|', '\|', $pattern), $message ?: $rule->getDefaultMessage()));
             }
@@ -198,14 +199,14 @@ class RulesCommand extends Command
 
         /** @var RuleAnnotation\ValidExample $validExample */
         $validExample = $this->annotationReader->getClassAnnotation(
-            new \ReflectionClass(\get_class($rule)),
-            RuleAnnotation\ValidExample::class
+            new \ReflectionClass($rule::class),
+            RuleAnnotation\ValidExample::class,
         );
 
         /** @var RuleAnnotation\InvalidExample $invalidExample */
         $invalidExample = $this->annotationReader->getClassAnnotation(
-            new \ReflectionClass(\get_class($rule)),
-            RuleAnnotation\InvalidExample::class
+            new \ReflectionClass($rule::class),
+            RuleAnnotation\InvalidExample::class,
         );
 
         if (null !== $validExample) {

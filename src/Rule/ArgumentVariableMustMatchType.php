@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -25,11 +25,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @Description("Make sure argument variable name match for type")
  */
-class ArgumentVariableMustMatchType extends AbstractRule implements LineContentRule, Configurable
+class ArgumentVariableMustMatchType extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;
 
-    /** @var array<array{type: string, name: string}> */
+    /**
+     * @var array<array{type: string, name: string}>
+     */
     private array $arguments;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
@@ -37,7 +39,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
         $resolver
             ->setRequired('arguments')
             ->setAllowedTypes('arguments', 'array')
-            ->setDefault('arguments', function (OptionsResolver $connResolver): void {
+            ->setDefault('arguments', static function (OptionsResolver $connResolver): void {
                 $connResolver
                     ->setPrototype(true)
                     ->setRequired(['type', 'name']);
@@ -76,7 +78,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
             $regex = sprintf(
                 '/%s \$(?!%s)(?<actualName>[a-z-A-Z\$]+)/',
                 $argument['type'],
-                $argument['name']
+                $argument['name'],
             );
             $match = $line->clean()->match($regex);
 
@@ -84,12 +86,13 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
                 $messageParts[] = sprintf(
                     'Please rename "$%s" to "$%s"',
                     $match['actualName'],
-                    $argument['name']
+                    $argument['name'],
                 );
             }
         }
 
         $message = $messageParts ? implode('. ', $messageParts) : null;
+
         if (null === $message) {
             return NullViolation::create();
         }
@@ -98,7 +101,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements LineContentR
             $message,
             $filename,
             $number + 1,
-            $line
+            $line,
         );
     }
 }

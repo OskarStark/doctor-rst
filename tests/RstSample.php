@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -21,12 +21,12 @@ final class RstSample
     private Lines $lines;
 
     /**
-     * @param string|array<string> $content
+     * @param array<string>|string $content
      */
     public function __construct($content, int $lineNumber = 0)
     {
         if (!\is_array($content)) {
-            $content = explode(PHP_EOL, $content);
+            $content = explode(\PHP_EOL, $content);
         }
 
         $this->lines = Lines::fromArray($content);

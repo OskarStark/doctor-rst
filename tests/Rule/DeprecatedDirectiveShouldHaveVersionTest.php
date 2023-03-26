@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,17 +29,17 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTest
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
             (new DeprecatedDirectiveShouldHaveVersion(new VersionParser()))
-                ->check($sample->lines(), $sample->lineNumber(), 'filename')
+                ->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -62,7 +62,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTest
                 'Please provide a version behind ".. deprecated::"',
                 'filename',
                 1,
-                '.. deprecated::'
+                '.. deprecated::',
             ),
             new RstSample('.. deprecated::'),
         ];
@@ -71,7 +71,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTest
                 'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
                 'filename',
                 1,
-                '.. deprecated:: foo'
+                '.. deprecated:: foo',
             ),
             new RstSample('.. deprecated:: foo'),
         ];

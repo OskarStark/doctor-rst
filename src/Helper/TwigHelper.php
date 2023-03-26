@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -17,7 +17,7 @@ use App\Value\Line;
 
 final class TwigHelper
 {
-    public static function isComment(Line $line, bool $closed = null): bool
+    public static function isComment(Line $line, ?bool $closed = null): bool
     {
         $string = $line->clean();
 
@@ -33,7 +33,6 @@ final class TwigHelper
             && (
                 ($closed && $string->endsWith('#}'))
                 || (!$closed && !$string->endsWith('#}'))
-            )
-        ;
+            );
     }
 }

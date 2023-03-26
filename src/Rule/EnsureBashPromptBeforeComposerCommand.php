@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -69,7 +69,7 @@ class EnsureBashPromptBeforeComposerCommand extends AbstractRule implements Line
             'Please add a bash prompt "$" before composer command',
             $filename,
             $number + 1,
-            $line
+            $line,
         );
     }
 }

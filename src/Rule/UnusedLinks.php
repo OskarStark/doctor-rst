@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,10 +29,14 @@ use Symfony\Contracts\Service\ResetInterface;
  */
 class UnusedLinks extends AbstractRule implements FileContentRule, ResetInterface
 {
-    /** @var LinkUsage[] */
+    /**
+     * @var LinkUsage[]
+     */
     private array $linkUsages = [];
 
-    /** @var LinkDefinition[] */
+    /**
+     * @var LinkDefinition[]
+     */
     private array $linkDefinitions = [];
 
     public static function getGroups(): array
@@ -52,6 +56,7 @@ class UnusedLinks extends AbstractRule implements FileContentRule, ResetInterfac
             }
 
             preg_match_all('/(?:`[^`]+`|(?:(?!_)\w)+(?:[-._+:](?:(?!_)\w)+)*+)_/', $lines->current()->raw()->toString(), $matches);
+
             if (!empty($matches[0])) {
                 foreach ($matches[0] as $match) {
                     if (RstParser::isLinkUsage($match)) {
@@ -73,14 +78,14 @@ class UnusedLinks extends AbstractRule implements FileContentRule, ResetInterfac
         if (!empty($this->linkDefinitions)) {
             $message = sprintf(
                 'The following link definitions aren\'t used anymore and should be removed: "%s"',
-                implode('", "', array_unique(array_keys($this->linkDefinitions)))
+                implode('", "', array_unique(array_keys($this->linkDefinitions))),
             );
 
             return Violation::from(
                 $message,
                 $filename,
                 1,
-                ''
+                '',
             );
         }
 

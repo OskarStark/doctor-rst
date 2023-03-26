@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -26,16 +26,16 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
      */
     public function isComment(bool $expected, string $line): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            PhpHelper::isComment(new Line($line))
+            PhpHelper::isComment(new Line($line)),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isCommentProvider(): \Generator
+    public static function isCommentProvider(): \Generator
     {
         yield [true, '# comment'];
         yield [true, '// comment'];
@@ -49,13 +49,13 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
      */
     public function containsBackslash(bool $expected, string $string): void
     {
-        static::assertSame($expected, PhpHelper::containsBackslash($string));
+        self::assertSame($expected, PhpHelper::containsBackslash($string));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function containsBackslashProvider(): \Generator
+    public static function containsBackslashProvider(): \Generator
     {
         yield 'one backslash at the beginning' => [true, '\Test'];
         yield 'one backslash at the end' => [true, 'Test\\'];
@@ -72,13 +72,13 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
      */
     public function isUsingTwoBackslashes(bool $expected, string $string): void
     {
-        static::assertSame($expected, PhpHelper::isUsingTwoBackslashes($string));
+        self::assertSame($expected, PhpHelper::isUsingTwoBackslashes($string));
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isUsingTwoBackSlashesProvider(): \Generator
+    public static function isUsingTwoBackSlashesProvider(): \Generator
     {
         yield 'two backslashes + beginning' => [true, '\\\\Test\\\\Test'];
         yield 'two backslashes' => [true, 'Test\\\\Test'];
@@ -105,16 +105,16 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
      */
     public function isLastLineOfMultilineComment(bool $expected, string $line): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            PhpHelper::isLastLineOfMultilineComment(new Line($line))
+            PhpHelper::isLastLineOfMultilineComment(new Line($line)),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isLastLineOfMultilineCommentProvider(): \Generator
+    public static function isLastLineOfMultilineCommentProvider(): \Generator
     {
         yield [false, '/**'];
         yield [false, '* test'];
@@ -128,16 +128,16 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
      */
     public function isPartOfDocBlock(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            (new PhpHelper())->isPartOfDocBlock($sample->lines(), $sample->lineNumber())
+            (new PhpHelper())->isPartOfDocBlock($sample->lines(), $sample->lineNumber()),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public function isPartOfDocBlockProvider(): \Generator
+    public static function isPartOfDocBlockProvider(): \Generator
     {
         $valid = <<<'RST'
 class User
@@ -162,16 +162,16 @@ RST;
      */
     public function isPartOfMultilineComment(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            (new PhpHelper())->isPartOfMultilineComment($sample->lines(), $sample->lineNumber())
+            (new PhpHelper())->isPartOfMultilineComment($sample->lines(), $sample->lineNumber()),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public function isPartOfMultilineCommentProvider(): \Generator
+    public static function isPartOfMultilineCommentProvider(): \Generator
     {
         $valid = <<<'RST'
     /*
@@ -205,16 +205,16 @@ RST;
      */
     public function isFirstLineOfMultilineComment(bool $expected, string $line): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            PhpHelper::isFirstLineOfMultilineComment(new Line($line))
+            PhpHelper::isFirstLineOfMultilineComment(new Line($line)),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isFirstLineOfMultilineCommentProvider(): \Generator
+    public static function isFirstLineOfMultilineCommentProvider(): \Generator
     {
         yield [true, '/*'];
         yield [false, '/**'];
@@ -229,16 +229,16 @@ RST;
      */
     public function isFirstLineOfDocBlock(bool $expected, string $line): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            PhpHelper::isFirstLineOfDocBlock(new Line($line))
+            PhpHelper::isFirstLineOfDocBlock(new Line($line)),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isFirstLineOfDocBlockProvider(): \Generator
+    public static function isFirstLineOfDocBlockProvider(): \Generator
     {
         yield [true, '/**'];
         yield [false, '/*'];
@@ -253,16 +253,16 @@ RST;
      */
     public function isLastLineOfDocBlock(bool $expected, string $line): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            PhpHelper::isLastLineOfDocBlock(new Line($line))
+            PhpHelper::isLastLineOfDocBlock(new Line($line)),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isLastLineOfDocBlockProvider(): \Generator
+    public static function isLastLineOfDocBlockProvider(): \Generator
     {
         yield [false, '/**'];
         yield [false, '* test'];

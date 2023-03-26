@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -25,16 +25,16 @@ final class YamlHelperTest extends \App\Tests\UnitTestCase
      */
     public function isComment(bool $expected, string $line): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            YamlHelper::isComment(new Line($line))
+            YamlHelper::isComment(new Line($line)),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public function isCommentProvider(): \Generator
+    public static function isCommentProvider(): \Generator
     {
         yield [true, '# comment'];
         yield [false, 'no comment'];

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new KernelInsteadOfAppKernel())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new KernelInsteadOfAppKernel())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -42,7 +42,7 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
                     'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
                     'filename',
                     1,
-                    'register the bundle in app/AppKernel.php'
+                    'register the bundle in app/AppKernel.php',
                 ),
                 new RstSample('register the bundle in app/AppKernel.php'),
             ],
@@ -51,7 +51,7 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
                     'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
                     'filename',
                     1,
-                    'register the bundle in app/AppKernel.php'
+                    'register the bundle in app/AppKernel.php',
                 ),
                 new RstSample('    register the bundle in app/AppKernel.php'),
             ],
@@ -64,7 +64,7 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
                     'Please use "Kernel" instead of "AppKernel"',
                     'filename',
                     1,
-                    'register the bundle via AppKernel'
+                    'register the bundle via AppKernel',
                 ),
                 new RstSample('register the bundle via AppKernel'),
             ],
@@ -73,7 +73,7 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
                     'Please use "Kernel" instead of "AppKernel"',
                     'filename',
                     1,
-                    'register the bundle via AppKernel'
+                    'register the bundle via AppKernel',
                 ),
                 new RstSample('    register the bundle via AppKernel'),
             ],

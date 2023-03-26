@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -31,16 +31,16 @@ final class IndentionTest extends \App\Tests\UnitTestCase
         $rule = (new Indention());
         $rule->setOptions(['size' => $size]);
 
-        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [NullViolation::create(), 4, new RstSample('')];
         yield [
             NullViolation::create(),
             4,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 Headline
 
     Content
@@ -51,7 +51,7 @@ RST
         yield [
             NullViolation::create(),
             4,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 Headline
 Content
 RST
@@ -61,7 +61,7 @@ RST
         yield [
             NullViolation::create(),
             4,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 Headline
 
 RST
@@ -73,10 +73,10 @@ RST
                 'Please add 4 spaces for every indention.',
                 'filename',
                 3,
-                'Content'
+                'Content',
             ),
             4,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 Headline
 ========
   Content
@@ -89,10 +89,10 @@ RST
                 'Please add 4 spaces for every indention.',
                 'filename',
                 4,
-                'Content'
+                'Content',
             ),
             4,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 Headline
 ========
 
@@ -104,7 +104,7 @@ RST
         yield [
             NullViolation::create(),
             4,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 .. index::
    single: Cache
 
@@ -151,7 +151,7 @@ RST;
                 'Please fix the indention of the PHP DocBlock.',
                 'filename',
                 6,
-                '* @Assert\NotBlank'
+                '* @Assert\NotBlank',
             ),
             4,
             new RstSample(<<<'RST'
@@ -227,7 +227,8 @@ RST
         yield 'list item (#) first line' => [
             NullViolation::create(),
             4,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
 #. At the beginning of the request, the Firewall checks the firewall map
    to see if any firewall should be active for this URL;
 RST
@@ -247,7 +248,8 @@ RST
         yield 'list item (*) first line' => [
             NullViolation::create(),
             4,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
 * At the beginning of the request, the Firewall checks the firewall map
   to see if any firewall should be active for this URL;
 RST
@@ -267,7 +269,8 @@ RST
         yield 'comment (rst) first line' => [
             NullViolation::create(),
             4,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
 .. I am a comment
    and have a second line.
 RST
@@ -287,7 +290,8 @@ RST
         yield 'special char "├─"' => [
             NullViolation::create(),
             4,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
   ├─ app.php
 RST
             ),
@@ -296,7 +300,8 @@ RST
         yield 'special char "└─"' => [
             NullViolation::create(),
             4,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
   └─ ...
 RST
             ),
@@ -370,17 +375,18 @@ RST
      */
     public function isPartOfMultilineXmlComment(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            (new Indention())->isPartOrMultilineXmlComment($sample->lines(), $sample->lineNumber())
+            (new Indention())->isPartOrMultilineXmlComment($sample->lines(), $sample->lineNumber()),
         );
     }
 
-    public function multilineXmlProvider(): \Generator
+    public static function multilineXmlProvider(): \Generator
     {
         yield [
             true,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
 <!-- appends the '@app.username_checker' argument to the parent
      argument list -->
 RST
@@ -398,7 +404,8 @@ RST
 
         yield [
             false,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
 <!-- appends the '@app.username_checker' argument to the parent -->
 RST
             ),
@@ -410,7 +417,7 @@ RST
 <!-- call a method on the specified factory service -->
 <factory service="AppBundle\Email\NewsletterManagerFactory"
     method="createNewsletterManager"
-/>        
+/>
 RST
                 , 2),
         ];
@@ -427,7 +434,7 @@ RST
     <monolog:excluded-404>^/</monolog:excluded-404>
     -->
     <monolog:handler
-        name="main"      
+        name="main"
 RST
                 , 9),
         ];
@@ -442,17 +449,18 @@ RST
      */
     public function isPartOfMultilineTwigComment(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            (new Indention())->isPartOrMultilineTwigComment($sample->lines(), $sample->lineNumber())
+            (new Indention())->isPartOrMultilineTwigComment($sample->lines(), $sample->lineNumber()),
         );
     }
 
-    public function multilineTwigProvider(): \Generator
+    public static function multilineTwigProvider(): \Generator
     {
         yield [
             true,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
 {# appends the '@app.username_checker' argument to the parent
    argument list #}
 RST
@@ -470,7 +478,8 @@ RST
 
         yield [
             false,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
 {# appends the '@app.username_checker' argument to the parent #}
 RST
             ),

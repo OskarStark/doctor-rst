@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -62,7 +62,7 @@ class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Line
                 sprintf('Please add a blank line after "%s"', $match),
                 $filename,
                 $number + 1,
-                $match
+                $match,
             );
         }
 

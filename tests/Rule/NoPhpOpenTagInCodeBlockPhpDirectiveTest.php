@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestC
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoPhpOpenTagInCodeBlockPhpDirective())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoPhpOpenTagInCodeBlockPhpDirective())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield sprintf('Has violation for code-block "%s"', $codeBlock) => [
@@ -42,7 +42,7 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestC
                     sprintf('Please remove PHP open tag after "%s" directive', $codeBlock),
                     'filename',
                     1,
-                    $codeBlock
+                    $codeBlock,
                 ),
                 new RstSample([
                     $codeBlock,
@@ -56,7 +56,7 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestC
                     sprintf('Please remove PHP open tag after "%s" directive', $codeBlock),
                     'filename',
                     1,
-                    $codeBlock
+                    $codeBlock,
                 ),
                 new RstSample([
                     $codeBlock,

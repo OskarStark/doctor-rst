@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,23 +28,23 @@ final class SpaceBetweenLabelAndLinkInRefTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new SpaceBetweenLabelAndLinkInRef())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new SpaceBetweenLabelAndLinkInRef())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [
             Violation::from(
                 'Please add a space between "receiving them via a worker" and "<messenger-worker>" inside :ref: directive',
                 'filename',
                 1,
-                ':ref:`receiving them via a worker<messenger-worker>`'
+                ':ref:`receiving them via a worker<messenger-worker>`',
             ),
             new RstSample(':ref:`receiving them via a worker<messenger-worker>`'),
         ];

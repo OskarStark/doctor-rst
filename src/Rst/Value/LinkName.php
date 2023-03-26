@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -15,8 +15,7 @@ namespace App\Rst\Value;
 
 final class LinkName
 {
-    /** @var string */
-    private $value;
+    private string $value;
 
     private function __construct(string $value)
     {

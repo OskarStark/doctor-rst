@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -57,14 +57,14 @@ class NoDirectiveAfterShorthand extends AbstractRule implements LineContentRule
         $message = sprintf(
             'A "%s" directive is following a shorthand notation "%s", this will lead to a broken markup!',
             $line->clean()->toString(),
-            RstParser::SHORTHAND
+            RstParser::SHORTHAND,
         );
 
         return Violation::from(
             $message,
             $filename,
             $number + 1,
-            $line
+            $line,
         );
     }
 }

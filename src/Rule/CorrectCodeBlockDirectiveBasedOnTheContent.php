@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -46,7 +46,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
             $lines->next();
 
             while ($lines->valid()
-                && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
+                && ($lines->current()->indention() > $indention || $lines->current()->isBlank())
             ) {
                 if (preg_match('/[<]+/', $lines->current()->clean()->toString(), $matches)
                     && !preg_match('/<3/', $lines->current()->clean()->toString())
@@ -55,7 +55,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                         $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG),
                         $filename,
                         $number + 1,
-                        $line
+                        $line,
                     );
                 }
 
@@ -70,7 +70,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
             $foundHtml = false;
 
             while ($lines->valid()
-                && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
+                && ($lines->current()->indention() > $indention || $lines->current()->isBlank())
                 && false === $foundHtml
             ) {
                 if (preg_match('/[<]+/', $lines->current()->clean()->toString())) {
@@ -85,7 +85,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                     $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG),
                     $filename,
                     $number + 1,
-                    $line
+                    $line,
                 );
             }
         }

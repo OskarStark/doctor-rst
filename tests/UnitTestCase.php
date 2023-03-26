@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -21,7 +21,7 @@ abstract class UnitTestCase extends TestCase
     /**
      * @return string[]
      */
-    public static function phpCodeBlocks(): array
+    final public static function phpCodeBlocks(): array
     {
         $codeBlocks = [
             RstParser::CODE_BLOCK_PHP,

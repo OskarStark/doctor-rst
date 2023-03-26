@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -59,7 +59,7 @@ class NoBashPrompt extends AbstractRule implements LineContentRule
                 'Please remove the "$" prefix in .. code-block:: directive',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

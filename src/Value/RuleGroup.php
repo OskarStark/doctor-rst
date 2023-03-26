@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -20,13 +20,11 @@ final class RuleGroup
     private const GROUP_EXPERIMENTAL = '@Experimental';
     private const GROUP_SONATA = '@Sonata';
     private const GROUP_SYMFONY = '@Symfony';
-
     private const ALLOWED_GROUPS = [
         self::GROUP_EXPERIMENTAL,
         self::GROUP_SONATA,
         self::GROUP_SYMFONY,
     ];
-
     private string $name;
 
     private function __construct(string $name)
@@ -62,7 +60,7 @@ final class RuleGroup
 
     public function equals(self $other): bool
     {
-        return $this->name === $other->name();
+        return $other->name() === $this->name;
     }
 
     public function name(): string

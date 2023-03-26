@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -18,11 +18,16 @@ use App\Value\Violation;
 
 final class FileCache implements Cache
 {
-    /** @var array<string, array> */
+    /**
+     * @var array<string, array>
+     */
     private array $cache;
     private string $cacheFile;
     private bool $loaded = false;
-    /** @var array<string, bool> */
+
+    /**
+     * @var array<string, bool>
+     */
     private array $parsedFiles = [];
 
     public function __construct(string $cacheFile)
@@ -36,13 +41,14 @@ final class FileCache implements Cache
         $this->load();
 
         $pathname = $file->getPathname();
+
         if (!isset($this->cache[$pathname])) {
             return false;
         }
 
         if (
-            $this->hashRules($rules) !== $this->cache[$pathname]['rules'] ||
-            sha1_file($pathname) !== $this->cache[$pathname]['hash']
+            $this->hashRules($rules) !== $this->cache[$pathname]['rules']
+            || sha1_file($pathname) !== $this->cache[$pathname]['hash']
         ) {
             unset($this->cache[$pathname]);
 
@@ -121,8 +127,8 @@ final class FileCache implements Cache
                 [
                     'version' => Application::VERSION,
                     'payload' => $cache,
-                ]
-            )
+                ],
+            ),
         );
     }
 

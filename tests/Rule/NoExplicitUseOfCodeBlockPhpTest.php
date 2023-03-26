@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,16 +29,16 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -50,7 +50,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
                 1,
-                '.. code-block:: php'
+                '.. code-block:: php',
             ),
             new RstSample('.. code-block:: php'),
         ];
@@ -64,7 +64,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
                 1,
-                '.. code-block:: php'
+                '.. code-block:: php',
             ),
             new RstSample('    .. code-block:: php'),
         ];
@@ -74,7 +74,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
                 3,
-                '.. code-block:: php'
+                '.. code-block:: php',
             ),
             new RstSample([
                 'Welcome to our tutorial!',
@@ -125,7 +125,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<int|string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function realSymfonyFileProvider(): \Generator
+    public static function realSymfonyFileProvider(): \Generator
     {
         $content = <<<'RST'
 .. configuration-block::
@@ -282,10 +282,10 @@ Test
 .. configuration-block::
 
     .. code-block:: php
-    
+
         // src/AppBundle/Entity/Company.php
         namespace AppBundle\Entity;
-    
+
         class Company
         {
             private $name;
@@ -295,7 +295,7 @@ Test
 
         // src/AppBundle/Entity/Customer.php
         namespace AppBundle\Entity;
-    
+
         class Customer
         {
             private $firstName;
@@ -432,7 +432,7 @@ RST;
                 '.. code-block:: php',
             ),
             new RstSample(
-                <<<RST
+                <<<'RST'
 .. configuration-block::
 
     .. code-block:: yaml
@@ -451,7 +451,9 @@ RST;
 
         echo 'foo';
 
-RST, 14),
+RST,
+                14,
+            ),
         ];
 
         yield [
@@ -508,7 +510,7 @@ RST, 14),
                 'Please do not use ".. code-block:: php", use "::" instead.',
                 'filename',
                 19,
-                '.. code-block:: php'
+                '.. code-block:: php',
             ),
             new RstSample(
                 <<<'RST'
@@ -545,12 +547,14 @@ You can specify the placeholder values as follows:
 The ``label_translation_parameters`` option of buttons is merged with the same
 option of its parents, so buttons can reuse and/or override any of the parent
 placeholders.
-RST, 18),
+RST,
+                18,
+            ),
         ];
 
         yield 'valid because previous paragraph ends with question mark (?)' => [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 This is nice PHP code, isn't it?
 
 .. code-block:: php
@@ -562,11 +566,11 @@ RST
 
         yield 'php code block following a configuration-block' => [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 .. configuration-block::
 
     .. code-block:: xml
-    
+
         content1
 
 .. code-block:: php
@@ -593,7 +597,7 @@ RST
 
         yield 'php code block unsing an option' => [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 .. code-block:: php
    :lineos:
 
@@ -605,10 +609,10 @@ RST
         foreach (NoExplicitUseOfCodeBlockPhp::ALLOWED_PREVIOUS_DIRECTIVES as $previousDirective) {
             yield sprintf(
                 'php code block following %s',
-                $previousDirective
+                $previousDirective,
             ) => [
                 NullViolation::create(),
-                new RstSample(sprintf(<<<RST
+                new RstSample(sprintf(<<<'RST'
 %s
 
     Here is text.

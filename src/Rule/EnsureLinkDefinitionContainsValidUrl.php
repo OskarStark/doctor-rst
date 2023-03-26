@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -58,7 +58,7 @@ class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineC
 
         if (\is_array($parsed)
             && isset($parsed['scheme'])
-            && \in_array($parsed['scheme'], ['http', 'https'])
+            && \in_array($parsed['scheme'], ['http', 'https'], true)
             && isset($parsed['host'])
         ) {
             return NullViolation::create();
@@ -66,14 +66,14 @@ class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineC
 
         $message = sprintf(
             'Invalid url in "%s"',
-            $line->clean()->toString()
+            $line->clean()->toString(),
         );
 
         return Violation::from(
             $message,
             $filename,
             $number + 1,
-            $line
+            $line,
         );
     }
 }

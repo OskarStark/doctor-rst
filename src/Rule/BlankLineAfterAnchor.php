@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -59,14 +59,14 @@ class BlankLineAfterAnchor extends AbstractRule implements LineContentRule
 
         $message = sprintf(
             'Please add a blank line after the anchor "%s"',
-            $line->clean()->toString()
+            $line->clean()->toString(),
         );
 
         return Violation::from(
             $message,
             $filename,
             $number + 1,
-            $line
+            $line,
         );
     }
 }

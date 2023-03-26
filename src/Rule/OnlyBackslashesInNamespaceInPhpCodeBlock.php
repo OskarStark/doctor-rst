@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -54,14 +54,14 @@ class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements L
         ) {
             $message = sprintf(
                 'Please check "%s", it should not contain "/"',
-                $line->clean()->toString()
+                $line->clean()->toString(),
             );
 
             return Violation::from(
                 $message,
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

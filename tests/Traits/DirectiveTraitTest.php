@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -32,7 +32,7 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
      */
     public function methodExists(): void
     {
-        static::assertTrue(method_exists($this->traitWrapper, 'in'));
+        self::assertTrue(method_exists($this->traitWrapper, 'in'));
     }
 
     /**
@@ -42,18 +42,13 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
      */
     public function getDirectiveContent(DirectiveContent $expected, string $directive, RstSample $sample): void
     {
-        static::assertDirectiveContentEquals(
+        self::assertDirectiveContentEquals(
             $expected,
-            $this->traitWrapper->getDirectiveContent($directive, clone $sample->lines(), $sample->lineNumber())
+            $this->traitWrapper->getDirectiveContent($directive, clone $sample->lines(), $sample->lineNumber()),
         );
     }
 
-    private static function assertDirectiveContentEquals(DirectiveContent $expected, DirectiveContent $actual): void
-    {
-        static::assertSame($expected->raw, $actual->raw);
-    }
-
-    public function getDirectiveContentProvider(): \Generator
+    public static function getDirectiveContentProvider(): \Generator
     {
         yield [
             new DirectiveContent([
@@ -92,38 +87,38 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
             ], 4),
         ];
 
-//        yield [
-//            new DirectiveContent([
-//                '        .. code-block:: php',
-//                '',
-//                '            echo $foo;',
-//                '',
-//                '            echo $bar;',
-//                '',
-//                '        .. code-block:: xml',
-//                '',
-//                '            <foo>bar</foo>',
-//                '',
-//            ]),
-//            RstParser::DIRECTIVE_CODE_BLOCK,
-//            new RstSample([
-//                'Text',
-//                '',
-//                '    .. configuration-block::',
-//                '',
-//                '        .. code-block:: php',
-//                '',
-//                '            echo $foo;',
-//                '',
-//                '            echo $bar;',
-//                '',
-//                '        .. code-block:: xml',
-//                '',
-//                '            <foo>bar</foo>',
-//                '',
-//                'New paragraph...'
-//            ], 4),
-//        ];
+        //        yield [
+        //            new DirectiveContent([
+        //                '        .. code-block:: php',
+        //                '',
+        //                '            echo $foo;',
+        //                '',
+        //                '            echo $bar;',
+        //                '',
+        //                '        .. code-block:: xml',
+        //                '',
+        //                '            <foo>bar</foo>',
+        //                '',
+        //            ]),
+        //            RstParser::DIRECTIVE_CODE_BLOCK,
+        //            new RstSample([
+        //                'Text',
+        //                '',
+        //                '    .. configuration-block::',
+        //                '',
+        //                '        .. code-block:: php',
+        //                '',
+        //                '            echo $foo;',
+        //                '',
+        //                '            echo $bar;',
+        //                '',
+        //                '        .. code-block:: xml',
+        //                '',
+        //                '            <foo>bar</foo>',
+        //                '',
+        //                'New paragraph...'
+        //            ], 4),
+        //        ];
     }
 
     /**
@@ -133,13 +128,13 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
      */
     public function getLineNumberOfDirective(int $expected, string $directive, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $this->traitWrapper->getLineNumberOfDirective($directive, clone $sample->lines(), $sample->lineNumber())
+            $this->traitWrapper->getLineNumberOfDirective($directive, clone $sample->lines(), $sample->lineNumber()),
         );
     }
 
-    public function getLineNumberOfDirectiveProvider(): \Generator
+    public static function getLineNumberOfDirectiveProvider(): \Generator
     {
         yield [
             0,
@@ -187,13 +182,13 @@ MULTIPLE, 11),
      */
     public function inPhpCodeBlock(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $this->traitWrapper->inPhpCodeBlock(clone $sample->lines(), $sample->lineNumber())
+            $this->traitWrapper->inPhpCodeBlock(clone $sample->lines(), $sample->lineNumber()),
         );
     }
 
-    public function inPhpCodeBlockProvider(): \Generator
+    public static function inPhpCodeBlockProvider(): \Generator
     {
         yield [
             true,
@@ -225,13 +220,13 @@ MULTIPLE, 11),
      */
     public function inShellCodeBlock(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $this->traitWrapper->inShellCodeBlock(clone $sample->lines(), $sample->lineNumber())
+            $this->traitWrapper->inShellCodeBlock(clone $sample->lines(), $sample->lineNumber()),
         );
     }
 
-    public function inShellCodeBlockProvider(): \Generator
+    public static function inShellCodeBlockProvider(): \Generator
     {
         yield [
             false,
@@ -269,13 +264,13 @@ MULTIPLE, 11),
      */
     public function in(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $this->traitWrapper->in($directive, clone $sample->lines(), $sample->lineNumber(), $types)
+            $this->traitWrapper->in($directive, clone $sample->lines(), $sample->lineNumber(), $types),
         );
     }
 
-    public function inProvider(): \Generator
+    public static function inProvider(): \Generator
     {
         $no_code_block = <<<'RST'
 I am just a cool text!
@@ -315,7 +310,7 @@ RST;
 
         yield [
             false,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 
 .. _env-var-processors:
 
@@ -687,16 +682,16 @@ RST;
      */
     public function previousDirectiveIs(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $this->traitWrapper->previousDirectiveIs($directive, $sample->lines(), $sample->lineNumber(), $types)
+            $this->traitWrapper->previousDirectiveIs($directive, $sample->lines(), $sample->lineNumber(), $types),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public function previousDirectiveIsProvider(): \Generator
+    public static function previousDirectiveIsProvider(): \Generator
     {
         yield [
             false,
@@ -706,7 +701,7 @@ RST;
 
         yield [
             false,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 .. code-block:: php
 
     // I am just a cool text!
@@ -717,11 +712,11 @@ RST
 
         yield [
             true,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 .. code-block:: php
 
     // I am just a cool text!
-    
+
 .. code-block:: yaml
 RST
                 , 4),
@@ -731,11 +726,11 @@ RST
 
         yield [
             true,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 .. code-block:: php
 
     // I am just a cool text!
-    
+
 .. code-block:: yaml
 RST
                 , 4),
@@ -744,7 +739,7 @@ RST
 
         yield [
             true,
-            new RstSample(<<<RST
+            new RstSample(<<<'RST'
 .. configuration-block::
 
     .. code-block: yaml
@@ -756,5 +751,10 @@ RST
                 , 6),
             RstParser::DIRECTIVE_CONFIGURATION_BLOCK,
         ];
+    }
+
+    private static function assertDirectiveContentEquals(DirectiveContent $expected, DirectiveContent $actual): void
+    {
+        self::assertSame($expected->raw, $actual->raw);
     }
 }

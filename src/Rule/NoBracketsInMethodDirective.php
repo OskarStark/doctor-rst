@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -49,7 +49,7 @@ class NoBracketsInMethodDirective extends AbstractRule implements LineContentRul
                 'Please remove "()" inside :method: directive',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

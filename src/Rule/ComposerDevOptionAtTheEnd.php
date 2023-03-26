@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -46,7 +46,7 @@ class ComposerDevOptionAtTheEnd extends AbstractRule implements LineContentRule
                 'Please move "--dev" option to the end of the command',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

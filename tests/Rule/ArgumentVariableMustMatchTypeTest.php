@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -44,16 +44,16 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
             ],
         ]);
 
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber(), 'filename')
+            $rule->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
@@ -149,7 +149,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
     public function invalidOptionType(): void
     {
         $this->expectExceptionObject(
-            new InvalidOptionsException('The nested option "arguments" with value "foo" is expected to be of type array, but is of type "string".')
+            new InvalidOptionsException('The nested option "arguments" with value "foo" is expected to be of type array, but is of type "string".'),
         );
 
         $rule = new ArgumentVariableMustMatchType();
@@ -164,7 +164,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
     public function invalidOptionValue(): void
     {
         $this->expectExceptionObject(
-            new UndefinedOptionsException('The option "arguments[0][foo]" does not exist. Defined options are: "name", "type".')
+            new UndefinedOptionsException('The option "arguments[0][foo]" does not exist. Defined options are: "name", "type".'),
         );
 
         $rule = new ArgumentVariableMustMatchType();

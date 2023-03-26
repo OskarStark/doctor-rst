@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoAdminYaml())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoAdminYaml())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -42,7 +42,7 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
                     'Please use "services.yaml" instead of "admin.yml"',
                     'filename',
                     1,
-                    'register the admin class in admin.yml'
+                    'register the admin class in admin.yml',
                 ),
                 new RstSample('register the admin class in admin.yml'),
             ],
@@ -55,7 +55,7 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
                     'Please use "services.yaml" instead of "admin.yaml"',
                     'filename',
                     1,
-                    'register the admin class in admin.yaml'
+                    'register the admin class in admin.yaml',
                 ),
                 new RstSample('register the admin class in admin.yaml'),
             ],

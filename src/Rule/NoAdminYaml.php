@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -40,7 +40,7 @@ class NoAdminYaml extends AbstractRule implements LineContentRule
                 'Please use "services.yaml" instead of "admin.yml"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 
@@ -51,7 +51,7 @@ class NoAdminYaml extends AbstractRule implements LineContentRule
                 $message,
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

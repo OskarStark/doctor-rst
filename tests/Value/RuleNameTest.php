@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,9 +28,9 @@ final class RuleNameTest extends \App\Tests\UnitTestCase
         $value = self::faker()->word;
         $untrimmed = ' '.$value.' ';
 
-        static::assertSame(
+        self::assertSame(
             $value,
-            RuleName::fromString($untrimmed)->toString()
+            RuleName::fromString($untrimmed)->toString(),
         );
     }
 
@@ -41,9 +41,9 @@ final class RuleNameTest extends \App\Tests\UnitTestCase
     {
         $value = self::faker()->word;
 
-        static::assertSame(
+        self::assertSame(
             $value,
-            RuleName::fromString($value)->toString()
+            RuleName::fromString($value)->toString(),
         );
     }
 
@@ -52,9 +52,9 @@ final class RuleNameTest extends \App\Tests\UnitTestCase
      */
     public function fromClassStringTrimsValue(): void
     {
-        static::assertSame(
+        self::assertSame(
             'baz_rule',
-            RuleName::fromClassString(' Foo\Bar\BazRule ')->toString()
+            RuleName::fromClassString(' Foo\Bar\BazRule ')->toString(),
         );
     }
 
@@ -63,17 +63,17 @@ final class RuleNameTest extends \App\Tests\UnitTestCase
      */
     public function fromClassString(): void
     {
-        static::assertSame(
+        self::assertSame(
             'baz_rule',
-            RuleName::fromClassString('Foo\Bar\BazRule')->toString()
+            RuleName::fromClassString('Foo\Bar\BazRule')->toString(),
         );
     }
 
     /**
      * @test
      *
-     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::empty()
      * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::blank()
+     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::empty()
      */
     public function fromStringThrowsException(string $value): void
     {
@@ -85,8 +85,8 @@ final class RuleNameTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
-     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::empty()
      * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::blank()
+     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::empty()
      */
     public function fromClassStringThrowsException(string $value): void
     {

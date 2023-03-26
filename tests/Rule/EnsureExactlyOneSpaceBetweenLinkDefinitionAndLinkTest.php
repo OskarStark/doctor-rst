@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,21 +24,21 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function validProvider(): \Generator
+    public static function validProvider(): \Generator
     {
         $validCases = [
             '.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST',
@@ -57,7 +57,7 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function invalidProvider(): \Generator
+    public static function invalidProvider(): \Generator
     {
         $invalidCases = [
             '.. _DOCtor-RST:  https://github.com/OskarStark/DOCtor-RST',
@@ -71,7 +71,7 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
                     'Please use only one whitespace between the link definition and the link.',
                     'filename',
                     1,
-                    $invalidCase
+                    $invalidCase,
                 ),
                 new RstSample($invalidCase),
             ];

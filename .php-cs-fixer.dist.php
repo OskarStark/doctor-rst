@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use Ergebnis\PhpCsFixer;
+
 $header = <<<'HEADER'
 This file is part of DOCtor-RST.
 
@@ -9,34 +13,54 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 HEADER;
 
-$finder = (new PhpCsFixer\Finder())
-    ->in('src')
-    ->in('tests')
-    ->in('config')
-;
+$config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\Php82($header), [
+    'blank_line_before_statement' => [
+        'statements' => [
+            'break',
+            'continue',
+            'declare',
+            'default',
+            'do',
+            'exit',
+            'for',
+            'foreach',
+            'goto',
+            'if',
+            'include',
+            'include_once',
+            'require',
+            'require_once',
+            'return',
+            'switch',
+            'throw',
+            'try',
+            'while',
+        ],
+    ],
+    'concat_space' => [
+        'spacing' => 'none',
+    ],
+    'date_time_immutable' => false,
+    'error_suppression' => false,
+    'final_class' => false,
+    'mb_str_functions' => false,
+    'native_function_invocation' => [
+        'exclude' => [],
+        'include' => [
+            '@compiler_optimized',
+        ],
+        'scope' => 'all',
+        'strict' => false,
+    ],
+    'php_unit_internal_class' => false,
+    'php_unit_test_annotation' => [
+        'style' => 'annotation',
+    ],
+    'php_unit_test_class_requires_covers' => false,
+]);
 
-return (new PhpCsFixer\Config())
-    ->setRiskyAllowed(true)
-    ->setRules([
-        '@Symfony' => true,
-        'array_syntax' => ['syntax' => 'short'],
-        'declare_strict_types' => true,
-        'header_comment' => [
-            'header' => $header,
-        ],
-        'linebreak_after_opening_tag' => true,
-        'logical_operators' => true,
-        'native_function_invocation' => [
-            'include' => ['@compiler_optimized'],
-            'scope' => 'namespaced'
-        ],
-        'no_superfluous_phpdoc_tags' => true,
-        'no_unused_imports' => true,
-        'ordered_imports' => true,
-        'php_unit_construct' => true,
-        'php_unit_test_case_static_method_calls' => true,
-        'single_line_throw' => false,
-        'void_return' => true,
-    ])
-    ->setFinder($finder)
-;
+$config->getFinder()
+    ->in('src')
+    ->in('tests');
+
+return $config;

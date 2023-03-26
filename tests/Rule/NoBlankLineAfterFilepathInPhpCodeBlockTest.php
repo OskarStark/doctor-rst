@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTe
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
