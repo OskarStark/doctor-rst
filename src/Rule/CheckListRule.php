@@ -21,7 +21,7 @@ abstract class CheckListRule extends AbstractRule
     /**
      * @return static
      */
-    final public function configure(string $pattern, ?string $message): self
+    public function configure(string $pattern, ?string $message): self
     {
         $this->search = $pattern;
         $this->message = $message ?? static::getDefaultMessage();
@@ -29,7 +29,7 @@ abstract class CheckListRule extends AbstractRule
         return $this;
     }
 
-    final public static function getDefaultMessage(): string
+    public static function getDefaultMessage(): string
     {
         return 'Please don\'t use: %s';
     }

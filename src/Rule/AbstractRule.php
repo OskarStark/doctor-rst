@@ -18,7 +18,7 @@ use App\Value\RuleName;
 
 abstract class AbstractRule
 {
-    final public static function getName(): RuleName
+    public static function getName(): RuleName
     {
         return RuleName::fromClassString(static::class);
     }
@@ -26,17 +26,17 @@ abstract class AbstractRule
     /**
      * @return RuleGroup[]
      */
-    final public static function getGroups(): array
+    public static function getGroups(): array
     {
         return [];
     }
 
-    final public static function runOnlyOnBlankline(): bool
+    public static function runOnlyOnBlankline(): bool
     {
         return false;
     }
 
-    final public static function isExperimental(): bool
+    public static function isExperimental(): bool
     {
         foreach (static::getGroups() as $group) {
             if ($group->equals(RuleGroup::Experimental())) {
