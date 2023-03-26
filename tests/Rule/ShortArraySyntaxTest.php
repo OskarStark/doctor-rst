@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,16 +28,16 @@ final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new ShortArraySyntax())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new ShortArraySyntax())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -45,7 +45,7 @@ final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
                     'Please use short array syntax',
                     'filename',
                     1,
-                    "->add('foo', null, array('key' => 1));"
+                    "->add('foo', null, array('key' => 1));",
                 ),
                 new RstSample("->add('foo', null, array('key' => 1));"),
             ],
@@ -58,7 +58,7 @@ final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
                     'Please use short array syntax',
                     'filename',
                     1,
-                    'if (in_array(1, array())) {'
+                    'if (in_array(1, array())) {',
                 ),
                 new RstSample('if (in_array(1, array())) { '),
             ],
@@ -75,7 +75,7 @@ final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
                     'Please use short array syntax',
                     'filename',
                     1,
-                    "->add('tags', null, array('label' => 'les tags'), null, array('expanded' => true, 'multiple' => true));"
+                    "->add('tags', null, array('label' => 'les tags'), null, array('expanded' => true, 'multiple' => true));",
                 ),
                 new RstSample("->add('tags', null, array('label' => 'les tags'), null, array('expanded' => true, 'multiple' => true));"),
             ],
@@ -84,7 +84,7 @@ final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
                     'Please use short array syntax',
                     'filename',
                     1,
-                    "->assertLength(array('max' => 100))"
+                    "->assertLength(array('max' => 100))",
                 ),
                 new RstSample("->assertLength(array('max' => 100))"),
             ],

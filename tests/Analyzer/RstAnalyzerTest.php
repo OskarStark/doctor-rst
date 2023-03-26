@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -18,16 +18,19 @@ use App\Rule\MaxBlankLines;
 
 final class RstAnalyzerTest extends \App\Tests\UnitTestCase
 {
-    public function testOnlyOneMaxBlankLineViolationMessageOccurs(): void
+    /**
+     * @test
+     */
+    public function onlyOneMaxBlankLineViolationMessageOccurs(): void
     {
         $maxBlankLines = new MaxBlankLines();
         $maxBlankLines->setOptions(['max' => 3]);
 
         $violations = (new RstAnalyzer())->analyze(
             new \SplFileInfo(__DIR__.'/../Fixtures/max_blanklines.rst'),
-            [$maxBlankLines]
+            [$maxBlankLines],
         );
 
-        static::assertCount(1, $violations);
+        self::assertCount(1, $violations);
     }
 }

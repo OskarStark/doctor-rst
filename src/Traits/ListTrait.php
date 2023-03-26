@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -31,7 +31,8 @@ trait ListTrait
         $currentIndention = $lines->current()->indention();
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);
@@ -67,7 +68,8 @@ trait ListTrait
         $currentIndention = $lines->current()->indention();
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);
@@ -103,7 +105,8 @@ trait ListTrait
         $currentIndention = $lines->current()->indention();
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);
@@ -148,7 +151,8 @@ trait ListTrait
         $currentIndention = $lines->current()->indention();
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);

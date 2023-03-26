@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -31,10 +31,10 @@ final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
         $rule = (new MaxBlankLines());
         $rule->setOptions(['max' => $max]);
 
-        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [NullViolation::create(), 2, new RstSample('')];
         yield [NullViolation::create(), 2, new RstSample([
@@ -46,7 +46,7 @@ final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
                 'Please use max 2 blank lines, you used 3',
                 'filename',
                 1,
-                ''
+                '',
             ),
             2,
             new RstSample([
@@ -60,7 +60,7 @@ final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
                 'Please use max 1 blank lines, you used 2',
                 'filename',
                 1,
-                ''
+                '',
             ),
             1,
             new RstSample([
@@ -69,7 +69,7 @@ final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
             ]),
         ];
 
-        $invalid = <<<RST
+        $invalid = <<<'RST'
 Routing is a system for mapping the URL of incoming requests to the controller
 function that should be called to process the request. It both allows you
 to specify beautiful URLs and keeps the functionality of your application
@@ -92,7 +92,7 @@ RST;
                 'Please use max 2 blank lines, you used 3',
                 'filename',
                 9,
-                ''
+                '',
             ),
             2,
             new RstSample($invalid, 8),

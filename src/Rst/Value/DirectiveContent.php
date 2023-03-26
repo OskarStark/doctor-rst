@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -18,7 +18,7 @@ final class DirectiveContent
     public array $cleaned = [];
 
     public function __construct(
-        public readonly array $raw
+        public readonly array $raw,
     ) {
         $cleaned = [];
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class NoBlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitT
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoBlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [

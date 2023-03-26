@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -25,11 +25,11 @@ final class MemoizingAnalyzerTest extends \App\Tests\UnitTestCase
      * @var Analyzer|MockObject
      */
     private $analyzer;
+
     /**
      * @var Cache|MockObject
      */
     private $cache;
-
     private MemoizingAnalyzer $memoizingAnalyzer;
 
     protected function setUp(): void
@@ -39,7 +39,10 @@ final class MemoizingAnalyzerTest extends \App\Tests\UnitTestCase
         $this->memoizingAnalyzer = new MemoizingAnalyzer($this->analyzer, $this->cache);
     }
 
-    public function testCacheHitReturnsCacheContent(): void
+    /**
+     * @test
+     */
+    public function cacheHitReturnsCacheContent(): void
     {
         $fileInfo = new \SplFileInfo('test.rst');
         $rules = [
@@ -47,44 +50,47 @@ final class MemoizingAnalyzerTest extends \App\Tests\UnitTestCase
         ];
 
         $this->cache
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('has')
             ->with($fileInfo, $rules)
             ->willReturn(true);
 
         $this->cache
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('get')
             ->with($fileInfo, $rules)
             ->willReturn([]);
 
-        $this->analyzer->expects(static::never())->method('analyze');
+        $this->analyzer->expects(self::never())->method('analyze');
 
         $this->memoizingAnalyzer->analyze($fileInfo, $rules);
     }
 
-    public function testNoCacheHitCallsAnalyzerAndSavesResultsToCache(): void
+    /**
+     * @test
+     */
+    public function noCacheHitCallsAnalyzerAndSavesResultsToCache(): void
     {
         $fileInfo = new \SplFileInfo('test.rst');
         $rules = [
             new DummyRule(),
         ];
 
-        $this->cache->expects(static::never())->method('get');
+        $this->cache->expects(self::never())->method('get');
 
         $this->cache
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('has')
             ->with($fileInfo, $rules)
             ->willReturn(false);
 
         $this->cache
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('set')
             ->with($fileInfo, $rules, []);
 
         $this->analyzer
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('analyze')
             ->with($fileInfo, $rules)
             ->willReturn([]);

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new OnlyBackslashesInNamespaceInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new OnlyBackslashesInNamespaceInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [
@@ -42,7 +42,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
                     'Please check "namespace App/Handler;", it should not contain "/"',
                     'filename',
                     5,
-                    'namespace App/Handler;'
+                    'namespace App/Handler;',
                 ),
                 new RstSample([
                     $codeBlock,
@@ -58,7 +58,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
                     'Please check "NaMeSpaCe App/Handler;", it should not contain "/"',
                     'filename',
                     5,
-                    'NaMeSpaCe App/Handler;'
+                    'NaMeSpaCe App/Handler;',
                 ),
                 new RstSample([
                     $codeBlock,
@@ -75,7 +75,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
                 'Please check "namespace App/Handler;", it should not contain "/"',
                 'filename',
                 5,
-                'namespace App/Handler;'
+                'namespace App/Handler;',
             ),
             new RstSample([
                 '::',

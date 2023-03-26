@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -20,7 +20,7 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MaxBlankLines extends AbstractRule implements LineContentRule, Configurable
+class MaxBlankLines extends AbstractRule implements Configurable, LineContentRule
 {
     private int $max;
 
@@ -29,8 +29,7 @@ class MaxBlankLines extends AbstractRule implements LineContentRule, Configurabl
         $resolver
             ->setDefault('max', 2)
             ->setRequired('max')
-            ->setAllowedTypes('max', 'int')
-        ;
+            ->setAllowedTypes('max', 'int');
 
         return $resolver;
     }
@@ -81,7 +80,7 @@ class MaxBlankLines extends AbstractRule implements LineContentRule, Configurabl
                 sprintf('Please use max %s blank lines, you used %s', $this->max, $blanklines),
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

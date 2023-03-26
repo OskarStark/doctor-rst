@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -17,11 +17,14 @@ use App\Value\Lines;
 
 final class LinesTest extends \App\Tests\UnitTestCase
 {
-    public function testCurrentThrowsOutOfBoundsExceptionWhenLinesIsInvalid(): void
+    /**
+     * @test
+     */
+    public function currentThrowsOutOfBoundsExceptionWhenLinesIsInvalid(): void
     {
         $lines = Lines::fromArray([]);
 
-        static::assertFalse($lines->valid());
+        self::assertFalse($lines->valid());
 
         $this->expectException(\OutOfBoundsException::class);
         $this->expectExceptionMessage('Line "0" does not exists.');
@@ -29,11 +32,14 @@ final class LinesTest extends \App\Tests\UnitTestCase
         $lines->current();
     }
 
-    public function testKeyThrowsOutOfBoundsExceptionWhenLinesIsInvalid(): void
+    /**
+     * @test
+     */
+    public function keyThrowsOutOfBoundsExceptionWhenLinesIsInvalid(): void
     {
         $lines = Lines::fromArray([]);
 
-        static::assertFalse($lines->valid());
+        self::assertFalse($lines->valid());
 
         $this->expectException(\OutOfBoundsException::class);
         $this->expectExceptionMessage('Line "0" does not exists.');
@@ -41,7 +47,10 @@ final class LinesTest extends \App\Tests\UnitTestCase
         $lines->key();
     }
 
-    public function testSeekRestoresCurrentPositionWhenTheGivenPositionIsInvalid(): void
+    /**
+     * @test
+     */
+    public function seekRestoresCurrentPositionWhenTheGivenPositionIsInvalid(): void
     {
         $lines = Lines::fromArray([
             "hello\n",
@@ -51,13 +60,14 @@ final class LinesTest extends \App\Tests\UnitTestCase
         $lines->seek(1);
 
         $exception = null;
+
         try {
             $lines->seek(54);
         } catch (\OutOfBoundsException $exception) {
-            static::assertSame('Line "54" does not exists.', $exception->getMessage());
+            self::assertSame('Line "54" does not exists.', $exception->getMessage());
         }
 
-        static::assertNotNull($exception, sprintf('Expected "%s" exception to be thrown.', \OutOfBoundsException::class));
-        static::assertSame(1, $lines->key());
+        self::assertNotNull($exception, sprintf('Expected "%s" exception to be thrown.', \OutOfBoundsException::class));
+        self::assertSame(1, $lines->key());
     }
 }

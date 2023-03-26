@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -34,16 +34,16 @@ final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCas
             'major_version' => $majorVersion,
         ]);
 
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber(), 'filename')
+            $rule->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return array<array{0: ViolationInterface, 1: int, 2: RstSample}>
      */
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -76,7 +76,7 @@ final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCas
                     'You are not allowed to use version "2.7". Only major version "3" is allowed.',
                     'filename',
                     1,
-                    '.. versionadded:: 2.7'
+                    '.. versionadded:: 2.7',
                 ),
                 3,
                 new RstSample('.. versionadded:: 2.7'),
@@ -86,7 +86,7 @@ final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCas
                     'You are not allowed to use version "4.0". Only major version "3" is allowed.',
                     'filename',
                     1,
-                    '.. versionadded:: 4.0'
+                    '.. versionadded:: 4.0',
                 ),
                 3,
                 new RstSample('.. versionadded:: 4.0'),
@@ -96,7 +96,7 @@ final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCas
                     'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
                     'filename',
                     1,
-                    '.. versionadded:: foo'
+                    '.. versionadded:: foo',
                 ),
                 3,
                 new RstSample('.. versionadded:: foo'),

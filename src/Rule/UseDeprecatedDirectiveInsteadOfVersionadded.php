@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -44,14 +44,14 @@ class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implement
         $lines->next();
 
         while ($lines->valid()
-            && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
+            && ($lines->current()->indention() > $indention || $lines->current()->isBlank())
         ) {
             if ($lines->current()->raw()->match('/[^`]deprecated/')) {
                 return Violation::from(
                     'Please use ".. deprecated::" instead of ".. versionadded::"',
                     $filename,
                     $number + 1,
-                    $line
+                    $line,
                 );
             }
 

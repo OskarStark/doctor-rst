@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -27,8 +27,8 @@ final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
      */
     public function name(): void
     {
-        static::assertInstanceOf(RuleName::class, FinalAdminClasses::getName());
-        static::assertSame('final_admin_classes', FinalAdminClasses::getName()->toString());
+        self::assertInstanceOf(RuleName::class, FinalAdminClasses::getName());
+        self::assertSame('final_admin_classes', FinalAdminClasses::getName()->toString());
     }
 
     /**
@@ -38,16 +38,16 @@ final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new FinalAdminClasses())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new FinalAdminClasses())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -55,7 +55,7 @@ final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
                     'Please use "final" for Admin class',
                     'filename',
                     1,
-                    'class TestAdmin extends AbstractAdmin'
+                    'class TestAdmin extends AbstractAdmin',
                 ),
                 new RstSample('class TestAdmin extends AbstractAdmin'),
             ],
@@ -65,7 +65,7 @@ final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
                     'Please use "final" for Admin class',
                     'filename',
                     1,
-                    'class TestAdmin extends AbstractAdmin'
+                    'class TestAdmin extends AbstractAdmin',
                 ),
                 new RstSample('    class TestAdmin extends AbstractAdmin'),
             ],

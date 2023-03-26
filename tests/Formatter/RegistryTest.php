@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -19,7 +19,10 @@ use App\Formatter\Registry;
 
 final class RegistryTest extends \App\Tests\UnitTestCase
 {
-    public function testInvalidNameThrowsException(): void
+    /**
+     * @test
+     */
+    public function invalidNameThrowsException(): void
     {
         $this->expectException(FormatterNotFound::class);
         $this->expectExceptionMessage('Formatter "invalid" not found');
@@ -27,10 +30,13 @@ final class RegistryTest extends \App\Tests\UnitTestCase
         (new Registry(new ConsoleFormatter()))->get('invalid');
     }
 
-    public function testValidName(): void
+    /**
+     * @test
+     */
+    public function validName(): void
     {
         $formatter = new ConsoleFormatter();
 
-        static::assertSame($formatter, (new Registry($formatter))->get('console'));
+        self::assertSame($formatter, (new Registry($formatter))->get('console'));
     }
 }

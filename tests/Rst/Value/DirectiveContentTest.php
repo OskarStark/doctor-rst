@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -33,7 +33,7 @@ final class DirectiveContentTest extends \App\Tests\UnitTestCase
 
         $content = new DirectiveContent($raw);
 
-        static::assertSame($content->raw, $content->cleaned);
+        self::assertSame($content->raw, $content->cleaned);
     }
 
     /**
@@ -49,7 +49,7 @@ final class DirectiveContentTest extends \App\Tests\UnitTestCase
 
         $content = new DirectiveContent($raw);
 
-        static::assertSame(3, $content->numberOfLines());
+        self::assertSame(3, $content->numberOfLines());
     }
 
     /**
@@ -67,7 +67,7 @@ final class DirectiveContentTest extends \App\Tests\UnitTestCase
 
         $content = new DirectiveContent($raw);
 
-        static::assertSame(3, $content->numberOfLines());
+        self::assertSame(3, $content->numberOfLines());
     }
 
     /**
@@ -85,6 +85,6 @@ final class DirectiveContentTest extends \App\Tests\UnitTestCase
 
         $content = new DirectiveContent($raw);
 
-        static::assertSame(3, $content->numberOfLines());
+        self::assertSame(3, $content->numberOfLines());
     }
 }

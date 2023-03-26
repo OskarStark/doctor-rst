@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -15,7 +15,9 @@ namespace App\Value;
 
 final class AnalyzerResult
 {
-    /** @var FileResult[] */
+    /**
+     * @var FileResult[]
+     */
     private array $results;
     private array $whitelistConfig;
 
@@ -84,6 +86,7 @@ final class AnalyzerResult
             foreach ($fileResult->violationList()->getMatchedWhitelistRegex() as $pattern => $count) {
                 $allMatchedRegex[$pattern] = isset($allMatchedRegex[$pattern]) ? $count + $allMatchedRegex[$pattern] : $count;
             }
+
             foreach ($fileResult->violationList()->getMatchedWhitelistLines() as $line => $count) {
                 $allMatchedLines[$line] = isset($allMatchedLines[$line]) ? $count + $allMatchedLines[$line] : $count;
             }

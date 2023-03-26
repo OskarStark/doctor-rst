@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoPhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoPhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -42,7 +42,7 @@ final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
                     'Please remove "php" prefix before "bin/console"',
                     'filename',
                     1,
-                    'please execute php bin/console foo'
+                    'please execute php bin/console foo',
                 ),
                 new RstSample('please execute php bin/console foo'),
             ],

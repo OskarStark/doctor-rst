@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -31,10 +31,10 @@ final class LineLengthTest extends \App\Tests\UnitTestCase
         $rule = (new LineLength());
         $rule->setOptions(['max' => $max]);
 
-        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -42,7 +42,7 @@ final class LineLengthTest extends \App\Tests\UnitTestCase
                     'Line is to long (max 20) currently: 23',
                     'filename',
                     1,
-                    'This is a cool sentence'
+                    'This is a cool sentence',
                 ),
                 20,
                 new RstSample('This is a cool sentence'),

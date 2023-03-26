@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,46 +28,46 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends \App\Tests\Unit
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new TitleUnderlineLengthMustMatchTitleLength())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new TitleUnderlineLengthMustMatchTitleLength())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): \Generator
     {
-        return [
-            [
-                Violation::from(
-                    sprintf('Please ensure title "%s" and underline length are matching', 'Title with too short underline'),
-                    'filename',
-                    1,
-                    'Title with too short underline'
-                ),
-                new RstSample([
-                    'Title with too short underline',
-                    '~~~~~~~~~~~~~~~~~~~~~~~~',
-                ], 1),
-            ],
-            [
-                Violation::from(
-                    sprintf('Please ensure title "%s" and underline length are matching', 'Title with too long underline'),
-                    'filename',
-                    1,
-                    'Title with too long underline'
-                ),
-                new RstSample([
-                    'Title with too long underline',
-                    '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
-                ], 1),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    'Title with matching underline',
-                    '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
-                ], 1),
-            ],
+        yield [
+            Violation::from(
+                sprintf('Please ensure title "%s" and underline length are matching', 'Title with too short underline'),
+                'filename',
+                1,
+                'Title with too short underline',
+            ),
+            new RstSample([
+                'Title with too short underline',
+                '~~~~~~~~~~~~~~~~~~~~~~~~',
+            ], 1),
+        ];
+
+        yield [
+            Violation::from(
+                sprintf('Please ensure title "%s" and underline length are matching', 'Title with too long underline'),
+                'filename',
+                1,
+                'Title with too long underline',
+            ),
+            new RstSample([
+                'Title with too long underline',
+                '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
+            ], 1),
+        ];
+
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                'Title with matching underline',
+                '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
+            ], 1),
         ];
     }
 }

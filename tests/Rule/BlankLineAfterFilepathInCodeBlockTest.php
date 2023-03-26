@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,25 +24,25 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @test
      *
-     * @dataProvider checkProvider
      * @dataProvider checkPhpProvider
-     * @dataProvider checkYmlProvider
-     * @dataProvider checkYamlProvider
-     * @dataProvider checkXmlProvider
+     * @dataProvider checkProvider
      * @dataProvider checkTwigProvider
+     * @dataProvider checkXmlProvider
+     * @dataProvider checkYamlProvider
+     * @dataProvider checkYmlProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new BlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -53,7 +53,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkPhpProvider(): \Generator
+    public static function checkPhpProvider(): \Generator
     {
         yield [
             Violation::from(
@@ -84,7 +84,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkYmlProvider(): \Generator
+    public static function checkYmlProvider(): \Generator
     {
         yield [
             Violation::from(
@@ -115,7 +115,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkYamlProvider(): \Generator
+    public static function checkYamlProvider(): \Generator
     {
         yield [
             Violation::from(
@@ -146,7 +146,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkXmlProvider(): \Generator
+    public static function checkXmlProvider(): \Generator
     {
         yield [
             Violation::from(
@@ -201,7 +201,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkTwigProvider(): \Generator
+    public static function checkTwigProvider(): \Generator
     {
         yield [
             Violation::from(

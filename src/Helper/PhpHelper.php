@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -65,12 +65,13 @@ final class PhpHelper
             return true;
         }
 
-        if (0 !== strpos($lines->current()->clean()->toString(), '*')) {
+        if (!str_starts_with($lines->current()->clean()->toString(), '*')) {
             return false;
         }
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);
@@ -79,7 +80,7 @@ final class PhpHelper
                 return true;
             }
 
-            if (0 !== strpos($lines->current()->clean()->toString(), '*')) {
+            if (!str_starts_with($lines->current()->clean()->toString(), '*')) {
                 return false;
             }
         }
@@ -98,7 +99,8 @@ final class PhpHelper
         }
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);

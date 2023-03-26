@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -19,7 +19,7 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class LineLength extends AbstractRule implements LineContentRule, Configurable
+class LineLength extends AbstractRule implements Configurable, LineContentRule
 {
     private int $max;
 
@@ -28,8 +28,7 @@ class LineLength extends AbstractRule implements LineContentRule, Configurable
         $resolver
             ->setDefault('max', 80)
             ->setRequired('max')
-            ->setAllowedTypes('max', 'int')
-        ;
+            ->setAllowedTypes('max', 'int');
 
         return $resolver;
     }
@@ -55,7 +54,7 @@ class LineLength extends AbstractRule implements LineContentRule, Configurable
                 sprintf('Line is to long (max %s) currently: %s', $this->max, $count),
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

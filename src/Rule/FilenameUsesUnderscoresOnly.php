@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -20,7 +20,6 @@ use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
-
 use function Symfony\Component\String\u;
 
 /**
@@ -48,14 +47,14 @@ final class FilenameUsesUnderscoresOnly extends AbstractRule implements FileInfo
         if ($filename->containsAny('-')) {
             $message = sprintf(
                 'Please use underscores (_) for the filename: %s',
-                $fileInfo->getFilename()
+                $fileInfo->getFilename(),
             );
 
             return Violation::from(
                 $message,
                 $fileInfo->getFilename(),
                 1,
-                ''
+                '',
             );
         }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,21 +24,21 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return array<int|string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function validProvider(): array
+    public static function validProvider(): array
     {
         return [
             [
@@ -84,7 +84,7 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function invalidProvider(): array
+    public static function invalidProvider(): array
     {
         return [
             [
@@ -92,7 +92,7 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
                     'Please use ".. deprecated::" instead of ".. versionadded::"',
                     'filename',
                     1,
-                    '.. versionadded:: 3.4'
+                    '.. versionadded:: 3.4',
                 ),
                 new RstSample([
                     '.. versionadded:: 3.4',
@@ -105,7 +105,7 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
                     'Please use ".. deprecated::" instead of ".. versionadded::"',
                     'filename',
                     1,
-                    '.. versionadded:: 3.4'
+                    '.. versionadded:: 3.4',
                 ),
                 new RstSample([
                     '.. versionadded:: 3.4',

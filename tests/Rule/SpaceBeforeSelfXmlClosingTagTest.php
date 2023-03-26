@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,16 +28,16 @@ final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new SpaceBeforeSelfXmlClosingTag())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new SpaceBeforeSelfXmlClosingTag())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -45,7 +45,7 @@ final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
                     'Please add space before "/>"',
                     'filename',
                     1,
-                    '<argument type="service" id="sonata.admin.search.handler"/>'
+                    '<argument type="service" id="sonata.admin.search.handler"/>',
                 ),
                 new RstSample('<argument type="service" id="sonata.admin.search.handler"/>'),
             ],
@@ -54,7 +54,7 @@ final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
                     'Please add space before "/>"',
                     'filename',
                     1,
-                    '<argument/>'
+                    '<argument/>',
                 ),
                 new RstSample('<argument/>'),
             ],

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -27,13 +27,13 @@ final class LinkUsageTest extends \App\Tests\UnitTestCase
     {
         $usage = LinkUsage::fromLine($line);
 
-        static::assertSame($expected, $usage->name()->value());
+        self::assertSame($expected, $usage->name()->value());
     }
 
     /**
      * @return \Generator<array{0: string, 1: string}>
      */
-    public function fromLineProvider(): \Generator
+    public static function fromLineProvider(): \Generator
     {
         yield ['Link1', '`Link1`_'];
         yield ['Link 1', '`Link 1`_'];
@@ -46,9 +46,9 @@ final class LinkUsageTest extends \App\Tests\UnitTestCase
     {
         $name = 'foo';
 
-        static::assertSame(
+        self::assertSame(
             $name,
-            LinkUsage::fromLinkName(LinkName::fromString($name))->name()->value()
+            LinkUsage::fromLinkName(LinkName::fromString($name))->name()->value(),
         );
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -59,7 +59,7 @@ class BlankLineBeforeDirective extends AbstractRule implements LineContentRule
                 sprintf('Please add a blank line before "%s" directive', $line->raw()->toString()),
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

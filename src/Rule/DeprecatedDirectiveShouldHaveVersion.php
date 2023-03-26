@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -34,7 +34,7 @@ use Composer\Semver\VersionParser;
 class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
 {
     public function __construct(
-        private readonly VersionParser $versionParser
+        private readonly VersionParser $versionParser,
     ) {
     }
 
@@ -63,7 +63,7 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineC
                     sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_DEPRECATED),
                     $filename,
                     $number + 1,
-                    $line
+                    $line,
                 );
             }
 
@@ -73,14 +73,14 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineC
                 $message = sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
-                    $version
+                    $version,
                 );
 
                 return Violation::from(
                     $message,
                     $filename,
                     $number + 1,
-                    $line
+                    $line,
                 );
             }
         }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,6 +24,11 @@ final class Lines implements \SeekableIterator
     private function __construct(array $array)
     {
         $this->array = $array;
+    }
+
+    public function __clone()
+    {
+        $this->rewind();
     }
 
     /**
@@ -90,18 +95,9 @@ final class Lines implements \SeekableIterator
 
         if (!isset($this->array[$this->currentLine])) {
             $this->currentLine = $currentLine;
+
             throw $this->createOutOfBoundException($line);
         }
-    }
-
-    public function __clone()
-    {
-        $this->rewind();
-    }
-
-    private function createOutOfBoundException(int $line): \OutOfBoundsException
-    {
-        return new \OutOfBoundsException(sprintf('Line "%d" does not exists.', $line));
     }
 
     public function isProcessedBy(int $no, string $rule): bool
@@ -111,5 +107,10 @@ final class Lines implements \SeekableIterator
         }
 
         return $this->array[$no]->isProcessedBy($rule);
+    }
+
+    private function createOutOfBoundException(int $line): \OutOfBoundsException
+    {
+        return new \OutOfBoundsException(sprintf('Line "%d" does not exists.', $line));
     }
 }

@@ -43,14 +43,29 @@ jobs:
 
         runs-on: ubuntu-latest
 
+        strategy:
+            matrix:
+                php-version:
+                    - '8.2'
+
         steps:
             - name: "Checkout code"
               uses: actions/checkout@v3
 
-            - name: PHP-CS-Fixer
-              uses: docker://oskarstark/php-cs-fixer-ga:3.14.2
+            - name: Install PHP with extensions
+              uses: shivammathur/setup-php@2.24.0
               with:
-                  args: --diff --dry-run
+                  coverage: "none"
+                  php-version: ${{ matrix.php-version }}
+                  tools: composer:v2
+
+            - name: "Composer install"
+              uses: "ramsey/composer-install@2.2.0"
+              with:
+                  composer-options: "--prefer-dist"
+
+            - name: "Run friendsofphp/php-cs-fixer"
+              run: "vendor/bin/php-cs-fixer fix --diff --verbose"
 
     tests:
         name: PHPUnit

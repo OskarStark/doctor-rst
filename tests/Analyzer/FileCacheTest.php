@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -27,7 +27,10 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
         $this->root = vfsStream::setup();
     }
 
-    public function testCacheFileWillBeCreated(): void
+    /**
+     * @test
+     */
+    public function cacheFileWillBeCreated(): void
     {
         $rstFile = vfsStream::newFile('doc.rst')
             ->withContent('')
@@ -37,10 +40,13 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
         $cache->set(new \SplFileInfo($rstFile->url()), ['test'], []);
         $cache->write();
 
-        static::assertTrue($this->root->hasChild('.doctor-rst.cache'));
+        self::assertTrue($this->root->hasChild('.doctor-rst.cache'));
     }
 
-    public function testCacheHits(): void
+    /**
+     * @test
+     */
+    public function cacheHits(): void
     {
         $rules = ['test'];
         $rstFile = vfsStream::newFile('doc.rst')
@@ -57,7 +63,7 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
                         'violations' => [],
                     ],
                 ],
-            ]
+            ],
         );
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
@@ -65,10 +71,13 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
 
         $cache = new FileCache($cacheFile->url());
 
-        static::assertTrue($cache->has(new \SplFileInfo($rstFile->url()), $rules));
+        self::assertTrue($cache->has(new \SplFileInfo($rstFile->url()), $rules));
     }
 
-    public function testCacheDoesNotHitWhenVersionNumberDoesNotMatch(): void
+    /**
+     * @test
+     */
+    public function cacheDoesNotHitWhenVersionNumberDoesNotMatch(): void
     {
         $rstFile = vfsStream::newFile('doc.rst')
             ->withContent('')
@@ -80,10 +89,13 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
 
         $cache = new FileCache($cacheFile->url());
 
-        static::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), ['test']));
+        self::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), ['test']));
     }
 
-    public function testCacheDoesNotHitWhenFileHashDoesNotMatch(): void
+    /**
+     * @test
+     */
+    public function cacheDoesNotHitWhenFileHashDoesNotMatch(): void
     {
         $rules = ['test'];
         $rstFile = vfsStream::newFile('doc.rst')
@@ -100,7 +112,7 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
                         'violations' => [],
                     ],
                 ],
-            ]
+            ],
         );
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
@@ -108,10 +120,13 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
 
         $cache = new FileCache($cacheFile->url());
 
-        static::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), $rules));
+        self::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), $rules));
     }
 
-    public function testCacheDoesNotHitWhenRulesHashDoesNotMatch(): void
+    /**
+     * @test
+     */
+    public function cacheDoesNotHitWhenRulesHashDoesNotMatch(): void
     {
         $rules = ['test'];
         $rstFile = vfsStream::newFile('doc.rst')
@@ -128,7 +143,7 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
                         'violations' => [],
                     ],
                 ],
-            ]
+            ],
         );
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
@@ -136,10 +151,13 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
 
         $cache = new FileCache($cacheFile->url());
 
-        static::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), $rules));
+        self::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), $rules));
     }
 
-    public function testUnparsedFilesWillDeletedFromCacheFile(): void
+    /**
+     * @test
+     */
+    public function unparsedFilesWillDeletedFromCacheFile(): void
     {
         $content = serialize(
             [
@@ -151,7 +169,7 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
                         'violations' => [],
                     ],
                 ],
-            ]
+            ],
         );
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
@@ -163,6 +181,6 @@ final class FileCacheTest extends \App\Tests\UnitTestCase
 
         $content = unserialize($cacheFile->getContent());
 
-        static::assertEmpty($content['payload']);
+        self::assertEmpty($content['payload']);
     }
 }

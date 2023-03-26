@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,16 +28,16 @@ final class MaxColonsTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new MaxColons())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new MaxColons())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -59,7 +59,7 @@ final class MaxColonsTest extends \App\Tests\UnitTestCase
                 'Please use max 2 colons at the end.',
                 'filename',
                 1,
-                'temp:::'
+                'temp:::',
             ),
             new RstSample('temp:::'),
         ];
@@ -69,7 +69,7 @@ final class MaxColonsTest extends \App\Tests\UnitTestCase
                 'Please use max 2 colons at the end.',
                 'filename',
                 1,
-                'temp:::'
+                'temp:::',
             ),
             new RstSample(' temp:::'),
         ];
@@ -79,7 +79,7 @@ final class MaxColonsTest extends \App\Tests\UnitTestCase
                 'Please use max 2 colons at the end.',
                 'filename',
                 1,
-                'temp:::'
+                'temp:::',
             ),
             new RstSample(' temp::: '),
         ];

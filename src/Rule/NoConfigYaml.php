@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -39,7 +39,7 @@ class NoConfigYaml extends AbstractRule implements LineContentRule
                 'Please use specific config class in "config/packages/..." instead of "app/config/config.yml"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

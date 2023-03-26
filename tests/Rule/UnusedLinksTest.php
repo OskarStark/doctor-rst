@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,18 +24,18 @@ final class UnusedLinksTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new UnusedLinks())->check($sample->lines(), 'filename')
+            (new UnusedLinks())->check($sample->lines(), 'filename'),
         );
     }
 
-    public function validProvider(): \Generator
+    public static function validProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -44,7 +44,8 @@ final class UnusedLinksTest extends \App\Tests\UnitTestCase
 
         yield [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 I am a `Link`_
 
 .. _`Link`: https://example.com
@@ -54,7 +55,8 @@ RST
 
         yield [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 I am a `Link`_ and `Link2`_
 
 .. _`Link`: https://example.com
@@ -65,7 +67,8 @@ RST
 
         yield [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 I am a `Link`_
 
 .. _Link: https://example.com
@@ -75,7 +78,8 @@ RST
 
         yield [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 I am a `Link`_ and `Link2`_
 
 .. _Link: https://example.com
@@ -86,7 +90,8 @@ RST
 
         yield [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 I am `a Link`_, `some other Link`_ and Link2_
 
 .. _a Link: https://example.com
@@ -98,7 +103,8 @@ RST
 
         yield [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 Date Handling
 ~~~~~~~~~~~~~
 
@@ -113,7 +119,8 @@ RST
 
         yield [
             NullViolation::create(),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 Active Core Members
 ~~~~~~~~~~~~~~~~~~~
 
@@ -196,16 +203,17 @@ RST
         ];
     }
 
-    public function invalidProvider(): \Generator
+    public static function invalidProvider(): \Generator
     {
         yield [
             Violation::from(
                 'The following link definitions aren\'t used anymore and should be removed: "unused"',
                 'filename',
                 1,
-                ''
+                '',
             ),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 I am a `Link`_
 
 .. _`Link`: https://example.com
@@ -219,9 +227,10 @@ RST
                 'The following link definitions aren\'t used anymore and should be removed: "unused"',
                 'filename',
                 1,
-                ''
+                '',
             ),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 I am a `Link`_
 
 .. _Link: https://example.com
@@ -235,9 +244,10 @@ RST
                 'The following link definitions aren\'t used anymore and should be removed: "unused2", "unused1", "unused 3"',
                 'filename',
                 1,
-                ''
+                '',
             ),
-            new RstSample(<<<RST
+            new RstSample(
+                <<<'RST'
 I am a `Link`_
 
 .. _unused2: https://example.com/foo

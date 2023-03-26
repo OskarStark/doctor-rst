@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -36,7 +36,7 @@ class KernelInsteadOfAppKernel extends AbstractRule implements LineContentRule
                 'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 
@@ -45,7 +45,7 @@ class KernelInsteadOfAppKernel extends AbstractRule implements LineContentRule
                 'Please use "Kernel" instead of "AppKernel"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

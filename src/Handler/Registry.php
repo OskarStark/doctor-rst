@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -20,10 +20,14 @@ use App\Value\RuleName;
 
 final class Registry
 {
-    /** @var array<string, Rule> */
+    /**
+     * @var array<string, Rule>
+     */
     private array $rules = [];
 
-    /** @var Rule[] */
+    /**
+     * @var Rule[]
+     */
     private array $rawRules = [];
 
     public function __construct(iterable $rules)
@@ -35,6 +39,7 @@ final class Registry
 
             if ($rule instanceof CheckListRule) {
                 $i = 0;
+
                 foreach ($rule::getList() as $search => $message) {
                     $clonedRule = clone $rule;
                     $this->rules[$rule::getName()->toString().'_'.$i] = $clonedRule->configure($search, $message);
@@ -77,6 +82,7 @@ final class Registry
     public function getRulesByGroup(RuleGroup $group): array
     {
         $rules = [];
+
         foreach ($this->rules as $rule) {
             if (\in_array($group, $rule::getGroups(), true)) {
                 $rules[] = $rule;

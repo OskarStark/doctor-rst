@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -60,7 +60,8 @@ class AvoidRepetetiveWords extends AbstractRule implements LineContentRule
                 !PhpHelper::isComment($line)
                 && !XmlHelper::isComment($line)
                 && !TwigHelper::isComment($line)
-                && !YamlHelper::isComment($line)))
+                && !YamlHelper::isComment($line)
+            ))
         ) {
             return NullViolation::create();
         }
@@ -79,7 +80,7 @@ class AvoidRepetetiveWords extends AbstractRule implements LineContentRule
                     $message,
                     $filename,
                     $number + 1,
-                    $line
+                    $line,
                 );
             }
         }

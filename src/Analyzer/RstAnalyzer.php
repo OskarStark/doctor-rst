@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -32,6 +32,7 @@ final class RstAnalyzer implements Analyzer
     public function analyze(\SplFileInfo $file, array $rules): array
     {
         $realpath = $file->getRealPath();
+
         if (false === $realpath) {
             throw new \RuntimeException(sprintf('Cannot get real path for file: %s', (string) $file->getPathname()));
         }
@@ -89,7 +90,7 @@ final class RstAnalyzer implements Analyzer
             \assert(\is_int($no));
 
             foreach ($lineContentRules as $rule) {
-                if ($lines->isProcessedBy($no, \get_class($rule))) {
+                if ($lines->isProcessedBy($no, $rule::class)) {
                     continue;
                 }
 

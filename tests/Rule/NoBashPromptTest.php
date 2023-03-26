@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoBashPrompt())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoBashPrompt())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -42,7 +42,7 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
                     'Please remove the "$" prefix in .. code-block:: directive',
                     'filename',
                     1,
-                    '$ composer install sonata-project/admin-bundle'
+                    '$ composer install sonata-project/admin-bundle',
                 ),
                 new RstSample([
                     '.. code-block:: bash',
@@ -55,7 +55,7 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
                     'Please remove the "$" prefix in .. code-block:: directive',
                     'filename',
                     1,
-                    '$ composer install sonata-project/admin-bundle'
+                    '$ composer install sonata-project/admin-bundle',
                 ),
                 new RstSample([
                     '.. code-block:: shell',
@@ -68,7 +68,7 @@ final class NoBashPromptTest extends \App\Tests\UnitTestCase
                     'Please remove the "$" prefix in .. code-block:: directive',
                     'filename',
                     1,
-                    '$ composer install sonata-project/admin-bundle'
+                    '$ composer install sonata-project/admin-bundle',
                 ),
                 new RstSample([
                     '.. code-block:: terminal',

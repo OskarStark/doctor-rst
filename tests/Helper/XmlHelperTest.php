@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -25,16 +25,16 @@ final class XmlHelperTest extends \App\Tests\UnitTestCase
      */
     public function isComment(bool $expected, string $line, ?bool $closed): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            XmlHelper::isComment(new Line($line), $closed)
+            XmlHelper::isComment(new Line($line), $closed),
         );
     }
 
     /**
-     * @return \Generator<array{0: bool, 1: string, 2: bool|null}>
+     * @return \Generator<array{0: bool, 1: string, 2: null|bool}>
      */
-    public function isCommentProvider(): \Generator
+    public static function isCommentProvider(): \Generator
     {
         yield [true, '<!--', null];
         yield [true, '-->', null];

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,16 +29,16 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new AvoidRepetetiveWords())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new AvoidRepetetiveWords())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function whitelistProvider(): \Generator
+    public static function whitelistProvider(): \Generator
     {
         $whitelist = [
             '...',
@@ -52,7 +52,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         $valid = '';
         $invalid = 'the cached items will not not be invalidated unless you clear OPcache.';
@@ -68,7 +68,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
                 'The word "not" is used more times in a row.',
                 'filename',
                 1,
-                $invalid
+                $invalid,
             ),
             new RstSample($invalid),
         ];

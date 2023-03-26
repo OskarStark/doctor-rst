@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -19,10 +19,8 @@ use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
-
-use function Symfony\Component\String\u;
-
 use Webmozart\Assert\Assert;
+use function Symfony\Component\String\u;
 
 class OrderedUseStatements extends AbstractRule implements LineContentRule
 {
@@ -52,7 +50,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
 
         while ($lines->valid()
             && !$lines->current()->isDirective()
-            && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
+            && ($lines->current()->indention() > $indention || $lines->current()->isBlank())
             && (!preg_match('/^((class|trait) (.*)|\$)/', $lines->current()->clean()->toString()))
         ) {
             if ($lines->current()->clean()->match('/^use (.*);$/')) {
@@ -60,7 +58,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
                     $indentionOfFirstFoundUseStatement = $lines->current()->indention();
                     $statements[] = $this->extractClass($lines->current()->clean()->toString());
                 } else {
-                    if ($indentionOfFirstFoundUseStatement !== $lines->current()->indention()) {
+                    if ($lines->current()->indention() !== $indentionOfFirstFoundUseStatement) {
                         break;
                     }
 
@@ -84,7 +82,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
                 'Please reorder the use statements alphabetically',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

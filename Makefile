@@ -1,11 +1,15 @@
+.PHONY: test
 test:
 	vendor/bin/phpunit
 
-cs:
-	docker run --rm -it -w /app -v ${PWD}:/app oskarstark/php-cs-fixer-ga:3.14.2
+.PHONY: cs
+cs: vendor
+	symfony php vendor/bin/php-cs-fixer fix --diff --verbose
 
+.PHONY: phpstan
 phpstan:
 	vendor/bin/phpstan analyse -c phpstan.neon.dist
 
+.PHONY: phpstan-baseline
 phpstan-baseline:
 	vendor/bin/phpstan analyse -c phpstan.neon.dist --generate-baseline=phpstan-baseline.neon

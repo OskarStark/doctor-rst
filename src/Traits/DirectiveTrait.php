@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -19,6 +19,29 @@ use App\Value\Lines;
 
 trait DirectiveTrait
 {
+    public function getLineNumberOfDirective(string $directive, Lines $lines, int $number): int
+    {
+        $lines->seek($number);
+        $startingLine = $lines->current();
+
+        while ((
+            $lines->current()->indention() === $startingLine->indention()
+            || $lines->current()->isBlank()
+        ) && !$lines->current()->isDirective()
+        ) {
+            $lines->previous();
+        }
+
+        if ($lines->valid()
+            && $lines->current()->isDirective()
+            && RstParser::directiveIs($lines->current(), $directive)
+        ) {
+            return $lines->key();
+        }
+
+        throw new \RuntimeException(sprintf('Directive "%s" not found', $directive));
+    }
+
     private function getDirectiveContent(string $directive, Lines $lines, int $number): DirectiveContent
     {
         $content = [];
@@ -50,29 +73,6 @@ trait DirectiveTrait
         return new DirectiveContent($content);
     }
 
-    public function getLineNumberOfDirective(string $directive, Lines $lines, int $number): int
-    {
-        $lines->seek($number);
-        $startingLine = $lines->current();
-
-        while ((
-            $lines->current()->indention() === $startingLine->indention()
-            || $lines->current()->isBlank()
-        ) && !$lines->current()->isDirective()
-        ) {
-            $lines->previous();
-        }
-
-        if ($lines->valid()
-            && $lines->current()->isDirective()
-            && RstParser::directiveIs($lines->current(), $directive)
-        ) {
-            return $lines->key();
-        }
-
-        throw new \RuntimeException(sprintf('Directive "%s" not found', $directive));
-    }
-
     private function inPhpCodeBlock(Lines $lines, int $number): bool
     {
         return $this->in(
@@ -85,7 +85,7 @@ trait DirectiveTrait
                 RstParser::CODE_BLOCK_PHP_ATTRIBUTES,
                 RstParser::CODE_BLOCK_PHP_STANDALONE,
                 RstParser::CODE_BLOCK_PHP_SYMFONY,
-            ]
+            ],
         );
     }
 
@@ -99,18 +99,19 @@ trait DirectiveTrait
                 RstParser::CODE_BLOCK_BASH,
                 RstParser::CODE_BLOCK_SHELL,
                 RstParser::CODE_BLOCK_TERMINAL,
-            ]
+            ],
         );
     }
 
-    private function in(string $directive, Lines $lines, int $number, array $directiveTypes = null): bool
+    private function in(string $directive, Lines $lines, int $number, ?array $directiveTypes = null): bool
     {
         $lines->seek($number);
 
         $currentIndention = $lines->current()->indention();
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);
@@ -131,9 +132,11 @@ trait DirectiveTrait
                 if (RstParser::directiveIs($lines->current(), $directive)) {
                     if (null !== $directiveTypes) {
                         $found = false;
+
                         foreach ($directiveTypes as $type) {
                             if (RstParser::codeBlockDirectiveIsTypeOf($lines->current(), $type)) {
                                 $found = true;
+
                                 break;
                             }
                         }
@@ -151,14 +154,15 @@ trait DirectiveTrait
         return false;
     }
 
-    private function previousDirectiveIs(string $directive, Lines $lines, int $number, array $directiveTypes = null): bool
+    private function previousDirectiveIs(string $directive, Lines $lines, int $number, ?array $directiveTypes = null): bool
     {
         $lines->seek($number);
 
         $initialIndention = $lines->current()->indention();
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);
@@ -189,9 +193,11 @@ trait DirectiveTrait
             ) {
                 if (null !== $directiveTypes) {
                     $found = false;
+
                     foreach ($directiveTypes as $type) {
                         if (RstParser::codeBlockDirectiveIsTypeOf($lines->current(), $type)) {
                             $found = true;
+
                             break;
                         }
                     }

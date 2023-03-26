@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new OrderedUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new OrderedUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         $codeBlocks = self::phpCodeBlocks();
 
@@ -70,7 +70,7 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
                     'Please reorder the use statements alphabetically',
                     'filename',
                     1,
-                    $codeBlock
+                    $codeBlock,
                 ),
                 new RstSample([
                     $codeBlock,
@@ -86,7 +86,7 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
                     'Please reorder the use statements alphabetically',
                     'filename',
                     1,
-                    $codeBlock
+                    $codeBlock,
                 ),
                 new RstSample([
                     $codeBlock,

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -33,16 +33,16 @@ final class VersionaddedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
             'min_version' => $minVersion,
         ]);
 
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber(), 'filename')
+            $rule->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return array<array{0: ViolationInterface, 1: string, 2: RstSample}>
      */
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -60,7 +60,7 @@ final class VersionaddedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
                     'Please only provide ".. versionadded::" if the version is greater/equal "3.4"',
                     'filename',
                     1,
-                    '.. versionadded:: 2.8'
+                    '.. versionadded:: 2.8',
                 ),
                 '3.4',
                 new RstSample('.. versionadded:: 2.8'),

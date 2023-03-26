@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -33,8 +33,8 @@ final class RuleGroupTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
-     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::empty()
      * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::blank()
+     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::empty()
      */
     public function fromStringThrowsException(string $value): void
     {
@@ -50,16 +50,16 @@ final class RuleGroupTest extends \App\Tests\UnitTestCase
      */
     public function defined(string $expected, RuleGroup $group): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $group->name()
+            $group->name(),
         );
     }
 
     /**
      * @return \Generator<string, array{0: string, 1: RuleGroup}>
      */
-    public function definedProvider(): \Generator
+    public static function definedProvider(): \Generator
     {
         yield '@Experimental' => [
             '@Experimental',
@@ -84,16 +84,16 @@ final class RuleGroupTest extends \App\Tests\UnitTestCase
      */
     public function equals(bool $expected, RuleGroup $group, RuleGroup $other): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $group->equals($other)
+            $group->equals($other),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: RuleGroup, 2: RuleGroup}>
      */
-    public function equalsProvider(): \Generator
+    public static function equalsProvider(): \Generator
     {
         yield [
             true,

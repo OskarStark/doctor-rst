@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,24 +24,24 @@ final class FilenameUsesDashesOnlyTest extends UnitTestCase
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, string $filename): void
     {
         $fileInfo = $this->createMock(\SplFileInfo::class);
         $fileInfo->method('getFilename')->willReturn($filename);
 
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new FilenameUsesDashesOnly())->check($fileInfo)
+            (new FilenameUsesDashesOnly())->check($fileInfo),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
-    public function validProvider(): \Generator
+    public static function validProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -57,14 +57,14 @@ final class FilenameUsesDashesOnlyTest extends UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
-    public function invalidProvider(): \Generator
+    public static function invalidProvider(): \Generator
     {
         yield [
             Violation::from(
                 'Please use dashes (-) for the filename: custom_extensions.rst',
                 'custom_extensions.rst',
                 1,
-                ''
+                '',
             ),
             'custom_extensions.rst',
         ];
@@ -74,7 +74,7 @@ final class FilenameUsesDashesOnlyTest extends UnitTestCase
                 'Please use dashes (-) for the filename: _custom_extensions.rst',
                 '_custom_extensions.rst',
                 1,
-                ''
+                '',
             ),
             '_custom_extensions.rst',
         ];

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,16 +28,16 @@ final class YamlInsteadOfYmlSuffixTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new YamlInsteadOfYmlSuffix())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new YamlInsteadOfYmlSuffix())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -45,7 +45,7 @@ final class YamlInsteadOfYmlSuffixTest extends \App\Tests\UnitTestCase
                     'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"',
                     'filename',
                     1,
-                    '.. code-block:: yml'
+                    '.. code-block:: yml',
                 ),
                 new RstSample('.. code-block:: yml'),
             ],
@@ -62,7 +62,7 @@ final class YamlInsteadOfYmlSuffixTest extends \App\Tests\UnitTestCase
                     'Please use ".yaml" instead of ".yml"',
                     'filename',
                     1,
-                    'Register your service in services.yml file'
+                    'Register your service in services.yml file',
                 ),
                 new RstSample('Register your service in services.yml file'),
             ],
