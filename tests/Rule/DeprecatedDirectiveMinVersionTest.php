@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -31,13 +31,13 @@ final class DeprecatedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
         $rule = (new DeprecatedDirectiveMinVersion());
         $rule->setOptions(['min_version' => $minVersion]);
 
-        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: string, 2: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -54,7 +54,7 @@ final class DeprecatedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
                 'Please only provide ".. deprecated::" if the version is greater/equal "3.4"',
                 'filename',
                 1,
-                '.. deprecated:: 2.8'
+                '.. deprecated:: 2.8',
             ),
             '3.4',
             new RstSample('.. deprecated:: 2.8'),

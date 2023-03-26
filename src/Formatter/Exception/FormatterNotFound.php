@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -19,7 +19,7 @@ final class FormatterNotFound extends \InvalidArgumentException
     {
         return new self(sprintf(
             'Formatter "%s" not found',
-            $name
+            $name,
         ));
     }
 }

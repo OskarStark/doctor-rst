@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-use function Symfony\Component\String\u;
-
 use Symfony\Component\String\UnicodeString;
+use function Symfony\Component\String\u;
 
 final class Line
 {
@@ -26,7 +25,10 @@ final class Line
     private ?bool $headline = null;
     private ?bool $isDirective = null;
     private ?bool $isDefaultDirective = null;
-    /** @var string[] */
+
+    /**
+     * @var string[]
+     */
     private array $processedBy = [];
 
     public function __construct(string $line)
@@ -79,9 +81,10 @@ final class Line
     public function isDirective(): bool
     {
         if (null === $this->isDirective) {
-            $this->isDirective = (0 === strpos(ltrim($this->raw->toString()), '.. ')
-                    && 0 !== strpos(ltrim($this->raw->toString()), '.. _`')
-                    && false !== strpos($this->raw->toString(), '::')
+            $this->isDirective = (
+                str_starts_with(ltrim($this->raw->toString()), '.. ')
+                    && !str_starts_with(ltrim($this->raw->toString()), '.. _`')
+                    && str_contains($this->raw->toString(), '::')
             ) || $this->isDefaultDirective();
         }
 

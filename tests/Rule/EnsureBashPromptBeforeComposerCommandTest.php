@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,16 +29,16 @@ final class EnsureBashPromptBeforeComposerCommandTest extends \App\Tests\UnitTes
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new EnsureBashPromptBeforeComposerCommand())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new EnsureBashPromptBeforeComposerCommand())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         $codeBlocks = [
             RstParser::CODE_BLOCK_BASH,
@@ -52,7 +52,7 @@ final class EnsureBashPromptBeforeComposerCommandTest extends \App\Tests\UnitTes
                     'Please add a bash prompt "$" before composer command',
                     'filename',
                     3,
-                    'composer require --dev symfony/debug'
+                    'composer require --dev symfony/debug',
                 ),
                 new RstSample([
                     '.. code-block:: '.$codeBlock,

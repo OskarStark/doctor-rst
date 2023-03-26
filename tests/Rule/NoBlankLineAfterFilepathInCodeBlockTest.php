@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,22 +24,22 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
     /**
      * @test
      *
-     * @dataProvider checkProvider
      * @dataProvider checkPhpProvider
-     * @dataProvider checkYmlProvider
-     * @dataProvider checkYamlProvider
-     * @dataProvider checkXmlProvider
+     * @dataProvider checkProvider
      * @dataProvider checkTwigProvider
+     * @dataProvider checkXmlProvider
+     * @dataProvider checkYamlProvider
+     * @dataProvider checkYmlProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoBlankLineAfterFilepathInCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -49,7 +49,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public function checkPhpProvider(): array
+    public static function checkPhpProvider(): array
     {
         return [
             [
@@ -79,7 +79,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public function checkYmlProvider(): array
+    public static function checkYmlProvider(): array
     {
         return [
             [
@@ -109,7 +109,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public function checkYamlProvider(): array
+    public static function checkYamlProvider(): array
     {
         return [
             [
@@ -139,7 +139,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public function checkXmlProvider(): array
+    public static function checkXmlProvider(): array
     {
         return [
             [
@@ -193,7 +193,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public function checkTwigProvider(): array
+    public static function checkTwigProvider(): array
     {
         return [
             [

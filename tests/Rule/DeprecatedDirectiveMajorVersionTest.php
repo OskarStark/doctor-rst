@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -32,13 +32,13 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
         $rule = (new DeprecatedDirectiveMajorVersion(new VersionParser()));
         $rule->setOptions(['major_version' => $majorVersion]);
 
-        static::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: int, 2: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -70,7 +70,7 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
                 'You are not allowed to use version "2.7". Only major version "3" is allowed.',
                 'filename',
                 1,
-                '.. deprecated:: 2.7'
+                '.. deprecated:: 2.7',
             ),
             3,
             new RstSample('.. deprecated:: 2.7'),
@@ -80,7 +80,7 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
                 'You are not allowed to use version "4.0". Only major version "3" is allowed.',
                 'filename',
                 1,
-                '.. deprecated:: 4.0'
+                '.. deprecated:: 4.0',
             ),
             3,
             new RstSample('.. deprecated:: 4.0'),
@@ -90,7 +90,7 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
                 'Please provide a numeric version behind ".. deprecated::" instead of "foo"',
                 'filename',
                 1,
-                '.. deprecated:: foo'
+                '.. deprecated:: foo',
             ),
             3,
             new RstSample('.. deprecated:: foo'),

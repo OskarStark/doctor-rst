@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -30,7 +30,7 @@ final class ListTraitTest extends \App\Tests\UnitTestCase
      */
     public function methodExists(): void
     {
-        static::assertTrue(method_exists($this->traitWrapper, 'isPartOfListItem'));
+        self::assertTrue(method_exists($this->traitWrapper, 'isPartOfListItem'));
     }
 
     /**
@@ -40,20 +40,21 @@ final class ListTraitTest extends \App\Tests\UnitTestCase
      */
     public function isPartOfListItem(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfListItem($sample->lines(), $sample->lineNumber())
+            $this->traitWrapper->isPartOfListItem($sample->lines(), $sample->lineNumber()),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public function isPartOfListItemProvider(): \Generator
+    public static function isPartOfListItemProvider(): \Generator
     {
         yield [
             false,
-            new RstSample(<<<'RST'
+            new RstSample(
+                <<<'RST'
 I am just a cool text!
 RST
             ),
@@ -125,7 +126,7 @@ RST;
 
         yield 'not list item' => [false, new RstSample(<<<'RST'
 Code here::
- 
+
     class User
     {
         /**
@@ -145,16 +146,16 @@ RST
      */
     public function isPartOfFootnote(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfFootnote($sample->lines(), $sample->lineNumber())
+            $this->traitWrapper->isPartOfFootnote($sample->lines(), $sample->lineNumber()),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public function isPartOfFootnoteProvider(): \Generator
+    public static function isPartOfFootnoteProvider(): \Generator
     {
         $footnote = <<<'RST'
 .. [1] Line 1
@@ -172,16 +173,16 @@ RST;
      */
     public function isPartOfRstComment(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfRstComment($sample->lines(), $sample->lineNumber())
+            $this->traitWrapper->isPartOfRstComment($sample->lines(), $sample->lineNumber()),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public function isPartOfRstCommentProvider(): \Generator
+    public static function isPartOfRstCommentProvider(): \Generator
     {
         $rst_comment = <<<'RST'
 .. Line 1
@@ -199,16 +200,16 @@ RST;
      */
     public function isPartOfLineNumberAnnotation(bool $expected, RstSample $sample): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines(), $sample->lineNumber())
+            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines(), $sample->lineNumber()),
         );
     }
 
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public function isPartOfLineNumberAnnotationProvider(): \Generator
+    public static function isPartOfLineNumberAnnotationProvider(): \Generator
     {
         $line_number_annotation = <<<'RST'
 Line 15

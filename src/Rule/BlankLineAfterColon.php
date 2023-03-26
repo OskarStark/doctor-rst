@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -63,7 +63,7 @@ class BlankLineAfterColon extends AbstractRule implements LineContentRule
             sprintf('Please add a blank line after "%s"', $line->clean()->toString()),
             $filename,
             $number + 1,
-            $line
+            $line,
         );
     }
 }

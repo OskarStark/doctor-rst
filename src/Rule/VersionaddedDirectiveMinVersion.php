@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -21,7 +21,7 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VersionaddedDirectiveMinVersion extends AbstractRule implements LineContentRule, Configurable
+class VersionaddedDirectiveMinVersion extends AbstractRule implements Configurable, LineContentRule
 {
     private string $minVersion;
 
@@ -29,8 +29,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements LineConten
     {
         $resolver
             ->setRequired('min_version')
-            ->setAllowedTypes('min_version', 'string')
-        ;
+            ->setAllowedTypes('min_version', 'string');
 
         return $resolver;
     }
@@ -65,14 +64,14 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements LineConten
                 $message = sprintf(
                     'Please only provide "%s" if the version is greater/equal "%s"',
                     RstParser::DIRECTIVE_VERSIONADDED,
-                    $this->minVersion
+                    $this->minVersion,
                 );
 
                 return Violation::from(
                     $message,
                     $filename,
                     $number + 1,
-                    $line
+                    $line,
                 );
             }
         }

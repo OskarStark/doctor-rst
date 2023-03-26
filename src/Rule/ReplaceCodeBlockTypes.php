@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -44,7 +44,7 @@ class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
                 $this->message,
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 
@@ -68,6 +68,7 @@ class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
         ];
 
         $list = [];
+
         foreach ($replacements as $current => $new) {
             $list[$current] = sprintf('Please do not use type "%s" for code-block, use "%s" instead', $current, $new);
         }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -33,27 +33,30 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];
+
         foreach (StringReplacement::getList() as $search => $message) {
             $configuredRules[] = (new StringReplacement())->configure($search, $message);
         }
 
         $violations = [];
+
         foreach ($configuredRules as $rule) {
             $violation = $rule->check($sample->lines(), $sample->lineNumber(), 'filename');
+
             if (!$violation->isNull()) {
                 $violations[] = $violation;
             }
         }
 
         if ($expected->isNull()) {
-            static::assertCount(0, $violations);
+            self::assertCount(0, $violations);
         } else {
-            static::assertCount(1, $violations);
-            static::assertEquals($expected, $violations[0]);
+            self::assertCount(1, $violations);
+            self::assertEquals($expected, $violations[0]);
         }
     }
 
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield 'empty string' => [NullViolation::create(), new RstSample('')];
 
@@ -73,7 +76,7 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
                 NullViolation::create(),
                 new RstSample(sprintf(
                     '    %s',
-                    $valid
+                    $valid,
                 )),
             ];
         }
@@ -89,11 +92,11 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
                     sprintf(
                         'Please replace "%s" with "%s"',
                         $invalid,
-                        $valid
+                        $valid,
                     ),
                     'filename',
                     1,
-                    $invalid
+                    $invalid,
                 ),
                 new RstSample($invalid),
             ];
@@ -104,15 +107,15 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
                     sprintf(
                         'Please replace "%s" with "%s"',
                         $invalid,
-                        $valid
+                        $valid,
                     ),
                     'filename',
                     1,
-                    trim($invalid)
+                    trim($invalid),
                 ),
                 new RstSample(sprintf(
                     '    %s',
-                    $invalid
+                    $invalid,
                 )),
             ];
         }

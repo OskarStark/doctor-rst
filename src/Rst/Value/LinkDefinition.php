@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -30,7 +30,7 @@ final class LinkDefinition
 
         return new self(
             LinkName::fromString($matches[1]),
-            LinkUrl::fromString($matches[2])
+            LinkUrl::fromString($matches[2]),
         );
     }
 

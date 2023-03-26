@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -21,7 +21,7 @@ abstract class CheckListRule extends AbstractRule
     /**
      * @return static
      */
-    public function configure(string $pattern, ?string $message): self
+    final public function configure(string $pattern, ?string $message): self
     {
         $this->search = $pattern;
         $this->message = $message ?? static::getDefaultMessage();
@@ -29,13 +29,13 @@ abstract class CheckListRule extends AbstractRule
         return $this;
     }
 
-    public static function getDefaultMessage(): string
+    final public static function getDefaultMessage(): string
     {
         return 'Please don\'t use: %s';
     }
 
     /**
-     * @return array<string, string|null>
+     * @return array<string, null|string>
      */
     abstract public static function getList(): array;
 }

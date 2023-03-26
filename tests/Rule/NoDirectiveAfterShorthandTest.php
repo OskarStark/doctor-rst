@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,37 +24,37 @@ final class NoDirectiveAfterShorthandTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoDirectiveAfterShorthand())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoDirectiveAfterShorthand())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function validProvider(): \Generator
+    public static function validProvider(): \Generator
     {
-        $valid2 = <<<RST
+        $valid2 = <<<'RST'
 This is a sentence::
 
     test
-    
+
 .. code-block:: php
 
     test
 RST;
 
-        $valid3 = <<<RST
+        $valid3 = <<<'RST'
 ::
 
     test
-    
+
 .. code-block:: php
 
     test
@@ -79,18 +79,18 @@ RST;
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function invalidProvider(): \Generator
+    public static function invalidProvider(): \Generator
     {
-        $invalid = <<<RST
+        $invalid = <<<'RST'
 This is a sentence::
 
     .. configuration-block::
 RST;
 
-        $invalid2 = <<<RST
+        $invalid2 = <<<'RST'
 ::
 
-    .. configuration-block::       
+    .. configuration-block::
 RST;
 
         yield [
@@ -98,7 +98,7 @@ RST;
                 'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
                 'filename',
                 1,
-                '.. configuration-block::'
+                '.. configuration-block::',
             ),
             new RstSample($invalid),
         ];
@@ -108,7 +108,7 @@ RST;
                 'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
                 'filename',
                 1,
-                '.. configuration-block::'
+                '.. configuration-block::',
             ),
             new RstSample($invalid2),
         ];

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,21 +24,21 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new EnsureLinkDefinitionContainsValidUrl())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new EnsureLinkDefinitionContainsValidUrl())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function validProvider(): \Generator
+    public static function validProvider(): \Generator
     {
         $validCases = [
             '.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST',
@@ -61,7 +61,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function invalidProvider(): \Generator
+    public static function invalidProvider(): \Generator
     {
         $invalidCases = [
             '.. _DOCtor-RST: ttp://github.com/OskarStark/DOCtor-RST',
@@ -75,11 +75,11 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
                 Violation::from(
                     sprintf(
                         'Invalid url in "%s"',
-                        $invalidCase
+                        $invalidCase,
                     ),
                     'filename',
                     1,
-                    $invalidCase
+                    $invalidCase,
                 ),
                 new RstSample($invalidCase),
             ];

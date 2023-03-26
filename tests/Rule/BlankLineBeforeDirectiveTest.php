@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,16 +29,16 @@ final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new BlankLineBeforeDirective())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new BlankLineBeforeDirective())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         yield 'no directive' => [
             NullViolation::create(),
@@ -82,7 +82,7 @@ RST
         ];
 
         foreach (RstParser::DIRECTIVES as $directive) {
-            if (RstParser::DIRECTIVE_ROLE == $directive) {
+            if (RstParser::DIRECTIVE_ROLE === $directive) {
                 continue;
             }
 
@@ -99,7 +99,7 @@ RST
                     sprintf('Please add a blank line before "%s" directive', $directive),
                     'filename',
                     2,
-                    $directive
+                    $directive,
                 ),
                 new RstSample([
                     'content',

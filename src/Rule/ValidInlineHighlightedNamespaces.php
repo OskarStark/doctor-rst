@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -59,7 +59,7 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
                         sprintf('Please use 1 backslash when highlighting a namespace with double backticks: %s', $occurence),
                         $filename,
                         $number + 1,
-                        $line
+                        $line,
                     );
                 }
             }
@@ -78,7 +78,7 @@ class ValidInlineHighlightedNamespaces extends AbstractRule implements LineConte
                         sprintf('Please use 2 backslashes when highlighting a namespace with single backticks: %s', $occurence),
                         $filename,
                         $number + 1,
-                        $line
+                        $line,
                     );
                 }
             }

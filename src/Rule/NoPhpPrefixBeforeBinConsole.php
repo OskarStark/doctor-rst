@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -46,7 +46,7 @@ class NoPhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRul
                 'Please remove "php" prefix before "bin/console"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

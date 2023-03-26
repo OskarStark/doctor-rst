@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -26,11 +26,10 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class Indention extends AbstractRule implements LineContentRule, Configurable
+class Indention extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;
     use ListTrait;
-
     private int $size;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
@@ -38,8 +37,7 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
         $resolver
             ->setDefault('size', 4)
             ->setRequired('size')
-            ->setAllowedTypes('size', 'int')
-        ;
+            ->setAllowedTypes('size', 'int');
 
         return $resolver;
     }
@@ -103,11 +101,12 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
                 $minus = 0;
             } elseif ((new PhpHelper())->isPartOfMultilineComment($lines, $number)) {
                 $customMessage = 'Please fix the indention of the multiline comment.';
+
                 if (PhpHelper::isLastLineOfMultilineComment($line)
-                    && $indention > 0 && 0 < $line->indention() % $this->size
+                    && 0 < $indention && 0 < $line->indention() % $this->size
                 ) {
                     $minus = 1;
-                } elseif ($indention > 0 && 0 < $line->indention() % $this->size) {
+                } elseif (0 < $indention && 0 < $line->indention() % $this->size) {
                     $minus = 1;
                 }
             } elseif (PhpHelper::isLastLineOfDocBlock($line)
@@ -137,14 +136,14 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
             $minus = 3;
         }
 
-        if ($indention > 0 && 0 < (($indention - $minus) % $this->size)) {
+        if (0 < $indention && 0 < (($indention - $minus) % $this->size)) {
             $message = $customMessage ?? sprintf('Please add %s spaces for every indention.', $this->size);
 
             return Violation::from(
                 $message,
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 
@@ -162,7 +161,8 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
         $currentIndention = $lines->current()->indention();
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);
@@ -196,7 +196,8 @@ class Indention extends AbstractRule implements LineContentRule, Configurable
         $currentIndention = $lines->current()->indention();
 
         $i = $number;
-        while ($i >= 1) {
+
+        while (1 <= $i) {
             --$i;
 
             $lines->seek($i);

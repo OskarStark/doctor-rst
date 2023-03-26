@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,16 +29,16 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new BlankLineAfterDirective())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new BlankLineAfterDirective())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         foreach (RstParser::DIRECTIVES as $directive) {
             yield [
@@ -64,8 +64,9 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
                 sprintf('Please add a blank line after "%s" directive', $directive),
                 'filename',
                 1,
-                $directive
+                $directive,
             );
+
             if (\in_array($directive, BlankLineAfterDirective::unSupportedDirectives(), true)) {
                 $violation = NullViolation::create();
             }
@@ -88,7 +89,8 @@ final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
 
         yield [
             NullViolation::create(),
-            new RstSample(<<<SAMPLE
+            new RstSample(
+                <<<'SAMPLE'
 .. code-block:: text
     :caption: src/app.js
     :emphasize-lines: 3,11

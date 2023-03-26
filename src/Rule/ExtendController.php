@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -40,7 +40,7 @@ class ExtendController extends AbstractRule implements LineContentRule
                 'Please extend Controller instead of AbstractController',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 
@@ -49,7 +49,7 @@ class ExtendController extends AbstractRule implements LineContentRule
                 'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

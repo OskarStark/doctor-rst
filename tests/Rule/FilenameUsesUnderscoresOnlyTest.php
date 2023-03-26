@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,8 +24,8 @@ final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, string $filename): void
     {
@@ -33,16 +33,16 @@ final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
         $fileInfo->method('getFilename')->willReturn($filename);
 
         $violation = (new FilenameUsesUnderscoresOnly())->check($fileInfo);
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            $violation
+            $violation,
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
-    public function validProvider(): \Generator
+    public static function validProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -58,14 +58,14 @@ final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
-    public function invalidProvider(): \Generator
+    public static function invalidProvider(): \Generator
     {
         yield [
             Violation::from(
                 'Please use underscores (_) for the filename: custom-extensions.rst',
                 'custom-extensions.rst',
                 1,
-                ''
+                '',
             ),
             'custom-extensions.rst',
         ];
@@ -75,7 +75,7 @@ final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
                 'Please use underscores (_) for the filename: _custom-extensions.rst',
                 '_custom-extensions.rst',
                 1,
-                ''
+                '',
             ),
             '_custom-extensions.rst',
         ];

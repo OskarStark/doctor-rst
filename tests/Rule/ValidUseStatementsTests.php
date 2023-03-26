@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,16 +28,16 @@ final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new ValidUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new ValidUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -45,7 +45,7 @@ final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
                     'Please do not escape the backslashes in a use statement.',
                     'filename',
                     1,
-                    'use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;'
+                    'use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;',
                 ),
                 new RstSample('use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;'),
             ],

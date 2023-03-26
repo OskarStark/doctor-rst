@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,36 +24,39 @@ final class TypoTest extends \App\Tests\UnitTestCase
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];
+
         foreach (Typo::getList() as $search => $message) {
             $configuredRules[] = (new Typo())->configure($search, $message);
         }
 
         $violations = [];
+
         foreach ($configuredRules as $rule) {
             $violation = $rule->check($sample->lines(), $sample->lineNumber(), 'filename');
+
             if (!$violation->isNull()) {
                 $violations[] = $violation;
             }
         }
 
         if ($expected->isNull()) {
-            static::assertCount(0, $violations);
+            self::assertCount(0, $violations);
         } else {
-            static::assertCount(1, $violations);
-            static::assertStringStartsWith($expected->message(), $violations[0]->message());
+            self::assertCount(1, $violations);
+            self::assertStringStartsWith($expected->message(), $violations[0]->message());
         }
     }
 
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function validProvider(): \Generator
+    public static function validProvider(): \Generator
     {
         yield 'empty string' => [NullViolation::create(), new RstSample('')];
 
@@ -94,7 +97,7 @@ final class TypoTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function invalidProvider(): \Generator
+    public static function invalidProvider(): \Generator
     {
         $invalids = [
             'Compsoer',
@@ -128,7 +131,7 @@ final class TypoTest extends \App\Tests\UnitTestCase
                     sprintf('Typo in word "%s"', $invalid),
                     'filename',
                     1,
-                    $invalid
+                    $invalid,
                 ),
                 new RstSample($invalid),
             ];
@@ -139,7 +142,7 @@ final class TypoTest extends \App\Tests\UnitTestCase
                     sprintf('Typo in word "%s"', $invalid),
                     'filename',
                     1,
-                    trim($invalid)
+                    trim($invalid),
                 ),
                 new RstSample(sprintf('    %s', $invalid)),
             ];

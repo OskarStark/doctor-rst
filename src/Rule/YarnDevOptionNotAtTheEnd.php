@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -40,7 +40,7 @@ class YarnDevOptionNotAtTheEnd extends AbstractRule implements LineContentRule
                 'Please move "--dev" option before the package',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

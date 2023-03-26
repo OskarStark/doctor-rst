@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -14,15 +14,12 @@ declare(strict_types=1);
 namespace App\Rst;
 
 use App\Value\Line;
-
-use function Symfony\Component\String\u;
-
 use Webmozart\Assert\Assert;
+use function Symfony\Component\String\u;
 
 class RstParser
 {
     public const SHORTHAND = '::';
-
     public const DIRECTIVE_CODE_BLOCK = '.. code-block::';
     public const DIRECTIVE_NOTE = '.. note::';
     public const DIRECTIVE_WARNING = '.. warning::';
@@ -48,7 +45,6 @@ class RstParser
     public const DIRECTIVE_LITERALINCLUDE = '.. literalinclude::';
     public const DIRECTIVE_CONTENTS = '.. contents::';
     public const DIRECTIVE_CODEIMPORT = '.. codeimport::';
-
     public const DIRECTIVES = [
         self::DIRECTIVE_CODE_BLOCK,
         self::DIRECTIVE_NOTE,
@@ -76,7 +72,6 @@ class RstParser
         self::DIRECTIVE_CONTENTS,
         self::DIRECTIVE_CODEIMPORT,
     ];
-
     public const CODE_BLOCK_PHP = 'php';
     public const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
     public const CODE_BLOCK_PHP_ATTRIBUTES = 'php-attributes';
@@ -110,11 +105,11 @@ class RstParser
     public static function isPhpDirective(Line $line): bool
     {
         if ($line->isDefaultDirective()
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP, true)
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS, true)
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ATTRIBUTES, true)
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY, true)
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE, true)
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP, true)
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_ANNOTATIONS, true)
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_ATTRIBUTES, true)
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_SYMFONY, true)
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_STANDALONE, true)
         ) {
             return true;
         }
@@ -130,7 +125,7 @@ class RstParser
 
         Assert::oneOf($directive, self::DIRECTIVES);
 
-        if (false !== strpos($line->raw()->toString(), $directive)) {
+        if (str_contains($line->raw()->toString(), $directive)) {
             return true;
         }
 
@@ -138,7 +133,7 @@ class RstParser
             $directivesExcludedCodeBlock = array_diff(self::DIRECTIVES, [$directive]);
 
             foreach ($directivesExcludedCodeBlock as $other) {
-                if (false !== strpos($line->raw()->toString(), $other)) {
+                if (str_contains($line->raw()->toString(), $other)) {
                     return false;
                 }
             }
@@ -187,7 +182,7 @@ class RstParser
                 self::CODE_BLOCK_VARNISH_3,
                 self::CODE_BLOCK_VARNISH_4,
                 self::CODE_BLOCK_APACHE,
-            ]
+            ],
         );
 
         if (substr($line->clean()->toString(), -\strlen($type)) === $type

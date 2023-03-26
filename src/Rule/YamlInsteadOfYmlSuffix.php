@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -54,7 +54,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements LineContentRule
                 'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 
@@ -63,7 +63,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements LineContentRule
                 sprintf('Please use ".yaml" instead of "%s"', $matches[0]),
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

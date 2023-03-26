@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -24,21 +24,21 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
     /**
      * @test
      *
-     * @dataProvider validProvider
      * @dataProvider invalidProvider
+     * @dataProvider validProvider
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new EnsureExactlyOneSpaceBeforeDirectiveType())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new EnsureExactlyOneSpaceBeforeDirectiveType())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function validProvider(): \Generator
+    public static function validProvider(): \Generator
     {
         $validCases = [
             '.. code-block:: php',
@@ -56,7 +56,7 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public function invalidProvider(): \Generator
+    public static function invalidProvider(): \Generator
     {
         $invalidCases = [
             '..  code-block:: php',
@@ -70,7 +70,7 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
                     'Please use only one whitespace between ".." and the directive type.',
                     'filename',
                     1,
-                    $invalidCase
+                    $invalidCase,
                 ),
                 new RstSample($invalidCase),
             ];

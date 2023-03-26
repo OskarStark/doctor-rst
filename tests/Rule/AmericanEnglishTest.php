@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -29,30 +29,33 @@ final class AmericanEnglishTest extends \App\Tests\UnitTestCase
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];
+
         foreach (AmericanEnglish::getList() as $search => $message) {
             $configuredRules[] = (new AmericanEnglish())->configure($search, $message);
         }
 
         $violations = [];
+
         foreach ($configuredRules as $rule) {
             $violation = $rule->check($sample->lines(), $sample->lineNumber(), 'filename');
+
             if (!$violation->isNull()) {
                 $violations[] = $violation;
             }
         }
 
         if ($expected->isNull()) {
-            static::assertCount(0, $violations);
+            self::assertCount(0, $violations);
         } else {
-            static::assertCount(1, $violations);
-            static::assertEquals($expected, $violations[0]);
+            self::assertCount(1, $violations);
+            self::assertEquals($expected, $violations[0]);
         }
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public function checkProvider(): \Generator
+    public static function checkProvider(): \Generator
     {
         $valids = [
             'behavior',
@@ -93,7 +96,7 @@ final class AmericanEnglishTest extends \App\Tests\UnitTestCase
                     sprintf('Please use American English for: %s', $invalid),
                     'filename',
                     1,
-                    $invalid
+                    $invalid,
                 ),
                 new RstSample($invalid),
             ];
@@ -104,7 +107,7 @@ final class AmericanEnglishTest extends \App\Tests\UnitTestCase
                     sprintf('Please use American English for: %s', $invalidUppercase),
                     'filename',
                     1,
-                    $invalidUppercase
+                    $invalidUppercase,
                 ),
                 new RstSample($invalidUppercase),
             ];

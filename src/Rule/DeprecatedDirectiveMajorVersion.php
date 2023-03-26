@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -22,12 +22,12 @@ use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineContentRule, Configurable
+class DeprecatedDirectiveMajorVersion extends AbstractRule implements Configurable, LineContentRule
 {
     private int $majorVersion;
 
     public function __construct(
-        private readonly VersionParser $versionParser
+        private readonly VersionParser $versionParser,
     ) {
     }
 
@@ -35,8 +35,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
     {
         $resolver
             ->setRequired('major_version')
-            ->setAllowedTypes('major_version', 'int')
-        ;
+            ->setAllowedTypes('major_version', 'int');
 
         return $resolver;
     }
@@ -70,7 +69,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
             try {
                 $normalizedVersion = $this->versionParser->normalize($version);
 
-                list($major, $minor, $patch, $add) = explode('.', $normalizedVersion);
+                [$major, $minor, $patch, $add] = explode('.', $normalizedVersion);
 
                 $major = (int) $major;
 
@@ -78,28 +77,28 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements LineConten
                     $message = sprintf(
                         'You are not allowed to use version "%s". Only major version "%s" is allowed.',
                         $version,
-                        $this->majorVersion
+                        $this->majorVersion,
                     );
 
                     return Violation::from(
                         $message,
                         $filename,
                         $number + 1,
-                        $line
+                        $line,
                     );
                 }
             } catch (\UnexpectedValueException) {
                 $message = sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
-                    $version
+                    $version,
                 );
 
                 return Violation::from(
                     $message,
                     $filename,
                     $number + 1,
-                    $line
+                    $line,
                 );
             }
         }

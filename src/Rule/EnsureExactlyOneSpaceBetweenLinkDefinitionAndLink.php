@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -54,7 +54,7 @@ class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule imp
                 'Please use only one whitespace between the link definition and the link.',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -48,7 +48,7 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements LineContentR
 
         while ($lines->valid()
             && !$lines->current()->isDirective()
-            && ($indention < $lines->current()->indention() || $lines->current()->isBlank())
+            && ($lines->current()->indention() > $indention || $lines->current()->isBlank())
         ) {
             $line = $lines->current();
 
@@ -62,9 +62,10 @@ class NoNamespaceAfterUseStatements extends AbstractRule implements LineContentR
                         'Please move the namespace before the use statement(s)',
                         $filename,
                         $number + 1,
-                        $line
+                        $line,
                     );
                 }
+
                 break;
             }
 

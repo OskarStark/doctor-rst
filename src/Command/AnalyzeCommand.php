@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -37,12 +37,12 @@ use Symfony\Component\Yaml\Yaml;
 class AnalyzeCommand extends Command
 {
     protected static $defaultName = 'analyze';
-
     private Registry $registry;
 
-    /** @var Rule[] */
+    /**
+     * @var Rule[]
+     */
     private array $rules = [];
-
     private MemoizingAnalyzer $analyzer;
     private FormatterRegistry $formatterRegistry;
 
@@ -141,6 +141,7 @@ class AnalyzeCommand extends Command
 
             try {
                 $ci = $ciDetector->detect();
+
                 if (CiDetector::CI_GITHUB_ACTIONS === $ci->getCiName()) {
                     $errorFormat = 'github';
                 }
@@ -157,13 +158,14 @@ class AnalyzeCommand extends Command
         $whitelistConfig = $config['whitelist'] ?? [];
 
         $fileResults = [];
+
         foreach ($finder as $file) {
             $fileResults[] = new FileResult(
                 $file,
                 new ExcludedViolationList(
                     $whitelistConfig,
-                    $this->analyzer->analyze($file, $this->rules)
-                )
+                    $this->analyzer->analyze($file, $this->rules),
+                ),
             );
         }
         $analyzerResult = new AnalyzerResult($fileResults, $whitelistConfig);

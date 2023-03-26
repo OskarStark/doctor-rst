@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -25,13 +25,13 @@ final class TwigHelperTest extends \App\Tests\UnitTestCase
      */
     public function isComment(bool $expected, string $line, ?bool $closed): void
     {
-        static::assertSame(
+        self::assertSame(
             $expected,
-            TwigHelper::isComment(new Line($line), $closed)
+            TwigHelper::isComment(new Line($line), $closed),
         );
     }
 
-    public function isCommentProvider(): iterable
+    public static function isCommentProvider(): iterable
     {
         yield [true, '{#', null];
         yield [true, '#}', null];

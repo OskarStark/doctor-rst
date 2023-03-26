@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -55,7 +55,7 @@ final class MaxColons extends AbstractRule implements LineContentRule
             'Please use max 2 colons at the end.',
             $filename,
             $number + 1,
-            $line
+            $line,
         );
     }
 }

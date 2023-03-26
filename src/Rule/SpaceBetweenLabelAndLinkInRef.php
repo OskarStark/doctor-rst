@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -21,7 +21,6 @@ use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
-
 use function Symfony\Component\String\u;
 
 /**
@@ -51,14 +50,14 @@ class SpaceBetweenLabelAndLinkInRef extends AbstractRule implements LineContentR
                 $message = sprintf(
                     'Please add a space between "%s" and "<%s>" inside :ref: directive',
                     $matches['label'],
-                    $matches['link']
+                    $matches['link'],
                 );
 
                 return Violation::from(
                     $message,
                     $filename,
                     $number + 1,
-                    $line
+                    $line,
                 );
             }
         }

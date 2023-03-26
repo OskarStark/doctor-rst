@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -39,7 +39,7 @@ class NoAppConsole extends AbstractRule implements LineContentRule
                 'Please use "bin/console" instead of "app/console"',
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

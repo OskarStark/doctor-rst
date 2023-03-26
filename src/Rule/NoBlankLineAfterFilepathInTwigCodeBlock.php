@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -61,6 +61,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Li
 
         if ($lines->current()->isBlank()) {
             $lines->next();
+
             if (!TwigHelper::isComment($lines->current())) {
                 $match = trim($matches[0]);
 
@@ -68,7 +69,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Li
                     sprintf('Please remove blank line after "%s"', $match),
                     $filename,
                     $number + 1,
-                    $match
+                    $match,
                 );
             }
         }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -17,7 +17,9 @@ use App\Formatter\Exception\FormatterNotFound;
 
 final class Registry
 {
-    /** @var Formatter[] */
+    /**
+     * @var Formatter[]
+     */
     private array $formatters = [];
 
     public function __construct(Formatter ...$formatters)

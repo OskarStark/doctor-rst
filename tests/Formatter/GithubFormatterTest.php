@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -25,7 +25,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class GithubFormatterTest extends \App\Tests\UnitTestCase
 {
-    public function testFormat(): void
+    /**
+     * @test
+     */
+    public function format(): void
     {
         $analyzeDir = \dirname(__DIR__, 2).'/dummy';
 
@@ -36,12 +39,12 @@ final class GithubFormatterTest extends \App\Tests\UnitTestCase
             new \SplFileInfo($analyzeDir.'/docs/index.rst'),
             new ExcludedViolationList(
                 [],
-                [Violation::from('violation message', $analyzeDir.'/docs/index.rst', 2, 'dummy text')]
-            )
+                [Violation::from('violation message', $analyzeDir.'/docs/index.rst', 2, 'dummy text')],
+            ),
         );
         $validFileResult = new FileResult(
             new \SplFileInfo($analyzeDir.'/docs/tutorial/introduction.rst'),
-            new ExcludedViolationList([], [])
+            new ExcludedViolationList([], []),
         );
 
         $analyzerResult = new AnalyzerResult([$fileResultWithViolations, $validFileResult], [
@@ -57,14 +60,14 @@ docs/index.rst ✘
     2: violation message
    ->  dummy text
 
- [WARNING] Whitelisted regex "/foo/" was not matched.                           
+ [WARNING] Whitelisted regex "/foo/" was not matched.
 
- [WARNING] Found "1" invalid file!                                              
+ [WARNING] Found "1" invalid file!
 
-::error file=$analyzeDir/docs/index.rst,line=2::violation message
+::error file={$analyzeDir}/docs/index.rst,line=2::violation message
 
 OUTPUT;
 
-        static::assertSame($expected, $bufferedOutput->fetch());
+        self::assertSame($expected, $bufferedOutput->fetch());
     }
 }

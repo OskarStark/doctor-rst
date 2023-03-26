@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -53,7 +53,8 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         $phpStandalone = false;
 
         $codeBlocks = [];
-        while ($lines->valid() && ($indention < $lines->current()->indention() || $lines->current()->isBlank())) {
+
+        while ($lines->valid() && ($lines->current()->indention() > $indention || $lines->current()->isBlank())) {
             if (RstParser::directiveIs($lines->current(), RstParser::DIRECTIVE_CODE_BLOCK)) {
                 if ($lines->current()->raw()->endsWith(RstParser::CODE_BLOCK_PHP_SYMFONY)) {
                     $phpSymfony = true;
@@ -72,7 +73,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
                     $content->seek($lines->key() + 1);
 
                     while ($content->valid() && ($content->current()->isBlank() || $lines->current()->indention() < $content->current()->indention())) {
-                        if (false !== strpos($content->current()->raw()->toString(), 'xliff')) {
+                        if (str_contains($content->current()->raw()->toString(), 'xliff')) {
                             $xliff = true;
 
                             break;
@@ -87,6 +88,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         }
 
         $onlyPhpSymfonyAndPhpStandalone = false;
+
         if ($phpSymfony && $phpStandalone && 2 === \count($codeBlocks)) {
             $onlyPhpSymfonyAndPhpStandalone = true;
         }
@@ -109,14 +111,14 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         ) {
             $message = sprintf(
                 'Please use the following order for your code blocks: "%s"',
-                str_replace('.. code-block:: ', '', implode(', ', $validOrderOnlyPhpSymfonyAndPhpStandalone))
+                str_replace('.. code-block:: ', '', implode(', ', $validOrderOnlyPhpSymfonyAndPhpStandalone)),
             );
 
             return Violation::from(
                 $message,
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 
@@ -124,14 +126,14 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         if (!$xliff && !$this->equal($codeBlocks, $validOrder) && 1 !== \count($validOrder)) {
             $message = sprintf(
                 'Please use the following order for your code blocks: "%s"',
-                str_replace('.. code-block:: ', '', implode(', ', $validOrder))
+                str_replace('.. code-block:: ', '', implode(', ', $validOrder)),
             );
 
             return Violation::from(
                 $message,
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 
@@ -145,14 +147,14 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         if ($xliff && !$this->equal($codeBlocks, $validXliffOrder) && !$this->equal($codeBlocks, $validOrder)) {
             $message = sprintf(
                 'Please use the following order for your code blocks: "%s"',
-                str_replace('.. code-block:: ', '', implode(', ', $validXliffOrder))
+                str_replace('.. code-block:: ', '', implode(', ', $validXliffOrder)),
             );
 
             return Violation::from(
                 $message,
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

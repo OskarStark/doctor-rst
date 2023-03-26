@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -62,7 +62,7 @@ class Application extends BaseApplication
         if (false === $input->hasParameterOption('--no-cache')) {
             $container->setParameter(
                 'cache.file',
-                $input->getParameterOption('--cache-file', getcwd().'/.doctor-rst.cache')
+                $input->getParameterOption('--cache-file', getcwd().'/.doctor-rst.cache'),
             );
 
             $fileLoader->load('cache.php');

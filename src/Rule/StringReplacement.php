@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -38,7 +38,7 @@ class StringReplacement extends CheckListRule implements LineContentRule
                 sprintf($this->message, $this->search),
                 $filename,
                 $number + 1,
-                $line
+                $line,
             );
         }
 

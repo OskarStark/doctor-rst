@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -28,13 +28,13 @@ final class NoComposerReqTest extends \App\Tests\UnitTestCase
      */
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
-        static::assertEquals(
+        self::assertEquals(
             $expected,
-            (new NoComposerReq())->check($sample->lines(), $sample->lineNumber(), 'filename')
+            (new NoComposerReq())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
-    public function checkProvider(): array
+    public static function checkProvider(): array
     {
         return [
             [
@@ -42,7 +42,7 @@ final class NoComposerReqTest extends \App\Tests\UnitTestCase
                     'Please "composer require" instead of "composer req"',
                     'filename',
                     1,
-                    'composer req symfony/form'
+                    'composer req symfony/form',
                 ),
                 new RstSample('composer req symfony/form'),
             ],
