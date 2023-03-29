@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
-use App\Annotations\Rule\InvalidExample;
-use App\Annotations\Rule\ValidExample;
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Helper\PhpHelper;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -23,15 +23,11 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Ensures to have 2 backslashes when highlighting a namespace to have valid output.")
- *
- * @ValidExample("``App\Entity\Foo``")
- * @ValidExample("`App\\Entity\\Foo`")
- *
- * @InvalidExample("``App\\Entity\\Foo``")
- * @InvalidExample("`App\Entity\Foo`")
- */
+#[Description('Ensures to have 2 backslashes when highlighting a namespace to have valid output.')]
+#[ValidExample('``App\\Entity\\Foo``')]
+#[ValidExample('`App\\\\Entity\\\\Foo`')]
+#[InvalidExample('``App\\\\Entity\\\\Foo``')]
+#[InvalidExample('`App\\Entity\\Foo`')]
 class ValidInlineHighlightedNamespaces extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array

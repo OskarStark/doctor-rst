@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace App\Command;
 
-use App\Annotations\Rule as RuleAnnotation;
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Handler\Registry;
 use App\Rule\CheckListRule;
 use App\Rule\Configurable;
 use App\Rule\Rule;
 use App\Value\RuleGroup;
-use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -32,12 +33,10 @@ class RulesCommand extends Command
     protected static $defaultName = 'rules';
     private SymfonyStyle $io;
     private Registry $registry;
-    private Reader $annotationReader;
 
-    public function __construct(Registry $registry, Reader $annotationReader, ?string $name = null)
+    public function __construct(Registry $registry, ?string $name = null)
     {
         $this->registry = $registry;
-        $this->annotationReader = $annotationReader;
 
         parent::__construct($name);
     }
@@ -81,11 +80,14 @@ class RulesCommand extends Command
 
     private function rule(Rule $rule): void
     {
-        /** @var RuleAnnotation\Description $description */
-        $description = $this->annotationReader->getClassAnnotation(
-            new \ReflectionClass($rule::class),
-            RuleAnnotation\Description::class,
-        );
+        $reflectionClass = new \ReflectionClass($rule::class);
+
+        $description = null;
+
+        if ($descriptions = $reflectionClass->getAttributes(Description::class)) {
+            /** @var Description $description */
+            $description = $descriptions[0]->newInstance();
+        }
 
         $this->io->writeln(sprintf('## `%s`', $rule::getName()->toString()));
         $this->io->newLine();
@@ -197,24 +199,24 @@ class RulesCommand extends Command
             $this->io->newLine();
         }
 
-        /** @var RuleAnnotation\ValidExample $validExample */
-        $validExample = $this->annotationReader->getClassAnnotation(
-            new \ReflectionClass($rule::class),
-            RuleAnnotation\ValidExample::class,
-        );
+        $validExamples = [];
 
-        /** @var RuleAnnotation\InvalidExample $invalidExample */
-        $invalidExample = $this->annotationReader->getClassAnnotation(
-            new \ReflectionClass($rule::class),
-            RuleAnnotation\InvalidExample::class,
-        );
-
-        if (null !== $validExample) {
-            $this->renderExamples('##### Valid Examples :+1:', \is_array($validExample->value) ? $validExample->value : [$validExample->value]);
+        foreach ($reflectionClass->getAttributes(ValidExample::class) as $attribute) {
+            $validExamples[] = $attribute->newInstance()->value;
         }
 
-        if (null !== $invalidExample) {
-            $this->renderExamples('##### Invalid Examples :-1:', \is_array($invalidExample->value) ? $invalidExample->value : [$invalidExample->value]);
+        if ($validExamples) {
+            $this->renderExamples('##### Valid Examples :+1:', $validExamples);
+        }
+
+        $invalidExamples = [];
+
+        foreach ($reflectionClass->getAttributes(InvalidExample::class) as $attribute) {
+            $invalidExamples[] = $attribute->newInstance()->value;
+        }
+
+        if ($invalidExamples) {
+            $this->renderExamples('##### Invalid Examples :-1:', $invalidExamples);
         }
     }
 

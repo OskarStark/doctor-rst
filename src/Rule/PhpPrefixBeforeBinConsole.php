@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
-use App\Annotations\Rule\InvalidExample;
-use App\Annotations\Rule\ValidExample;
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -23,13 +23,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Ensure `bin/console` is prefixed with `php` to be safe executable on Microsoft Windows.")
- *
- * @InvalidExample("bin/console list")
- *
- * @ValidExample("php bin/console list")
- */
+#[Description('Ensure `bin/console` is prefixed with `php` to be safe executable on Microsoft Windows.')]
+#[InvalidExample('bin/console list')]
+#[ValidExample('php bin/console list')]
 class PhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array

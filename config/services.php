@@ -62,7 +62,4 @@ return static function (ContainerConfigurator $container): void {
         ->args([tagged_iterator('doctor_rst.rule')]);
 
     $services->set(VersionParser::class);
-
-    $services->set(AnnotationReader::class);
-    $services->alias(Reader::class, AnnotationReader::class);
 };

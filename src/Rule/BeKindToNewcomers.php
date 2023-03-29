@@ -13,16 +13,14 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
+use App\Attribute\Rule\Description;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Do not use belittling words!")
- */
+#[Description('Do not use belittling words!')]
 class BeKindToNewcomers extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array

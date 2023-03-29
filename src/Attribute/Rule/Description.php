@@ -11,15 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Annotations\Rule;
+namespace App\Attribute\Rule;
 
-/**
- * @Annotation
- */
-class InvalidExample
+#[\Attribute(\Attribute::TARGET_CLASS)]
+class Description
 {
-    /**
-     * @var string|string[]
-     */
-    public $value;
+    public function __construct(
+        public string $value,
+    ) {
+    }
 }

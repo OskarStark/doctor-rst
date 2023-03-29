@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
-use App\Annotations\Rule\InvalidExample;
-use App\Annotations\Rule\ValidExample;
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -23,13 +23,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Ensure exactly one space between link definition and link.")
- *
- * @InvalidExample(".. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST")
- *
- * @ValidExample(".. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST")
- */
+#[Description('Ensure exactly one space between link definition and link.')]
+#[InvalidExample('.. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST')]
+#[ValidExample('.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST')]
 class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array

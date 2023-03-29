@@ -13,16 +13,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Annotations\Rule\Description;
+use App\Attribute\Rule\Description;
 use App\Rule\StringReplacement;
 use App\Tests\RstSample;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("propose to replace a string with another string.")
- */
+#[Description("propose to replace a string with another string.")]
 final class StringReplacementTest extends \App\Tests\UnitTestCase
 {
     /**

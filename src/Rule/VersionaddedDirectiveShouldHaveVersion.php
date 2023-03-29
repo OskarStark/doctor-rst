@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
-use App\Annotations\Rule\InvalidExample;
-use App\Annotations\Rule\ValidExample;
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -24,13 +24,10 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
-/**
- * @Description("Ensure a versionadded directive has a version which follows SemVer.")
- *
- * @ValidExample(".. versionadded:: 3.4")
- *
- * @InvalidExample({".. versionadded::", ".. versionadded:: foo-bar"})
- */
+#[Description('Ensure a versionadded directive has a version which follows SemVer.')]
+#[ValidExample('.. versionadded:: 3.4')]
+#[InvalidExample('.. versionadded::')]
+#[InvalidExample('.. versionadded:: foo-bar')]
 class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
 {
     public function __construct(
