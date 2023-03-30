@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
-use App\Annotations\Rule\InvalidExample;
-use App\Annotations\Rule\ValidExample;
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
@@ -24,13 +24,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Make sure Composer command in a terminal/bash code block is prefixed with a $.")
- *
- * @InvalidExample("composer require symfony/var-dumper")
- *
- * @ValidExample("$ composer require symfony/var-dumper")
- */
+#[Description('Make sure Composer command in a terminal/bash code block is prefixed with a $.')]
+#[InvalidExample('composer require symfony/var-dumper')]
+#[ValidExample('$ composer require symfony/var-dumper')]
 class EnsureBashPromptBeforeComposerCommand extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;

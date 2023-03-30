@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
+use App\Attribute\Rule\Description;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -21,9 +21,7 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Ensure that no directive follows the shorthand `::`. This could lead to broken markup.")
- */
+#[Description('Ensure that no directive follows the shorthand `::`. This could lead to broken markup.')]
 class NoDirectiveAfterShorthand extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array

@@ -11,12 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Annotations\Rule;
+namespace App\Attribute\Rule;
 
-/**
- * @Annotation
- */
-class Description
+#[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
+class InvalidExample
 {
-    public string $value;
+    public function __construct(
+        public readonly string $value,
+    ) {
+    }
 }

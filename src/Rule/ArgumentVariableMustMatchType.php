@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
+use App\Attribute\Rule\Description;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -22,9 +22,7 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @Description("Make sure argument variable name match for type")
- */
+#[Description('Make sure argument variable name match for type')]
 class ArgumentVariableMustMatchType extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;
