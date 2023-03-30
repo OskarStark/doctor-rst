@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
+use App\Attribute\Rule\Description;
 use App\Helper\PhpHelper;
 use App\Rst\RstParser;
 use App\Value\Lines;
@@ -21,9 +21,7 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Make sure you have a blank line after a filepath in a PHP code block.")
- */
+#[Description('Make sure you have a blank line after a filepath in a PHP code block.')]
 class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface

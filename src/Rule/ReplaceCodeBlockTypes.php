@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
+use App\Attribute\Rule\Description;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -21,9 +21,7 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Propose alternatives for disallowed code block types.")
- */
+#[Description('Propose alternatives for disallowed code block types.')]
 class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array

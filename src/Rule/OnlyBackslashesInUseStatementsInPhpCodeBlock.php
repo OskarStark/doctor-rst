@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
-use App\Annotations\Rule\InvalidExample;
-use App\Annotations\Rule\ValidExample;
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -23,13 +23,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("A use statement in a PHP code-block should only contain backslashes.")
- *
- * @InvalidExample("use Foo/Bar;")
- *
- * @ValidExample("use Foo\Bar;")
- */
+#[Description('A use statement in a PHP code-block should only contain backslashes.')]
+#[InvalidExample('use Foo/Bar;')]
+#[ValidExample('use Foo\\Bar;')]
 class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;

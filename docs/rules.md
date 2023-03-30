@@ -442,6 +442,10 @@ custom_extensions.rst
 custom_extensions.rst
 ```
 
+```rst
+_custom_extensions.rst
+```
+
 ##### Invalid Examples :-1:
 
 ```rst
@@ -883,10 +887,18 @@ Pattern | Message
 ``App\Entity\Foo``
 ```
 
+```rst
+`App\\Entity\\Foo`
+```
+
 ##### Invalid Examples :-1:
 
 ```rst
 ``App\\Entity\\Foo``
+```
+
+```rst
+`App\Entity\Foo`
 ```
 
 ## `valid_use_statements`

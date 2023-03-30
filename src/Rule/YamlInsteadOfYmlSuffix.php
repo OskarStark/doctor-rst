@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
-use App\Annotations\Rule\InvalidExample;
-use App\Annotations\Rule\ValidExample;
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\NullViolation;
@@ -23,13 +23,12 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Make sure to only use `yaml` instead of `yml`.")
- *
- * @ValidExample({".travis.yml", "..code-block:: yaml", "Please add this to your services.yaml file."})
- *
- * @InvalidExample({"..code-block:: yml", "Please add this to your services.yml file."})
- */
+#[Description('Make sure to only use `yaml` instead of `yml`.')]
+#[ValidExample('.travis.yml')]
+#[ValidExample('..code-block:: yaml')]
+#[ValidExample('Please add this to your services.yaml file.')]
+#[InvalidExample('..code-block:: yml')]
+#[InvalidExample('Please add this to your services.yml file.')]
 class YamlInsteadOfYmlSuffix extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array

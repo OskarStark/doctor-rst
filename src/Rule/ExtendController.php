@@ -13,16 +13,14 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
+use App\Attribute\Rule\Description;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @Description("Ensure `Controller` and the corresponding namespace `Symfony\Bundle\FrameworkBundle\Controller\Controller` is used. Instead of `Symfony\Bundle\FrameworkBundle\Controller\AbstractController`.")
- */
+#[Description('Ensure `Controller` and the corresponding namespace `Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller` is used. Instead of `Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController`.')]
 class ExtendController extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
