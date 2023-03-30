@@ -17,7 +17,7 @@ namespace App\Attribute\Rule;
 class ValidExample
 {
     public function __construct(
-        public string $value,
+        public readonly string $value,
     ) {
     }
 }
