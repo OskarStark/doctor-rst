@@ -32,6 +32,7 @@
 * [filename_uses_underscores_only](#filename_uses_underscores_only)
 * [final_admin_classes](#final_admin_classes)
 * [final_admin_extension_classes](#final_admin_extension_classes)
+* [forbidden_directives](#forbidden_directives)
 * [indention](#indention) :exclamation:
 * [kernel_instead_of_app_kernel](#kernel_instead_of_app_kernel)
 * [line_length](#line_length)
@@ -459,6 +460,18 @@ custom-extensions.rst
 ## `final_admin_extension_classes`
 
 #### Groups [`@Sonata`]
+
+## `forbidden_directives`
+
+  > _Make sure forbidden directives are not used_
+
+#### Groups [`@Symfony`]
+
+#### Configuration options
+
+Name | Required | Allowed Types | Default
+--- | --- | --- | ---
+`directives` | `false` | `string[]` | `[]`
 
 ## `indention`
 
