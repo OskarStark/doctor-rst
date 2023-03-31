@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Annotations\Rule\Description;
+use App\Attribute\Rule\Description;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
@@ -23,9 +23,7 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @Description("Make sure forbidden directives are not used")
- */
+ #[Description("Make sure forbidden directives are not used")]
 class ForbiddenDirectives extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;
@@ -40,7 +38,7 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
         $resolver
             ->setRequired('directives')
             ->setAllowedTypes('directives', 'string[]')
-            ->setDefault('arguments', []);
+            ->setDefault('directives', []);
 
         return $resolver;
     }

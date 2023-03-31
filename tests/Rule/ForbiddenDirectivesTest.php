@@ -97,7 +97,22 @@ final class ForbiddenDirectivesTest extends \App\Tests\UnitTestCase
 
         $rule = new ForbiddenDirectives();
         $rule->setOptions([
-            'directives' => '.. caution::'
+            'directives' => '.. caution::',
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function checkWithNoConfiguration(): void
+    {
+        $rule = new ForbiddenDirectives();
+        $rule->setOptions([]);
+
+        $sample = new RstSample('temp');
+        self::assertEquals(
+            NullViolation::create(),
+            $rule->check($sample->lines(), $sample->lineNumber(), 'filename')
+        );
     }
 }
