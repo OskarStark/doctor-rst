@@ -79,6 +79,7 @@
 * [unused_links](#unused_links)
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
 * [use_https_xsd_urls](#use_https_xsd_urls)
+* [use_named_constructor_without_new_keyword_rule](#use_named_constructor_without_new_keyword_rule)
 * [valid_inline_highlighted_namespaces](#valid_inline_highlighted_namespaces)
 * [valid_use_statements](#valid_use_statements)
 * [versionadded_directive_major_version](#versionadded_directive_major_version)
@@ -887,6 +888,22 @@ Pattern | Message
 ## `use_https_xsd_urls`
 
 #### Groups [`@Sonata`, `@Symfony`]
+
+## `use_named_constructor_without_new_keyword_rule`
+
+  > _Ensures that named constructor is used without "new" keyword._
+
+##### Valid Examples :+1:
+
+```rst
+new Uuid()
+```
+
+##### Invalid Examples :-1:
+
+```rst
+new Uuid::fromString()
+```
 
 ## `valid_inline_highlighted_namespaces`
 
