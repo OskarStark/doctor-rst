@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\UseNamedConstructorWithoutNewKeywordRule;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class UseNamedConstructorWithoutNewKeywordRuleTest extends \App\Tests\UnitTestCase
+final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
 {
     /**
      * @test
@@ -39,24 +40,24 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends \App\Tests\Unit
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield sprintf('Has violation for code-block "%s"', $codeBlock) => [
                 Violation::from(
-                    sprintf('Please do not use "new" keyword with named constructor for "%s"', $codeBlock),
+                    'Please do not use "new" keyword with named constructor',
                     'filename',
-                    1,
-                    $codeBlock
+                    2,
+                    $codeBlock,
                 ),
                 new RstSample([
                     $codeBlock,
-                    '$uuid = new Uuid::fromString("foobar");',
-                ]),
+                    '    $uuid = new Uuid::fromString("foobar");',
+                ], 1),
             ];
 
             yield sprintf('No violation for code-block "%s"', $codeBlock) => [
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
-                    '$this->somePhp()',
-                    'self::setUp()',
-                ]),
+                    '    $this->somePhp();',
+                    '    new class();',
+                ], 2),
             ];
         }
     }

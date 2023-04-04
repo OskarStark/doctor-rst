@@ -28,11 +28,13 @@ class UseNamedConstructorWithoutNewKeywordRule extends AbstractRule implements L
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->isBlank()) {
+        if ($line->isBlank()
+            || $line->isDirective()
+        ) {
             return NullViolation::create();
         }
 
-        if (!$matches = $line->raw()->match('/new .*::/')) {
+        if ([] === $line->raw()->match('/new .*::/')) {
             return NullViolation::create();
         }
 
@@ -41,7 +43,7 @@ class UseNamedConstructorWithoutNewKeywordRule extends AbstractRule implements L
         }
 
         return Violation::from(
-            sprintf('Please do not use "new" keyword with named constructor for %s', $matches[0]),
+            'Please do not use "new" keyword with named constructor',
             $filename,
             $number + 1,
             $lines->current()
