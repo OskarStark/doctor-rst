@@ -101,6 +101,7 @@ class RstParser
     public const CODE_BLOCK_VARNISH_3 = 'varnish3';
     public const CODE_BLOCK_VARNISH_4 = 'varnish4';
     public const CODE_BLOCK_APACHE = 'apache';
+    public const CODE_BLOCK_CADDY = 'caddy';
 
     public static function isPhpDirective(Line $line): bool
     {
@@ -182,6 +183,7 @@ class RstParser
                 self::CODE_BLOCK_VARNISH_3,
                 self::CODE_BLOCK_VARNISH_4,
                 self::CODE_BLOCK_APACHE,
+                self::CODE_BLOCK_CADDY,
             ],
         );
 
