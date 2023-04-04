@@ -20,7 +20,7 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-#[Description("propose to replace a string with another string.")]
+#[Description('propose to replace a string with another string.')]
 final class StringReplacementTest extends \App\Tests\UnitTestCase
 {
     /**
