@@ -183,6 +183,7 @@ class RstParser
                 self::CODE_BLOCK_VARNISH_3,
                 self::CODE_BLOCK_VARNISH_4,
                 self::CODE_BLOCK_APACHE,
+                self::CODE_BLOCK_CADDY,
             ],
         );
 
