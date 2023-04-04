@@ -230,6 +230,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
         yield [true, '.. code-block:: rst', RstParser::DIRECTIVE_CODE_BLOCK];
         yield [true, ' .. code-block:: php', RstParser::DIRECTIVE_CODE_BLOCK];
         yield [true, '.. code-block:: php-annotations', RstParser::DIRECTIVE_CODE_BLOCK];
+        yield [true, '.. code-block:: caddy', RstParser::DIRECTIVE_CODE_BLOCK];
         yield [false, 'foo', RstParser::DIRECTIVE_CODE_BLOCK];
     }
 
@@ -258,6 +259,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
         yield [true, ' .. code-block:: php-standalone', RstParser::CODE_BLOCK_PHP_STANDALONE];
         yield [true, ' .. code-block:: text', RstParser::CODE_BLOCK_TEXT];
         yield [true, ' .. code-block:: rst', RstParser::CODE_BLOCK_RST];
+        yield [true, ' .. code-block:: caddy', RstParser::CODE_BLOCK_CADDY];
         yield [false, 'foo', RstParser::CODE_BLOCK_PHP];
         yield [true, ' .. code-block:: php', RstParser::CODE_BLOCK_PHP, true];
         yield [true, ' .. code-block:: php-annotations', RstParser::CODE_BLOCK_PHP_ANNOTATIONS, false];
