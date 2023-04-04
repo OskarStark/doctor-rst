@@ -39,7 +39,7 @@ class TitleUnderlineLengthMustMatchTitleLength extends AbstractRule implements L
             return Violation::from(
                 sprintf(
                     'Please ensure title "%s" and underline length are matching',
-                    $lines->current()->raw()->replace('`', '')->toString()
+                    $lines->current()->raw()->replace('`', '')->toString(),
                 ),
                 $filename,
                 $number,
