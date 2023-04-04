@@ -13,13 +13,19 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-class UseNamedConstructorWithoutNewKeywordRule extends AbstractRule implements LineContentRule
+#[Description('Ensures that named constructor is used without "new" keyword.')]
+#[ValidExample('new Uuid()')]
+#[InvalidExample('new Uuid::fromString()')]
+final class UseNamedConstructorWithoutNewKeywordRule extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 
