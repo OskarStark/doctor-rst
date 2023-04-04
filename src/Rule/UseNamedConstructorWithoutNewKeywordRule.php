@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/*
+/**
  * This file is part of DOCtor-RST.
  *
  * (c) Oskar Stark <oskarstark@googlemail.com>
@@ -52,7 +52,7 @@ final class UseNamedConstructorWithoutNewKeywordRule extends AbstractRule implem
             'Please do not use "new" keyword with named constructor',
             $filename,
             $number + 1,
-            $lines->current()
+            $lines->current(),
         );
     }
 }
