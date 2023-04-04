@@ -23,7 +23,7 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
- #[Description("Make sure forbidden directives are not used")]
+#[Description('Make sure forbidden directives are not used')]
 class ForbiddenDirectives extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;

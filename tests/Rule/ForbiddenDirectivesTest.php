@@ -72,7 +72,6 @@ final class ForbiddenDirectivesTest extends \App\Tests\UnitTestCase
             ]),
         ];
 
-
         yield [
             NullViolation::create(),
             new RstSample([
@@ -112,7 +111,7 @@ final class ForbiddenDirectivesTest extends \App\Tests\UnitTestCase
         $sample = new RstSample('temp');
         self::assertEquals(
             NullViolation::create(),
-            $rule->check($sample->lines(), $sample->lineNumber(), 'filename')
+            $rule->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 }
