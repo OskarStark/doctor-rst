@@ -60,7 +60,7 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
                     '    $client = new NoPrivateNetworkHttpClient(HttpClient::create());',
                     '    $container->register(Ldap::class)->addArgument(new Reference(Adapter::class));',
                     '    new Status(Status::YES);',
-                    '    $response = new Response('Hello '.$name, Response::HTTP_OK);',
+                    '    return new Response(null, Response::HTTP_TOO_MANY_REQUESTS, $headers);',
                 ], 2),
             ];
         }
