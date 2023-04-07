@@ -57,6 +57,10 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
                     $codeBlock,
                     '    $this->somePhp();',
                     '    return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);',
+                    '    $client = new NoPrivateNetworkHttpClient(HttpClient::create());',
+                    '    $container->register(Ldap::class)->addArgument(new Reference(Adapter::class));',
+                    '    new Status(Status::YES);',
+                    '    $response = new Response('Hello '.$name, Response::HTTP_OK);',
                 ], 2),
             ];
         }
