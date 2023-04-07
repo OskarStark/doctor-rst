@@ -51,17 +51,44 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
                 ], 1),
             ];
 
-            yield sprintf('No violation for code-block "%s"', $codeBlock) => [
+            yield sprintf('No violation for code-block "%s" - First case', $codeBlock) => [
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
-                    '    $this->somePhp();',
-                    '    return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);',
-                    '    $client = new NoPrivateNetworkHttpClient(HttpClient::create());',
-                    '    $container->register(Ldap::class)->addArgument(new Reference(Adapter::class));',
+                    '    return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);'
+                ], 1),
+            ];
+
+            yield sprintf('No violation for code-block "%s" - Second case', $codeBlock) => [
+                NullViolation::create(),
+                new RstSample([
+                    $codeBlock,
+                    '    $client = new NoPrivateNetworkHttpClient(HttpClient::create());'
+                ], 1),
+            ];
+
+            yield sprintf('No violation for code-block "%s" - Third case', $codeBlock) => [
+                NullViolation::create(),
+                new RstSample([
+                    $codeBlock,
+                    '    $container->register(Ldap::class)->addArgument(new Reference(Adapter::class));'
+                ], 1),
+            ];
+
+            yield sprintf('No violation for code-block "%s" - Fourth case', $codeBlock) => [
+                NullViolation::create(),
+                new RstSample([
+                    $codeBlock,
                     '    new Status(Status::YES);',
+                ], 1),
+            ];
+
+            yield sprintf('No violation for code-block "%s" - Fifth case', $codeBlock) => [
+                NullViolation::create(),
+                new RstSample([
+                    $codeBlock,
                     '    return new Response(null, Response::HTTP_TOO_MANY_REQUESTS, $headers);',
-                ], 2),
+                ], 1),
             ];
         }
     }
