@@ -56,15 +56,6 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
                 new RstSample([
                     $codeBlock,
                     '    $this->somePhp();',
-                    '    new class();',
-                ], 2),
-            ];
-
-            yield sprintf('No violation for code-block "%s"', $codeBlock) => [
-                NullViolation::create(),
-                new RstSample([
-                    $codeBlock,
-                    '    $this->somePhp();',
                     '    return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);',
                 ], 2),
             ];
