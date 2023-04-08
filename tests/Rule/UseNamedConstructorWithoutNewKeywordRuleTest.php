@@ -37,6 +37,14 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
 
     public static function checkProvider(): \Generator
     {
+        $validLines = [
+            '$client = new NoPrivateNetworkHttpClient(HttpClient::create());',
+            'return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);',
+            '$container->register(Ldap::class)->addArgument(new Reference(Adapter::class));',
+            'new Status(Status::YES);',
+            'return new Response(null, Response::HTTP_TOO_MANY_REQUESTS, $headers);',
+        ];
+
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield sprintf('Has violation for code-block "%s"', $codeBlock) => [
                 Violation::from(
@@ -51,45 +59,15 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
                 ], 1),
             ];
 
-            yield sprintf('No violation for code-block "%s" - First case', $codeBlock) => [
-                NullViolation::create(),
-                new RstSample([
-                    $codeBlock,
-                    '    return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);'
-                ], 1),
-            ];
-
-            yield sprintf('No violation for code-block "%s" - Second case', $codeBlock) => [
-                NullViolation::create(),
-                new RstSample([
-                    $codeBlock,
-                    '    $client = new NoPrivateNetworkHttpClient(HttpClient::create());'
-                ], 1),
-            ];
-
-            yield sprintf('No violation for code-block "%s" - Third case', $codeBlock) => [
-                NullViolation::create(),
-                new RstSample([
-                    $codeBlock,
-                    '    $container->register(Ldap::class)->addArgument(new Reference(Adapter::class));'
-                ], 1),
-            ];
-
-            yield sprintf('No violation for code-block "%s" - Fourth case', $codeBlock) => [
-                NullViolation::create(),
-                new RstSample([
-                    $codeBlock,
-                    '    new Status(Status::YES);',
-                ], 1),
-            ];
-
-            yield sprintf('No violation for code-block "%s" - Fifth case', $codeBlock) => [
-                NullViolation::create(),
-                new RstSample([
-                    $codeBlock,
-                    '    return new Response(null, Response::HTTP_TOO_MANY_REQUESTS, $headers);',
-                ], 1),
-            ];
+            foreach ($validLines as $line) {
+                yield sprintf('NO violation for line "%s" in code-block "%s"', $line, $codeBlock) => [
+                    NullViolation::create(),
+                    new RstSample([
+                        $codeBlock,
+                        '    '.$line,
+                    ], 1),
+                ];
+            }
         }
     }
 }
