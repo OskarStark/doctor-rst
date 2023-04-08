@@ -40,7 +40,7 @@ final class UseNamedConstructorWithoutNewKeywordRule extends AbstractRule implem
             return NullViolation::create();
         }
 
-        if ([] === $line->raw()->match('/new .*::/')) {
+        if ([] === $line->raw()->match('/new [^(]*::/')) {
             return NullViolation::create();
         }
 
