@@ -37,7 +37,7 @@ class RemoveTrailingWhitespace extends AbstractRule implements LineContentRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->raw()->match('/[a-zA-Z] $/')) {
+        if ($line->raw()->match('/.+ $/')) {
             return Violation::from(
                 'Please remove trailing whitespace',
                 $filename,

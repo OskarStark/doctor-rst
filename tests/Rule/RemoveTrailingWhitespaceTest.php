@@ -48,6 +48,17 @@ final class RemoveTrailingWhitespaceTest extends \App\Tests\UnitTestCase
             ),
             new RstSample('Invalid sentence '),
         ];
+
+        yield [
+            Violation::from(
+                'Please remove trailing whitespace',
+                'filename',
+                1,
+                'Question mark?',
+            ),
+            new RstSample('Question mark? '),
+        ];
+
         yield [
             NullViolation::create(),
             new RstSample('Valid sentence'),
