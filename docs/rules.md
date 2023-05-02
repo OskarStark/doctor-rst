@@ -67,6 +67,7 @@
 * [ordered_use_statements](#ordered_use_statements)
 * [php_open_tag_in_code_block_php_directive](#php_open_tag_in_code_block_php_directive)
 * [php_prefix_before_bin_console](#php_prefix_before_bin_console)
+* [remove_trailing_whitespace](#remove_trailing_whitespace)
 * [replace_code_block_types](#replace_code_block_types)
 * [replacement](#replacement)
 * [short_array_syntax](#short_array_syntax)
@@ -748,6 +749,24 @@ php bin/console list
 
 ```rst
 bin/console list
+```
+
+## `remove_trailing_whitespace`
+
+  > _Make sure there is not trailing whitespace._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+Valid sentence
+```
+
+##### Invalid Examples :-1:
+
+```rst
+Invalid sentence 
 ```
 
 ## `replace_code_block_types`
