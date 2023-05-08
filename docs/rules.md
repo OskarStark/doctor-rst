@@ -54,6 +54,7 @@
 * [no_config_yaml](#no_config_yaml)
 * [no_contraction](#no_contraction)
 * [no_directive_after_shorthand](#no_directive_after_shorthand)
+* [no_duplicate_use_statements](#no_duplicate_use_statements)
 * [no_explicit_use_of_code_block_php](#no_explicit_use_of_code_block_php)
 * [no_inheritdoc_in_code_examples](#no_inheritdoc_in_code_examples)
 * [no_merge_conflict](#no_merge_conflict)
@@ -642,6 +643,12 @@ It's an example
   > _Ensure that no directive follows the shorthand `::`. This could lead to broken markup._
 
 #### Groups [`@Sonata`, `@Symfony`]
+
+## `no_duplicate_use_statements`
+
+  > _Ensure there is not same use statement twice_
+
+#### Groups [`@Symfony`]
 
 ## `no_explicit_use_of_code_block_php`
 
