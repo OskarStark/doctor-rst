@@ -102,6 +102,19 @@ class AnalyzeCommand extends Command
             }
         }
 
+        $excludeRuleForFileConfiguration = $config['exclude_rule_for_file'] ?? [];
+
+        foreach ($excludeRuleForFileConfiguration as $exclusionConfiguration) {
+            $filePath = $exclusionConfiguration['path'] ?? null;
+            \assert(\is_string($filePath));
+
+            $ruleName = $exclusionConfiguration['rule_name'] ?? null;
+            \assert(\is_string($ruleName));
+
+            $rules = $this->registry->getRulesByName(RuleName::fromString($ruleName));
+            $this->rulesConfiguration->excludeRulesForFilePath($filePath, $rules);
+        }
+
         if (!empty($input->getOption('rule') && !empty($input->getOption('group')))) {
             $io->error('You can only provide "rule" or "group"!');
 
