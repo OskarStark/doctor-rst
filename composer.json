@@ -62,6 +62,6 @@
         "symfony/polyfill-php82": "*"
     },
     "bin": [
-		"bin/doctor-rst"
-	]
+        "bin/doctor-rst"
+    ]
 }
