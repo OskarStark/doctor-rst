@@ -101,11 +101,7 @@ final class Line
                 return $this->isDefaultDirective = false;
             }
 
-            if ($len >=5 && ($string[0] !== '.' && $string[1] !== '.' && $string[2] !== ' ')) {
-                return $this->isDefaultDirective = true;
-            }
-
-            $this->isDefaultDirective = false;
+            $this->isDefaultDirective = !preg_match('/^\.\. (.*)::/', $this->raw->toString());
         }
 
         return $this->isDefaultDirective;
