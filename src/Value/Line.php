@@ -101,7 +101,7 @@ final class Line
                 return $this->isDefaultDirective = false;
             }
 
-            if ($string[0] !== '.' && $string[1] !== '.') {
+            if ($len >=5 && ($string[0] !== '.' && $string[1] !== '.' && $string[2] !== ' ')) {
                 return $this->isDefaultDirective = true;
             }
 
