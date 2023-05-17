@@ -153,7 +153,7 @@ class AnalyzeCommand extends Command
         $showValidFiles = $input->getOption('short') ? false : true;
 
         $finder = new Finder();
-        $finder->files()->name(['*.rst', '*.rst.inc'])->in($analyzeDir);
+        $finder->files()->name(['*.rst', '*.rst.inc'])->in($analyzeDir)->exclude('vendor');
 
         $whitelistConfig = $config['whitelist'] ?? [];
 
