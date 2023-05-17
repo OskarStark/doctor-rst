@@ -36,16 +36,17 @@ trait ListTrait
             --$i;
 
             $lines->seek($i);
+            $currentLine = $lines->current();
 
-            if ($lines->current()->isBlank()) {
+            if ($currentLine->isBlank()) {
                 continue;
             }
 
-            if ($lines->current()->isHeadline()) {
+            if ($currentLine->isHeadline()) {
                 return false;
             }
 
-            $lineIndention = $lines->current()->indention();
+            $lineIndention = $currentLine->indention();
 
             if ($lineIndention < $currentIndention
                 && RstParser::isListItem($lines->current())
@@ -73,19 +74,20 @@ trait ListTrait
             --$i;
 
             $lines->seek($i);
+            $currentLine = $lines->current();
 
-            if ($lines->current()->isBlank()) {
+            if ($currentLine->isBlank()) {
                 continue;
             }
 
-            if ($lines->current()->isHeadline()) {
+            if ($currentLine->isHeadline()) {
                 return false;
             }
 
-            $lineIndention = $lines->current()->indention();
+            $lineIndention = $currentLine->indention();
 
             if ($lineIndention < $currentIndention
-                && RstParser::isFootnote($lines->current())
+                && RstParser::isFootnote($currentLine)
             ) {
                 return true;
             }
