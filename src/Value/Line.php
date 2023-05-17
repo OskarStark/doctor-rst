@@ -94,8 +94,18 @@ final class Line
     public function isDefaultDirective(): bool
     {
         if (null === $this->isDefaultDirective) {
-            $this->isDefaultDirective = !preg_match('/^\.\. (.*)::/', $this->raw->toString())
-                && preg_match('/::$/', $this->raw->toString());
+            $string = $this->raw->toString();
+            $len = strlen($string);
+
+            if ($len < 2 || $string[$len - 1] !== ':' || $string[$len - 2] !== ':') {
+                return $this->isDefaultDirective = false;
+            }
+
+            if ($string[0] === '.' && $string[1] === '.') {
+                return $this->isDefaultDirective = true;
+            }
+
+            $this->isDefaultDirective = false;
         }
 
         return $this->isDefaultDirective;
