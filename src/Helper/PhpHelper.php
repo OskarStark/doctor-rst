@@ -37,22 +37,22 @@ final class PhpHelper
 
     public static function isFirstLineOfMultilineComment(Line $line): bool
     {
-        return $line->clean()->equalsTo('/*');
+        return $line->clean()->toString() === '/*';
     }
 
     public static function isLastLineOfMultilineComment(Line $line): bool
     {
-        return $line->clean()->equalsTo('*/');
+        return $line->clean()->toString() === '*/';
     }
 
     public static function isFirstLineOfDocBlock(Line $line): bool
     {
-        return $line->clean()->equalsTo('/**');
+        return $line->clean()->toString() === '/**';
     }
 
     public static function isLastLineOfDocBlock(Line $line): bool
     {
-        return $line->clean()->equalsTo('*/');
+        return $line->clean()->toString() === '*/';
     }
 
     public function isPartOfDocBlock(Lines $lines, int $number): bool
