@@ -1,6 +1,7 @@
 {
     "type": "project",
     "license": "MIT",
+    "name": "oskarstark/doctor-rst",
     "require": {
         "php": "^8.2",
         "ext-ctype": "*",
