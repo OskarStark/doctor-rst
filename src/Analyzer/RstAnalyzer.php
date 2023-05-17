@@ -40,7 +40,7 @@ final class RstAnalyzer implements Analyzer
         $content = file($realpath);
 
         if (false === $content) {
-            throw new \RuntimeException(sprintf('Cannot parse file: %s', (string) $file->getRealPath()));
+            throw new \RuntimeException(sprintf('Cannot parse file: %s', (string) $realpath));
         }
 
         $violations = [];
@@ -66,7 +66,7 @@ final class RstAnalyzer implements Analyzer
         $lines = Lines::fromArray($content);
 
         foreach ($fileContentRules as $rule) {
-            $violation = $rule->check(clone $lines, (string) $file->getRealPath());
+            $violation = $rule->check(clone $lines, $realpath);
 
             if (!$violation->isNull()) {
                 $violations[] = $violation;
@@ -98,7 +98,7 @@ final class RstAnalyzer implements Analyzer
                     continue;
                 }
 
-                $violation = $rule->check($lines, $no, (string) $file->getRealPath());
+                $violation = $rule->check($lines, $no, $realpath);
 
                 if (!$violation->isNull()) {
                     $violations[] = $violation;
