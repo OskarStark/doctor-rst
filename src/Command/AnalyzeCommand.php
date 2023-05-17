@@ -160,6 +160,9 @@ class AnalyzeCommand extends Command
         $fileResults = [];
 
         foreach ($finder as $file) {
+            if ($output->isVeryVerbose()) {
+                $output->writeln('Analyze '. $file->getRealPath());
+            }
             $fileResults[] = new FileResult(
                 $file,
                 new ExcludedViolationList(
