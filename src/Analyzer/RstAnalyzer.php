@@ -88,13 +88,14 @@ final class RstAnalyzer implements Analyzer
          */
         foreach ($lines->toIterator() as $no => $line) {
             \assert(\is_int($no));
+            $lineIsBlank = $line->isBlank();
 
             foreach ($lineContentRules as $rule) {
                 if ($lines->isProcessedBy($no, $rule::class)) {
                     continue;
                 }
 
-                if (!$rule::runOnlyOnBlankline() && $line->isBlank()) {
+                if (!$rule::runOnlyOnBlankline() && $lineIsBlank) {
                     continue;
                 }
 
