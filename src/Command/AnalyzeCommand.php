@@ -153,13 +153,16 @@ class AnalyzeCommand extends Command
         $showValidFiles = $input->getOption('short') ? false : true;
 
         $finder = new Finder();
-        $finder->files()->name(['*.rst', '*.rst.inc'])->in($analyzeDir);
+        $finder->files()->name(['*.rst', '*.rst.inc'])->in($analyzeDir)->exclude('vendor');
 
         $whitelistConfig = $config['whitelist'] ?? [];
 
         $fileResults = [];
 
         foreach ($finder as $file) {
+            if ($output->isVeryVerbose()) {
+                $output->writeln('Analyze '. $file->getRealPath());
+            }
             $fileResults[] = new FileResult(
                 $file,
                 new ExcludedViolationList(

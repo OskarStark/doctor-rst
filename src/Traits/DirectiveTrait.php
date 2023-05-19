@@ -115,26 +115,27 @@ trait DirectiveTrait
             --$i;
 
             $lines->seek($i);
+            $currentLine = $lines->current();
 
-            if ($lines->current()->isBlank()) {
+            if ($currentLine->isBlank()) {
                 continue;
             }
 
-            if ($lines->current()->isHeadline()) {
+            if ($currentLine->isHeadline()) {
                 return false;
             }
 
-            $lineIndention = $lines->current()->indention();
+            $lineIndention = $currentLine->indention();
 
             if ($lineIndention < $currentIndention
-                && $lines->current()->isDirective()
+                && $currentLine->isDirective()
             ) {
-                if (RstParser::directiveIs($lines->current(), $directive)) {
+                if (RstParser::directiveIs($currentLine, $directive)) {
                     if (null !== $directiveTypes) {
                         $found = false;
 
                         foreach ($directiveTypes as $type) {
-                            if (RstParser::codeBlockDirectiveIsTypeOf($lines->current(), $type)) {
+                            if (RstParser::codeBlockDirectiveIsTypeOf($currentLine, $type)) {
                                 $found = true;
 
                                 break;

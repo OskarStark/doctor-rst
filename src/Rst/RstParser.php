@@ -132,9 +132,10 @@ class RstParser
 
         if (self::DIRECTIVE_CODE_BLOCK === $directive && (!$strict && $line->isDefaultDirective())) {
             $directivesExcludedCodeBlock = array_diff(self::DIRECTIVES, [$directive]);
+            $rawLine = $line->raw()->toString();
 
             foreach ($directivesExcludedCodeBlock as $other) {
-                if (str_contains($line->raw()->toString(), $other)) {
+                if (str_contains($rawLine, $other)) {
                     return false;
                 }
             }
@@ -228,7 +229,14 @@ class RstParser
      */
     public static function isFootnote(Line $line): bool
     {
-        return [] !== $line->clean()->match('/^\.\. \[[0-9]\]/');
+        $string = (string) $line->clean();
+        return strlen($string) >= 5
+            && $string[0] === '.'
+            && $string[1] === '.'
+            && $string[2] === ' '
+            && $string[3] === '['
+            && [] !== $line->clean()->match('/^\.\. \[[0-9]\]/'
+        );
     }
 
     /**
