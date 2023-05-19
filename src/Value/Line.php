@@ -81,11 +81,26 @@ final class Line
     public function isDirective(): bool
     {
         if (null === $this->isDirective) {
-            $this->isDirective = (
-                str_starts_with(ltrim($this->raw->toString()), '.. ')
-                    && !str_starts_with(ltrim($this->raw->toString()), '.. _`')
-                    && str_contains($this->raw->toString(), '::')
-            ) || $this->isDefaultDirective();
+            $string = ltrim($this->raw->toString());
+            $len = strlen($string);
+
+            if ($len >= 2
+                && $string[0] === '.'
+                && $string[1] === '.'
+            ) {
+                if (
+                    !str_starts_with($string, '.. _`')
+                    && str_contains($string, '::'))
+                {
+                    return $this->isDirective = true;
+                }
+            }
+
+            if ($this->isDefaultDirective()) {
+                return $this->isDirective = true;
+            }
+
+            $this->isDirective = false;
         }
 
         return $this->isDirective;
