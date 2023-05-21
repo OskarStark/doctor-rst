@@ -75,9 +75,6 @@ final class Line
         return $this->headline;
     }
 
-    /**
-     * @todo use regex here
-     */
     public function isDirective(): bool
     {
         if (null === $this->isDirective) {
@@ -109,7 +106,7 @@ final class Line
     public function isDefaultDirective(): bool
     {
         if (null === $this->isDefaultDirective) {
-            $string = $this->raw->toString();
+            $string = rtrim($this->raw->toString());
             $len = strlen($string);
 
             if ($len < 2 || $string[$len - 1] !== ':' || $string[$len - 2] !== ':') {
