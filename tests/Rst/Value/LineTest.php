@@ -194,6 +194,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     {
         yield [true, 'this is using the default directive::'];
         yield [true, 'prefixed classes included in doc block comments (``/** ... */``). For example::'];
+        yield [true, "this is using the default directive::\n"];
 
         yield [false, ''];
         yield [false, '.. code-block:: php'];
