@@ -78,6 +78,22 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends \App\Tests\Unit
         yield [
             NullViolation::create(),
             new RstSample([
+                't',
+                '~',
+            ], 1),
+        ];
+
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                'tt',
+                '~~',
+            ], 1),
+        ];
+
+        yield [
+            NullViolation::create(),
+            new RstSample([
                 'Title with matching underline',
                 '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',
             ], 1),
