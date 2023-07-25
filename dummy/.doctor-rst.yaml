@@ -20,3 +20,7 @@ whitelist:
         - '#. The most important config file is ``app/config/services.yml``, which now is'
         - 'php "%s/../bin/console" cache:clear --env=%s --no-warmup'
         - 'code in production without a proxy, it becomes trivially easy to abuse your'
+
+exclude_rule_for_file:
+    - path: docs/tutorial/introduction_one.rst
+      rule_name: max_blank_lines
