@@ -17,12 +17,12 @@ use App\Analyzer\MemoizingAnalyzer;
 use App\Formatter\Registry as FormatterRegistry;
 use App\Handler\Registry;
 use App\Rule\Configurable;
-use App\Rule\Rule;
 use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
 use App\Value\RuleGroup;
 use App\Value\RuleName;
+use App\Value\RulesConfiguration;
 use OndraM\CiDetector\CiDetector;
 use OndraM\CiDetector\Exception\CiNotDetectedException;
 use Symfony\Component\Console\Command\Command;
@@ -38,11 +38,7 @@ class AnalyzeCommand extends Command
 {
     protected static $defaultName = 'analyze';
     private Registry $registry;
-
-    /**
-     * @var Rule[]
-     */
-    private array $rules = [];
+    private RulesConfiguration $rulesConfiguration;
     private MemoizingAnalyzer $analyzer;
     private FormatterRegistry $formatterRegistry;
 
@@ -51,6 +47,7 @@ class AnalyzeCommand extends Command
         $this->registry = $registry;
         $this->analyzer = $analyzer;
         $this->formatterRegistry = $formatterRegistry;
+        $this->rulesConfiguration = new RulesConfiguration();
 
         parent::__construct();
     }
@@ -94,7 +91,6 @@ class AnalyzeCommand extends Command
         $config = Yaml::parseFile($configFile);
 
         foreach ($config['rules'] as $name => $options) {
-            /** @var Rule[] $rules */
             $rules = $this->registry->getRulesByName(RuleName::fromString($name));
 
             foreach ($rules as $rule) {
@@ -102,7 +98,7 @@ class AnalyzeCommand extends Command
                     $rule->setOptions($options ?? []);
                 }
 
-                $this->rules[] = $rule;
+                $this->rulesConfiguration->addRuleForAll($rule);
             }
         }
 
@@ -114,7 +110,7 @@ class AnalyzeCommand extends Command
 
         if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
             foreach ($input->getOption('rule') as $rule) {
-                $this->rules[] = $this->registry->getRule(RuleName::fromString($rule));
+                $this->rulesConfiguration->addRuleForAll($this->registry->getRule(RuleName::fromString($rule)));
             }
         }
 
@@ -123,10 +119,11 @@ class AnalyzeCommand extends Command
 
             \assert(\is_string($group));
 
-            $this->rules = $this->registry->getRulesByGroup(RuleGroup::fromString($group));
+            $rules = $this->registry->getRulesByGroup(RuleGroup::fromString($group));
+            $this->rulesConfiguration->setRulesForAll($rules);
         }
 
-        if (empty($this->rules)) {
+        if (!$this->rulesConfiguration->hasRulesForAll()) {
             $io->warning('No rules selected!');
 
             return 1;
@@ -163,11 +160,12 @@ class AnalyzeCommand extends Command
             if ($output->isVeryVerbose()) {
                 $output->writeln('Analyze '. $file->getRealPath());
             }
+            $rules = $this->rulesConfiguration->getRulesForFilePath($file->getRelativePathname());
             $fileResults[] = new FileResult(
                 $file,
                 new ExcludedViolationList(
                     $whitelistConfig,
-                    $this->analyzer->analyze($file, $this->rules),
+                    $this->analyzer->analyze($file, $rules),
                 ),
             );
         }
