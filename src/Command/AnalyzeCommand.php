@@ -90,7 +90,8 @@ class AnalyzeCommand extends Command
 
         $config = Yaml::parseFile($configFile);
 
-        foreach ($config['rules'] as $name => $options) {
+        $rules = $config['rules'];
+        foreach ($rules as $name => $options) {
             $rules = $this->registry->getRulesByName(RuleName::fromString($name));
 
             foreach ($rules as $rule) {
@@ -103,6 +104,7 @@ class AnalyzeCommand extends Command
         }
 
         $excludeRuleForFileConfiguration = $config['exclude_rule_for_file'] ?? [];
+        \assert(\is_array($excludeRuleForFileConfiguration));
 
         foreach ($excludeRuleForFileConfiguration as $exclusionConfiguration) {
             $filePath = $exclusionConfiguration['path'] ?? null;

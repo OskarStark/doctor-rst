@@ -26,6 +26,11 @@ parameters:
 			path: src/Command/AnalyzeCommand.php
 
 		-
+			message: "#^Cannot access offset 'exclude_rule_for…' on mixed\\.$#"
+			count: 1
+			path: src/Command/AnalyzeCommand.php
+
+		-
 			message: "#^Cannot access offset 'rules' on mixed\\.$#"
 			count: 1
 			path: src/Command/AnalyzeCommand.php
