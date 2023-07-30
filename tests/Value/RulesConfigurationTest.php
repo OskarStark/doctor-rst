@@ -57,4 +57,35 @@ final class RulesConfigurationTest extends \App\Tests\UnitTestCase
             $rulesConfiguration->getRulesForFilePath('foobar'),
         );
     }
+
+    /**
+     * @test
+     */
+    public function excludedRulesForFile(): void
+    {
+        $rulesConfiguration = new RulesConfiguration();
+
+        $firstRule = new DummyRule();
+        $secondRule = new DummyRule();
+        $notRegisteredRule = new DummyRule();
+
+        $rulesConfiguration->setRulesForAll([$firstRule, $secondRule]);
+
+        $rulesConfiguration->excludeRulesForFilePath('foo', [$firstRule, $notRegisteredRule]);
+
+        self::assertSame(
+            [
+                1 => $secondRule,
+            ],
+            $rulesConfiguration->getRulesForFilePath('foo'),
+        );
+
+        self::assertSame(
+            [
+                0 => $firstRule,
+                1 => $secondRule,
+            ],
+            $rulesConfiguration->getRulesForFilePath('bar'),
+        );
+    }
 }

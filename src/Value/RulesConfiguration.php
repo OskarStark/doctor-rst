@@ -22,6 +22,11 @@ final class RulesConfiguration
      */
     private array $rulesForAll = [];
 
+    /**
+     * @var array<string, array<Rule>>
+     */
+    private array $excludedRulesByFilePath = [];
+
     public function addRuleForAll(Rule $rule): void
     {
         $this->rulesForAll[] = $rule;
@@ -41,11 +46,29 @@ final class RulesConfiguration
         return [] !== $this->rulesForAll;
     }
 
+    public function excludeRulesForFilePath(string $filePath, array $rules): void
+    {
+        foreach ($rules as $rule) {
+            $this->excludeRuleForFilePath($filePath, $rule);
+        }
+    }
+
+    public function excludeRuleForFilePath(string $filePath, Rule $rule): void
+    {
+        $this->excludedRulesByFilePath[$filePath][] = $rule;
+    }
+
     /**
      * @return Rule[]
      */
     public function getRulesForFilePath(string $filePath): array
     {
+        $excludedRulesForFile = $this->excludedRulesByFilePath[$filePath] ?? null;
+
+        if ($excludedRulesForFile) {
+            return array_udiff($this->rulesForAll, $excludedRulesForFile, static fn (object $a, object $b) => strcmp(spl_object_hash($a), spl_object_hash($b)));
+        }
+
         return $this->rulesForAll;
     }
 }
