@@ -30,7 +30,7 @@ jobs:
 
             -
                 name: "Install PHP with extensions"
-                uses: "shivammathur/setup-php@2.25.4"
+                uses: "shivammathur/setup-php@2.25.5"
                 with:
                     coverage: "none"
                     extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
