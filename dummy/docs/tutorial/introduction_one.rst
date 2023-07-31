@@ -14,4 +14,6 @@ The tutorial will explain how to define `orphanRemoval`_.:
 * CRUD controller,
 * The ``Admin`` class.
 
+
+
 .. _`orphanRemoval`: https://www.doctrine-project.org/projects/doctrine-orm/en/current/reference/working-with-associations.html#orphan-removal
