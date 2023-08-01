@@ -42,6 +42,7 @@ final class PhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
         yield [NullViolation::create(), new RstSample('.. _`copying Symfony\'s bin/console source`: https://github.com/symfony/recipes/blob/master/symfony/console/3.3/bin/console')];
         yield [NullViolation::create(), new RstSample('├─ bin/console')];
         yield [NullViolation::create(), new RstSample('Symfony\Component\Console\Application->run() at /home/greg/demo/bin/console:42')];
+        yield [NullViolation::create(), new RstSample('// bin/console')];
         yield [
             Violation::from(
                 'Please add "php" prefix before "bin/console"',
