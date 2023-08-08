@@ -42,7 +42,7 @@ class PhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule
             return NullViolation::create();
         }
 
-        if (preg_match('/(`|"|_|├─ |\/\/ )bin\/console/u', $line->raw()->toString())
+        if (preg_match('/((`|"|_|├─ |\/\/ )|\[\')bin\/console/u', $line->raw()->toString())
             || preg_match('/php "%s\/\.\.\/bin\/console"/', $line->raw()->toString())) {
             return NullViolation::create();
         }
