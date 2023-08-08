@@ -42,8 +42,8 @@ jobs:
                   push: true
                   builder: ${{ steps.buildx.outputs.name }}
                   tags: |
-                      ${{env.DOCKER_REGISTRY}}/${{env.IMAGE}}:latest
-                      ${{env.DOCKER_REGISTRY}}/${{env.IMAGE}}:${{env.RELEASE_VERSION}}
+                      ${{env.IMAGE}}:latest
+                      ${{env.IMAGE}}:${{env.RELEASE_VERSION}}
                   file: Dockerfile
                   context: .
                   cache-from: type=gha
