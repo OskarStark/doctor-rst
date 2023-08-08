@@ -11,7 +11,6 @@ on:
 env:
     IMAGE: "oskarstark/doctor-rst"
     USERNAME: "oskarstark"
-    DOCKER_REGISTRY: "hub.docker.com"
 
 jobs:
     build:
@@ -27,10 +26,9 @@ jobs:
               run: |
                 echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
 
-            - name: Login to Docker Container Registry
+            - name: Login to Dockerhub
               uses: docker/login-action@v2
               with:
-                registry: ${{ env.DOCKER_REGISTRY }}
                 username: ${{ env.USERNAME }}
                 password: ${{ secrets.DOCKERHUB_TOKEN }}
 
