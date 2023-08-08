@@ -11,7 +11,7 @@ on:
 env:
     IMAGE: "oskarstark/doctor-rst"
     USERNAME: "oskarstark"
-    DOCKER_REGISTRY: "hub.docker-com"
+    DOCKER_REGISTRY: "hub.docker.com"
 
 jobs:
     build:
