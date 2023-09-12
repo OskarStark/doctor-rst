@@ -56,6 +56,7 @@
 * [no_directive_after_shorthand](#no_directive_after_shorthand)
 * [no_duplicate_use_statements](#no_duplicate_use_statements)
 * [no_explicit_use_of_code_block_php](#no_explicit_use_of_code_block_php)
+* [no_footnotes](#no_footnotes)
 * [no_inheritdoc_in_code_examples](#no_inheritdoc_in_code_examples)
 * [no_merge_conflict](#no_merge_conflict)
 * [no_namespace_after_use_statements](#no_namespace_after_use_statements)
@@ -653,6 +654,18 @@ It's an example
 ## `no_explicit_use_of_code_block_php`
 
 #### Groups [`@Symfony`]
+
+## `no_footnotes`
+
+  > _Make sure there is no footnotes_
+
+#### Groups [`@Symfony`]
+
+##### Invalid Examples :-1:
+
+```rst
+.. [5] A numerical footnote. Note
+```
 
 ## `no_inheritdoc_in_code_examples`
 
