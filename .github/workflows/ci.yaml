@@ -99,3 +99,50 @@ jobs:
 
             - name: "Run tests"
               run: vendor/bin/phpunit
+
+    refactoring:
+        name: "Refactoring"
+
+        runs-on: "ubuntu-latest"
+
+        strategy:
+            matrix:
+                php-version:
+                    - "8.2"
+
+        steps:
+            # workaround for missing secret in fork PRs - see https://github.com/actions/checkout/issues/298
+            # see https://github.com/rectorphp/rector/commit/d395e1c28b8e6a56711dcc2e10490a82965850e4
+            -   if: github.actor != 'dependabot[bot]'
+                name: "Checkout"
+                uses: "actions/checkout@v4"
+                with:
+                    ref: "${{ github.head_ref }}"
+                    # Must be used to be able to commit changed files
+                    token: "${{ secrets.GITHUB_TOKEN }}"
+
+            # in forks, the token is not available - so we cannot use it
+            -   if: github.actor == 'dependabot[bot]'
+                name: "Checkout"
+                uses: "actions/checkout@v4"
+                with:
+                    ref: "${{ github.head_ref }}"
+
+            -
+                name: "Install PHP with extensions"
+                uses: "shivammathur/setup-php@2.26.0"
+                with:
+                    coverage: "none"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: composer:v2
+
+            -
+                name: "Composer instal"
+                uses: "ramsey/composer-install@2.2.0"
+                with:
+                    composer-options: "--no-scripts"
+
+            -
+                name: "Run rector/rector"
+                run: "vendor/bin/rector process --config rector.php"
