@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Traits;
 
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Tests\Util\ListItemTraitWrapper;
 
-final class ListTraitTest extends \App\Tests\UnitTestCase
+final class ListTraitTest extends UnitTestCase
 {
     private ListItemTraitWrapper $traitWrapper;
 
@@ -49,7 +50,7 @@ final class ListTraitTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfListItemProvider(): \Generator
+    public static function isPartOfListItemProvider(): iterable
     {
         yield [
             false,
@@ -155,7 +156,7 @@ RST
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfFootnoteProvider(): \Generator
+    public static function isPartOfFootnoteProvider(): iterable
     {
         $footnote = <<<'RST'
 .. [1] Line 1
@@ -182,7 +183,7 @@ RST;
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfRstCommentProvider(): \Generator
+    public static function isPartOfRstCommentProvider(): iterable
     {
         $rst_comment = <<<'RST'
 .. Line 1
@@ -209,7 +210,7 @@ RST;
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfLineNumberAnnotationProvider(): \Generator
+    public static function isPartOfLineNumberAnnotationProvider(): iterable
     {
         $line_number_annotation = <<<'RST'
 Line 15

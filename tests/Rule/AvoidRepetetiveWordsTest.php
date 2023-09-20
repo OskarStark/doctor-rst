@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\AvoidRepetetiveWords;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
+final class AvoidRepetetiveWordsTest extends UnitTestCase
 {
     /**
      * @test
@@ -38,7 +39,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function whitelistProvider(): \Generator
+    public static function whitelistProvider(): iterable
     {
         $whitelist = [
             '...',
@@ -52,7 +53,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         $valid = '';
         $invalid = 'the cached items will not not be invalidated unless you clear OPcache.';

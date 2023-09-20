@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoDirectiveAfterShorthand;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoDirectiveAfterShorthandTest extends \App\Tests\UnitTestCase
+final class NoDirectiveAfterShorthandTest extends UnitTestCase
 {
     /**
      * @test
@@ -38,7 +39,7 @@ final class NoDirectiveAfterShorthandTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         $valid2 = <<<'RST'
 This is a sentence::
@@ -79,7 +80,7 @@ RST;
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         $invalid = <<<'RST'
 This is a sentence::

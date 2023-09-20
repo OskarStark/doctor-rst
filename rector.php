@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+use Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector;
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
@@ -49,7 +50,7 @@ return static function (RectorConfig $rectorConfig): void {
         ArraySpreadInsteadOfArrayMergeRector::class,
         PreferPHPUnitThisCallRector::class,
         ReplaceTestAnnotationWithPrefixedFunctionRector::class,
-        \Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector::class,
+        AddSeeTestAnnotationRector::class,
     ]);
 
     /**

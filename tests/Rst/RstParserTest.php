@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Rst;
 
 use App\Rst\RstParser;
+use App\Tests\UnitTestCase;
 use App\Value\Line;
 
-final class RstParserTest extends \App\Tests\UnitTestCase
+final class RstParserTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isPhpDirectiveProvider(): \Generator
+    public static function isPhpDirectiveProvider(): iterable
     {
         foreach (self::phpCodeBlocks() as $phpCodeBlock) {
             yield [true, $phpCodeBlock];
@@ -55,7 +56,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isLineNumberAnnotationProvider(): \Generator
+    public static function isLineNumberAnnotationProvider(): iterable
     {
         yield [true, 'Line 15'];
         yield [true, 'Line 16 - 18'];
@@ -79,7 +80,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isCommentProvider(): \Generator
+    public static function isCommentProvider(): iterable
     {
         yield [true, '.. I am a comment'];
 
@@ -102,7 +103,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isFootnoteProvider(): \Generator
+    public static function isFootnoteProvider(): iterable
     {
         yield [false, ''];
         yield [true, '.. [1]'];
@@ -123,7 +124,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isListItemProvider(): \Generator
+    public static function isListItemProvider(): iterable
     {
         yield [false, ''];
         yield [true, '* Bullet point 1'];
@@ -145,7 +146,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isLinkDefinitionProvider()
+    public static function isLinkDefinitionProvider(): iterable
     {
         yield [true, '.. _`Symfony`: https://symfony.com'];
         yield [true, '.. _`APCu`: https://github.com/krakjoe/apcu'];
@@ -170,7 +171,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isLinkUsageProvider()
+    public static function isLinkUsageProvider(): iterable
     {
         yield [true, '`Symfony`_'];
         yield [true, '`APCu`_'];
@@ -192,7 +193,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isTableProvider()
+    public static function isTableProvider(): iterable
     {
         yield [true, '==='];
         yield [true, '=== ==='];
@@ -220,7 +221,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string, 2: string}>
      */
-    public static function directiveIsProvider(): \Generator
+    public static function directiveIsProvider(): iterable
     {
         yield [false, '.. note::', RstParser::DIRECTIVE_CODE_BLOCK];
         yield [true, '.. note::', RstParser::DIRECTIVE_NOTE];
@@ -247,7 +248,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string, 2: string}>
      */
-    public static function codeBlockDirectiveIsTypeOfProvider(): \Generator
+    public static function codeBlockDirectiveIsTypeOfProvider(): iterable
     {
         yield [false, '.. note::', RstParser::CODE_BLOCK_PHP];
         yield [true, 'the following code is php::', RstParser::CODE_BLOCK_PHP];
@@ -283,7 +284,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isOptionProvider(): \Generator
+    public static function isOptionProvider(): iterable
     {
         yield [true, ':lineos:'];
         yield [true, ' :lineos: '];
@@ -310,7 +311,7 @@ final class RstParserTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isAnchorProvider(): \Generator
+    public static function isAnchorProvider(): iterable
     {
         yield [true, '.. _env-var-processors:'];
 

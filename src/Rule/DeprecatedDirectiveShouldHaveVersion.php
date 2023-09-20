@@ -53,7 +53,7 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineC
         }
 
         if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
-            $version = trim($matches[1]);
+            $version = trim((string) $matches[1]);
 
             if (empty($version)) {
                 return Violation::from(

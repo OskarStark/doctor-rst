@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Rst\Value;
 
+use App\Tests\UnitTestCase;
 use App\Value\Line;
 
-final class LineTest extends \App\Tests\UnitTestCase
+final class LineTest extends UnitTestCase
 {
     /**
      * @test
@@ -40,41 +41,39 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return array<array{0: string, 1: string}>
      */
-    public static function cleanProvider(): array
+    public static function cleanProvider(): iterable
     {
-        return [
-            [
-                '.. code-block:: php',
-                '.. code-block:: php',
-            ],
-            [
-                '.. code-block:: php',
-                '  .. code-block:: php  ',
-            ],
-            [
-                '',
-                '\r',
-            ],
-            [
-                '',
-                '\n',
-            ],
-            [
-                'when you need to embed a ``\n`` or a Unicode character in a string.',
-                'when you need to embed a ``\n`` or a Unicode character in a string.\n',
-            ],
-            [
-                'use Sonata\AdminBundle\Admin\Admin;',
-                'use Sonata\AdminBundle\Admin\Admin;',
-            ],
-            [
-                'use Sonata\AdminBundle\Admin\Admin',
-                'use Sonata\AdminBundle\Admin\Admin',
-            ],
-            [
-                'use Sonata\AdminBundle\Admin\Admin',
-                'use Sonata\AdminBundle\Admin\Admin  ',
-            ],
+        yield [
+            '.. code-block:: php',
+            '.. code-block:: php',
+        ];
+        yield [
+            '.. code-block:: php',
+            '  .. code-block:: php  ',
+        ];
+        yield [
+            '',
+            '\r',
+        ];
+        yield [
+            '',
+            '\n',
+        ];
+        yield [
+            'when you need to embed a ``\n`` or a Unicode character in a string.',
+            'when you need to embed a ``\n`` or a Unicode character in a string.\n',
+        ];
+        yield [
+            'use Sonata\AdminBundle\Admin\Admin;',
+            'use Sonata\AdminBundle\Admin\Admin;',
+        ];
+        yield [
+            'use Sonata\AdminBundle\Admin\Admin',
+            'use Sonata\AdminBundle\Admin\Admin',
+        ];
+        yield [
+            'use Sonata\AdminBundle\Admin\Admin',
+            'use Sonata\AdminBundle\Admin\Admin  ',
         ];
     }
 
@@ -91,14 +90,12 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return array<array{0: bool, 1: string}>
      */
-    public static function isBlankProvider(): array
+    public static function isBlankProvider(): iterable
     {
-        return [
-            [true, '\r\n'],
-            [true, ''],
-            [true, ' '],
-            [false, 'foo'],
-        ];
+        yield [true, '\r\n'];
+        yield [true, ''];
+        yield [true, ' '];
+        yield [false, 'foo'];
     }
 
     /**
@@ -114,7 +111,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: int, 1: string}>
      */
-    public static function indentionProvider(): \Generator
+    public static function indentionProvider(): iterable
     {
         yield [0, ''];
         yield [1, ' foo'];
@@ -134,7 +131,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isHeadlineProvider(): \Generator
+    public static function isHeadlineProvider(): iterable
     {
         yield [true, '==='];
         yield [true, '~~~'];
@@ -161,7 +158,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isDirectiveProvider(): \Generator
+    public static function isDirectiveProvider(): iterable
     {
         yield [true, 'the following code is php::'];
         yield [true, '.. code-block:: php'];
@@ -190,7 +187,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isDefaultDirectiveProvider(): \Generator
+    public static function isDefaultDirectiveProvider(): iterable
     {
         yield [true, 'this is using the default directive::'];
         yield [true, 'prefixed classes included in doc block comments (``/** ... */``). For example::'];

@@ -22,7 +22,6 @@ final class FileCache implements Cache
      * @var array<string, array>
      */
     private array $cache;
-    private string $cacheFile;
     private bool $loaded = false;
 
     /**
@@ -30,10 +29,10 @@ final class FileCache implements Cache
      */
     private array $parsedFiles = [];
 
-    public function __construct(string $cacheFile)
-    {
+    public function __construct(
+        private readonly string $cacheFile,
+    ) {
         $this->cache = [];
-        $this->cacheFile = $cacheFile;
     }
 
     public function has(\SplFileInfo $file, array $rules): bool

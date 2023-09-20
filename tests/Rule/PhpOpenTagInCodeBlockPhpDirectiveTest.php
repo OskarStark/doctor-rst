@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\PhpOpenTagInCodeBlockPhpDirective;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class PhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestCase
+final class PhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,7 +35,7 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestCas
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield sprintf('Has violation for code-block "%s"', $codeBlock) => [

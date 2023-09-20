@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\Typo;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class TypoTest extends \App\Tests\UnitTestCase
+final class TypoTest extends UnitTestCase
 {
     /**
      * @test
@@ -56,7 +57,7 @@ final class TypoTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         yield 'empty string' => [NullViolation::create(), new RstSample('')];
 
@@ -97,7 +98,7 @@ final class TypoTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         $invalids = [
             'Compsoer',

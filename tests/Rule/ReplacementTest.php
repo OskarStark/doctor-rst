@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\Replacement;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class ReplacementTest extends \App\Tests\UnitTestCase
+final class ReplacementTest extends UnitTestCase
 {
     /**
      * @test
@@ -55,7 +56,7 @@ final class ReplacementTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield 'empty string' => [NullViolation::create(), new RstSample('')];
 

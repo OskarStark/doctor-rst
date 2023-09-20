@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoAdminYaml;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoAdminYamlTest extends \App\Tests\UnitTestCase
+final class NoAdminYamlTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,47 +35,45 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Please use "services.yaml" instead of "admin.yml"',
-                    'filename',
-                    1,
-                    'register the admin class in admin.yml',
-                ),
-                new RstSample('register the admin class in admin.yml'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('register the admin class in services.yaml'),
-            ],
-            [
-                Violation::from(
-                    'Please use "services.yaml" instead of "admin.yaml"',
-                    'filename',
-                    1,
-                    'register the admin class in admin.yaml',
-                ),
-                new RstSample('register the admin class in admin.yaml'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('register the admin class in services.yaml'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('# config/packages/sonata_admin.yaml'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('# config/packages/sonata_doctrine_orm_admin.yaml'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('# config/packages/sonata_doctrine_mongodb_admin.yaml'),
-            ],
+        yield [
+            Violation::from(
+                'Please use "services.yaml" instead of "admin.yml"',
+                'filename',
+                1,
+                'register the admin class in admin.yml',
+            ),
+            new RstSample('register the admin class in admin.yml'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('register the admin class in services.yaml'),
+        ];
+        yield [
+            Violation::from(
+                'Please use "services.yaml" instead of "admin.yaml"',
+                'filename',
+                1,
+                'register the admin class in admin.yaml',
+            ),
+            new RstSample('register the admin class in admin.yaml'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('register the admin class in services.yaml'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('# config/packages/sonata_admin.yaml'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('# config/packages/sonata_doctrine_orm_admin.yaml'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('# config/packages/sonata_doctrine_mongodb_admin.yaml'),
         ];
     }
 }

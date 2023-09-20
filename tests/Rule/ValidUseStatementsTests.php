@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\ValidUseStatements;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
+final class ValidUseStatementsTests extends UnitTestCase
 {
     /**
      * @test
@@ -37,26 +38,24 @@ final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Please do not escape the backslashes in a use statement.',
-                    'filename',
-                    1,
-                    'use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;',
-                ),
-                new RstSample('use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('use Symfony\Component\Form\Extension\Core\Type\FormType;'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('don\'t use the :class:`Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\ControllerTrait`'),
-            ],
+        yield [
+            Violation::from(
+                'Please do not escape the backslashes in a use statement.',
+                'filename',
+                1,
+                'use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;',
+            ),
+            new RstSample('use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('use Symfony\Component\Form\Extension\Core\Type\FormType;'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('don\'t use the :class:`Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\ControllerTrait`'),
         ];
     }
 }

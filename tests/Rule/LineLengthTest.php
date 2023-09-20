@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\LineLength;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class LineLengthTest extends \App\Tests\UnitTestCase
+final class LineLengthTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,24 +35,22 @@ final class LineLengthTest extends \App\Tests\UnitTestCase
         self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Line is to long (max 20) currently: 23',
-                    'filename',
-                    1,
-                    'This is a cool sentence',
-                ),
-                20,
-                new RstSample('This is a cool sentence'),
-            ],
-            [
-                NullViolation::create(),
-                20,
-                new RstSample('This is a sentence'),
-            ],
+        yield [
+            Violation::from(
+                'Line is to long (max 20) currently: 23',
+                'filename',
+                1,
+                'This is a cool sentence',
+            ),
+            20,
+            new RstSample('This is a cool sentence'),
+        ];
+        yield [
+            NullViolation::create(),
+            20,
+            new RstSample('This is a sentence'),
         ];
     }
 }

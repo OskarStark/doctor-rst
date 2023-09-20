@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Helper;
 
 use App\Helper\YamlHelper;
+use App\Tests\UnitTestCase;
 use App\Value\Line;
 
-final class YamlHelperTest extends \App\Tests\UnitTestCase
+final class YamlHelperTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,7 +35,7 @@ final class YamlHelperTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isCommentProvider(): \Generator
+    public static function isCommentProvider(): iterable
     {
         yield [true, '# comment'];
         yield [false, 'no comment'];

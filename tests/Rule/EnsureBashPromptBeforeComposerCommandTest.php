@@ -16,11 +16,12 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\EnsureBashPromptBeforeComposerCommand;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class EnsureBashPromptBeforeComposerCommandTest extends \App\Tests\UnitTestCase
+final class EnsureBashPromptBeforeComposerCommandTest extends UnitTestCase
 {
     /**
      * @test
@@ -38,7 +39,7 @@ final class EnsureBashPromptBeforeComposerCommandTest extends \App\Tests\UnitTes
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         $codeBlocks = [
             RstParser::CODE_BLOCK_BASH,

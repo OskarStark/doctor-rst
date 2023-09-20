@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInYamlCodeBlock;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoBlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitTestCase
+final class NoBlankLineAfterFilepathInYamlCodeBlockTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,72 +35,70 @@ final class NoBlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitT
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Please remove blank line after "# config/services.yml"',
-                    'filename',
-                    3,
-                    '# config/services.yml',
-                ),
-                new RstSample([
-                    '.. code-block:: yml',
-                    '',
-                    '    # config/services.yml',
-                    '',
-                    '    services:',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. code-block:: yml',
-                    '',
-                    '    # config/services.yml',
-                    '    services:',
-                ]),
-            ],
-            [
-                Violation::from(
-                    'Please remove blank line after "# config/services.yaml"',
-                    'filename',
-                    3,
-                    '# config/services.yaml',
-                ),
-                new RstSample([
-                    '.. code-block:: yaml',
-                    '',
-                    '    # config/services.yaml',
-                    '',
-                    '    services:',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. code-block:: yaml',
-                    '',
-                    '    # config/services.yaml',
-                    '',
-                    '    # a comment',
-                    '    services:',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. code-block:: yaml',
-                    '',
-                    '    # config/services.yaml',
-                    '    services:',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('temp'),
-            ],
+        yield [
+            Violation::from(
+                'Please remove blank line after "# config/services.yml"',
+                'filename',
+                3,
+                '# config/services.yml',
+            ),
+            new RstSample([
+                '.. code-block:: yml',
+                '',
+                '    # config/services.yml',
+                '',
+                '    services:',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: yml',
+                '',
+                '    # config/services.yml',
+                '    services:',
+            ]),
+        ];
+        yield [
+            Violation::from(
+                'Please remove blank line after "# config/services.yaml"',
+                'filename',
+                3,
+                '# config/services.yaml',
+            ),
+            new RstSample([
+                '.. code-block:: yaml',
+                '',
+                '    # config/services.yaml',
+                '',
+                '    services:',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: yaml',
+                '',
+                '    # config/services.yaml',
+                '',
+                '    # a comment',
+                '    services:',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: yaml',
+                '',
+                '    # config/services.yaml',
+                '    services:',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('temp'),
         ];
     }
 }

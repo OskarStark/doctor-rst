@@ -16,11 +16,12 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\BlankLineBeforeDirective;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
+final class BlankLineBeforeDirectiveTest extends UnitTestCase
 {
     /**
      * @test
@@ -38,7 +39,7 @@ final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield 'no directive' => [
             NullViolation::create(),

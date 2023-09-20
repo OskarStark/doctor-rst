@@ -15,15 +15,13 @@ namespace App\Value;
 
 final class Lines implements \SeekableIterator
 {
-    private array $array;
     private int $currentLine = 0;
 
     /**
      * @param array<int, Line> $array
      */
-    private function __construct(array $array)
+    private function __construct(private array $array)
     {
-        $this->array = $array;
     }
 
     public function __clone()

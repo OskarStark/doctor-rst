@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\UseDeprecatedDirectiveInsteadOfVersionadded;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\UnitTestCase
+final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends UnitTestCase
 {
     /**
      * @test
@@ -38,80 +39,76 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
     /**
      * @return array<int|string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): array
+    public static function validProvider(): iterable
     {
-        return [
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. versionadded:: 3.4',
-                    '',
-                    '    Foo was added in Symfony 3.4.',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. versionadded:: 3.4',
-                    '    Foo was added in Symfony 3.4.',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. deprecated:: 3.4',
-                    '',
-                    '    Foo was deprecated in Symfony 3.4.',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. deprecated:: 3.4',
-                    '    Foo was deprecated in Symfony 3.4.',
-                ]),
-            ],
-            'versionadded directive with deprecated option' => [
-                NullViolation::create(),
-                new RstSample([
-                    '.. versionadded:: 4.3',
-                    '    The ``deprecated`` option for service aliases was introduced in Symfony 4.3.',
-                ]),
-            ],
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. versionadded:: 3.4',
+                '',
+                '    Foo was added in Symfony 3.4.',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. versionadded:: 3.4',
+                '    Foo was added in Symfony 3.4.',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. deprecated:: 3.4',
+                '',
+                '    Foo was deprecated in Symfony 3.4.',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. deprecated:: 3.4',
+                '    Foo was deprecated in Symfony 3.4.',
+            ]),
+        ];
+        yield 'versionadded directive with deprecated option' => [
+            NullViolation::create(),
+            new RstSample([
+                '.. versionadded:: 4.3',
+                '    The ``deprecated`` option for service aliases was introduced in Symfony 4.3.',
+            ]),
         ];
     }
 
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): array
+    public static function invalidProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Please use ".. deprecated::" instead of ".. versionadded::"',
-                    'filename',
-                    1,
-                    '.. versionadded:: 3.4',
-                ),
-                new RstSample([
-                    '.. versionadded:: 3.4',
-                    '',
-                    '    Foo was deprecated in Symfony 3.4.',
-                ]),
-            ],
-            [
-                Violation::from(
-                    'Please use ".. deprecated::" instead of ".. versionadded::"',
-                    'filename',
-                    1,
-                    '.. versionadded:: 3.4',
-                ),
-                new RstSample([
-                    '.. versionadded:: 3.4',
-                    '    Foo was deprecated in Symfony 3.4.',
-                ]),
-            ],
+        yield [
+            Violation::from(
+                'Please use ".. deprecated::" instead of ".. versionadded::"',
+                'filename',
+                1,
+                '.. versionadded:: 3.4',
+            ),
+            new RstSample([
+                '.. versionadded:: 3.4',
+                '',
+                '    Foo was deprecated in Symfony 3.4.',
+            ]),
+        ];
+        yield [
+            Violation::from(
+                'Please use ".. deprecated::" instead of ".. versionadded::"',
+                'filename',
+                1,
+                '.. versionadded:: 3.4',
+            ),
+            new RstSample([
+                '.. versionadded:: 3.4',
+                '    Foo was deprecated in Symfony 3.4.',
+            ]),
         ];
     }
 }

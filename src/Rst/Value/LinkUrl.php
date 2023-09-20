@@ -17,7 +17,7 @@ use Webmozart\Assert\Assert;
 
 final class LinkUrl
 {
-    private string $value;
+    private readonly string $value;
 
     private function __construct(string $value)
     {

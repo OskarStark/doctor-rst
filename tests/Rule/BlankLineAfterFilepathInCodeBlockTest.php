@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInCodeBlock;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCase
+final class BlankLineAfterFilepathInCodeBlockTest extends UnitTestCase
 {
     /**
      * @test
@@ -42,7 +43,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield [
             NullViolation::create(),
@@ -53,7 +54,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkPhpProvider(): \Generator
+    public static function checkPhpProvider(): iterable
     {
         yield [
             Violation::from(
@@ -84,7 +85,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkYmlProvider(): \Generator
+    public static function checkYmlProvider(): iterable
     {
         yield [
             Violation::from(
@@ -115,7 +116,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkYamlProvider(): \Generator
+    public static function checkYamlProvider(): iterable
     {
         yield [
             Violation::from(
@@ -146,7 +147,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkXmlProvider(): \Generator
+    public static function checkXmlProvider(): iterable
     {
         yield [
             Violation::from(
@@ -201,7 +202,7 @@ final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCas
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkTwigProvider(): \Generator
+    public static function checkTwigProvider(): iterable
     {
         yield [
             Violation::from(

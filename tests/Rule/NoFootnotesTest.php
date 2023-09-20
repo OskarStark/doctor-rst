@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoFootnotes;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoFootnotesTest extends \App\Tests\UnitTestCase
+final class NoFootnotesTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,22 +35,20 @@ final class NoFootnotesTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    "Please don't use footnotes as they are not supported",
-                    'filename',
-                    1,
-                    '.. [5] A numerical footnote. Note',
-                ),
-                new RstSample('.. [5] A numerical footnote. Note'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.. _`Symfony`: https://symfony.com'),
-            ],
+        yield [
+            Violation::from(
+                "Please don't use footnotes as they are not supported",
+                'filename',
+                1,
+                '.. [5] A numerical footnote. Note',
+            ),
+            new RstSample('.. [5] A numerical footnote. Note'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.. _`Symfony`: https://symfony.com'),
         ];
     }
 }

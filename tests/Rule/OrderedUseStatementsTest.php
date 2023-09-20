@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\OrderedUseStatements;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
+final class OrderedUseStatementsTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,7 +35,7 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         $codeBlocks = self::phpCodeBlocks();
 

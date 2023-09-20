@@ -42,7 +42,7 @@ final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         yield [
             NullViolation::create(),
@@ -58,7 +58,7 @@ final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: string}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         yield [
             Violation::from(

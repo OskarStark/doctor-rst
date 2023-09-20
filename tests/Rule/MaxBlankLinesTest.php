@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\MaxBlankLines;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
+final class MaxBlankLinesTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,7 +35,7 @@ final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
         self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield [NullViolation::create(), 2, new RstSample('')];
         yield [NullViolation::create(), 2, new RstSample([

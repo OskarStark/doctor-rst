@@ -15,8 +15,9 @@ namespace App\Tests\Rst\Value;
 
 use App\Rst\Value\LinkName;
 use App\Rst\Value\LinkUsage;
+use App\Tests\UnitTestCase;
 
-final class LinkUsageTest extends \App\Tests\UnitTestCase
+final class LinkUsageTest extends UnitTestCase
 {
     /**
      * @test
@@ -33,7 +34,7 @@ final class LinkUsageTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: string, 1: string}>
      */
-    public static function fromLineProvider(): \Generator
+    public static function fromLineProvider(): iterable
     {
         yield ['Link1', '`Link1`_'];
         yield ['Link 1', '`Link 1`_'];

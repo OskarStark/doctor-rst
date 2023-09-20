@@ -16,9 +16,10 @@ namespace App\Tests\Traits;
 use App\Rst\RstParser;
 use App\Rst\Value\DirectiveContent;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Tests\Util\DirectiveTraitWrapper;
 
-final class DirectiveTraitTest extends \App\Tests\UnitTestCase
+final class DirectiveTraitTest extends UnitTestCase
 {
     private DirectiveTraitWrapper $traitWrapper;
 
@@ -48,7 +49,7 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function getDirectiveContentProvider(): \Generator
+    public static function getDirectiveContentProvider(): iterable
     {
         yield [
             new DirectiveContent([
@@ -134,7 +135,7 @@ final class DirectiveTraitTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function getLineNumberOfDirectiveProvider(): \Generator
+    public static function getLineNumberOfDirectiveProvider(): iterable
     {
         yield [
             0,
@@ -188,7 +189,7 @@ MULTIPLE, 11),
         );
     }
 
-    public static function inPhpCodeBlockProvider(): \Generator
+    public static function inPhpCodeBlockProvider(): iterable
     {
         yield [
             true,
@@ -226,7 +227,7 @@ MULTIPLE, 11),
         );
     }
 
-    public static function inShellCodeBlockProvider(): \Generator
+    public static function inShellCodeBlockProvider(): iterable
     {
         yield [
             false,
@@ -270,7 +271,7 @@ MULTIPLE, 11),
         );
     }
 
-    public static function inProvider(): \Generator
+    public static function inProvider(): iterable
     {
         $no_code_block = <<<'RST'
 I am just a cool text!
@@ -691,7 +692,7 @@ RST;
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function previousDirectiveIsProvider(): \Generator
+    public static function previousDirectiveIsProvider(): iterable
     {
         yield [
             false,

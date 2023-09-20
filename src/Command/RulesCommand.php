@@ -21,6 +21,7 @@ use App\Rule\CheckListRule;
 use App\Rule\Configurable;
 use App\Rule\Rule;
 use App\Value\RuleGroup;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,23 +29,20 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\OptionsResolver\Debug\OptionsResolverIntrospector;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+#[AsCommand('rules', 'List available rules')]
 class RulesCommand extends Command
 {
-    protected static $defaultName = 'rules';
     private SymfonyStyle $io;
-    private Registry $registry;
 
-    public function __construct(Registry $registry, ?string $name = null)
-    {
-        $this->registry = $registry;
-
+    public function __construct(
+        private readonly Registry $registry,
+        ?string $name = null,
+    ) {
         parent::__construct($name);
     }
 
     protected function configure(): void
     {
-        $this
-            ->setDescription('List available rules');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -59,7 +57,7 @@ class RulesCommand extends Command
         if ([] === $rules) {
             $this->io->warning('No rules available!');
 
-            return 1;
+            return (int) Command::FAILURE;
         }
 
         foreach ($rules as $rule) {
@@ -75,7 +73,7 @@ class RulesCommand extends Command
             $this->rule($rule);
         }
 
-        return 0;
+        return (int) Command::SUCCESS;
     }
 
     private function rule(Rule $rule): void
@@ -101,9 +99,7 @@ class RulesCommand extends Command
         }
 
         if ([] !== $rule::getGroups()) {
-            $groupNames = array_map(static function (RuleGroup $group): string {
-                return $group->name();
-            }, $rule::getGroups());
+            $groupNames = array_map(static fn (RuleGroup $group): string => $group->name(), $rule::getGroups());
 
             $this->io->writeln(sprintf('#### Groups [`%s`]', implode('`, `', $groupNames)));
             $this->io->newLine();
@@ -194,7 +190,7 @@ class RulesCommand extends Command
             $this->io->writeln('--- | ---');
 
             foreach ($rule::getList() as $pattern => $message) {
-                $this->io->writeln(sprintf('`%s` | %s', str_replace('|', '\|', $pattern), $message ?: $rule->getDefaultMessage()));
+                $this->io->writeln(sprintf('`%s` | %s', str_replace('|', '\|', (string) $pattern), $message ?: $rule->getDefaultMessage()));
             }
             $this->io->newLine();
         }

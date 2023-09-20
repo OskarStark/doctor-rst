@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\RemoveTrailingWhitespace;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class RemoveTrailingWhitespaceTest extends \App\Tests\UnitTestCase
+final class RemoveTrailingWhitespaceTest extends UnitTestCase
 {
     /**
      * @test
@@ -37,7 +38,7 @@ final class RemoveTrailingWhitespaceTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield [
             Violation::from(

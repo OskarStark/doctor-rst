@@ -13,15 +13,12 @@ declare(strict_types=1);
 
 namespace App\Analyzer;
 
-final class MemoizingAnalyzer implements Analyzer
+final readonly class MemoizingAnalyzer implements Analyzer
 {
-    private Analyzer $analyzer;
-    private Cache $cache;
-
-    public function __construct(Analyzer $analyzer, Cache $cache)
-    {
-        $this->analyzer = $analyzer;
-        $this->cache = $cache;
+    public function __construct(
+        private Analyzer $analyzer,
+        private Cache $cache,
+    ) {
     }
 
     /**

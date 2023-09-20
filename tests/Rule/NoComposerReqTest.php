@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoComposerReq;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoComposerReqTest extends \App\Tests\UnitTestCase
+final class NoComposerReqTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,22 +35,20 @@ final class NoComposerReqTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Please "composer require" instead of "composer req"',
-                    'filename',
-                    1,
-                    'composer req symfony/form',
-                ),
-                new RstSample('composer req symfony/form'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('composer require symfony/form'),
-            ],
+        yield [
+            Violation::from(
+                'Please "composer require" instead of "composer req"',
+                'filename',
+                1,
+                'composer req symfony/form',
+            ),
+            new RstSample('composer req symfony/form'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('composer require symfony/form'),
         ];
     }
 }

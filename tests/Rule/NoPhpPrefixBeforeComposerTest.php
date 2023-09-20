@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoPhpPrefixBeforeComposer;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoPhpPrefixBeforeComposerTest extends \App\Tests\UnitTestCase
+final class NoPhpPrefixBeforeComposerTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,22 +35,20 @@ final class NoPhpPrefixBeforeComposerTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Please remove "php" prefix',
-                    'filename',
-                    1,
-                    'please execute php composer',
-                ),
-                new RstSample('please execute php composer'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('please execute composer install'),
-            ],
+        yield [
+            Violation::from(
+                'Please remove "php" prefix',
+                'filename',
+                1,
+                'please execute php composer',
+            ),
+            new RstSample('please execute php composer'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('please execute composer install'),
         ];
     }
 }

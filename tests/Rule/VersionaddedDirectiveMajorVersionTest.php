@@ -15,12 +15,13 @@ namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveMajorVersion;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
-final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
+final class VersionaddedDirectiveMajorVersionTest extends UnitTestCase
 {
     /**
      * @test
@@ -43,64 +44,62 @@ final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCas
     /**
      * @return array<array{0: ViolationInterface, 1: int, 2: RstSample}>
      */
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                NullViolation::create(),
-                3,
-                new RstSample('.. versionadded:: 3'),
-            ],
-            [
-                NullViolation::create(),
-                3,
-                new RstSample('.. versionadded:: 3.4'),
-            ],
-            [
-                NullViolation::create(),
-                3,
-                new RstSample('.. versionadded:: 3.4.0'),
-            ],
-            [
-                NullViolation::create(),
-                3,
-                new RstSample('.. versionadded:: 3.4.0.0'),
-            ],
-            [
-                NullViolation::create(),
-                3,
-                new RstSample('.. versionadded:: 3.4   '),
-            ],
-            [
-                Violation::from(
-                    'You are not allowed to use version "2.7". Only major version "3" is allowed.',
-                    'filename',
-                    1,
-                    '.. versionadded:: 2.7',
-                ),
-                3,
-                new RstSample('.. versionadded:: 2.7'),
-            ],
-            [
-                Violation::from(
-                    'You are not allowed to use version "4.0". Only major version "3" is allowed.',
-                    'filename',
-                    1,
-                    '.. versionadded:: 4.0',
-                ),
-                3,
-                new RstSample('.. versionadded:: 4.0'),
-            ],
-            [
-                Violation::from(
-                    'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
-                    'filename',
-                    1,
-                    '.. versionadded:: foo',
-                ),
-                3,
-                new RstSample('.. versionadded:: foo'),
-            ],
+        yield [
+            NullViolation::create(),
+            3,
+            new RstSample('.. versionadded:: 3'),
+        ];
+        yield [
+            NullViolation::create(),
+            3,
+            new RstSample('.. versionadded:: 3.4'),
+        ];
+        yield [
+            NullViolation::create(),
+            3,
+            new RstSample('.. versionadded:: 3.4.0'),
+        ];
+        yield [
+            NullViolation::create(),
+            3,
+            new RstSample('.. versionadded:: 3.4.0.0'),
+        ];
+        yield [
+            NullViolation::create(),
+            3,
+            new RstSample('.. versionadded:: 3.4   '),
+        ];
+        yield [
+            Violation::from(
+                'You are not allowed to use version "2.7". Only major version "3" is allowed.',
+                'filename',
+                1,
+                '.. versionadded:: 2.7',
+            ),
+            3,
+            new RstSample('.. versionadded:: 2.7'),
+        ];
+        yield [
+            Violation::from(
+                'You are not allowed to use version "4.0". Only major version "3" is allowed.',
+                'filename',
+                1,
+                '.. versionadded:: 4.0',
+            ),
+            3,
+            new RstSample('.. versionadded:: 4.0'),
+        ];
+        yield [
+            Violation::from(
+                'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
+                'filename',
+                1,
+                '.. versionadded:: foo',
+            ),
+            3,
+            new RstSample('.. versionadded:: foo'),
         ];
     }
 }

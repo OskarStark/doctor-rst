@@ -15,12 +15,13 @@ namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveShouldHaveVersion;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
-final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTestCase
+final class VersionaddedDirectiveShouldHaveVersionTest extends UnitTestCase
 {
     /**
      * @test
@@ -39,43 +40,41 @@ final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTe
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                NullViolation::create(),
-                new RstSample('.. versionadded:: 1'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.. versionadded:: 1.2'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.. versionadded:: 1.2.0'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.. versionadded:: 1.2   '),
-            ],
-            [
-                Violation::from(
-                    'Please provide a version behind ".. versionadded::"',
-                    'filename',
-                    1,
-                    '.. versionadded::',
-                ),
-                new RstSample('.. versionadded::'),
-            ],
-            [
-                Violation::from(
-                    'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
-                    'filename',
-                    1,
-                    '.. versionadded:: foo',
-                ),
-                new RstSample('.. versionadded:: foo'),
-            ],
+        yield [
+            NullViolation::create(),
+            new RstSample('.. versionadded:: 1'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.. versionadded:: 1.2'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.. versionadded:: 1.2.0'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.. versionadded:: 1.2   '),
+        ];
+        yield [
+            Violation::from(
+                'Please provide a version behind ".. versionadded::"',
+                'filename',
+                1,
+                '.. versionadded::',
+            ),
+            new RstSample('.. versionadded::'),
+        ];
+        yield [
+            Violation::from(
+                'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
+                'filename',
+                1,
+                '.. versionadded:: foo',
+            ),
+            new RstSample('.. versionadded:: foo'),
         ];
     }
 }

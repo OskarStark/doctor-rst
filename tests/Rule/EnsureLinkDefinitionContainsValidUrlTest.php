@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureLinkDefinitionContainsValidUrl;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTestCase
+final class EnsureLinkDefinitionContainsValidUrlTest extends UnitTestCase
 {
     /**
      * @test
@@ -38,7 +39,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         $validCases = [
             '.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST',
@@ -61,7 +62,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         $invalidCases = [
             '.. _DOCtor-RST: ttp://github.com/OskarStark/DOCtor-RST',

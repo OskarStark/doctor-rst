@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\UnusedLinks;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class UnusedLinksTest extends \App\Tests\UnitTestCase
+final class UnusedLinksTest extends UnitTestCase
 {
     /**
      * @test
@@ -35,7 +36,7 @@ final class UnusedLinksTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         yield [
             NullViolation::create(),
@@ -203,7 +204,7 @@ RST
         ];
     }
 
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         yield [
             Violation::from(

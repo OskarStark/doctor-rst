@@ -25,10 +25,12 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 class Application extends BaseApplication
 {
-    public const VERSION = '@git-version@';
+    final public const VERSION = '@git-version@';
 
-    public function __construct()
-    {
+    public function __construct(
+        private AnalyzeCommand $analyzeCommand,
+        private RulesCommand $rulesCommand,
+    ) {
         parent::__construct('DOCtor-RST', self::VERSION);
 
         $this->getDefinition()->addOptions([
@@ -42,10 +44,10 @@ class Application extends BaseApplication
         $container = $this->buildContainer($input);
 
         /** @var AnalyzeCommand $analyzeCommand */
-        $analyzeCommand = $container->get(AnalyzeCommand::class);
+        $analyzeCommand = $this->analyzeCommand;
 
         /** @var RulesCommand $rulesCommand */
-        $rulesCommand = $container->get(RulesCommand::class);
+        $rulesCommand = $this->rulesCommand;
 
         $this->addCommands([$analyzeCommand, $rulesCommand]);
 
@@ -68,7 +70,7 @@ class Application extends BaseApplication
             $fileLoader->load('cache.php');
         }
 
-        $container->compile();
+        $container->compile(true);
 
         return $container;
     }

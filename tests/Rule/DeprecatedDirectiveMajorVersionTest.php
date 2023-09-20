@@ -15,12 +15,13 @@ namespace App\Tests\Rule;
 
 use App\Rule\DeprecatedDirectiveMajorVersion;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
-final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
+final class DeprecatedDirectiveMajorVersionTest extends UnitTestCase
 {
     /**
      * @test
@@ -38,7 +39,7 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: int, 2: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield [
             NullViolation::create(),

@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\ExtensionXlfInsteadOfXliff;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class ExtensionXlfInsteadOfXliffTest extends \App\Tests\UnitTestCase
+final class ExtensionXlfInsteadOfXliffTest extends UnitTestCase
 {
     /**
      * @test
@@ -37,22 +38,20 @@ final class ExtensionXlfInsteadOfXliffTest extends \App\Tests\UnitTestCase
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Please use ".xlf" extension instead of ".xliff"',
-                    'filename',
-                    1,
-                    'messages.xliff',
-                ),
-                new RstSample('messages.xliff'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('messages.xlf'),
-            ],
+        yield [
+            Violation::from(
+                'Please use ".xlf" extension instead of ".xliff"',
+                'filename',
+                1,
+                'messages.xliff',
+            ),
+            new RstSample('messages.xliff'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('messages.xlf'),
         ];
     }
 }

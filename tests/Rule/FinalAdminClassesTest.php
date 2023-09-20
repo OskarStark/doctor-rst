@@ -15,12 +15,13 @@ namespace App\Tests\Rule;
 
 use App\Rule\FinalAdminClasses;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\RuleName;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
+final class FinalAdminClassesTest extends UnitTestCase
 {
     /**
      * @test
@@ -47,32 +48,29 @@ final class FinalAdminClassesTest extends \App\Tests\UnitTestCase
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Please use "final" for Admin class',
-                    'filename',
-                    1,
-                    'class TestAdmin extends AbstractAdmin',
-                ),
-                new RstSample('class TestAdmin extends AbstractAdmin'),
-            ],
-
-            [
-                Violation::from(
-                    'Please use "final" for Admin class',
-                    'filename',
-                    1,
-                    'class TestAdmin extends AbstractAdmin',
-                ),
-                new RstSample('    class TestAdmin extends AbstractAdmin'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('final class TestAdmin extends AbstractAdmin'),
-            ],
+        yield [
+            Violation::from(
+                'Please use "final" for Admin class',
+                'filename',
+                1,
+                'class TestAdmin extends AbstractAdmin',
+            ),
+            new RstSample('class TestAdmin extends AbstractAdmin'),
+        ];
+        yield [
+            Violation::from(
+                'Please use "final" for Admin class',
+                'filename',
+                1,
+                'class TestAdmin extends AbstractAdmin',
+            ),
+            new RstSample('    class TestAdmin extends AbstractAdmin'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('final class TestAdmin extends AbstractAdmin'),
         ];
     }
 }

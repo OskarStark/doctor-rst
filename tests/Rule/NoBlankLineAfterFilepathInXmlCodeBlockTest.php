@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInXmlCodeBlock;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTestCase
+final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,7 +35,7 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         $paths = [
             'config/services.xml',

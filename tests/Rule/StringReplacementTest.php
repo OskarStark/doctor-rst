@@ -16,12 +16,13 @@ namespace App\Tests\Rule;
 use App\Attribute\Rule\Description;
 use App\Rule\StringReplacement;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
 #[Description('propose to replace a string with another string.')]
-final class StringReplacementTest extends \App\Tests\UnitTestCase
+final class StringReplacementTest extends UnitTestCase
 {
     /**
      * @test
@@ -54,7 +55,7 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
         }
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield 'empty string' => [NullViolation::create(), new RstSample('')];
 

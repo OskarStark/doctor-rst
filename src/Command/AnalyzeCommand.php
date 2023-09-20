@@ -25,6 +25,7 @@ use App\Value\RuleName;
 use App\Value\RulesConfiguration;
 use OndraM\CiDetector\CiDetector;
 use OndraM\CiDetector\Exception\CiNotDetectedException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,19 +35,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
+#[AsCommand('analyze', null, ['analyse'])]
 class AnalyzeCommand extends Command
 {
-    protected static $defaultName = 'analyze';
-    private Registry $registry;
-    private RulesConfiguration $rulesConfiguration;
-    private MemoizingAnalyzer $analyzer;
-    private FormatterRegistry $formatterRegistry;
+    private readonly RulesConfiguration $rulesConfiguration;
 
-    public function __construct(Registry $registry, MemoizingAnalyzer $analyzer, FormatterRegistry $formatterRegistry)
-    {
-        $this->registry = $registry;
-        $this->analyzer = $analyzer;
-        $this->formatterRegistry = $formatterRegistry;
+    public function __construct(
+        private readonly Registry $registry,
+        private readonly MemoizingAnalyzer $analyzer,
+        private readonly FormatterRegistry $formatterRegistry,
+    ) {
         $this->rulesConfiguration = new RulesConfiguration();
 
         parent::__construct();
@@ -55,8 +53,6 @@ class AnalyzeCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Analyze *.rst files')
-            ->setAliases(['analyse'])
             ->addArgument('dir', InputArgument::OPTIONAL, 'Directory', '.')
             ->addOption('rule', 'r', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which rule should be applied?')
             ->addOption('group', 'g', InputOption::VALUE_REQUIRED, 'Which groups should be used?')
@@ -74,7 +70,7 @@ class AnalyzeCommand extends Command
         if (!$analyzeDir = realpath($dir)) {
             $io->error(sprintf('Could not find directory: %s', $dir));
 
-            return 1;
+            return (int) Command::FAILURE;
         }
 
         $io->text(sprintf('Analyze *.rst(.inc) files in: <info>%s</info>', $analyzeDir));
@@ -82,7 +78,7 @@ class AnalyzeCommand extends Command
         if (!is_file($configFile = $analyzeDir.'/.doctor-rst.yaml')) {
             $io->error(sprintf('Could not find config file: %s', $configFile));
 
-            return 1;
+            return (int) Command::FAILURE;
         }
 
         $io->text(sprintf('Used config file:             <info>%s</info>', $configFile));
@@ -91,6 +87,7 @@ class AnalyzeCommand extends Command
         $config = Yaml::parseFile($configFile);
 
         $rules = $config['rules'];
+
         foreach ($rules as $name => $options) {
             $rules = $this->registry->getRulesByName(RuleName::fromString($name));
 
@@ -120,7 +117,7 @@ class AnalyzeCommand extends Command
         if (!empty($input->getOption('rule') && !empty($input->getOption('group')))) {
             $io->error('You can only provide "rule" or "group"!');
 
-            return 1;
+            return (int) Command::FAILURE;
         }
 
         if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
@@ -141,7 +138,7 @@ class AnalyzeCommand extends Command
         if (!$this->rulesConfiguration->hasRulesForAll()) {
             $io->warning('No rules selected!');
 
-            return 1;
+            return (int) Command::FAILURE;
         }
 
         $errorFormat = $input->getOption('error-format');
@@ -157,7 +154,7 @@ class AnalyzeCommand extends Command
                 if (CiDetector::CI_GITHUB_ACTIONS === $ci->getCiName()) {
                     $errorFormat = 'github';
                 }
-            } catch (CiNotDetectedException $e) {
+            } catch (CiNotDetectedException) {
                 // pass and use default
             }
         }
@@ -173,7 +170,7 @@ class AnalyzeCommand extends Command
 
         foreach ($finder as $file) {
             if ($output->isVeryVerbose()) {
-                $output->writeln('Analyze '. $file->getRealPath());
+                $output->writeln('Analyze '.$file->getRealPath());
             }
             $rules = $this->rulesConfiguration->getRulesForFilePath($file->getRelativePathname());
             $fileResults[] = new FileResult(

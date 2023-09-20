@@ -15,10 +15,11 @@ namespace App\Tests\Analyzer;
 
 use App\Analyzer\FileCache;
 use App\Application;
+use App\Tests\UnitTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 
-final class FileCacheTest extends \App\Tests\UnitTestCase
+final class FileCacheTest extends UnitTestCase
 {
     private vfsStreamDirectory $root;
 

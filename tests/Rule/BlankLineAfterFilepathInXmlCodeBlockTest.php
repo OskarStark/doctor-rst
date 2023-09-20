@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInXmlCodeBlock;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTestCase
+final class BlankLineAfterFilepathInXmlCodeBlockTest extends UnitTestCase
 {
     /**
      * @test
@@ -37,7 +38,7 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTest
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         $paths = [
             'config/services.xml',

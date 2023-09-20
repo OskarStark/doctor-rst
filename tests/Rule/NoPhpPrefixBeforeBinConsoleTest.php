@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoPhpPrefixBeforeBinConsole;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
+final class NoPhpPrefixBeforeBinConsoleTest extends UnitTestCase
 {
     /**
      * @test
@@ -34,22 +35,20 @@ final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
-            [
-                Violation::from(
-                    'Please remove "php" prefix before "bin/console"',
-                    'filename',
-                    1,
-                    'please execute php bin/console foo',
-                ),
-                new RstSample('please execute php bin/console foo'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('please execute bin/console foo'),
-            ],
+        yield [
+            Violation::from(
+                'Please remove "php" prefix before "bin/console"',
+                'filename',
+                1,
+                'please execute php bin/console foo',
+            ),
+            new RstSample('please execute php bin/console foo'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('please execute bin/console foo'),
         ];
     }
 }
