@@ -49,6 +49,7 @@ return static function (RectorConfig $rectorConfig): void {
         ArraySpreadInsteadOfArrayMergeRector::class,
         PreferPHPUnitThisCallRector::class,
         ReplaceTestAnnotationWithPrefixedFunctionRector::class,
+        \Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector::class,
     ]);
 
     /**
@@ -61,6 +62,4 @@ return static function (RectorConfig $rectorConfig): void {
      * @see https://github.com/rectorphp/rector-phpunit/blob/main/docs/rector_rules_overview.md#staticdataproviderclassmethodrector
      */
     $rectorConfig->rule(StaticDataProviderClassMethodRector::class);
-
-    $rectorConfig->import(__DIR__.'/vendor/fakerphp/faker/rector-migrate.php');
 };
