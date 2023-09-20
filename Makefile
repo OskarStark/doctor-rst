@@ -13,3 +13,7 @@ phpstan:
 .PHONY: phpstan-baseline
 phpstan-baseline:
 	vendor/bin/phpstan analyse -c phpstan.neon.dist --generate-baseline=phpstan-baseline.neon
+
+.PHONY: refactoring
+refactoring:
+	vendor/bin/rector process --config rector.php
