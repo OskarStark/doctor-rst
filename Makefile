@@ -17,3 +17,7 @@ phpstan-baseline:
 .PHONY: refactoring
 refactoring:
 	vendor/bin/rector process --config rector.php
+
+.PHONY: dependency-analysis
+dependency-analysis:
+	vendor/bin/composer-unused
