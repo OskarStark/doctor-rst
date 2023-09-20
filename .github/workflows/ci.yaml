@@ -178,3 +178,7 @@ jobs:
             -
                 name: "Check for unused dependencies"
                 run: 'vendor/bin/composer-unused --no-progress --output-format=github | grep -e "^::error" && exit 1 || :'
+
+            -
+                name: "Check for implicit dependencies"
+                run: "tools/composer-require-checker check --config-file=$(pwd)/composer-require-checker.json composer.json"
