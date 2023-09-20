@@ -6,6 +6,7 @@
         "php": "^8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-mbstring": "*",
         "composer/semver": "^3.4.0",
         "ondram/ci-detector": "^4.1.0",
         "symfony/config": "^6.3.2",
@@ -13,6 +14,7 @@
         "symfony/dependency-injection": "^6.3.4",
         "symfony/finder": "^6.3.3",
         "symfony/options-resolver": "^6.3.0",
+        "symfony/service-contracts": "^3.3",
         "symfony/string": "^6.3.2",
         "symfony/yaml": "^6.3.3",
         "webmozart/assert": "^1.11"
