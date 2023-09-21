@@ -79,16 +79,15 @@ final class Line
     {
         if (null === $this->isDirective) {
             $string = ltrim($this->raw->toString());
-            $len = strlen($string);
+            $len = \strlen($string);
 
-            if ($len >= 2
-                && $string[0] === '.'
-                && $string[1] === '.'
+            if (2 <= $len
+                && '.' === $string[0]
+                && '.' === $string[1]
             ) {
                 if (
                     !str_starts_with($string, '.. _`')
-                    && str_contains($string, '::'))
-                {
+                    && str_contains($string, '::')) {
                     return $this->isDirective = true;
                 }
             }
@@ -107,9 +106,9 @@ final class Line
     {
         if (null === $this->isDefaultDirective) {
             $string = rtrim($this->raw->toString());
-            $len = strlen($string);
+            $len = \strlen($string);
 
-            if ($len < 2 || $string[$len - 1] !== ':' || $string[$len - 2] !== ':') {
+            if (2 > $len || $string[$len - 1] !== ':' || $string[$len - 2] !== ':') {
                 return $this->isDefaultDirective = false;
             }
 

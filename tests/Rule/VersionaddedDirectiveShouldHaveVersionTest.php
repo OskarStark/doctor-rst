@@ -39,9 +39,9 @@ final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTe
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 NullViolation::create(),
                 new RstSample('.. versionadded:: 1'),

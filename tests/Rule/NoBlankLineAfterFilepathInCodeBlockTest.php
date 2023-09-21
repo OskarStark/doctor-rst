@@ -39,9 +39,9 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 NullViolation::create(),
                 new RstSample('temp'),
@@ -49,9 +49,9 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public static function checkPhpProvider(): array
+    public static function checkPhpProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please remove blank line after "// src/Handler/Collection.php"',
@@ -79,9 +79,9 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public static function checkYmlProvider(): array
+    public static function checkYmlProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please remove blank line after "# config/services.yml"',
@@ -109,9 +109,9 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public static function checkYamlProvider(): array
+    public static function checkYamlProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please remove blank line after "# config/services.yaml"',
@@ -139,9 +139,9 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public static function checkXmlProvider(): array
+    public static function checkXmlProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please remove blank line after "<!-- config/services.xml -->"',
@@ -193,9 +193,9 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestC
         ];
     }
 
-    public static function checkTwigProvider(): array
+    public static function checkTwigProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please remove blank line after "{# templates/index.html.twig #}"',

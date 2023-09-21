@@ -38,7 +38,7 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\U
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         $valid = <<<'RST'
 .. configuration-block::
@@ -258,7 +258,7 @@ RST;
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         $invalid = <<<'RST'
 .. configuration-block::

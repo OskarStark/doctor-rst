@@ -35,7 +35,7 @@ final class UnusedLinksTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         yield [
             NullViolation::create(),
@@ -203,7 +203,7 @@ RST
         ];
     }
 
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         yield [
             Violation::from(

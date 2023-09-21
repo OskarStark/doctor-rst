@@ -34,9 +34,9 @@ final class NoFootnotesTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     "Please don't use footnotes as they are not supported",

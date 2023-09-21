@@ -34,9 +34,9 @@ final class LineLengthTest extends \App\Tests\UnitTestCase
         self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Line is to long (max 20) currently: 23',

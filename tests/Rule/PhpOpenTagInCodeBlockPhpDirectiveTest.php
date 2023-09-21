@@ -34,7 +34,7 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestCas
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield sprintf('Has violation for code-block "%s"', $codeBlock) => [

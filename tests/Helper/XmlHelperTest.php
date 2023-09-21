@@ -34,7 +34,7 @@ final class XmlHelperTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string, 2: null|bool}>
      */
-    public static function isCommentProvider(): \Generator
+    public static function isCommentProvider(): iterable
     {
         yield [true, '<!--', null];
         yield [true, '-->', null];

@@ -34,9 +34,9 @@ final class NoSpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please remove space before "/>"',

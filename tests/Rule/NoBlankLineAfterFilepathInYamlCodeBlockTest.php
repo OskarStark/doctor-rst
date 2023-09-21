@@ -34,9 +34,9 @@ final class NoBlankLineAfterFilepathInYamlCodeBlockTest extends \App\Tests\UnitT
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please remove blank line after "# config/services.yml"',

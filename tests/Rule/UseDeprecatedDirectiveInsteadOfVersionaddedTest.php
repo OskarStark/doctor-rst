@@ -38,9 +38,9 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
     /**
      * @return array<int|string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): array
+    public static function validProvider(): iterable
     {
-        return [
+        yield from [
             [
                 NullViolation::create(),
                 new RstSample([
@@ -84,9 +84,9 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\U
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): array
+    public static function invalidProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please use ".. deprecated::" instead of ".. versionadded::"',
