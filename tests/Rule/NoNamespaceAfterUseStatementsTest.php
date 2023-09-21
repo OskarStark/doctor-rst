@@ -34,7 +34,7 @@ final class NoNamespaceAfterUseStatementsTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         $codeBlocks = self::phpCodeBlocks();
 

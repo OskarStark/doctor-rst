@@ -38,7 +38,7 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         $validCases = [
             '.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST',
@@ -57,7 +57,7 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         $invalidCases = [
             '.. _DOCtor-RST:  https://github.com/OskarStark/DOCtor-RST',

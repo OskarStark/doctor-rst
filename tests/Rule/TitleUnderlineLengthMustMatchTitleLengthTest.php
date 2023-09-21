@@ -34,7 +34,7 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends \App\Tests\Unit
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield [
             Violation::from(

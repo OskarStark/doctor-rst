@@ -34,7 +34,7 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends \App\Tests\UnitTe
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         $paths = [
             'config/services.xml',

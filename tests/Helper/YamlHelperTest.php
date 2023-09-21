@@ -34,7 +34,7 @@ final class YamlHelperTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isCommentProvider(): \Generator
+    public static function isCommentProvider(): iterable
     {
         yield [true, '# comment'];
         yield [false, 'no comment'];

@@ -59,7 +59,7 @@ final class RuleGroupTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: string, 1: RuleGroup}>
      */
-    public static function definedProvider(): \Generator
+    public static function definedProvider(): iterable
     {
         yield '@Experimental' => [
             '@Experimental',
@@ -93,7 +93,7 @@ final class RuleGroupTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: RuleGroup, 2: RuleGroup}>
      */
-    public static function equalsProvider(): \Generator
+    public static function equalsProvider(): iterable
     {
         yield [
             true,

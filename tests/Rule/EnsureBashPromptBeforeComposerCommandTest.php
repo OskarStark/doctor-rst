@@ -38,7 +38,7 @@ final class EnsureBashPromptBeforeComposerCommandTest extends \App\Tests\UnitTes
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         $codeBlocks = [
             RstParser::CODE_BLOCK_BASH,

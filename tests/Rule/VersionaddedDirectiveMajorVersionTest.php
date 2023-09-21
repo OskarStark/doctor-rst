@@ -43,9 +43,9 @@ final class VersionaddedDirectiveMajorVersionTest extends \App\Tests\UnitTestCas
     /**
      * @return array<array{0: ViolationInterface, 1: int, 2: RstSample}>
      */
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 NullViolation::create(),
                 3,

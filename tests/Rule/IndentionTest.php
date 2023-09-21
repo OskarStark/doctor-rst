@@ -34,7 +34,7 @@ final class IndentionTest extends \App\Tests\UnitTestCase
         self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield [NullViolation::create(), 4, new RstSample('')];
         yield [
@@ -381,7 +381,7 @@ RST
         );
     }
 
-    public static function multilineXmlProvider(): \Generator
+    public static function multilineXmlProvider(): iterable
     {
         yield [
             true,
@@ -455,7 +455,7 @@ RST
         );
     }
 
-    public static function multilineTwigProvider(): \Generator
+    public static function multilineTwigProvider(): iterable
     {
         yield [
             true,

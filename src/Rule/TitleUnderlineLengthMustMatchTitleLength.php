@@ -30,10 +30,11 @@ class TitleUnderlineLengthMustMatchTitleLength extends AbstractRule implements L
         }
 
         $headLineLength = mb_strlen($line->clean()->toString());
+
         // needed because some headline contents only contain 1 or 2 characters;
         // this causes issues with the Doctrine RST Parser, which requires 3 or more characters
         // (see https://github.com/symfony/symfony-docs/issues/18289)
-        if ($headLineLength <= 3) {
+        if (3 >= $headLineLength) {
             return NullViolation::create();
         }
 

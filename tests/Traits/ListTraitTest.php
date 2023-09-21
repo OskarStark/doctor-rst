@@ -49,7 +49,7 @@ final class ListTraitTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfListItemProvider(): \Generator
+    public static function isPartOfListItemProvider(): iterable
     {
         yield [
             false,
@@ -155,7 +155,7 @@ RST
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfFootnoteProvider(): \Generator
+    public static function isPartOfFootnoteProvider(): iterable
     {
         $footnote = <<<'RST'
 .. [1] Line 1
@@ -182,7 +182,7 @@ RST;
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfRstCommentProvider(): \Generator
+    public static function isPartOfRstCommentProvider(): iterable
     {
         $rst_comment = <<<'RST'
 .. Line 1
@@ -209,7 +209,7 @@ RST;
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfLineNumberAnnotationProvider(): \Generator
+    public static function isPartOfLineNumberAnnotationProvider(): iterable
     {
         $line_number_annotation = <<<'RST'
 Line 15

@@ -40,9 +40,9 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return array<array{0: string, 1: string}>
      */
-    public static function cleanProvider(): array
+    public static function cleanProvider(): iterable
     {
-        return [
+        yield from [
             [
                 '.. code-block:: php',
                 '.. code-block:: php',
@@ -91,9 +91,9 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return array<array{0: bool, 1: string}>
      */
-    public static function isBlankProvider(): array
+    public static function isBlankProvider(): iterable
     {
-        return [
+        yield from [
             [true, '\r\n'],
             [true, ''],
             [true, ' '],
@@ -114,7 +114,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: int, 1: string}>
      */
-    public static function indentionProvider(): \Generator
+    public static function indentionProvider(): iterable
     {
         yield [0, ''];
         yield [1, ' foo'];
@@ -134,7 +134,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isHeadlineProvider(): \Generator
+    public static function isHeadlineProvider(): iterable
     {
         yield [true, '==='];
         yield [true, '~~~'];
@@ -161,7 +161,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isDirectiveProvider(): \Generator
+    public static function isDirectiveProvider(): iterable
     {
         yield [true, 'the following code is php::'];
         yield [true, '.. code-block:: php'];
@@ -190,7 +190,7 @@ final class LineTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isDefaultDirectiveProvider(): \Generator
+    public static function isDefaultDirectiveProvider(): iterable
     {
         yield [true, 'this is using the default directive::'];
         yield [true, 'prefixed classes included in doc block comments (``/** ... */``). For example::'];

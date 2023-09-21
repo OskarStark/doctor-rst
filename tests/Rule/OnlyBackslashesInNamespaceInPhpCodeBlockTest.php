@@ -34,7 +34,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends \App\Tests\Unit
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [

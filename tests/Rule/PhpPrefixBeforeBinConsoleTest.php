@@ -34,7 +34,7 @@ final class PhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield [NullViolation::create(), new RstSample('please execute php bin/console foo')];
         yield [NullViolation::create(), new RstSample('you can use `bin/console` to execute')];

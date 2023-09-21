@@ -53,7 +53,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
             yield [

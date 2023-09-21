@@ -37,9 +37,9 @@ final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
     /**
      * @return array<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please add space before "/>"',

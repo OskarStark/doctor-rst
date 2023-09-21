@@ -34,7 +34,7 @@ final class ValidInlineHighlightedNamespacesTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield [NullViolation::create(), new RstSample('')];
         yield [NullViolation::create(), new RstSample(' ')];
