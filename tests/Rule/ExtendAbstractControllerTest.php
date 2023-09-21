@@ -34,9 +34,9 @@ final class ExtendAbstractControllerTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please extend AbstractController instead of Controller',

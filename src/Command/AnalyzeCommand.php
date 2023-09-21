@@ -91,6 +91,7 @@ class AnalyzeCommand extends Command
         $config = Yaml::parseFile($configFile);
 
         $rules = $config['rules'];
+
         foreach ($rules as $name => $options) {
             $rules = $this->registry->getRulesByName(RuleName::fromString($name));
 
@@ -173,7 +174,7 @@ class AnalyzeCommand extends Command
 
         foreach ($finder as $file) {
             if ($output->isVeryVerbose()) {
-                $output->writeln('Analyze '. $file->getRealPath());
+                $output->writeln('Analyze '.$file->getRealPath());
             }
             $rules = $this->rulesConfiguration->getRulesForFilePath($file->getRelativePathname());
             $fileResults[] = new FileResult(

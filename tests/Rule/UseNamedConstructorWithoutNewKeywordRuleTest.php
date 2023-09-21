@@ -35,7 +35,7 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
         );
     }
 
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         $validLines = [
             '$client = new NoPrivateNetworkHttpClient(HttpClient::create());',

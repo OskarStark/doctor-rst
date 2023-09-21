@@ -34,9 +34,9 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please use "services.yaml" instead of "admin.yml"',

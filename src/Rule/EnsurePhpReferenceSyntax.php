@@ -15,20 +15,22 @@ namespace App\Rule;
 
 use App\Attribute\Rule\Description;
 use App\Attribute\Rule\InvalidExample;
-use App\Rst\RstParser;
+use App\Attribute\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-#[Description('Make sure there is no footnotes')]
-#[InvalidExample('.. [5] A numerical footnote. Note')]
-class NoFootnotes extends AbstractRule implements LineContentRule
+#[Description('Ensure php reference syntax is valid.')]
+#[InvalidExample('The :class:`Symfony\\Component\\Notifier\\Transport`` class')]
+#[ValidExample('The :class:`Symfony\\Component\\Notifier\\Transport` class')]
+class EnsurePhpReferenceSyntax extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {
         return [
+            RuleGroup::Sonata(),
             RuleGroup::Symfony(),
         ];
     }
@@ -38,9 +40,9 @@ class NoFootnotes extends AbstractRule implements LineContentRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (RstParser::isFootnote($lines->current())) {
+        if ($line->clean()->match('/:(class|method|namespace|phpclass|phpfunction|phpmethod):`[a-zA-Z\\\\:]+``/')) {
             return Violation::from(
-                "Please don't use footnotes as they are not supported",
+                'Please use one backtick at the end of the reference',
                 $filename,
                 $number + 1,
                 $line,

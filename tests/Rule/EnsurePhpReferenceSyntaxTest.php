@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rule\BlankLineAfterColon;
+use App\Rule\EnsurePhpReferenceSyntax;
 use App\Tests\RstSample;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
+final class EnsurePhpReferenceSyntaxTest extends \App\Tests\UnitTestCase
 {
     /**
      * @test
@@ -30,14 +30,14 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterColon())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new EnsurePhpReferenceSyntax())->check($sample->lines(), $sample->lineNumber(), 'filename'),
         );
     }
 
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): iterable
+    public static function checkProvider(): \Generator
     {
         yield [
             NullViolation::create(),
@@ -46,49 +46,22 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
 
         yield [
             NullViolation::create(),
-            new RstSample('temp:'),
-        ];
-
-        yield [
-            NullViolation::create(),
             new RstSample([
-                'For example:',
                 '',
-                '    this is a text',
-            ]),
+                'The :class:`Symfony\\Component\\Notifier\\Transport` class',
+            ], 1),
         ];
 
         yield [
             Violation::from(
-                'Please add a blank line after "For example:"',
+                'Please use one backtick at the end of the reference',
                 'filename',
-                1,
-                'For example:',
+                2,
+                'The :class:`Symfony\\Component\\Notifier\\Transport`` class',
             ),
             new RstSample([
-                'For example:',
-                'For example::',
-            ]),
-        ];
-
-        yield [
-            NullViolation::create(),
-            new RstSample([
-                '.. code-block:: yaml',
                 '',
-                '    session:',
-                '        foo:',
-            ], 2),
-        ];
-
-        yield [
-            NullViolation::create(),
-            new RstSample([
-                '.. code-block:: yml',
-                '    :option:',
-                '    # config/services.yml',
-                '',
-                '    services:',
+                'The :class:`Symfony\\Component\\Notifier\\Transport`` class',
             ], 1),
         ];
 
@@ -96,11 +69,20 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
             NullViolation::create(),
             new RstSample([
                 '',
-                '.. _env-var-processors:',
+                'The :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController::createNotFoundException`',
+            ], 1),
+        ];
+
+        yield [
+            Violation::from(
+                'Please use one backtick at the end of the reference',
+                'filename',
+                2,
+                'The :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController::createNotFoundException``',
+            ),
+            new RstSample([
                 '',
-                'Environment Variable Processors',
-                '===============================',
-                '',
+                'The :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController::createNotFoundException``',
             ], 1),
         ];
     }

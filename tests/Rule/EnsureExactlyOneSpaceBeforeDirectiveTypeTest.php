@@ -38,7 +38,7 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         $validCases = [
             '.. code-block:: php',
@@ -56,7 +56,7 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         $invalidCases = [
             '..  code-block:: php',

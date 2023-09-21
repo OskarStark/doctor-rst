@@ -38,7 +38,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         $validCases = [
             '.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST',
@@ -61,7 +61,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         $invalidCases = [
             '.. _DOCtor-RST: ttp://github.com/OskarStark/DOCtor-RST',

@@ -35,7 +35,7 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isCommentProvider(): \Generator
+    public static function isCommentProvider(): iterable
     {
         yield [true, '# comment'];
         yield [true, '// comment'];
@@ -55,7 +55,7 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function containsBackslashProvider(): \Generator
+    public static function containsBackslashProvider(): iterable
     {
         yield 'one backslash at the beginning' => [true, '\Test'];
         yield 'one backslash at the end' => [true, 'Test\\'];
@@ -78,7 +78,7 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isUsingTwoBackSlashesProvider(): \Generator
+    public static function isUsingTwoBackSlashesProvider(): iterable
     {
         yield 'two backslashes + beginning' => [true, '\\\\Test\\\\Test'];
         yield 'two backslashes' => [true, 'Test\\\\Test'];
@@ -114,7 +114,7 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isLastLineOfMultilineCommentProvider(): \Generator
+    public static function isLastLineOfMultilineCommentProvider(): iterable
     {
         yield [false, '/**'];
         yield [false, '* test'];
@@ -137,7 +137,7 @@ final class PhpHelperTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfDocBlockProvider(): \Generator
+    public static function isPartOfDocBlockProvider(): iterable
     {
         $valid = <<<'RST'
 class User
@@ -171,7 +171,7 @@ RST;
     /**
      * @return \Generator<array{0: bool, 1: RstSample}>
      */
-    public static function isPartOfMultilineCommentProvider(): \Generator
+    public static function isPartOfMultilineCommentProvider(): iterable
     {
         $valid = <<<'RST'
     /*
@@ -214,7 +214,7 @@ RST;
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isFirstLineOfMultilineCommentProvider(): \Generator
+    public static function isFirstLineOfMultilineCommentProvider(): iterable
     {
         yield [true, '/*'];
         yield [false, '/**'];
@@ -238,7 +238,7 @@ RST;
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isFirstLineOfDocBlockProvider(): \Generator
+    public static function isFirstLineOfDocBlockProvider(): iterable
     {
         yield [true, '/**'];
         yield [false, '/*'];
@@ -262,7 +262,7 @@ RST;
     /**
      * @return \Generator<array{0: bool, 1: string}>
      */
-    public static function isLastLineOfDocBlockProvider(): \Generator
+    public static function isLastLineOfDocBlockProvider(): iterable
     {
         yield [false, '/**'];
         yield [false, '* test'];

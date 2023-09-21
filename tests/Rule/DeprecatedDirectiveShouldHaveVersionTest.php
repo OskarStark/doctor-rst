@@ -39,7 +39,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTest
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield [
             NullViolation::create(),

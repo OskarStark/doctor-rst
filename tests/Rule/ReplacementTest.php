@@ -55,7 +55,7 @@ final class ReplacementTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function checkProvider(): \Generator
+    public static function checkProvider(): iterable
     {
         yield 'empty string' => [NullViolation::create(), new RstSample('')];
 

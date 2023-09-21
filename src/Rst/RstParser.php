@@ -230,13 +230,15 @@ class RstParser
     public static function isFootnote(Line $line): bool
     {
         $string = (string) $line->clean();
-        return strlen($string) >= 5
-            && $string[0] === '.'
-            && $string[1] === '.'
-            && $string[2] === ' '
-            && $string[3] === '['
-            && [] !== $line->clean()->match('/^\.\. \[[0-9]\]/'
-        );
+
+        return \strlen($string) >= 5
+            && '.' === $string[0]
+            && '.' === $string[1]
+            && ' ' === $string[2]
+            && '[' === $string[3]
+            && [] !== $line->clean()->match(
+                '/^\.\. \[[0-9]\]/',
+            );
     }
 
     /**

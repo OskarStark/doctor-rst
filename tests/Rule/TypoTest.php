@@ -56,7 +56,7 @@ final class TypoTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         yield 'empty string' => [NullViolation::create(), new RstSample('')];
 
@@ -97,7 +97,7 @@ final class TypoTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         $invalids = [
             'Compsoer',

@@ -38,7 +38,7 @@ final class NoDirectiveAfterShorthandTest extends \App\Tests\UnitTestCase
     /**
      * @return \Generator<string, array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function validProvider(): \Generator
+    public static function validProvider(): iterable
     {
         $valid2 = <<<'RST'
 This is a sentence::
@@ -79,7 +79,7 @@ RST;
     /**
      * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
      */
-    public static function invalidProvider(): \Generator
+    public static function invalidProvider(): iterable
     {
         $invalid = <<<'RST'
 This is a sentence::

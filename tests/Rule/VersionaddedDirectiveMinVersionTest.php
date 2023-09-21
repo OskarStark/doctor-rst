@@ -42,9 +42,9 @@ final class VersionaddedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
     /**
      * @return array<array{0: ViolationInterface, 1: string, 2: RstSample}>
      */
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 NullViolation::create(),
                 '3.4',

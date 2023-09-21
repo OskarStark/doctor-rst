@@ -34,9 +34,9 @@ final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
         );
     }
 
-    public static function checkProvider(): array
+    public static function checkProvider(): iterable
     {
-        return [
+        yield from [
             [
                 Violation::from(
                     'Please remove "php" prefix before "bin/console"',
