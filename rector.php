@@ -1,7 +1,16 @@
 <?php
 
 declare(strict_types=1);
-use Rector\Caching\ValueObject\Storage\FileCacheStorage;
+
+/**
+ * This file is part of DOCtor-RST.
+ *
+ * (c) Oskar Stark <oskarstark@googlemail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Doctrine\Set\DoctrineSetList;

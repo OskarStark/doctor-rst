@@ -62,6 +62,9 @@ $config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\P
 ]);
 
 $config->getFinder()
+    ->append([
+        __DIR__.'/rector.php',
+    ])
     ->in('src')
     ->in('tests');
 
