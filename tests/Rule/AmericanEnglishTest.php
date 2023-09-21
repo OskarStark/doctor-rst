@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\AmericanEnglish;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class AmericanEnglishTest extends \App\Tests\UnitTestCase
+final class AmericanEnglishTest extends UnitTestCase
 {
     /**
      * @test

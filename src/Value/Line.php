@@ -18,9 +18,9 @@ use function Symfony\Component\String\u;
 
 final class Line
 {
-    private UnicodeString $raw;
-    private UnicodeString $clean;
-    private bool $blank;
+    private readonly UnicodeString $raw;
+    private readonly UnicodeString $clean;
+    private readonly bool $blank;
     private ?int $indention = null;
     private ?bool $headline = null;
     private ?bool $isDirective = null;
@@ -57,7 +57,7 @@ final class Line
     {
         if (null === $this->indention) {
             if ($matches = $this->raw->match('/^[\s]+/')) {
-                return $this->indention = \strlen($matches[0]);
+                return $this->indention = \strlen((string) $matches[0]);
             }
 
             return $this->indention = 0;

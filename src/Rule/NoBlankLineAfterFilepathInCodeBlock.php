@@ -64,7 +64,7 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCo
         $lines->next();
 
         if ($lines->current()->isBlank()) {
-            $match = trim($matches[0]);
+            $match = trim((string) $matches[0]);
 
             return Violation::from(
                 sprintf('Please remove blank line after "%s"', $match),

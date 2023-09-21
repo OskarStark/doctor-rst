@@ -16,6 +16,7 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Php74\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
+use Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\ReplaceTestAnnotationWithPrefixedFunctionRector;
 use Rector\PHPUnit\PHPUnit100\Rector\Class_\StaticDataProviderClassMethodRector;
@@ -58,7 +59,7 @@ return static function (RectorConfig $rectorConfig): void {
         ArraySpreadInsteadOfArrayMergeRector::class,
         PreferPHPUnitThisCallRector::class,
         ReplaceTestAnnotationWithPrefixedFunctionRector::class,
-        \Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector::class,
+        AddSeeTestAnnotationRector::class,
     ]);
 
     /**
@@ -71,4 +72,8 @@ return static function (RectorConfig $rectorConfig): void {
      * @see https://github.com/rectorphp/rector-phpunit/blob/main/docs/rector_rules_overview.md#staticdataproviderclassmethodrector
      */
     $rectorConfig->rule(StaticDataProviderClassMethodRector::class);
+
+    $rectorConfig->skip([
+        __DIR__.'/src/Application.php',
+    ]);
 };

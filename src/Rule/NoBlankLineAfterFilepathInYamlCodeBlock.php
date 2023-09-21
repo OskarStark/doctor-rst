@@ -61,7 +61,7 @@ class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Li
             $lines->next();
 
             if (!YamlHelper::isComment($lines->current())) {
-                $match = trim($matches[0]);
+                $match = trim((string) $matches[0]);
 
                 return Violation::from(
                     sprintf('Please remove blank line after "%s"', $match),

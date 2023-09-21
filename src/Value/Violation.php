@@ -17,12 +17,11 @@ use Webmozart\Assert\Assert;
 
 final class Violation implements ViolationInterface
 {
-    private string $message;
-    private string $filename;
-    private int $lineno;
-    private string $rawLine;
+    private readonly string $message;
+    private readonly string $filename;
+    private readonly int $lineno;
 
-    private function __construct(string $message, string $filename, int $lineno, string $rawLine)
+    private function __construct(string $message, string $filename, int $lineno, private readonly string $rawLine)
     {
         $message = trim($message);
         Assert::stringNotEmpty($message);
@@ -37,7 +36,6 @@ final class Violation implements ViolationInterface
         $this->message = $message;
         $this->filename = $filename;
         $this->lineno = $lineno;
-        $this->rawLine = $rawLine;
     }
 
     public static function from(string $message, string $filename, int $lineno, Line|string $rawLine): self

@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Helper;
 
 use App\Helper\XmlHelper;
+use App\Tests\UnitTestCase;
 use App\Value\Line;
 
-final class XmlHelperTest extends \App\Tests\UnitTestCase
+final class XmlHelperTest extends UnitTestCase
 {
     /**
      * @test

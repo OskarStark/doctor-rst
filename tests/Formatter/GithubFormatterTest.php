@@ -15,6 +15,7 @@ namespace App\Tests\Formatter;
 
 use App\Formatter\ConsoleFormatter;
 use App\Formatter\GithubFormatter;
+use App\Tests\UnitTestCase;
 use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
@@ -23,7 +24,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-final class GithubFormatterTest extends \App\Tests\UnitTestCase
+final class GithubFormatterTest extends UnitTestCase
 {
     /**
      * @test

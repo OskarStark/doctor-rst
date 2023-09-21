@@ -15,8 +15,9 @@ namespace App\Tests\Analyzer;
 
 use App\Analyzer\RstAnalyzer;
 use App\Rule\MaxBlankLines;
+use App\Tests\UnitTestCase;
 
-final class RstAnalyzerTest extends \App\Tests\UnitTestCase
+final class RstAnalyzerTest extends UnitTestCase
 {
     /**
      * @test

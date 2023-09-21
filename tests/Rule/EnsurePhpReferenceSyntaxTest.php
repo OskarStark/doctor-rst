@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use App\Tests\UnitTestCase;
 use App\Rule\EnsurePhpReferenceSyntax;
 use App\Tests\RstSample;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class EnsurePhpReferenceSyntaxTest extends \App\Tests\UnitTestCase
+final class EnsurePhpReferenceSyntaxTest extends UnitTestCase
 {
     /**
      * @test

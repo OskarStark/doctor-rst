@@ -16,11 +16,12 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\BlankLineAfterDirective;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineAfterDirectiveTest extends \App\Tests\UnitTestCase
+final class BlankLineAfterDirectiveTest extends UnitTestCase
 {
     /**
      * @test
