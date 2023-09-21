@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Tests\UnitTestCase;
 use App\Rule\EnsurePhpReferenceSyntax;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
