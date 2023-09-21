@@ -24,6 +24,7 @@
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
 * [ensure_link_definition_contains_valid_url](#ensure_link_definition_contains_valid_url)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
+* [ensure_php_reference_syntax](#ensure_php_reference_syntax)
 * [extend_abstract_admin](#extend_abstract_admin)
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
@@ -376,6 +377,24 @@ composer require symfony/var-dumper
 ## `ensure_order_of_code_blocks_in_configuration_block`
 
 #### Groups [`@Sonata`, `@Symfony`]
+
+## `ensure_php_reference_syntax`
+
+  > _Ensure php reference syntax is valid._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+The :class:`Symfony\Component\Notifier\Transport` class
+```
+
+##### Invalid Examples :-1:
+
+```rst
+The :class:`Symfony\Component\Notifier\Transport`` class
+```
 
 ## `extend_abstract_admin`
 
