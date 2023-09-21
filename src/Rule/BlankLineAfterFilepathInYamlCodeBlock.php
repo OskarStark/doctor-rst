@@ -54,7 +54,7 @@ class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Line
         $lines->next();
 
         if (!$lines->current()->isBlank() && !YamlHelper::isComment($lines->current())) {
-            $match = trim($matches[0]);
+            $match = trim((string) $matches[0]);
 
             return Violation::from(
                 sprintf('Please add a blank line after "%s"', $match),

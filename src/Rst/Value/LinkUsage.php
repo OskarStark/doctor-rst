@@ -13,13 +13,10 @@ declare(strict_types=1);
 
 namespace App\Rst\Value;
 
-final class LinkUsage
+final readonly class LinkUsage
 {
-    private LinkName $name;
-
-    private function __construct(LinkName $name)
+    private function __construct(private LinkName $name)
     {
-        $this->name = $name;
     }
 
     public static function fromLine(string $line): self

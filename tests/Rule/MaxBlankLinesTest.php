@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\MaxBlankLines;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class MaxBlankLinesTest extends \App\Tests\UnitTestCase
+final class MaxBlankLinesTest extends UnitTestCase
 {
     /**
      * @test

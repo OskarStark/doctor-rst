@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\Indention;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class IndentionTest extends \App\Tests\UnitTestCase
+final class IndentionTest extends UnitTestCase
 {
     /**
      * @test

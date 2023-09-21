@@ -16,9 +16,10 @@ namespace App\Tests\Traits;
 use App\Rst\RstParser;
 use App\Rst\Value\DirectiveContent;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Tests\Util\DirectiveTraitWrapper;
 
-final class DirectiveTraitTest extends \App\Tests\UnitTestCase
+final class DirectiveTraitTest extends UnitTestCase
 {
     private DirectiveTraitWrapper $traitWrapper;
 

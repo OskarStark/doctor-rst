@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoMergeConflict;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoMergeConflictTest extends \App\Tests\UnitTestCase
+final class NoMergeConflictTest extends UnitTestCase
 {
     /**
      * @test

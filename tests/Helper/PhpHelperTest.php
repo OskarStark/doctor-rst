@@ -15,9 +15,10 @@ namespace App\Tests\Helper;
 
 use App\Helper\PhpHelper;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\Line;
 
-final class PhpHelperTest extends \App\Tests\UnitTestCase
+final class PhpHelperTest extends UnitTestCase
 {
     /**
      * @test

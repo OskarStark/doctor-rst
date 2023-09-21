@@ -13,10 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Value;
 
+use App\Tests\UnitTestCase;
 use App\Value\RuleGroup;
 use Ergebnis\Test\Util\Helper;
 
-final class RuleGroupTest extends \App\Tests\UnitTestCase
+final class RuleGroupTest extends UnitTestCase
 {
     use Helper;
 

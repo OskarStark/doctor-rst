@@ -14,11 +14,12 @@ declare(strict_types=1);
 namespace App\Tests\Rst\Value;
 
 use App\Rst\Value\DirectiveContent;
+use App\Tests\UnitTestCase;
 
 /**
  * @group temp
  */
-final class DirectiveContentTest extends \App\Tests\UnitTestCase
+final class DirectiveContentTest extends UnitTestCase
 {
     /**
      * @test

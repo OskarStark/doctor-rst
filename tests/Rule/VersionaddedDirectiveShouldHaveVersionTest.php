@@ -15,12 +15,13 @@ namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveShouldHaveVersion;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
-final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTestCase
+final class VersionaddedDirectiveShouldHaveVersionTest extends UnitTestCase
 {
     /**
      * @test
