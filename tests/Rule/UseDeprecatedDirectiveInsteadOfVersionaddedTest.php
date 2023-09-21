@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\UseDeprecatedDirectiveInsteadOfVersionadded;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends \App\Tests\UnitTestCase
+final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends UnitTestCase
 {
     /**
      * @test

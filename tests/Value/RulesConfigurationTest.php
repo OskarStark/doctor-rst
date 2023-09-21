@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Value;
 
 use App\Tests\Fixtures\Rule\DummyRule;
+use App\Tests\UnitTestCase;
 use App\Value\RulesConfiguration;
 
-final class RulesConfigurationTest extends \App\Tests\UnitTestCase
+final class RulesConfigurationTest extends UnitTestCase
 {
     /**
      * @test

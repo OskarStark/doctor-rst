@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Rst\Value;
 
+use App\Tests\UnitTestCase;
 use App\Value\Line;
 
-final class LineTest extends \App\Tests\UnitTestCase
+final class LineTest extends UnitTestCase
 {
     /**
      * @test

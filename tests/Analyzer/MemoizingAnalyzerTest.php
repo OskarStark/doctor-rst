@@ -17,19 +17,20 @@ use App\Analyzer\Analyzer;
 use App\Analyzer\Cache;
 use App\Analyzer\MemoizingAnalyzer;
 use App\Tests\Fixtures\Rule\DummyRule;
+use App\Tests\UnitTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class MemoizingAnalyzerTest extends \App\Tests\UnitTestCase
+final class MemoizingAnalyzerTest extends UnitTestCase
 {
     /**
      * @var Analyzer|MockObject
      */
-    private $analyzer;
+    private MockObject $analyzer;
 
     /**
      * @var Cache|MockObject
      */
-    private $cache;
+    private MockObject $cache;
     private MemoizingAnalyzer $memoizingAnalyzer;
 
     protected function setUp(): void

@@ -13,12 +13,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Value;
 
+use App\Tests\UnitTestCase;
 use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
 use App\Value\Violation;
 
-final class AnalyzerResultTest extends \App\Tests\UnitTestCase
+final class AnalyzerResultTest extends UnitTestCase
 {
     /**
      * @test

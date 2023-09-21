@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Rst;
 
 use App\Rst\RstParser;
+use App\Tests\UnitTestCase;
 use App\Value\Line;
 
-final class RstParserTest extends \App\Tests\UnitTestCase
+final class RstParserTest extends UnitTestCase
 {
     /**
      * @test

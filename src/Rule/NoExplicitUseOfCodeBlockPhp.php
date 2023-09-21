@@ -28,7 +28,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
     /**
      * @var string[]
      */
-    public const ALLOWED_PREVIOUS_DIRECTIVES = [
+    final public const ALLOWED_PREVIOUS_DIRECTIVES = [
         RstParser::DIRECTIVE_CAUTION,
         RstParser::DIRECTIVE_CONFIGURATION_BLOCK,
         RstParser::DIRECTIVE_DEPRECATED,

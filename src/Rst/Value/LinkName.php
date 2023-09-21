@@ -15,7 +15,7 @@ namespace App\Rst\Value;
 
 final class LinkName
 {
-    private string $value;
+    private readonly string $value;
 
     private function __construct(string $value)
     {

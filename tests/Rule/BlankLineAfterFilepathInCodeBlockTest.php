@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInCodeBlock;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineAfterFilepathInCodeBlockTest extends \App\Tests\UnitTestCase
+final class BlankLineAfterFilepathInCodeBlockTest extends UnitTestCase
 {
     /**
      * @test

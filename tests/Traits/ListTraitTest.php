@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Traits;
 
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Tests\Util\ListItemTraitWrapper;
 
-final class ListTraitTest extends \App\Tests\UnitTestCase
+final class ListTraitTest extends UnitTestCase
 {
     private ListItemTraitWrapper $traitWrapper;
 
