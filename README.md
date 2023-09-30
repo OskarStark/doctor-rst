@@ -26,7 +26,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout code"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
 
             - name: DOCtor-RST
               uses: docker://oskarstark/doctor-rst
@@ -60,7 +60,7 @@ Use Caching to Speedup your GithubActions builds
 ```diff
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4
 
 +            - name: "Create cache dir"
 +              run: mkdir .cache
