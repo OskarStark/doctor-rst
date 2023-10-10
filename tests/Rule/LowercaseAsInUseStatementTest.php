@@ -31,7 +31,7 @@ final class LowercaseAsInUseStatementTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new LowercaseAsInUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new LowercaseAsInUseStatements())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

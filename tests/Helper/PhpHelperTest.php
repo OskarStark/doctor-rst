@@ -131,7 +131,7 @@ final class PhpHelperTest extends UnitTestCase
     {
         self::assertSame(
             $expected,
-            (new PhpHelper())->isPartOfDocBlock($sample->lines(), $sample->lineNumber()),
+            (new PhpHelper())->isPartOfDocBlock($sample->lines, $sample->lineNumber()),
         );
     }
 
@@ -165,7 +165,7 @@ RST;
     {
         self::assertSame(
             $expected,
-            (new PhpHelper())->isPartOfMultilineComment($sample->lines(), $sample->lineNumber()),
+            (new PhpHelper())->isPartOfMultilineComment($sample->lines, $sample->lineNumber()),
         );
     }
 

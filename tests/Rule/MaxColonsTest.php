@@ -31,7 +31,7 @@ final class MaxColonsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new MaxColons())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new MaxColons())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

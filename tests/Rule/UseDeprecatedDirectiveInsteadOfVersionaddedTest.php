@@ -32,7 +32,7 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

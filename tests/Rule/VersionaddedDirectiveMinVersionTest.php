@@ -36,7 +36,7 @@ final class VersionaddedDirectiveMinVersionTest extends UnitTestCase
 
         self::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            $rule->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

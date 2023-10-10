@@ -31,7 +31,7 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new PhpOpenTagInCodeBlockPhpDirective())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new PhpOpenTagInCodeBlockPhpDirective())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

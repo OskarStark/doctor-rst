@@ -32,7 +32,7 @@ final class BlankLineBeforeDirectiveTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineBeforeDirective())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new BlankLineBeforeDirective())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

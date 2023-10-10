@@ -31,7 +31,7 @@ final class NoBlankLineAfterFilepathInXmlCodeBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInXmlCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoBlankLineAfterFilepathInXmlCodeBlock())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

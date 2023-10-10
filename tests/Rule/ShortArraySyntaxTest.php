@@ -31,7 +31,7 @@ final class ShortArraySyntaxTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ShortArraySyntax())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new ShortArraySyntax())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

@@ -31,7 +31,7 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new UseNamedConstructorWithoutNewKeywordRule())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new UseNamedConstructorWithoutNewKeywordRule())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

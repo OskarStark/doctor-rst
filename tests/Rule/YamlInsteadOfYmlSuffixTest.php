@@ -31,7 +31,7 @@ final class YamlInsteadOfYmlSuffixTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new YamlInsteadOfYmlSuffix())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new YamlInsteadOfYmlSuffix())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

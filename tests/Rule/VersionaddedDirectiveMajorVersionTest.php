@@ -37,7 +37,7 @@ final class VersionaddedDirectiveMajorVersionTest extends UnitTestCase
 
         self::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            $rule->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

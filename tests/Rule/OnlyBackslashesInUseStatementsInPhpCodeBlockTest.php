@@ -31,7 +31,7 @@ final class OnlyBackslashesInUseStatementsInPhpCodeBlockTest extends UnitTestCas
     {
         self::assertEquals(
             $expected,
-            (new OnlyBackslashesInUseStatementsInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new OnlyBackslashesInUseStatementsInPhpCodeBlock())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

@@ -33,7 +33,7 @@ final class DeprecatedDirectiveMajorVersionTest extends UnitTestCase
         $rule = (new DeprecatedDirectiveMajorVersion(new VersionParser()));
         $rule->setOptions(['major_version' => $majorVersion]);
 
-        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines, $sample->lineNumber(), 'filename'));
     }
 
     /**

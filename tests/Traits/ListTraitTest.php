@@ -43,7 +43,7 @@ final class ListTraitTest extends UnitTestCase
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfListItem($sample->lines(), $sample->lineNumber()),
+            $this->traitWrapper->isPartOfListItem($sample->lines, $sample->lineNumber()),
         );
     }
 
@@ -149,7 +149,7 @@ RST
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfFootnote($sample->lines(), $sample->lineNumber()),
+            $this->traitWrapper->isPartOfFootnote($sample->lines, $sample->lineNumber()),
         );
     }
 
@@ -176,7 +176,7 @@ RST;
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfRstComment($sample->lines(), $sample->lineNumber()),
+            $this->traitWrapper->isPartOfRstComment($sample->lines, $sample->lineNumber()),
         );
     }
 
@@ -203,7 +203,7 @@ RST;
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines(), $sample->lineNumber()),
+            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines, $sample->lineNumber()),
         );
     }
 
