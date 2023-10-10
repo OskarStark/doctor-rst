@@ -45,7 +45,7 @@ final class DirectiveTraitTest extends UnitTestCase
     {
         self::assertDirectiveContentEquals(
             $expected,
-            $this->traitWrapper->getDirectiveContent($directive, clone $sample->lines, $sample->lineNumber()),
+            $this->traitWrapper->getDirectiveContent($directive, clone $sample->lines, $sample->lineNumber),
         );
     }
 
@@ -131,7 +131,7 @@ final class DirectiveTraitTest extends UnitTestCase
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->getLineNumberOfDirective($directive, clone $sample->lines, $sample->lineNumber()),
+            $this->traitWrapper->getLineNumberOfDirective($directive, clone $sample->lines, $sample->lineNumber),
         );
     }
 
@@ -185,7 +185,7 @@ MULTIPLE, 11),
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->inPhpCodeBlock(clone $sample->lines, $sample->lineNumber()),
+            $this->traitWrapper->inPhpCodeBlock(clone $sample->lines, $sample->lineNumber),
         );
     }
 
@@ -223,7 +223,7 @@ MULTIPLE, 11),
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->inShellCodeBlock(clone $sample->lines, $sample->lineNumber()),
+            $this->traitWrapper->inShellCodeBlock(clone $sample->lines, $sample->lineNumber),
         );
     }
 
@@ -267,7 +267,7 @@ MULTIPLE, 11),
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->in($directive, clone $sample->lines, $sample->lineNumber(), $types),
+            $this->traitWrapper->in($directive, clone $sample->lines, $sample->lineNumber, $types),
         );
     }
 
@@ -685,7 +685,7 @@ RST;
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->previousDirectiveIs($directive, $sample->lines, $sample->lineNumber(), $types),
+            $this->traitWrapper->previousDirectiveIs($directive, $sample->lines, $sample->lineNumber, $types),
         );
     }
 

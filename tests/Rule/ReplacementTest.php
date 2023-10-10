@@ -38,7 +38,7 @@ final class ReplacementTest extends UnitTestCase
         $violations = [];
 
         foreach ($configuredRules as $rule) {
-            $violation = $rule->check($sample->lines, $sample->lineNumber(), 'filename');
+            $violation = $rule->check($sample->lines, $sample->lineNumber, 'filename');
 
             if (!$violation->isNull()) {
                 $violations[] = $violation;

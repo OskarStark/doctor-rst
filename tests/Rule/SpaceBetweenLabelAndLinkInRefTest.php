@@ -31,7 +31,7 @@ final class SpaceBetweenLabelAndLinkInRefTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new SpaceBetweenLabelAndLinkInRef())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new SpaceBetweenLabelAndLinkInRef())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

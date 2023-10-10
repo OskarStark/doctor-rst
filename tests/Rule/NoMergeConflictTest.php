@@ -31,7 +31,7 @@ final class NoMergeConflictTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoMergeConflict())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new NoMergeConflict())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

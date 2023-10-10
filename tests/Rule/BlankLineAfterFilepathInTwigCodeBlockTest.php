@@ -31,7 +31,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new BlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -24,7 +24,7 @@ final class RstSample
      */
     public function __construct(
         array|string $content,
-        private readonly int $lineNumber = 0,
+        public readonly int $lineNumber = 0,
     ) {
         if (!\is_array($content)) {
             $content = explode(\PHP_EOL, $content);
@@ -33,8 +33,4 @@ final class RstSample
         $this->lines = Lines::fromArray($content);
     }
 
-    public function lineNumber(): int
-    {
-        return $this->lineNumber;
-    }
 }

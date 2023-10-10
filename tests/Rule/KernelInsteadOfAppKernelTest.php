@@ -31,7 +31,7 @@ final class KernelInsteadOfAppKernelTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new KernelInsteadOfAppKernel())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new KernelInsteadOfAppKernel())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -31,7 +31,7 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

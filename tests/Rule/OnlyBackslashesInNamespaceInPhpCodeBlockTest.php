@@ -31,7 +31,7 @@ final class OnlyBackslashesInNamespaceInPhpCodeBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new OnlyBackslashesInNamespaceInPhpCodeBlock())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new OnlyBackslashesInNamespaceInPhpCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

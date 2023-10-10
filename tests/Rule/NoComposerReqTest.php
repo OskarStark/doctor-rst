@@ -31,7 +31,7 @@ final class NoComposerReqTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoComposerReq())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new NoComposerReq())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -31,7 +31,7 @@ final class NoInheritdocInCodeExamplesTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoInheritdocInCodeExamples())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new NoInheritdocInCodeExamples())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

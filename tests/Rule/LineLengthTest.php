@@ -32,7 +32,7 @@ final class LineLengthTest extends UnitTestCase
         $rule = (new LineLength());
         $rule->setOptions(['max' => $max]);
 
-        self::assertEquals($expected, $rule->check($sample->lines, $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines, $sample->lineNumber, 'filename'));
     }
 
     public static function checkProvider(): iterable
