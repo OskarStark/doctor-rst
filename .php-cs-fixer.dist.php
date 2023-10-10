@@ -67,6 +67,7 @@ $config->getFinder()
     ->append([
         __DIR__.'/rector.php',
     ])
+    ->in('config')
     ->in('src')
     ->in('tests');
 
