@@ -31,7 +31,7 @@ final class NoAdminYamlTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoAdminYaml())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoAdminYaml())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

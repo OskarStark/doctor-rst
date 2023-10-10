@@ -17,7 +17,7 @@ use App\Value\Lines;
 
 final class RstSample
 {
-    private readonly Lines $lines;
+    public readonly Lines $lines;
 
     /**
      * @param array<string>|string $content
@@ -34,10 +34,5 @@ final class RstSample
     public function lineNumber(): int
     {
         return $this->lineNumber;
-    }
-
-    public function lines(): Lines
-    {
-        return $this->lines;
     }
 }

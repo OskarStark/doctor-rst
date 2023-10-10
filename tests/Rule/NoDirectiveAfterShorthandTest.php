@@ -32,7 +32,7 @@ final class NoDirectiveAfterShorthandTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoDirectiveAfterShorthand())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoDirectiveAfterShorthand())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 

@@ -32,7 +32,7 @@ final class IndentionTest extends UnitTestCase
         $rule = (new Indention());
         $rule->setOptions(['size' => $size]);
 
-        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines, $sample->lineNumber(), 'filename'));
     }
 
     public static function checkProvider(): iterable
@@ -378,7 +378,7 @@ RST
     {
         self::assertSame(
             $expected,
-            (new Indention())->isPartOrMultilineXmlComment($sample->lines(), $sample->lineNumber()),
+            (new Indention())->isPartOrMultilineXmlComment($sample->lines, $sample->lineNumber()),
         );
     }
 
@@ -452,7 +452,7 @@ RST
     {
         self::assertSame(
             $expected,
-            (new Indention())->isPartOrMultilineTwigComment($sample->lines(), $sample->lineNumber()),
+            (new Indention())->isPartOrMultilineTwigComment($sample->lines, $sample->lineNumber()),
         );
     }
 

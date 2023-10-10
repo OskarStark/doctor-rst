@@ -32,7 +32,7 @@ final class UnusedLinksTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new UnusedLinks())->check($sample->lines(), 'filename'),
+            (new UnusedLinks())->check($sample->lines, 'filename'),
         );
     }
 

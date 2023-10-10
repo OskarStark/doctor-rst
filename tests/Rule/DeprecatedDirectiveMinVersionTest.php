@@ -32,7 +32,7 @@ final class DeprecatedDirectiveMinVersionTest extends UnitTestCase
         $rule = (new DeprecatedDirectiveMinVersion());
         $rule->setOptions(['min_version' => $minVersion]);
 
-        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines, $sample->lineNumber(), 'filename'));
     }
 
     /**

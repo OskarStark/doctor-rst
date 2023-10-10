@@ -32,7 +32,7 @@ final class AvoidRepetetiveWordsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new AvoidRepetetiveWords())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new AvoidRepetetiveWords())->check($sample->lines, $sample->lineNumber(), 'filename'),
         );
     }
 
