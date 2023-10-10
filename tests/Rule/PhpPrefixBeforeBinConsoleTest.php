@@ -31,7 +31,7 @@ final class PhpPrefixBeforeBinConsoleTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new PhpPrefixBeforeBinConsole())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new PhpPrefixBeforeBinConsole())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

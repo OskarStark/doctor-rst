@@ -31,7 +31,7 @@ final class ExtendAbstractControllerTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ExtendAbstractController())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new ExtendAbstractController())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

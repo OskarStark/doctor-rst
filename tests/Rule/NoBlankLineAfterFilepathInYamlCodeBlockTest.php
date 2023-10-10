@@ -31,7 +31,7 @@ final class NoBlankLineAfterFilepathInYamlCodeBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInYamlCodeBlock())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new NoBlankLineAfterFilepathInYamlCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

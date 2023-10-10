@@ -31,7 +31,7 @@ final class BlankLineAfterAnchorTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterAnchor())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new BlankLineAfterAnchor())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

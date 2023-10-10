@@ -31,7 +31,7 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoPhpOpenTagInCodeBlockPhpDirective())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new NoPhpOpenTagInCodeBlockPhpDirective())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

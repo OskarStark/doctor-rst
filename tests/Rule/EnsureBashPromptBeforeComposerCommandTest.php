@@ -32,7 +32,7 @@ final class EnsureBashPromptBeforeComposerCommandTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsureBashPromptBeforeComposerCommand())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new EnsureBashPromptBeforeComposerCommand())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

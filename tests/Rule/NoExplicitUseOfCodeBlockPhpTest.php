@@ -32,7 +32,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

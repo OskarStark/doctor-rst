@@ -40,7 +40,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
 
         self::assertEquals(
             $expected,
-            $rule->check($sample->lines, $sample->lineNumber(), 'filename'),
+            $rule->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 
@@ -112,7 +112,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
         $sample = new RstSample('temp');
         self::assertEquals(
             NullViolation::create(),
-            $rule->check($sample->lines, $sample->lineNumber(), 'filename'),
+            $rule->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 }

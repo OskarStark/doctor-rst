@@ -31,7 +31,7 @@ final class NoSpaceBeforeSelfXmlClosingTagTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoSpaceBeforeSelfXmlClosingTag())->check($sample->lines, $sample->lineNumber(), 'filename'),
+            (new NoSpaceBeforeSelfXmlClosingTag())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 
