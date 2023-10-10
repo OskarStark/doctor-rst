@@ -46,9 +46,7 @@ final class RstAnalyzer implements Analyzer
         $violations = [];
 
         /** @var FileInfoRule[] $fileInfoRules */
-        $fileInfoRules = array_filter($rules, static function (Rule $rule): bool {
-            return $rule instanceof FileInfoRule;
-        });
+        $fileInfoRules = array_filter($rules, static fn (Rule $rule): bool => $rule instanceof FileInfoRule);
 
         foreach ($fileInfoRules as $rule) {
             $violation = $rule->check($file);
@@ -59,9 +57,7 @@ final class RstAnalyzer implements Analyzer
         }
 
         /** @var FileContentRule[] $fileContentRules */
-        $fileContentRules = array_filter($rules, static function (Rule $rule): bool {
-            return $rule instanceof FileContentRule;
-        });
+        $fileContentRules = array_filter($rules, static fn (Rule $rule): bool => $rule instanceof FileContentRule);
 
         $lines = Lines::fromArray($content);
 
@@ -78,9 +74,7 @@ final class RstAnalyzer implements Analyzer
         }
 
         /** @var LineContentRule[] $lineContentRules */
-        $lineContentRules = array_filter($rules, static function (Rule $rule): bool {
-            return $rule instanceof LineContentRule;
-        });
+        $lineContentRules = array_filter($rules, static fn (Rule $rule): bool => $rule instanceof LineContentRule);
 
         /**
          * @var int  $no

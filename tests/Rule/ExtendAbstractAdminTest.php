@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\ExtendAbstractAdmin;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
+final class ExtendAbstractAdminTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class ExtendAbstractAdminTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ExtendAbstractAdmin())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new ExtendAbstractAdmin())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

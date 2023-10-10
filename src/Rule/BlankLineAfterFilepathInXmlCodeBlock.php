@@ -52,7 +52,7 @@ class BlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements LineC
         $lines->next();
 
         if (!$lines->current()->isBlank() && !XmlHelper::isComment($lines->current())) {
-            $match = trim($matches[0]);
+            $match = trim((string) $matches[0]);
 
             return Violation::from(
                 sprintf('Please add a blank line after "%s"', $match),

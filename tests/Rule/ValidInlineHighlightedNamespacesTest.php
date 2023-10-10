@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\ValidInlineHighlightedNamespaces;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class ValidInlineHighlightedNamespacesTest extends \App\Tests\UnitTestCase
+final class ValidInlineHighlightedNamespacesTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class ValidInlineHighlightedNamespacesTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ValidInlineHighlightedNamespaces())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new ValidInlineHighlightedNamespaces())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

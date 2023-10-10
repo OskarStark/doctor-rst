@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBracketsInMethodDirective;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoBracketsInMethodDirectiveTest extends \App\Tests\UnitTestCase
+final class NoBracketsInMethodDirectiveTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class NoBracketsInMethodDirectiveTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoBracketsInMethodDirective())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoBracketsInMethodDirective())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

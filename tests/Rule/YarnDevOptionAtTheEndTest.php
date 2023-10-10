@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\YarnDevOptionAtTheEnd;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class YarnDevOptionAtTheEndTest extends \App\Tests\UnitTestCase
+final class YarnDevOptionAtTheEndTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class YarnDevOptionAtTheEndTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new YarnDevOptionAtTheEnd())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new YarnDevOptionAtTheEnd())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

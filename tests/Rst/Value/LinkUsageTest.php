@@ -15,8 +15,9 @@ namespace App\Tests\Rst\Value;
 
 use App\Rst\Value\LinkName;
 use App\Rst\Value\LinkUsage;
+use App\Tests\UnitTestCase;
 
-final class LinkUsageTest extends \App\Tests\UnitTestCase
+final class LinkUsageTest extends UnitTestCase
 {
     /**
      * @test

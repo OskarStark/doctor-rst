@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\ValidUseStatements;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
+final class ValidUseStatementsTests extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class ValidUseStatementsTests extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ValidUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new ValidUseStatements())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

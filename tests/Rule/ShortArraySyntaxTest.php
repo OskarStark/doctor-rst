@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\ShortArraySyntax;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
+final class ShortArraySyntaxTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class ShortArraySyntaxTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ShortArraySyntax())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new ShortArraySyntax())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

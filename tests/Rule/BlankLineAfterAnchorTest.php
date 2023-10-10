@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterAnchor;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
+final class BlankLineAfterAnchorTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class BlankLineAfterAnchorTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterAnchor())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new BlankLineAfterAnchor())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

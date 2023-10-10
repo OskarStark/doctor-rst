@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Traits;
 
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Tests\Util\ListItemTraitWrapper;
 
-final class ListTraitTest extends \App\Tests\UnitTestCase
+final class ListTraitTest extends UnitTestCase
 {
     private ListItemTraitWrapper $traitWrapper;
 
@@ -42,7 +43,7 @@ final class ListTraitTest extends \App\Tests\UnitTestCase
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfListItem($sample->lines(), $sample->lineNumber()),
+            $this->traitWrapper->isPartOfListItem($sample->lines, $sample->lineNumber),
         );
     }
 
@@ -148,7 +149,7 @@ RST
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfFootnote($sample->lines(), $sample->lineNumber()),
+            $this->traitWrapper->isPartOfFootnote($sample->lines, $sample->lineNumber),
         );
     }
 
@@ -175,7 +176,7 @@ RST;
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfRstComment($sample->lines(), $sample->lineNumber()),
+            $this->traitWrapper->isPartOfRstComment($sample->lines, $sample->lineNumber),
         );
     }
 
@@ -202,7 +203,7 @@ RST;
     {
         self::assertSame(
             $expected,
-            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines(), $sample->lineNumber()),
+            $this->traitWrapper->isPartOfLineNumberAnnotation($sample->lines, $sample->lineNumber),
         );
     }
 

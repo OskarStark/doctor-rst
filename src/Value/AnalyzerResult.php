@@ -16,19 +16,11 @@ namespace App\Value;
 final class AnalyzerResult
 {
     /**
-     * @var FileResult[]
-     */
-    private array $results;
-    private array $whitelistConfig;
-
-    /**
-     * @param FileResult[]                              $fileResults
+     * @param FileResult[]                              $results
      * @param array{regex?: string[], lines?: string[]} $whitelistConfig
      */
-    public function __construct(array $fileResults, array $whitelistConfig)
+    public function __construct(private readonly array $results, private array $whitelistConfig)
     {
-        $this->results = $fileResults;
-        $this->whitelistConfig = $whitelistConfig;
     }
 
     public function all(): array

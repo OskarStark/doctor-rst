@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\OrderedUseStatements;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
+final class OrderedUseStatementsTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class OrderedUseStatementsTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new OrderedUseStatements())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new OrderedUseStatements())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

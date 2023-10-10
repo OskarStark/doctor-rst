@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace App\Tests\Helper;
 
 use App\Helper\TwigHelper;
+use App\Tests\UnitTestCase;
 use App\Value\Line;
 
-final class TwigHelperTest extends \App\Tests\UnitTestCase
+final class TwigHelperTest extends UnitTestCase
 {
     /**
      * @test

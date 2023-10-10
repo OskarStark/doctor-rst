@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoPhpPrefixBeforeComposer;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoPhpPrefixBeforeComposerTest extends \App\Tests\UnitTestCase
+final class NoPhpPrefixBeforeComposerTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class NoPhpPrefixBeforeComposerTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoPhpPrefixBeforeComposer())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoPhpPrefixBeforeComposer())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

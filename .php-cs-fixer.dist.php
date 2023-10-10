@@ -1,6 +1,8 @@
 <?php
 
 declare(strict_types=1);
+use Ergebnis\PhpCsFixer\Config\Factory;
+use Ergebnis\PhpCsFixer\Config\RuleSet\Php82;
 
 use Ergebnis\PhpCsFixer;
 
@@ -13,7 +15,7 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 HEADER;
 
-$config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\Php82($header), [
+$config = Factory::fromRuleSet(new Php82($header), [
     'blank_line_before_statement' => [
         'statements' => [
             'break',
@@ -65,6 +67,7 @@ $config->getFinder()
     ->append([
         __DIR__.'/rector.php',
     ])
+    ->in('config')
     ->in('src')
     ->in('tests');
 

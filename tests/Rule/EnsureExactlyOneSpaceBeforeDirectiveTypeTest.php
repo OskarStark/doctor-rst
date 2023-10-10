@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureExactlyOneSpaceBeforeDirectiveType;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\UnitTestCase
+final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends \App\Tests\Unit
     {
         self::assertEquals(
             $expected,
-            (new EnsureExactlyOneSpaceBeforeDirectiveType())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new EnsureExactlyOneSpaceBeforeDirectiveType())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

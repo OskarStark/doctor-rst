@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoDirectiveAfterShorthand;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoDirectiveAfterShorthandTest extends \App\Tests\UnitTestCase
+final class NoDirectiveAfterShorthandTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class NoDirectiveAfterShorthandTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoDirectiveAfterShorthand())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoDirectiveAfterShorthand())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

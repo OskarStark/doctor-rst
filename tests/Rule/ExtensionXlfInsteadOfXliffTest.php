@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\ExtensionXlfInsteadOfXliff;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class ExtensionXlfInsteadOfXliffTest extends \App\Tests\UnitTestCase
+final class ExtensionXlfInsteadOfXliffTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class ExtensionXlfInsteadOfXliffTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ExtensionXlfInsteadOfXliff())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new ExtensionXlfInsteadOfXliff())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

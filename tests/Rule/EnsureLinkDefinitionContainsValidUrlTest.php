@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureLinkDefinitionContainsValidUrl;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTestCase
+final class EnsureLinkDefinitionContainsValidUrlTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends \App\Tests\UnitTest
     {
         self::assertEquals(
             $expected,
-            (new EnsureLinkDefinitionContainsValidUrl())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new EnsureLinkDefinitionContainsValidUrl())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

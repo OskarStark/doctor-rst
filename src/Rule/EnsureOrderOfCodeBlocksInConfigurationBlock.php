@@ -167,7 +167,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
             Assert::eq(array_values($codeBlocks), array_values($validOrder));
 
             return true;
-        } catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException) {
             return false;
         }
     }

@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\DeprecatedDirectiveMinVersion;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class DeprecatedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
+final class DeprecatedDirectiveMinVersionTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class DeprecatedDirectiveMinVersionTest extends \App\Tests\UnitTestCase
         $rule = (new DeprecatedDirectiveMinVersion());
         $rule->setOptions(['min_version' => $minVersion]);
 
-        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines, $sample->lineNumber, 'filename'));
     }
 
     /**

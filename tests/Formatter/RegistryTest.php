@@ -16,8 +16,9 @@ namespace App\Tests\Formatter;
 use App\Formatter\ConsoleFormatter;
 use App\Formatter\Exception\FormatterNotFound;
 use App\Formatter\Registry;
+use App\Tests\UnitTestCase;
 
-final class RegistryTest extends \App\Tests\UnitTestCase
+final class RegistryTest extends UnitTestCase
 {
     /**
      * @test

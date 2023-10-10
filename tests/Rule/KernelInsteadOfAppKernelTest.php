@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\KernelInsteadOfAppKernel;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
+final class KernelInsteadOfAppKernelTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class KernelInsteadOfAppKernelTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new KernelInsteadOfAppKernel())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new KernelInsteadOfAppKernel())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

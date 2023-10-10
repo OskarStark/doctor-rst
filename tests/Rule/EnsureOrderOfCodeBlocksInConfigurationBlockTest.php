@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureOrderOfCodeBlocksInConfigurationBlock;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\UnitTestCase
+final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends \App\Tests\U
     {
         self::assertEquals(
             $expected,
-            (new EnsureOrderOfCodeBlocksInConfigurationBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new EnsureOrderOfCodeBlocksInConfigurationBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

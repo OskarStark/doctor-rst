@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterColon;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
+final class BlankLineAfterColonTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class BlankLineAfterColonTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterColon())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new BlankLineAfterColon())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

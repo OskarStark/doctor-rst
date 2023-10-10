@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoAdminYaml;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoAdminYamlTest extends \App\Tests\UnitTestCase
+final class NoAdminYamlTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class NoAdminYamlTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoAdminYaml())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoAdminYaml())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

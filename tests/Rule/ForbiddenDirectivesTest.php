@@ -15,12 +15,13 @@ namespace App\Tests\Rule;
 
 use App\Rule\ForbiddenDirectives;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
-final class ForbiddenDirectivesTest extends \App\Tests\UnitTestCase
+final class ForbiddenDirectivesTest extends UnitTestCase
 {
     /**
      * @test
@@ -39,7 +40,7 @@ final class ForbiddenDirectivesTest extends \App\Tests\UnitTestCase
 
         self::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            $rule->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 
@@ -111,7 +112,7 @@ final class ForbiddenDirectivesTest extends \App\Tests\UnitTestCase
         $sample = new RstSample('temp');
         self::assertEquals(
             NullViolation::create(),
-            $rule->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            $rule->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 }

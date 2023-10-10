@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsurePhpReferenceSyntax;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class EnsurePhpReferenceSyntaxTest extends \App\Tests\UnitTestCase
+final class EnsurePhpReferenceSyntaxTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class EnsurePhpReferenceSyntaxTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsurePhpReferenceSyntax())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new EnsurePhpReferenceSyntax())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

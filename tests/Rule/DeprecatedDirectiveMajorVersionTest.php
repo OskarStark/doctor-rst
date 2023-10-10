@@ -15,12 +15,13 @@ namespace App\Tests\Rule;
 
 use App\Rule\DeprecatedDirectiveMajorVersion;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
-final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
+final class DeprecatedDirectiveMajorVersionTest extends UnitTestCase
 {
     /**
      * @test
@@ -32,7 +33,7 @@ final class DeprecatedDirectiveMajorVersionTest extends \App\Tests\UnitTestCase
         $rule = (new DeprecatedDirectiveMajorVersion(new VersionParser()));
         $rule->setOptions(['major_version' => $majorVersion]);
 
-        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines, $sample->lineNumber, 'filename'));
     }
 
     /**

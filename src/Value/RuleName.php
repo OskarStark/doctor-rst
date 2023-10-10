@@ -18,7 +18,7 @@ use function Symfony\Component\String\u;
 
 final class RuleName
 {
-    private string $name;
+    private readonly string $name;
 
     private function __construct(string $value)
     {

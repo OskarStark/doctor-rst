@@ -25,7 +25,7 @@ final class RuleGroup
         self::GROUP_SONATA,
         self::GROUP_SYMFONY,
     ];
-    private string $name;
+    private readonly string $name;
 
     private function __construct(string $name)
     {

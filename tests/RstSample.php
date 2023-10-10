@@ -17,29 +17,20 @@ use App\Value\Lines;
 
 final class RstSample
 {
-    private int $lineNumber = 0;
-    private Lines $lines;
+    public readonly Lines $lines;
 
     /**
      * @param array<string>|string $content
      */
-    public function __construct($content, int $lineNumber = 0)
-    {
+    public function __construct(
+        array|string $content,
+        public readonly int $lineNumber = 0,
+    ) {
         if (!\is_array($content)) {
             $content = explode(\PHP_EOL, $content);
         }
 
         $this->lines = Lines::fromArray($content);
-        $this->lineNumber = $lineNumber;
     }
 
-    public function lineNumber(): int
-    {
-        return $this->lineNumber;
-    }
-
-    public function lines(): Lines
-    {
-        return $this->lines;
-    }
 }

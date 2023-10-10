@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\Indention;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class IndentionTest extends \App\Tests\UnitTestCase
+final class IndentionTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class IndentionTest extends \App\Tests\UnitTestCase
         $rule = (new Indention());
         $rule->setOptions(['size' => $size]);
 
-        self::assertEquals($expected, $rule->check($sample->lines(), $sample->lineNumber(), 'filename'));
+        self::assertEquals($expected, $rule->check($sample->lines, $sample->lineNumber, 'filename'));
     }
 
     public static function checkProvider(): iterable
@@ -377,7 +378,7 @@ RST
     {
         self::assertSame(
             $expected,
-            (new Indention())->isPartOrMultilineXmlComment($sample->lines(), $sample->lineNumber()),
+            (new Indention())->isPartOrMultilineXmlComment($sample->lines, $sample->lineNumber),
         );
     }
 
@@ -451,7 +452,7 @@ RST
     {
         self::assertSame(
             $expected,
-            (new Indention())->isPartOrMultilineTwigComment($sample->lines(), $sample->lineNumber()),
+            (new Indention())->isPartOrMultilineTwigComment($sample->lines, $sample->lineNumber),
         );
     }
 

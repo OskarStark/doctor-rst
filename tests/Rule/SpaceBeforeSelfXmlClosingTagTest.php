@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\SpaceBeforeSelfXmlClosingTag;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
+final class SpaceBeforeSelfXmlClosingTagTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class SpaceBeforeSelfXmlClosingTagTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new SpaceBeforeSelfXmlClosingTag())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new SpaceBeforeSelfXmlClosingTag())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

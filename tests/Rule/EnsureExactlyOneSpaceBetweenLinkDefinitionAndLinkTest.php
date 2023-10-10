@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\Tests\UnitTestCase
+final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends \App\T
     {
         self::assertEquals(
             $expected,
-            (new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

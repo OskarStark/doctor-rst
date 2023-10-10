@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\BlankLineAfterFilepathInTwigCodeBlock;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTestCase
+final class BlankLineAfterFilepathInTwigCodeBlockTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class BlankLineAfterFilepathInTwigCodeBlockTest extends \App\Tests\UnitTes
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new BlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoPhpOpenTagInCodeBlockPhpDirective;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestCase
+final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends \App\Tests\UnitTestC
     {
         self::assertEquals(
             $expected,
-            (new NoPhpOpenTagInCodeBlockPhpDirective())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoPhpOpenTagInCodeBlockPhpDirective())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

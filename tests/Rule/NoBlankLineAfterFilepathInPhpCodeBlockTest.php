@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoBlankLineAfterFilepathInPhpCodeBlock;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTestCase
+final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class NoBlankLineAfterFilepathInPhpCodeBlockTest extends \App\Tests\UnitTe
     {
         self::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoBlankLineAfterFilepathInPhpCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

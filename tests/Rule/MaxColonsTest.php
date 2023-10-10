@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\MaxColons;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class MaxColonsTest extends \App\Tests\UnitTestCase
+final class MaxColonsTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class MaxColonsTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new MaxColons())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new MaxColons())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

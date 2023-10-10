@@ -18,18 +18,18 @@ final class ExcludedViolationList
     /**
      * @var Violation[]
      */
-    private array $violations;
-    private bool $hasViolations;
+    private readonly array $violations;
+    private readonly bool $hasViolations;
 
     /**
      * @var array<string, int>
      */
-    private array $matchedWhitelistRegex;
+    private readonly array $matchedWhitelistRegex;
 
     /**
      * @var array<string, int>
      */
-    private array $matchedWhitelistLines;
+    private readonly array $matchedWhitelistLines;
 
     public function __construct(array $excludedViolationConfig, array $violations)
     {

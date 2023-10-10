@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\ExtendAbstractController;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class ExtendAbstractControllerTest extends \App\Tests\UnitTestCase
+final class ExtendAbstractControllerTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class ExtendAbstractControllerTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ExtendAbstractController())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new ExtendAbstractController())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

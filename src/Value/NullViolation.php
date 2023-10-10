@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-final class NullViolation implements ViolationInterface
+final readonly class NullViolation implements ViolationInterface
 {
     private string $message;
     private string $filename;

@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoPhpPrefixBeforeBinConsole;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
+final class NoPhpPrefixBeforeBinConsoleTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class NoPhpPrefixBeforeBinConsoleTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoPhpPrefixBeforeBinConsole())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoPhpPrefixBeforeBinConsole())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\YamlInsteadOfYmlSuffix;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class YamlInsteadOfYmlSuffixTest extends \App\Tests\UnitTestCase
+final class YamlInsteadOfYmlSuffixTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class YamlInsteadOfYmlSuffixTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new YamlInsteadOfYmlSuffix())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new YamlInsteadOfYmlSuffix())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

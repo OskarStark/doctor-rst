@@ -15,12 +15,13 @@ namespace App\Tests\Rule;
 
 use App\Rule\VersionaddedDirectiveShouldHaveVersion;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
-final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTestCase
+final class VersionaddedDirectiveShouldHaveVersionTest extends UnitTestCase
 {
     /**
      * @test
@@ -32,7 +33,7 @@ final class VersionaddedDirectiveShouldHaveVersionTest extends \App\Tests\UnitTe
         self::assertEquals(
             $expected,
             (new VersionaddedDirectiveShouldHaveVersion(new VersionParser()))
-                ->check($sample->lines(), $sample->lineNumber(), 'filename'),
+                ->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

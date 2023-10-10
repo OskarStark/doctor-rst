@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\TitleUnderlineLengthMustMatchTitleLength;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class TitleUnderlineLengthMustMatchTitleLengthTest extends \App\Tests\UnitTestCase
+final class TitleUnderlineLengthMustMatchTitleLengthTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends \App\Tests\Unit
     {
         self::assertEquals(
             $expected,
-            (new TitleUnderlineLengthMustMatchTitleLength())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new TitleUnderlineLengthMustMatchTitleLength())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

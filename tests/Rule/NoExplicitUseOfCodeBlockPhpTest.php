@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoExplicitUseOfCodeBlockPhp;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
+final class NoExplicitUseOfCodeBlockPhpTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

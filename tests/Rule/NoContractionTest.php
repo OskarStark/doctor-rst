@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\NoContraction;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoContractionTest extends \App\Tests\UnitTestCase
+final class NoContractionTest extends UnitTestCase
 {
     /**
      * @test
@@ -37,7 +38,7 @@ final class NoContractionTest extends \App\Tests\UnitTestCase
         $violations = [];
 
         foreach ($configuredRules as $rule) {
-            $violation = $rule->check($sample->lines(), $sample->lineNumber(), 'filename');
+            $violation = $rule->check($sample->lines, $sample->lineNumber, 'filename');
 
             if (!$violation->isNull()) {
                 $violations[] = $violation;

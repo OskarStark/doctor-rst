@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\UseHttpsXsdUrls;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class UseHttpsXsdUrlsTest extends \App\Tests\UnitTestCase
+final class UseHttpsXsdUrlsTest extends UnitTestCase
 {
     /**
      * @test
@@ -30,7 +31,7 @@ final class UseHttpsXsdUrlsTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new UseHttpsXsdUrls())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new UseHttpsXsdUrls())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

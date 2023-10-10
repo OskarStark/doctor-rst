@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\AvoidRepetetiveWords;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
+final class AvoidRepetetiveWordsTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class AvoidRepetetiveWordsTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new AvoidRepetetiveWords())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new AvoidRepetetiveWords())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

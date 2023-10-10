@@ -15,11 +15,12 @@ namespace App\Tests\Rule;
 
 use App\Rule\UnusedLinks;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class UnusedLinksTest extends \App\Tests\UnitTestCase
+final class UnusedLinksTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class UnusedLinksTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new UnusedLinks())->check($sample->lines(), 'filename'),
+            (new UnusedLinks())->check($sample->lines, 'filename'),
         );
     }
 

@@ -16,11 +16,12 @@ namespace App\Tests\Rule;
 use App\Rst\RstParser;
 use App\Rule\BlankLineBeforeDirective;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
+final class BlankLineBeforeDirectiveTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,7 +32,7 @@ final class BlankLineBeforeDirectiveTest extends \App\Tests\UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineBeforeDirective())->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            (new BlankLineBeforeDirective())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -15,13 +15,14 @@ namespace App\Tests\Rule;
 
 use App\Rule\ArgumentVariableMustMatchType;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 
-final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
+final class ArgumentVariableMustMatchTypeTest extends UnitTestCase
 {
     /**
      * @test
@@ -46,7 +47,7 @@ final class ArgumentVariableMustMatchTypeTest extends \App\Tests\UnitTestCase
 
         self::assertEquals(
             $expected,
-            $rule->check($sample->lines(), $sample->lineNumber(), 'filename'),
+            $rule->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

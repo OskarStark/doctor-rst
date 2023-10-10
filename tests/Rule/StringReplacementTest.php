@@ -16,12 +16,13 @@ namespace App\Tests\Rule;
 use App\Attribute\Rule\Description;
 use App\Rule\StringReplacement;
 use App\Tests\RstSample;
+use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
 #[Description('propose to replace a string with another string.')]
-final class StringReplacementTest extends \App\Tests\UnitTestCase
+final class StringReplacementTest extends UnitTestCase
 {
     /**
      * @test
@@ -39,7 +40,7 @@ final class StringReplacementTest extends \App\Tests\UnitTestCase
         $violations = [];
 
         foreach ($configuredRules as $rule) {
-            $violation = $rule->check($sample->lines(), $sample->lineNumber(), 'filename');
+            $violation = $rule->check($sample->lines, $sample->lineNumber, 'filename');
 
             if (!$violation->isNull()) {
                 $violations[] = $violation;
