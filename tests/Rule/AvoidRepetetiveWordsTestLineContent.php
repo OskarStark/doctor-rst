@@ -15,31 +15,17 @@ namespace App\Tests\Rule;
 
 use App\Rule\AvoidRepetetiveWords;
 use App\Tests\RstSample;
-use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
-use App\Value\ViolationInterface;
 
-final class AvoidRepetetiveWordsTest extends UnitTestCase
+final class AvoidRepetetiveWordsTestLineContent extends AbstractLineContentRuleTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     * @dataProvider whitelistProvider
-     */
-    public function check(ViolationInterface $expected, RstSample $sample): void
+    public function createRule(): AvoidRepetetiveWords
     {
-        self::assertEquals(
-            $expected,
-            (new AvoidRepetetiveWords())->check($sample->lines, $sample->lineNumber, 'filename'),
-        );
+        return new AvoidRepetetiveWords();
     }
 
-    /**
-     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
-     */
-    public static function whitelistProvider(): iterable
+    public static function checkProvider(): iterable
     {
         $whitelist = [
             '...',
@@ -48,13 +34,7 @@ final class AvoidRepetetiveWordsTest extends UnitTestCase
         foreach ($whitelist as $word) {
             yield sprintf('valid whitelist: %s', $word) => [NullViolation::create(), new RstSample(sprintf('%s %s %s', $word, $word, $word))];
         }
-    }
 
-    /**
-     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
-     */
-    public static function checkProvider(): iterable
-    {
         $valid = '';
         $invalid = 'the cached items will not not be invalidated unless you clear OPcache.';
 

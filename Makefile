@@ -1,17 +1,17 @@
-.PHONY: test
-test:
+.PHONY: tests
+tests:
 	vendor/bin/phpunit
 
 .PHONY: cs
 cs: vendor
 	symfony php vendor/bin/php-cs-fixer fix --diff --verbose
 
-.PHONY: phpstan
-phpstan:
-	vendor/bin/phpstan analyse -c phpstan.neon.dist
+.PHONY: static-code-analysis
+static-code-analysis:
+	vendor/bin/phpstan analyse -c phpstan.neon.dist --memory-limit=-1
 
-.PHONY: phpstan-baseline
-phpstan-baseline:
+.PHONY: static-code-analysis-baseline
+static-code-analysis-baseline:
 	vendor/bin/phpstan analyse -c phpstan.neon.dist --generate-baseline=phpstan-baseline.neon
 
 .PHONY: refactoring
