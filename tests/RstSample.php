@@ -32,5 +32,4 @@ final class RstSample
 
         $this->lines = Lines::fromArray($content);
     }
-
 }
