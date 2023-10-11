@@ -1,7 +1,7 @@
 {
-    "type": "project",
-    "license": "MIT",
     "name": "oskarstark/doctor-rst",
+    "license": "MIT",
+    "type": "project",
     "require": {
         "php": "^8.2",
         "ext-ctype": "*",
@@ -20,6 +20,7 @@
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "^2.39",
         "ergebnis/php-cs-fixer-config": "^5.16.0",
         "ergebnis/test-util": "^1.6",
         "icanhazstring/composer-unused": "^0.8.10",
@@ -32,27 +33,8 @@
         "rector/rector": "^0.18.4",
         "symfony/var-dumper": "^6.3.4"
     },
-    "config": {
-        "preferred-install": {
-            "*": "dist"
-        },
-        "sort-packages": true,
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "App\\Tests\\": "tests/"
-        }
-    },
     "replace": {
-        "paragonie/random_compat": "2.*",
+        "paragonie/random_compat": "^2.0",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php56": "*",
@@ -65,7 +47,27 @@
         "symfony/polyfill-php81": "*",
         "symfony/polyfill-php82": "*"
     },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
     "bin": [
         "bin/doctor-rst"
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "phpstan/extension-installer": true
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    }
 }
