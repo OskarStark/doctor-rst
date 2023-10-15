@@ -64,7 +64,7 @@ final class EnsureLinkBottomTest extends UnitTestCase
 
         yield [
             Violation::from(
-                'Please move link line at the bottom of the file',
+                'Please move link definition to the bottom of the page',
                 'filename',
                 2,
                 '.. _`first-link`: https://foo.bar',
@@ -78,7 +78,7 @@ final class EnsureLinkBottomTest extends UnitTestCase
 
         yield [
             Violation::from(
-                'Please move link line at the bottom of the file',
+                'Please move link definition to the bottom of the page',
                 'filename',
                 2,
                 '.. _`first-link`: https://foo.bar',

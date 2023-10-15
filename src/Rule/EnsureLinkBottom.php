@@ -53,7 +53,7 @@ class EnsureLinkBottom extends AbstractRule implements LineContentRule
 
             if (!RstParser::isLinkDefinition($current)) {
                 return Violation::from(
-                    'Please move link line at the bottom of the file',
+                    'Please move link definition to the bottom of the page',
                     $filename,
                     $number + 1,
                     $line,
