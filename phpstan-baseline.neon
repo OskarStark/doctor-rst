@@ -104,3 +104,8 @@ parameters:
 			message: "#^Cannot access offset 'payload' on mixed\\.$#"
 			count: 1
 			path: tests/Analyzer/FileCacheTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$prefix of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringStartsWith\\(\\) expects non\\-empty\\-string, string given\\.$#"
+			count: 1
+			path: tests/Rule/TypoTest.php

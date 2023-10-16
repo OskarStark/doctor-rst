@@ -67,6 +67,35 @@ jobs:
             - name: "Run friendsofphp/php-cs-fixer"
               run: "vendor/bin/php-cs-fixer fix --diff --verbose"
 
+    composer-normalize:
+        name: composer normalize
+
+        runs-on: ubuntu-latest
+
+        strategy:
+            matrix:
+                php-version:
+                    - '8.2'
+
+        steps:
+            - name: "Checkout code"
+              uses: actions/checkout@v4
+
+            - name: Install PHP with extensions
+              uses: shivammathur/setup-php@2.26.0
+              with:
+                  coverage: "none"
+                  php-version: ${{ matrix.php-version }}
+                  tools: composer:v2
+
+            - name: "Composer install"
+              uses: "ramsey/composer-install@2.2.0"
+              with:
+                  composer-options: "--no-scripts"
+
+            - name: "composer normalize"
+              run: "composer normalize"
+
     tests:
         name: PHPUnit
 

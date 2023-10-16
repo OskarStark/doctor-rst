@@ -1,7 +1,7 @@
 {
-    "type": "project",
-    "license": "MIT",
     "name": "oskarstark/doctor-rst",
+    "license": "MIT",
+    "type": "project",
     "require": {
         "php": "^8.2",
         "ext-ctype": "*",
@@ -11,48 +11,30 @@
         "ondram/ci-detector": "^4.1.0",
         "symfony/config": "^6.3.2",
         "symfony/console": "^6.3.4",
-        "symfony/dependency-injection": "^6.3.4",
-        "symfony/finder": "^6.3.3",
+        "symfony/dependency-injection": "^6.3.5",
+        "symfony/finder": "^6.3.5",
         "symfony/options-resolver": "^6.3.0",
         "symfony/service-contracts": "^3.3",
-        "symfony/string": "^6.3.2",
+        "symfony/string": "^6.3.5",
         "symfony/yaml": "^6.3.3",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
+        "ergebnis/composer-normalize": "^2.39",
         "ergebnis/php-cs-fixer-config": "^5.16.0",
         "ergebnis/test-util": "^1.6",
         "icanhazstring/composer-unused": "^0.8.10",
         "mikey179/vfsstream": "^1.6.11",
         "phpstan/extension-installer": "^1.3.1",
-        "phpstan/phpstan": "^1.10.35",
-        "phpstan/phpstan-phpunit": "^1.3.14",
+        "phpstan/phpstan": "^1.10.38",
+        "phpstan/phpstan-phpunit": "^1.3.15",
         "phpstan/phpstan-webmozart-assert": "^1.2.4",
-        "phpunit/phpunit": "^9.6.13",
-        "rector/rector": "^0.18.4",
-        "symfony/var-dumper": "^6.3.4"
-    },
-    "config": {
-        "preferred-install": {
-            "*": "dist"
-        },
-        "sort-packages": true,
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "App\\Tests\\": "tests/"
-        }
+        "phpunit/phpunit": "^10",
+        "rector/rector": "^0.18.5",
+        "symfony/var-dumper": "^6.3.5"
     },
     "replace": {
-        "paragonie/random_compat": "2.*",
+        "paragonie/random_compat": "^2.0",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php56": "*",
@@ -65,7 +47,27 @@
         "symfony/polyfill-php81": "*",
         "symfony/polyfill-php82": "*"
     },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
     "bin": [
         "bin/doctor-rst"
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "phpstan/extension-installer": true
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    }
 }
