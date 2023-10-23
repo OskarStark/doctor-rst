@@ -73,6 +73,11 @@ class Typo extends CheckListRule implements LineContentRule
             '/overriden/i' => null,
             '/succesfully/i' => null,
             '/optionnally/i' => null,
+            '/esimated/i' => null,
+            '/strengh/i' => null,
+            '/mehtod/i' => null,
+            '/contraint/i' => null,
+            '/instanciation/i' => 'Typo in word "%s", use "instantiation"',
         ];
     }
 }

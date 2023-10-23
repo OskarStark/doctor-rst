@@ -85,6 +85,16 @@ final class TypoTest extends UnitTestCase
             'successfully',
             'Optionally',
             'optionally',
+            'Estimated',
+            'estimated',
+            'Strength',
+            'strength',
+            'Method',
+            'method',
+            'Constraint',
+            'constraint',
+            'Instantiation',
+            'instantiation',
         ];
 
         foreach ($valids as $valid) {
@@ -124,6 +134,16 @@ final class TypoTest extends UnitTestCase
             'succesfully',
             'Optionnally',
             'optionnally',
+            'Esimated',
+            'esimated',
+            'Strengh',
+            'strengh',
+            'Mehtod',
+            'mehtod',
+            'Contraint',
+            'contraint',
+            'Instanciation',
+            'instanciation',
         ];
 
         foreach ($invalids as $invalid) {

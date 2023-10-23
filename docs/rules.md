@@ -939,6 +939,11 @@ Pattern | Message
 `/overriden/i` | Typo in word "%s"
 `/succesfully/i` | Typo in word "%s"
 `/optionnally/i` | Typo in word "%s"
+`/esimated/i` | Typo in word "%s"
+`/strengh/i` | Typo in word "%s"
+`/mehtod/i` | Typo in word "%s"
+`/contraint/i` | Typo in word "%s"
+`/instanciation/i` | Typo in word "%s", use "instantiation"
 
 ## `unused_links`
 
