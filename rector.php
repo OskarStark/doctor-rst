@@ -42,7 +42,10 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->phpVersion(PhpVersion::PHP_82);
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses(false);
-    $rectorConfig->phpstanConfig(getcwd().'/phpstan.neon.dist');
+    $rectorConfig->phpstanConfigs([
+        'vendor/phpstan/phpstan-phpunit/extension.neon',
+        'vendor/phpstan/phpstan-webmozart-assert/extension.neon',
+    ]);
 
     $rectorConfig->sets([
         SetList::PHP_82,
