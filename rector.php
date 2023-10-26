@@ -43,6 +43,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses(false);
     $rectorConfig->phpstanConfigs([
+        getcwd().'/phpstan.neon.dist',
         'vendor/phpstan/phpstan-phpunit/extension.neon',
         'vendor/phpstan/phpstan-webmozart-assert/extension.neon',
     ]);
