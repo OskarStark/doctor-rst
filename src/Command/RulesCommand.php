@@ -152,6 +152,7 @@ class RulesCommand extends Command
                             if (\is_array($defaultValue)) {
                                 $defaultValue = '[]';
                             }
+
                             $default = sprintf('`%s`', $defaultValue);
                         }
 
@@ -190,6 +191,7 @@ class RulesCommand extends Command
             foreach ($rule::getList() as $pattern => $message) {
                 $this->io->writeln(sprintf('`%s` | %s', str_replace('|', '\|', (string) $pattern), $message ?: $rule->getDefaultMessage()));
             }
+
             $this->io->newLine();
         }
 

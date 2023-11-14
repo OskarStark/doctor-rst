@@ -1,10 +1,19 @@
 <?php
 
 declare(strict_types=1);
-use Ergebnis\PhpCsFixer\Config\Factory;
-use Ergebnis\PhpCsFixer\Config\RuleSet\Php82;
+
+/**
+ * This file is part of DOCtor-RST.
+ *
+ * (c) Oskar Stark <oskarstark@googlemail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 use Ergebnis\PhpCsFixer;
+use Ergebnis\PhpCsFixer\Config\Factory;
+use Ergebnis\PhpCsFixer\Config\RuleSet\Php82;
 
 $header = <<<'HEADER'
 This file is part of DOCtor-RST.
@@ -15,7 +24,11 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 HEADER;
 
-$ruleSet = Php82::create()->withHeader($header)->withRules(PhpCsFixer\Config\Rules::fromArray([
+$customRules = [
+    'no_trailing_whitespace_in_string' => false,
+];
+
+$ruleSet = Php82::create()->withHeader($header)->withRules(PhpCsFixer\Config\Rules::fromArray(array_merge([
     'blank_line_before_statement' => [
         'statements' => [
             'break',
@@ -71,7 +84,7 @@ $ruleSet = Php82::create()->withHeader($header)->withRules(PhpCsFixer\Config\Rul
         ],
     ],
     'final_public_method_for_abstract_class' => false,
-]));
+], $customRules)));
 
 $config = Factory::fromRuleSet($ruleSet);
 
