@@ -50,6 +50,7 @@ class NoDirectiveAfterShorthand extends AbstractRule implements LineContentRule
         if (!$lines->current()->isDirective()) {
             return NullViolation::create();
         }
+
         $line = $lines->current();
 
         $message = sprintf(

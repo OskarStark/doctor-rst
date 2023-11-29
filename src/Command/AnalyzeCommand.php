@@ -169,6 +169,7 @@ class AnalyzeCommand extends Command
             if ($output->isVeryVerbose()) {
                 $output->writeln('Analyze '.$file->getRealPath());
             }
+
             $rules = $this->rulesConfiguration->getRulesForFilePath($file->getRelativePathname());
             $fileResults[] = new FileResult(
                 $file,
@@ -178,6 +179,7 @@ class AnalyzeCommand extends Command
                 ),
             );
         }
+
         $analyzerResult = new AnalyzerResult($fileResults, $whitelistConfig);
 
         $this->analyzer->write();

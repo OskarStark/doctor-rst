@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Config\RectorConfig;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Doctrine\Set\DoctrineSetList;
-use Rector\Php74\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\AddSeeTestAnnotationRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
@@ -42,7 +42,11 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->phpVersion(PhpVersion::PHP_82);
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses(false);
-    $rectorConfig->phpstanConfig(getcwd().'/phpstan.neon.dist');
+    $rectorConfig->phpstanConfigs([
+        getcwd().'/phpstan.neon.dist',
+        'vendor/phpstan/phpstan-phpunit/extension.neon',
+        'vendor/phpstan/phpstan-webmozart-assert/extension.neon',
+    ]);
 
     $rectorConfig->sets([
         SetList::PHP_82,
