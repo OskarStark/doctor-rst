@@ -13,7 +13,7 @@ RUN composer install --classmap-authoritative --no-interaction --no-dev --optimi
 ADD https://github.com/humbug/box/releases/download/4.2.0/box.phar ./box.phar
 RUN php box.phar compile
 
-FROM php:8.2-cli-alpine
+FROM php:8.3-cli-alpine
 
 LABEL "com.github.actions.name"="DOCtor-RST"
 LABEL "com.github.actions.description"="check *.rst files against given rules"
