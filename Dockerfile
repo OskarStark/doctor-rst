@@ -1,4 +1,4 @@
-FROM php:8.2-cli-alpine as build
+FROM php:8.3-cli-alpine as build
 
 RUN apk add git # required for box to detect the version
 RUN apk add --update icu-dev && docker-php-ext-install -j$(nproc) intl # related to https://github.com/box-project/box/issues/516
