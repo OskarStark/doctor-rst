@@ -10,7 +10,7 @@ ADD . /usr/src/app
 
 RUN composer install --classmap-authoritative --no-interaction --no-dev --optimize-autoloader
 
-ADD https://github.com/humbug/box/releases/download/4.2.0/box.phar ./box.phar
+ADD https://github.com/humbug/box/releases/download/4.5.1/box.phar ./box.phar
 RUN php box.phar compile
 
 FROM php:8.3-cli-alpine
