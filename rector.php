@@ -61,6 +61,7 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->skip([
+\Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector::class,
         ArraySpreadInsteadOfArrayMergeRector::class,
         PreferPHPUnitThisCallRector::class,
         ReplaceTestAnnotationWithPrefixedFunctionRector::class,
