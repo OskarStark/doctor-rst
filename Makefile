@@ -1,8 +1,10 @@
 .PHONY: tests-changed
+tests-changed: export APP_ENV=test
 tests-changed: vendor doctrine
 	symfony php vendor/bin/phpunit --configuration=phpunit.xml.dist $(shell git diff HEAD --name-only | grep Test.php | xargs )
 
 .PHONY: tests
+tests: export APP_ENV=test
 tests:
 	vendor/bin/phpunit
 
