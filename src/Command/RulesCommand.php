@@ -34,8 +34,10 @@ class RulesCommand extends Command
 {
     private SymfonyStyle $io;
 
-    public function __construct(private readonly Registry $registry, ?string $name = null)
-    {
+    public function __construct(
+        private readonly Registry $registry,
+        ?string $name = null,
+    ) {
         parent::__construct($name);
     }
 

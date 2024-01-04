@@ -15,8 +15,10 @@ namespace App\Analyzer;
 
 final readonly class MemoizingAnalyzer implements Analyzer
 {
-    public function __construct(private Analyzer $analyzer, private Cache $cache)
-    {
+    public function __construct(
+        private Analyzer $analyzer,
+        private Cache $cache,
+    ) {
     }
 
     /**
