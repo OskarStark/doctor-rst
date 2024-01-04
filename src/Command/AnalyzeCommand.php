@@ -40,8 +40,11 @@ class AnalyzeCommand extends Command
 {
     private readonly RulesConfiguration $rulesConfiguration;
 
-    public function __construct(private readonly Registry $registry, private readonly MemoizingAnalyzer $analyzer, private readonly FormatterRegistry $formatterRegistry)
-    {
+    public function __construct(
+        private readonly Registry $registry,
+        private readonly MemoizingAnalyzer $analyzer,
+        private readonly FormatterRegistry $formatterRegistry,
+    ) {
         $this->rulesConfiguration = new RulesConfiguration();
 
         parent::__construct();

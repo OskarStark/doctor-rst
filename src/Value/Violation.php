@@ -21,8 +21,12 @@ final class Violation implements ViolationInterface
     private readonly string $filename;
     private readonly int $lineno;
 
-    private function __construct(string $message, string $filename, int $lineno, private readonly string $rawLine)
-    {
+    private function __construct(
+        string $message,
+        string $filename,
+        int $lineno,
+        private readonly string $rawLine,
+    ) {
         $message = trim($message);
         Assert::stringNotEmpty($message);
         Assert::notWhitespaceOnly($message);

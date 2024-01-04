@@ -74,6 +74,7 @@ $ruleSet = Php83::create()->withHeader($header)->withRules(PhpCsFixer\Config\Rul
     'php_unit_test_class_requires_covers' => false,
     'return_to_yield_from' => false,
     'PhpCsFixerCustomFixers/phpdoc_array_style' => false,
+    'PhpCsFixerCustomFixers/phpdoc_type_list' => false,
     'attribute_empty_parentheses' => false,
     'class_attributes_separation' => [
         'elements' => [

@@ -15,8 +15,10 @@ namespace App\Rst\Value;
 
 final readonly class LinkDefinition
 {
-    private function __construct(private LinkName $name, private LinkUrl $url)
-    {
+    private function __construct(
+        private LinkName $name,
+        private LinkUrl $url,
+    ) {
     }
 
     public static function fromLine(string $line): self

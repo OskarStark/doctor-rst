@@ -15,8 +15,10 @@ namespace App\Value;
 
 final readonly class FileResult
 {
-    public function __construct(private \SplFileInfo $file, private ExcludedViolationList $violationList)
-    {
+    public function __construct(
+        private \SplFileInfo $file,
+        private ExcludedViolationList $violationList,
+    ) {
     }
 
     public function filename(): string
