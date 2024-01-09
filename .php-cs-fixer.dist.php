@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-
 /**
  * This file is part of DOCtor-RST.
  *
@@ -10,6 +9,7 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+use Ergebnis\PhpCsFixer\Config\Rules;
 
 use Ergebnis\PhpCsFixer;
 use Ergebnis\PhpCsFixer\Config\Factory;
@@ -28,7 +28,7 @@ $customRules = [
     'no_trailing_whitespace_in_string' => false,
 ];
 
-$ruleSet = Php83::create()->withHeader($header)->withRules(PhpCsFixer\Config\Rules::fromArray(array_merge([
+$ruleSet = Php83::create()->withHeader($header)->withRules(Rules::fromArray(array_merge([
     'blank_line_before_statement' => [
         'statements' => [
             'break',
