@@ -9,14 +9,14 @@
         "ext-mbstring": "*",
         "composer/semver": "^3.4.0",
         "ondram/ci-detector": "^4.1.0",
-        "symfony/config": "^6.4",
-        "symfony/console": "^6.4.2",
-        "symfony/dependency-injection": "^6.4.2",
-        "symfony/finder": "^6.4",
-        "symfony/options-resolver": "^6.4",
+        "symfony/config": "^7.0",
+        "symfony/console": "^7.0",
+        "symfony/dependency-injection": "^7.0",
+        "symfony/finder": "^7.0",
+        "symfony/options-resolver": "^7.0",
         "symfony/service-contracts": "^3.4.1",
-        "symfony/string": "^6.4.2",
-        "symfony/yaml": "^6.4",
+        "symfony/string": "^7.0",
+        "symfony/yaml": "^7.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
@@ -31,7 +31,7 @@
         "phpstan/phpstan-webmozart-assert": "^1.2.4",
         "phpunit/phpunit": "^10.5.5",
         "rector/rector": "^0.19.0",
-        "symfony/var-dumper": "^6.4.2"
+        "symfony/var-dumper": "^7.0"
     },
     "replace": {
         "paragonie/random_compat": "^2.0",
