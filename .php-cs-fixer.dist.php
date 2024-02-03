@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 /**
  * This file is part of DOCtor-RST.
  *
@@ -9,10 +10,9 @@ declare(strict_types=1);
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-use Ergebnis\PhpCsFixer\Config\Rules;
 
-use Ergebnis\PhpCsFixer;
 use Ergebnis\PhpCsFixer\Config\Factory;
+use Ergebnis\PhpCsFixer\Config\Rules;
 use Ergebnis\PhpCsFixer\Config\RuleSet\Php83;
 
 $header = <<<'HEADER'
@@ -74,7 +74,7 @@ $ruleSet = Php83::create()->withHeader($header)->withRules(Rules::fromArray(arra
     'php_unit_test_class_requires_covers' => false,
     'return_to_yield_from' => false,
     'PhpCsFixerCustomFixers/phpdoc_array_style' => false,
-    'PhpCsFixerCustomFixers/phpdoc_type_list' => false,
+    'phpdoc_list_type' => false,
     'attribute_empty_parentheses' => false,
     'class_attributes_separation' => [
         'elements' => [
