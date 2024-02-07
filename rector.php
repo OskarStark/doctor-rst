@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 use Rector\CodingStyle\Rector\FuncCall\ArraySpreadInsteadOfArrayMergeRector;
 use Rector\Config\RectorConfig;
-use Rector\Core\ValueObject\PhpVersion;
+use Rector\ValueObject\PhpVersion;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Php80\Rector\Class_\AnnotationToAttributeRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
@@ -69,10 +69,7 @@ return static function (RectorConfig $rectorConfig): void {
         AddSeeTestAnnotationRector::class,
     ]);
 
-    /**
-     * @see https://github.com/rectorphp/rector/blob/master/docs/rector_rules_overview.md#annotationtoattributerector
-     */
-    $rectorConfig->rule(AnnotationToAttributeRector::class);
+
     $rectorConfig->rule(PreferPHPUnitSelfCallRector::class);
 
     /**
