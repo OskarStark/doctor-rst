@@ -30,7 +30,7 @@ final class EnsureGithubDirectiveStartWithPrefixTest extends UnitTestCase
     public function check(ViolationInterface $expected, string $prefix, RstSample $sample): void
     {
         $rule = (new EnsureGithubDirectiveStartWithPrefix());
-        $rule->setOptions(['min_version' => $prefix]);
+        $rule->setOptions(['prefix' => $prefix]);
 
         self::assertEquals($expected, $rule->check($sample->lines, $sample->lineNumber, 'filename'));
     }
@@ -52,7 +52,7 @@ final class EnsureGithubDirectiveStartWithPrefixTest extends UnitTestCase
         ];
         yield [
             Violation::from(
-                'Please only use Symfony namespace with Github directive',
+                'Please only use "Symfony" base namespace with Github directive',
                 'filename',
                 1,
                 'Implements the interface :class:`Psr\\Cache\\CacheItemPoolInterface`',

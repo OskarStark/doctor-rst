@@ -15,7 +15,6 @@ namespace App\Rule;
 
 use App\Value\Lines;
 use App\Value\NullViolation;
-use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -51,7 +50,7 @@ class EnsureGithubDirectiveStartWithPrefix extends AbstractRule implements Confi
             !($line->clean()->match('/:(method|class|namespace):`'.$this->prefix.'\\\\.*`/'))) {
 
             $message = sprintf(
-                'Please only use "%s" namespace with Github directive',
+                'Please only use "%s" base namespace with Github directive',
                 $this->prefix,
             );
             
