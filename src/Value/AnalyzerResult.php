@@ -19,8 +19,10 @@ final class AnalyzerResult
      * @param FileResult[]                              $results
      * @param array{regex?: string[], lines?: string[]} $whitelistConfig
      */
-    public function __construct(private readonly array $results, private array $whitelistConfig)
-    {
+    public function __construct(
+        private readonly array $results,
+        private array $whitelistConfig,
+    ) {
     }
 
     public function all(): array

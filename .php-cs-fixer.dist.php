@@ -11,8 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-use Ergebnis\PhpCsFixer;
 use Ergebnis\PhpCsFixer\Config\Factory;
+use Ergebnis\PhpCsFixer\Config\Rules;
 use Ergebnis\PhpCsFixer\Config\RuleSet\Php83;
 
 $header = <<<'HEADER'
@@ -28,7 +28,7 @@ $customRules = [
     'no_trailing_whitespace_in_string' => false,
 ];
 
-$ruleSet = Php83::create()->withHeader($header)->withRules(PhpCsFixer\Config\Rules::fromArray(array_merge([
+$ruleSet = Php83::create()->withHeader($header)->withRules(Rules::fromArray(array_merge([
     'blank_line_before_statement' => [
         'statements' => [
             'break',
@@ -73,7 +73,8 @@ $ruleSet = Php83::create()->withHeader($header)->withRules(PhpCsFixer\Config\Rul
     ],
     'php_unit_test_class_requires_covers' => false,
     'return_to_yield_from' => false,
-    'PhpCsFixerCustomFixers/phpdoc_array_style' => false,
+    'phpdoc_array_type' => false,
+    'phpdoc_list_type' => false,
     'attribute_empty_parentheses' => false,
     'class_attributes_separation' => [
         'elements' => [
