@@ -47,7 +47,7 @@ class EnsureGithubDirectiveStartWithPrefix extends AbstractRule implements Confi
         $line = $lines->current();
 
         if ($line->clean()->match('/:(method|class|namespace):`.*`/') &&
-            !($line->clean()->match('/:(method|class|namespace):`'.$this->prefix.'\\\\.*`/'))) {
+            !($line->clean()->match('/:(method|class|namespace):`.*'.$this->prefix.'\\\\.*`/'))) {
 
             $message = sprintf(
                 'Please only use "%s" base namespace with Github directive',
