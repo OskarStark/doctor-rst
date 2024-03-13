@@ -51,6 +51,11 @@ final class EnsureGithubDirectiveStartWithPrefixTest extends UnitTestCase
             new RstSample('Implements the interface :class:`Psr\\Cache\\CacheItemPoolInterface`'),
         ];
         yield [
+            NullViolation::create(),
+            'Symfony',
+            new RstSample('Or :method:`Form::submit() <Symfony\\Component\\Form\\Form::submit>`.'),
+        ];
+        yield [
             Violation::from(
                 'Please only use "Symfony" base namespace with Github directive',
                 'filename',
@@ -59,6 +64,16 @@ final class EnsureGithubDirectiveStartWithPrefixTest extends UnitTestCase
             ),
             'Symfony',
             new RstSample('Implements the interface :class:`Psr\\Cache\\CacheItemPoolInterface`'),
+        ];
+        yield [
+            Violation::from(
+                'Please only use "Psr" base namespace with Github directive',
+                'filename',
+                1,
+                'Or :method:`Form::submit() <Symfony\\Component\\Form\\Form::submit>`.',
+            ),
+            'Psr',
+            new RstSample('Or :method:`Form::submit() <Symfony\\Component\\Form\\Form::submit>`.'),
         ];
     }
 }

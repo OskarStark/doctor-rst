@@ -22,6 +22,7 @@
 * [ensure_bash_prompt_before_composer_command](#ensure_bash_prompt_before_composer_command)
 * [ensure_exactly_one_space_before_directive_type](#ensure_exactly_one_space_before_directive_type)
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
+* [ensure_github_directive_start_with_prefix](#ensure_github_directive_start_with_prefix)
 * [ensure_link_bottom](#ensure_link_bottom)
 * [ensure_link_definition_contains_valid_url](#ensure_link_definition_contains_valid_url)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
@@ -356,6 +357,14 @@ composer require symfony/var-dumper
 ```rst
 .. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST
 ```
+
+## `ensure_github_directive_start_with_prefix`
+
+#### Configuration options
+
+Name | Required
+--- | ---
+`prefix` | `true` | `string`
 
 ## `ensure_link_bottom`
 
