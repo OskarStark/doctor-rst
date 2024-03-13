@@ -41,6 +41,7 @@ jobs:
               with:
                   push: true
                   builder: ${{ steps.buildx.outputs.name }}
+                  platforms: linux/amd64,linux/arm64
                   tags: |
                       ${{env.IMAGE}}:latest
                       ${{env.IMAGE}}:${{env.RELEASE_VERSION}}
