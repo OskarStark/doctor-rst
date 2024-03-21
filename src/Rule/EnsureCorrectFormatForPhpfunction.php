@@ -18,9 +18,8 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-class EnsureCorrectFormatForPhpfunction extends AbstractRule implements LineContentRule
+final class EnsureCorrectFormatForPhpfunction extends AbstractRule implements LineContentRule
 {
-
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
