@@ -13,11 +13,17 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+#[Description('Ensure phpfunction directive do not end with ().')]
+#[InvalidExample(':phpfunction:`mb_detect_encoding()`.')]
+#[ValidExample(':phpfunction:`mb_detect_encoding`.')]
 final class EnsureCorrectFormatForPhpfunction extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
