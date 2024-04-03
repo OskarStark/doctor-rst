@@ -325,6 +325,20 @@ composer require symfony/var-dumper
 
 ## `ensure_correct_format_for_phpfunction`
 
+  > _Ensure phpfunction directive do not end with ()._
+
+##### Valid Examples :+1:
+
+```rst
+:phpfunction:`mb_detect_encoding`.
+```
+
+##### Invalid Examples :-1:
+
+```rst
+:phpfunction:`mb_detect_encoding()`.
+```
+
 ## `ensure_exactly_one_space_before_directive_type`
 
   > _Ensure exactly one space before directive type._
