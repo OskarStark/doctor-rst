@@ -20,7 +20,7 @@
 * [deprecated_directive_min_version](#deprecated_directive_min_version)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
 * [ensure_bash_prompt_before_composer_command](#ensure_bash_prompt_before_composer_command)
-* [ensure_correct_format_for_phpfunction] (#ensure_correct_format_for_phpfunction)
+* [ensure_correct_format_for_phpfunction](#ensure_correct_format_for_phpfunction)
 * [ensure_exactly_one_space_before_directive_type](#ensure_exactly_one_space_before_directive_type)
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
 * [ensure_github_directive_start_with_prefix](#ensure_github_directive_start_with_prefix)
@@ -324,20 +324,6 @@ composer require symfony/var-dumper
 ```
 
 ## `ensure_correct_format_for_phpfunction`
-
-  > _Ensure phpfunction directive do not end with ()._
-
-##### Valid Examples :+1:
-
-```rst
-This option accepts any value that can be passed to :phpfunction:`mb_detect_encoding`.
-```
-
-##### Invalid Examples :-1:
-
-```rst
-This option accepts any value that can be passed to :phpfunction:`mb_detect_encoding()`.
-```
 
 ## `ensure_exactly_one_space_before_directive_type`
 
