@@ -44,7 +44,6 @@ class TitleUnderlineLengthMustMatchTitleLength extends AbstractRule implements L
             && !$lines->current()->isBlank()
             && !(mb_strlen($lines->current()->clean()->toString()) === $headLineLength)
         ) {
-
             return Violation::from(
                 sprintf(
                     'Please ensure title "%s" and underline length are matching',
