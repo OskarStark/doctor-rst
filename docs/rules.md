@@ -23,6 +23,7 @@
 * [ensure_correct_format_for_phpfunction](#ensure_correct_format_for_phpfunction)
 * [ensure_exactly_one_space_before_directive_type](#ensure_exactly_one_space_before_directive_type)
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
+* [ensure_explicit_nullable_types](#ensure_explicit_nullable_types)
 * [ensure_github_directive_start_with_prefix](#ensure_github_directive_start_with_prefix)
 * [ensure_link_bottom](#ensure_link_bottom)
 * [ensure_link_definition_contains_valid_url](#ensure_link_definition_contains_valid_url)
@@ -373,6 +374,28 @@ composer require symfony/var-dumper
 
 ```rst
 .. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST
+```
+
+## `ensure_explicit_nullable_types`
+
+  > _Ensure explicit nullable types are used._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+function foo(?string $bar = null)
+```
+
+```rst
+function foo(string|null $bar = null)
+```
+
+##### Invalid Examples :-1:
+
+```rst
+function foo(string $bar = null)
 ```
 
 ## `ensure_github_directive_start_with_prefix`
