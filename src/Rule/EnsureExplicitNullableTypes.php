@@ -16,6 +16,7 @@ namespace App\Rule;
 use App\Attribute\Rule\Description;
 use App\Attribute\Rule\InvalidExample;
 use App\Attribute\Rule\ValidExample;
+use App\Rst\RstParser;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
@@ -40,35 +41,47 @@ class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRul
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!str_contains((string) $line->clean(), ' = null')) {
+        if (!RstParser::isPhpDirective($line)) {
             return NullViolation::create();
         }
 
-        $pattern = '/([?]?\w+)\s+\$(\w+)\s*=\s*null(?=\s*[,\)])/';
+        $lines->next();
 
-        if ($matches = $line->clean()->match($pattern, \PREG_SET_ORDER)) {
-            foreach ($matches as $match) {
-                $types = $match[1];
+        while ($lines->valid() && !$lines->current()->isDirective()) {
+            if (!str_contains((string) $lines->current()->clean(), ' = null')) {
+                $lines->next();
 
-                // ?int $id = null
-                if (str_starts_with($types, '?')) {
-                    continue;
-                }
-
-                // int|string|null $id = null
-                $types = explode('|', $types);
-
-                if (\in_array('null', $types, true)) {
-                    continue;
-                }
-
-                return Violation::from(
-                    'Please use explicit nullable types.',
-                    $filename,
-                    $number + 1,
-                    $line,
-                );
+                continue;
             }
+
+            $pattern = '/([?]?\w+)\s+\$(\w+)\s*=\s*null(?=\s*[,\)])/';
+
+            if ($matches = $lines->current()->clean()->match($pattern, \PREG_SET_ORDER)) {
+                foreach ($matches as $match) {
+                    $types = $match[1];
+
+                    // ?int $id = null
+                    if (str_starts_with($types, '?')) {
+                        continue;
+                    }
+
+                    // int|string|null $id = null
+                    $types = explode('|', $types);
+
+                    if (\in_array('null', $types, true)) {
+                        continue;
+                    }
+
+                    return Violation::from(
+                        'Please use explicit nullable types.',
+                        $filename,
+                        $number + 1,
+                        $lines->current()->clean()->toString(),
+                    );
+                }
+            }
+
+            $lines->next();
         }
 
         return NullViolation::create();

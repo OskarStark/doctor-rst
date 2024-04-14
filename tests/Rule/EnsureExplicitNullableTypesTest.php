@@ -51,7 +51,7 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
         foreach ($validCases as $validCase) {
             yield $validCase => [
                 NullViolation::create(),
-                new RstSample($validCase),
+                new RstSample(['.. code-block:: php', $validCase]),
             ];
         }
     }
@@ -79,7 +79,7 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
                     1,
                     $invalidCase,
                 ),
-                new RstSample($invalidCase),
+                new RstSample(['.. code-block:: php', $invalidCase]),
             ];
         }
     }
