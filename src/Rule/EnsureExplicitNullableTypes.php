@@ -54,7 +54,7 @@ class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRul
                 return NullViolation::create();
             }
 
-            // int|null $id = null
+            // int|string|null $id = null
             $types = explode('|', $types);
             if (\in_array('null', $types, true)) {
                 return NullViolation::create();
