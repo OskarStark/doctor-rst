@@ -42,6 +42,7 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
     public static function validProvider(): iterable
     {
         $validCases = [
+            'function foo(int $bar = 23)',
             'function foo(?int $bar = null)',
             'function foo(int|null $bar = null)',
             'function foo(int|string|null $bar = null)',
@@ -65,6 +66,8 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
             'public function foo(int|string $bar = null)',
             'function foo(int $foo, int $bar = null)',
             'function foo(int $foo, int $bar = null, int $baz)',
+            'function foo(?int $foo = null, int $bar = null, int $baz)',
+            'function foo(int|string|null $foo = null, int $bar = null, int $baz)',
             'int $foo = null,',
         ];
 

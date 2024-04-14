@@ -46,26 +46,29 @@ class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRul
 
         $pattern = '/([?]?\w+)\s+\$(\w+)\s*=\s*null(?=\s*[,\)])/';
 
-        if ($matches = $line->clean()->match($pattern)) {
-            $types = $matches[1];
+        if ($matches = $line->clean()->match($pattern, \PREG_SET_ORDER)) {
+            foreach ($matches as $match) {
+                $types = $match[1];
 
-            // ?int $id = null
-            if (str_starts_with($types, '?')) {
-                return NullViolation::create();
+                // ?int $id = null
+                if (str_starts_with($types, '?')) {
+                    continue;
+                }
+
+                // int|string|null $id = null
+                $types = explode('|', $types);
+
+                if (\in_array('null', $types, true)) {
+                    continue;
+                }
+
+                return Violation::from(
+                    'Please use explicit nullable types.',
+                    $filename,
+                    $number + 1,
+                    $line,
+                );
             }
-
-            // int|string|null $id = null
-            $types = explode('|', $types);
-            if (\in_array('null', $types, true)) {
-                return NullViolation::create();
-            }
-
-            return Violation::from(
-                'Please use explicit nullable types.',
-                $filename,
-                $number + 1,
-                $line,
-            );
         }
 
         return NullViolation::create();
