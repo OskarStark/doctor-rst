@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
@@ -21,6 +23,9 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 
 #[Description('Ensure explicit nullable types in method arguments.')]
+#[ValidExample('function foo(?string $bar = null)')]
+#[ValidExample('function foo(string|null $bar = null)')]
+#[InvalidExample('function foo(string $bar = null)')]
 class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array

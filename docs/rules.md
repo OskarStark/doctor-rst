@@ -378,7 +378,7 @@ composer require symfony/var-dumper
 
 ## `ensure_explicit_nullable_types`
 
-  > _Ensure explicit nullable types are used._
+  > _Ensure explicit nullable types in method arguments._
 
 #### Groups [`@Symfony`]
 
