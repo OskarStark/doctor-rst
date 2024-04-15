@@ -46,12 +46,16 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
             'function foo(?int $bar = null)',
             'function foo(int|null $bar = null)',
             'function foo(int|string|null $bar = null)',
+            'private ?int $foo = null',
         ];
 
         foreach ($validCases as $validCase) {
             yield $validCase => [
                 NullViolation::create(),
-                new RstSample(['.. code-block:: php', $validCase]),
+                new RstSample([
+                    '.. code-block:: php',
+                    '    '.$validCase,
+                ]),
             ];
         }
     }
@@ -69,6 +73,7 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
             'function foo(?int $foo = null, int $bar = null, int $baz)',
             'function foo(int|string|null $foo = null, int $bar = null, int $baz)',
             'int $foo = null,',
+            'private int $foo = null',
         ];
 
         foreach ($invalidCases as $invalidCase) {
@@ -76,10 +81,13 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
                 Violation::from(
                     'Please use explicit nullable types.',
                     'filename',
-                    1,
+                    2,
                     $invalidCase,
                 ),
-                new RstSample(['.. code-block:: php', $invalidCase]),
+                new RstSample([
+                    '.. code-block:: php',
+                    '    '.$invalidCase,
+                ]),
             ];
         }
     }
