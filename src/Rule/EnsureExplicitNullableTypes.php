@@ -48,6 +48,7 @@ class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRul
         $lines->next();
 
         while ($lines->valid() && !$lines->current()->isDirective()) {
+            $number++;
             if (!str_contains((string) $lines->current()->clean(), ' = null')) {
                 $lines->next();
 
