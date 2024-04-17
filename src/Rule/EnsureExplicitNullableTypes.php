@@ -56,7 +56,7 @@ class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRul
                 continue;
             }
 
-            $pattern = '#((?:\??\\\\?\w+[|]?)+)\s+\$(\w+)\s*=\s*null(?=\s*[,\)])#siu';
+            $pattern = '#([\w|\\\\?]+)\s+\$(\w+)\s*=\s*null[\n,\)]#';
 
             if ($matches = $lines->current()->clean()->match($pattern, \PREG_SET_ORDER)) {
                 foreach ($matches as $match) {
