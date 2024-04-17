@@ -48,13 +48,15 @@ class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRul
         $lines->next();
 
         while ($lines->valid() && !$lines->current()->isDirective()) {
+            ++$number;
+
             if (!str_contains((string) $lines->current()->clean(), ' = null')) {
                 $lines->next();
 
                 continue;
             }
 
-            $pattern = '/([?]?\w+)\s+\$(\w+)\s*=\s*null(?=\s*[,\)])/';
+            $pattern = '#((?:\??\\\\?\w+[|]?)+)\s+\$(\w+)\s*=\s*null(?=\s*[,\)])#siu';
 
             if ($matches = $lines->current()->clean()->match($pattern, \PREG_SET_ORDER)) {
                 foreach ($matches as $match) {
@@ -62,6 +64,11 @@ class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRul
 
                     // ?int $id = null
                     if (str_starts_with($types, '?')) {
+                        continue;
+                    }
+
+                    // mixed $id = null
+                    if ('mixed' === $types) {
                         continue;
                     }
 
