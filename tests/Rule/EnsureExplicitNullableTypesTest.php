@@ -44,6 +44,10 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
         $validCases = [
             'function foo(int $bar = 23)',
             'function foo(?int $bar = null)',
+            'function foo(?\\Throwable $exception = null)',
+            'function foo(\\Throwable|null $exception = null)',
+            'function foo(?Foo\\Bar $bar = null)',
+            'function foo(mixed $bar = null)',
             'function foo(int|null $bar = null)',
             'function foo(int|string|null $bar = null)',
         ];
@@ -51,7 +55,10 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
         foreach ($validCases as $validCase) {
             yield $validCase => [
                 NullViolation::create(),
-                new RstSample(['.. code-block:: php', $validCase]),
+                new RstSample([
+                    '.. code-block:: php',
+                    '    '.$validCase,
+                ]),
             ];
         }
     }
@@ -63,6 +70,9 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
     {
         $invalidCases = [
             'public function foo(int $bar = null)',
+            'public function foo(Throwable $bar = null)',
+            'public function foo(Foo\\Bar $bar = null)',
+            'public function foo(\\Throwable $bar = null)',
             'public function foo(int|string $bar = null)',
             'function foo(int $foo, int $bar = null)',
             'function foo(int $foo, int $bar = null, int $baz)',
@@ -76,10 +86,13 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
                 Violation::from(
                     'Please use explicit nullable types.',
                     'filename',
-                    1,
+                    2,
                     $invalidCase,
                 ),
-                new RstSample(['.. code-block:: php', $invalidCase]),
+                new RstSample([
+                    '.. code-block:: php',
+                    '    '.$invalidCase,
+                ]),
             ];
         }
     }
