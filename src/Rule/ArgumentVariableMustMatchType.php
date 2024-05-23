@@ -55,11 +55,6 @@ class ArgumentVariableMustMatchType extends AbstractRule implements Configurable
         $this->arguments = $resolvedOptions['arguments'];
     }
 
-    public static function getGroups(): array
-    {
-        return [RuleGroup::Symfony()];
-    }
-
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
