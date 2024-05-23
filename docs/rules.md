@@ -47,6 +47,7 @@
 * [no_admin_yaml](#no_admin_yaml)
 * [no_app_bundle](#no_app_bundle)
 * [no_app_console](#no_app_console)
+* [no_attribute_redundant_parenthesis](#no_attribute_redundant_parenthesis)
 * [no_bash_prompt](#no_bash_prompt)
 * [no_blank_line_after_filepath_in_code_block](#no_blank_line_after_filepath_in_code_block)
 * [no_blank_line_after_filepath_in_php_code_block](#no_blank_line_after_filepath_in_php_code_block)
@@ -131,8 +132,6 @@ This is a nice behaviour...
 ## `argument_variable_must_match_type`
 
   > _Make sure argument variable name match for type_
-
-#### Groups [`@Symfony`]
 
 #### Configuration options
 
@@ -617,6 +616,28 @@ composer require --dev symfony/var-dumper
 ## `no_app_console`
 
 #### Groups [`@Sonata`, `@Symfony`]
+
+## `no_attribute_redundant_parenthesis`
+
+  > _Make sure there is no redundant parenthesis on attribute_
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+#[Bar]
+```
+
+```rst
+#[Bar('foo')]
+```
+
+##### Invalid Examples :-1:
+
+```rst
+#[Bar()]
+```
 
 ## `no_bash_prompt`
 
