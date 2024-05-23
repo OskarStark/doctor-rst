@@ -85,7 +85,6 @@ $ruleSet = Php83::create()->withHeader($header)->withRules(Rules::fromArray(arra
         ],
     ],
     'final_public_method_for_abstract_class' => false,
-    'ordered_attributes' => false,
 ], $customRules)));
 
 $config = Factory::fromRuleSet($ruleSet);
