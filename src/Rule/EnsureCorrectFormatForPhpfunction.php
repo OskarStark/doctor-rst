@@ -32,7 +32,6 @@ final class EnsureCorrectFormatForPhpfunction extends AbstractRule implements Li
         $line = $lines->current();
 
         if ($line->clean()->match('/:phpfunction:`.*\(\)`/')) {
-
             return Violation::from(
                 'Please do not use () at the end of PHP function',
                 $filename,

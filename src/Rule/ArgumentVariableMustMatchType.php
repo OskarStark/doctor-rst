@@ -17,7 +17,6 @@ use App\Attribute\Rule\Description;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
-use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -40,7 +40,7 @@ final class NoAttributeRedundantParenthesisTest extends UnitTestCase
         yield from [
             [
                 Violation::from(
-                    "Please remove redundant parenthesis on attribute",
+                    'Please remove redundant parenthesis on attribute',
                     'filename',
                     1,
                     '#[Bar()]',
@@ -49,7 +49,7 @@ final class NoAttributeRedundantParenthesisTest extends UnitTestCase
             ],
             [
                 Violation::from(
-                    "Please remove redundant parenthesis on attribute",
+                    'Please remove redundant parenthesis on attribute',
                     'filename',
                     1,
                     'Attribute #[Bar()] in my text',

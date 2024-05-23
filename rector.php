@@ -24,7 +24,6 @@ use Rector\PHPUnit\Set\PHPUnitLevelSetList;
 use Rector\PHPUnit\Set\PHPUnitSetList;
 use Rector\Set\ValueObject\SetList;
 use Rector\Symfony\Set\SymfonySetList;
-use Rector\Symfony\Set\TwigLevelSetList;
 use Rector\ValueObject\PhpVersion;
 
 return static function (RectorConfig $rectorConfig): void {
@@ -53,7 +52,6 @@ return static function (RectorConfig $rectorConfig): void {
         SymfonySetList::SYMFONY_64,
         SymfonySetList::SYMFONY_CODE_QUALITY,
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
-        TwigLevelSetList::UP_TO_TWIG_240,
     ]);
 
     $rectorConfig->skip([
