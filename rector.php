@@ -69,7 +69,4 @@ return static function (RectorConfig $rectorConfig): void {
      */
     $rectorConfig->rule(StaticDataProviderClassMethodRector::class);
 
-    $rectorConfig->skip([
-        __DIR__.'/src/Application.php',
-    ]);
 };
