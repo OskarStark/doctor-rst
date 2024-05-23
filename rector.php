@@ -68,5 +68,4 @@ return static function (RectorConfig $rectorConfig): void {
      * @see https://github.com/rectorphp/rector-phpunit/blob/main/docs/rector_rules_overview.md#staticdataproviderclassmethodrector
      */
     $rectorConfig->rule(StaticDataProviderClassMethodRector::class);
-
 };
