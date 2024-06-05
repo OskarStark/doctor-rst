@@ -295,16 +295,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v7.1.0",
+            "version": "v7.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "5bcde9e0b2ea9bd9772bca17618365ea921c5707"
+                "reference": "9b008f2d7b21c74ef4d0c3de6077a642bc55ece3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/5bcde9e0b2ea9bd9772bca17618365ea921c5707",
-                "reference": "5bcde9e0b2ea9bd9772bca17618365ea921c5707",
+                "url": "https://api.github.com/repos/symfony/console/zipball/9b008f2d7b21c74ef4d0c3de6077a642bc55ece3",
+                "reference": "9b008f2d7b21c74ef4d0c3de6077a642bc55ece3",
                 "shasum": ""
             },
             "require": {
@@ -368,7 +368,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.1.0"
+                "source": "https://github.com/symfony/console/tree/v7.1.1"
             },
             "funding": [
                 {
@@ -384,7 +384,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-17T10:55:18+00:00"
+            "time": "2024-05-31T14:57:53+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -1054,16 +1054,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v7.1.0",
+            "version": "v7.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "6f41b185e742737917e6f2e3eca37767fba5f17a"
+                "reference": "60bc311c74e0af215101235aa6f471bcbc032df2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/6f41b185e742737917e6f2e3eca37767fba5f17a",
-                "reference": "6f41b185e742737917e6f2e3eca37767fba5f17a",
+                "url": "https://api.github.com/repos/symfony/string/zipball/60bc311c74e0af215101235aa6f471bcbc032df2",
+                "reference": "60bc311c74e0af215101235aa6f471bcbc032df2",
                 "shasum": ""
             },
             "require": {
@@ -1121,7 +1121,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v7.1.0"
+                "source": "https://github.com/symfony/string/tree/v7.1.1"
             },
             "funding": [
                 {
@@ -1137,7 +1137,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-17T10:55:18+00:00"
+            "time": "2024-06-04T06:40:14+00:00"
         },
         {
             "name": "symfony/var-exporter",
