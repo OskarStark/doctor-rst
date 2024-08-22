@@ -19,7 +19,7 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-class NoBrokenRefDirective extends AbstractRule implements LineContentRule
+final class NoBrokenRefDirective extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {
