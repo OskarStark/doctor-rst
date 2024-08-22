@@ -69,6 +69,10 @@ final class NoBrokenRefDirectiveTest extends UnitTestCase
                 NullViolation::create(),
                 new RstSample(':ref:`Redis section <messenger-redis-transport>` below'),
             ],
+            [
+                NullViolation::create(),
+                new RstSample('If you prefer to use'),
+            ],
         ];
     }
 }
