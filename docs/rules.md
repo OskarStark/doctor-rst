@@ -55,6 +55,7 @@
 * [no_blank_line_after_filepath_in_xml_code_block](#no_blank_line_after_filepath_in_xml_code_block)
 * [no_blank_line_after_filepath_in_yaml_code_block](#no_blank_line_after_filepath_in_yaml_code_block)
 * [no_brackets_in_method_directive](#no_brackets_in_method_directive)
+* [no_broken_ref_directive](#no_broken_ref_directive)
 * [no_composer_phar](#no_composer_phar)
 * [no_composer_req](#no_composer_req)
 * [no_config_yaml](#no_config_yaml)
@@ -692,6 +693,10 @@ $ bin/console list
 ```rst
 :method:`Symfony\\Component\\OptionsResolver\\Options::offsetGet()`
 ```
+
+## `no_broken_ref_directive`
+
+#### Groups [`@Symfony`]
 
 ## `no_composer_phar`
 
