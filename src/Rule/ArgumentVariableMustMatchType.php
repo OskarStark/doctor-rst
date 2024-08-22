@@ -67,7 +67,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements Configurable
 
         foreach ($this->arguments as $argument) {
             // This regex match argument type with bad argument name
-            $regex = sprintf(
+            $regex = \sprintf(
                 '/%s \$(?!%s)(?<actualName>[a-z-A-Z\$]+)/',
                 $argument['type'],
                 $argument['name'],
@@ -75,7 +75,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements Configurable
             $match = $line->clean()->match($regex);
 
             if ($match) {
-                $messageParts[] = sprintf(
+                $messageParts[] = \sprintf(
                     'Please rename "$%s" to "$%s"',
                     $match['actualName'],
                     $argument['name'],

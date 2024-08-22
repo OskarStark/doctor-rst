@@ -177,7 +177,7 @@ final class NoContractionTest extends UnitTestCase
         foreach ($invalids as $invalid => $matched) {
             yield $invalid => [
                 Violation::from(
-                    sprintf('Please do not use contraction for: %s', $matched ?? $invalid),
+                    \sprintf('Please do not use contraction for: %s', $matched ?? $invalid),
                     'filename',
                     1,
                     trim($invalid),
@@ -190,7 +190,7 @@ final class NoContractionTest extends UnitTestCase
             if ($invalidUppercase !== $invalid) {
                 yield $invalidUppercase => [
                     Violation::from(
-                        sprintf('Please do not use contraction for: %s', $matched ?? $invalidUppercase),
+                        \sprintf('Please do not use contraction for: %s', $matched ?? $invalidUppercase),
                         'filename',
                         1,
                         $invalidUppercase,

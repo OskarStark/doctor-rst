@@ -58,7 +58,7 @@ class NoDuplicateUseStatements extends AbstractRule implements LineContentRule
         foreach (array_count_values($statements) as $statement => $count) {
             if (1 < $count) {
                 return Violation::from(
-                    sprintf('Please remove duplication of "%s"', $statement),
+                    \sprintf('Please remove duplication of "%s"', $statement),
                     $filename,
                     $number + 1,
                     $line,

@@ -97,7 +97,7 @@ final class FileCache implements Cache
         $contents = file_get_contents($this->cacheFile);
 
         if (false === $contents) {
-            throw new \RuntimeException(sprintf('Cache file could not be read "%s".', $this->cacheFile));
+            throw new \RuntimeException(\sprintf('Cache file could not be read "%s".', $this->cacheFile));
         }
 
         $cache = unserialize($contents, ['allowed_classes' => [Violation::class]]);

@@ -34,7 +34,7 @@ class BeKindToNewcomers extends CheckListRule implements LineContentRule
         $line = $lines->current();
 
         if (preg_match($this->search, $line->raw()->toString(), $matches)) {
-            $message = sprintf($this->message, $matches[0]);
+            $message = \sprintf($this->message, $matches[0]);
 
             return Violation::from(
                 $message,

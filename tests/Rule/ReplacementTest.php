@@ -90,7 +90,7 @@ final class ReplacementTest extends UnitTestCase
             yield $valid => [NullViolation::create(), new RstSample($valid)];
 
             // add leading spaces
-            yield sprintf('"%s" with leading spaces', $valid) => [NullViolation::create(), new RstSample(sprintf('    %s', $valid))];
+            yield \sprintf('"%s" with leading spaces', $valid) => [NullViolation::create(), new RstSample(\sprintf('    %s', $valid))];
         }
 
         $invalids = [
@@ -125,7 +125,7 @@ final class ReplacementTest extends UnitTestCase
         foreach ($invalids as $invalid => $valid) {
             yield $invalid => [
                 Violation::from(
-                    sprintf('Please replace "%s" with "%s"', $invalid, $valid),
+                    \sprintf('Please replace "%s" with "%s"', $invalid, $valid),
                     'filename',
                     1,
                     $invalid,
@@ -134,14 +134,14 @@ final class ReplacementTest extends UnitTestCase
             ];
 
             // add leading spaces
-            yield sprintf('"%s" with leading spaces', $invalid) => [
+            yield \sprintf('"%s" with leading spaces', $invalid) => [
                 Violation::from(
-                    sprintf('Please replace "%s" with "%s"', $invalid, $valid),
+                    \sprintf('Please replace "%s" with "%s"', $invalid, $valid),
                     'filename',
                     1,
                     $invalid,
                 ),
-                new RstSample(sprintf('    %s', $invalid)),
+                new RstSample(\sprintf('    %s', $invalid)),
             ];
         }
     }

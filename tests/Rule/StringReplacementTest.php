@@ -71,9 +71,9 @@ final class StringReplacementTest extends UnitTestCase
             ];
 
             // add leading spaces
-            yield sprintf('"%s" with leading spaces', $valid) => [
+            yield \sprintf('"%s" with leading spaces', $valid) => [
                 NullViolation::create(),
-                new RstSample(sprintf(
+                new RstSample(\sprintf(
                     '    %s',
                     $valid,
                 )),
@@ -88,7 +88,7 @@ final class StringReplacementTest extends UnitTestCase
         foreach ($invalids as $invalid => $valid) {
             yield $invalid => [
                 Violation::from(
-                    sprintf(
+                    \sprintf(
                         'Please replace "%s" with "%s"',
                         $invalid,
                         $valid,
@@ -101,9 +101,9 @@ final class StringReplacementTest extends UnitTestCase
             ];
 
             // add leading spaces
-            yield sprintf('"%s" with leading spaces', $invalid) => [
+            yield \sprintf('"%s" with leading spaces', $invalid) => [
                 Violation::from(
-                    sprintf(
+                    \sprintf(
                         'Please replace "%s" with "%s"',
                         $invalid,
                         $valid,
@@ -112,7 +112,7 @@ final class StringReplacementTest extends UnitTestCase
                     1,
                     trim($invalid),
                 ),
-                new RstSample(sprintf(
+                new RstSample(\sprintf(
                     '    %s',
                     $invalid,
                 )),

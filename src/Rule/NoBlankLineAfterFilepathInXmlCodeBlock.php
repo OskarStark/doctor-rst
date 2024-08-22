@@ -62,7 +62,7 @@ class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements Lin
                 $match = trim((string) $matches[0]);
 
                 return Violation::from(
-                    sprintf('Please remove blank line after "%s"', $match),
+                    \sprintf('Please remove blank line after "%s"', $match),
                     $filename,
                     $number + 1,
                     $match,

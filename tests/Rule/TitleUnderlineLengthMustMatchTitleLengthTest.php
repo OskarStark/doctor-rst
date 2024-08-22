@@ -39,7 +39,7 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends UnitTestCase
     {
         yield [
             Violation::from(
-                sprintf('Please ensure title "%s" and underline length are matching', 'Title with too short underline'),
+                \sprintf('Please ensure title "%s" and underline length are matching', 'Title with too short underline'),
                 'filename',
                 1,
                 'Title with too short underline',
@@ -52,7 +52,7 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends UnitTestCase
 
         yield [
             Violation::from(
-                sprintf('Please ensure title "%s" and underline length are matching', 'lowStrengthMessage'),
+                \sprintf('Please ensure title "%s" and underline length are matching', 'lowStrengthMessage'),
                 'filename',
                 1,
                 '``lowStrengthMessage``',
@@ -65,7 +65,7 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends UnitTestCase
 
         yield [
             Violation::from(
-                sprintf('Please ensure title "%s" and underline length are matching', 'Title with too long underline'),
+                \sprintf('Please ensure title "%s" and underline length are matching', 'Title with too long underline'),
                 'filename',
                 1,
                 'Title with too long underline',

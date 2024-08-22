@@ -68,7 +68,7 @@ class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
         $list = [];
 
         foreach ($replacements as $current => $new) {
-            $list[$current] = sprintf('Please do not use type "%s" for code-block, use "%s" instead', $current, $new);
+            $list[$current] = \sprintf('Please do not use type "%s" for code-block, use "%s" instead', $current, $new);
         }
 
         return $list;

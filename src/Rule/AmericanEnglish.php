@@ -42,7 +42,7 @@ class AmericanEnglish extends CheckListRule implements LineContentRule
 
         if (preg_match($this->search, $line->raw()->toString(), $matches)) {
             return Violation::from(
-                sprintf($this->message, $matches[0]),
+                \sprintf($this->message, $matches[0]),
                 $filename,
                 $number + 1,
                 $line,

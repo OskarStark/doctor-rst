@@ -60,7 +60,7 @@ class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineC
             return NullViolation::create();
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'Invalid url in "%s"',
             $line->clean()->toString(),
         );

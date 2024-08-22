@@ -38,9 +38,9 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
     public static function checkProvider(): iterable
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
-            yield sprintf('Has violation for code-block "%s"', $codeBlock) => [
+            yield \sprintf('Has violation for code-block "%s"', $codeBlock) => [
                 Violation::from(
-                    sprintf('Please remove PHP open tag after "%s" directive', $codeBlock),
+                    \sprintf('Please remove PHP open tag after "%s" directive', $codeBlock),
                     'filename',
                     1,
                     $codeBlock,
@@ -52,9 +52,9 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
                 ]),
             ];
 
-            yield sprintf('Has violation for code-block "%s" with comment', $codeBlock) => [
+            yield \sprintf('Has violation for code-block "%s" with comment', $codeBlock) => [
                 Violation::from(
-                    sprintf('Please remove PHP open tag after "%s" directive', $codeBlock),
+                    \sprintf('Please remove PHP open tag after "%s" directive', $codeBlock),
                     'filename',
                     1,
                     $codeBlock,
@@ -67,7 +67,7 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
                 ]),
             ];
 
-            yield sprintf('No violation for code-block "%s"', $codeBlock) => [
+            yield \sprintf('No violation for code-block "%s"', $codeBlock) => [
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
@@ -76,7 +76,7 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
                 ]),
             ];
 
-            yield sprintf('No violation for code-block "%s" with comment', $codeBlock) => [
+            yield \sprintf('No violation for code-block "%s" with comment', $codeBlock) => [
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
@@ -88,7 +88,7 @@ final class NoPhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
         }
 
         $codeBlock = '.. code-block:: html+php';
-        yield sprintf('No violation for code-block "%s"', $codeBlock) => [
+        yield \sprintf('No violation for code-block "%s"', $codeBlock) => [
             NullViolation::create(),
             new RstSample([
                 $codeBlock,

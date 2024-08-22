@@ -41,7 +41,7 @@ final class FilenameUsesUnderscoresOnly extends AbstractRule implements FileInfo
         $filename = u($fileInfo->getFilename());
 
         if ($filename->containsAny('-')) {
-            $message = sprintf(
+            $message = \sprintf(
                 'Please use underscores (_) for the filename: %s',
                 $fileInfo->getFilename(),
             );

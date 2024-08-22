@@ -54,7 +54,7 @@ class BlankLineBeforeDirective extends AbstractRule implements LineContentRule
             && !RstParser::isComment($lines->current())
         ) {
             return Violation::from(
-                sprintf('Please add a blank line before "%s" directive', $line->raw()->toString()),
+                \sprintf('Please add a blank line before "%s" directive', $line->raw()->toString()),
                 $filename,
                 $number + 1,
                 $line,

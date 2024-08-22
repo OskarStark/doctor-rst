@@ -43,7 +43,7 @@ class SpaceBetweenLabelAndLinkInDoc extends AbstractRule implements LineContentR
 
         if ($matches = $line->raw()->match('/:doc:`(?P<label>.*)<(?P<link>.*)>`/')) {
             if (!u($matches['label'])->endsWith(' ')) {
-                $message = sprintf(
+                $message = \sprintf(
                     'Please add a space between "%s" and "<%s>" inside :doc: directive',
                     $matches['label'],
                     $matches['link'],

@@ -77,7 +77,7 @@ class MaxBlankLines extends AbstractRule implements Configurable, LineContentRul
 
         if ($blanklines > $this->max) {
             return Violation::from(
-                sprintf('Please use max %s blank lines, you used %s', $this->max, $blanklines),
+                \sprintf('Please use max %s blank lines, you used %s', $this->max, $blanklines),
                 $filename,
                 $number + 1,
                 $line,

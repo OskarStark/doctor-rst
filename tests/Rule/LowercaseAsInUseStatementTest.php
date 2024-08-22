@@ -67,29 +67,29 @@ final class LowercaseAsInUseStatementTest extends UnitTestCase
                 // WITH blank line after directive
                 yield [
                     Violation::from(
-                        sprintf('Please use lowercase "as" instead of "%s"', $invalid),
+                        \sprintf('Please use lowercase "as" instead of "%s"', $invalid),
                         'filename',
                         3,
-                        sprintf('use Symfony\A %s A;', $invalid),
+                        \sprintf('use Symfony\A %s A;', $invalid),
                     ),
                     new RstSample([
                         $codeBlock,
                         '',
-                        sprintf('    use Symfony\A %s A;', $invalid),
+                        \sprintf('    use Symfony\A %s A;', $invalid),
                     ], 2),
                 ];
 
                 // WITHOUT blank line after directive
                 yield [
                     Violation::from(
-                        sprintf('Please use lowercase "as" instead of "%s"', $invalid),
+                        \sprintf('Please use lowercase "as" instead of "%s"', $invalid),
                         'filename',
                         2,
-                        sprintf('use Symfony\A %s A;', $invalid),
+                        \sprintf('use Symfony\A %s A;', $invalid),
                     ),
                     new RstSample([
                         $codeBlock,
-                        sprintf('    use Symfony\A %s A;', $invalid),
+                        \sprintf('    use Symfony\A %s A;', $invalid),
                     ], 1),
                 ];
             }

@@ -55,7 +55,7 @@ class BlankLineAfterAnchor extends AbstractRule implements LineContentRule
             return NullViolation::create();
         }
 
-        $message = sprintf(
+        $message = \sprintf(
             'Please add a blank line after the anchor "%s"',
             $line->clean()->toString(),
         );

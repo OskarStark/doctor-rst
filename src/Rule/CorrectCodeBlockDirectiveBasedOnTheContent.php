@@ -95,6 +95,6 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
 
     private function getErrorMessage(string $new, string $current): string
     {
-        return sprintf('Please use "%s" instead of "%s"', $new, $current);
+        return \sprintf('Please use "%s" instead of "%s"', $new, $current);
     }
 }

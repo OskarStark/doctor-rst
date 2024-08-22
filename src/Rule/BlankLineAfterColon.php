@@ -58,7 +58,7 @@ class BlankLineAfterColon extends AbstractRule implements LineContentRule
         }
 
         return Violation::from(
-            sprintf('Please add a blank line after "%s"', $line->clean()->toString()),
+            \sprintf('Please add a blank line after "%s"', $line->clean()->toString()),
             $filename,
             $number + 1,
             $line,

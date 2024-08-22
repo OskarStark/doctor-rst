@@ -43,7 +43,7 @@ class LowercaseAsInUseStatements extends AbstractRule implements LineContentRule
 
         if ($matches = $line->clean()->match('/^use (.*) (AS|As|aS) (.*);$/')) {
             return Violation::from(
-                sprintf('Please use lowercase "as" instead of "%s"', $matches[2]),
+                \sprintf('Please use lowercase "as" instead of "%s"', $matches[2]),
                 $filename,
                 $number + 1,
                 $line,

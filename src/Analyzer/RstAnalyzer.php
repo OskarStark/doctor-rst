@@ -34,13 +34,13 @@ final class RstAnalyzer implements Analyzer
         $realpath = $file->getRealPath();
 
         if (false === $realpath) {
-            throw new \RuntimeException(sprintf('Cannot get real path for file: %s', (string) $file->getPathname()));
+            throw new \RuntimeException(\sprintf('Cannot get real path for file: %s', (string) $file->getPathname()));
         }
 
         $content = file($realpath);
 
         if (false === $content) {
-            throw new \RuntimeException(sprintf('Cannot parse file: %s', (string) $realpath));
+            throw new \RuntimeException(\sprintf('Cannot parse file: %s', (string) $realpath));
         }
 
         $violations = [];

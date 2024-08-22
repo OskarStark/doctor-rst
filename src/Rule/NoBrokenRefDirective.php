@@ -13,21 +13,23 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-use App\Rst\RstParser;
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineContentRule
+#[Description('Ensure only valid :ref: directives.')]
+#[InvalidExample('See this ref:`Foo`')]
+#[ValidExample('See this :ref:`Foo`')]
+final class NoBrokenRefDirective extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {
-        return [
-            RuleGroup::Sonata(),
-            RuleGroup::Symfony(),
-        ];
+        return [RuleGroup::Symfony()];
     }
 
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
@@ -35,24 +37,9 @@ class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineCo
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::isPhpDirective($line)) {
-            return NullViolation::create();
-        }
-
-        $lines->next();
-        $lines->next();
-
-        // check if next line is "<?php"
-        $nextLine = $lines->current();
-
-        if ($nextLine->clean()->startsWith('//')) {
-            $lines->next();
-            $nextLine = $lines->current();
-        }
-
-        if ('<?php' === $nextLine->clean()->toString()) {
+        if ($line->clean()->match('/ref/') && !$line->clean()->match('/:ref:/')) {
             return Violation::from(
-                \sprintf('Please remove PHP open tag after "%s" directive', $line->raw()->toString()),
+                'Please use correct syntax for :ref: directive',
                 $filename,
                 $number + 1,
                 $line,

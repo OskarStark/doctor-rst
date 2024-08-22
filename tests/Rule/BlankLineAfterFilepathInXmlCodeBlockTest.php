@@ -49,15 +49,15 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends UnitTestCase
         foreach ($paths as $path) {
             yield [
                 Violation::from(
-                    sprintf('Please add a blank line after "<!-- %s -->"', $path),
+                    \sprintf('Please add a blank line after "<!-- %s -->"', $path),
                     'filename',
                     3,
-                    sprintf('<!-- %s -->', $path),
+                    \sprintf('<!-- %s -->', $path),
                 ),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    sprintf('<!-- %s -->', $path),
+                    \sprintf('<!-- %s -->', $path),
                     '    <foo\/>',
                 ]),
             ];
@@ -67,7 +67,7 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends UnitTestCase
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    sprintf('    <!-- %s -->', $path),
+                    \sprintf('    <!-- %s -->', $path),
                     '',
                     '    <foo\/>',
                 ]),
@@ -75,15 +75,15 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends UnitTestCase
 
             yield [
                 Violation::from(
-                    sprintf('Please add a blank line after "<!--%s-->"', $path),
+                    \sprintf('Please add a blank line after "<!--%s-->"', $path),
                     'filename',
                     3,
-                    sprintf('<!--%s-->', $path),
+                    \sprintf('<!--%s-->', $path),
                 ),
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    sprintf('    <!--%s-->', $path),
+                    \sprintf('    <!--%s-->', $path),
                     '    <foo\/>',
                 ]),
             ];
@@ -93,7 +93,7 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends UnitTestCase
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    sprintf('    <!--%s-->', $path),
+                    \sprintf('    <!--%s-->', $path),
                     '',
                     '    <foo\/>',
                 ]),
@@ -104,7 +104,7 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends UnitTestCase
                 new RstSample([
                     '.. code-block:: xml',
                     '',
-                    sprintf('    <!--%s-->', $path),
+                    \sprintf('    <!--%s-->', $path),
                     '    <!-- a comment -->',
                     '    <foo\/>',
                 ]),

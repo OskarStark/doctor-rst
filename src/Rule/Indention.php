@@ -137,7 +137,7 @@ class Indention extends AbstractRule implements Configurable, LineContentRule
         }
 
         if (0 < $indention && 0 < (($indention - $minus) % $this->size)) {
-            $message = $customMessage ?? sprintf('Please add %s spaces for every indention.', $this->size);
+            $message = $customMessage ?? \sprintf('Please add %s spaces for every indention.', $this->size);
 
             return Violation::from(
                 $message,
