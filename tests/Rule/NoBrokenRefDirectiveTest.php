@@ -43,15 +43,6 @@ final class NoBrokenRefDirectiveTest extends UnitTestCase
                     'Please use correct syntax for :ref: directive',
                     'filename',
                     1,
-                    'ref `Redis section <messenger-redis-transport>` below',
-                ),
-                new RstSample('ref `Redis section <messenger-redis-transport>` below'),
-            ],
-            [
-                Violation::from(
-                    'Please use correct syntax for :ref: directive',
-                    'filename',
-                    1,
                     'ref:`Redis section <messenger-redis-transport>` below',
                 ),
                 new RstSample('ref:`Redis section <messenger-redis-transport>` below'),
