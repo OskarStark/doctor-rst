@@ -59,7 +59,7 @@ class YamlInsteadOfYmlSuffix extends AbstractRule implements LineContentRule
 
         if ($matches = $line->raw()->match('/\.yml/i')) {
             return Violation::from(
-                sprintf('Please use ".yaml" instead of "%s"', $matches[0]),
+                \sprintf('Please use ".yaml" instead of "%s"', $matches[0]),
                 $filename,
                 $number + 1,
                 $line,

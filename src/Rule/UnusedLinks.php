@@ -74,7 +74,7 @@ class UnusedLinks extends AbstractRule implements FileContentRule, ResetInterfac
         }
 
         if (!empty($this->linkDefinitions)) {
-            $message = sprintf(
+            $message = \sprintf(
                 'The following link definitions aren\'t used anymore and should be removed: "%s"',
                 implode('", "', array_unique(array_keys($this->linkDefinitions))),
             );

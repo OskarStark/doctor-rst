@@ -54,7 +54,7 @@ class BlankLineAfterDirective extends AbstractRule implements LineContentRule
         }
 
         if (!$lines->valid() || !$lines->current()->isBlank()) {
-            $message = sprintf('Please add a blank line after "%s" directive', $line->raw()->toString());
+            $message = \sprintf('Please add a blank line after "%s" directive', $line->raw()->toString());
 
             return Violation::from(
                 $message,

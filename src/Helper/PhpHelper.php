@@ -27,7 +27,7 @@ final class PhpHelper
 
     public static function isUsingTwoBackslashes(string $string): bool
     {
-        return (bool) preg_match(sprintf('/%s/', self::REGEX_NAMESPACE_WITH_TWO_BACKSLASHES), $string);
+        return (bool) preg_match(\sprintf('/%s/', self::REGEX_NAMESPACE_WITH_TWO_BACKSLASHES), $string);
     }
 
     public static function containsBackslash(string $string): bool

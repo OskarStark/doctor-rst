@@ -48,7 +48,7 @@ class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implemen
             && $line->clean()->containsAny('/')
             && $this->inPhpCodeBlock($lines, $number)
         ) {
-            $message = sprintf(
+            $message = \sprintf(
                 'Please check "%s", it should not contain "/"',
                 $line->clean()->toString(),
             );

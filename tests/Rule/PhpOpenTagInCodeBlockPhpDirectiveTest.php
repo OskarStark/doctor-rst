@@ -38,9 +38,9 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
     public static function checkProvider(): iterable
     {
         foreach (self::phpCodeBlocks() as $codeBlock) {
-            yield sprintf('Has violation for code-block "%s"', $codeBlock) => [
+            yield \sprintf('Has violation for code-block "%s"', $codeBlock) => [
                 Violation::from(
-                    sprintf('Please add PHP open tag after "%s" directive', $codeBlock),
+                    \sprintf('Please add PHP open tag after "%s" directive', $codeBlock),
                     'filename',
                     1,
                     $codeBlock,
@@ -52,7 +52,7 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
                 ]),
             ];
 
-            yield sprintf('No violation for code-block "%s"', $codeBlock) => [
+            yield \sprintf('No violation for code-block "%s"', $codeBlock) => [
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
@@ -63,7 +63,7 @@ final class PhpOpenTagInCodeBlockPhpDirectiveTest extends UnitTestCase
         }
 
         $codeBlock = '.. code-block:: html+php';
-        yield sprintf('No violation for code-block "%s"', $codeBlock) => [
+        yield \sprintf('No violation for code-block "%s"', $codeBlock) => [
             NullViolation::create(),
             new RstSample([
                 $codeBlock,

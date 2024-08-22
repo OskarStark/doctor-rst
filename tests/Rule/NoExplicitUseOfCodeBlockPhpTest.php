@@ -608,12 +608,12 @@ RST
         ];
 
         foreach (NoExplicitUseOfCodeBlockPhp::ALLOWED_PREVIOUS_DIRECTIVES as $previousDirective) {
-            yield sprintf(
+            yield \sprintf(
                 'php code block following %s',
                 $previousDirective,
             ) => [
                 NullViolation::create(),
-                new RstSample(sprintf(<<<'RST'
+                new RstSample(\sprintf(<<<'RST'
 %s
 
     Here is text.

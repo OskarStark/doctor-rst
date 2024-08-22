@@ -17,7 +17,7 @@ final class FormatterNotFound extends \InvalidArgumentException
 {
     public static function byName(string $name): self
     {
-        return new self(sprintf(
+        return new self(\sprintf(
             'Formatter "%s" not found',
             $name,
         ));

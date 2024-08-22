@@ -57,11 +57,11 @@ class DeprecatedDirectiveMinVersion extends AbstractRule implements Configurable
             return NullViolation::create();
         }
 
-        if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
+        if ($matches = $line->clean()->match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim((string) $matches[1]);
 
             if (-1 === version_compare($version, $this->minVersion)) {
-                $message = sprintf(
+                $message = \sprintf(
                     'Please only provide "%s" if the version is greater/equal "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
                     $this->minVersion,

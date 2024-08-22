@@ -109,6 +109,6 @@ final class Lines implements \SeekableIterator
 
     private function createOutOfBoundException(int $line): \OutOfBoundsException
     {
-        return new \OutOfBoundsException(sprintf('Line "%d" does not exists.', $line));
+        return new \OutOfBoundsException(\sprintf('Line "%d" does not exists.', $line));
     }
 }

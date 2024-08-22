@@ -68,20 +68,20 @@ class AnalyzeCommand extends Command
         \assert(\is_string($dir));
 
         if (!$analyzeDir = realpath($dir)) {
-            $io->error(sprintf('Could not find directory: %s', $dir));
+            $io->error(\sprintf('Could not find directory: %s', $dir));
 
             return (int) Command::FAILURE;
         }
 
-        $io->text(sprintf('Analyze *.rst(.inc) files in: <info>%s</info>', $analyzeDir));
+        $io->text(\sprintf('Analyze *.rst(.inc) files in: <info>%s</info>', $analyzeDir));
 
         if (!is_file($configFile = $analyzeDir.'/.doctor-rst.yaml')) {
-            $io->error(sprintf('Could not find config file: %s', $configFile));
+            $io->error(\sprintf('Could not find config file: %s', $configFile));
 
             return (int) Command::FAILURE;
         }
 
-        $io->text(sprintf('Used config file:             <info>%s</info>', $configFile));
+        $io->text(\sprintf('Used config file:             <info>%s</info>', $configFile));
         $io->newLine();
 
         $config = Yaml::parseFile($configFile);

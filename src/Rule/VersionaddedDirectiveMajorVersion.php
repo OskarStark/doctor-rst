@@ -63,7 +63,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Configur
             return NullViolation::create();
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $line->clean()->toString(), $matches)) {
+        if (preg_match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $line->clean()->toString(), $matches)) {
             $version = trim($matches[1]);
 
             try {
@@ -74,7 +74,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Configur
                 $major = (int) $major;
 
                 if ($this->majorVersion !== $major) {
-                    $message = sprintf(
+                    $message = \sprintf(
                         'You are not allowed to use version "%s". Only major version "%s" is allowed.',
                         $version,
                         $this->majorVersion,
@@ -88,7 +88,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Configur
                     );
                 }
             } catch (\UnexpectedValueException) {
-                $message = sprintf(
+                $message = \sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_VERSIONADDED,
                     $version,

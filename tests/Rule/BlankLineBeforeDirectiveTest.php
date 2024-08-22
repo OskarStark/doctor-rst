@@ -87,7 +87,7 @@ RST
                 continue;
             }
 
-            yield sprintf('valid %s', $directive) => [
+            yield \sprintf('valid %s', $directive) => [
                 NullViolation::create(),
                 new RstSample([
                     '',
@@ -95,9 +95,9 @@ RST
                 ], 1),
             ];
 
-            yield sprintf('invalid %s', $directive) => [
+            yield \sprintf('invalid %s', $directive) => [
                 Violation::from(
-                    sprintf('Please add a blank line before "%s" directive', $directive),
+                    \sprintf('Please add a blank line before "%s" directive', $directive),
                     'filename',
                     2,
                     $directive,

@@ -64,7 +64,7 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
 
         foreach ($this->forbiddenDirectives as $forbiddenDirective) {
             if (RstParser::directiveIs($line, $forbiddenDirective)) {
-                $message = sprintf('Please don\'t use directive "%s" anymore', $line->raw()->toString());
+                $message = \sprintf('Please don\'t use directive "%s" anymore', $line->raw()->toString());
 
                 return Violation::from(
                     $message,

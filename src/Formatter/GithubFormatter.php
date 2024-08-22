@@ -29,7 +29,7 @@ class GithubFormatter implements Formatter
 
         foreach ($analyzerResult->all() as $fileResult) {
             foreach ($fileResult->violationList()->violations() as $violation) {
-                $style->writeln(sprintf(
+                $style->writeln(\sprintf(
                     '::error file=%s,line=%d::%s',
                     $fileResult->filename(),
                     $violation->lineno(),

@@ -42,7 +42,7 @@ class ExtensionXlfInsteadOfXliff extends AbstractRule implements LineContentRule
 
         if ($matches = $line->raw()->match('/\.xliff/i')) {
             return Violation::from(
-                sprintf('Please use ".xlf" extension instead of "%s"', $matches[0]),
+                \sprintf('Please use ".xlf" extension instead of "%s"', $matches[0]),
                 $filename,
                 $number + 1,
                 $line,

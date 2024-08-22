@@ -43,7 +43,7 @@ class SpaceBetweenLabelAndLinkInRef extends AbstractRule implements LineContentR
 
         if ($matches = $line->raw()->match('/:ref:`(?P<label>.*)<(?P<link>.*)>`/')) {
             if (!u($matches['label'])->endsWith(' ')) {
-                $message = sprintf(
+                $message = \sprintf(
                     'Please add a space between "%s" and "<%s>" inside :ref: directive',
                     $matches['label'],
                     $matches['link'],

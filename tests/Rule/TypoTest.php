@@ -101,7 +101,7 @@ final class TypoTest extends UnitTestCase
             yield $valid => [NullViolation::create(), new RstSample($valid)];
 
             // add leading spaces
-            yield sprintf('"%s" with leading spaces', $valid) => [NullViolation::create(), new RstSample(sprintf('    %s', $valid))];
+            yield \sprintf('"%s" with leading spaces', $valid) => [NullViolation::create(), new RstSample(\sprintf('    %s', $valid))];
         }
     }
 
@@ -149,7 +149,7 @@ final class TypoTest extends UnitTestCase
         foreach ($invalids as $invalid) {
             yield $invalid => [
                 Violation::from(
-                    sprintf('Typo in word "%s"', $invalid),
+                    \sprintf('Typo in word "%s"', $invalid),
                     'filename',
                     1,
                     $invalid,
@@ -158,14 +158,14 @@ final class TypoTest extends UnitTestCase
             ];
 
             // add leading spaces
-            yield sprintf('"%s" with leading spaces', $invalid) => [
+            yield \sprintf('"%s" with leading spaces', $invalid) => [
                 Violation::from(
-                    sprintf('Typo in word "%s"', $invalid),
+                    \sprintf('Typo in word "%s"', $invalid),
                     'filename',
                     1,
                     trim($invalid),
                 ),
-                new RstSample(sprintf('    %s', $invalid)),
+                new RstSample(\sprintf('    %s', $invalid)),
             ];
         }
     }

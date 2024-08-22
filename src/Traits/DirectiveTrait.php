@@ -39,7 +39,7 @@ trait DirectiveTrait
             return $lines->key();
         }
 
-        throw new \RuntimeException(sprintf('Directive "%s" not found', $directive));
+        throw new \RuntimeException(\sprintf('Directive "%s" not found', $directive));
     }
 
     private function getDirectiveContent(string $directive, Lines $lines, int $number): DirectiveContent

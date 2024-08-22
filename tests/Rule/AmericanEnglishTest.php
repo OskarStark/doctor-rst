@@ -94,7 +94,7 @@ final class AmericanEnglishTest extends UnitTestCase
         foreach ($invalids as $invalid) {
             yield $invalid => [
                 Violation::from(
-                    sprintf('Please use American English for: %s', $invalid),
+                    \sprintf('Please use American English for: %s', $invalid),
                     'filename',
                     1,
                     $invalid,
@@ -105,7 +105,7 @@ final class AmericanEnglishTest extends UnitTestCase
             $invalidUppercase = ucfirst($invalid);
             yield $invalidUppercase => [
                 Violation::from(
-                    sprintf('Please use American English for: %s', $invalidUppercase),
+                    \sprintf('Please use American English for: %s', $invalidUppercase),
                     'filename',
                     1,
                     $invalidUppercase,

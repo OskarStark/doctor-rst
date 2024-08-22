@@ -70,7 +70,7 @@ class AvoidRepetetiveWords extends AbstractRule implements LineContentRule
             }
 
             if (isset($words[$key + 1]) && !empty($words[$key + 1]) && 1 < \strlen($word) && $words[$key + 1] === $word && (!is_numeric(rtrim($word, ',')))) {
-                $message = sprintf('The word "%s" is used more times in a row.', $word);
+                $message = \sprintf('The word "%s" is used more times in a row.', $word);
 
                 return Violation::from(
                     $message,

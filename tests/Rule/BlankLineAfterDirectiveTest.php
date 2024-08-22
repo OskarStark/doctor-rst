@@ -62,7 +62,7 @@ final class BlankLineAfterDirectiveTest extends UnitTestCase
             ];
 
             $violation = Violation::from(
-                sprintf('Please add a blank line after "%s" directive', $directive),
+                \sprintf('Please add a blank line after "%s" directive', $directive),
                 'filename',
                 1,
                 $directive,

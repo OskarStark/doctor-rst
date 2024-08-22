@@ -52,12 +52,12 @@ class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Lin
             return NullViolation::create();
         }
 
-        if (preg_match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $line->clean()->toString(), $matches)) {
+        if (preg_match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $line->clean()->toString(), $matches)) {
             $version = trim($matches[1]);
 
             if (empty($version)) {
                 return Violation::from(
-                    sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_VERSIONADDED),
+                    \sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_VERSIONADDED),
                     $filename,
                     $number + 1,
                     $line,
@@ -67,7 +67,7 @@ class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements Lin
             try {
                 $this->versionParser->normalize($version);
             } catch (\UnexpectedValueException) {
-                $message = sprintf(
+                $message = \sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_VERSIONADDED,
                     $version,

@@ -32,7 +32,7 @@ final class AvoidRepetetiveWordsTestLineContent extends AbstractLineContentRuleT
         ];
 
         foreach ($whitelist as $word) {
-            yield sprintf('valid whitelist: %s', $word) => [NullViolation::create(), new RstSample(sprintf('%s %s %s', $word, $word, $word))];
+            yield \sprintf('valid whitelist: %s', $word) => [NullViolation::create(), new RstSample(\sprintf('%s %s %s', $word, $word, $word))];
         }
 
         $valid = '';

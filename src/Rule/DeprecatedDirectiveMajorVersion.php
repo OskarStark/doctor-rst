@@ -63,7 +63,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements Configurab
             return NullViolation::create();
         }
 
-        if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
+        if ($matches = $line->clean()->match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim((string) $matches[1]);
 
             try {
@@ -74,7 +74,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements Configurab
                 $major = (int) $major;
 
                 if ($this->majorVersion !== $major) {
-                    $message = sprintf(
+                    $message = \sprintf(
                         'You are not allowed to use version "%s". Only major version "%s" is allowed.',
                         $version,
                         $this->majorVersion,
@@ -88,7 +88,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements Configurab
                     );
                 }
             } catch (\UnexpectedValueException) {
-                $message = sprintf(
+                $message = \sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
                     $version,

@@ -41,7 +41,7 @@ class NoContraction extends CheckListRule implements LineContentRule
 
         if ($matches = $line->raw()->match($this->search)) {
             return Violation::from(
-                sprintf($this->message, $matches['contraction']),
+                \sprintf($this->message, $matches['contraction']),
                 $filename,
                 $number + 1,
                 $line,
@@ -65,13 +65,13 @@ class NoContraction extends CheckListRule implements LineContentRule
         $baseRegex = '/(^|[^[:alnum:]])(?<contraction>%s)/i';
 
         return [
-            sprintf($baseRegex, "i\\'m") => null,
-            sprintf($baseRegex, "(you|we|they)\\'re") => null,
-            sprintf($baseRegex, "(he|she|it)\\'s") => null,
-            sprintf($baseRegex, "(you|we|they)\\'ve") => null,
-            sprintf($baseRegex, "(i|you|he|she|it|we|they)\\'ll") => null,
-            sprintf($baseRegex, "(i|you|he|she|it|we|they)\\'d") => null,
-            sprintf($baseRegex, "(aren|can|couldn|didn|hasn|haven|isn|mustn|shan|shouldn|wasn|weren|won|wouldn)\\'t") => null,
+            \sprintf($baseRegex, "i\\'m") => null,
+            \sprintf($baseRegex, "(you|we|they)\\'re") => null,
+            \sprintf($baseRegex, "(he|she|it)\\'s") => null,
+            \sprintf($baseRegex, "(you|we|they)\\'ve") => null,
+            \sprintf($baseRegex, "(i|you|he|she|it|we|they)\\'ll") => null,
+            \sprintf($baseRegex, "(i|you|he|she|it|we|they)\\'d") => null,
+            \sprintf($baseRegex, "(aren|can|couldn|didn|hasn|haven|isn|mustn|shan|shouldn|wasn|weren|won|wouldn)\\'t") => null,
         ];
     }
 }

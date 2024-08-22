@@ -74,7 +74,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends UnitTestCase
         foreach ($invalidCases as $invalidCase) {
             yield $invalidCase => [
                 Violation::from(
-                    sprintf(
+                    \sprintf(
                         'Invalid url in "%s"',
                         $invalidCase,
                     ),

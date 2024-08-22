@@ -61,7 +61,7 @@ class RulesCommand extends Command
         }
 
         foreach ($rules as $rule) {
-            $this->io->writeln(sprintf(
+            $this->io->writeln(\sprintf(
                 '* [%s](#%s)%s',
                 $rule::getName()->toString(),
                 $rule::getName()->toString(),
@@ -87,11 +87,11 @@ class RulesCommand extends Command
             $description = $descriptions[0]->newInstance();
         }
 
-        $this->io->writeln(sprintf('## `%s`', $rule::getName()->toString()));
+        $this->io->writeln(\sprintf('## `%s`', $rule::getName()->toString()));
         $this->io->newLine();
 
         if (null !== $description) {
-            $this->io->writeln(sprintf(
+            $this->io->writeln(\sprintf(
                 '  > _%s_',
                 $description->value,
             ));
@@ -101,7 +101,7 @@ class RulesCommand extends Command
         if ([] !== $rule::getGroups()) {
             $groupNames = array_map(static fn (RuleGroup $group): string => $group->name(), $rule::getGroups());
 
-            $this->io->writeln(sprintf('#### Groups [`%s`]', implode('`, `', $groupNames)));
+            $this->io->writeln(\sprintf('#### Groups [`%s`]', implode('`, `', $groupNames)));
             $this->io->newLine();
         }
 
@@ -155,14 +155,14 @@ class RulesCommand extends Command
                                 $defaultValue = '[]';
                             }
 
-                            $default = sprintf('`%s`', $defaultValue);
+                            $default = \sprintf('`%s`', $defaultValue);
                         }
 
-                        $this->io->writeln(sprintf(
+                        $this->io->writeln(\sprintf(
                             '%s | %s | %s | %s',
-                            sprintf('`%s`', $option['name']),
-                            sprintf('`%s`', $option['required'] ? 'true' : 'false'),
-                            sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
+                            \sprintf('`%s`', $option['name']),
+                            \sprintf('`%s`', $option['required'] ? 'true' : 'false'),
+                            \sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
                             $default,
                         ));
                     }
@@ -171,11 +171,11 @@ class RulesCommand extends Command
                     $this->io->writeln('--- | ---');
 
                     foreach ($options as $option) {
-                        $this->io->writeln(sprintf(
+                        $this->io->writeln(\sprintf(
                             '%s | %s | %s',
-                            sprintf('`%s`', $option['name']),
-                            sprintf('`%s`', $option['required'] ? 'true' : 'false'),
-                            sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
+                            \sprintf('`%s`', $option['name']),
+                            \sprintf('`%s`', $option['required'] ? 'true' : 'false'),
+                            \sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
                         ));
                     }
                 }
@@ -191,7 +191,7 @@ class RulesCommand extends Command
             $this->io->writeln('--- | ---');
 
             foreach ($rule::getList() as $pattern => $message) {
-                $this->io->writeln(sprintf('`%s` | %s', str_replace('|', '\|', (string) $pattern), $message ?: $rule->getDefaultMessage()));
+                $this->io->writeln(\sprintf('`%s` | %s', str_replace('|', '\|', (string) $pattern), $message ?: $rule->getDefaultMessage()));
             }
 
             $this->io->newLine();

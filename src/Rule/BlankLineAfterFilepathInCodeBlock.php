@@ -81,7 +81,7 @@ class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCont
         $match = trim((string) $matches[0]);
 
         return Violation::from(
-            sprintf('Please add a blank line after "%s"', $match),
+            \sprintf('Please add a blank line after "%s"', $match),
             $filename,
             $number + 1,
             $match,

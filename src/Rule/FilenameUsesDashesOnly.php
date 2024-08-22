@@ -49,7 +49,7 @@ final class FilenameUsesDashesOnly extends AbstractRule implements FileInfoRule
         }
 
         if ($filename->containsAny('_')) {
-            $message = sprintf(
+            $message = \sprintf(
                 'Please use dashes (-) for the filename: %s',
                 $fileInfo->getFilename(),
             );

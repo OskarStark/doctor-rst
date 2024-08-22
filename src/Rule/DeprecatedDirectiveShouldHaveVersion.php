@@ -52,12 +52,12 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineC
             return NullViolation::create();
         }
 
-        if ($matches = $line->clean()->match(sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
+        if ($matches = $line->clean()->match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             $version = trim((string) $matches[1]);
 
             if (empty($version)) {
                 return Violation::from(
-                    sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_DEPRECATED),
+                    \sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_DEPRECATED),
                     $filename,
                     $number + 1,
                     $line,
@@ -67,7 +67,7 @@ class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineC
             try {
                 $this->versionParser->normalize($version);
             } catch (\UnexpectedValueException) {
-                $message = sprintf(
+                $message = \sprintf(
                     'Please provide a numeric version behind "%s" instead of "%s"',
                     RstParser::DIRECTIVE_DEPRECATED,
                     $version,

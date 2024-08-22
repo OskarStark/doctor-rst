@@ -109,7 +109,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         if ($onlyPhpSymfonyAndPhpStandalone
             && !$this->equal($codeBlocks, $validOrderOnlyPhpSymfonyAndPhpStandalone)
         ) {
-            $message = sprintf(
+            $message = \sprintf(
                 'Please use the following order for your code blocks: "%s"',
                 str_replace('.. code-block:: ', '', implode(', ', $validOrderOnlyPhpSymfonyAndPhpStandalone)),
             );
@@ -124,7 +124,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
 
         // no xliff
         if (!$xliff && !$this->equal($codeBlocks, $validOrder) && 1 !== \count($validOrder)) {
-            $message = sprintf(
+            $message = \sprintf(
                 'Please use the following order for your code blocks: "%s"',
                 str_replace('.. code-block:: ', '', implode(', ', $validOrder)),
             );
@@ -145,7 +145,7 @@ class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implement
         }
 
         if ($xliff && !$this->equal($codeBlocks, $validXliffOrder) && !$this->equal($codeBlocks, $validOrder)) {
-            $message = sprintf(
+            $message = \sprintf(
                 'Please use the following order for your code blocks: "%s"',
                 str_replace('.. code-block:: ', '', implode(', ', $validXliffOrder)),
             );

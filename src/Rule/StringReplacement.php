@@ -35,7 +35,7 @@ class StringReplacement extends CheckListRule implements LineContentRule
 
         if ($line->clean()->containsAny($this->search)) {
             return Violation::from(
-                sprintf($this->message, $this->search),
+                \sprintf($this->message, $this->search),
                 $filename,
                 $number + 1,
                 $line,

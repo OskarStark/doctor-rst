@@ -68,7 +68,7 @@ final class LinesTest extends UnitTestCase
             self::assertSame('Line "54" does not exists.', $exception->getMessage());
         }
 
-        self::assertNotNull($exception, sprintf('Expected "%s" exception to be thrown.', \OutOfBoundsException::class));
+        self::assertNotNull($exception, \sprintf('Expected "%s" exception to be thrown.', \OutOfBoundsException::class));
         self::assertSame(1, $lines->key());
     }
 }

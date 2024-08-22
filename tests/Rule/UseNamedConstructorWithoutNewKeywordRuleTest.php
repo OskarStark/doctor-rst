@@ -46,7 +46,7 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
         ];
 
         foreach (self::phpCodeBlocks() as $codeBlock) {
-            yield sprintf('Has violation for code-block "%s"', $codeBlock) => [
+            yield \sprintf('Has violation for code-block "%s"', $codeBlock) => [
                 Violation::from(
                     'Please do not use "new" keyword with named constructor',
                     'filename',
@@ -60,7 +60,7 @@ final class UseNamedConstructorWithoutNewKeywordRuleTest extends UnitTestCase
             ];
 
             foreach ($validLines as $line) {
-                yield sprintf('NO violation for line "%s" in code-block "%s"', $line, $codeBlock) => [
+                yield \sprintf('NO violation for line "%s" in code-block "%s"', $line, $codeBlock) => [
                     NullViolation::create(),
                     new RstSample([
                         $codeBlock,
