@@ -13,12 +13,18 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+#[Description('Ensure only valid :ref: directives.')]
+#[InvalidExample('See this ref:`Foo`')]
+#[ValidExample('See this :ref:`Foo`')]
 final class NoBrokenRefDirective extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array

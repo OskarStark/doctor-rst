@@ -696,7 +696,21 @@ $ bin/console list
 
 ## `no_broken_ref_directive`
 
+  > _Ensure only valid :ref: directives._
+
 #### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+See this :ref:`Foo`
+```
+
+##### Invalid Examples :-1:
+
+```rst
+See this ref:`Foo`
+```
 
 ## `no_composer_phar`
 
