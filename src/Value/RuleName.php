@@ -16,9 +16,9 @@ namespace App\Value;
 use Webmozart\Assert\Assert;
 use function Symfony\Component\String\u;
 
-final class RuleName
+final readonly class RuleName
 {
-    private readonly string $name;
+    private string $name;
 
     private function __construct(string $value)
     {

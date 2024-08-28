@@ -15,9 +15,9 @@ namespace App\Rst\Value;
 
 use Webmozart\Assert\Assert;
 
-final class LinkUrl
+final readonly class LinkUrl
 {
-    private readonly string $value;
+    private string $value;
 
     private function __construct(string $value)
     {
