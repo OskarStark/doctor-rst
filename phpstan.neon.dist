@@ -2,9 +2,12 @@ includes:
     - phpstan-baseline.neon
 
 parameters:
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue
+        -
+            identifier: missingType.generics
     paths:
         - src
         - tests
     level: max
-    checkGenericClassInNonGenericObjectType: false
-    checkMissingIterableValueType: false
