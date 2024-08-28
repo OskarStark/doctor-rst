@@ -13,23 +13,23 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-final class ExcludedViolationList
+final readonly class ExcludedViolationList
 {
     /**
      * @var Violation[]
      */
-    private readonly array $violations;
-    private readonly bool $hasViolations;
+    private array $violations;
+    private bool $hasViolations;
 
     /**
      * @var array<string, int>
      */
-    private readonly array $matchedWhitelistRegex;
+    private array $matchedWhitelistRegex;
 
     /**
      * @var array<string, int>
      */
-    private readonly array $matchedWhitelistLines;
+    private array $matchedWhitelistLines;
 
     public function __construct(array $excludedViolationConfig, array $violations)
     {

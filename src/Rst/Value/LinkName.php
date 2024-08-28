@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rst\Value;
 
-final class LinkName
+final readonly class LinkName
 {
-    private readonly string $value;
+    private string $value;
 
     private function __construct(string $value)
     {

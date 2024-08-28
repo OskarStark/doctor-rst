@@ -15,7 +15,7 @@ namespace App\Value;
 
 use Webmozart\Assert\Assert;
 
-final class RuleGroup
+final readonly class RuleGroup
 {
     private const GROUP_EXPERIMENTAL = '@Experimental';
     private const GROUP_SONATA = '@Sonata';
@@ -25,7 +25,7 @@ final class RuleGroup
         self::GROUP_SONATA,
         self::GROUP_SYMFONY,
     ];
-    private readonly string $name;
+    private string $name;
 
     private function __construct(string $name)
     {

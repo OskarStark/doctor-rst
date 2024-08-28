@@ -15,16 +15,16 @@ namespace App\Tests;
 
 use App\Value\Lines;
 
-final class RstSample
+final readonly class RstSample
 {
-    public readonly Lines $lines;
+    public Lines $lines;
 
     /**
      * @param array<string>|string $content
      */
     public function __construct(
         array|string $content,
-        public readonly int $lineNumber = 0,
+        public int $lineNumber = 0,
     ) {
         if (!\is_array($content)) {
             $content = explode(\PHP_EOL, $content);
