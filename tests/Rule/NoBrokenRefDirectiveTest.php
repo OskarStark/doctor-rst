@@ -43,22 +43,22 @@ final class NoBrokenRefDirectiveTest extends UnitTestCase
                     'Please use correct syntax for :ref: directive',
                     'filename',
                     1,
-                    'ref:`Redis section <messenger-redis-transport>` below',
+                    'see ref:`Redis section <messenger-redis-transport>` below',
                 ),
-                new RstSample('ref:`Redis section <messenger-redis-transport>` below'),
+                new RstSample('see ref:`Redis section <messenger-redis-transport>` below'),
             ],
             [
                 Violation::from(
                     'Please use correct syntax for :ref: directive',
                     'filename',
                     1,
-                    ':ref `Redis section <messenger-redis-transport>` below',
+                    'see :ref `Redis section <messenger-redis-transport>` below',
                 ),
-                new RstSample(':ref `Redis section <messenger-redis-transport>` below'),
+                new RstSample('see :ref `Redis section <messenger-redis-transport>` below'),
             ],
             [
                 NullViolation::create(),
-                new RstSample(':ref:`Redis section <messenger-redis-transport>` below'),
+                new RstSample('see :ref:`Redis section <messenger-redis-transport>` below'),
             ],
             [
                 NullViolation::create(),
@@ -67,6 +67,10 @@ final class NoBrokenRefDirectiveTest extends UnitTestCase
             [
                 NullViolation::create(),
                 new RstSample('Then use the :method:`Symfony\\Component\\Lock\\LockInterface::refresh` method'),
+            ],
+            [
+                NullViolation::create(),
+                new RstSample('new Link(href: style.css'),
             ],
         ];
     }
