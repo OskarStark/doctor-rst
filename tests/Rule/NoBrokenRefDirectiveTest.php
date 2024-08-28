@@ -64,6 +64,10 @@ final class NoBrokenRefDirectiveTest extends UnitTestCase
                 NullViolation::create(),
                 new RstSample('If you prefer to use'),
             ],
+            [
+                NullViolation::create(),
+                new RstSample('Then use the :method:`Symfony\\Component\\Lock\\LockInterface::refresh` method'),
+            ],
         ];
     }
 }

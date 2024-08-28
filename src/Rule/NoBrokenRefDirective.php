@@ -37,7 +37,7 @@ final class NoBrokenRefDirective extends AbstractRule implements LineContentRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if ($line->clean()->match('/(:ref|ref:)/') && !$line->clean()->match('/:ref:/')) {
+        if ($line->clean()->match('/(:ref\s|ref:)/') && !$line->clean()->match('/:ref:/')) {
             return Violation::from(
                 'Please use correct syntax for :ref: directive',
                 $filename,
