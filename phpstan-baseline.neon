@@ -96,11 +96,6 @@ parameters:
 			path: src/Command/RulesCommand.php
 
 		-
-			message: "#^Right side of \\|\\| is always false\\.$#"
-			count: 1
-			path: src/Rule/PhpPrefixBeforeBinConsole.php
-
-		-
 			message: "#^Cannot access offset 'payload' on mixed\\.$#"
 			count: 1
 			path: tests/Analyzer/FileCacheTest.php
