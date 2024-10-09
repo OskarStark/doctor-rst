@@ -32,7 +32,7 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__.'/tests',
     ]);
 
-    $rectorConfig->phpVersion(PhpVersion::PHP_82);
+    $rectorConfig->phpVersion(PhpVersion::PHP_83);
     $rectorConfig->importNames();
     $rectorConfig->importShortClasses(false);
     $rectorConfig->phpstanConfigs([
@@ -42,10 +42,10 @@ return static function (RectorConfig $rectorConfig): void {
     ]);
 
     $rectorConfig->sets([
-        SetList::PHP_82,
+        SetList::PHP_83,
         PHPUnitSetList::PHPUNIT_90,
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-        SymfonySetList::SYMFONY_64,
+        SymfonySetList::SYMFONY_71,
         SymfonySetList::SYMFONY_CODE_QUALITY,
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
     ]);
