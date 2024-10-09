@@ -19,33 +19,33 @@ use function Symfony\Component\String\u;
 
 class RstParser
 {
-    final public const SHORTHAND = '::';
-    final public const DIRECTIVE_CODE_BLOCK = '.. code-block::';
-    final public const DIRECTIVE_NOTE = '.. note::';
-    final public const DIRECTIVE_WARNING = '.. warning::';
-    final public const DIRECTIVE_NOTICE = '.. notice::';
-    final public const DIRECTIVE_VERSIONADDED = '.. versionadded::';
-    final public const DIRECTIVE_VERSIONCHANGED = '.. versionchanged::';
-    final public const DIRECTIVE_DEPRECATED = '.. deprecated::';
-    final public const DIRECTIVE_TIP = '.. tip::';
-    final public const DIRECTIVE_CAUTION = '.. caution::';
-    final public const DIRECTIVE_TOCTREE = '.. toctree::';
-    final public const DIRECTIVE_INDEX = '.. index::';
-    final public const DIRECTIVE_IMPORTANT = '.. important::';
-    final public const DIRECTIVE_CONFIGURATION_BLOCK = '.. configuration-block::';
-    final public const DIRECTIVE_BEST_PRACTICE = '.. best-practice::';
-    final public const DIRECTIVE_INCLUDE = '.. include::';
-    final public const DIRECTIVE_IMAGE = '.. image::';
-    final public const DIRECTIVE_ADMONITION = '.. admonition::';
-    final public const DIRECTIVE_ROLE = '.. role::';
-    final public const DIRECTIVE_FIGURE = '.. figure::';
-    final public const DIRECTIVE_SEEALSO = '.. seealso::';
-    final public const DIRECTIVE_CLASS = '.. class::';
-    final public const DIRECTIVE_RST_CLASS = '.. rst-class::';
-    final public const DIRECTIVE_LITERALINCLUDE = '.. literalinclude::';
-    final public const DIRECTIVE_CONTENTS = '.. contents::';
-    final public const DIRECTIVE_CODEIMPORT = '.. codeimport::';
-    final public const DIRECTIVES = [
+    final public const string SHORTHAND = '::';
+    final public const string DIRECTIVE_CODE_BLOCK = '.. code-block::';
+    final public const string DIRECTIVE_NOTE = '.. note::';
+    final public const string DIRECTIVE_WARNING = '.. warning::';
+    final public const string DIRECTIVE_NOTICE = '.. notice::';
+    final public const string DIRECTIVE_VERSIONADDED = '.. versionadded::';
+    final public const string DIRECTIVE_VERSIONCHANGED = '.. versionchanged::';
+    final public const string DIRECTIVE_DEPRECATED = '.. deprecated::';
+    final public const string DIRECTIVE_TIP = '.. tip::';
+    final public const string DIRECTIVE_CAUTION = '.. caution::';
+    final public const string DIRECTIVE_TOCTREE = '.. toctree::';
+    final public const string DIRECTIVE_INDEX = '.. index::';
+    final public const string DIRECTIVE_IMPORTANT = '.. important::';
+    final public const string DIRECTIVE_CONFIGURATION_BLOCK = '.. configuration-block::';
+    final public const string DIRECTIVE_BEST_PRACTICE = '.. best-practice::';
+    final public const string DIRECTIVE_INCLUDE = '.. include::';
+    final public const string DIRECTIVE_IMAGE = '.. image::';
+    final public const string DIRECTIVE_ADMONITION = '.. admonition::';
+    final public const string DIRECTIVE_ROLE = '.. role::';
+    final public const string DIRECTIVE_FIGURE = '.. figure::';
+    final public const string DIRECTIVE_SEEALSO = '.. seealso::';
+    final public const string DIRECTIVE_CLASS = '.. class::';
+    final public const string DIRECTIVE_RST_CLASS = '.. rst-class::';
+    final public const string DIRECTIVE_LITERALINCLUDE = '.. literalinclude::';
+    final public const string DIRECTIVE_CONTENTS = '.. contents::';
+    final public const string DIRECTIVE_CODEIMPORT = '.. codeimport::';
+    final public const array DIRECTIVES = [
         self::DIRECTIVE_CODE_BLOCK,
         self::DIRECTIVE_NOTE,
         self::DIRECTIVE_WARNING,
@@ -72,36 +72,36 @@ class RstParser
         self::DIRECTIVE_CONTENTS,
         self::DIRECTIVE_CODEIMPORT,
     ];
-    final public const CODE_BLOCK_PHP = 'php';
-    final public const CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
-    final public const CODE_BLOCK_PHP_ATTRIBUTES = 'php-attributes';
-    final public const CODE_BLOCK_PHP_SYMFONY = 'php-symfony';
-    final public const CODE_BLOCK_PHP_STANDALONE = 'php-standalone';
-    final public const CODE_BLOCK_XML = 'xml';
-    final public const CODE_BLOCK_TWIG = 'twig';
-    final public const CODE_BLOCK_JINJA = 'jinja';
-    final public const CODE_BLOCK_HTML = 'html';
-    final public const CODE_BLOCK_HTML_JINJA = 'html+jinja';
-    final public const CODE_BLOCK_HTML_TWIG = 'html+twig';
-    final public const CODE_BLOCK_HTML_PHP = 'html+php';
-    final public const CODE_BLOCK_YML = 'yml';
-    final public const CODE_BLOCK_YAML = 'yaml';
-    final public const CODE_BLOCK_BASH = 'bash';
-    final public const CODE_BLOCK_SHELL = 'shell';
-    final public const CODE_BLOCK_TERMINAL = 'terminal';
-    final public const CODE_BLOCK_TEXT = 'text';
-    final public const CODE_BLOCK_RST = 'rst';
-    final public const CODE_BLOCK_DIFF = 'diff';
-    final public const CODE_BLOCK_JSON = 'json';
-    final public const CODE_BLOCK_JAVASCRIPT = 'javascript';
-    final public const CODE_BLOCK_JS = 'js';
-    final public const CODE_BLOCK_JSX = 'jsx';
-    final public const CODE_BLOCK_SQL = 'sql';
-    final public const CODE_BLOCK_INI = 'ini';
-    final public const CODE_BLOCK_VARNISH_3 = 'varnish3';
-    final public const CODE_BLOCK_VARNISH_4 = 'varnish4';
-    final public const CODE_BLOCK_APACHE = 'apache';
-    final public const CODE_BLOCK_CADDY = 'caddy';
+    final public const string CODE_BLOCK_PHP = 'php';
+    final public const string CODE_BLOCK_PHP_ANNOTATIONS = 'php-annotations';
+    final public const string CODE_BLOCK_PHP_ATTRIBUTES = 'php-attributes';
+    final public const string CODE_BLOCK_PHP_SYMFONY = 'php-symfony';
+    final public const string CODE_BLOCK_PHP_STANDALONE = 'php-standalone';
+    final public const string CODE_BLOCK_XML = 'xml';
+    final public const string CODE_BLOCK_TWIG = 'twig';
+    final public const string CODE_BLOCK_JINJA = 'jinja';
+    final public const string CODE_BLOCK_HTML = 'html';
+    final public const string CODE_BLOCK_HTML_JINJA = 'html+jinja';
+    final public const string CODE_BLOCK_HTML_TWIG = 'html+twig';
+    final public const string CODE_BLOCK_HTML_PHP = 'html+php';
+    final public const string CODE_BLOCK_YML = 'yml';
+    final public const string CODE_BLOCK_YAML = 'yaml';
+    final public const string CODE_BLOCK_BASH = 'bash';
+    final public const string CODE_BLOCK_SHELL = 'shell';
+    final public const string CODE_BLOCK_TERMINAL = 'terminal';
+    final public const string CODE_BLOCK_TEXT = 'text';
+    final public const string CODE_BLOCK_RST = 'rst';
+    final public const string CODE_BLOCK_DIFF = 'diff';
+    final public const string CODE_BLOCK_JSON = 'json';
+    final public const string CODE_BLOCK_JAVASCRIPT = 'javascript';
+    final public const string CODE_BLOCK_JS = 'js';
+    final public const string CODE_BLOCK_JSX = 'jsx';
+    final public const string CODE_BLOCK_SQL = 'sql';
+    final public const string CODE_BLOCK_INI = 'ini';
+    final public const string CODE_BLOCK_VARNISH_3 = 'varnish3';
+    final public const string CODE_BLOCK_VARNISH_4 = 'varnish4';
+    final public const string CODE_BLOCK_APACHE = 'apache';
+    final public const string CODE_BLOCK_CADDY = 'caddy';
 
     public static function isPhpDirective(Line $line): bool
     {

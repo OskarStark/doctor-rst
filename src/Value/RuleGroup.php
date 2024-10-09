@@ -17,10 +17,10 @@ use Webmozart\Assert\Assert;
 
 final readonly class RuleGroup
 {
-    private const GROUP_EXPERIMENTAL = '@Experimental';
-    private const GROUP_SONATA = '@Sonata';
-    private const GROUP_SYMFONY = '@Symfony';
-    private const ALLOWED_GROUPS = [
+    private const string GROUP_EXPERIMENTAL = '@Experimental';
+    private const string GROUP_SONATA = '@Sonata';
+    private const string GROUP_SYMFONY = '@Symfony';
+    private const array ALLOWED_GROUPS = [
         self::GROUP_EXPERIMENTAL,
         self::GROUP_SONATA,
         self::GROUP_SYMFONY,
