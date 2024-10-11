@@ -210,4 +210,4 @@ jobs:
 
             -
                 name: "Check for implicit dependencies"
-                run: "tools/composer-require-checker check --config-file=$(pwd)/composer-require-checker.json composer.json"
+                run: "vendor/bin/composer-require-checker check --config-file=$(pwd)/composer-require-checker.json composer.json"
