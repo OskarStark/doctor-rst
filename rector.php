@@ -54,7 +54,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->skip([
         PreferPHPUnitThisCallRector::class,
         ReplaceTestAnnotationWithPrefixedFunctionRector::class,
-        AddOverrideAttributeToOverriddenMethodsRector::class
+        AddOverrideAttributeToOverriddenMethodsRector::class,
     ]);
 
     $rectorConfig->rule(PreferPHPUnitSelfCallRector::class);

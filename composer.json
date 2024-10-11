@@ -24,6 +24,7 @@
         "ergebnis/php-cs-fixer-config": "^6.37",
         "ergebnis/test-util": "^1.6",
         "icanhazstring/composer-unused": "^0.8.11",
+        "maglnet/composer-require-checker": "^4.12",
         "mikey179/vfsstream": "^1.6.12",
         "phpstan/extension-installer": "^1.4.3",
         "phpstan/phpstan": "^1.12.6",
