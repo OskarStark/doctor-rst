@@ -90,6 +90,7 @@
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
 * [use_https_xsd_urls](#use_https_xsd_urls)
 * [use_named_constructor_without_new_keyword_rule](#use_named_constructor_without_new_keyword_rule)
+* [use_non_static_assertions](#use_non_static_assertions)
 * [valid_inline_highlighted_namespaces](#valid_inline_highlighted_namespaces)
 * [valid_use_statements](#valid_use_statements)
 * [versionadded_directive_major_version](#versionadded_directive_major_version)
@@ -1062,6 +1063,25 @@ new Uuid()
 
 ```rst
 new Uuid::fromString()
+```
+
+## `use_non_static_assertions`
+
+  > _Ensures assertions are done with $this._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+$this->assertTrue($foo)
+```
+
+##### Invalid Examples :-1:
+
+```rst
+self::assertTrue($foo)
+static::assertTrue($foo)
 ```
 
 ## `valid_inline_highlighted_namespaces`
