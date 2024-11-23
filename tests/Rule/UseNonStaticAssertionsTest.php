@@ -68,6 +68,6 @@ final class UseNonStaticAssertionsTest extends UnitTestCase
         yield [
             NullViolation::create(),
             new RstSample('You can use this assertion'),
-        ],
+        ]
     }
 }
