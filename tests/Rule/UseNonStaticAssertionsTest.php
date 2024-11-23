@@ -60,7 +60,7 @@ final class UseNonStaticAssertionsTest extends UnitTestCase
                 ),
                 new RstSample([
                     $codeBlock,
-                    'self::assertSame('POST', $mockResponse->getRequestMethod());',
+                    'self::assertSame(\'https://example.com/api/article\', $mockResponse->getRequestUrl());',
                 ], 1),
             ];
         }
