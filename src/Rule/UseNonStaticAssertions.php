@@ -34,11 +34,7 @@ class UseNonStaticAssertions extends AbstractRule implements LineContentRule
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::isPhpDirective($line)) {
-            return NullViolation::create();
-        }
-
-        if ($line->clean()->match('/self::assert/') || $line->clean()->match('/static::assert/')) {
+        if ($line->raw()->match('/self::assert*/') || $line->raw()->match('/static::assert*/')) {
             return Violation::from(
                 'Please use `$this->assert` over static call',
                 $filename,

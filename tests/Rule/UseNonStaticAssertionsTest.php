@@ -37,37 +37,33 @@ final class UseNonStaticAssertionsTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        foreach (self::phpCodeBlocks() as $codeBlock) {
-            yield [
+        yield from [
+            [
                 Violation::from(
-                    'Please use `$this->assert` over static call"',
+                    'Please use `$this->assert` over static call',
                     'filename',
                     1,
-                    'use App/Handler;',
-                ),
-                new RstSample([
-                    $codeBlock,
                     'static::assertFalse($expirationChecker->isExpired($validUntil));',
-                ], 1),
-            ];
-
-            yield [
+                ),
+                new RstSample(
+                    'static::assertFalse($expirationChecker->isExpired($validUntil));'
+                    , 0),
+            ],
+            [
                 Violation::from(
-                    'Please use `$this->assert` over static call"',
+                    'Please use `$this->assert` over static call',
                     'filename',
                     1,
-                    'use App/Handler;',
-                ),
-                new RstSample([
-                    $codeBlock,
                     'self::assertSame(\'https://example.com/api/article\', $mockResponse->getRequestUrl());',
-                ], 1),
-            ];
-        }
-
-        yield [
-            NullViolation::create(),
-            new RstSample('You can use this assertion'),
-        ]
+                ),
+                new RstSample(
+                    'self::assertSame(\'https://example.com/api/article\', $mockResponse->getRequestUrl());',
+                    0),
+            ],
+            [
+                NullViolation::create(),
+                new RstSample('You can use this assertion'),
+            ]
+        ];
     }
 }
