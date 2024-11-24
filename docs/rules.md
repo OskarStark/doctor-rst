@@ -1065,7 +1065,7 @@ new Uuid()
 new Uuid::fromString()
 ```
 
-## `use_non_static_assertions`
+## `non_static_assertions`
 
   > _Ensures assertions are done with $this._
 
