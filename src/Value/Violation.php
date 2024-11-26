@@ -15,17 +15,17 @@ namespace App\Value;
 
 use Webmozart\Assert\Assert;
 
-final class Violation implements ViolationInterface
+final readonly class Violation implements ViolationInterface
 {
-    private readonly string $message;
-    private readonly string $filename;
-    private readonly int $lineno;
+    private string $message;
+    private string $filename;
+    private int $lineno;
 
     private function __construct(
         string $message,
         string $filename,
         int $lineno,
-        private readonly string $rawLine,
+        private string $rawLine,
     ) {
         $message = trim($message);
         Assert::stringNotEmpty($message);

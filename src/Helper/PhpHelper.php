@@ -18,7 +18,7 @@ use App\Value\Lines;
 
 final class PhpHelper
 {
-    private const REGEX_NAMESPACE_WITH_TWO_BACKSLASHES = '((?:\\\\{0,2}\w+|\w+\\\\{2})(?:\w+\\\\{2})+)';
+    private const string REGEX_NAMESPACE_WITH_TWO_BACKSLASHES = '((?:\\\\{0,2}\w+|\w+\\\\{2})(?:\w+\\\\{2})+)';
 
     public static function isComment(Line $line): bool
     {

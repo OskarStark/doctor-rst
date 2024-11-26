@@ -13,18 +13,23 @@ declare(strict_types=1);
 
 namespace App\Rst\Value;
 
+use Webmozart\Assert\Assert;
+
 final readonly class LinkUsage
 {
-    private function __construct(private LinkName $name)
-    {
+    private function __construct(
+        private LinkName $name,
+    ) {
     }
 
     public static function fromLine(string $line): self
     {
         preg_match('/(`[^`]+`|(?:(?!_)\w)+(?:[-._+:](?:(?!_)\w)+)*+)_/', $line, $matches);
-        $matches[1] = trim($matches[1], '`');
+        Assert::keyExists($matches, 1);
+        Assert::string($matches[1]);
+        $name = trim($matches[1], '`');
 
-        return new self(LinkName::fromString($matches[1]));
+        return new self(LinkName::fromString($name));
     }
 
     public static function fromLinkName(LinkName $name): self

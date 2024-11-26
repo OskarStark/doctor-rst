@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Rst\Value;
 
+use Webmozart\Assert\Assert;
+
 final readonly class LinkDefinition
 {
     private function __construct(
@@ -24,6 +26,10 @@ final readonly class LinkDefinition
     public static function fromLine(string $line): self
     {
         preg_match('/^\.\. _`?([^`]+)`?: (.*)$/', $line, $matches);
+        Assert::keyExists($matches, 1);
+        Assert::keyExists($matches, 2);
+        Assert::string($matches[1]);
+        Assert::string($matches[2]);
 
         return new self(
             LinkName::fromString($matches[1]),
