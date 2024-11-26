@@ -13,14 +13,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use App\Rule\NonStaticAssertions;
+use App\Rule\NonStaticPhpunitAssertions;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NonStaticAssertionsTest extends UnitTestCase
+final class NonStaticPhpunitAssertionsTest extends UnitTestCase
 {
     /**
      * @test
@@ -31,80 +31,88 @@ final class NonStaticAssertionsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NonStaticAssertions())->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new NonStaticPhpunitAssertions())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 
     public static function checkProvider(): iterable
     {
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                'static::assertFalse($expirationChecker->isExpired($validUntil));',
+            ]),
+        ];
+
         foreach (self::phpCodeBlocks() as $codeBlock) {
-        
             yield [
                 Violation::from(
-                    'Please use `$this->assert` over static call',
+                    'Please use `$this->assert*` over static call',
                     'filename',
-                    1,
+                    3,
                     'static::assertFalse($expirationChecker->isExpired($validUntil));',
                 ),
                 new RstSample([
                     $codeBlock,
-                    'static::assertFalse($expirationChecker->isExpired($validUntil));'
-                ], 0),
+                    '',
+                    '    static::assertFalse($expirationChecker->isExpired($validUntil));',
+                ], 2),
             ];
 
             yield [
                 Violation::from(
-                    'Please use `$this->assert` over static call',
+                    'Please use `$this->assert*` over static call',
                     'filename',
-                    1,
+                    3,
                     'self::assertSame(\'https://example.com/api/article\', $mockResponse->getRequestUrl());',
                 ),
                 new RstSample([
                     $codeBlock,
-                    'self::assertSame(\'https://example.com/api/article\', $mockResponse->getRequestUrl());'
-                ], 0),
+                    '',
+                    '    self::assertSame(\'https://example.com/api/article\', $mockResponse->getRequestUrl());',
+                ], 2),
             ];
 
             yield [
                 Violation::from(
-                    'Please use `$this->assert` over static call',
+                    'Please use `$this->assert*` over static call',
                     'filename',
-                    1,
+                    2,
                     'self::assert(true);',
                 ),
                 new RstSample([
                     $codeBlock,
-                    'self::assert(true);'
-                ], 0),
+                    '    self::assert(true);',
+                ], 1),
             ];
 
             yield [
                 Violation::from(
-                    'Please use `$this->assert` over static call',
+                    'Please use `$this->assert*` over static call',
                     'filename',
-                    1,
+                    2,
                     'static::assert(true);',
                 ),
                 new RstSample([
                     $codeBlock,
-                    'static::assert(true);'
-                ], 0),
+                    '    static::assert(true);',
+                ], 1),
             ];
 
             yield [
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
-                    'You can use this assertion'
-                ])
+                    '    You can use this assertion',
+                ]),
             ];
 
             yield [
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
-                    '$this->assert(true);'
-                ])
+                    '    $this->assert(true);',
+                ]),
             ];
         }
     }

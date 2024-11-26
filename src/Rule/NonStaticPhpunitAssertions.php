@@ -14,20 +14,19 @@ declare(strict_types=1);
 namespace App\Rule;
 
 use App\Attribute\Rule\Description;
-use App\Attribute\Rule\ValidExample;
 use App\Attribute\Rule\InvalidExample;
-use App\Rst\RstParser;
+use App\Attribute\Rule\ValidExample;
 use App\Traits\DirectiveTrait;
 use App\Value\Lines;
+use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
-use App\Value\NullViolation;
 use App\Value\ViolationInterface;
 
 #[Description('Use `$this->assert*` over static calls.')]
 #[InvalidExample('self::assertTrue($foo);')]
 #[ValidExample('$this->assertTrue($foo);')]
-final class NonStaticAssertions extends AbstractRule implements LineContentRule
+final class NonStaticPhpunitAssertions extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 
@@ -41,25 +40,25 @@ final class NonStaticAssertions extends AbstractRule implements LineContentRule
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
-        $line = $lines->current();
 
-        //if (!RstParser::isPhpDirective($line)) {
-        //    return NullViolation::create();
-        //}
+        if (!$this->inPhpCodeBlock($lines, $number)) {
+            return NullViolation::create();
+        }
 
-        //$lines->next();
-        //++$number;
+        $lines->next();
 
-        //echo($lines->current()->raw());
+        if ($lines->current()->isBlank()) {
+            $lines->next();
+        }
 
-        if ($this->inPhpCodeBlock($lines, $number)
-        && ($lines->current()->raw()->match('/self::assert*/')
-        || $lines->current()->raw()->match('/static::assert*/'))) {
+        if ($lines->current()->raw()->match('/self::assert*/')
+            || $lines->current()->raw()->match('/static::assert*/')
+        ) {
             return Violation::from(
-                'Please use `$this->assert` over static call',
+                'Please use `$this->assert*` over static call',
                 $filename,
                 $number + 1,
-                $line,
+                $lines->current()->clean()->toString(),
             );
         }
 

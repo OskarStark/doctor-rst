@@ -71,6 +71,7 @@
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
 * [no_php_prefix_before_composer](#no_php_prefix_before_composer)
 * [no_space_before_self_xml_closing_tag](#no_space_before_self_xml_closing_tag)
+* [non_static_phpunit_assertions](#non_static_phpunit_assertions)
 * [only_backslashes_in_namespace_in_php_code_block](#only_backslashes_in_namespace_in_php_code_block)
 * [only_backslashes_in_use_statements_in_php_code_block](#only_backslashes_in_use_statements_in_php_code_block)
 * [ordered_use_statements](#ordered_use_statements)
@@ -90,7 +91,6 @@
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
 * [use_https_xsd_urls](#use_https_xsd_urls)
 * [use_named_constructor_without_new_keyword_rule](#use_named_constructor_without_new_keyword_rule)
-* [use_non_static_assertions](#use_non_static_assertions)
 * [valid_inline_highlighted_namespaces](#valid_inline_highlighted_namespaces)
 * [valid_use_statements](#valid_use_statements)
 * [versionadded_directive_major_version](#versionadded_directive_major_version)
@@ -827,6 +827,24 @@ php bin/console list
 
 #### Groups [`@Sonata`]
 
+## `non_static_phpunit_assertions`
+
+  > _Use `$this->assert*` over static calls._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+$this->assertTrue($foo);
+```
+
+##### Invalid Examples :-1:
+
+```rst
+self::assertTrue($foo);
+```
+
 ## `only_backslashes_in_namespace_in_php_code_block`
 
   > _A namespace declaration in a PHP code-block should only contain backslashes._
@@ -1063,25 +1081,6 @@ new Uuid()
 
 ```rst
 new Uuid::fromString()
-```
-
-## `non_static_assertions`
-
-  > _Ensures assertions are done with $this._
-
-#### Groups [`@Symfony`]
-
-##### Valid Examples :+1:
-
-```rst
-$this->assertTrue($foo)
-```
-
-##### Invalid Examples :-1:
-
-```rst
-self::assertTrue($foo)
-static::assertTrue($foo)
 ```
 
 ## `valid_inline_highlighted_namespaces`
