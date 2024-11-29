@@ -71,6 +71,7 @@
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
 * [no_php_prefix_before_composer](#no_php_prefix_before_composer)
 * [no_space_before_self_xml_closing_tag](#no_space_before_self_xml_closing_tag)
+* [non_static_phpunit_assertions](#non_static_phpunit_assertions)
 * [only_backslashes_in_namespace_in_php_code_block](#only_backslashes_in_namespace_in_php_code_block)
 * [only_backslashes_in_use_statements_in_php_code_block](#only_backslashes_in_use_statements_in_php_code_block)
 * [ordered_use_statements](#ordered_use_statements)
@@ -825,6 +826,24 @@ php bin/console list
 ## `no_space_before_self_xml_closing_tag`
 
 #### Groups [`@Sonata`]
+
+## `non_static_phpunit_assertions`
+
+  > _Use `$this->assert*` over static calls._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+$this->assertTrue($foo);
+```
+
+##### Invalid Examples :-1:
+
+```rst
+self::assertTrue($foo);
+```
 
 ## `only_backslashes_in_namespace_in_php_code_block`
 
