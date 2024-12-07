@@ -50,8 +50,8 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
                         $directive['replacements'] = [$directive['replacements']];
                     }
 
-                    if (!isset($directive['directive'])) {
-                        throw new InvalidOptionsException();
+                    if (!isset($directive['directive']) || !\is_string($directive['directive'])) {
+                        throw new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value');
                     }
 
                     return $directive;

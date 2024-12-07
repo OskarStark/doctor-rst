@@ -151,6 +151,45 @@ final class ForbiddenDirectivesTest extends UnitTestCase
     /**
      * @test
      */
+    public function invalidDirective(): void
+    {
+        $this->expectExceptionObject(
+            new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value'),
+        );
+
+        $rule = new ForbiddenDirectives();
+        $rule->setOptions([
+            'directives' => [
+                [
+                    'directive' => 2,
+                    'replacements' => '.. caution::',
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function missingDirective(): void
+    {
+        $this->expectExceptionObject(
+            new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value'),
+        );
+
+        $rule = new ForbiddenDirectives();
+        $rule->setOptions([
+            'directives' => [
+                [
+                    'replacements' => '.. caution::',
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @test
+     */
     public function checkWithNoConfiguration(): void
     {
         $rule = new ForbiddenDirectives();
