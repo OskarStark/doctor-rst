@@ -21,6 +21,7 @@ use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 #[Description('Make sure forbidden directives are not used')]
@@ -29,7 +30,7 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
     use DirectiveTrait;
 
     /**
-     * @var array<string>
+     * @var array<array[directive<string>, replacement<?string>]>
      */
     private array $forbiddenDirectives;
 
@@ -37,7 +38,16 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
     {
         $resolver
             ->setRequired('directives')
-            ->setAllowedTypes('directives', 'string[]')
+            ->setAllowedTypes('directives', 'array')
+            ->setNormalizer('directives', static function (Options $options, $directives): array {
+                return \array_map(static function (array|string $directive) {
+                    if (\is_string($directive)) {
+                        return ['directive' => $directive];
+                    }
+
+                    return $directive;
+                }, $directives);
+            })
             ->setDefault('directives', []);
 
         return $resolver;
@@ -63,8 +73,12 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
         $line = $lines->current();
 
         foreach ($this->forbiddenDirectives as $forbiddenDirective) {
-            if (RstParser::directiveIs($line, $forbiddenDirective)) {
+            if (RstParser::directiveIs($line, $forbiddenDirective['directive'])) {
                 $message = \sprintf('Please don\'t use directive "%s" anymore', $line->raw()->toString());
+
+                if (isset($forbiddenDirective['replacement'])) {
+                    $message = \sprintf('%s, use "%s" instead', $message, $forbiddenDirective['replacement']);
+                }
 
                 return Violation::from(
                     $message,

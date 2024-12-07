@@ -34,7 +34,13 @@ final class ForbiddenDirectivesTest extends UnitTestCase
         $rule->setOptions([
             'directives' => [
                 '.. index::',
-                '.. caution::',
+                [
+                    'directive' => '.. notice::',
+                ],
+                [
+                    'directive' => '.. caution::',
+                    'replacement' => '.. warning::',
+                ],
             ],
         ]);
 
@@ -63,7 +69,19 @@ final class ForbiddenDirectivesTest extends UnitTestCase
 
         yield [
             Violation::from(
-                'Please don\'t use directive ".. caution::" anymore',
+                'Please don\'t use directive ".. notice::" anymore',
+                'filename',
+                1,
+                '.. notice::',
+            ),
+            new RstSample([
+                '.. notice::',
+            ]),
+        ];
+
+        yield [
+            Violation::from(
+                'Please don\'t use directive ".. caution::" anymore, use ".. warning::" instead',
                 'filename',
                 1,
                 '.. caution::',
@@ -92,7 +110,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
     public function invalidOptionType(): void
     {
         $this->expectExceptionObject(
-            new InvalidOptionsException('The option "directives" with value ".. caution::" is expected to be of type "string[]", but is of type "string".'),
+            new InvalidOptionsException('The option "directives" with value ".. caution::" is expected to be of type "array", but is of type "string".'),
         );
 
         $rule = new ForbiddenDirectives();
