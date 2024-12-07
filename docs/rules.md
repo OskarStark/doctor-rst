@@ -551,7 +551,7 @@ custom-extensions.rst
 
 Name | Required | Allowed Types | Default
 --- | --- | --- | ---
-`directives` | `false` | `string[]` | `[]`
+`directives` | `false` | `array` | `[]`
 
 ## `indention`
 
