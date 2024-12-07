@@ -42,8 +42,8 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
             ->setAllowedTypes('directives', 'array')
             ->setNormalizer('directives', static function (Options $options, $directives): array {
                 return \array_map(static function (array|string $directive) {
-                    if (\is_string($directive)) {
-                        return ['directive' => $directive];
+                    if (!\is_array($directive)) {
+                        $directive = ['directive' => $directive];
                     }
 
                     if (isset($directive['replacements']) && \is_string($directive['replacements'])) {
