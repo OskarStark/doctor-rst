@@ -28,14 +28,11 @@ final class ForbiddenDirectivesTest extends UnitTestCase
      *
      * @dataProvider checkProvider
      */
-    public function check(ViolationInterface $expected, RstSample $sample): void
+    public function check(array $directiveOptions, ViolationInterface $expected, RstSample $sample): void
     {
         $rule = new ForbiddenDirectives();
         $rule->setOptions([
-            'directives' => [
-                '.. index::',
-                '.. caution::',
-            ],
+            'directives' => $directiveOptions,
         ]);
 
         self::assertEquals(
@@ -45,11 +42,14 @@ final class ForbiddenDirectivesTest extends UnitTestCase
     }
 
     /**
-     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
+     * @return \Generator<array{0: array, 1: ViolationInterface, 2: RstSample}>
      */
     public static function checkProvider(): iterable
     {
         yield [
+            [
+                '.. index::',
+            ],
             Violation::from(
                 'Please don\'t use directive ".. index::" anymore',
                 'filename',
@@ -62,8 +62,31 @@ final class ForbiddenDirectivesTest extends UnitTestCase
         ];
 
         yield [
+            [
+                [
+                    'directive' => '.. notice::',
+                ],
+            ],
             Violation::from(
-                'Please don\'t use directive ".. caution::" anymore',
+                'Please don\'t use directive ".. notice::" anymore',
+                'filename',
+                1,
+                '.. notice::',
+            ),
+            new RstSample([
+                '.. notice::',
+            ]),
+        ];
+
+        yield [
+            [
+                [
+                    'directive' => '.. caution::',
+                    'replacements' => '.. warning::',
+                ],
+            ],
+            Violation::from(
+                'Please don\'t use directive ".. caution::" anymore, use ".. warning::" instead',
                 'filename',
                 1,
                 '.. caution::',
@@ -74,6 +97,27 @@ final class ForbiddenDirectivesTest extends UnitTestCase
         ];
 
         yield [
+            [
+                [
+                    'directive' => '.. caution::',
+                    'replacements' => ['.. warning::', '.. danger::'],
+                ],
+            ],
+            Violation::from(
+                'Please don\'t use directive ".. caution::" anymore, use ".. warning::" or ".. danger::" instead',
+                'filename',
+                1,
+                '.. caution::',
+            ),
+            new RstSample([
+                '.. caution::',
+            ]),
+        ];
+
+        yield [
+            [
+                '.. index::',
+            ],
             NullViolation::create(),
             new RstSample([
                 '.. tip::',
@@ -81,6 +125,9 @@ final class ForbiddenDirectivesTest extends UnitTestCase
         ];
 
         yield [
+            [
+                '.. index::',
+            ],
             NullViolation::create(),
             new RstSample('temp'),
         ];
@@ -92,12 +139,51 @@ final class ForbiddenDirectivesTest extends UnitTestCase
     public function invalidOptionType(): void
     {
         $this->expectExceptionObject(
-            new InvalidOptionsException('The option "directives" with value ".. caution::" is expected to be of type "string[]", but is of type "string".'),
+            new InvalidOptionsException('The option "directives" with value ".. caution::" is expected to be of type "array", but is of type "string".'),
         );
 
         $rule = new ForbiddenDirectives();
         $rule->setOptions([
             'directives' => '.. caution::',
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function invalidDirective(): void
+    {
+        $this->expectExceptionObject(
+            new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value'),
+        );
+
+        $rule = new ForbiddenDirectives();
+        $rule->setOptions([
+            'directives' => [
+                [
+                    'directive' => 2,
+                    'replacements' => '.. caution::',
+                ],
+            ],
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function missingDirective(): void
+    {
+        $this->expectExceptionObject(
+            new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value'),
+        );
+
+        $rule = new ForbiddenDirectives();
+        $rule->setOptions([
+            'directives' => [
+                [
+                    'replacements' => '.. caution::',
+                ],
+            ],
         ]);
     }
 

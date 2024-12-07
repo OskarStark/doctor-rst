@@ -21,6 +21,8 @@ use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 #[Description('Make sure forbidden directives are not used')]
@@ -29,7 +31,7 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
     use DirectiveTrait;
 
     /**
-     * @var array<string>
+     * @var array<array{directive: string, replacements: ?string[]}>
      */
     private array $forbiddenDirectives;
 
@@ -37,7 +39,24 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
     {
         $resolver
             ->setRequired('directives')
-            ->setAllowedTypes('directives', 'string[]')
+            ->setAllowedTypes('directives', 'array')
+            ->setNormalizer('directives', static function (Options $options, $directives): array {
+                return \array_map(static function (array|string $directive) {
+                    if (!\is_array($directive)) {
+                        $directive = ['directive' => $directive];
+                    }
+
+                    if (isset($directive['replacements']) && \is_string($directive['replacements'])) {
+                        $directive['replacements'] = [$directive['replacements']];
+                    }
+
+                    if (!isset($directive['directive']) || !\is_string($directive['directive'])) {
+                        throw new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value');
+                    }
+
+                    return $directive;
+                }, $directives);
+            })
             ->setDefault('directives', []);
 
         return $resolver;
@@ -63,8 +82,16 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
         $line = $lines->current();
 
         foreach ($this->forbiddenDirectives as $forbiddenDirective) {
-            if (RstParser::directiveIs($line, $forbiddenDirective)) {
+            if (RstParser::directiveIs($line, $forbiddenDirective['directive'])) {
                 $message = \sprintf('Please don\'t use directive "%s" anymore', $line->raw()->toString());
+
+                if (isset($forbiddenDirective['replacements'])) {
+                    $message = \sprintf(
+                        '%s, use "%s" instead',
+                        $message,
+                        \implode('" or "', $forbiddenDirective['replacements']),
+                    );
+                }
 
                 return Violation::from(
                     $message,

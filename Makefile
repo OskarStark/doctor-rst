@@ -28,3 +28,7 @@ refactoring:
 dependency-analysis: vendor ## Runs a dependency analysis with maglnet/composer-require-checker
 	symfony php vendor/bin/composer-require-checker check --config-file=$(shell pwd)/composer-require-checker.json
 	vendor/bin/composer-unused
+
+.PHONY: docs
+docs: vendor
+	symfony php bin/doctor-rst rules > docs/rules.md
