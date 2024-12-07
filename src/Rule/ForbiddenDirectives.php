@@ -21,6 +21,7 @@ use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,7 +31,7 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
     use DirectiveTrait;
 
     /**
-     * @var array<array[directive<string>, replacement<?string>]>
+     * @var array<array{directive: string, replacements: ?string[]}>
      */
     private array $forbiddenDirectives;
 
@@ -43,6 +44,14 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
                 return \array_map(static function (array|string $directive) {
                     if (\is_string($directive)) {
                         return ['directive' => $directive];
+                    }
+
+                    if (isset($directive['replacements']) && \is_string($directive['replacements'])) {
+                        $directive['replacements'] = [$directive['replacements']];
+                    }
+
+                    if (!isset($directive['directive'])) {
+                        throw new InvalidOptionsException();
                     }
 
                     return $directive;
@@ -76,8 +85,12 @@ class ForbiddenDirectives extends AbstractRule implements Configurable, LineCont
             if (RstParser::directiveIs($line, $forbiddenDirective['directive'])) {
                 $message = \sprintf('Please don\'t use directive "%s" anymore', $line->raw()->toString());
 
-                if (isset($forbiddenDirective['replacement'])) {
-                    $message = \sprintf('%s, use "%s" instead', $message, $forbiddenDirective['replacement']);
+                if (isset($forbiddenDirective['replacements'])) {
+                    $message = \sprintf(
+                        '%s, use "%s" instead',
+                        $message,
+                        \implode('" or "', $forbiddenDirective['replacements']),
+                    );
                 }
 
                 return Violation::from(
