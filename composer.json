@@ -12,7 +12,7 @@
         "symfony/config": "^7.2.0",
         "symfony/console": "^7.2.1",
         "symfony/dependency-injection": "^7.2.0",
-        "symfony/finder": "^7.2.0",
+        "symfony/finder": "^7.2.2",
         "symfony/options-resolver": "^7.2.0",
         "symfony/service-contracts": "^3.5.1",
         "symfony/string": "^7.2.0",
@@ -21,7 +21,7 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.45.0",
-        "ergebnis/php-cs-fixer-config": "^6.39",
+        "ergebnis/php-cs-fixer-config": "^6.42.1",
         "ergebnis/test-util": "^1.6",
         "icanhazstring/composer-unused": "^0.8.11",
         "maglnet/composer-require-checker": "^4.14",
