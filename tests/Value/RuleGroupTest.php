@@ -15,12 +15,9 @@ namespace App\Tests\Value;
 
 use App\Tests\UnitTestCase;
 use App\Value\RuleGroup;
-use Ergebnis\Test\Util\Helper;
 
 final class RuleGroupTest extends UnitTestCase
 {
-    use Helper;
-
     /**
      * @test
      */
@@ -34,8 +31,8 @@ final class RuleGroupTest extends UnitTestCase
     /**
      * @test
      *
-     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::blank()
-     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::empty()
+     * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
+     * @dataProvider \Ergebnis\DataProvider\StringProvider::empty()
      */
     public function fromStringThrowsException(string $value): void
     {
