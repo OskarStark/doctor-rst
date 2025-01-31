@@ -14,22 +14,12 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Rst\RstParser;
+use Faker\Factory;
 use Faker\Generator;
 use PHPUnit\Framework\TestCase;
 
 abstract class UnitTestCase extends TestCase
 {
-    final protected static function faker(string $locale = 'de_DE'): Generator
-    {
-        static $fakers = [];
-
-        if (!\array_key_exists($locale, $fakers)) {
-            $fakers[$locale] = new Generator();
-        }
-
-        return $fakers[$locale];
-    }
-
     /**
      * @return string[]
      */
@@ -52,5 +42,9 @@ abstract class UnitTestCase extends TestCase
         $result[] = 'A PHP code block follows::';
 
         return $result;
+    }
+    final protected static function faker(string $locale = 'de_DE'): Generator
+    {
+        return Factory::create($locale);
     }
 }

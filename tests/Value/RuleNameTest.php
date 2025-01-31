@@ -15,18 +15,15 @@ namespace App\Tests\Value;
 
 use App\Tests\UnitTestCase;
 use App\Value\RuleName;
-use Ergebnis\Test\Util\Helper;
 
 final class RuleNameTest extends UnitTestCase
 {
-    use Helper;
-
     /**
      * @test
      */
     public function fromStringTrimsValue(): void
     {
-        $value = self::faker()->word;
+        $value = self::faker()->word();
         $untrimmed = ' '.$value.' ';
 
         self::assertSame(
@@ -40,7 +37,7 @@ final class RuleNameTest extends UnitTestCase
      */
     public function fromString(): void
     {
-        $value = self::faker()->word;
+        $value = self::faker()->word();
 
         self::assertSame(
             $value,
@@ -73,8 +70,8 @@ final class RuleNameTest extends UnitTestCase
     /**
      * @test
      *
-     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::blank()
-     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::empty()
+     * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
+     * @dataProvider \Ergebnis\DataProvider\StringProvider::empty()
      */
     public function fromStringThrowsException(string $value): void
     {
@@ -86,8 +83,8 @@ final class RuleNameTest extends UnitTestCase
     /**
      * @test
      *
-     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::blank()
-     * @dataProvider \Ergebnis\Test\Util\DataProvider\StringProvider::empty()
+     * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
+     * @dataProvider \Ergebnis\DataProvider\StringProvider::empty()
      */
     public function fromClassStringThrowsException(string $value): void
     {
