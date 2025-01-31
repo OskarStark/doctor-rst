@@ -18,7 +18,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.3"
+                    - "8.4"
 
         steps:
             -
@@ -30,7 +30,7 @@ jobs:
 
             -
                 name: "Install PHP with extensions"
-                uses: "shivammathur/setup-php@2.31.1"
+                uses: "shivammathur/setup-php@2.32.0"
                 with:
                     coverage: "none"
                     extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
@@ -49,7 +49,7 @@ jobs:
 
             -
                 name: "Commit regenerated docs/rules.md file"
-                uses: "stefanzweifel/git-auto-commit-action@v5.0.1"
+                uses: "stefanzweifel/git-auto-commit-action@v5.1.0"
                 with:
                     branch: "${{ github.head_ref }}"
                     commit_author: "${{ env.COMMITTER_NAME }} <${{ env.COMMITTER_EMAIL }}>"
