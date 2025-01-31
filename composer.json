@@ -21,8 +21,8 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.45.0",
+        "ergebnis/data-provider": "^3.4",
         "ergebnis/php-cs-fixer-config": "^6.42.1",
-        "ergebnis/test-util": "^1.6",
         "icanhazstring/composer-unused": "^0.8.11",
         "maglnet/composer-require-checker": "^4.14",
         "mikey179/vfsstream": "^1.6.12",
