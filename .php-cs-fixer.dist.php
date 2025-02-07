@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 use Ergebnis\PhpCsFixer\Config\Factory;
 use Ergebnis\PhpCsFixer\Config\Rules;
-use Ergebnis\PhpCsFixer\Config\RuleSet\Php83;
+use Ergebnis\PhpCsFixer\Config\RuleSet\Php84;
 
 $header = <<<'HEADER'
 This file is part of DOCtor-RST.
@@ -28,7 +28,7 @@ $customRules = [
     'no_trailing_whitespace_in_string' => false,
 ];
 
-$ruleSet = Php83::create()->withHeader($header)->withRules(Rules::fromArray(array_merge([
+$ruleSet = Php84::create()->withHeader($header)->withRules(Rules::fromArray(array_merge([
     'blank_line_before_statement' => [
         'statements' => [
             'break',
