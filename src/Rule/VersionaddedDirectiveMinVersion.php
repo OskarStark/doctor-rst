@@ -40,6 +40,7 @@ class VersionaddedDirectiveMinVersion extends AbstractRule implements Configurab
 
         $resolvedOptions = $resolver->resolve($options);
 
+        /** @phpstan-ignore-next-line  */
         $this->minVersion = $resolvedOptions['min_version'];
     }
 

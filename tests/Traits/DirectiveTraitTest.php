@@ -30,14 +30,6 @@ final class DirectiveTraitTest extends UnitTestCase
 
     /**
      * @test
-     */
-    public function methodExists(): void
-    {
-        self::assertTrue(method_exists($this->traitWrapper, 'in'));
-    }
-
-    /**
-     * @test
      *
      * @dataProvider getDirectiveContentProvider
      */
@@ -262,6 +254,8 @@ MULTIPLE, 11),
      * @test
      *
      * @dataProvider inProvider
+     *
+     * @param string[]|null $types
      */
     public function in(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
     {
@@ -680,6 +674,8 @@ RST;
      * @test
      *
      * @dataProvider previousDirectiveIsProvider
+     *
+     * @param string[]|null $types
      */
     public function previousDirectiveIs(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
     {

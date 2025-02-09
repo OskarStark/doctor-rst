@@ -15,12 +15,7 @@ namespace App\Tests\Fixtures\Rule;
 
 use App\Rule\AbstractRule;
 use App\Rule\Rule;
-use App\Value\Lines;
 
 final class DummyRule extends AbstractRule implements Rule
 {
-    public function check(Lines $lines, int $number): ?string
-    {
-        return null;
-    }
 }
