@@ -59,6 +59,9 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCo
         return NullViolation::create();
     }
 
+    /**
+     * @param string[] $matches
+     */
     private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();

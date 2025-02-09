@@ -109,7 +109,7 @@ class RulesCommand extends Command
             $this->io->writeln('#### Configuration options');
             $this->io->newLine();
 
-            /** @var array{name: string, required: bool, types: array, default: mixed} $options */
+            /** @var array<array{name: string, required: bool, types: array, default: mixed}> $options */
             $options = [];
 
             $hasAnOptionWithDefaultValue = false;
@@ -155,6 +155,7 @@ class RulesCommand extends Command
                                 $defaultValue = '[]';
                             }
 
+                            /** @phpstan-ignore-next-line */
                             $default = \sprintf('`%s`', $defaultValue);
                         }
 

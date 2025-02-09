@@ -57,6 +57,7 @@ final class Line
     {
         if (null === $this->indention) {
             if ($matches = $this->raw->match('/^[\s]+/')) {
+                /** @var string[] $matches */
                 return $this->indention = \strlen((string) $matches[0]);
             }
 

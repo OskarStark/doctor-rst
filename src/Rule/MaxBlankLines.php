@@ -40,6 +40,7 @@ class MaxBlankLines extends AbstractRule implements Configurable, LineContentRul
 
         $resolvedOptions = $resolver->resolve($options);
 
+        /** @phpstan-ignore-next-line */
         $this->max = $resolvedOptions['max'];
     }
 
