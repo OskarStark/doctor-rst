@@ -48,6 +48,7 @@ class Indention extends AbstractRule implements Configurable, LineContentRule
 
         $resolvedOptions = $resolver->resolve($options);
 
+        /** @phpstan-ignore-next-line */
         $this->size = $resolvedOptions['size'];
     }
 

@@ -32,6 +32,9 @@ final class RulesConfiguration
         $this->rulesForAll[] = $rule;
     }
 
+    /**
+     * @param Rule[] $rules
+     */
     public function setRulesForAll(array $rules): void
     {
         $this->rulesForAll = [];
@@ -46,6 +49,9 @@ final class RulesConfiguration
         return [] !== $this->rulesForAll;
     }
 
+    /**
+     * @param Rule[] $rules
+     */
     public function excludeRulesForFilePath(string $filePath, array $rules): void
     {
         foreach ($rules as $rule) {

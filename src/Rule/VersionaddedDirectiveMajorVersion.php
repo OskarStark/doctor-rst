@@ -46,6 +46,7 @@ class VersionaddedDirectiveMajorVersion extends AbstractRule implements Configur
 
         $resolvedOptions = $resolver->resolve($options);
 
+        /** @phpstan-ignore-next-line  */
         $this->majorVersion = $resolvedOptions['major_version'];
     }
 

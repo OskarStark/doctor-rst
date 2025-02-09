@@ -51,6 +51,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements Configurable
 
         $resolvedOptions = $resolver->resolve($options);
 
+        /** @phpstan-ignore-next-line */
         $this->arguments = $resolvedOptions['arguments'];
     }
 
@@ -72,6 +73,7 @@ class ArgumentVariableMustMatchType extends AbstractRule implements Configurable
                 $argument['type'],
                 $argument['name'],
             );
+            /** @var array{actualName?: string} $match */
             $match = $line->clean()->match($regex);
 
             if ($match) {
