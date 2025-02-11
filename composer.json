@@ -27,10 +27,10 @@
         "maglnet/composer-require-checker": "^4.15",
         "mikey179/vfsstream": "^1.6.12",
         "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan": "^1.12.16",
+        "phpstan/phpstan": "^1.12.17",
         "phpstan/phpstan-phpunit": "^1.4.2",
         "phpstan/phpstan-webmozart-assert": "^1.2.11",
-        "phpunit/phpunit": "^10.5.44",
+        "phpunit/phpunit": "^10.5.45",
         "rector/rector": "^1.2.10",
         "symfony/var-dumper": "^7.2.3"
     },
