@@ -51,6 +51,12 @@
         "symfony/polyfill-php83": "*",
         "symfony/polyfill-php84": "*"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Drenso/composer-unused"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "src/"
@@ -73,11 +79,5 @@
             "*": "dist"
         },
         "sort-packages": true
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Drenso/composer-unused"
-        }
-    ]
+    }
 }
