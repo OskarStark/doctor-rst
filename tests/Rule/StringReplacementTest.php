@@ -48,7 +48,7 @@ final class StringReplacementTest extends UnitTestCase
         }
 
         if ($expected->isNull()) {
-            self::assertCount(0, $violations);
+            self::assertEmpty($violations);
         } else {
             self::assertCount(1, $violations);
             self::assertEquals($expected, $violations[0]);
