@@ -47,7 +47,7 @@ final class TypoTest extends UnitTestCase
         }
 
         if ($expected->isNull()) {
-            self::assertCount(0, $violations);
+            self::assertEmpty($violations);
         } else {
             self::assertCount(1, $violations);
             self::assertStringStartsWith($expected->message(), $violations[0]->message());
