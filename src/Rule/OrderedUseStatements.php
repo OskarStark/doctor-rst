@@ -92,6 +92,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
     private function extractClass(string $useStatement): string
     {
         $matches = u($useStatement)->match('/use (.*);/');
+        /** @var string[] $matches */
 
         Assert::keyExists($matches, 1);
 

@@ -103,6 +103,9 @@ trait DirectiveTrait
         );
     }
 
+    /**
+     * @param string[]|null $directiveTypes
+     */
     private function in(string $directive, Lines $lines, int $number, ?array $directiveTypes = null): bool
     {
         $lines->seek($number);
@@ -155,6 +158,9 @@ trait DirectiveTrait
         return false;
     }
 
+    /**
+     * @param string[]|null $directiveTypes
+     */
     private function previousDirectiveIs(string $directive, Lines $lines, int $number, ?array $directiveTypes = null): bool
     {
         $lines->seek($number);

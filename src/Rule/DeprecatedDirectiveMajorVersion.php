@@ -46,6 +46,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements Configurab
 
         $resolvedOptions = $resolver->resolve($options);
 
+        /** @phpstan-ignore-next-line  */
         $this->majorVersion = $resolvedOptions['major_version'];
     }
 
@@ -64,6 +65,7 @@ class DeprecatedDirectiveMajorVersion extends AbstractRule implements Configurab
         }
 
         if ($matches = $line->clean()->match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
+            /** @var string[] $matches */
             $version = trim((string) $matches[1]);
 
             try {

@@ -39,6 +39,7 @@ class LineLength extends AbstractRule implements Configurable, LineContentRule
 
         $resolvedOptions = $resolver->resolve($options);
 
+        /** @phpstan-ignore-next-line */
         $this->max = $resolvedOptions['max'];
     }
 

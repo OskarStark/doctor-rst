@@ -81,7 +81,6 @@ final class RstAnalyzer implements Analyzer
          * @var Line $line
          */
         foreach ($lines->toIterator() as $no => $line) {
-            \assert(\is_int($no));
             $lineIsBlank = $line->isBlank();
 
             foreach ($lineContentRules as $rule) {

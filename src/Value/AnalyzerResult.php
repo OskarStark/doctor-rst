@@ -25,6 +25,9 @@ final class AnalyzerResult
     ) {
     }
 
+    /**
+     * @return FileResult[]
+     */
     public function all(): array
     {
         return $this->results;

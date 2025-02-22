@@ -13,12 +13,27 @@ declare(strict_types=1);
 
 namespace App\Analyzer;
 
+use App\Rule\Rule;
+use App\Value\Violation;
+
 interface Cache
 {
+    /**
+     * @param Rule[] $rules
+     */
     public function has(\SplFileInfo $file, array $rules): bool;
 
+    /**
+     * @param Rule[] $rules
+     *
+     * @return Violation[]
+     */
     public function get(\SplFileInfo $file, array $rules): array;
 
+    /**
+     * @param Rule[]      $rules
+     * @param Violation[] $violations
+     */
     public function set(\SplFileInfo $file, array $rules, array $violations): void;
 
     public function write(): void;

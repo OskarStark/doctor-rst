@@ -18,7 +18,7 @@ final class Lines implements \SeekableIterator
     private int $currentLine = 0;
 
     /**
-     * @param array<int, Line> $array
+     * @param Line[] $array
      */
     private function __construct(
         private array $array,
@@ -31,7 +31,7 @@ final class Lines implements \SeekableIterator
     }
 
     /**
-     * @param array<int, string> $array
+     * @param string[] $array
      */
     public static function fromArray(array $array): self
     {
