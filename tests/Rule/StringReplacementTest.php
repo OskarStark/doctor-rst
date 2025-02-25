@@ -20,15 +20,14 @@ use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Description('propose to replace a string with another string.')]
 final class StringReplacementTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     */
+    #[Test]
+    #[DataProvider('checkProvider')]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];

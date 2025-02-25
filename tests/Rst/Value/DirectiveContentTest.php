@@ -15,15 +15,13 @@ namespace App\Tests\Rst\Value;
 
 use App\Rst\Value\DirectiveContent;
 use App\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @group temp
- */
+#[Group('temp')]
 final class DirectiveContentTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function cleanedEqualsRaw(): void
     {
         $raw = [
@@ -37,9 +35,7 @@ final class DirectiveContentTest extends UnitTestCase
         self::assertSame($content->raw, $content->cleaned);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function countWithoutBlankLines(): void
     {
         $raw = [
@@ -53,9 +49,7 @@ final class DirectiveContentTest extends UnitTestCase
         self::assertSame(3, $content->numberOfLines());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function countWithBlankLinesAtTheBeginning(): void
     {
         $raw = [
@@ -71,9 +65,7 @@ final class DirectiveContentTest extends UnitTestCase
         self::assertSame(3, $content->numberOfLines());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function countWithBlankLinesAtTheEnd(): void
     {
         $raw = [

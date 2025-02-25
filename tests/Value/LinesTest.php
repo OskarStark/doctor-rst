@@ -15,12 +15,11 @@ namespace App\Tests\Value;
 
 use App\Tests\UnitTestCase;
 use App\Value\Lines;
+use PHPUnit\Framework\Attributes\Test;
 
 final class LinesTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function currentThrowsOutOfBoundsExceptionWhenLinesIsInvalid(): void
     {
         $lines = Lines::fromArray([]);
@@ -33,9 +32,7 @@ final class LinesTest extends UnitTestCase
         $lines->current();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function keyThrowsOutOfBoundsExceptionWhenLinesIsInvalid(): void
     {
         $lines = Lines::fromArray([]);
@@ -48,9 +45,7 @@ final class LinesTest extends UnitTestCase
         $lines->key();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function seekRestoresCurrentPositionWhenTheGivenPositionIsInvalid(): void
     {
         $lines = Lines::fromArray([

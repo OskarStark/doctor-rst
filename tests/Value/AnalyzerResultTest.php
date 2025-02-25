@@ -18,12 +18,11 @@ use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
 use App\Value\Violation;
+use PHPUnit\Framework\Attributes\Test;
 
 final class AnalyzerResultTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function all(): void
     {
         $filename = \dirname(__DIR__, 2).'/dummy/docs/index.rst';

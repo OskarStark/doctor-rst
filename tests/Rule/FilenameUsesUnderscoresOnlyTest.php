@@ -18,15 +18,14 @@ use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider invalidProvider
-     * @dataProvider validProvider
-     */
+    #[Test]
+    #[DataProvider('invalidProvider')]
+    #[DataProvider('validProvider')]
     public function check(ViolationInterface $expected, string $filename): void
     {
         $fileInfo = $this->createMock(\SplFileInfo::class);

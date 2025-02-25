@@ -16,14 +16,13 @@ namespace App\Tests\Helper;
 use App\Helper\XmlHelper;
 use App\Tests\UnitTestCase;
 use App\Value\Line;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class XmlHelperTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider isCommentProvider
-     */
+    #[Test]
+    #[DataProvider('isCommentProvider')]
     public function isComment(bool $expected, string $line, ?bool $closed): void
     {
         self::assertSame(

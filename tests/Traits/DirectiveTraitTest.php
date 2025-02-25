@@ -18,6 +18,8 @@ use App\Rst\Value\DirectiveContent;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
 use App\Tests\Util\DirectiveTraitWrapper;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class DirectiveTraitTest extends UnitTestCase
 {
@@ -28,19 +30,14 @@ final class DirectiveTraitTest extends UnitTestCase
         $this->traitWrapper = new DirectiveTraitWrapper();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function methodExists(): void
     {
         self::assertTrue(method_exists($this->traitWrapper, 'in'));
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getDirectiveContentProvider
-     */
+    #[Test]
+    #[DataProvider('getDirectiveContentProvider')]
     public function getDirectiveContent(DirectiveContent $expected, string $directive, RstSample $sample): void
     {
         self::assertDirectiveContentEquals(
@@ -122,11 +119,8 @@ final class DirectiveTraitTest extends UnitTestCase
         //        ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider getLineNumberOfDirectiveProvider
-     */
+    #[Test]
+    #[DataProvider('getLineNumberOfDirectiveProvider')]
     public function getLineNumberOfDirective(int $expected, string $directive, RstSample $sample): void
     {
         self::assertSame(
@@ -176,11 +170,8 @@ MULTIPLE, 11),
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider inPhpCodeBlockProvider
-     */
+    #[Test]
+    #[DataProvider('inPhpCodeBlockProvider')]
     public function inPhpCodeBlock(bool $expected, RstSample $sample): void
     {
         self::assertSame(
@@ -214,11 +205,8 @@ MULTIPLE, 11),
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider inShellCodeBlockProvider
-     */
+    #[Test]
+    #[DataProvider('inShellCodeBlockProvider')]
     public function inShellCodeBlock(bool $expected, RstSample $sample): void
     {
         self::assertSame(
@@ -258,11 +246,8 @@ MULTIPLE, 11),
         }
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider inProvider
-     */
+    #[Test]
+    #[DataProvider('inProvider')]
     public function in(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
     {
         self::assertSame(
@@ -676,11 +661,8 @@ RST;
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider previousDirectiveIsProvider
-     */
+    #[Test]
+    #[DataProvider('previousDirectiveIsProvider')]
     public function previousDirectiveIs(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
     {
         self::assertSame(

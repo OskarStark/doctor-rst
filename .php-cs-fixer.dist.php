@@ -85,7 +85,14 @@ $ruleSet = Php84::create()->withHeader($header)->withRules(Rules::fromArray(arra
         ],
     ],
     'final_public_method_for_abstract_class' => false,
-    'ordered_attributes' => false,
+    'ordered_attributes' => [
+        'sort_algorithm' => 'custom',
+        'order' => [
+            'PHPUnit\\Framework\\Attributes\\Test',
+            'PHPUnit\\Framework\\Attributes\\Testdox',
+            'PHPUnit\\Framework\\Attributes\\DataProvider',
+        ],
+    ],
 ], $customRules)));
 
 $config = Factory::fromRuleSet($ruleSet);

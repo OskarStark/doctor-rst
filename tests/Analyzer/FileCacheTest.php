@@ -18,6 +18,7 @@ use App\Application;
 use App\Tests\UnitTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use PHPUnit\Framework\Attributes\Test;
 
 final class FileCacheTest extends UnitTestCase
 {
@@ -28,9 +29,7 @@ final class FileCacheTest extends UnitTestCase
         $this->root = vfsStream::setup();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function cacheFileWillBeCreated(): void
     {
         $rstFile = vfsStream::newFile('doc.rst')
@@ -44,9 +43,7 @@ final class FileCacheTest extends UnitTestCase
         self::assertTrue($this->root->hasChild('.doctor-rst.cache'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function cacheHits(): void
     {
         $rules = ['test'];
@@ -75,9 +72,7 @@ final class FileCacheTest extends UnitTestCase
         self::assertTrue($cache->has(new \SplFileInfo($rstFile->url()), $rules));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function cacheDoesNotHitWhenVersionNumberDoesNotMatch(): void
     {
         $rstFile = vfsStream::newFile('doc.rst')
@@ -93,9 +88,7 @@ final class FileCacheTest extends UnitTestCase
         self::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), ['test']));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function cacheDoesNotHitWhenFileHashDoesNotMatch(): void
     {
         $rules = ['test'];
@@ -124,9 +117,7 @@ final class FileCacheTest extends UnitTestCase
         self::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), $rules));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function cacheDoesNotHitWhenRulesHashDoesNotMatch(): void
     {
         $rules = ['test'];
@@ -155,9 +146,7 @@ final class FileCacheTest extends UnitTestCase
         self::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), $rules));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function unparsedFilesWillDeletedFromCacheFile(): void
     {
         $content = serialize(

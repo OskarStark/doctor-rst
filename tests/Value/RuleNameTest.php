@@ -15,12 +15,12 @@ namespace App\Tests\Value;
 
 use App\Tests\UnitTestCase;
 use App\Value\RuleName;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\Test;
 
 final class RuleNameTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function fromStringTrimsValue(): void
     {
         $value = self::faker()->word();
@@ -32,9 +32,7 @@ final class RuleNameTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fromString(): void
     {
         $value = self::faker()->word();
@@ -45,9 +43,7 @@ final class RuleNameTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fromClassStringTrimsValue(): void
     {
         self::assertSame(
@@ -56,9 +52,7 @@ final class RuleNameTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fromClassString(): void
     {
         self::assertSame(
@@ -67,12 +61,9 @@ final class RuleNameTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
-     * @dataProvider \Ergebnis\DataProvider\StringProvider::empty()
-     */
+    #[Test]
+    #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'blank')]
+    #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'empty')]
     public function fromStringThrowsException(string $value): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -80,12 +71,9 @@ final class RuleNameTest extends UnitTestCase
         RuleName::fromString($value);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
-     * @dataProvider \Ergebnis\DataProvider\StringProvider::empty()
-     */
+    #[Test]
+    #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'blank')]
+    #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'empty')]
     public function fromClassStringThrowsException(string $value): void
     {
         $this->expectException(\InvalidArgumentException::class);

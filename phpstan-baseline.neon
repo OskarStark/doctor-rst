@@ -671,27 +671,3 @@ parameters:
 			identifier: argument.type
 			count: 2
 			path: tests/Util/DirectiveTraitWrapper.php
-
-		-
-			message: '#^@dataProvider \\Ergebnis\\DataProvider\\StringProvider\:\:blank\(\) related method not found\.$#'
-			identifier: phpunit.dataProviderMethod
-			count: 1
-			path: tests/Value/RuleGroupTest.php
-
-		-
-			message: '#^@dataProvider \\Ergebnis\\DataProvider\\StringProvider\:\:empty\(\) related method not found\.$#'
-			identifier: phpunit.dataProviderMethod
-			count: 1
-			path: tests/Value/RuleGroupTest.php
-
-		-
-			message: '#^@dataProvider \\Ergebnis\\DataProvider\\StringProvider\:\:blank\(\) related method not found\.$#'
-			identifier: phpunit.dataProviderMethod
-			count: 2
-			path: tests/Value/RuleNameTest.php
-
-		-
-			message: '#^@dataProvider \\Ergebnis\\DataProvider\\StringProvider\:\:empty\(\) related method not found\.$#'
-			identifier: phpunit.dataProviderMethod
-			count: 2
-			path: tests/Value/RuleNameTest.php
