@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use App\Rule\DeprecatedDirectiveMajorVersion;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
@@ -23,11 +25,8 @@ use Composer\Semver\VersionParser;
 
 final class DeprecatedDirectiveMajorVersionTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     */
+    #[DataProvider('checkProvider')]
+    #[Test]
     public function check(ViolationInterface $expected, int $majorVersion, RstSample $sample): void
     {
         $rule = (new DeprecatedDirectiveMajorVersion(new VersionParser()));

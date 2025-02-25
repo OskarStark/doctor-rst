@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Formatter;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Formatter\ConsoleFormatter;
 use App\Formatter\GithubFormatter;
 use App\Tests\UnitTestCase;
@@ -26,9 +27,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class GithubFormatterTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function format(): void
     {
         $analyzeDir = \dirname(__DIR__, 2).'/dummy';

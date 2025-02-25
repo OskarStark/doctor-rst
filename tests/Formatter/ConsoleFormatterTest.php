@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Formatter;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Formatter\ConsoleFormatter;
 use App\Tests\UnitTestCase;
 use App\Value\AnalyzerResult;
@@ -25,9 +26,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class ConsoleFormatterTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function format(): void
     {
         $analyzeDir = \dirname(__DIR__, 2).'/dummy';

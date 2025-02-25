@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use App\Rule\FinalAdminClasses;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
@@ -23,20 +25,15 @@ use App\Value\ViolationInterface;
 
 final class FinalAdminClassesTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function getName(): void
     {
         self::assertInstanceOf(RuleName::class, FinalAdminClasses::getName());
         self::assertSame('final_admin_classes', FinalAdminClasses::getName()->toString());
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     */
+    #[DataProvider('checkProvider')]
+    #[Test]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         self::assertEquals(

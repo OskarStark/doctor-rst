@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use App\Rule\UseDeprecatedDirectiveInsteadOfVersionadded;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
@@ -22,12 +24,9 @@ use App\Value\ViolationInterface;
 
 final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider invalidProvider
-     * @dataProvider validProvider
-     */
+    #[DataProvider('invalidProvider')]
+    #[DataProvider('validProvider')]
+    #[Test]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         self::assertEquals(

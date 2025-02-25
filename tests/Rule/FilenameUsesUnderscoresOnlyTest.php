@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use App\Rule\FilenameUsesUnderscoresOnly;
 use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
@@ -21,12 +23,9 @@ use App\Value\ViolationInterface;
 
 final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider invalidProvider
-     * @dataProvider validProvider
-     */
+    #[DataProvider('invalidProvider')]
+    #[DataProvider('validProvider')]
+    #[Test]
     public function check(ViolationInterface $expected, string $filename): void
     {
         $fileInfo = $this->createMock(\SplFileInfo::class);

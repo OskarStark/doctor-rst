@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use App\Rule\Indention;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
@@ -22,11 +24,8 @@ use App\Value\ViolationInterface;
 
 final class IndentionTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     */
+    #[DataProvider('checkProvider')]
+    #[Test]
     public function check(ViolationInterface $expected, int $size, RstSample $sample): void
     {
         $rule = (new Indention());
@@ -369,11 +368,8 @@ RST
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider multilineXmlProvider
-     */
+    #[DataProvider('multilineXmlProvider')]
+    #[Test]
     public function isPartOfMultilineXmlComment(bool $expected, RstSample $sample): void
     {
         self::assertSame(
@@ -443,11 +439,8 @@ RST
         yield [false, new RstSample('foo bar')];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider multilineTwigProvider
-     */
+    #[DataProvider('multilineTwigProvider')]
+    #[Test]
     public function isPartOfMultilineTwigComment(bool $expected, RstSample $sample): void
     {
         self::assertSame(

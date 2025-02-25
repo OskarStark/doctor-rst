@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Analyzer;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Analyzer\RstAnalyzer;
 use App\Rule\MaxBlankLines;
 use App\Tests\UnitTestCase;
 
 final class RstAnalyzerTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function onlyOneMaxBlankLineViolationMessageOccurs(): void
     {
         $maxBlankLines = new MaxBlankLines();

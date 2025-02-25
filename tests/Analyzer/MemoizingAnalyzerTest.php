@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Analyzer;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Analyzer\Analyzer;
 use App\Analyzer\Cache;
 use App\Analyzer\MemoizingAnalyzer;
@@ -40,9 +41,7 @@ final class MemoizingAnalyzerTest extends UnitTestCase
         $this->memoizingAnalyzer = new MemoizingAnalyzer($this->analyzer, $this->cache);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function cacheHitReturnsCacheContent(): void
     {
         $fileInfo = new \SplFileInfo('test.rst');
@@ -67,9 +66,7 @@ final class MemoizingAnalyzerTest extends UnitTestCase
         $this->memoizingAnalyzer->analyze($fileInfo, $rules);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function noCacheHitCallsAnalyzerAndSavesResultsToCache(): void
     {
         $fileInfo = new \SplFileInfo('test.rst');

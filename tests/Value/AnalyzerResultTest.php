@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Value;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Tests\UnitTestCase;
 use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
@@ -21,9 +22,7 @@ use App\Value\Violation;
 
 final class AnalyzerResultTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function all(): void
     {
         $filename = \dirname(__DIR__, 2).'/dummy/docs/index.rst';

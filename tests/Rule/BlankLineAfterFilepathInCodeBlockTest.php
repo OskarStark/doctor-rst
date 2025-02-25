@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use App\Rule\BlankLineAfterFilepathInCodeBlock;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
@@ -22,16 +24,13 @@ use App\Value\ViolationInterface;
 
 final class BlankLineAfterFilepathInCodeBlockTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkPhpProvider
-     * @dataProvider checkProvider
-     * @dataProvider checkTwigProvider
-     * @dataProvider checkXmlProvider
-     * @dataProvider checkYamlProvider
-     * @dataProvider checkYmlProvider
-     */
+    #[DataProvider('checkPhpProvider')]
+    #[DataProvider('checkProvider')]
+    #[DataProvider('checkTwigProvider')]
+    #[DataProvider('checkXmlProvider')]
+    #[DataProvider('checkYamlProvider')]
+    #[DataProvider('checkYmlProvider')]
+    #[Test]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         self::assertEquals(

@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Value;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\DataProvider;
 use App\Tests\UnitTestCase;
 use App\Value\RuleGroup;
 
 final class RuleGroupTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function fromStringThrowsExceptionIfUnknownGroup(): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -28,12 +29,9 @@ final class RuleGroupTest extends UnitTestCase
         RuleGroup::fromString(self::faker()->word);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider \Ergebnis\DataProvider\StringProvider::blank()
-     * @dataProvider \Ergebnis\DataProvider\StringProvider::empty()
-     */
+    #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'blank')]
+    #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'empty')]
+    #[Test]
     public function fromStringThrowsException(string $value): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -41,11 +39,8 @@ final class RuleGroupTest extends UnitTestCase
         RuleGroup::fromString($value);
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider definedProvider
-     */
+    #[DataProvider('definedProvider')]
+    #[Test]
     public function defined(string $expected, RuleGroup $group): void
     {
         self::assertSame(
@@ -75,11 +70,8 @@ final class RuleGroupTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     *
-     * @dataProvider equalsProvider
-     */
+    #[DataProvider('equalsProvider')]
+    #[Test]
     public function equals(bool $expected, RuleGroup $group, RuleGroup $other): void
     {
         self::assertSame(

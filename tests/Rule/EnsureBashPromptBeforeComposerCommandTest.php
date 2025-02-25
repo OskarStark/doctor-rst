@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use App\Rst\RstParser;
 use App\Rule\EnsureBashPromptBeforeComposerCommand;
 use App\Tests\RstSample;
@@ -23,11 +25,8 @@ use App\Value\ViolationInterface;
 
 final class EnsureBashPromptBeforeComposerCommandTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     */
+    #[DataProvider('checkProvider')]
+    #[Test]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         self::assertEquals(

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use App\Rule\ArgumentVariableMustMatchType;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
@@ -24,11 +26,8 @@ use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 
 final class ArgumentVariableMustMatchTypeTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     */
+    #[DataProvider('checkProvider')]
+    #[Test]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $rule = new ArgumentVariableMustMatchType();
@@ -144,9 +143,7 @@ final class ArgumentVariableMustMatchTypeTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function invalidOptionType(): void
     {
         $this->expectExceptionObject(
@@ -159,9 +156,7 @@ final class ArgumentVariableMustMatchTypeTest extends UnitTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function invalidOptionValue(): void
     {
         $this->expectExceptionObject(
