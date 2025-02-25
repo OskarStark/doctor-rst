@@ -18,7 +18,7 @@ static-code-analysis:
 
 .PHONY: static-code-analysis-baseline
 static-code-analysis-baseline:
-	vendor/bin/phpstan analyse -c phpstan.neon.dist --generate-baseline=phpstan-baseline.neon
+	vendor/bin/phpstan analyse -c phpstan.neon.dist --generate-baseline=phpstan-baseline.neon --memory-limit=1G
 
 .PHONY: refactoring
 refactoring:
