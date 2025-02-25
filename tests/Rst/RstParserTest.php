@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace App\Tests\Rst;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use App\Rst\RstParser;
 use App\Tests\UnitTestCase;
 use App\Value\Line;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class RstParserTest extends UnitTestCase
 {
-    #[DataProvider('isPhpDirectiveProvider')]
     #[Test]
+    #[DataProvider('isPhpDirectiveProvider')]
     public function isPhpDirective(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isPhpDirective(new Line($string)));
@@ -42,8 +42,8 @@ final class RstParserTest extends UnitTestCase
         yield [false, '.. index::'];
     }
 
-    #[DataProvider('isLineNumberAnnotationProvider')]
     #[Test]
+    #[DataProvider('isLineNumberAnnotationProvider')]
     public function isLineNumberAnnotation(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isLineNumberAnnotation(new Line($string)));
@@ -63,8 +63,8 @@ final class RstParserTest extends UnitTestCase
         yield [false, '.. index::'];
     }
 
-    #[DataProvider('isCommentProvider')]
     #[Test]
+    #[DataProvider('isCommentProvider')]
     public function isComment(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isComment(new Line($string)));
@@ -83,8 +83,8 @@ final class RstParserTest extends UnitTestCase
         yield [false, ' .. [1] '];
     }
 
-    #[DataProvider('isFootnoteProvider')]
     #[Test]
+    #[DataProvider('isFootnoteProvider')]
     public function isFootnote(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isFootnote(new Line($string)));
@@ -101,8 +101,8 @@ final class RstParserTest extends UnitTestCase
         yield [true, ' .. [1] '];
     }
 
-    #[DataProvider('isListItemProvider')]
     #[Test]
+    #[DataProvider('isListItemProvider')]
     public function isListItem(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isListItem(new Line($string)));
@@ -120,8 +120,8 @@ final class RstParserTest extends UnitTestCase
         yield [true, '  #. list item 1'];
     }
 
-    #[DataProvider('isLinkDefinitionProvider')]
     #[Test]
+    #[DataProvider('isLinkDefinitionProvider')]
     public function isLinkDefinition(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isLinkDefinition(new Line($string)));
@@ -142,8 +142,8 @@ final class RstParserTest extends UnitTestCase
         yield [false, 'I am text::'];
     }
 
-    #[DataProvider('isLinkUsageProvider')]
     #[Test]
+    #[DataProvider('isLinkUsageProvider')]
     public function isLinkUsage(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isLinkUsage($string));
@@ -161,8 +161,8 @@ final class RstParserTest extends UnitTestCase
         yield [false, 'I am text::'];
     }
 
-    #[DataProvider('isTableProvider')]
     #[Test]
+    #[DataProvider('isTableProvider')]
     public function isTable(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isTable(new Line($string)));
@@ -186,8 +186,8 @@ final class RstParserTest extends UnitTestCase
         yield [false, 'I am text::'];
     }
 
-    #[DataProvider('directiveIsProvider')]
     #[Test]
+    #[DataProvider('directiveIsProvider')]
     public function directiveIs(bool $expected, string $string, string $directive): void
     {
         self::assertSame($expected, RstParser::directiveIs(new Line($string), $directive));
@@ -210,8 +210,8 @@ final class RstParserTest extends UnitTestCase
         yield [false, 'foo', RstParser::DIRECTIVE_CODE_BLOCK];
     }
 
-    #[DataProvider('codeBlockDirectiveIsTypeOfProvider')]
     #[Test]
+    #[DataProvider('codeBlockDirectiveIsTypeOfProvider')]
     public function codeBlockDirectiveIsTypeOf(bool $expected, string $string, string $type, bool $strict = false): void
     {
         self::assertSame($expected, RstParser::codeBlockDirectiveIsTypeOf(new Line($string), $type, $strict));
@@ -243,8 +243,8 @@ final class RstParserTest extends UnitTestCase
         yield [false, ' .. code-block:: html+php', RstParser::CODE_BLOCK_PHP, true];
     }
 
-    #[DataProvider('isOptionProvider')]
     #[Test]
+    #[DataProvider('isOptionProvider')]
     public function isOption(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isOption(new Line($string)));
@@ -267,8 +267,8 @@ final class RstParserTest extends UnitTestCase
         yield [false, '.. _env-var-processors:'];
     }
 
-    #[DataProvider('isAnchorProvider')]
     #[Test]
+    #[DataProvider('isAnchorProvider')]
     public function isAnchor(bool $expected, string $string): void
     {
         self::assertSame($expected, RstParser::isAnchor(new Line($string)));

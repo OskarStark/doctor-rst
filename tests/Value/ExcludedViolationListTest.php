@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Value;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Tests\UnitTestCase;
 use App\Value\ExcludedViolationList;
 use App\Value\Violation;
+use PHPUnit\Framework\Attributes\Test;
 
 final class ExcludedViolationListTest extends UnitTestCase
 {

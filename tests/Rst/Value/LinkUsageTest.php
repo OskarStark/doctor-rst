@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace App\Tests\Rst\Value;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use App\Rst\Value\LinkName;
 use App\Rst\Value\LinkUsage;
 use App\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class LinkUsageTest extends UnitTestCase
 {
-    #[DataProvider('fromLineProvider')]
     #[Test]
+    #[DataProvider('fromLineProvider')]
     public function fromLine(string $expected, string $line): void
     {
         $usage = LinkUsage::fromLine($line);

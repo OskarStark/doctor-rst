@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Value;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Tests\Fixtures\Rule\DummyRule;
 use App\Tests\UnitTestCase;
 use App\Value\RulesConfiguration;
+use PHPUnit\Framework\Attributes\Test;
 
 final class RulesConfigurationTest extends UnitTestCase
 {

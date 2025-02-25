@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use App\Rule\LineContentRule;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
 use App\Value\ViolationInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 abstract class AbstractLineContentRuleTestCase extends UnitTestCase
 {
@@ -29,8 +29,8 @@ abstract class AbstractLineContentRuleTestCase extends UnitTestCase
      */
     abstract public static function checkProvider(): iterable;
 
-    #[DataProvider('checkProvider')]
     #[Test]
+    #[DataProvider('checkProvider')]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         self::assertEquals(

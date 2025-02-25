@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Analyzer;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Analyzer\FileCache;
 use App\Application;
 use App\Tests\UnitTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use PHPUnit\Framework\Attributes\Test;
 
 final class FileCacheTest extends UnitTestCase
 {

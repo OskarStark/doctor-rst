@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace App\Tests\Helper;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use App\Helper\PhpHelper;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
 use App\Value\Line;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class PhpHelperTest extends UnitTestCase
 {
-    #[DataProvider('isCommentProvider')]
     #[Test]
+    #[DataProvider('isCommentProvider')]
     public function isComment(bool $expected, string $line): void
     {
         self::assertSame(
@@ -42,8 +42,8 @@ final class PhpHelperTest extends UnitTestCase
         yield [false, 'no comment'];
     }
 
-    #[DataProvider('containsBackslashProvider')]
     #[Test]
+    #[DataProvider('containsBackslashProvider')]
     public function containsBackslash(bool $expected, string $string): void
     {
         self::assertSame($expected, PhpHelper::containsBackslash($string));
@@ -62,8 +62,8 @@ final class PhpHelperTest extends UnitTestCase
         yield 'no backslash' => [false, 'Test'];
     }
 
-    #[DataProvider('isUsingTwoBackSlashesProvider')]
     #[Test]
+    #[DataProvider('isUsingTwoBackSlashesProvider')]
     public function isUsingTwoBackslashes(bool $expected, string $string): void
     {
         self::assertSame($expected, PhpHelper::isUsingTwoBackslashes($string));
@@ -92,8 +92,8 @@ final class PhpHelperTest extends UnitTestCase
         yield 'two backslashes' => [false, '\\\\Test'];
     }
 
-    #[DataProvider('isLastLineOfMultilineCommentProvider')]
     #[Test]
+    #[DataProvider('isLastLineOfMultilineCommentProvider')]
     public function isLastLineOfMultilineComment(bool $expected, string $line): void
     {
         self::assertSame(
@@ -112,8 +112,8 @@ final class PhpHelperTest extends UnitTestCase
         yield [true, '*/'];
     }
 
-    #[DataProvider('isPartOfDocBlockProvider')]
     #[Test]
+    #[DataProvider('isPartOfDocBlockProvider')]
     public function isPartOfDocBlock(bool $expected, RstSample $sample): void
     {
         self::assertSame(
@@ -143,8 +143,8 @@ RST;
         yield 'not part of doc block' => [false, new RstSample($valid, 5)];
     }
 
-    #[DataProvider('isPartOfMultilineCommentProvider')]
     #[Test]
+    #[DataProvider('isPartOfMultilineCommentProvider')]
     public function isPartOfMultilineComment(bool $expected, RstSample $sample): void
     {
         self::assertSame(
@@ -183,8 +183,8 @@ RST;
         yield 'no asterisk - not part of multiline comment' => [false, new RstSample($valid, 3)];
     }
 
-    #[DataProvider('isFirstLineOfMultilineCommentProvider')]
     #[Test]
+    #[DataProvider('isFirstLineOfMultilineCommentProvider')]
     public function isFirstLineOfMultilineComment(bool $expected, string $line): void
     {
         self::assertSame(
@@ -204,8 +204,8 @@ RST;
         yield [false, '*/'];
     }
 
-    #[DataProvider('isFirstLineOfDocBlockProvider')]
     #[Test]
+    #[DataProvider('isFirstLineOfDocBlockProvider')]
     public function isFirstLineOfDocBlock(bool $expected, string $line): void
     {
         self::assertSame(
@@ -225,8 +225,8 @@ RST;
         yield [false, '*/'];
     }
 
-    #[DataProvider('isLastLineOfDocBlockProvider')]
     #[Test]
+    #[DataProvider('isLastLineOfDocBlockProvider')]
     public function isLastLineOfDocBlock(bool $expected, string $line): void
     {
         self::assertSame(

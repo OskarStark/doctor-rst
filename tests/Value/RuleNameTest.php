@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Value;
 
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\DataProviderExternal;
 use App\Tests\UnitTestCase;
 use App\Value\RuleName;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\Test;
 
 final class RuleNameTest extends UnitTestCase
 {
@@ -61,9 +61,9 @@ final class RuleNameTest extends UnitTestCase
         );
     }
 
+    #[Test]
     #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'blank')]
     #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'empty')]
-    #[Test]
     public function fromStringThrowsException(string $value): void
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -71,9 +71,9 @@ final class RuleNameTest extends UnitTestCase
         RuleName::fromString($value);
     }
 
+    #[Test]
     #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'blank')]
     #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'empty')]
-    #[Test]
     public function fromClassStringThrowsException(string $value): void
     {
         $this->expectException(\InvalidArgumentException::class);

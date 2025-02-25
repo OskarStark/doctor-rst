@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use App\Rule\VersionaddedDirectiveMajorVersion;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
@@ -22,11 +20,13 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class VersionaddedDirectiveMajorVersionTest extends UnitTestCase
 {
-    #[DataProvider('checkProvider')]
     #[Test]
+    #[DataProvider('checkProvider')]
     public function check(ViolationInterface $expected, int $majorVersion, RstSample $sample): void
     {
         $rule = new VersionaddedDirectiveMajorVersion(new VersionParser());

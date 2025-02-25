@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Traits;
 
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\DataProvider;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
 use App\Tests\Util\ListItemTraitWrapper;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class ListTraitTest extends UnitTestCase
 {
@@ -34,8 +34,8 @@ final class ListTraitTest extends UnitTestCase
         self::assertTrue(method_exists($this->traitWrapper, 'isPartOfListItem'));
     }
 
-    #[DataProvider('isPartOfListItemProvider')]
     #[Test]
+    #[DataProvider('isPartOfListItemProvider')]
     public function isPartOfListItem(bool $expected, RstSample $sample): void
     {
         self::assertSame(
@@ -137,8 +137,8 @@ RST
         ];
     }
 
-    #[DataProvider('isPartOfFootnoteProvider')]
     #[Test]
+    #[DataProvider('isPartOfFootnoteProvider')]
     public function isPartOfFootnote(bool $expected, RstSample $sample): void
     {
         self::assertSame(
@@ -161,8 +161,8 @@ RST;
         yield 'second line (footnote)' => [true, new RstSample($footnote, 1)];
     }
 
-    #[DataProvider('isPartOfRstCommentProvider')]
     #[Test]
+    #[DataProvider('isPartOfRstCommentProvider')]
     public function isPartOfRstComment(bool $expected, RstSample $sample): void
     {
         self::assertSame(
@@ -185,8 +185,8 @@ RST;
         yield 'second line (rst comment)' => [true, new RstSample($rst_comment, 1)];
     }
 
-    #[DataProvider('isPartOfLineNumberAnnotationProvider')]
     #[Test]
+    #[DataProvider('isPartOfLineNumberAnnotationProvider')]
     public function isPartOfLineNumberAnnotation(bool $expected, RstSample $sample): void
     {
         self::assertSame(

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace App\Tests\Analyzer;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Analyzer\Analyzer;
 use App\Analyzer\Cache;
 use App\Analyzer\MemoizingAnalyzer;
 use App\Tests\Fixtures\Rule\DummyRule;
 use App\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
 final class MemoizingAnalyzerTest extends UnitTestCase

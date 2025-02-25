@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Value;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Tests\UnitTestCase;
 use App\Value\Lines;
+use PHPUnit\Framework\Attributes\Test;
 
 final class LinesTest extends UnitTestCase
 {

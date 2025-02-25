@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace App\Tests\Helper;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use App\Helper\YamlHelper;
 use App\Tests\UnitTestCase;
 use App\Value\Line;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class YamlHelperTest extends UnitTestCase
 {
-    #[DataProvider('isCommentProvider')]
     #[Test]
+    #[DataProvider('isCommentProvider')]
     public function isComment(bool $expected, string $line): void
     {
         self::assertSame(

@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
-use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Test;
 use App\Rule\NoDirectiveAfterShorthand;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class NoDirectiveAfterShorthandTest extends UnitTestCase
 {
+    #[Test]
     #[DataProvider('invalidProvider')]
     #[DataProvider('validProvider')]
-    #[Test]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         self::assertEquals(

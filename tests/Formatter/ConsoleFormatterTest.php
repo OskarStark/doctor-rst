@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Formatter;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Formatter\ConsoleFormatter;
 use App\Tests\UnitTestCase;
 use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
 use App\Value\Violation;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;

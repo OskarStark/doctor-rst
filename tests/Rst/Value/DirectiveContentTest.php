@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Rst\Value;
 
-use PHPUnit\Framework\Attributes\Group;
-use PHPUnit\Framework\Attributes\Test;
 use App\Rst\Value\DirectiveContent;
 use App\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 
 #[Group('temp')]
 final class DirectiveContentTest extends UnitTestCase

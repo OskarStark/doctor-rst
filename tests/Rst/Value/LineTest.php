@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Rst\Value;
 
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\DataProvider;
 use App\Tests\UnitTestCase;
 use App\Value\Line;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class LineTest extends UnitTestCase
 {
@@ -28,8 +28,8 @@ final class LineTest extends UnitTestCase
         self::assertSame($line->clean()->toString(), $line->raw()->trim()->toString());
     }
 
-    #[DataProvider('cleanProvider')]
     #[Test]
+    #[DataProvider('cleanProvider')]
     public function clean(string $expected, string $string): void
     {
         self::assertSame($expected, (new Line($string))->clean()->toString());
@@ -76,8 +76,8 @@ final class LineTest extends UnitTestCase
         ];
     }
 
-    #[DataProvider('isBlankProvider')]
     #[Test]
+    #[DataProvider('isBlankProvider')]
     public function isBlank(bool $expected, string $string): void
     {
         self::assertSame($expected, (new Line($string))->isBlank());
@@ -96,8 +96,8 @@ final class LineTest extends UnitTestCase
         ];
     }
 
-    #[DataProvider('indentionProvider')]
     #[Test]
+    #[DataProvider('indentionProvider')]
     public function indention(int $expected, string $string): void
     {
         self::assertSame($expected, (new Line($string))->indention());
@@ -113,8 +113,8 @@ final class LineTest extends UnitTestCase
         yield [4, '    .. versionchanged:: 3.4'];
     }
 
-    #[DataProvider('isHeadlineProvider')]
     #[Test]
+    #[DataProvider('isHeadlineProvider')]
     public function isHeadline(bool $expected, string $string): void
     {
         self::assertSame($expected, (new Line($string))->isHeadline());
@@ -137,8 +137,8 @@ final class LineTest extends UnitTestCase
         yield 'no spaces allowed' => [false, '--- ---'];
     }
 
-    #[DataProvider('isDirectiveProvider')]
     #[Test]
+    #[DataProvider('isDirectiveProvider')]
     public function isDirective(bool $expected, string $string): void
     {
         self::assertSame($expected, (new Line($string))->isDirective());
@@ -163,8 +163,8 @@ final class LineTest extends UnitTestCase
         yield [false, '.. _security-firewalls:'];
     }
 
-    #[DataProvider('isDefaultDirectiveProvider')]
     #[Test]
+    #[DataProvider('isDefaultDirectiveProvider')]
     public function isDefaultDirective(bool $expected, string $string): void
     {
         self::assertSame($expected, (new Line($string))->isDefaultDirective());

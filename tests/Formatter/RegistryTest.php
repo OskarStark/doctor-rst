@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Formatter;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Formatter\ConsoleFormatter;
 use App\Formatter\Exception\FormatterNotFound;
 use App\Formatter\Registry;
 use App\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 final class RegistryTest extends UnitTestCase
 {
