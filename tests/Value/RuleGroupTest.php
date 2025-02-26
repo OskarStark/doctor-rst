@@ -15,6 +15,7 @@ namespace App\Tests\Value;
 
 use App\Tests\UnitTestCase;
 use App\Value\RuleGroup;
+use Ergebnis\DataProvider\StringProvider;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
@@ -30,8 +31,8 @@ final class RuleGroupTest extends UnitTestCase
     }
 
     #[Test]
-    #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'blank')]
-    #[DataProviderExternal(\Ergebnis\DataProvider\StringProvider::class, 'empty')]
+    #[DataProviderExternal(StringProvider::class, 'blank')]
+    #[DataProviderExternal(StringProvider::class, 'empty')]
     public function fromStringThrowsException(string $value): void
     {
         $this->expectException(\InvalidArgumentException::class);
