@@ -11,7 +11,7 @@
         "ondram/ci-detector": "^4.2.0",
         "symfony/config": "^7.2.3",
         "symfony/console": "^7.2.1",
-        "symfony/dependency-injection": "^7.2.3",
+        "symfony/dependency-injection": "^7.2.4",
         "symfony/finder": "^7.2.2",
         "symfony/options-resolver": "^7.2.0",
         "symfony/service-contracts": "^3.5.1",
