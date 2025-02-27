@@ -31,7 +31,7 @@
         "phpstan/phpstan": "^2.1.6",
         "phpstan/phpstan-phpunit": "^2.0.4",
         "phpstan/phpstan-webmozart-assert": "^2.0.0",
-        "phpunit/phpunit": "^11.5.10",
+        "phpunit/phpunit": "^12.0.5",
         "rector/rector": "^2.0.9",
         "symfony/var-dumper": "^7.2.3"
     },
