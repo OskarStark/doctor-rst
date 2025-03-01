@@ -16,12 +16,11 @@ namespace App\Tests\Value;
 use App\Tests\UnitTestCase;
 use App\Value\ExcludedViolationList;
 use App\Value\Violation;
+use PHPUnit\Framework\Attributes\Test;
 
 final class ExcludedViolationListTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function filterExcludedViolations(): void
     {
         $filename = \dirname(__DIR__, 2).'/dummy/docs/index.rst';

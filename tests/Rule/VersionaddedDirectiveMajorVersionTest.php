@@ -20,14 +20,13 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class VersionaddedDirectiveMajorVersionTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     */
+    #[Test]
+    #[DataProvider('checkProvider')]
     public function check(ViolationInterface $expected, int $majorVersion, RstSample $sample): void
     {
         $rule = new VersionaddedDirectiveMajorVersion(new VersionParser());

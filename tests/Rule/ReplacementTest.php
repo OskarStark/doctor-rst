@@ -19,14 +19,13 @@ use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class ReplacementTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     */
+    #[Test]
+    #[DataProvider('checkProvider')]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];
@@ -46,7 +45,7 @@ final class ReplacementTest extends UnitTestCase
         }
 
         if ($expected->isNull()) {
-            self::assertCount(0, $violations);
+            self::assertEmpty($violations);
         } else {
             self::assertCount(1, $violations);
             self::assertEquals($expected, $violations[0]);

@@ -16,14 +16,13 @@ namespace App\Tests\Rst\Value;
 use App\Rst\Value\LinkName;
 use App\Rst\Value\LinkUsage;
 use App\Tests\UnitTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class LinkUsageTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider fromLineProvider
-     */
+    #[Test]
+    #[DataProvider('fromLineProvider')]
     public function fromLine(string $expected, string $line): void
     {
         $usage = LinkUsage::fromLine($line);
@@ -40,9 +39,7 @@ final class LinkUsageTest extends UnitTestCase
         yield ['Link 1', '`Link 1`_'];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fromLinkName(): void
     {
         $name = 'foo';

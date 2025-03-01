@@ -3,14 +3,14 @@ FROM php:8.4-cli-alpine as build
 RUN apk add git # required for box to detect the version
 RUN apk add --update icu-dev && docker-php-ext-install -j$(nproc) intl # related to https://github.com/box-project/box/issues/516
 
-COPY --from=composer:2.6.5 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.8.5 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /usr/src/app
 ADD . /usr/src/app
 
 RUN composer install --classmap-authoritative --no-interaction --no-dev --optimize-autoloader
 
-ADD https://github.com/humbug/box/releases/download/4.6.2/box.phar ./box.phar
+ADD https://github.com/humbug/box/releases/download/4.6.4/box.phar ./box.phar
 RUN php box.phar compile
 
 FROM php:8.4-cli-alpine

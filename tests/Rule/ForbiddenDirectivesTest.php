@@ -19,15 +19,14 @@ use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
 final class ForbiddenDirectivesTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     */
+    #[Test]
+    #[DataProvider('checkProvider')]
     public function check(array $directiveOptions, ViolationInterface $expected, RstSample $sample): void
     {
         $rule = new ForbiddenDirectives();
@@ -133,9 +132,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function invalidOptionType(): void
     {
         $this->expectExceptionObject(
@@ -148,9 +145,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function invalidDirective(): void
     {
         $this->expectExceptionObject(
@@ -168,9 +163,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function missingDirective(): void
     {
         $this->expectExceptionObject(
@@ -187,9 +180,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
         ]);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkWithNoConfiguration(): void
     {
         $rule = new ForbiddenDirectives();

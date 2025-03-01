@@ -16,12 +16,11 @@ namespace App\Tests\Value;
 use App\Tests\Fixtures\Rule\DummyRule;
 use App\Tests\UnitTestCase;
 use App\Value\RulesConfiguration;
+use PHPUnit\Framework\Attributes\Test;
 
 final class RulesConfigurationTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function rulesForAll(): void
     {
         $rulesConfiguration = new RulesConfiguration();
@@ -59,9 +58,7 @@ final class RulesConfigurationTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function excludedRulesForFile(): void
     {
         $rulesConfiguration = new RulesConfiguration();

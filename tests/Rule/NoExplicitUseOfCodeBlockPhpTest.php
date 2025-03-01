@@ -19,15 +19,14 @@ use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class NoExplicitUseOfCodeBlockPhpTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider checkProvider
-     * @dataProvider realSymfonyFileProvider
-     */
+    #[Test]
+    #[DataProvider('checkProvider')]
+    #[DataProvider('realSymfonyFileProvider')]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         self::assertEquals(

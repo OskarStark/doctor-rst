@@ -19,15 +19,14 @@ use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 
 final class TypoTest extends UnitTestCase
 {
-    /**
-     * @test
-     *
-     * @dataProvider invalidProvider
-     * @dataProvider validProvider
-     */
+    #[Test]
+    #[DataProvider('invalidProvider')]
+    #[DataProvider('validProvider')]
     public function check(ViolationInterface $expected, RstSample $sample): void
     {
         $configuredRules = [];
@@ -47,7 +46,7 @@ final class TypoTest extends UnitTestCase
         }
 
         if ($expected->isNull()) {
-            self::assertCount(0, $violations);
+            self::assertEmpty($violations);
         } else {
             self::assertCount(1, $violations);
             self::assertStringStartsWith($expected->message(), $violations[0]->message());
