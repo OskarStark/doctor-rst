@@ -45,12 +45,16 @@ class BlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Line
 
         // TWIG
         if ($matches = $lines->current()->clean()->match('/^{#(.*)\.twig(.*)#}/')) {
+            /** @var string[] $matches */
             return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
     }
 
+    /**
+     * @param string[] $matches
+     */
     private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();

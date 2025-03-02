@@ -19,7 +19,7 @@ use App\Value\Violation;
 final class FileCache implements Cache
 {
     /**
-     * @var array<string, array>
+     * @var array<string, array{hash: string|false, rules: string, violations: Violation[]}>
      */
     private array $cache;
     private bool $loaded = false;
@@ -100,6 +100,7 @@ final class FileCache implements Cache
             throw new \RuntimeException(\sprintf('Cache file could not be read "%s".', $this->cacheFile));
         }
 
+        /** @var array{version: string, payload: array<string, array{hash: string, rules: string, violations: Violation[]}>} $cache */
         $cache = unserialize($contents, ['allowed_classes' => [Violation::class]]);
 
         $this->loaded = true;

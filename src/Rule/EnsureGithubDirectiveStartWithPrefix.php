@@ -38,6 +38,7 @@ class EnsureGithubDirectiveStartWithPrefix extends AbstractRule implements Confi
 
         $resolvedOptions = $resolver->resolve($options);
 
+        /** @phpstan-ignore-next-line */
         $this->prefix = $resolvedOptions['prefix'];
     }
 
