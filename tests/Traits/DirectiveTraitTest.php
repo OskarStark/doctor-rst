@@ -246,6 +246,9 @@ MULTIPLE, 11),
         }
     }
 
+    /**
+     * @param string[]|null $types
+     */
     #[Test]
     #[DataProvider('inProvider')]
     public function in(bool $expected, RstSample $sample, string $directive, ?array $types = null): void
@@ -661,6 +664,9 @@ RST;
         ];
     }
 
+    /**
+     * @param string[]|null $types
+     */
     #[Test]
     #[DataProvider('previousDirectiveIsProvider')]
     public function previousDirectiveIs(bool $expected, RstSample $sample, string $directive, ?array $types = null): void

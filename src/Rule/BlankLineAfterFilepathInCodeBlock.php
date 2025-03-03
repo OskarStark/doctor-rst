@@ -49,27 +49,34 @@ class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCont
 
         // PHP
         if ($matches = $lines->current()->clean()->match('/^\/\/(.*)\.php$/')) {
+            /** @var string[] $matches */
             return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         // YML / YAML
         if ($matches = $lines->current()->clean()->match('/^#(.*)\.(yml|yaml)$/')) {
+            /** @var string[] $matches */
             return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         // XML
         if ($matches = $lines->current()->clean()->match('/^<!--(.*)\.xml(.*)-->$/')) {
+            /** @var string[] $matches */
             return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         // TWIG
         if ($matches = $lines->current()->clean()->match('/^{#(.*)\.twig(.*)#}/')) {
+            /** @var string[] $matches */
             return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
     }
 
+    /**
+     * @param string[] $matches
+     */
     private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();

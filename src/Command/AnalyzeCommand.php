@@ -85,6 +85,12 @@ class AnalyzeCommand extends Command
         $io->newLine();
 
         $config = Yaml::parseFile($configFile);
+        /** @var array{
+         *     rules: array<string, array<string, mixed>|null>,
+         *     exclude_rule_for_file?: array<array{path?: ?string, rule_name?: ?string}>|null,
+         *     whitelist?: array{regex?: string[], lines?: string[]}|null,
+         * } $config
+         */
 
         $rules = $config['rules'];
 
@@ -101,7 +107,6 @@ class AnalyzeCommand extends Command
         }
 
         $excludeRuleForFileConfiguration = $config['exclude_rule_for_file'] ?? [];
-        \assert(\is_array($excludeRuleForFileConfiguration));
 
         foreach ($excludeRuleForFileConfiguration as $exclusionConfiguration) {
             $filePath = $exclusionConfiguration['path'] ?? null;
@@ -122,6 +127,7 @@ class AnalyzeCommand extends Command
 
         if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
             foreach ($input->getOption('rule') as $rule) {
+                /** @var string $rule */
                 $this->rulesConfiguration->addRuleForAll($this->registry->getRule(RuleName::fromString($rule)));
             }
         }

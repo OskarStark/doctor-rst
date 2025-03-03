@@ -31,6 +31,10 @@ final readonly class ExcludedViolationList
      */
     private array $matchedWhitelistLines;
 
+    /**
+     * @param array{regex?: string[], lines?: string[]} $excludedViolationConfig
+     * @param Violation[]                               $violations
+     */
     public function __construct(array $excludedViolationConfig, array $violations)
     {
         $filteredViolations = $this->filterViolations($excludedViolationConfig, $violations);
@@ -41,6 +45,9 @@ final readonly class ExcludedViolationList
         $this->matchedWhitelistLines = $filteredViolations['matchedWhitelistLines'];
     }
 
+    /**
+     * @return Violation[]
+     */
     public function violations(): array
     {
         return $this->violations;
@@ -68,7 +75,8 @@ final readonly class ExcludedViolationList
     }
 
     /**
-     * @param Violation[] $violations
+     * @param array{regex?: string[], lines?: string[]} $excludedViolationConfig
+     * @param Violation[]                               $violations
      *
      * @return array{violations: Violation[], matchedWhitelistRegex: array<string, int>, matchedWhitelistLines: array<string, int>}
      */

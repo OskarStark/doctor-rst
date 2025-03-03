@@ -40,6 +40,7 @@ class DeprecatedDirectiveMinVersion extends AbstractRule implements Configurable
 
         $resolvedOptions = $resolver->resolve($options);
 
+        /** @phpstan-ignore-next-line  */
         $this->minVersion = $resolvedOptions['min_version'];
     }
 
@@ -58,6 +59,7 @@ class DeprecatedDirectiveMinVersion extends AbstractRule implements Configurable
         }
 
         if ($matches = $line->clean()->match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
+            /** @var string[] $matches */
             $version = trim((string) $matches[1]);
 
             if (-1 === version_compare($version, $this->minVersion)) {

@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace App\Analyzer;
 
+use App\Value\Violation;
+
 final class InMemoryCache implements Cache
 {
     /**
-     * @var array<string, array>
+     * @var array<string, Violation[]>
      */
     private array $cache;
 

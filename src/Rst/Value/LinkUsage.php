@@ -26,7 +26,6 @@ final readonly class LinkUsage
     {
         preg_match('/(`[^`]+`|(?:(?!_)\w)+(?:[-._+:](?:(?!_)\w)+)*+)_/', $line, $matches);
         Assert::keyExists($matches, 1);
-        Assert::string($matches[1]);
         $name = trim($matches[1], '`');
 
         return new self(LinkName::fromString($name));

@@ -43,12 +43,16 @@ class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Line
 
         // YML / YAML
         if ($matches = $lines->current()->clean()->match('/^#(.*)\.(yml|yaml)$/')) {
+            /** @var string[] $matches */
             return $this->validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
     }
 
+    /**
+     * @param string[] $matches
+     */
     private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();

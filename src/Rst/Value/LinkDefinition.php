@@ -28,8 +28,6 @@ final readonly class LinkDefinition
         preg_match('/^\.\. _`?([^`]+)`?: (.*)$/', $line, $matches);
         Assert::keyExists($matches, 1);
         Assert::keyExists($matches, 2);
-        Assert::string($matches[1]);
-        Assert::string($matches[2]);
 
         return new self(
             LinkName::fromString($matches[1]),

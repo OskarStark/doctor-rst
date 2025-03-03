@@ -37,6 +37,7 @@ class Typo extends CheckListRule implements LineContentRule
         $line = $lines->current();
 
         if ($matches = $line->raw()->match($this->search)) {
+            /** @var string[] $matches */
             return Violation::from(
                 \sprintf($this->message, $matches[0]),
                 $filename,

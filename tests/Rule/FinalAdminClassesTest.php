@@ -28,7 +28,6 @@ final class FinalAdminClassesTest extends UnitTestCase
     #[Test]
     public function getName(): void
     {
-        self::assertInstanceOf(RuleName::class, FinalAdminClasses::getName());
         self::assertSame('final_admin_classes', FinalAdminClasses::getName()->toString());
     }
 

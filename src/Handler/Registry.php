@@ -53,6 +53,9 @@ final class Registry
         }
     }
 
+    /**
+     * @param array<string, Rule> $rules
+     */
     public function setRules(array $rules): self
     {
         $this->rules = $rules;

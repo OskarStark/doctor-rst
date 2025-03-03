@@ -15,6 +15,7 @@ namespace App\Tests\Analyzer;
 
 use App\Analyzer\FileCache;
 use App\Application;
+use App\Rule\ShortArraySyntax;
 use App\Tests\UnitTestCase;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
@@ -37,7 +38,7 @@ final class FileCacheTest extends UnitTestCase
             ->at($this->root);
 
         $cache = new FileCache($this->root->url().'/.doctor-rst.cache');
-        $cache->set(new \SplFileInfo($rstFile->url()), ['test'], []);
+        $cache->set(new \SplFileInfo($rstFile->url()), [new ShortArraySyntax()], []);
         $cache->write();
 
         self::assertTrue($this->root->hasChild('.doctor-rst.cache'));
@@ -46,7 +47,7 @@ final class FileCacheTest extends UnitTestCase
     #[Test]
     public function cacheHits(): void
     {
-        $rules = ['test'];
+        $rules = [new ShortArraySyntax()];
         $rstFile = vfsStream::newFile('doc.rst')
             ->withContent('')
             ->at($this->root);
@@ -85,13 +86,13 @@ final class FileCacheTest extends UnitTestCase
 
         $cache = new FileCache($cacheFile->url());
 
-        self::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), ['test']));
+        self::assertFalse($cache->has(new \SplFileInfo($rstFile->url()), [new ShortArraySyntax()]));
     }
 
     #[Test]
     public function cacheDoesNotHitWhenFileHashDoesNotMatch(): void
     {
-        $rules = ['test'];
+        $rules = [new ShortArraySyntax()];
         $rstFile = vfsStream::newFile('doc.rst')
             ->withContent('')
             ->at($this->root);
@@ -120,7 +121,7 @@ final class FileCacheTest extends UnitTestCase
     #[Test]
     public function cacheDoesNotHitWhenRulesHashDoesNotMatch(): void
     {
-        $rules = ['test'];
+        $rules = [new ShortArraySyntax()];
         $rstFile = vfsStream::newFile('doc.rst')
             ->withContent('')
             ->at($this->root);
@@ -171,6 +172,8 @@ final class FileCacheTest extends UnitTestCase
 
         $content = unserialize($cacheFile->getContent());
 
+        self::assertIsArray($content);
+        self::assertArrayHasKey('payload', $content);
         self::assertEmpty($content['payload']);
     }
 }
