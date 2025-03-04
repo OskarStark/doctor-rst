@@ -19,7 +19,7 @@ use App\Value\Violation;
 final class FileCache implements Cache
 {
     /**
-     * @var array<string, array{hash: string|false, rules: string, violations: Violation[]}>
+     * @var array<string, array{hash: false|string, rules: string, violations: Violation[]}>
      */
     private array $cache;
     private bool $loaded = false;

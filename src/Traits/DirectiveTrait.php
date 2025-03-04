@@ -104,7 +104,7 @@ trait DirectiveTrait
     }
 
     /**
-     * @param string[]|null $directiveTypes
+     * @param null|string[] $directiveTypes
      */
     private function in(string $directive, Lines $lines, int $number, ?array $directiveTypes = null): bool
     {
@@ -159,7 +159,7 @@ trait DirectiveTrait
     }
 
     /**
-     * @param string[]|null $directiveTypes
+     * @param null|string[] $directiveTypes
      */
     private function previousDirectiveIs(string $directive, Lines $lines, int $number, ?array $directiveTypes = null): bool
     {

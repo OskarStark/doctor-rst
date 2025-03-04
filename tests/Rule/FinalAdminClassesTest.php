@@ -17,7 +17,6 @@ use App\Rule\FinalAdminClasses;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
-use App\Value\RuleName;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
