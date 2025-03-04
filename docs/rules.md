@@ -62,6 +62,7 @@
 * [no_contraction](#no_contraction)
 * [no_directive_after_shorthand](#no_directive_after_shorthand)
 * [no_duplicate_use_statements](#no_duplicate_use_statements)
+* [no_empty_literals](#no_empty_literals)
 * [no_explicit_use_of_code_block_php](#no_explicit_use_of_code_block_php)
 * [no_footnotes](#no_footnotes)
 * [no_inheritdoc_in_code_examples](#no_inheritdoc_in_code_examples)
@@ -766,6 +767,24 @@ It's an example
   > _Ensure there is not same use statement twice_
 
 #### Groups [`@Symfony`]
+
+## `no_empty_literals`
+
+  > _Make sure that no empty literals are used._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+Please use ``foo``...
+```
+
+##### Invalid Examples :-1:
+
+```rst
+Please use ````...
+```
 
 ## `no_explicit_use_of_code_block_php`
 
