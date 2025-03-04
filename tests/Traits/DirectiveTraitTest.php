@@ -247,7 +247,7 @@ MULTIPLE, 11),
     }
 
     /**
-     * @param string[]|null $types
+     * @param null|string[] $types
      */
     #[Test]
     #[DataProvider('inProvider')]
@@ -665,7 +665,7 @@ RST;
     }
 
     /**
-     * @param string[]|null $types
+     * @param null|string[] $types
      */
     #[Test]
     #[DataProvider('previousDirectiveIsProvider')]
