@@ -211,3 +211,7 @@ jobs:
             -
                 name: "Check for implicit dependencies"
                 run: "vendor/bin/composer-require-checker check --config-file=$(pwd)/composer-require-checker.json composer.json"
+
+            -
+                name: "Check for security vulnerabilities"
+                run: "composer audit"
