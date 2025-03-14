@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "771965b5865994425bec2e69d3ac7fc0",
+    "content-hash": "8766e4e86e49e6b11f587c1e4e6888d4",
     "packages": [
         {
             "name": "composer/semver",
@@ -2608,12 +2608,12 @@
             "version": "0.9.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Drenso/composer-unused.git",
+                "url": "https://github.com/composer-unused/composer-unused.git",
                 "reference": "a67bd42dd97184de6144506143510388e8837807"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Drenso/composer-unused/zipball/a67bd42dd97184de6144506143510388e8837807",
+                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/a67bd42dd97184de6144506143510388e8837807",
                 "reference": "a67bd42dd97184de6144506143510388e8837807",
                 "shasum": ""
             },
