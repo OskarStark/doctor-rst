@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8766e4e86e49e6b11f587c1e4e6888d4",
+    "content-hash": "8ce34204947c78b2c1483f2aa1f8319e",
     "packages": [
         {
             "name": "composer/semver",
@@ -1459,23 +1459,23 @@
         },
         {
             "name": "composer-unused/symbol-parser",
-            "version": "0.2.5",
+            "version": "0.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer-unused/symbol-parser.git",
-                "reference": "96cee7244aea405e936247d42c49332d52d90ae7"
+                "reference": "de4296816dc023d1b932d5ea62536aecc1c51d85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer-unused/symbol-parser/zipball/96cee7244aea405e936247d42c49332d52d90ae7",
-                "reference": "96cee7244aea405e936247d42c49332d52d90ae7",
+                "url": "https://api.github.com/repos/composer-unused/symbol-parser/zipball/de4296816dc023d1b932d5ea62536aecc1c51d85",
+                "reference": "de4296816dc023d1b932d5ea62536aecc1c51d85",
                 "shasum": ""
             },
             "require": {
                 "composer-unused/contracts": "^0.3",
                 "nikic/php-parser": "^4.18 || ^5.0",
                 "php": "^7.4 || ^8.0",
-                "phpstan/phpdoc-parser": "^1.25",
+                "phpstan/phpdoc-parser": "^1.25 || ^2",
                 "psr/container": "^1.0 || ^2.0",
                 "psr/log": "^1.1 || ^2 || ^3",
                 "symfony/finder": "^5.3 || ^6.0 || ^7.0"
@@ -1526,7 +1526,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2024-03-09T15:25:51+00:00"
+            "time": "2025-03-15T10:27:03+00:00"
         },
         {
             "name": "composer/pcre",
@@ -2605,27 +2605,27 @@
         },
         {
             "name": "icanhazstring/composer-unused",
-            "version": "0.9.0",
+            "version": "0.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer-unused/composer-unused.git",
-                "reference": "a67bd42dd97184de6144506143510388e8837807"
+                "reference": "a9c93d99b5f3d71f244473fa0dcd69c385dac361"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/a67bd42dd97184de6144506143510388e8837807",
-                "reference": "a67bd42dd97184de6144506143510388e8837807",
+                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/a9c93d99b5f3d71f244473fa0dcd69c385dac361",
+                "reference": "a9c93d99b5f3d71f244473fa0dcd69c385dac361",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.0",
                 "composer-unused/contracts": "^0.3",
-                "composer-unused/symbol-parser": "^0.2.5",
+                "composer-unused/symbol-parser": "^0.2.6",
                 "ext-json": "*",
                 "nikic/php-parser": "^5.0",
                 "ondram/ci-detector": "^4.1",
                 "php": "^8.1",
-                "phpstan/phpdoc-parser": "^1.25",
+                "phpstan/phpdoc-parser": "^1.25 || ^2",
                 "psr/container": "^1.0 || ^2.0",
                 "psr/log": "^1.1 || ^2 || ^3",
                 "symfony/config": "^5.4 || ^6.0 || ^7.0",
@@ -2670,32 +2670,7 @@
                     "ComposerUnused\\ComposerUnused\\": "src"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "ComposerUnused\\ComposerUnused\\Test\\Integration\\": "tests/Integration",
-                    "ComposerUnused\\ComposerUnused\\Test\\Unit\\": "tests/Unit",
-                    "ComposerUnused\\ComposerUnused\\Test\\Stubs\\": "tests/Stubs"
-                }
-            },
-            "scripts": {
-                "analyse": [
-                    "phpstan analyse --no-progress"
-                ],
-                "check": [
-                    "@cs-check",
-                    "@analyse",
-                    "@test"
-                ],
-                "cs-check": [
-                    "phpcs --parallel=50 --cache=data/cs-check.json"
-                ],
-                "cs-fix": [
-                    "phpcbf --parallel=50"
-                ],
-                "test": [
-                    "phpunit"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2719,15 +2694,15 @@
             },
             "funding": [
                 {
-                    "type": "other",
-                    "url": "https://paypal.me/icanhazstring"
+                    "url": "https://github.com/sponsors/icanhazstring",
+                    "type": "github"
                 },
                 {
-                    "type": "github",
-                    "url": "https://github.com/sponsors/icanhazstring"
+                    "url": "https://paypal.me/icanhazstring",
+                    "type": "other"
                 }
             ],
-            "time": "2025-02-07T11:42:40+00:00"
+            "time": "2025-03-15T14:23:28+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -3397,30 +3372,30 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.33.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "82a311fd3690fb2bf7b64d5c98f912b3dd746140"
+                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/82a311fd3690fb2bf7b64d5c98f912b3dd746140",
-                "reference": "82a311fd3690fb2bf7b64d5c98f912b3dd746140",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
+                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
                 "doctrine/annotations": "^2.0",
-                "nikic/php-parser": "^4.15",
+                "nikic/php-parser": "^5.3.0",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "^1.5",
-                "phpstan/phpstan-phpunit": "^1.1",
-                "phpstan/phpstan-strict-rules": "^1.0",
-                "phpunit/phpunit": "^9.5",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6",
                 "symfony/process": "^5.2"
             },
             "type": "library",
@@ -3438,9 +3413,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.33.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.1.0"
             },
-            "time": "2024-10-13T11:25:22+00:00"
+            "time": "2025-02-19T13:28:12+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -3604,16 +3579,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "12.0.4",
+            "version": "12.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "79e5ef5897068689c7c325554d6df905480ce942"
+                "reference": "da732486790670c622aa367eb3dbb7e1619e68be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/79e5ef5897068689c7c325554d6df905480ce942",
-                "reference": "79e5ef5897068689c7c325554d6df905480ce942",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/da732486790670c622aa367eb3dbb7e1619e68be",
+                "reference": "da732486790670c622aa367eb3dbb7e1619e68be",
                 "shasum": ""
             },
             "require": {
@@ -3669,7 +3644,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.0.4"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/12.0.5"
             },
             "funding": [
                 {
@@ -3677,7 +3652,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-25T13:27:48+00:00"
+            "time": "2025-03-15T07:24:51+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -6544,7 +6519,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -6553,6 +6528,6 @@
         "ext-iconv": "*",
         "ext-mbstring": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
