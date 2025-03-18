@@ -24,8 +24,8 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 
 #[Description('Make sure you have max 2 colons (`::`).')]
-#[InvalidExample('composer require --dev symfony/var-dumper')]
-#[ValidExample('composer require symfony/var-dumper --dev')]
+#[InvalidExample('temp:::')]
+#[ValidExample('temp::')]
 final class MaxColons extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
