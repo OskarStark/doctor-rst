@@ -7,24 +7,6 @@ parameters:
 			path: src/Application.php
 
 		-
-			message: '#^Call to method method\(\) on an unknown class PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\.$#'
-			identifier: class.notFound
-			count: 7
-			path: tests/Analyzer/MemoizingAnalyzerTest.php
-
-		-
-			message: '#^Cannot call method willReturn\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 4
-			path: tests/Analyzer/MemoizingAnalyzerTest.php
-
-		-
-			message: '#^Cannot call method with\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 5
-			path: tests/Analyzer/MemoizingAnalyzerTest.php
-
-		-
 			message: '#^Parameter \#1 \$prefix of static method PHPUnit\\Framework\\Assert\:\:assertStringStartsWith\(\) expects non\-empty\-string, string given\.$#'
 			identifier: argument.type
 			count: 1
