@@ -9,31 +9,31 @@
         "ext-mbstring": "*",
         "composer/semver": "^3.4.3",
         "ondram/ci-detector": "^4.2.0",
-        "symfony/config": "^7.2.3",
-        "symfony/console": "^7.2.1",
-        "symfony/dependency-injection": "^7.2.4",
+        "symfony/config": "^7.2.6",
+        "symfony/console": "^7.2.6",
+        "symfony/dependency-injection": "^7.2.6",
         "symfony/finder": "^7.2.2",
         "symfony/options-resolver": "^7.2.0",
         "symfony/service-contracts": "^3.5.1",
-        "symfony/string": "^7.2.0",
-        "symfony/yaml": "^7.2.3",
+        "symfony/string": "^7.2.6",
+        "symfony/yaml": "^7.2.6",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.45.0",
+        "ergebnis/composer-normalize": "^2.47.0",
         "ergebnis/data-provider": "^3.4",
-        "ergebnis/php-cs-fixer-config": "^6.44.0",
-        "friendsofphp/php-cs-fixer": "^3.70.1",
-        "icanhazstring/composer-unused": "^0.9.0",
+        "ergebnis/php-cs-fixer-config": "^6.46.0",
+        "friendsofphp/php-cs-fixer": "^3.75.0",
+        "icanhazstring/composer-unused": "^0.9.2",
         "maglnet/composer-require-checker": "^4.16.1",
         "mikey179/vfsstream": "^1.6.12",
         "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan": "^2.1.6",
-        "phpstan/phpstan-phpunit": "^2.0.4",
+        "phpstan/phpstan": "^2.1.14",
+        "phpstan/phpstan-phpunit": "^2.0.6",
         "phpstan/phpstan-webmozart-assert": "^2.0.0",
-        "phpunit/phpunit": "^12.0.5",
-        "rector/rector": "^2.0.9",
-        "symfony/var-dumper": "^7.2.3"
+        "phpunit/phpunit": "^12.1.4",
+        "rector/rector": "^2.0.15",
+        "symfony/var-dumper": "^7.2.6"
     },
     "replace": {
         "paragonie/random_compat": "^2.0",
@@ -51,12 +51,6 @@
         "symfony/polyfill-php83": "*",
         "symfony/polyfill-php84": "*"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/Drenso/composer-unused"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "App\\": "src/"

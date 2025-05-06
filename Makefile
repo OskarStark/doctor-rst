@@ -27,7 +27,8 @@ refactoring:
 .PHONY: dependency-analysis
 dependency-analysis: vendor ## Runs a dependency analysis with maglnet/composer-require-checker
 	symfony php vendor/bin/composer-require-checker check --config-file=$(shell pwd)/composer-require-checker.json
-	vendor/bin/composer-unused
+	symfony php vendor/bin/composer-unused
+	symfony composer audit
 
 .PHONY: docs
 docs: vendor

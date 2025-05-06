@@ -599,13 +599,13 @@ Name | Required | Allowed Types | Default
 ##### Valid Examples :+1:
 
 ```rst
-composer require symfony/var-dumper --dev
+temp::
 ```
 
 ##### Invalid Examples :-1:
 
 ```rst
-composer require --dev symfony/var-dumper
+temp:::
 ```
 
 ## `no_admin_yaml`
