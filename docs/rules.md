@@ -72,6 +72,7 @@
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
 * [no_php_prefix_before_composer](#no_php_prefix_before_composer)
 * [no_space_before_self_xml_closing_tag](#no_space_before_self_xml_closing_tag)
+* [no_typographic_quotes](#no_typographic_quotes)
 * [non_static_phpunit_assertions](#non_static_phpunit_assertions)
 * [only_backslashes_in_namespace_in_php_code_block](#only_backslashes_in_namespace_in_php_code_block)
 * [only_backslashes_in_use_statements_in_php_code_block](#only_backslashes_in_use_statements_in_php_code_block)
@@ -845,6 +846,24 @@ php bin/console list
 ## `no_space_before_self_xml_closing_tag`
 
 #### Groups [`@Sonata`]
+
+## `no_typographic_quotes`
+
+  > _Do not use typographic quotes._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+Lorem 'ipsum' dolor "sit amet"
+```
+
+##### Invalid Examples :-1:
+
+```rst
+Lorem ‘ipsum’ dolor “sit amet”
+```
 
 ## `non_static_phpunit_assertions`
 
