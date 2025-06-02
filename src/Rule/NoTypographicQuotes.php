@@ -38,6 +38,7 @@ final class NoTypographicQuotes extends AbstractRule implements LineContentRule
         $line = $lines->current();
 
         $lineContent = $line->raw();
+
         if ($lineContent->containsAny(['‘', '’'])) {
             return Violation::from(
                 'Please use straight single quotes (\' ... \') instead of curly quotes (‘ ... ’)',

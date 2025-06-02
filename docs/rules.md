@@ -20,6 +20,7 @@
 * [deprecated_directive_min_version](#deprecated_directive_min_version)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
 * [ensure_bash_prompt_before_composer_command](#ensure_bash_prompt_before_composer_command)
+* [ensure_class_constant](#ensure_class_constant)
 * [ensure_correct_format_for_phpfunction](#ensure_correct_format_for_phpfunction)
 * [ensure_exactly_one_space_before_directive_type](#ensure_exactly_one_space_before_directive_type)
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
@@ -325,6 +326,22 @@ $ composer require symfony/var-dumper
 
 ```rst
 composer require symfony/var-dumper
+```
+
+## `ensure_class_constant`
+
+  > _Make sure to use ::class over get_class_
+
+##### Valid Examples :+1:
+
+```rst
+MyClass::class
+```
+
+##### Invalid Examples :-1:
+
+```rst
+get_class(new MyClass())
 ```
 
 ## `ensure_correct_format_for_phpfunction`
