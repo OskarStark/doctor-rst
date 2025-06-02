@@ -21,6 +21,7 @@
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
 * [ensure_bash_prompt_before_composer_command](#ensure_bash_prompt_before_composer_command)
 * [ensure_class_constant](#ensure_class_constant)
+* [ensure_code_block_indentation](#ensure_code_block_indentation)
 * [ensure_correct_format_for_phpfunction](#ensure_correct_format_for_phpfunction)
 * [ensure_exactly_one_space_before_directive_type](#ensure_exactly_one_space_before_directive_type)
 * [ensure_exactly_one_space_between_link_definition_and_link](#ensure_exactly_one_space_between_link_definition_and_link)
@@ -342,6 +343,24 @@ MyClass::class
 
 ```rst
 get_class(new MyClass())
+```
+
+## `ensure_code_block_indentation`
+
+  > _Ensure code blocks are indented by 4 spaces._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+  .. code-block:: yml
+```
+
+##### Invalid Examples :-1:
+
+```rst
+   .. code-block:: yml
 ```
 
 ## `ensure_correct_format_for_phpfunction`
