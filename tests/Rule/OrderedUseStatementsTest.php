@@ -267,6 +267,13 @@ and compose your services with them::
     }
 RST;
 
+        $valid_with_function = <<<'RST'
+for that::
+
+    use Symfony\Component\Form\AbstractType;
+    use function Symfony\foo;
+RST;
+
         yield 'valid with trait' => [
             NullViolation::create(),
             new RstSample($valid_with_trait, 1),
@@ -298,6 +305,10 @@ RST;
         yield 'valid in trait definition' => [
             NullViolation::create(),
             new RstSample($valid_in_trait_definition, 1),
+        ];
+        yield 'valid with function' => [
+            NullViolation::create(),
+            new RstSample($valid_with_function, 1),
         ];
     }
 }
