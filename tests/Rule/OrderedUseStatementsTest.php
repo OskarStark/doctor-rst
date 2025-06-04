@@ -323,7 +323,6 @@ User Credential
 ~~~~~~~~~~~~~~~
 RST;
 
-
         yield 'valid with trait' => [
             NullViolation::create(),
             new RstSample($valid_with_trait, 1),
