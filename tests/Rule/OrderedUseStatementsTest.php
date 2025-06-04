@@ -274,6 +274,56 @@ for that::
     use function Symfony\foo;
 RST;
 
+        $valid3 = <<<'RST'
+and storage::
+
+    // src/Security/NormalizedUserBadge.php
+    namespace App\Security;
+
+    use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+    use function Symfony\Component\String\u;
+
+    final class NormalizedUserBadge extends UserBadge
+    {
+        public function __construct(string $identifier)
+        {
+            $callback = static fn (string $identifier): string => u($identifier)->normalize(UnicodeString::NFKC)->ascii()->lower()->toString();
+
+            parent::__construct($identifier, null, $callback);
+        }
+    }
+
+::
+
+    // src/Security/PasswordAuthenticator.php
+    namespace App\Security;
+
+    final class PasswordAuthenticator extends AbstractLoginFormAuthenticator
+    {
+        // simplified for brevity
+        public function authenticate(Request $request): Passport
+        {
+            $username = (string) $request->request->get('username', '');
+            $password = (string) $request->request->get('password', '');
+
+            $request->getSession()
+                ->set(SecurityRequestAttributes::LAST_USERNAME, $username);
+
+            return new Passport(
+                new NormalizedUserBadge($username),
+                new PasswordCredentials($password),
+                [
+                    // all other useful badges
+                ]
+            );
+        }
+    }
+
+User Credential
+~~~~~~~~~~~~~~~
+RST;
+
+
         yield 'valid with trait' => [
             NullViolation::create(),
             new RstSample($valid_with_trait, 1),
@@ -309,6 +359,10 @@ RST;
         yield 'valid with function' => [
             NullViolation::create(),
             new RstSample($valid_with_function, 1),
+        ];
+        yield 'valid 3' => [
+            NullViolation::create(),
+            new RstSample($valid3),
         ];
     }
 }
