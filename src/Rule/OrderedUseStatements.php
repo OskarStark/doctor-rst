@@ -99,6 +99,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
             ->trim()
             ->replace('\\', 'A') // the "A" here helps to sort !!
             ->lower()
+            ->replace('function ', 'zzzfunction') // prefix with "zzz" to sort functions at the end
             ->toString();
     }
 }
