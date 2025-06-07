@@ -217,6 +217,8 @@ class RulesCommand extends Command
         if ($invalidExamples) {
             $this->renderExamples('##### Invalid Examples :-1:', $invalidExamples);
         }
+
+        $this->renderReferences($reflectionClass->getName(), $reflectionClass->getShortName());
     }
 
     /**
@@ -234,5 +236,54 @@ class RulesCommand extends Command
         }
 
         $this->io->newLine();
+    }
+
+    private function renderReferences(string $className, string $classShortName): void
+    {
+        $this->io->writeln('#### References');
+        $this->io->newLine();
+
+        $classPath = \sprintf(
+            'src/Rule/%s.php',
+            $classShortName,
+        );
+        $ruleLink = $this->renderGithubLink($className, $classPath);
+        $this->io->writeln(
+            \sprintf(
+                '- Rule class: %s',
+                $ruleLink,
+            ),
+        );
+
+        $testName = \sprintf(
+            'App\Tests\Rule\\%sTest',
+            $classShortName,
+        );
+
+        if (class_exists($testName)) {
+            $testPath = \sprintf(
+                'tests/Rule/%sTest.php',
+                $classShortName,
+            );
+            $testLink = $this->renderGithubLink($testName, $testPath);
+            $this->io->writeln(
+                \sprintf(
+                    '- Test class: %s',
+                    $testLink,
+                ),
+            );
+        }
+
+        $this->io->newLine();
+    }
+
+    private function renderGithubLink(string $name, string $relativeFilePath): string
+    {
+        return \sprintf(
+            '[%s](%s%s)',
+            $name,
+            'https://github.com/OskarStark/doctor-rst/blob/develop/',
+            $relativeFilePath,
+        );
     }
 }
