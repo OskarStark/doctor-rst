@@ -47,7 +47,7 @@ final class NoTypographicQuotesTest extends UnitTestCase
             ],
             [
                 Violation::from(
-                    'Please use straight double quotes (" ... ") instead of curly quotes (“ ... ”)',
+                    'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
                     'filename',
                     1,
                     'Lorem ipsum “dolor sit amet”, consectetur adipiscing elit.',
@@ -56,7 +56,7 @@ final class NoTypographicQuotesTest extends UnitTestCase
             ],
             [
                 Violation::from(
-                    'Please use straight double quotes (" ... ") instead of curly quotes (“ ... ”)',
+                    'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
                     'filename',
                     1,
                     'Lorem ipsum „dolor sit amet“, consectetur adipiscing elit.',
@@ -65,7 +65,7 @@ final class NoTypographicQuotesTest extends UnitTestCase
             ],
             [
                 Violation::from(
-                    'Please use straight double quotes (" ... ") instead of curly quotes (“ ... ”)',
+                    'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
                     'filename',
                     1,
                     'Lorem ipsum «dolor sit amet», consectetur adipiscing elit.',

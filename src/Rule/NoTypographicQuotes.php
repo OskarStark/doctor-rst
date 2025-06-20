@@ -50,7 +50,7 @@ final class NoTypographicQuotes extends AbstractRule implements LineContentRule
 
         if ($lineContent->containsAny(['“', '”', '„', '“', '«', '»'])) {
             return Violation::from(
-                'Please use straight double quotes (" ... ") instead of curly quotes (“ ... ”)',
+                'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
                 $filename,
                 $number + 1,
                 $line,
