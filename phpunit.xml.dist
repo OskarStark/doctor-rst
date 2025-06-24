@@ -5,7 +5,7 @@
          colors="true"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.4/phpunit.xsd"
-    displayDetailsOnTestsThatTriggerWarnings="true"
+             displayDetailsOnTestsThatTriggerWarnings="true"
 >
     <php>
       <env name="APP_ENV" value="test"/>
