@@ -30,7 +30,7 @@ final class NoBrokenRefDirectiveTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoBrokenRefDirective())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoBrokenRefDirective()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

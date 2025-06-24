@@ -30,7 +30,7 @@ final class ExtendAbstractAdminTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ExtendAbstractAdmin())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new ExtendAbstractAdmin()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

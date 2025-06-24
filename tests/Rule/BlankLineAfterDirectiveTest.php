@@ -31,7 +31,7 @@ final class BlankLineAfterDirectiveTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterDirective())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new BlankLineAfterDirective()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -30,7 +30,7 @@ final class ComposerDevOptionAtTheEndTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ComposerDevOptionAtTheEnd())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new ComposerDevOptionAtTheEnd()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

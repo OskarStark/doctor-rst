@@ -31,7 +31,7 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsureOrderOfCodeBlocksInConfigurationBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsureOrderOfCodeBlocksInConfigurationBlock()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

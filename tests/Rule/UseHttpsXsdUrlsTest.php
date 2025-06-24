@@ -30,7 +30,7 @@ final class UseHttpsXsdUrlsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new UseHttpsXsdUrls())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new UseHttpsXsdUrls()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

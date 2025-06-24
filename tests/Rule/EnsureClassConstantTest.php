@@ -30,7 +30,7 @@ final class EnsureClassConstantTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsureClassConstant())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsureClassConstant()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -30,7 +30,7 @@ final class ExtensionXlfInsteadOfXliffTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ExtensionXlfInsteadOfXliff())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new ExtensionXlfInsteadOfXliff()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

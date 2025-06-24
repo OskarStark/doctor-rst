@@ -30,7 +30,7 @@ final class NoBashPromptTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoBashPrompt())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoBashPrompt()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

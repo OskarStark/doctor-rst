@@ -33,7 +33,7 @@ final class FilenameUsesDashesOnlyTest extends UnitTestCase
 
         self::assertEquals(
             $expected,
-            (new FilenameUsesDashesOnly())->check($fileInfo),
+            new FilenameUsesDashesOnly()->check($fileInfo),
         );
     }
 

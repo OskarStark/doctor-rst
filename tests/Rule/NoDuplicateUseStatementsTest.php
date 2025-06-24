@@ -30,7 +30,7 @@ final class NoDuplicateUseStatementsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoDuplicateUseStatements())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoDuplicateUseStatements()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

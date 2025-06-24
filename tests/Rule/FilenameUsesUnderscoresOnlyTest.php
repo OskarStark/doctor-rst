@@ -31,7 +31,7 @@ final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
         $fileInfo = $this->createMock(\SplFileInfo::class);
         $fileInfo->method('getFilename')->willReturn($filename);
 
-        $violation = (new FilenameUsesUnderscoresOnly())->check($fileInfo);
+        $violation = new FilenameUsesUnderscoresOnly()->check($fileInfo);
         self::assertEquals(
             $expected,
             $violation,

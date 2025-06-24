@@ -30,7 +30,7 @@ final class ValidUseStatementsTests extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ValidUseStatements())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new ValidUseStatements()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

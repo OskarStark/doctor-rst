@@ -53,7 +53,7 @@ final class GithubFormatterTest extends UnitTestCase
             ],
         ]);
 
-        (new GithubFormatter(new ConsoleFormatter()))->format($style, $analyzerResult, $analyzeDir, false);
+        new GithubFormatter(new ConsoleFormatter())->format($style, $analyzerResult, $analyzeDir, false);
 
         $expected = <<<OUTPUT
 docs/index.rst ✘

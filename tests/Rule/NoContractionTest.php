@@ -31,7 +31,7 @@ final class NoContractionTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (NoContraction::getList() as $search => $message) {
-            $configuredRules[] = (new NoContraction())->configure($search, $message);
+            $configuredRules[] = new NoContraction()->configure($search, $message);
         }
 
         $violations = [];

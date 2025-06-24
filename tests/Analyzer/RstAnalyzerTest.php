@@ -26,7 +26,7 @@ final class RstAnalyzerTest extends UnitTestCase
         $maxBlankLines = new MaxBlankLines();
         $maxBlankLines->setOptions(['max' => 3]);
 
-        $violations = (new RstAnalyzer())->analyze(
+        $violations = new RstAnalyzer()->analyze(
             new \SplFileInfo(__DIR__.'/../Fixtures/max_blanklines.rst'),
             [$maxBlankLines],
         );

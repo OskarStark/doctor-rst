@@ -30,7 +30,7 @@ final class YarnDevOptionAtTheEndTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new YarnDevOptionAtTheEnd())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new YarnDevOptionAtTheEnd()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

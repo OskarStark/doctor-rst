@@ -30,7 +30,7 @@ final class NoPhpPrefixBeforeComposerTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoPhpPrefixBeforeComposer())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoPhpPrefixBeforeComposer()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

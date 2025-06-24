@@ -30,7 +30,7 @@ final class EnsureLinkBottomTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsureLinkBottom())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsureLinkBottom()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

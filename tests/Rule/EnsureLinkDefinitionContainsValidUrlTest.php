@@ -31,7 +31,7 @@ final class EnsureLinkDefinitionContainsValidUrlTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsureLinkDefinitionContainsValidUrl())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsureLinkDefinitionContainsValidUrl()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -30,7 +30,7 @@ final class NonStaticPhpunitAssertionsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NonStaticPhpunitAssertions())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NonStaticPhpunitAssertions()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

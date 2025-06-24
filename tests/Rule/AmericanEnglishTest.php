@@ -31,7 +31,7 @@ final class AmericanEnglishTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (AmericanEnglish::getList() as $search => $message) {
-            $configuredRules[] = (new AmericanEnglish())->configure($search, $message);
+            $configuredRules[] = new AmericanEnglish()->configure($search, $message);
         }
 
         $violations = [];

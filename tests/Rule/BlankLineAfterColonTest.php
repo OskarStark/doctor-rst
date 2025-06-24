@@ -30,7 +30,7 @@ final class BlankLineAfterColonTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterColon())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new BlankLineAfterColon()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

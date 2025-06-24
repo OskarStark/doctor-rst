@@ -27,7 +27,7 @@ final class RegistryTest extends UnitTestCase
         $this->expectException(FormatterNotFound::class);
         $this->expectExceptionMessage('Formatter "invalid" not found');
 
-        (new Registry(new ConsoleFormatter()))->get('invalid');
+        new Registry(new ConsoleFormatter())->get('invalid');
     }
 
     #[Test]
@@ -35,6 +35,6 @@ final class RegistryTest extends UnitTestCase
     {
         $formatter = new ConsoleFormatter();
 
-        self::assertSame($formatter, (new Registry($formatter))->get('console'));
+        self::assertSame($formatter, new Registry($formatter)->get('console'));
     }
 }

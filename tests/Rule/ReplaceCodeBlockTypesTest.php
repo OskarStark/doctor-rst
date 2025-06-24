@@ -31,7 +31,7 @@ final class ReplaceCodeBlockTypesTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (ReplaceCodeBlockTypes::getList() as $search => $message) {
-            $configuredRules[] = (new ReplaceCodeBlockTypes())->configure($search, $message);
+            $configuredRules[] = new ReplaceCodeBlockTypes()->configure($search, $message);
         }
 
         $violations = [];

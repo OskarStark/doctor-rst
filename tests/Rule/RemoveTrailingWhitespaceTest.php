@@ -30,7 +30,7 @@ final class RemoveTrailingWhitespaceTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new RemoveTrailingWhitespace())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new RemoveTrailingWhitespace()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

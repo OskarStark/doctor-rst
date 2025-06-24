@@ -30,7 +30,7 @@ final class OrderedUseStatementsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new OrderedUseStatements())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new OrderedUseStatements()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

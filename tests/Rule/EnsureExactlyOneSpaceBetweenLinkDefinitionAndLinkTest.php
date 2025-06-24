@@ -31,7 +31,7 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends UnitTe
     {
         self::assertEquals(
             $expected,
-            (new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 
