@@ -24,6 +24,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure link definition contains valid link.')]
 #[InvalidExample('.. _DOCtor-RST: htt//github.com/OskarStark/DOCtor-RST')]
 #[ValidExample('.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST')]

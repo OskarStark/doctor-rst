@@ -15,6 +15,9 @@ namespace App\Value;
 
 use Webmozart\Assert\Assert;
 
+/**
+ * @no-named-arguments
+ */
 final readonly class RuleGroup
 {
     private const string GROUP_EXPERIMENTAL = '@Experimental';

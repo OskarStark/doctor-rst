@@ -17,6 +17,9 @@ use App\Helper\PhpHelper;
 use App\Rst\RstParser;
 use App\Value\Lines;
 
+/**
+ * @no-named-arguments
+ */
 trait ListTrait
 {
     private function isPartOfListItem(Lines $lines, int $number): bool
@@ -24,8 +27,8 @@ trait ListTrait
         $lines->seek($number);
 
         if (RstParser::isListItem($lines->current())) {
-            return !(new PhpHelper()->isPartOfMultilineComment($lines, $number)
-                || new PhpHelper()->isPartOfDocBlock($lines, $number));
+            return !((new PhpHelper())->isPartOfMultilineComment($lines, $number)
+                || (new PhpHelper())->isPartOfDocBlock($lines, $number));
         }
 
         $currentIndention = $lines->current()->indention();

@@ -20,14 +20,12 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 abstract class AbstractLineContentRuleTestCase extends UnitTestCase
 {
     abstract public function createRule(): LineContentRule;
-
-    /**
-     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
-     */
-    abstract public static function checkProvider(): iterable;
 
     #[Test]
     #[DataProvider('checkProvider')]
@@ -38,4 +36,9 @@ abstract class AbstractLineContentRuleTestCase extends UnitTestCase
             static::createRule()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
+
+    /**
+     * @return \Generator<array{0: ViolationInterface, 1: RstSample}>
+     */
+    abstract public static function checkProvider(): iterable;
 }

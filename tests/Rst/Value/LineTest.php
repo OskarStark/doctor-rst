@@ -18,6 +18,9 @@ use App\Value\Line;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class LineTest extends UnitTestCase
 {
     #[Test]
@@ -32,7 +35,7 @@ final class LineTest extends UnitTestCase
     #[DataProvider('cleanProvider')]
     public function clean(string $expected, string $string): void
     {
-        self::assertSame($expected, new Line($string)->clean()->toString());
+        self::assertSame($expected, (new Line($string))->clean()->toString());
     }
 
     /**
@@ -80,7 +83,7 @@ final class LineTest extends UnitTestCase
     #[DataProvider('isBlankProvider')]
     public function isBlank(bool $expected, string $string): void
     {
-        self::assertSame($expected, new Line($string)->isBlank());
+        self::assertSame($expected, (new Line($string))->isBlank());
     }
 
     /**
@@ -100,7 +103,7 @@ final class LineTest extends UnitTestCase
     #[DataProvider('indentionProvider')]
     public function indention(int $expected, string $string): void
     {
-        self::assertSame($expected, new Line($string)->indention());
+        self::assertSame($expected, (new Line($string))->indention());
     }
 
     /**
@@ -117,7 +120,7 @@ final class LineTest extends UnitTestCase
     #[DataProvider('isHeadlineProvider')]
     public function isHeadline(bool $expected, string $string): void
     {
-        self::assertSame($expected, new Line($string)->isHeadline());
+        self::assertSame($expected, (new Line($string))->isHeadline());
     }
 
     /**
@@ -141,7 +144,7 @@ final class LineTest extends UnitTestCase
     #[DataProvider('isDirectiveProvider')]
     public function isDirective(bool $expected, string $string): void
     {
-        self::assertSame($expected, new Line($string)->isDirective());
+        self::assertSame($expected, (new Line($string))->isDirective());
     }
 
     /**
@@ -167,7 +170,7 @@ final class LineTest extends UnitTestCase
     #[DataProvider('isDefaultDirectiveProvider')]
     public function isDefaultDirective(bool $expected, string $string): void
     {
-        self::assertSame($expected, new Line($string)->isDefaultDirective());
+        self::assertSame($expected, (new Line($string))->isDefaultDirective());
     }
 
     /**

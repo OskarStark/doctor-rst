@@ -25,6 +25,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * @no-named-arguments
+ */
 final class GithubFormatterTest extends UnitTestCase
 {
     #[Test]
@@ -53,7 +56,7 @@ final class GithubFormatterTest extends UnitTestCase
             ],
         ]);
 
-        new GithubFormatter(new ConsoleFormatter())->format($style, $analyzerResult, $analyzeDir, false);
+        (new GithubFormatter(new ConsoleFormatter()))->format($style, $analyzerResult, $analyzeDir, false);
 
         $expected = <<<OUTPUT
 docs/index.rst ✘

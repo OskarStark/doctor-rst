@@ -21,6 +21,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure there is not same use statement twice')]
 class NoDuplicateUseStatements extends AbstractRule implements LineContentRule
 {

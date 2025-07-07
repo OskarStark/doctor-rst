@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class SpaceBetweenLabelAndLinkInDocTest extends UnitTestCase
 {
     #[Test]
@@ -30,7 +33,7 @@ final class SpaceBetweenLabelAndLinkInDocTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new SpaceBetweenLabelAndLinkInDoc()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new SpaceBetweenLabelAndLinkInDoc())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

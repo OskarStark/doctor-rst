@@ -23,6 +23,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensures to have 2 backslashes when highlighting a namespace to have valid output.')]
 #[ValidExample('``App\\Entity\\Foo``')]
 #[ValidExample('`App\\\\Entity\\\\Foo`')]

@@ -15,6 +15,9 @@ namespace App\Rule;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @no-named-arguments
+ */
 interface Configurable
 {
     public function configureOptions(OptionsResolver $resolver): OptionsResolver;

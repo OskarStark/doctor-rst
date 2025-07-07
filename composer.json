@@ -22,7 +22,7 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.47.0",
         "ergebnis/data-provider": "^3.4",
-        "ergebnis/php-cs-fixer-config": "^6.46.0",
+        "ergebnis/php-cs-fixer-config": "^6.47",
         "friendsofphp/php-cs-fixer": "^3.75.0",
         "icanhazstring/composer-unused": "^0.9.3",
         "maglnet/composer-require-checker": "^4.16.1",

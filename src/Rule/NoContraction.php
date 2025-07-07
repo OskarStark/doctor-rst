@@ -22,6 +22,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure contractions are not used.')]
 #[InvalidExample("It's an example")]
 #[ValidExample('It is an example')]

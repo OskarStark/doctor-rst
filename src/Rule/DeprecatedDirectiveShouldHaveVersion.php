@@ -24,6 +24,9 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure a deprecated directive has a version which follows SemVer.')]
 #[ValidExample('.. deprecated:: 3.4')]
 #[InvalidExample('.. deprecated::')]

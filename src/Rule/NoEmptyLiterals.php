@@ -23,6 +23,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Make sure that no empty literals are used.')]
 #[ValidExample('Please use ``foo``...')]
 #[InvalidExample('Please use ````...')]

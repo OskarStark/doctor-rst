@@ -18,6 +18,9 @@ use App\Tests\RstSample;
 use App\Value\NullViolation;
 use App\Value\Violation;
 
+/**
+ * @no-named-arguments
+ */
 final class NoEmptyLiteralsTest extends AbstractLineContentRuleTestCase
 {
     public function createRule(): NoEmptyLiterals

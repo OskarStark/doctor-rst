@@ -22,6 +22,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Make sure there is not trailing whitespace.')]
 #[InvalidExample('Invalid sentence ')]
 #[ValidExample('Valid sentence')]

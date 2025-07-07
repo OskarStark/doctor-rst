@@ -21,6 +21,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class FilenameUsesUnderscoresOnlyTest extends UnitTestCase
         $fileInfo = $this->createMock(\SplFileInfo::class);
         $fileInfo->method('getFilename')->willReturn($filename);
 
-        $violation = new FilenameUsesUnderscoresOnly()->check($fileInfo);
+        $violation = (new FilenameUsesUnderscoresOnly())->check($fileInfo);
         self::assertEquals(
             $expected,
             $violation,

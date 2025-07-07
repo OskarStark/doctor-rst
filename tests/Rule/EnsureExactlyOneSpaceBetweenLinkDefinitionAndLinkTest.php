@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class EnsureExactlyOneSpaceBetweenLinkDefinitionAndLinkTest extends UnitTe
     {
         self::assertEquals(
             $expected,
-            new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new EnsureExactlyOneSpaceBetweenLinkDefinitionAndLink())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -23,6 +23,9 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 
+/**
+ * @no-named-arguments
+ */
 final class ForbiddenDirectivesTest extends UnitTestCase
 {
     #[Test]

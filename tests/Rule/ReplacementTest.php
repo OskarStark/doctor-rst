@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class ReplacementTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class ReplacementTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (Replacement::getList() as $search => $message) {
-            $configuredRules[] = new Replacement()->configure($search, $message);
+            $configuredRules[] = (new Replacement())->configure($search, $message);
         }
 
         $violations = [];

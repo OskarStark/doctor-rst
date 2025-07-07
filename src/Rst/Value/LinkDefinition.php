@@ -15,6 +15,9 @@ namespace App\Rst\Value;
 
 use Webmozart\Assert\Assert;
 
+/**
+ * @no-named-arguments
+ */
 final readonly class LinkDefinition
 {
     private function __construct(

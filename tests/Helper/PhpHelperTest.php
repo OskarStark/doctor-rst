@@ -20,6 +20,9 @@ use App\Value\Line;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class PhpHelperTest extends UnitTestCase
 {
     #[Test]
@@ -118,7 +121,7 @@ final class PhpHelperTest extends UnitTestCase
     {
         self::assertSame(
             $expected,
-            new PhpHelper()->isPartOfDocBlock($sample->lines, $sample->lineNumber),
+            (new PhpHelper())->isPartOfDocBlock($sample->lines, $sample->lineNumber),
         );
     }
 
@@ -149,7 +152,7 @@ RST;
     {
         self::assertSame(
             $expected,
-            new PhpHelper()->isPartOfMultilineComment($sample->lines, $sample->lineNumber),
+            (new PhpHelper())->isPartOfMultilineComment($sample->lines, $sample->lineNumber),
         );
     }
 

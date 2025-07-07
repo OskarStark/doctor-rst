@@ -23,6 +23,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Use `$this->assert*` over static calls.')]
 #[InvalidExample('self::assertTrue($foo);')]
 #[ValidExample('$this->assertTrue($foo);')]

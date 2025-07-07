@@ -19,6 +19,9 @@ use App\Formatter\Registry;
 use App\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class RegistryTest extends UnitTestCase
 {
     #[Test]
@@ -27,7 +30,7 @@ final class RegistryTest extends UnitTestCase
         $this->expectException(FormatterNotFound::class);
         $this->expectExceptionMessage('Formatter "invalid" not found');
 
-        new Registry(new ConsoleFormatter())->get('invalid');
+        (new Registry(new ConsoleFormatter()))->get('invalid');
     }
 
     #[Test]
@@ -35,6 +38,6 @@ final class RegistryTest extends UnitTestCase
     {
         $formatter = new ConsoleFormatter();
 
-        self::assertSame($formatter, new Registry($formatter)->get('console'));
+        self::assertSame($formatter, (new Registry($formatter))->get('console'));
     }
 }

@@ -23,6 +23,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure explicit nullable types in method arguments.')]
 #[ValidExample('function foo(?string $bar = null)')]
 #[ValidExample('function foo(string|null $bar = null)')]

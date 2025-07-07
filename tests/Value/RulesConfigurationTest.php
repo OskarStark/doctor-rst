@@ -18,6 +18,9 @@ use App\Tests\UnitTestCase;
 use App\Value\RulesConfiguration;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class RulesConfigurationTest extends UnitTestCase
 {
     #[Test]

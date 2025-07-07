@@ -23,6 +23,9 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use function Symfony\Component\String\u;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure a space between label and link in :doc: directive.')]
 #[InvalidExample(':doc:`File</reference/constraints/File>`')]
 #[ValidExample(':doc:`File </reference/constraints/File>`')]

@@ -20,6 +20,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Report common typos.')]
 class Typo extends CheckListRule implements LineContentRule
 {

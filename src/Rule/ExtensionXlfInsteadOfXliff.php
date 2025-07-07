@@ -22,6 +22,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Make sure to only use `.xlf` instead of `.xliff`.')]
 #[ValidExample('messages.xlf')]
 #[InvalidExample('messages.xliff')]

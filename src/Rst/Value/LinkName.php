@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace App\Rst\Value;
 
+/**
+ * @no-named-arguments
+ */
 final readonly class LinkName
 {
     private string $value;

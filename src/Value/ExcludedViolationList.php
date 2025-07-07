@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace App\Value;
 
+/**
+ * @no-named-arguments
+ */
 final readonly class ExcludedViolationList
 {
     /**
@@ -37,7 +40,7 @@ final readonly class ExcludedViolationList
      */
     public function __construct(array $excludedViolationConfig, array $violations)
     {
-        $filteredViolations = $this->filterViolations($excludedViolationConfig, $violations);
+        $filteredViolations = self::filterViolations($excludedViolationConfig, $violations);
 
         $this->violations = $filteredViolations['violations'];
         $this->hasViolations = \count($this->violations) > 0;
@@ -80,7 +83,7 @@ final readonly class ExcludedViolationList
      *
      * @return array{violations: Violation[], matchedWhitelistRegex: array<string, int>, matchedWhitelistLines: array<string, int>}
      */
-    private function filterViolations(array $excludedViolationConfig, array $violations): array
+    private static function filterViolations(array $excludedViolationConfig, array $violations): array
     {
         $matchedWhitelistRegex = [];
         $matchedWhitelistLines = [];

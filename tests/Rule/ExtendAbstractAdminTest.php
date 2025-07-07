@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class ExtendAbstractAdminTest extends UnitTestCase
 {
     #[Test]
@@ -30,7 +33,7 @@ final class ExtendAbstractAdminTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new ExtendAbstractAdmin()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new ExtendAbstractAdmin())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 
@@ -46,7 +49,6 @@ final class ExtendAbstractAdminTest extends UnitTestCase
                 ),
                 new RstSample('class TestAdmin extends Admin'),
             ],
-
             [
                 Violation::from(
                     'Please extend AbstractAdmin instead of Admin',

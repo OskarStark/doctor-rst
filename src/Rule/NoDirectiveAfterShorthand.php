@@ -21,6 +21,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure that no directive follows the shorthand `::`. This could lead to broken markup.')]
 class NoDirectiveAfterShorthand extends AbstractRule implements LineContentRule
 {

@@ -22,6 +22,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Make sure Composer `--dev` option for `require` command is used at the end.')]
 #[InvalidExample('composer require --dev symfony/var-dumper')]
 #[ValidExample('composer require symfony/var-dumper --dev')]

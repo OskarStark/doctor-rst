@@ -21,6 +21,9 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Make sure you have a blank line after a filepath in a Twig code block.')]
 class BlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements LineContentRule
 {
@@ -46,7 +49,7 @@ class BlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Line
         // TWIG
         if ($matches = $lines->current()->clean()->match('/^{#(.*)\.twig(.*)#}/')) {
             /** @var string[] $matches */
-            return $this->validateBlankLine($lines, $matches, $filename, $number);
+            return self::validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
@@ -55,7 +58,7 @@ class BlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Line
     /**
      * @param string[] $matches
      */
-    private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
+    private static function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();
 
