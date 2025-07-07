@@ -18,6 +18,9 @@ use App\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 #[Group('temp')]
 final class DirectiveContentTest extends UnitTestCase
 {

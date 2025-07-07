@@ -21,6 +21,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
@@ -63,9 +66,9 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
 
         // it has no indention, check if it comes after a headline, in this case its ok
         if (!preg_match('/^[\s]+/', $line->raw()->toString(), $matches)) {
-            if ($this->directAfterHeadline($lines, $number)
-                || $this->directAfterTable($lines, $number)
-                || $this->previousParagraphEndsWithQuestionMark($lines, $number)
+            if (self::directAfterHeadline($lines, $number)
+                || self::directAfterTable($lines, $number)
+                || self::previousParagraphEndsWithQuestionMark($lines, $number)
             ) {
                 return NullViolation::create();
             }
@@ -118,7 +121,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         );
     }
 
-    private function directAfterHeadline(Lines $lines, int $number): bool
+    private static function directAfterHeadline(Lines $lines, int $number): bool
     {
         $lines->seek($number);
 
@@ -143,7 +146,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         return false;
     }
 
-    private function directAfterTable(Lines $lines, int $number): bool
+    private static function directAfterTable(Lines $lines, int $number): bool
     {
         $lines->seek($number);
 
@@ -168,7 +171,7 @@ class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRul
         return false;
     }
 
-    private function previousParagraphEndsWithQuestionMark(Lines $lines, int $number): bool
+    private static function previousParagraphEndsWithQuestionMark(Lines $lines, int $number): bool
     {
         $lines->seek($number);
 

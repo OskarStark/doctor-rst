@@ -22,6 +22,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Make sure there is no redundant parenthesis on attribute')]
 #[InvalidExample('#[Bar()]')]
 #[ValidExample('#[Bar]')]

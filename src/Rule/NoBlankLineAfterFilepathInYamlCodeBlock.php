@@ -21,6 +21,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
@@ -47,7 +50,7 @@ class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Li
 
         // YML / YAML
         if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename, $number);
+            return self::validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
@@ -56,7 +59,7 @@ class NoBlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements Li
     /**
      * @param string[] $matches
      */
-    private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
+    private static function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();
 

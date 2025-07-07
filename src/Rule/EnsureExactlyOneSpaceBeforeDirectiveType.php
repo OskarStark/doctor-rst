@@ -22,6 +22,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure exactly one space before directive type.')]
 #[InvalidExample('..  code-block:: php')]
 #[ValidExample('.. code-block:: php')]

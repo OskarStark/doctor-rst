@@ -21,6 +21,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class FilenameUsesDashesOnlyTest extends UnitTestCase
 {
     #[Test]
@@ -33,7 +36,7 @@ final class FilenameUsesDashesOnlyTest extends UnitTestCase
 
         self::assertEquals(
             $expected,
-            new FilenameUsesDashesOnly()->check($fileInfo),
+            (new FilenameUsesDashesOnly())->check($fileInfo),
         );
     }
 

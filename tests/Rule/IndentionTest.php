@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class IndentionTest extends UnitTestCase
 {
     #[Test]
@@ -374,7 +377,7 @@ RST
     {
         self::assertSame(
             $expected,
-            new Indention()->isPartOrMultilineXmlComment($sample->lines, $sample->lineNumber),
+            (new Indention())->isPartOrMultilineXmlComment($sample->lines, $sample->lineNumber),
         );
     }
 
@@ -445,7 +448,7 @@ RST
     {
         self::assertSame(
             $expected,
-            new Indention()->isPartOrMultilineTwigComment($sample->lines, $sample->lineNumber),
+            (new Indention())->isPartOrMultilineTwigComment($sample->lines, $sample->lineNumber),
         );
     }
 

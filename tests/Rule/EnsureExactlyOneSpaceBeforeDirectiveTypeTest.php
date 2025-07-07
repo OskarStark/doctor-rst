@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new EnsureExactlyOneSpaceBeforeDirectiveType()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new EnsureExactlyOneSpaceBeforeDirectiveType())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

@@ -23,6 +23,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class EnsureBashPromptBeforeComposerCommandTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class EnsureBashPromptBeforeComposerCommandTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new EnsureBashPromptBeforeComposerCommand()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new EnsureBashPromptBeforeComposerCommand())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

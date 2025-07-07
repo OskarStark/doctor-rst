@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class ReplaceCodeBlockTypesTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class ReplaceCodeBlockTypesTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (ReplaceCodeBlockTypes::getList() as $search => $message) {
-            $configuredRules[] = new ReplaceCodeBlockTypes()->configure($search, $message);
+            $configuredRules[] = (new ReplaceCodeBlockTypes())->configure($search, $message);
         }
 
         $violations = [];

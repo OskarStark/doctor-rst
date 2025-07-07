@@ -19,6 +19,9 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
@@ -38,22 +41,22 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCo
 
         // PHP
         if (preg_match('/^\/\/(.*)\.php$/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename, $number);
+            return self::validateBlankLine($lines, $matches, $filename, $number);
         }
 
         // YML / YAML
         if (preg_match('/^#(.*)\.(yml|yaml)$/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename, $number);
+            return self::validateBlankLine($lines, $matches, $filename, $number);
         }
 
         // XML
         if (preg_match('/^<!--(.*)\.xml(.*)-->$/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename, $number);
+            return self::validateBlankLine($lines, $matches, $filename, $number);
         }
 
         // TWIG
         if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename, $number);
+            return self::validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
@@ -62,7 +65,7 @@ class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineCo
     /**
      * @param string[] $matches
      */
-    private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
+    private static function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();
 

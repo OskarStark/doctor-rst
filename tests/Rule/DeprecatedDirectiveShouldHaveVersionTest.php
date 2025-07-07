@@ -23,6 +23,9 @@ use Composer\Semver\VersionParser;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class DeprecatedDirectiveShouldHaveVersionTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new DeprecatedDirectiveShouldHaveVersion(new VersionParser())
+            (new DeprecatedDirectiveShouldHaveVersion(new VersionParser()))
                 ->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }

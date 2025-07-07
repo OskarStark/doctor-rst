@@ -23,6 +23,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('propose to replace a string with another string.')]
 final class StringReplacementTest extends UnitTestCase
 {
@@ -33,7 +36,7 @@ final class StringReplacementTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (StringReplacement::getList() as $search => $message) {
-            $configuredRules[] = new StringReplacement()->configure($search, $message);
+            $configuredRules[] = (new StringReplacement())->configure($search, $message);
         }
 
         $violations = [];

@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class TypoTest extends UnitTestCase
 {
     #[Test]
@@ -32,7 +35,7 @@ final class TypoTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (Typo::getList() as $search => $message) {
-            $configuredRules[] = new Typo()->configure($search, $message);
+            $configuredRules[] = (new Typo())->configure($search, $message);
         }
 
         $violations = [];

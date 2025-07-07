@@ -21,6 +21,9 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @no-named-arguments
+ */
 class VersionaddedDirectiveMinVersion extends AbstractRule implements Configurable, LineContentRule
 {
     private string $minVersion;

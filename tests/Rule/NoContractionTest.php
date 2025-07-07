@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class NoContractionTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class NoContractionTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (NoContraction::getList() as $search => $message) {
-            $configuredRules[] = new NoContraction()->configure($search, $message);
+            $configuredRules[] = (new NoContraction())->configure($search, $message);
         }
 
         $violations = [];

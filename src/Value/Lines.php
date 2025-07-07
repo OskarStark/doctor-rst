@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace App\Value;
 
+/**
+ * @no-named-arguments
+ */
 final class Lines implements \SeekableIterator
 {
     private int $currentLine = 0;
@@ -49,7 +52,7 @@ final class Lines implements \SeekableIterator
     public function current(): Line
     {
         if (!isset($this->array[$this->currentLine])) {
-            throw $this->createOutOfBoundException($this->currentLine);
+            throw self::createOutOfBoundException($this->currentLine);
         }
 
         return $this->array[$this->currentLine];
@@ -68,7 +71,7 @@ final class Lines implements \SeekableIterator
     public function key(): int
     {
         if (!isset($this->array[$this->currentLine])) {
-            throw $this->createOutOfBoundException($this->currentLine);
+            throw self::createOutOfBoundException($this->currentLine);
         }
 
         return $this->currentLine;
@@ -95,7 +98,7 @@ final class Lines implements \SeekableIterator
         if (!isset($this->array[$this->currentLine])) {
             $this->currentLine = $currentLine;
 
-            throw $this->createOutOfBoundException($line);
+            throw self::createOutOfBoundException($line);
         }
     }
 
@@ -108,7 +111,7 @@ final class Lines implements \SeekableIterator
         return $this->array[$no]->isProcessedBy($rule);
     }
 
-    private function createOutOfBoundException(int $line): \OutOfBoundsException
+    private static function createOutOfBoundException(int $line): \OutOfBoundsException
     {
         return new \OutOfBoundsException(\sprintf('Line "%d" does not exists.', $line));
     }

@@ -22,6 +22,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Do not use typographic quotes.')]
 #[ValidExample('Lorem \'ipsum\' dolor "sit amet"')]
 #[InvalidExample('Lorem ‘ipsum’ dolor “sit amet”')]

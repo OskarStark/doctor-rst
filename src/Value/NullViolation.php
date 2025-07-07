@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace App\Value;
 
+/**
+ * @no-named-arguments
+ */
 final readonly class NullViolation implements ViolationInterface
 {
     private string $message;

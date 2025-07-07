@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new UseDeprecatedDirectiveInsteadOfVersionadded()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new UseDeprecatedDirectiveInsteadOfVersionadded())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

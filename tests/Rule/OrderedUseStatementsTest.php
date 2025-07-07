@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class OrderedUseStatementsTest extends UnitTestCase
 {
     #[Test]
@@ -30,7 +33,7 @@ final class OrderedUseStatementsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new OrderedUseStatements()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new OrderedUseStatements())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

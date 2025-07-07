@@ -23,6 +23,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure exactly one space between link definition and link.')]
 #[InvalidExample('.. _DOCtor-RST:     https://github.com/OskarStark/DOCtor-RST')]
 #[ValidExample('.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST')]

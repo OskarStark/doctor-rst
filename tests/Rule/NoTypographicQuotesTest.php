@@ -21,6 +21,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class NoTypographicQuotesTest extends UnitTestCase
 {
     #[Test]
@@ -29,7 +32,7 @@ final class NoTypographicQuotesTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new NoTypographicQuotes()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new NoTypographicQuotes())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

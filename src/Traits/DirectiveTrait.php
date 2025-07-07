@@ -17,6 +17,9 @@ use App\Rst\RstParser;
 use App\Rst\Value\DirectiveContent;
 use App\Value\Lines;
 
+/**
+ * @no-named-arguments
+ */
 trait DirectiveTrait
 {
     public function getLineNumberOfDirective(string $directive, Lines $lines, int $number): int

@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class NoBlankLineAfterFilepathInCodeBlockTest extends UnitTestCase
 {
     #[Test]
@@ -35,7 +38,7 @@ final class NoBlankLineAfterFilepathInCodeBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new NoBlankLineAfterFilepathInCodeBlock()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new NoBlankLineAfterFilepathInCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

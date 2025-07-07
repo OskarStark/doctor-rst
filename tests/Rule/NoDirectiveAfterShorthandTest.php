@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class NoDirectiveAfterShorthandTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class NoDirectiveAfterShorthandTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new NoDirectiveAfterShorthand()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new NoDirectiveAfterShorthand())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

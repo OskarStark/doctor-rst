@@ -22,6 +22,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure php reference syntax is valid.')]
 #[InvalidExample('The :class:`Symfony\\Component\\Notifier\\Transport`` class')]
 #[ValidExample('The :class:`Symfony\\Component\\Notifier\\Transport` class')]

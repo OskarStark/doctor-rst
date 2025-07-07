@@ -26,6 +26,9 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @no-named-arguments
+ */
 class Indention extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;
@@ -100,7 +103,7 @@ class Indention extends AbstractRule implements Configurable, LineContentRule
                 || PhpHelper::isFirstLineOfMultilineComment($line)
             ) {
                 $minus = 0;
-            } elseif (new PhpHelper()->isPartOfMultilineComment($lines, $number)) {
+            } elseif ((new PhpHelper())->isPartOfMultilineComment($lines, $number)) {
                 $customMessage = 'Please fix the indention of the multiline comment.';
 
                 if (PhpHelper::isLastLineOfMultilineComment($line)
@@ -111,11 +114,11 @@ class Indention extends AbstractRule implements Configurable, LineContentRule
                     $minus = 1;
                 }
             } elseif (PhpHelper::isLastLineOfDocBlock($line)
-                && new PhpHelper()->isPartOfDocBlock($lines, $number)
+                && (new PhpHelper())->isPartOfDocBlock($lines, $number)
             ) {
                 $customMessage = 'Please fix the indention of the PHP DocBlock.';
                 $minus = 1;
-            } elseif (new PhpHelper()->isPartOfDocBlock($lines, $number)) {
+            } elseif ((new PhpHelper())->isPartOfDocBlock($lines, $number)) {
                 $customMessage = 'Please fix the indention of the PHP DocBlock.';
                 $minus = 1;
             }

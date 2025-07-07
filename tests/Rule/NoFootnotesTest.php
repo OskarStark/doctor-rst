@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class NoFootnotesTest extends UnitTestCase
 {
     #[Test]
@@ -30,7 +33,7 @@ final class NoFootnotesTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new NoFootnotes()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new NoFootnotes())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

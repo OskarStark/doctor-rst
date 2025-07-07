@@ -16,6 +16,9 @@ namespace App\Analyzer;
 use App\Application;
 use App\Value\Violation;
 
+/**
+ * @no-named-arguments
+ */
 final class FileCache implements Cache
 {
     /**
@@ -45,7 +48,7 @@ final class FileCache implements Cache
         }
 
         if (
-            $this->hashRules($rules) !== $this->cache[$pathname]['rules']
+            self::hashRules($rules) !== $this->cache[$pathname]['rules']
             || sha1_file($pathname) !== $this->cache[$pathname]['hash']
         ) {
             unset($this->cache[$pathname]);
@@ -79,7 +82,7 @@ final class FileCache implements Cache
 
         $this->cache[$pathname] = [
             'hash' => sha1_file($pathname),
-            'rules' => $this->hashRules($rules),
+            'rules' => self::hashRules($rules),
             'violations' => $violations,
         ];
     }
@@ -131,7 +134,7 @@ final class FileCache implements Cache
         );
     }
 
-    private function hashRules(array $rules): string
+    private static function hashRules(array $rules): string
     {
         return sha1(serialize($rules));
     }

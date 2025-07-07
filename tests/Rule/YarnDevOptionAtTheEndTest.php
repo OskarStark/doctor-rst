@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class YarnDevOptionAtTheEndTest extends UnitTestCase
 {
     #[Test]
@@ -30,7 +33,7 @@ final class YarnDevOptionAtTheEndTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new YarnDevOptionAtTheEnd()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new YarnDevOptionAtTheEnd())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

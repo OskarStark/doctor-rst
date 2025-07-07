@@ -19,6 +19,9 @@ use App\Value\Line;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class TwigHelperTest extends UnitTestCase
 {
     #[Test]

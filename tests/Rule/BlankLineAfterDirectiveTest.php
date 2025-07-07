@@ -23,6 +23,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class BlankLineAfterDirectiveTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class BlankLineAfterDirectiveTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new BlankLineAfterDirective()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new BlankLineAfterDirective())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

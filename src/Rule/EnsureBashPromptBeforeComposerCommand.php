@@ -24,6 +24,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Make sure Composer command in a terminal/bash code block is prefixed with a $.')]
 #[InvalidExample('composer require symfony/var-dumper')]
 #[ValidExample('$ composer require symfony/var-dumper')]

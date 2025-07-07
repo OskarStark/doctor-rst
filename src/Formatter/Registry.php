@@ -15,6 +15,9 @@ namespace App\Formatter;
 
 use App\Formatter\Exception\FormatterNotFound;
 
+/**
+ * @no-named-arguments
+ */
 final class Registry
 {
     /**

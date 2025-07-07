@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class NoExplicitUseOfCodeBlockPhpTest extends UnitTestCase
 {
     #[Test]
@@ -31,7 +34,7 @@ final class NoExplicitUseOfCodeBlockPhpTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            new NoExplicitUseOfCodeBlockPhp()->check($sample->lines, $sample->lineNumber, 'filename'),
+            (new NoExplicitUseOfCodeBlockPhp())->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

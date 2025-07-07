@@ -18,6 +18,8 @@ use App\Value\ViolationInterface;
 /**
  * Rules using this interface are only run once,
  * and get a \SplFileInfo containing infos of the file.
+ *
+ * @no-named-arguments
  */
 interface FileInfoRule extends Rule
 {

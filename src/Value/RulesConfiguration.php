@@ -15,6 +15,9 @@ namespace App\Value;
 
 use App\Rule\Rule;
 
+/**
+ * @no-named-arguments
+ */
 final class RulesConfiguration
 {
     /**
