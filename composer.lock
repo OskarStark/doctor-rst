@@ -2610,22 +2610,23 @@
         },
         {
             "name": "icanhazstring/composer-unused",
-            "version": "0.9.3",
+            "version": "0.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer-unused/composer-unused.git",
-                "reference": "da5212b085d279ddeca19e007edf98e93b867724"
+                "reference": "28070aae000ad09b1b4952f2d446c5efb96ab71c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/da5212b085d279ddeca19e007edf98e93b867724",
-                "reference": "da5212b085d279ddeca19e007edf98e93b867724",
+                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/28070aae000ad09b1b4952f2d446c5efb96ab71c",
+                "reference": "28070aae000ad09b1b4952f2d446c5efb96ab71c",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.0",
                 "composer-unused/contracts": "^0.3",
                 "composer-unused/symbol-parser": "^0.3.1",
+                "composer/xdebug-handler": "^3.0",
                 "ext-json": "*",
                 "nikic/php-parser": "^5.0",
                 "ondram/ci-detector": "^4.1",
@@ -2706,7 +2707,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-04-10T06:53:16+00:00"
+            "time": "2025-07-29T18:30:11+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
