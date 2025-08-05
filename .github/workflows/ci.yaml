@@ -65,7 +65,7 @@ jobs:
                   composer-options: "--prefer-dist"
 
             - name: "Run friendsofphp/php-cs-fixer"
-              run: "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --diff --verbose"
+              run: "vendor/bin/php-cs-fixer fix --diff --verbose"
 
     composer-normalize:
         name: composer normalize

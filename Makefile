@@ -10,7 +10,7 @@ tests:
 
 .PHONY: cs
 cs: vendor
-	PHP_CS_FIXER_IGNORE_ENV=1 symfony php vendor/bin/php-cs-fixer fix --diff --verbose
+	symfony php vendor/bin/php-cs-fixer fix --diff --verbose
 
 .PHONY: static-code-analysis
 static-code-analysis:
