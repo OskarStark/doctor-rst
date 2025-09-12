@@ -3489,16 +3489,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.22",
+            "version": "2.1.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "41600c8379eb5aee63e9413fe9e97273e25d57e4"
+                "reference": "5a9f28e9ec3fe8b1b7cbd42b3935a66b569f2ff2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/41600c8379eb5aee63e9413fe9e97273e25d57e4",
-                "reference": "41600c8379eb5aee63e9413fe9e97273e25d57e4",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/5a9f28e9ec3fe8b1b7cbd42b3935a66b569f2ff2",
+                "reference": "5a9f28e9ec3fe8b1b7cbd42b3935a66b569f2ff2",
                 "shasum": ""
             },
             "require": {
@@ -3543,7 +3543,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-04T19:17:37+00:00"
+            "time": "2025-09-12T07:54:24+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
