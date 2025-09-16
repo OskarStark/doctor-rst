@@ -23,6 +23,9 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use function Symfony\Component\String\u;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Ensure a space between label and link in :ref: directive.')]
 #[InvalidExample(':ref:`receiving them via a worker<messenger-worker>`')]
 #[ValidExample(':ref:`receiving them via a worker <messenger-worker>`')]

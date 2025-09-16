@@ -21,6 +21,9 @@ use App\Tests\Util\DirectiveTraitWrapper;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class DirectiveTraitTest extends UnitTestCase
 {
     private DirectiveTraitWrapper $traitWrapper;

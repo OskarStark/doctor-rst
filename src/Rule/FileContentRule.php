@@ -20,6 +20,8 @@ use App\Value\ViolationInterface;
  * Rules using this interface are only run once per file, and are
  * responsible to check the whole file content on its own, if needed.
  * They always start on the first line of the document.
+ *
+ * @no-named-arguments
  */
 interface FileContentRule extends Rule
 {

@@ -16,6 +16,9 @@ namespace App\Value;
 use Webmozart\Assert\Assert;
 use function Symfony\Component\String\u;
 
+/**
+ * @no-named-arguments
+ */
 final readonly class RuleName
 {
     private string $name;

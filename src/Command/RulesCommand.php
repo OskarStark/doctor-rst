@@ -29,6 +29,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\OptionsResolver\Debug\OptionsResolverIntrospector;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @no-named-arguments
+ */
 #[AsCommand('rules', 'List available rules')]
 class RulesCommand extends Command
 {
@@ -247,7 +250,7 @@ class RulesCommand extends Command
             'src/Rule/%s.php',
             $classShortName,
         );
-        $ruleLink = $this->renderGithubLink($className, $classPath);
+        $ruleLink = self::renderGithubLink($className, $classPath);
         $this->io->writeln(
             \sprintf(
                 '- Rule class: %s',
@@ -265,7 +268,7 @@ class RulesCommand extends Command
                 'tests/Rule/%sTest.php',
                 $classShortName,
             );
-            $testLink = $this->renderGithubLink($testName, $testPath);
+            $testLink = self::renderGithubLink($testName, $testPath);
             $this->io->writeln(
                 \sprintf(
                     '- Test class: %s',
@@ -277,7 +280,7 @@ class RulesCommand extends Command
         $this->io->newLine();
     }
 
-    private function renderGithubLink(string $name, string $relativeFilePath): string
+    private static function renderGithubLink(string $name, string $relativeFilePath): string
     {
         return \sprintf(
             '[%s](%s%s)',

@@ -21,6 +21,9 @@ use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class FileCacheTest extends UnitTestCase
 {
     private vfsStreamDirectory $root;

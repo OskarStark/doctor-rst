@@ -21,6 +21,9 @@ use App\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 
+/**
+ * @no-named-arguments
+ */
 final class MemoizingAnalyzerTest extends UnitTestCase
 {
     /**

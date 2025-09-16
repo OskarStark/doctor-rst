@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class ExtendControllerTest extends UnitTestCase
 {
     #[Test]
@@ -49,7 +52,6 @@ final class ExtendControllerTest extends UnitTestCase
                 ),
                 new RstSample('class TestController extends AbstractController'),
             ],
-
             [
                 Violation::from(
                     'Please extend Controller instead of AbstractController',
@@ -76,7 +78,6 @@ final class ExtendControllerTest extends UnitTestCase
                 ),
                 new RstSample('use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
             ],
-
             [
                 Violation::from(
                     'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',

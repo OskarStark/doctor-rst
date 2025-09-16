@@ -25,6 +25,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * @no-named-arguments
+ */
 final class GithubFormatterTest extends UnitTestCase
 {
     #[Test]

@@ -21,6 +21,9 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('Make sure you have a blank line after a filepath in a PHP code block.')]
 class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineContentRule
 {
@@ -42,7 +45,7 @@ class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineC
         // PHP
         if ($matches = $lines->current()->clean()->match('/^\/\/(.*)\.php$/')) {
             /** @var string[] $matches */
-            return $this->validateBlankLine($lines, $matches, $filename, $number);
+            return self::validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
@@ -51,7 +54,7 @@ class BlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineC
     /**
      * @param string[] $matches
      */
-    private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
+    private static function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();
 

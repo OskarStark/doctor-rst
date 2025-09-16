@@ -21,6 +21,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
@@ -49,7 +52,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Li
 
         // TWIG
         if (preg_match('/^{#(.*)\.twig(.*)#}/', $lines->current()->clean()->toString(), $matches)) {
-            return $this->validateBlankLine($lines, $matches, $filename, $number);
+            return self::validateBlankLine($lines, $matches, $filename, $number);
         }
 
         return NullViolation::create();
@@ -58,7 +61,7 @@ class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements Li
     /**
      * @param string[] $matches
      */
-    private function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
+    private static function validateBlankLine(Lines $lines, array $matches, string $filename, int $number): ViolationInterface
     {
         $lines->next();
 

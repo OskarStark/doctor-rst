@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use Webmozart\Assert\Assert;
 use function Symfony\Component\String\u;
 
+/**
+ * @no-named-arguments
+ */
 class OrderedUseStatements extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
@@ -56,13 +59,13 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
             if ($lines->current()->clean()->match('/^use (.*);$/')) {
                 if (null === $indentionOfFirstFoundUseStatement) {
                     $indentionOfFirstFoundUseStatement = $lines->current()->indention();
-                    $statements[] = $this->extractClass($lines->current()->clean()->toString());
+                    $statements[] = self::extractClass($lines->current()->clean()->toString());
                 } else {
                     if ($lines->current()->indention() !== $indentionOfFirstFoundUseStatement) {
                         break;
                     }
 
-                    $statements[] = $this->extractClass($lines->current()->clean()->toString());
+                    $statements[] = self::extractClass($lines->current()->clean()->toString());
                 }
             }
 
@@ -89,7 +92,7 @@ class OrderedUseStatements extends AbstractRule implements LineContentRule
         return NullViolation::create();
     }
 
-    private function extractClass(string $useStatement): string
+    private static function extractClass(string $useStatement): string
     {
         $matches = u($useStatement)->match('/use (.*);/');
         /** @var string[] $matches */

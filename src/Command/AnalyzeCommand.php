@@ -35,6 +35,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
+/**
+ * @no-named-arguments
+ */
 #[AsCommand('analyze', null, ['analyse'])]
 class AnalyzeCommand extends Command
 {

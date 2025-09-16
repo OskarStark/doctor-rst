@@ -18,6 +18,9 @@ use App\Value\FileResult;
 use App\Value\Violation;
 use Symfony\Component\Console\Style\OutputStyle;
 
+/**
+ * @no-named-arguments
+ */
 class ConsoleFormatter implements Formatter
 {
     public function format(
@@ -31,10 +34,10 @@ class ConsoleFormatter implements Formatter
         foreach ($analyzerResult->all() as $fileResult) {
             if ($fileResult->violationList()->hasViolations()) {
                 ++$violatedFiles;
-                $this->formatViolationList($style, $analyzeDir, $fileResult);
+                self::formatViolationList($style, $analyzeDir, $fileResult);
                 $style->newLine();
             } elseif ($showValidFiles) {
-                $this->formatValidFile($style, $analyzeDir, $fileResult);
+                self::formatValidFile($style, $analyzeDir, $fileResult);
                 $style->newLine();
             }
         }
@@ -73,7 +76,7 @@ class ConsoleFormatter implements Formatter
         return 'console';
     }
 
-    private function formatViolationList(OutputStyle $style, string $analyzeDir, FileResult $fileResult): void
+    private static function formatViolationList(OutputStyle $style, string $analyzeDir, FileResult $fileResult): void
     {
         $style->writeln(\sprintf(
             '%s %s',
@@ -95,7 +98,7 @@ class ConsoleFormatter implements Formatter
         }
     }
 
-    private function formatValidFile(OutputStyle $style, string $analyzeDir, FileResult $fileResult): void
+    private static function formatValidFile(OutputStyle $style, string $analyzeDir, FileResult $fileResult): void
     {
         $style->writeln(\sprintf(
             '%s %s',

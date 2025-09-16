@@ -22,6 +22,9 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
+/**
+ * @no-named-arguments
+ */
 final class FinalAdminClassesTest extends UnitTestCase
 {
     #[Test]
@@ -55,7 +58,6 @@ final class FinalAdminClassesTest extends UnitTestCase
                 ),
                 new RstSample('class TestAdmin extends AbstractAdmin'),
             ],
-
             [
                 Violation::from(
                     'Please use "final" for Admin class',

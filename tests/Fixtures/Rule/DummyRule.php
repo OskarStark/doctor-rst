@@ -16,6 +16,9 @@ namespace App\Tests\Fixtures\Rule;
 use App\Rule\AbstractRule;
 use App\Rule\Rule;
 
+/**
+ * @no-named-arguments
+ */
 final class DummyRule extends AbstractRule implements Rule
 {
 }

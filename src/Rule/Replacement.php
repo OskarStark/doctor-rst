@@ -19,6 +19,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 class Replacement extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
@@ -79,7 +82,7 @@ class Replacement extends CheckListRule implements LineContentRule
             '/Performances/' => 'Please replace "%s" with "Performance"',
             "/``'%kernel.debug%'``/" => 'Please replace "%s" with "``%%kernel.debug%%``"',
             '/PHPdoc/' => 'Please replace "%s" with "PHPDoc"',
-            '/eg\./' => 'Please replace "%s" with "e.g."',
+            '/\beg\./' => 'Please replace "%s" with "e.g."',
         ];
     }
 }

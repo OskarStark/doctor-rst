@@ -20,6 +20,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
@@ -52,7 +55,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
                     && !preg_match('/<3/', $lines->current()->clean()->toString())
                 ) {
                     return Violation::from(
-                        $this->getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG),
+                        self::getErrorMessage(RstParser::CODE_BLOCK_HTML_TWIG, RstParser::CODE_BLOCK_TWIG),
                         $filename,
                         $number + 1,
                         $line,
@@ -82,7 +85,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
 
             if (!$foundHtml) {
                 return Violation::from(
-                    $this->getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG),
+                    self::getErrorMessage(RstParser::CODE_BLOCK_TWIG, RstParser::CODE_BLOCK_HTML_TWIG),
                     $filename,
                     $number + 1,
                     $line,
@@ -93,7 +96,7 @@ class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements
         return NullViolation::create();
     }
 
-    private function getErrorMessage(string $new, string $current): string
+    private static function getErrorMessage(string $new, string $current): string
     {
         return \sprintf('Please use "%s" instead of "%s"', $new, $current);
     }

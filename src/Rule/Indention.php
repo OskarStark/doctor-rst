@@ -26,6 +26,9 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @no-named-arguments
+ */
 class Indention extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;

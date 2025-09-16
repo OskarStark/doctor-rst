@@ -18,6 +18,8 @@ use App\Value\ViolationInterface;
 
 /**
  * Rules using this interface run for every line of the file content.
+ *
+ * @no-named-arguments
  */
 interface LineContentRule extends Rule
 {

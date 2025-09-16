@@ -20,6 +20,9 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @no-named-arguments
+ */
 class MaxBlankLines extends AbstractRule implements Configurable, LineContentRule
 {
     private int $max;

@@ -23,6 +23,9 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
+/**
+ * @no-named-arguments
+ */
 #[Description('A use statement in a PHP code-block should only contain backslashes.')]
 #[InvalidExample('use Foo/Bar;')]
 #[ValidExample('use Foo\\Bar;')]

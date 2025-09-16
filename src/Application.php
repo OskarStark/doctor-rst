@@ -23,9 +23,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
+/**
+ * @no-named-arguments
+ */
 class Application extends BaseApplication
 {
-    public const VERSION = '@git-version@';
+    public const string VERSION = '@git-version@';
 
     public function __construct()
     {
@@ -39,7 +42,7 @@ class Application extends BaseApplication
 
     public function doRun(InputInterface $input, OutputInterface $output): int
     {
-        $container = $this->buildContainer($input);
+        $container = self::buildContainer($input);
 
         /** @var AnalyzeCommand $analyzeCommand */
         $analyzeCommand = $container->get(AnalyzeCommand::class);
@@ -52,7 +55,7 @@ class Application extends BaseApplication
         return parent::doRun($input, $output);
     }
 
-    private function buildContainer(InputInterface $input): ContainerBuilder
+    private static function buildContainer(InputInterface $input): ContainerBuilder
     {
         $container = new ContainerBuilder();
 

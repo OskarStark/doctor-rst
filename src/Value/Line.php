@@ -16,6 +16,9 @@ namespace App\Value;
 use Symfony\Component\String\UnicodeString;
 use function Symfony\Component\String\u;
 
+/**
+ * @no-named-arguments
+ */
 final class Line
 {
     private readonly UnicodeString $raw;
@@ -34,7 +37,7 @@ final class Line
     public function __construct(string $line)
     {
         $this->raw = u($line);
-        $this->clean = $this->cleanString($this->raw);
+        $this->clean = self::cleanString($this->raw);
         $this->blank = $this->clean->isEmpty();
     }
 
@@ -129,7 +132,7 @@ final class Line
         return \in_array($rule, $this->processedBy, true);
     }
 
-    private function cleanString(UnicodeString $string): UnicodeString
+    private static function cleanString(UnicodeString $string): UnicodeString
     {
         $clean = $string->trim()->toUnicodeString();
 

@@ -16,6 +16,9 @@ namespace App\Formatter;
 use App\Value\AnalyzerResult;
 use Symfony\Component\Console\Style\OutputStyle;
 
+/**
+ * @no-named-arguments
+ */
 class GithubFormatter implements Formatter
 {
     public function __construct(
