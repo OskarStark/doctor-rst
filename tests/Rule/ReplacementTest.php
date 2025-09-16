@@ -84,6 +84,8 @@ final class ReplacementTest extends UnitTestCase
             'Performance',
             '``%kernel.debug%``',
             'e.g.',
+            # 'eg. in the URL should not be reported as mispelling of `e.g.`
+            '.. _`FFmpeg package`: https://ffmpeg.org/',
             'PHPDoc',
             //            '# username is your full Gmail or Google Apps email address', // todo this should be supported by the regex
         ];
