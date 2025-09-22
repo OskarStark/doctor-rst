@@ -2669,16 +2669,16 @@
         },
         {
             "name": "icanhazstring/composer-unused",
-            "version": "0.9.4",
+            "version": "0.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer-unused/composer-unused.git",
-                "reference": "28070aae000ad09b1b4952f2d446c5efb96ab71c"
+                "reference": "13b1d32e35e7c6dc997c01342c4fe1b217b6d767"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/28070aae000ad09b1b4952f2d446c5efb96ab71c",
-                "reference": "28070aae000ad09b1b4952f2d446c5efb96ab71c",
+                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/13b1d32e35e7c6dc997c01342c4fe1b217b6d767",
+                "reference": "13b1d32e35e7c6dc997c01342c4fe1b217b6d767",
                 "shasum": ""
             },
             "require": {
@@ -2766,7 +2766,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2025-07-29T18:30:11+00:00"
+            "time": "2025-09-22T07:07:50+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
