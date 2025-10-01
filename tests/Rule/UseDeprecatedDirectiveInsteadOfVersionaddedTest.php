@@ -39,7 +39,7 @@ final class UseDeprecatedDirectiveInsteadOfVersionaddedTest extends UnitTestCase
     }
 
     /**
-     * @return array<int|string, array{0: ViolationInterface, 1: RstSample}>
+     * @return iterable<int|string, array{0: ViolationInterface, 1: RstSample}>
      */
     public static function validProvider(): iterable
     {
