@@ -22,17 +22,17 @@
     "require-dev": {
         "ergebnis/composer-normalize": "^2.48.2",
         "ergebnis/data-provider": "^3.6",
-        "ergebnis/php-cs-fixer-config": "^6.54",
-        "friendsofphp/php-cs-fixer": "^3.87.2",
+        "ergebnis/php-cs-fixer-config": "^6.55",
+        "friendsofphp/php-cs-fixer": "^3.88.2",
         "icanhazstring/composer-unused": "^0.9.5",
         "maglnet/composer-require-checker": "^4.16.1",
         "mikey179/vfsstream": "^1.6.12",
         "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan": "^2.1.29",
+        "phpstan/phpstan": "^2.1.31",
         "phpstan/phpstan-phpunit": "^2.0.7",
         "phpstan/phpstan-webmozart-assert": "^2.0.0",
-        "phpunit/phpunit": "^12.3.15",
-        "rector/rector": "^2.1.7",
+        "phpunit/phpunit": "^12.4.1",
+        "rector/rector": "^2.2.3",
         "symfony/var-dumper": "^7.3.4"
     },
     "replace": {
