@@ -17,7 +17,7 @@
         "symfony/service-contracts": "^3.6.0",
         "symfony/string": "^7.3.4",
         "symfony/yaml": "^7.3.3",
-        "webmozart/assert": "^1.11"
+        "webmozart/assert": "^1.12"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.48.2",
@@ -32,7 +32,7 @@
         "phpstan/phpstan-phpunit": "^2.0.7",
         "phpstan/phpstan-webmozart-assert": "^2.0.0",
         "phpunit/phpunit": "^12.4.1",
-        "rector/rector": "^2.2.3",
+        "rector/rector": "^2.2.5",
         "symfony/var-dumper": "^7.3.4"
     },
     "replace": {
