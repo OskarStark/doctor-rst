@@ -369,6 +369,25 @@ RST
 RST
                 , 5),
         ];
+        yield 'table multiline' => [
+            NullViolation::create(),
+            4,
+            new RstSample(<<<'RST'
+Possible options to configure with the attribute are:
+
+============================  ====================================================================================================
+Option                        Description
+============================  ====================================================================================================
+``bus``                       Name of the bus from which the handler can receive messages, by default all buses.
+``fromTransport``             Name of the transport from which the handler can receive messages, by default all transports.
+``handles``                   Type of messages (FQCN) that can be processed by the handler, only needed if can't be guessed by
+                              type-hint.
+``method``                    Name of the method that will process the message, only if the target is a class.
+``priority``                  Priority of the handler when multiple handlers can process the same message.
+============================  ====================================================================================================
+RST
+                , 8),
+        ];
     }
 
     #[Test]

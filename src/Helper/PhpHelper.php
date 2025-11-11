@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
+use App\Rst\RstParser;
 use App\Value\Line;
 use App\Value\Lines;
 
@@ -113,6 +114,29 @@ final class PhpHelper
             }
 
             if (self::isFirstLineOfMultilineComment($lines->current())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function isPartOfTable(Lines $lines, int $number): bool
+    {
+        $lines->seek($number);
+
+        $i = $number;
+
+        while (1 <= $i) {
+            --$i;
+
+            $lines->seek($i);
+
+            if ($lines->current()->isBlank()) {
+                continue;
+            }
+
+            if (RstParser::isTable($lines->current())) {
                 return true;
             }
         }

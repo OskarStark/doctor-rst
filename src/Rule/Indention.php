@@ -33,6 +33,7 @@ class Indention extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;
     use ListTrait;
+
     private int $size;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
@@ -138,6 +139,10 @@ class Indention extends AbstractRule implements Configurable, LineContentRule
             && $this->isPartOrMultilineTwigComment($lines, $number)
         ) {
             $minus = 3;
+        }
+
+        if ((new PhpHelper())->isPartOfTable($lines, $number)) {
+            return NullViolation::create();
         }
 
         if (0 < $indention && 0 < (($indention - $minus) % $this->size)) {
