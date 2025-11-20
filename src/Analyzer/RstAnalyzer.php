@@ -17,7 +17,6 @@ use App\Rule\FileContentRule;
 use App\Rule\FileInfoRule;
 use App\Rule\LineContentRule;
 use App\Rule\Rule;
-use App\Value\Line;
 use App\Value\Lines;
 use App\Value\ViolationInterface;
 use Symfony\Contracts\Service\ResetInterface;
@@ -76,10 +75,6 @@ final class RstAnalyzer implements Analyzer
 
         $lineContentRules = RuleFilter::byType($rules, LineContentRule::class);
 
-        /**
-         * @var int  $no
-         * @var Line $line
-         */
         foreach ($lines->toIterator() as $no => $line) {
             $lineIsBlank = $line->isBlank();
 
