@@ -17,7 +17,6 @@ use App\Rule\FileContentRule;
 use App\Rule\FileInfoRule;
 use App\Rule\LineContentRule;
 use App\Rule\Rule;
-use App\Rule\RuleFilter;
 use App\Value\Line;
 use App\Value\Lines;
 use App\Value\ViolationInterface;

@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Tests\Rule;
+namespace App\Tests\Analyzer;
 
+use App\Analyzer\RuleFilter;
 use App\Rule\FileContentRule;
 use App\Rule\FileInfoRule;
 use App\Rule\LineContentRule;
 use App\Rule\Rule;
-use App\Rule\RuleFilter;
 use App\Tests\Fixtures\Rule\DummyFileContentRule;
 use App\Tests\Fixtures\Rule\DummyFileInfoRule;
 use App\Tests\Fixtures\Rule\DummyLineContentRule;

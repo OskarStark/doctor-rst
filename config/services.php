@@ -21,7 +21,6 @@ use App\Formatter\ConsoleFormatter;
 use App\Formatter\GithubFormatter;
 use App\Formatter\Registry as FormatterRegistry;
 use App\Handler\Registry as HandlerRegistry;
-use App\Rule\RuleFilter;
 use Composer\Semver\VersionParser;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -54,7 +53,6 @@ return static function (ContainerConfigurator $container): void {
         ]);
 
     $services->load('App\\Rule\\', '../src/Rule')
-        ->exclude('../src/Rule/RuleFilter.php')
         ->tag('doctor_rst.rule');
 
     $services->set(HandlerRegistry::class)

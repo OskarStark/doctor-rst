@@ -11,7 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Rule;
+namespace App\Analyzer;
+
+use App\Rule\Rule;
 
 final class RuleFilter
 {
