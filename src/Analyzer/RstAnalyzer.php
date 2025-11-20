@@ -49,7 +49,6 @@ final class RstAnalyzer implements Analyzer
 
         $violations = [];
 
-        /** @var FileInfoRule[] $fileInfoRules */
         $fileInfoRules = RuleFilter::byType($rules, FileInfoRule::class);
 
         foreach ($fileInfoRules as $rule) {
@@ -60,7 +59,6 @@ final class RstAnalyzer implements Analyzer
             }
         }
 
-        /** @var FileContentRule[] $fileContentRules */
         $fileContentRules = RuleFilter::byType($rules, FileContentRule::class);
 
         $lines = Lines::fromArray($content);
@@ -77,7 +75,6 @@ final class RstAnalyzer implements Analyzer
             }
         }
 
-        /** @var LineContentRule[] $lineContentRules */
         $lineContentRules = RuleFilter::byType($rules, LineContentRule::class);
 
         /**
