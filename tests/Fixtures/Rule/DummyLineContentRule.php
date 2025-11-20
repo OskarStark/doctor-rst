@@ -19,9 +19,6 @@ use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 final class DummyLineContentRule extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface

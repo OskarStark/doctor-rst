@@ -25,9 +25,6 @@ use App\Tests\Fixtures\Rule\DummyRule;
 use App\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class RuleFilterTest extends UnitTestCase
 {
     #[Test]

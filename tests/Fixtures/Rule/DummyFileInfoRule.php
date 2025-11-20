@@ -18,9 +18,6 @@ use App\Rule\FileInfoRule;
 use App\Value\NullViolation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 final class DummyFileInfoRule extends AbstractRule implements FileInfoRule
 {
     public function check(\SplFileInfo $file): ViolationInterface
