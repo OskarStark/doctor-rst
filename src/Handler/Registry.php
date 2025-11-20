@@ -130,17 +130,5 @@ final class Registry
 
         return $rules;
     }
-
-    /**
-     * @template T of Rule
-     *
-     * @param class-string<T> $type
-     *
-     * @return T[]
-     */
-    public function getRulesByType(string $type): array
-    {
-        return array_filter($this->rules, static fn (Rule $rule): bool => $rule instanceof $type);
-    }
 }
 
