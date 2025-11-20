@@ -63,10 +63,9 @@ class Application extends BaseApplication
         $fileLoader->load('services.php');
 
         if (false === $input->hasParameterOption('--no-cache')) {
-            $container->setParameter(
-                'cache.file',
-                $input->getParameterOption('--cache-file', getcwd().'/.doctor-rst.cache'),
-            );
+            $cacheFile = $input->getParameterOption('--cache-file', getcwd().'/.doctor-rst.cache');
+            \assert(\is_string($cacheFile));
+            $container->setParameter('cache.file', $cacheFile);
 
             $fileLoader->load('cache.php');
         }

@@ -68,7 +68,7 @@ final class RstAnalyzer implements Analyzer
                 $violations[] = $violation;
             }
 
-            $this->resetIfNeeded($rule);
+            self::resetIfNeeded($rule);
         }
 
         $lineContentRules = RuleFilter::byType($rules, LineContentRule::class);
@@ -91,14 +91,14 @@ final class RstAnalyzer implements Analyzer
                     $violations[] = $violation;
                 }
 
-                $this->resetIfNeeded($rule);
+                self::resetIfNeeded($rule);
             }
         }
 
         return $violations;
     }
 
-    private function resetIfNeeded(Rule $rule): void
+    private static function resetIfNeeded(Rule $rule): void
     {
         if ($rule instanceof ResetInterface) {
             $rule->reset();

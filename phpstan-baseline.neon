@@ -1,25 +1,13 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Parameter \#2 \$value of method Symfony\\Component\\DependencyInjection\\Container\:\:setParameter\(\) expects array\|bool\|float\|int\|string\|UnitEnum\|null, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Application.php
-
-		-
-			message: '#^Parameter \#1 \$prefix of static method PHPUnit\\Framework\\Assert\:\:assertStringStartsWith\(\) expects non\-empty\-string, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/Rule/TypoTest.php
-
-		-
-			message: '#^Call to function method_exists\(\) with App\\Tests\\Util\\DirectiveTraitWrapper and ''in'' will always evaluate to true\.$#'
+			message: '#^Call to function method_exists\(\) with ''App\\\\Tests\\\\Util\\\\DirectiveTraitWrapper'' and ''in'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: tests/Traits/DirectiveTraitTest.php
 
 		-
-			message: '#^Call to function method_exists\(\) with App\\Tests\\Util\\ListItemTraitWrapper and ''isPartOfListItem'' will always evaluate to true\.$#'
+			message: '#^Call to function method_exists\(\) with ''App\\\\Tests\\\\Util\\\\ListItemTraitWrapper'' and ''isPartOfListItem'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: tests/Traits/ListTraitTest.php
