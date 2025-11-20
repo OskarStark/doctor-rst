@@ -34,7 +34,7 @@ final class ListTraitTest extends UnitTestCase
     #[Test]
     public function methodExists(): void
     {
-        self::assertTrue(method_exists($this->traitWrapper, 'isPartOfListItem'));
+        self::assertTrue(method_exists(ListItemTraitWrapper::class, 'isPartOfListItem'));
     }
 
     #[Test]

@@ -21,7 +21,6 @@ use App\Rule\Rule;
 use App\Tests\Fixtures\Rule\DummyFileContentRule;
 use App\Tests\Fixtures\Rule\DummyFileInfoRule;
 use App\Tests\Fixtures\Rule\DummyLineContentRule;
-use App\Tests\Fixtures\Rule\DummyRule;
 use App\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\Test;
 

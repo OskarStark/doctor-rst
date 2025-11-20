@@ -36,7 +36,7 @@ final class DirectiveTraitTest extends UnitTestCase
     #[Test]
     public function methodExists(): void
     {
-        self::assertTrue(method_exists($this->traitWrapper, 'in'));
+        self::assertTrue(method_exists(DirectiveTraitWrapper::class, 'in'));
     }
 
     #[Test]
