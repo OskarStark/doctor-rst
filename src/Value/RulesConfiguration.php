@@ -75,7 +75,7 @@ final class RulesConfiguration
         $excludedRulesForFile = $this->excludedRulesByFilePath[$filePath] ?? null;
 
         if ($excludedRulesForFile) {
-            return array_udiff($this->rulesForAll, $excludedRulesForFile, static fn (object $a, object $b) => strcmp(spl_object_hash($a), spl_object_hash($b)));
+            return array_udiff($this->rulesForAll, $excludedRulesForFile, static fn (Rule $a, Rule $b) => $a::class <=> $b::class);
         }
 
         return $this->rulesForAll;
