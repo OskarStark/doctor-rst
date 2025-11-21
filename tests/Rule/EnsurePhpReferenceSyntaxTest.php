@@ -88,5 +88,58 @@ final class EnsurePhpReferenceSyntaxTest extends UnitTestCase
                 'The :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController::createNotFoundException``',
             ], 1),
         ];
+
+        // Test inconsistent backslash detection
+        // In PHP strings: \\\\ = \\, \\ = \
+        // Inconsistent: Symfony\\AI\\Platform\PlatformInterface (mix of \\ and \)
+        yield 'inconsistent backslashes in class reference' => [
+            Violation::from(
+                'Please use consistent backslash escaping in PHP reference: `Symfony\\\\AI\\\\Platform\\PlatformInterface`',
+                'filename',
+                2,
+                'The :class:`Symfony\\\\AI\\\\Platform\\PlatformInterface` class',
+            ),
+            new RstSample([
+                '',
+                'The :class:`Symfony\\\\AI\\\\Platform\\PlatformInterface` class',
+            ], 1),
+        ];
+
+        yield 'inconsistent backslashes in method reference' => [
+            Violation::from(
+                'Please use consistent backslash escaping in PHP reference: `Symfony\\\\AI\\\\Platform\\PlatformInterface::invoke`',
+                'filename',
+                2,
+                'The :method:`Symfony\\\\AI\\\\Platform\\PlatformInterface::invoke` method',
+            ),
+            new RstSample([
+                '',
+                'The :method:`Symfony\\\\AI\\\\Platform\\PlatformInterface::invoke` method',
+            ], 1),
+        ];
+
+        yield 'consistent single backslashes is valid' => [
+            NullViolation::create(),
+            new RstSample([
+                '',
+                'The :class:`Symfony\\AI\\Platform\\PlatformInterface` class',
+            ], 1),
+        ];
+
+        yield 'consistent double backslashes is valid' => [
+            NullViolation::create(),
+            new RstSample([
+                '',
+                'The :class:`Symfony\\\\AI\\\\Platform\\\\PlatformInterface` class',
+            ], 1),
+        ];
+
+        yield 'no backslashes is valid' => [
+            NullViolation::create(),
+            new RstSample([
+                '',
+                'The :class:`PlatformInterface` class',
+            ], 1),
+        ];
     }
 }

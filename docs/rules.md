@@ -615,6 +615,10 @@ The :class:`Symfony\Component\Notifier\Transport` class
 The :class:`Symfony\Component\Notifier\Transport`` class
 ```
 
+```rst
+The :class:`Symfony\\AI\\Platform\PlatformInterface` class
+```
+
 #### References
 
 - Rule class: [App\Rule\EnsurePhpReferenceSyntax](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/EnsurePhpReferenceSyntax.php)
