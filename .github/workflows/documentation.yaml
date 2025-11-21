@@ -23,7 +23,7 @@ jobs:
         steps:
             -
                 name: "Checkout"
-                uses: "actions/checkout@v5"
+                uses: "actions/checkout@v6"
                 with:
                     ref: "${{ github.head_ref }}"
                     token: "${{ secrets.GITHUB_TOKEN }}"
@@ -48,7 +48,7 @@ jobs:
 
             -
                 name: "Commit regenerated docs/rules.md file"
-                uses: "stefanzweifel/git-auto-commit-action@v6.0.1"
+                uses: "stefanzweifel/git-auto-commit-action@v7.0.0"
                 with:
                     branch: "${{ github.head_ref }}"
                     commit_author: "${{ env.COMMITTER_NAME }} <${{ env.COMMITTER_EMAIL }}>"

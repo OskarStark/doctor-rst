@@ -52,7 +52,9 @@ final class TypoTest extends UnitTestCase
             self::assertEmpty($violations);
         } else {
             self::assertCount(1, $violations);
-            self::assertStringStartsWith($expected->message(), $violations[0]->message());
+            $expectedMessage = $expected->message();
+            \assert('' !== $expectedMessage);
+            self::assertStringStartsWith($expectedMessage, $violations[0]->message());
         }
     }
 

@@ -90,9 +90,9 @@ class AnalyzeCommand extends Command
         $config = Yaml::parseFile($configFile);
         /**
          * @var array{
-         *     rules: array<string, array<string, mixed>|null>,
-         *     exclude_rule_for_file?: array<array{path?: ?string, rule_name?: ?string}>|null,
-         *     whitelist?: array{regex?: string[], lines?: string[]}|null,
+         *     rules: array<string, null|array<string, mixed>>,
+         *     exclude_rule_for_file?: null|array<array{path?: ?string, rule_name?: ?string}>,
+         *     whitelist?: null|array{regex?: string[], lines?: string[]},
          * } $config
          */
         $rules = $config['rules'];

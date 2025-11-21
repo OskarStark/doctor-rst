@@ -17,7 +17,6 @@ use App\Rule\FileContentRule;
 use App\Rule\FileInfoRule;
 use App\Rule\LineContentRule;
 use App\Rule\Rule;
-use App\Value\Line;
 use App\Value\Lines;
 use App\Value\ViolationInterface;
 use Symfony\Contracts\Service\ResetInterface;
@@ -48,8 +47,7 @@ final class RstAnalyzer implements Analyzer
 
         $violations = [];
 
-        /** @var FileInfoRule[] $fileInfoRules */
-        $fileInfoRules = array_filter($rules, static fn (Rule $rule): bool => $rule instanceof FileInfoRule);
+        $fileInfoRules = RuleFilter::byType($rules, FileInfoRule::class);
 
         foreach ($fileInfoRules as $rule) {
             $violation = $rule->check($file);
@@ -59,8 +57,7 @@ final class RstAnalyzer implements Analyzer
             }
         }
 
-        /** @var FileContentRule[] $fileContentRules */
-        $fileContentRules = array_filter($rules, static fn (Rule $rule): bool => $rule instanceof FileContentRule);
+        $fileContentRules = RuleFilter::byType($rules, FileContentRule::class);
 
         $lines = Lines::fromArray($content);
 
@@ -71,18 +68,11 @@ final class RstAnalyzer implements Analyzer
                 $violations[] = $violation;
             }
 
-            if ($rule instanceof ResetInterface) {
-                $rule->reset();
-            }
+            self::resetIfNeeded($rule);
         }
 
-        /** @var LineContentRule[] $lineContentRules */
-        $lineContentRules = array_filter($rules, static fn (Rule $rule): bool => $rule instanceof LineContentRule);
+        $lineContentRules = RuleFilter::byType($rules, LineContentRule::class);
 
-        /**
-         * @var int  $no
-         * @var Line $line
-         */
         foreach ($lines->toIterator() as $no => $line) {
             $lineIsBlank = $line->isBlank();
 
@@ -101,12 +91,17 @@ final class RstAnalyzer implements Analyzer
                     $violations[] = $violation;
                 }
 
-                if ($rule instanceof ResetInterface) {
-                    $rule->reset();
-                }
+                self::resetIfNeeded($rule);
             }
         }
 
         return $violations;
+    }
+
+    private static function resetIfNeeded(Rule $rule): void
+    {
+        if ($rule instanceof ResetInterface) {
+            $rule->reset();
+        }
     }
 }

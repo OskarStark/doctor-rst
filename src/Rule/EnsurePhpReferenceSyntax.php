@@ -21,15 +21,19 @@ use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use function Symfony\Component\String\u;
 
 /**
  * @no-named-arguments
  */
 #[Description('Ensure php reference syntax is valid.')]
 #[InvalidExample('The :class:`Symfony\\Component\\Notifier\\Transport`` class')]
+#[InvalidExample('The :class:`Symfony\\\\AI\\\\Platform\\PlatformInterface` class')]
 #[ValidExample('The :class:`Symfony\\Component\\Notifier\\Transport` class')]
 class EnsurePhpReferenceSyntax extends AbstractRule implements LineContentRule
 {
+    private const string PATTERN = '/:(class|method|namespace|phpclass|phpfunction|phpmethod):`([^`]+)`/';
+
     public static function getGroups(): array
     {
         return [
@@ -52,6 +56,46 @@ class EnsurePhpReferenceSyntax extends AbstractRule implements LineContentRule
             );
         }
 
+        // Check for inconsistent backslash usage
+        if (preg_match_all(self::PATTERN, $line->raw()->toString(), $matches, \PREG_SET_ORDER)) {
+            foreach ($matches as $match) {
+                $reference = u($match[2]);
+
+                if (self::hasInconsistentBackslashes($reference)) {
+                    return Violation::from(
+                        \sprintf('Please use consistent backslash escaping in PHP reference: `%s`', $reference->toString()),
+                        $filename,
+                        $number + 1,
+                        $line,
+                    );
+                }
+            }
+        }
+
         return NullViolation::create();
+    }
+
+    /**
+     * Check if a reference has inconsistent backslash escaping.
+     * In RST, namespaces should use consistent double backslashes (\\).
+     * This detects cases like "Symfony\\AI\\Platform\PlatformInterface"
+     * where there's a mix of \\ and \.
+     */
+    private static function hasInconsistentBackslashes(\Symfony\Component\String\UnicodeString $reference): bool
+    {
+        // No backslash at all - consistent
+        if (!$reference->containsAny('\\')) {
+            return false;
+        }
+
+        // Replace double backslashes with a placeholder
+        $withoutDouble = $reference->replace('\\\\', "\x00");
+
+        // If there are still single backslashes after removing doubles, it's inconsistent
+        // But we need to make sure there were also double backslashes originally
+        $hasDoubleBackslashes = $reference->containsAny('\\\\');
+        $hasSingleBackslashesAfterRemovingDoubles = $withoutDouble->containsAny('\\');
+
+        return $hasDoubleBackslashes && $hasSingleBackslashesAfterRemovingDoubles;
     }
 }
