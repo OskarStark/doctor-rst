@@ -92,6 +92,7 @@
 * [typo](#typo)
 * [unused_links](#unused_links)
 * [use_deprecated_directive_instead_of_versionadded](#use_deprecated_directive_instead_of_versionadded)
+* [use_double_backticks_for_inline_literals](#use_double_backticks_for_inline_literals)
 * [use_https_xsd_urls](#use_https_xsd_urls)
 * [use_named_constructor_without_new_keyword_rule](#use_named_constructor_without_new_keyword_rule)
 * [valid_inline_highlighted_namespaces](#valid_inline_highlighted_namespaces)
@@ -1573,6 +1574,33 @@ Pattern | Message
 
 - Rule class: [App\Rule\UseDeprecatedDirectiveInsteadOfVersionadded](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/UseDeprecatedDirectiveInsteadOfVersionadded.php)
 - Test class: [App\Tests\Rule\UseDeprecatedDirectiveInsteadOfVersionaddedTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/UseDeprecatedDirectiveInsteadOfVersionaddedTest.php)
+
+## `use_double_backticks_for_inline_literals`
+
+  > _Ensure double backticks are used for inline literals instead of single backticks._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+Please use ``vector`` for this.
+```
+
+```rst
+See :ref:`my-reference` for details.
+```
+
+##### Invalid Examples :-1:
+
+```rst
+Please use `vector` for this.
+```
+
+#### References
+
+- Rule class: [App\Rule\UseDoubleBackticksForInlineLiterals](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/UseDoubleBackticksForInlineLiterals.php)
+- Test class: [App\Tests\Rule\UseDoubleBackticksForInlineLiteralsTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/UseDoubleBackticksForInlineLiteralsTest.php)
 
 ## `use_https_xsd_urls`
 
