@@ -1,0 +1,108 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * This file is part of DOCtor-RST.
+ *
+ * (c) Oskar Stark <oskarstark@googlemail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace App\Tests\Rule;
+
+use App\Rule\UseDoubleBackticksForInlineLiterals;
+use App\Tests\RstSample;
+use App\Value\NullViolation;
+use App\Value\Violation;
+
+/**
+ * @no-named-arguments
+ */
+final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentRuleTestCase
+{
+    public function createRule(): UseDoubleBackticksForInlineLiterals
+    {
+        return new UseDoubleBackticksForInlineLiterals();
+    }
+
+    public static function checkProvider(): iterable
+    {
+        yield 'valid - double backticks' => [
+            NullViolation::create(),
+            new RstSample('Please use ``vector`` for this.'),
+        ];
+
+        yield 'valid - role with single backticks' => [
+            NullViolation::create(),
+            new RstSample('See :ref:`my-reference` for details.'),
+        ];
+
+        yield 'valid - doc role' => [
+            NullViolation::create(),
+            new RstSample('Read :doc:`/components/store` for more info.'),
+        ];
+
+        yield 'valid - class role' => [
+            NullViolation::create(),
+            new RstSample('The :class:`Symfony\\Component\\HttpFoundation\\Request` class.'),
+        ];
+
+        yield 'valid - method role' => [
+            NullViolation::create(),
+            new RstSample('Call :method:`Symfony\\Component\\HttpFoundation\\Request::getContent`'),
+        ];
+
+        yield 'valid - no backticks' => [
+            NullViolation::create(),
+            new RstSample('This is a plain text line.'),
+        ];
+
+        yield 'valid - empty line' => [
+            NullViolation::create(),
+            new RstSample(''),
+        ];
+
+        yield 'invalid - single backticks for literal' => [
+            Violation::from(
+                'Please use double backticks for inline literals: `vector` should be ``vector``',
+                'filename',
+                1,
+                'Please use `vector` for this.',
+            ),
+            new RstSample('Please use `vector` for this.'),
+        ];
+
+        yield 'invalid - single backticks for class name' => [
+            Violation::from(
+                'Please use double backticks for inline literals: `ToolboxInterface` should be ``ToolboxInterface``',
+                'filename',
+                1,
+                'The `ToolboxInterface` provides tools.',
+            ),
+            new RstSample('The `ToolboxInterface` provides tools.'),
+        ];
+
+        yield 'invalid - single backticks for method' => [
+            Violation::from(
+                'Please use double backticks for inline literals: `getTools()` should be ``getTools()``',
+                'filename',
+                1,
+                'Use `getTools()` to retrieve tools.',
+            ),
+            new RstSample('Use `getTools()` to retrieve tools.'),
+        ];
+
+        yield 'invalid - single backticks for table name' => [
+            Violation::from(
+                'Please use double backticks for inline literals: `blog` should be ``blog``',
+                'filename',
+                1,
+                'Create a table named `blog`.',
+            ),
+            new RstSample('Create a table named `blog`.'),
+        ];
+    }
+}
