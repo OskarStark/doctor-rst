@@ -142,5 +142,25 @@ final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentR
             NullViolation::create(),
             new RstSample(':ref:`Rendering forms <rendering-forms>` and :ref:`processing forms <processing-forms>`'),
         ];
+
+        yield 'valid - multiple RST links on same line' => [
+            NullViolation::create(),
+            new RstSample('Validates that a value is a valid `Universally unique identifier (UUID)`_ per `RFC 4122`_.'),
+        ];
+
+        yield 'valid - ref role followed by RST link' => [
+            NullViolation::create(),
+            new RstSample('* :ref:`Webpack Encore <frontend-webpack-encore>` is built with `Node.js`_'),
+        ];
+
+        yield 'valid - multiple RST links with or separator' => [
+            NullViolation::create(),
+            new RstSample('and `JSON Web Tokens (JWT)`_ or `SAML2 (XML structures)`_. Please refer to the'),
+        ];
+
+        yield 'valid - doc role followed by RST link' => [
+            NullViolation::create(),
+            new RstSample('and Because :doc:`the Form component </forms>` as well as `API Platform`_ internally'),
+        ];
     }
 }
