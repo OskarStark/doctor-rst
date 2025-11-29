@@ -28,7 +28,7 @@ final readonly class LinkDefinition
 
     public static function fromLine(string $line): self
     {
-        preg_match('/^\.\. _`?([^`]+)`?: (.*)$/', $line, $matches);
+        preg_match('/^\s*\.\. _`?([^`]+)`?: (.*)$/', $line, $matches);
         Assert::keyExists($matches, 1);
         Assert::keyExists($matches, 2);
 
