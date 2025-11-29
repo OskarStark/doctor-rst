@@ -22,9 +22,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure a :method: directive has special format.')]
 #[InvalidExample(':method:`Symfony\\\\Component\\\\OptionsResolver\\\\Options::offsetGet()`')]
 #[ValidExample(':method:`Symfony\\\\Component\\\\OptionsResolver\\\\Options::offsetGet`')]

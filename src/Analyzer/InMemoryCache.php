@@ -15,9 +15,6 @@ namespace App\Analyzer;
 
 use App\Value\Violation;
 
-/**
- * @no-named-arguments
- */
 final class InMemoryCache implements Cache
 {
     /**

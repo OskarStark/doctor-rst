@@ -23,9 +23,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
-/**
- * @no-named-arguments
- */
 class Application extends BaseApplication
 {
     public const string VERSION = '@git-version@';

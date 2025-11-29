@@ -23,9 +23,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure to only use `yaml` instead of `yml`.')]
 #[ValidExample('.travis.yml')]
 #[ValidExample('..code-block:: yaml')]

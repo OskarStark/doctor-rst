@@ -23,9 +23,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure no bash prompt `$` is used before commands in `bash`, `shell` or `terminal` code blocks.')]
 #[InvalidExample('$ bin/console list')]
 #[ValidExample('bin/console list')]

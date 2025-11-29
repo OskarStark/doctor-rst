@@ -21,9 +21,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure you have a blank line after a filepath in a code block. This rule respects PHP, YAML, XML and Twig.')]
 final class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineContentRule
 {

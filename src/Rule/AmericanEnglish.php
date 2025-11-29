@@ -22,9 +22,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure only American English is used.')]
 #[InvalidExample('This is a nice behaviour...')]
 #[ValidExample('This is a nice behavior...')]

@@ -20,9 +20,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure `Controller` and the corresponding namespace `Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller` is used. Instead of `Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController`.')]
 final class ExtendController extends AbstractRule implements LineContentRule
 {

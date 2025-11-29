@@ -21,9 +21,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure you have a blank line after each directive.')]
 final class BlankLineAfterDirective extends AbstractRule implements LineContentRule
 {

@@ -21,9 +21,6 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Webmozart\Assert\Assert;
 
-/**
- * @no-named-arguments
- */
 final class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array

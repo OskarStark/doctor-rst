@@ -20,9 +20,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure `AbstractAdmin` and the corresponding namespace `Sonata\\AdminBundle\\Admin\\AbstractAdmin` is used.')]
 final class ExtendAbstractAdmin extends AbstractRule implements LineContentRule
 {

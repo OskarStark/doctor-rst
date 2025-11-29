@@ -17,9 +17,6 @@ use App\Value\Line;
 use Webmozart\Assert\Assert;
 use function Symfony\Component\String\u;
 
-/**
- * @no-named-arguments
- */
 class RstParser
 {
     final public const string SHORTHAND = '::';

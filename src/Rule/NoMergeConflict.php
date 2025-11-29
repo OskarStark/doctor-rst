@@ -20,9 +20,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure that the files does not contain merge conflicts.')]
 final class NoMergeConflict extends AbstractRule implements LineContentRule
 {

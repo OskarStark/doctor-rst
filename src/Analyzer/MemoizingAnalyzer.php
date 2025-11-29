@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Analyzer;
 
-/**
- * @no-named-arguments
- */
 final readonly class MemoizingAnalyzer implements Analyzer
 {
     public function __construct(

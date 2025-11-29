@@ -16,9 +16,6 @@ namespace App\Rule;
 use App\Value\RuleGroup;
 use App\Value\RuleName;
 
-/**
- * @no-named-arguments
- */
 interface Rule
 {
     public static function getName(): RuleName;

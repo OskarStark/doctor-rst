@@ -22,9 +22,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure `bin/console` is not prefixed with `php`.')]
 #[InvalidExample('php bin/console list')]
 #[ValidExample('bin/console list')]

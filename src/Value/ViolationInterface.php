@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-/**
- * @no-named-arguments
- */
 interface ViolationInterface
 {
     public function message(): string;

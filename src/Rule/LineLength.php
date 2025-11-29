@@ -19,9 +19,6 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @no-named-arguments
- */
 final class LineLength extends AbstractRule implements Configurable, LineContentRule
 {
     private int $max;

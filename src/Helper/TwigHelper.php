@@ -15,9 +15,6 @@ namespace App\Helper;
 
 use App\Value\Line;
 
-/**
- * @no-named-arguments
- */
 final class TwigHelper
 {
     public static function isComment(Line $line, ?bool $closed = null): bool

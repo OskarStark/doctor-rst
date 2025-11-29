@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Attribute\Rule;
 
-/**
- * @no-named-arguments
- */
 #[\Attribute(\Attribute::TARGET_CLASS)]
 class Description
 {

@@ -16,9 +16,6 @@ namespace App\Helper;
 use App\Value\Line;
 use App\Value\Lines;
 
-/**
- * @no-named-arguments
- */
 final class PhpHelper
 {
     private const string REGEX_NAMESPACE_WITH_TWO_BACKSLASHES = '((?:\\\\{0,2}\w+|\w+\\\\{2})(?:\w+\\\\{2})+)';

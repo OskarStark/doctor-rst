@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
-/**
- * @no-named-arguments
- */
 abstract class CheckListRule extends AbstractRule
 {
     public string $search;
