@@ -70,6 +70,7 @@
 * [no_inheritdoc_in_code_examples](#no_inheritdoc_in_code_examples)
 * [no_merge_conflict](#no_merge_conflict)
 * [no_namespace_after_use_statements](#no_namespace_after_use_statements)
+* [no_non_breaking_space](#no_non_breaking_space)
 * [no_php_open_tag_in_code_block_php_directive](#no_php_open_tag_in_code_block_php_directive)
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
 * [no_php_prefix_before_composer](#no_php_prefix_before_composer)
@@ -407,7 +408,7 @@ Name | Required
 
 ## `ensure_attribute_between_backticks_in_content`
 
-  > _Make sure to use backticks around attribute in content._
+  > _Make sure to use backticks around attributes in content_
 
 ##### Valid Examples :+1:
 
@@ -420,6 +421,11 @@ Use ``#[Route]`` to define route
 ```rst
 Use #[Route] to define route
 ```
+
+#### References
+
+- Rule class: [App\Rule\EnsureAttributeBetweenBackticksInContent](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/EnsureAttributeBetweenBackticksInContent.php)
+- Test class: [App\Tests\Rule\EnsureAttributeBetweenBackticksInContentTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/EnsureAttributeBetweenBackticksInContentTest.php)
 
 ## `ensure_bash_prompt_before_composer_command`
 
@@ -1193,6 +1199,29 @@ Please use ````...
 
 - Rule class: [App\Rule\NoNamespaceAfterUseStatements](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoNamespaceAfterUseStatements.php)
 - Test class: [App\Tests\Rule\NoNamespaceAfterUseStatementsTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoNamespaceAfterUseStatementsTest.php)
+
+## `no_non_breaking_space`
+
+  > _Ensure no non-breaking spaces or other invisible whitespace characters are used._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+Valid sentence
+```
+
+##### Invalid Examples :-1:
+
+```rst
+Invalid sentence
+```
+
+#### References
+
+- Rule class: [App\Rule\NoNonBreakingSpace](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoNonBreakingSpace.php)
+- Test class: [App\Tests\Rule\NoNonBreakingSpaceTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoNonBreakingSpaceTest.php)
 
 ## `no_php_open_tag_in_code_block_php_directive`
 
