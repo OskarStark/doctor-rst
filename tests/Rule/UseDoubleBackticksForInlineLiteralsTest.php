@@ -182,5 +182,30 @@ final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentR
             NullViolation::create(),
             new RstSample('.. _upgrade-minor-symfony-code:'),
         ];
+
+        yield 'valid - doc role followed by comma and another doc role' => [
+            NullViolation::create(),
+            new RstSample(':doc:`routing </routing>`, or rendering :doc:`controllers </controller>`;'),
+        ];
+
+        yield 'valid - RST link followed by comma and doc role' => [
+            NullViolation::create(),
+            new RstSample('`Templating`_, :doc:`Security </security>`, :doc:`Form </components/form>`,'),
+        ];
+
+        yield 'valid - multiple doc roles with commas' => [
+            NullViolation::create(),
+            new RstSample('(:doc:`Apcu </components/cache/adapters/apcu_adapter>`, :doc:`Memcached </components/cache/adapters/memcached_adapter>`,'),
+        ];
+
+        yield 'valid - doc role followed by semicolon and another doc role' => [
+            NullViolation::create(),
+            new RstSample(':doc:`one </one>`; :doc:`two </two>`'),
+        ];
+
+        yield 'valid - RST link followed by text and class role' => [
+            NullViolation::create(),
+            new RstSample('Symfony comes with two minimalist `PSR-3`_ loggers: :class:`Symfony\\Component\\HttpKernel\\Log\\Logger`'),
+        ];
     }
 }
