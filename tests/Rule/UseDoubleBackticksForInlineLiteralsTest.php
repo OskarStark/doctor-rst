@@ -172,5 +172,15 @@ final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentR
             NullViolation::create(),
             new RstSample('   .. _`Pimple`: https://github.com/silexphp/Pimple'),
         ];
+
+        yield 'valid - RST internal anchor without URL' => [
+            NullViolation::create(),
+            new RstSample('.. _`upgrade-minor-symfony-composer`:'),
+        ];
+
+        yield 'valid - RST internal anchor without backticks or URL' => [
+            NullViolation::create(),
+            new RstSample('.. _upgrade-minor-symfony-code:'),
+        ];
     }
 }
