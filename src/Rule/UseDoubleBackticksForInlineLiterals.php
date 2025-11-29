@@ -89,6 +89,12 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
                     }
                 }
 
+                // Skip if the content looks like text between two roles (starts with ` and contains :rolename:`)
+                // This happens with multiple roles on the same line: :ref:`foo`  and :ref:`bar`
+                if (preg_match('/^\s+and\s+:[a-z-]+:$/i', $content) || preg_match('/^[^`]*:[a-z-]+:$/i', $content)) {
+                    continue;
+                }
+
                 return Violation::from(
                     \sprintf('Please use double backticks for inline literals: `%s` should be ``%s``', $content, $content),
                     $filename,

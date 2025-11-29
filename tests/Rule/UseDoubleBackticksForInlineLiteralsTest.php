@@ -137,5 +137,10 @@ final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentR
                 '    // Using the `foo` variable',
             ], 2),
         ];
+
+        yield 'valid - multiple ref roles with custom titles on same line' => [
+            NullViolation::create(),
+            new RstSample(':ref:`Rendering forms <rendering-forms>` and :ref:`processing forms <processing-forms>`'),
+        ];
     }
 }
