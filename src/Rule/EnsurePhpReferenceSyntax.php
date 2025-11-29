@@ -23,9 +23,6 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use function Symfony\Component\String\u;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure php reference syntax is valid.')]
 #[InvalidExample('The :class:`Symfony\\Component\\Notifier\\Transport`` class')]
 #[InvalidExample('The :class:`Symfony\\\\AI\\\\Platform\\PlatformInterface` class')]

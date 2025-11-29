@@ -18,9 +18,6 @@ use App\Value\FileResult;
 use App\Value\Violation;
 use Symfony\Component\Console\Style\OutputStyle;
 
-/**
- * @no-named-arguments
- */
 class ConsoleFormatter implements Formatter
 {
     public function format(

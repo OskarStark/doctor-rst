@@ -15,9 +15,6 @@ namespace App\Value;
 
 use Webmozart\Assert\Assert;
 
-/**
- * @no-named-arguments
- */
 final readonly class Violation implements ViolationInterface
 {
     private string $message;

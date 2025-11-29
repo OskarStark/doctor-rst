@@ -23,9 +23,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure `bin/console` is prefixed with `php` to be safe executable on Microsoft Windows.')]
 #[InvalidExample('bin/console list')]
 #[ValidExample('php bin/console list')]

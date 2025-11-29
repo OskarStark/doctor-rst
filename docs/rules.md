@@ -19,6 +19,7 @@
 * [deprecated_directive_major_version](#deprecated_directive_major_version)
 * [deprecated_directive_min_version](#deprecated_directive_min_version)
 * [deprecated_directive_should_have_version](#deprecated_directive_should_have_version)
+* [ensure_attribute_between_backticks_in_content](#ensure_attribute_between_backticks_in_content)
 * [ensure_bash_prompt_before_composer_command](#ensure_bash_prompt_before_composer_command)
 * [ensure_class_constant](#ensure_class_constant)
 * [ensure_correct_format_for_phpfunction](#ensure_correct_format_for_phpfunction)
@@ -403,6 +404,22 @@ Name | Required
 
 - Rule class: [App\Rule\DeprecatedDirectiveShouldHaveVersion](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/DeprecatedDirectiveShouldHaveVersion.php)
 - Test class: [App\Tests\Rule\DeprecatedDirectiveShouldHaveVersionTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/DeprecatedDirectiveShouldHaveVersionTest.php)
+
+## `ensure_attribute_between_backticks_in_content`
+
+  > _Make sure to use backticks around attribute in content._
+
+##### Valid Examples :+1:
+
+```rst
+Use ``#[Route]`` to define route
+```
+
+##### Invalid Examples :-1:
+
+```rst
+Use #[Route] to define route
+```
 
 ## `ensure_bash_prompt_before_composer_command`
 

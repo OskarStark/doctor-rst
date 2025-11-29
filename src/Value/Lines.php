@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Value;
 
-/**
- * @no-named-arguments
- */
 final class Lines implements \SeekableIterator
 {
     private int $currentLine = 0;

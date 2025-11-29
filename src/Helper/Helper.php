@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Helper;
 
-/**
- * @no-named-arguments
- */
 class Helper
 {
     public static function cloneIterator(\ArrayIterator $iterator, int $number): \ArrayIterator

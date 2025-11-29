@@ -13,46 +13,39 @@ declare(strict_types=1);
 
 namespace App\Rule;
 
+use App\Attribute\Rule\Description;
+use App\Attribute\Rule\InvalidExample;
+use App\Attribute\Rule\ValidExample;
 use App\Rst\RstParser;
+use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
-use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-final class NoPhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineContentRule
+#[Description('Make sure to use backticks around attributes in content')]
+#[InvalidExample('Use #[Route] to define route')]
+#[ValidExample('Use ``#[Route]`` to define route')]
+final class EnsureAttributeBetweenBackticksInContent extends AbstractRule implements LineContentRule
 {
-    public static function getGroups(): array
-    {
-        return [
-            RuleGroup::Sonata(),
-            RuleGroup::Symfony(),
-        ];
-    }
+    use DirectiveTrait;
 
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
-        if (!RstParser::isPhpDirective($line)) {
+        if ($this->inPhpCodeBlock($lines, $number)) {
             return NullViolation::create();
         }
 
-        $lines->next();
-        $lines->next();
-
-        // check if next line is "<?php"
-        $nextLine = $lines->current();
-
-        if ($nextLine->clean()->startsWith('//')) {
-            $lines->next();
-            $nextLine = $lines->current();
+        if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_DIFF])) {
+            return NullViolation::create();
         }
 
-        if ('<?php' === $nextLine->clean()->toString()) {
+        if ($line->raw()->match('/(?<!`)#\[[^\]]*\](?!`)/')) {
             return Violation::from(
-                \sprintf('Please remove PHP open tag after "%s" directive', $line->raw()->toString()),
+                \sprintf('Please ensure to use backticks "%s"', $line->raw()->toString()),
                 $filename,
                 $number + 1,
                 $line,

@@ -22,9 +22,6 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensures that named constructor is used without "new" keyword.')]
 #[ValidExample('new Uuid()')]
 #[InvalidExample('new Uuid::fromString()')]

@@ -16,9 +16,6 @@ namespace App\Rule;
 use App\Value\RuleGroup;
 use App\Value\RuleName;
 
-/**
- * @no-named-arguments
- */
 abstract class AbstractRule
 {
     public static function getName(): RuleName

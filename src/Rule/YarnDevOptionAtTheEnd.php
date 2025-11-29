@@ -22,9 +22,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure yarn `--dev` option for `add` command is used at the end.')]
 #[InvalidExample('yarn add --dev jquery')]
 #[ValidExample('yarn add jquery --dev')]

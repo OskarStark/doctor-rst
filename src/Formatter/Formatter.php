@@ -16,9 +16,6 @@ namespace App\Formatter;
 use App\Value\AnalyzerResult;
 use Symfony\Component\Console\Style\OutputStyle;
 
-/**
- * @no-named-arguments
- */
 interface Formatter
 {
     public function format(OutputStyle $style, AnalyzerResult $analyzerResult, string $analyzeDir, bool $showValidFiles): void;

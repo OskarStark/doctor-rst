@@ -13,9 +13,6 @@ declare(strict_types=1);
 
 namespace App\Formatter\Exception;
 
-/**
- * @no-named-arguments
- */
 final class FormatterNotFound extends \InvalidArgumentException
 {
     public static function byName(string $name): self

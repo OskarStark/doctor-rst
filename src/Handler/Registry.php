@@ -18,9 +18,6 @@ use App\Rule\Rule;
 use App\Value\RuleGroup;
 use App\Value\RuleName;
 
-/**
- * @no-named-arguments
- */
 final class Registry
 {
     /**

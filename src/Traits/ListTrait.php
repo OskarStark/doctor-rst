@@ -17,9 +17,6 @@ use App\Helper\PhpHelper;
 use App\Rst\RstParser;
 use App\Value\Lines;
 
-/**
- * @no-named-arguments
- */
 trait ListTrait
 {
     private function isPartOfListItem(Lines $lines, int $number): bool
