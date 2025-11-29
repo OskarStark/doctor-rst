@@ -74,6 +74,10 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
             return NullViolation::create();
         }
 
+        if (RstParser::isLinkDefinition($line)) {
+            return NullViolation::create();
+        }
+
         // Match single-backtick patterns that are not part of a role or RST link
         if (preg_match_all(self::PATTERN, $rawLine, $matches, \PREG_SET_ORDER)) {
             foreach ($matches as $match) {

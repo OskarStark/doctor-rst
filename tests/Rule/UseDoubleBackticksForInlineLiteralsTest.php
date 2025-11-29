@@ -162,5 +162,15 @@ final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentR
             NullViolation::create(),
             new RstSample('and Because :doc:`the Form component </forms>` as well as `API Platform`_ internally'),
         ];
+
+        yield 'valid - RST link target definition with backticks' => [
+            NullViolation::create(),
+            new RstSample('.. _`same-origin`: https://en.wikipedia.org/wiki/Same-origin_policy'),
+        ];
+
+        yield 'valid - indented RST link target definition with backticks' => [
+            NullViolation::create(),
+            new RstSample('   .. _`Pimple`: https://github.com/silexphp/Pimple'),
+        ];
     }
 }
