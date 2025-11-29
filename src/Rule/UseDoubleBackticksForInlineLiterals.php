@@ -36,11 +36,18 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
     use DirectiveTrait;
 
     /**
-     * Regex pattern to match single-backtick content that is NOT preceded by a role
-     * and NOT followed by an underscore (RST link).
-     * This pattern captures text like `word` but not :role:`word` or `link`_.
+     * Regex pattern to match single-backtick inline literals that should use double backticks.
+     *
+     * Matches `content` where:
+     * - Not preceded by :rolename (RST role like :ref:, :doc:, etc.)
+     * - Content starts and ends with non-whitespace (valid inline literal format)
+     * - Not followed by _ (RST link reference)
+     *
+     * The pattern ([^\s`][^`]*[^\s`]|\S) matches either:
+     * - Multi-char content: starts non-whitespace, any middle chars, ends non-whitespace
+     * - Single char: just one non-whitespace character
      */
-    private const string PATTERN = '/(?<!:)(?<!\w)`([^`\n]+)`(?!`)(?!_)/';
+    private const string PATTERN = '/(?<!:)(?<![a-z])`([^\s`][^`]*[^\s`]|\S)`(?!_)/i';
 
     public static function getGroups(): array
     {
@@ -67,33 +74,10 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
             return NullViolation::create();
         }
 
-        // Match single-backtick patterns that are not part of a role
+        // Match single-backtick patterns that are not part of a role or RST link
         if (preg_match_all(self::PATTERN, $rawLine, $matches, \PREG_SET_ORDER)) {
             foreach ($matches as $match) {
                 $content = $match[1];
-
-                // Skip empty content
-                if ('' === trim($content)) {
-                    continue;
-                }
-
-                // Skip if it looks like it's part of a role (check for preceding colon and role name)
-                $position = strpos($rawLine, '`'.$content.'`');
-
-                if (false !== $position && 0 < $position) {
-                    $before = substr($rawLine, 0, $position);
-
-                    // Check if this is part of a role like :ref:`...` or :doc:`...`
-                    if (preg_match('/:[a-z-]+$/i', $before)) {
-                        continue;
-                    }
-                }
-
-                // Skip if the content looks like text between two roles (starts with ` and contains :rolename:`)
-                // This happens with multiple roles on the same line: :ref:`foo`  and :ref:`bar`
-                if (preg_match('/^\s+and\s+:[a-z-]+:$/i', $content) || preg_match('/^[^`]*:[a-z-]+:$/i', $content)) {
-                    continue;
-                }
 
                 return Violation::from(
                     \sprintf('Please use double backticks for inline literals: `%s` should be ``%s``', $content, $content),
