@@ -30,7 +30,7 @@ use App\Value\ViolationInterface;
 #[Description('Ensure link definition contains valid link.')]
 #[InvalidExample('.. _DOCtor-RST: htt//github.com/OskarStark/DOCtor-RST')]
 #[ValidExample('.. _DOCtor-RST: https://github.com/OskarStark/DOCtor-RST')]
-class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineContentRule
+final class EnsureLinkDefinitionContainsValidUrl extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class ShortArraySyntax extends AbstractRule implements LineContentRule
+final class ShortArraySyntax extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -27,7 +27,7 @@ use App\Value\ViolationInterface;
 #[Description('Make sure yarn `--dev` option for `add` command is used at the end.')]
 #[ValidExample('yarn add --dev jquery')]
 #[InvalidExample('yarn add jquery --dev')]
-class YarnDevOptionNotAtTheEnd extends AbstractRule implements LineContentRule
+final class YarnDevOptionNotAtTheEnd extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {

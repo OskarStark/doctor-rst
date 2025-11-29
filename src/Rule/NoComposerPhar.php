@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class NoComposerPhar extends AbstractRule implements LineContentRule
+final class NoComposerPhar extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

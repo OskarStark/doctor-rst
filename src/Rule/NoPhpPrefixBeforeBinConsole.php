@@ -28,7 +28,7 @@ use App\Value\ViolationInterface;
 #[Description('Ensure `bin/console` is not prefixed with `php`.')]
 #[InvalidExample('php bin/console list')]
 #[ValidExample('bin/console list')]
-class NoPhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule
+final class NoPhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @no-named-arguments
  */
-class Indention extends AbstractRule implements Configurable, LineContentRule
+final class Indention extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;
     use ListTrait;

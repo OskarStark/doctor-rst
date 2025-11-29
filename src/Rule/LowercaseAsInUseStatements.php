@@ -23,7 +23,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class LowercaseAsInUseStatements extends AbstractRule implements LineContentRule
+final class LowercaseAsInUseStatements extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

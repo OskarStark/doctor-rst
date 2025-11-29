@@ -23,7 +23,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements LineContentRule
+final class CorrectCodeBlockDirectiveBasedOnTheContent extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

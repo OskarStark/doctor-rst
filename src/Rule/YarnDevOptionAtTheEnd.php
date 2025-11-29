@@ -28,7 +28,7 @@ use App\Value\ViolationInterface;
 #[Description('Make sure yarn `--dev` option for `add` command is used at the end.')]
 #[InvalidExample('yarn add --dev jquery')]
 #[ValidExample('yarn add jquery --dev')]
-class YarnDevOptionAtTheEnd extends AbstractRule implements LineContentRule
+final class YarnDevOptionAtTheEnd extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -28,7 +28,7 @@ use App\Value\ViolationInterface;
 #[Description('Ensure exactly one space before directive type.')]
 #[InvalidExample('..  code-block:: php')]
 #[ValidExample('.. code-block:: php')]
-class EnsureExactlyOneSpaceBeforeDirectiveType extends AbstractRule implements LineContentRule
+final class EnsureExactlyOneSpaceBeforeDirectiveType extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

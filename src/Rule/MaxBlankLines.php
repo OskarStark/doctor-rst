@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @no-named-arguments
  */
-class MaxBlankLines extends AbstractRule implements Configurable, LineContentRule
+final class MaxBlankLines extends AbstractRule implements Configurable, LineContentRule
 {
     private int $max;
 

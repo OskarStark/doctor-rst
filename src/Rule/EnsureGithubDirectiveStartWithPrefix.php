@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @no-named-arguments
  */
-class EnsureGithubDirectiveStartWithPrefix extends AbstractRule implements Configurable, LineContentRule
+final class EnsureGithubDirectiveStartWithPrefix extends AbstractRule implements Configurable, LineContentRule
 {
     private string $prefix;
 

@@ -25,7 +25,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Ensure link lines are at the bottom of the file.')]
-class EnsureLinkBottom extends AbstractRule implements LineContentRule
+final class EnsureLinkBottom extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

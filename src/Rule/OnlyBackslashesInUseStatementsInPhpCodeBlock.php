@@ -29,7 +29,7 @@ use App\Value\ViolationInterface;
 #[Description('A use statement in a PHP code-block should only contain backslashes.')]
 #[InvalidExample('use Foo/Bar;')]
 #[ValidExample('use Foo\\Bar;')]
-class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implements LineContentRule
+final class OnlyBackslashesInUseStatementsInPhpCodeBlock extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

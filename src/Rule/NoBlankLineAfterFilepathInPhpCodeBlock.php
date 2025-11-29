@@ -24,7 +24,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineContentRule
+final class NoBlankLineAfterFilepathInPhpCodeBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

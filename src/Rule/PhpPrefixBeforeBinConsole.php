@@ -29,7 +29,7 @@ use App\Value\ViolationInterface;
 #[Description('Ensure `bin/console` is prefixed with `php` to be safe executable on Microsoft Windows.')]
 #[InvalidExample('bin/console list')]
 #[ValidExample('php bin/console list')]
-class PhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule
+final class PhpPrefixBeforeBinConsole extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -24,7 +24,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements LineContentRule
+final class NoBlankLineAfterFilepathInTwigCodeBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {
