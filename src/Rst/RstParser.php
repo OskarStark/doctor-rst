@@ -269,21 +269,4 @@ class RstParser
     {
         return [] !== $line->raw()->match('/^\.\. _.*:$/');
     }
-
-    /**
-     * Whether the string starts with an RST role pattern like :ref:, :doc:, :method:, etc.
-     */
-    public static function startsWithRstRole(string $string): bool
-    {
-        return [] !== u($string)->match('/^:[a-z]+:`/i');
-    }
-
-    /**
-     * Whether the string ends with an RST role name like :ref:, :doc:, :method:, etc.
-     * This is useful for detecting text between RST constructs.
-     */
-    public static function endsWithRstRoleName(string $string): bool
-    {
-        return [] !== u($string)->match('/:[a-z]+:$/i');
-    }
 }

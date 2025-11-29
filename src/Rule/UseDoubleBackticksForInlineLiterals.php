@@ -89,14 +89,14 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
                 // Skip if content ends with RST role pattern (`:rolename:`)
                 // This handles patterns like `>`: :method:` or `>`. See :doc:`
                 // where the matched content is text between RST constructs
-                if (RstParser::endsWithRstRoleName($content)) {
+                if (preg_match('/:[a-z]+:$/i', $content)) {
                     continue;
                 }
 
                 // Check if this match is followed by an RST role (`:rolename:`)
                 $afterMatch = substr($rawLine, $matchOffset + \strlen($match[0][0]));
 
-                if (RstParser::startsWithRstRole(ltrim($afterMatch))) {
+                if (preg_match('/^\s*:[a-z]+:`/i', $afterMatch)) {
                     continue;
                 }
 
