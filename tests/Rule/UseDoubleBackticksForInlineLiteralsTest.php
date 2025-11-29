@@ -104,5 +104,20 @@ final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentR
             ),
             new RstSample('Create a table named `blog`.'),
         ];
+
+        yield 'valid - RST link with trailing underscore' => [
+            NullViolation::create(),
+            new RstSample('it by using the native PHP `reflection`_. This method is defined in the'),
+        ];
+
+        yield 'valid - RST link with trailing underscore at end of line' => [
+            NullViolation::create(),
+            new RstSample('See the `official documentation`_'),
+        ];
+
+        yield 'valid - RST anonymous link with double underscore' => [
+            NullViolation::create(),
+            new RstSample('Check the `example`__ for more details.'),
+        ];
     }
 }
