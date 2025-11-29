@@ -16,6 +16,8 @@ namespace App\Rule;
 use App\Attribute\Rule\Description;
 use App\Attribute\Rule\InvalidExample;
 use App\Attribute\Rule\ValidExample;
+use App\Rst\RstParser;
+use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
@@ -31,6 +33,8 @@ use App\Value\ViolationInterface;
 #[InvalidExample('Please use `vector` for this.')]
 final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements LineContentRule
 {
+    use DirectiveTrait;
+
     /**
      * Regex pattern to match single-backtick content that is NOT preceded by a role
      * and NOT followed by an underscore (RST link).
@@ -55,6 +59,11 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
         // Skip if line contains double backticks (already correct)
         // or if there's no single backtick at all
         if (!str_contains($rawLine, '`') || str_contains($rawLine, '``')) {
+            return NullViolation::create();
+        }
+
+        // Skip if line is inside a code block
+        if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number)) {
             return NullViolation::create();
         }
 

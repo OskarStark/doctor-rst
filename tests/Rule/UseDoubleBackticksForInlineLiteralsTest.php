@@ -119,5 +119,23 @@ final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentR
             NullViolation::create(),
             new RstSample('Check the `example`__ for more details.'),
         ];
+
+        yield 'valid - single backticks inside code block' => [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: yaml',
+                '',
+                '    # you can add more services here (e.g. the `serializer`)',
+            ], 2),
+        ];
+
+        yield 'valid - single backticks inside php code block' => [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // Using the `foo` variable',
+            ], 2),
+        ];
     }
 }
