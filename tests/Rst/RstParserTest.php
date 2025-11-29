@@ -138,6 +138,7 @@ final class RstParserTest extends UnitTestCase
         yield [true, '.. _`Symfony`: https://symfony.com'];
         yield [true, '.. _`APCu`: https://github.com/krakjoe/apcu'];
         yield [true, '.. _APCu: https://github.com/krakjoe/apcu'];
+        yield [true, '   .. _`Pimple`: https://github.com/silexphp/Pimple'];
 
         yield [false, '.. _APCu`: https://github.com/krakjoe/apcu'];
         yield [false, '.. _`APCu: https://github.com/krakjoe/apcu'];

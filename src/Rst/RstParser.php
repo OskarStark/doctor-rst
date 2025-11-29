@@ -214,7 +214,7 @@ class RstParser
 
     public static function isLinkDefinition(Line $line): bool
     {
-        return [] !== $line->raw()->match('/^\.\. _(`([^`]+)`|([^`]+)): (.*)$/');
+        return [] !== $line->raw()->match('/^\s*\.\. _(`([^`]+)`|([^`]+)): (.*)$/');
     }
 
     public static function isLinkUsage(string $string): bool
