@@ -207,5 +207,35 @@ final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentR
             NullViolation::create(),
             new RstSample('Symfony comes with two minimalist `PSR-3`_ loggers: :class:`Symfony\\Component\\HttpKernel\\Log\\Logger`'),
         ];
+
+        yield 'valid - ref role followed by colon and method role' => [
+            NullViolation::create(),
+            new RstSample('* :ref:`List of properties <property-info-list>`: :method:`Symfony\\Component\\PropertyInfo\\PropertyListExtractorInterface::getProperties`'),
+        ];
+
+        yield 'valid - ref role followed by colon space and method role' => [
+            NullViolation::create(),
+            new RstSample('* :ref:`Property type <property-info-type>`: :method:`Symfony\\Component\\PropertyInfo\\PropertyTypeExtractorInterface::getTypes`'),
+        ];
+
+        yield 'valid - ref followed by colon and multiple method roles' => [
+            NullViolation::create(),
+            new RstSample('* :ref:`Property description <property-info-description>`: :method:`Symfony\\Component\\PropertyInfo\\PropertyDescriptionExtractorInterface::getShortDescription` and :method:`Symfony\\Component\\PropertyInfo\\PropertyDescriptionExtractorInterface::getLongDescription`'),
+        ];
+
+        yield 'valid - ref followed by double space colon and method role' => [
+            NullViolation::create(),
+            new RstSample('* :ref:`Property initializable through the constructor <property-info-initializable>`:  :method:`Symfony\\Component\\PropertyInfo\\PropertyInitializableExtractorInterface::isInitializable`'),
+        ];
+
+        yield 'valid - closing angle bracket followed by period See and doc role' => [
+            NullViolation::create(),
+            new RstSample('<services-wire-specific-service>`. See :doc:`/service_container/debug`.'),
+        ];
+
+        yield 'valid - closing angle bracket followed by text and ref role' => [
+            NullViolation::create(),
+            new RstSample('<service-container-creating-service>`. If you\'re using the :ref:`default'),
+        ];
     }
 }

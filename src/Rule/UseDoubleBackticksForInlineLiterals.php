@@ -81,9 +81,24 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
         }
 
         // Match single-backtick patterns that are not part of a role or RST link
-        if (preg_match_all(self::PATTERN, $rawLine, $matches, \PREG_SET_ORDER)) {
+        if (preg_match_all(self::PATTERN, $rawLine, $matches, \PREG_SET_ORDER | \PREG_OFFSET_CAPTURE)) {
             foreach ($matches as $match) {
-                $content = $match[1];
+                $content = $match[1][0];
+                $matchOffset = $match[0][1];
+
+                // Skip if content ends with RST role pattern (`:rolename:`)
+                // This handles patterns like `>`: :method:` or `>`. See :doc:`
+                // where the matched content is text between RST constructs
+                if (preg_match('/:[a-z]+:$/i', $content)) {
+                    continue;
+                }
+
+                // Check if this match is followed by an RST role (`:rolename:`)
+                $afterMatch = substr($rawLine, $matchOffset + \strlen($match[0][0]));
+
+                if (preg_match('/^\s*:[a-z]+:`/i', $afterMatch)) {
+                    continue;
+                }
 
                 return Violation::from(
                     \sprintf('Please use double backticks for inline literals: `%s` should be ``%s``', $content, $content),
