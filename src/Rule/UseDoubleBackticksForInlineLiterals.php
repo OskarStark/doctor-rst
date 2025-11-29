@@ -32,10 +32,11 @@ use App\Value\ViolationInterface;
 final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements LineContentRule
 {
     /**
-     * Regex pattern to match single-backtick content that is NOT preceded by a role.
-     * This pattern captures text like `word` but not :role:`word`.
+     * Regex pattern to match single-backtick content that is NOT preceded by a role
+     * and NOT followed by an underscore (RST link).
+     * This pattern captures text like `word` but not :role:`word` or `link`_.
      */
-    private const string PATTERN = '/(?<!:)(?<!\w)`([^`\n]+)`(?!`)/';
+    private const string PATTERN = '/(?<!:)(?<!\w)`([^`\n]+)`(?!`)(?!_)/';
 
     public static function getGroups(): array
     {
