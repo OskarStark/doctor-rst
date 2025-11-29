@@ -24,7 +24,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Ensure `AbstractController` and the corresponding namespace `Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController` is used. Instead of `Symfony\\Bundle\\FrameworkBundle\\Controller\\Controller`.')]
-class ExtendAbstractController extends AbstractRule implements LineContentRule
+final class ExtendAbstractController extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -29,7 +29,7 @@ use function Symfony\Component\String\u;
 #[Description('Ensure a space between label and link in :doc: directive.')]
 #[InvalidExample(':doc:`File</reference/constraints/File>`')]
 #[ValidExample(':doc:`File </reference/constraints/File>`')]
-class SpaceBetweenLabelAndLinkInDoc extends AbstractRule implements LineContentRule
+final class SpaceBetweenLabelAndLinkInDoc extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContentRule
+final class SpaceBeforeSelfXmlClosingTag extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {

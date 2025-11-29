@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class UseHttpsXsdUrls extends AbstractRule implements LineContentRule
+final class UseHttpsXsdUrls extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

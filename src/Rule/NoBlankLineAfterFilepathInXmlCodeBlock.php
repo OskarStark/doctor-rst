@@ -24,7 +24,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements LineContentRule
+final class NoBlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

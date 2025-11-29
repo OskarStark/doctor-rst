@@ -28,7 +28,7 @@ use App\Value\ViolationInterface;
 #[Description('Ensure a :method: directive has special format.')]
 #[InvalidExample(':method:`Symfony\\\\Component\\\\OptionsResolver\\\\Options::offsetGet()`')]
 #[ValidExample(':method:`Symfony\\\\Component\\\\OptionsResolver\\\\Options::offsetGet`')]
-class NoBracketsInMethodDirective extends AbstractRule implements LineContentRule
+final class NoBracketsInMethodDirective extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

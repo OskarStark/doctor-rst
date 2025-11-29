@@ -25,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @no-named-arguments
  */
-class DeprecatedDirectiveMajorVersion extends AbstractRule implements Configurable, LineContentRule
+final class DeprecatedDirectiveMajorVersion extends AbstractRule implements Configurable, LineContentRule
 {
     private int $majorVersion;
 

@@ -31,7 +31,7 @@ use Composer\Semver\VersionParser;
 #[ValidExample('.. versionadded:: 3.4')]
 #[InvalidExample('.. versionadded::')]
 #[InvalidExample('.. versionadded:: foo-bar')]
-class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
+final class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
 {
     public function __construct(
         private readonly VersionParser $versionParser,

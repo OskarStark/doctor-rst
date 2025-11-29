@@ -28,7 +28,7 @@ use App\Value\ViolationInterface;
 #[Description('Ensure only American English is used.')]
 #[InvalidExample('This is a nice behaviour...')]
 #[ValidExample('This is a nice behavior...')]
-class AmericanEnglish extends CheckListRule implements LineContentRule
+final class AmericanEnglish extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

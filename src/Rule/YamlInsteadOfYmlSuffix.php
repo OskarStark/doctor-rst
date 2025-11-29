@@ -32,7 +32,7 @@ use App\Value\ViolationInterface;
 #[ValidExample('Please add this to your services.yaml file.')]
 #[InvalidExample('..code-block:: yml')]
 #[InvalidExample('Please add this to your services.yml file.')]
-class YamlInsteadOfYmlSuffix extends AbstractRule implements LineContentRule
+final class YamlInsteadOfYmlSuffix extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -31,7 +31,7 @@ use App\Value\ViolationInterface;
 #[ValidExample('`App\\\\Entity\\\\Foo`')]
 #[InvalidExample('``App\\\\Entity\\\\Foo``')]
 #[InvalidExample('`App\\Entity\\Foo`')]
-class ValidInlineHighlightedNamespaces extends AbstractRule implements LineContentRule
+final class ValidInlineHighlightedNamespaces extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

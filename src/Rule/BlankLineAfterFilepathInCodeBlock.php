@@ -25,7 +25,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Make sure you have a blank line after a filepath in a code block. This rule respects PHP, YAML, XML and Twig.')]
-class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineContentRule
+final class BlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -28,7 +28,7 @@ use App\Value\ViolationInterface;
 #[Description('Ensure contractions are not used.')]
 #[InvalidExample("It's an example")]
 #[ValidExample('It is an example')]
-class NoContraction extends CheckListRule implements LineContentRule
+final class NoContraction extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

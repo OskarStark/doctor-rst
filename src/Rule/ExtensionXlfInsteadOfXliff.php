@@ -28,7 +28,7 @@ use App\Value\ViolationInterface;
 #[Description('Make sure to only use `.xlf` instead of `.xliff`.')]
 #[ValidExample('messages.xlf')]
 #[InvalidExample('messages.xliff')]
-class ExtensionXlfInsteadOfXliff extends AbstractRule implements LineContentRule
+final class ExtensionXlfInsteadOfXliff extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {
