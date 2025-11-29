@@ -16,6 +16,8 @@ namespace App\Rule;
 use App\Attribute\Rule\Description;
 use App\Attribute\Rule\InvalidExample;
 use App\Attribute\Rule\ValidExample;
+use App\Rst\RstParser;
+use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
@@ -31,6 +33,8 @@ use App\Value\ViolationInterface;
 #[InvalidExample('Please use `vector` for this.')]
 final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements LineContentRule
 {
+    use DirectiveTrait;
+
     /**
      * Regex pattern to match single-backtick content that is NOT preceded by a role
      * and NOT followed by an underscore (RST link).
@@ -58,6 +62,11 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
             return NullViolation::create();
         }
 
+        // Skip if line is inside a code block
+        if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number)) {
+            return NullViolation::create();
+        }
+
         // Match single-backtick patterns that are not part of a role
         if (preg_match_all(self::PATTERN, $rawLine, $matches, \PREG_SET_ORDER)) {
             foreach ($matches as $match) {
@@ -78,6 +87,12 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
                     if (preg_match('/:[a-z-]+$/i', $before)) {
                         continue;
                     }
+                }
+
+                // Skip if the content looks like text between two roles (starts with ` and contains :rolename:`)
+                // This happens with multiple roles on the same line: :ref:`foo`  and :ref:`bar`
+                if (preg_match('/^\s+and\s+:[a-z-]+:$/i', $content) || preg_match('/^[^`]*:[a-z-]+:$/i', $content)) {
+                    continue;
                 }
 
                 return Violation::from(
