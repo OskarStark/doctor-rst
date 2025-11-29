@@ -291,4 +291,49 @@ final class RstParserTest extends UnitTestCase
         yield [false, '.. _foo-bar: https://google.com'];
         yield [false, '.. _foo: https://google.com'];
     }
+
+    #[Test]
+    #[DataProvider('startsWithRstRoleProvider')]
+    public function startsWithRstRole(bool $expected, string $string): void
+    {
+        self::assertSame($expected, RstParser::startsWithRstRole($string));
+    }
+
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
+    public static function startsWithRstRoleProvider(): iterable
+    {
+        yield [true, ':ref:`my-reference`'];
+        yield [true, ':doc:`/path/to/doc`'];
+        yield [true, ':method:`Symfony\\Component\\HttpFoundation\\Request::getContent`'];
+        yield [true, ':class:`App\\Entity\\User`'];
+
+        yield [false, ''];
+        yield [false, 'plain text'];
+        yield [false, 'text :ref:`reference`'];
+        yield [false, '`literal`'];
+    }
+
+    #[Test]
+    #[DataProvider('endsWithRstRoleNameProvider')]
+    public function endsWithRstRoleName(bool $expected, string $string): void
+    {
+        self::assertSame($expected, RstParser::endsWithRstRoleName($string));
+    }
+
+    /**
+     * @return \Generator<array{0: bool, 1: string}>
+     */
+    public static function endsWithRstRoleNameProvider(): iterable
+    {
+        yield [true, ': :method:'];
+        yield [true, '. See :doc:'];
+        yield [true, '>`: :ref:'];
+
+        yield [false, ''];
+        yield [false, 'plain text'];
+        yield [false, ':ref:`my-reference`'];
+        yield [false, 'text ending with colon:'];
+    }
 }
