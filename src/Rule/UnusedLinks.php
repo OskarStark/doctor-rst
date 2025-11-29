@@ -24,9 +24,6 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Contracts\Service\ResetInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Report all links which are defined, but not used in the file anymore.')]
 final class UnusedLinks extends AbstractRule implements FileContentRule, ResetInterface
 {

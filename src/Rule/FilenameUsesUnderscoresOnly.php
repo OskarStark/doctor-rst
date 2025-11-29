@@ -22,9 +22,6 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use function Symfony\Component\String\u;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensures a filename uses only underscores (`_`).')]
 #[InvalidExample('custom-extensions.rst')]
 #[ValidExample('custom_extensions.rst')]

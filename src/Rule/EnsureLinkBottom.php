@@ -23,9 +23,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure link lines are at the bottom of the file.')]
 final class EnsureLinkBottom extends AbstractRule implements LineContentRule
 {

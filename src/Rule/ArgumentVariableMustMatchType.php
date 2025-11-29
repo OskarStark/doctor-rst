@@ -21,9 +21,6 @@ use App\Value\Violation;
 use App\Value\ViolationInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure argument variable name match for type')]
 final class ArgumentVariableMustMatchType extends AbstractRule implements Configurable, LineContentRule
 {

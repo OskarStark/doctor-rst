@@ -15,9 +15,6 @@ namespace App\Helper;
 
 use App\Value\Line;
 
-/**
- * @no-named-arguments
- */
 final class YamlHelper
 {
     public static function isComment(Line $line): bool

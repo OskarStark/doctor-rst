@@ -28,9 +28,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure that a word is not used twice in a row.')]
 #[ValidExample('Please do not use it this way...')]
 #[InvalidExample('Please do not not use it this way...')]

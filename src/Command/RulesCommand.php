@@ -29,9 +29,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\OptionsResolver\Debug\OptionsResolverIntrospector;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @no-named-arguments
- */
 #[AsCommand('rules', 'List available rules')]
 class RulesCommand extends Command
 {

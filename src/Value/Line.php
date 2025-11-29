@@ -16,9 +16,6 @@ namespace App\Value;
 use Symfony\Component\String\UnicodeString;
 use function Symfony\Component\String\u;
 
-/**
- * @no-named-arguments
- */
 final class Line
 {
     private readonly UnicodeString $raw;

@@ -21,9 +21,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure you have a blank line before each directive.')]
 final class BlankLineBeforeDirective extends AbstractRule implements LineContentRule
 {

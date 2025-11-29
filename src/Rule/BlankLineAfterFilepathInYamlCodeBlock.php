@@ -21,9 +21,6 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure you have a blank line after a filepath in a YAML code block.')]
 final class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements LineContentRule
 {

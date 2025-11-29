@@ -22,9 +22,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure there is no footnotes')]
 #[InvalidExample('.. [5] A numerical footnote. Note')]
 final class NoFootnotes extends AbstractRule implements LineContentRule

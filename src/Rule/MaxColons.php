@@ -23,9 +23,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure you have max 2 colons (`::`).')]
 #[InvalidExample('temp:::')]
 #[ValidExample('temp::')]

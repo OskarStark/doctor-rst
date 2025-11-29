@@ -22,9 +22,6 @@ use App\Value\ViolationInterface;
 use Webmozart\Assert\Assert;
 use function Symfony\Component\String\u;
 
-/**
- * @no-named-arguments
- */
 final class OrderedUseStatements extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array

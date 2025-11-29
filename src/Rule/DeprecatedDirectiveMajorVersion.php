@@ -22,9 +22,6 @@ use App\Value\ViolationInterface;
 use Composer\Semver\VersionParser;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @no-named-arguments
- */
 final class DeprecatedDirectiveMajorVersion extends AbstractRule implements Configurable, LineContentRule
 {
     private int $majorVersion;

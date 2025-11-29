@@ -16,9 +16,6 @@ namespace App\Analyzer;
 use App\Application;
 use App\Value\Violation;
 
-/**
- * @no-named-arguments
- */
 final class FileCache implements Cache
 {
     /**

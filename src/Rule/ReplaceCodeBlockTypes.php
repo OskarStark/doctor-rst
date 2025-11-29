@@ -21,9 +21,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Propose alternatives for disallowed code block types.')]
 final class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
 {

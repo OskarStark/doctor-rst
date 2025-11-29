@@ -21,9 +21,6 @@ use App\Value\Lines;
 use App\Value\ViolationInterface;
 use Symfony\Contracts\Service\ResetInterface;
 
-/**
- * @no-named-arguments
- */
 final class RstAnalyzer implements Analyzer
 {
     /**

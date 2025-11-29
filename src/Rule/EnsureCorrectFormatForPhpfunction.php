@@ -21,9 +21,6 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure phpfunction directive do not end with ().')]
 #[InvalidExample(':phpfunction:`mb_detect_encoding()`.')]
 #[ValidExample(':phpfunction:`mb_detect_encoding`.')]

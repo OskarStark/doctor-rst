@@ -24,9 +24,6 @@ use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Ensure double backticks are used for inline literals instead of single backticks.')]
 #[ValidExample('Please use ``vector`` for this.')]
 #[ValidExample('See :ref:`my-reference` for details.')]

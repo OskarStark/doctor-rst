@@ -16,9 +16,6 @@ namespace App\Analyzer;
 use App\Rule\Rule;
 use App\Value\Violation;
 
-/**
- * @no-named-arguments
- */
 interface Cache
 {
     /**

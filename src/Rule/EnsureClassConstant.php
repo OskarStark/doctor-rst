@@ -22,9 +22,6 @@ use App\Value\NullViolation;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
 
-/**
- * @no-named-arguments
- */
 #[Description('Make sure to use ::class over get_class')]
 #[InvalidExample('get_class(new MyClass())')]
 #[ValidExample('MyClass::class')]
