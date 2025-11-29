@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace App\Tests\Rule;
 
 use App\Rule\EnsureAttributeBetweenBackticksInContent;
-use App\Rule\PhpOpenTagInCodeBlockPhpDirective;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
 use App\Value\NullViolation;
@@ -42,24 +41,33 @@ final class EnsureAttributeBetweenBackticksInContentTest extends UnitTestCase
                 NullViolation::create(),
                 new RstSample([
                     $codeBlock,
-                    '#[AsEventListener]'
+                    '#[AsEventListener]',
                 ]),
             ];
         }
 
-        yield \sprintf('Has violation without backticks') => [
+        yield 'No violation for diff code-block' => [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: diff',
+                '',
+                '    #[AsEventListener]',
+            ]),
+        ];
+
+        yield 'Has violation without backticks' => [
             Violation::from(
-                \sprintf('Please ensure to use backticks "use #[MapEntity] attributes"'),
+                'Please ensure to use backticks "use #[MapEntity] attributes"',
                 'filename',
                 1,
                 'use #[MapEntity] attributes',
             ),
-            new RstSample('use #[MapEntity] attributes')
+            new RstSample('use #[MapEntity] attributes'),
         ];
 
-        yield \sprintf('Has no violation') => [
+        yield 'Has no violation' => [
             NullViolation::create(),
-            new RstSample('use ``#[MapEntity]`` attributes')
+            new RstSample('use ``#[MapEntity]`` attributes'),
         ];
     }
 }

@@ -17,6 +17,7 @@ use App\Attribute\Rule\Description;
 use App\Attribute\Rule\InvalidExample;
 use App\Attribute\Rule\ValidExample;
 use App\Rst\RstParser;
+use App\Traits\DirectiveTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\Violation;
@@ -25,20 +26,20 @@ use App\Value\ViolationInterface;
 #[Description('Make sure to use backticks around attributes in content')]
 #[InvalidExample('Use #[Route] to define route')]
 #[ValidExample('Use ``#[Route]`` to define route')]
-class EnsureAttributeBetweenBackticksInContent extends AbstractRule implements LineContentRule
+final class EnsureAttributeBetweenBackticksInContent extends AbstractRule implements LineContentRule
 {
+    use DirectiveTrait;
+
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {
         $lines->seek($number);
         $line = $lines->current();
 
-        if (RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP)
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ANNOTATIONS, true)
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_ATTRIBUTES, true)
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_SYMFONY, true)
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_PHP_STANDALONE, true)
-            || RstParser::codeBlockDirectiveIsTypeOf($line, RstParser::CODE_BLOCK_HTML_PHP, true)
-        ) {
+        if ($this->inPhpCodeBlock($lines, $number)) {
+            return NullViolation::create();
+        }
+
+        if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_DIFF])) {
             return NullViolation::create();
         }
 
