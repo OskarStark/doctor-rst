@@ -74,7 +74,7 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
             return NullViolation::create();
         }
 
-        if (RstParser::isLinkDefinition($line)) {
+        if (RstParser::isLinkDefinition($line) || RstParser::isAnchor($line)) {
             return NullViolation::create();
         }
 
