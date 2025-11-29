@@ -25,7 +25,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Make sure you have a blank line after a filepath in a YAML code block.')]
-class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements LineContentRule
+final class BlankLineAfterFilepathInYamlCodeBlock extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {

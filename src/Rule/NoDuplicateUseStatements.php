@@ -25,7 +25,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Ensure there is not same use statement twice')]
-class NoDuplicateUseStatements extends AbstractRule implements LineContentRule
+final class NoDuplicateUseStatements extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

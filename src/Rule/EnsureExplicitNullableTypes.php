@@ -30,7 +30,7 @@ use App\Value\ViolationInterface;
 #[ValidExample('function foo(?string $bar = null)')]
 #[ValidExample('function foo(string|null $bar = null)')]
 #[InvalidExample('function foo(string $bar = null)')]
-class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRule
+final class EnsureExplicitNullableTypes extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineContentRule
+final class PhpOpenTagInCodeBlockPhpDirective extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {

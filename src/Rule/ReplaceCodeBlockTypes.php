@@ -25,7 +25,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Propose alternatives for disallowed code block types.')]
-class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
+final class ReplaceCodeBlockTypes extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineContentRule
+final class NoBlankLineAfterFilepathInCodeBlock extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {

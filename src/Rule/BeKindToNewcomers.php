@@ -24,7 +24,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Do not use belittling words!')]
-class BeKindToNewcomers extends CheckListRule implements LineContentRule
+final class BeKindToNewcomers extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

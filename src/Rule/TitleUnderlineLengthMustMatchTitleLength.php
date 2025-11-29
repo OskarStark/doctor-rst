@@ -21,7 +21,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class TitleUnderlineLengthMustMatchTitleLength extends AbstractRule implements LineContentRule
+final class TitleUnderlineLengthMustMatchTitleLength extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {

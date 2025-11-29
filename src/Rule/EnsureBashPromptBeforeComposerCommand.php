@@ -30,7 +30,7 @@ use App\Value\ViolationInterface;
 #[Description('Make sure Composer command in a terminal/bash code block is prefixed with a $.')]
 #[InvalidExample('composer require symfony/var-dumper')]
 #[ValidExample('$ composer require symfony/var-dumper')]
-class EnsureBashPromptBeforeComposerCommand extends AbstractRule implements LineContentRule
+final class EnsureBashPromptBeforeComposerCommand extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

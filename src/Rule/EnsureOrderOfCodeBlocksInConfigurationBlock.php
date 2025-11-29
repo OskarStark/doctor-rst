@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
 /**
  * @no-named-arguments
  */
-class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implements LineContentRule
+final class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

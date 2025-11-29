@@ -24,7 +24,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRule
+final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

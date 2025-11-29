@@ -25,7 +25,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Make sure you have a blank line before each directive.')]
-class BlankLineBeforeDirective extends AbstractRule implements LineContentRule
+final class BlankLineBeforeDirective extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

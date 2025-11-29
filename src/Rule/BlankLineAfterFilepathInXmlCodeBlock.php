@@ -25,7 +25,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Make sure you have a blank line after a filepath in a XML code block.')]
-class BlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements LineContentRule
+final class BlankLineAfterFilepathInXmlCodeBlock extends AbstractRule implements LineContentRule
 {
     public function check(Lines $lines, int $number, string $filename): ViolationInterface
     {

@@ -29,7 +29,7 @@ use App\Value\ViolationInterface;
 #[Description('A namespace declaration in a PHP code-block should only contain backslashes.')]
 #[InvalidExample('namespace Foo/Bar;')]
 #[ValidExample('namespace Foo\\Bar;')]
-class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements LineContentRule
+final class OnlyBackslashesInNamespaceInPhpCodeBlock extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

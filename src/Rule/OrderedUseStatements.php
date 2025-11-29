@@ -25,7 +25,7 @@ use function Symfony\Component\String\u;
 /**
  * @no-named-arguments
  */
-class OrderedUseStatements extends AbstractRule implements LineContentRule
+final class OrderedUseStatements extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

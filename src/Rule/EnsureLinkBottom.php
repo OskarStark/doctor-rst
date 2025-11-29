@@ -15,6 +15,8 @@ namespace App\Rule;
 
 use App\Attribute\Rule\Description;
 use App\Rst\RstParser;
+use App\Traits\DirectiveTrait;
+use App\Value\Line;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
@@ -25,8 +27,10 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Ensure link lines are at the bottom of the file.')]
-class EnsureLinkBottom extends AbstractRule implements LineContentRule
+final class EnsureLinkBottom extends AbstractRule implements LineContentRule
 {
+    use DirectiveTrait;
+
     public static function getGroups(): array
     {
         return [RuleGroup::Symfony()];
@@ -40,6 +44,24 @@ class EnsureLinkBottom extends AbstractRule implements LineContentRule
         if (!RstParser::isLinkDefinition($line)) {
             return NullViolation::create();
         }
+
+        $inRstCodeBlock = $this->in(
+            RstParser::DIRECTIVE_CODE_BLOCK,
+            $lines,
+            $number,
+            [RstParser::CODE_BLOCK_RST],
+        );
+
+        if ($inRstCodeBlock) {
+            return self::checkLinkAtEndOfCodeBlock($lines, $number, $filename, $line);
+        }
+
+        return self::checkLinkAtEndOfFile($lines, $number, $filename, $line);
+    }
+
+    private static function checkLinkAtEndOfFile(Lines $lines, int $number, string $filename, Line $line): ViolationInterface
+    {
+        $lines->seek($number);
 
         while ($lines->valid()) {
             $lines->next();
@@ -57,6 +79,42 @@ class EnsureLinkBottom extends AbstractRule implements LineContentRule
             if (!RstParser::isLinkDefinition($current)) {
                 return Violation::from(
                     'Please move link definition to the bottom of the page',
+                    $filename,
+                    $number + 1,
+                    $line,
+                );
+            }
+        }
+
+        return NullViolation::create();
+    }
+
+    private static function checkLinkAtEndOfCodeBlock(Lines $lines, int $number, string $filename, Line $line): ViolationInterface
+    {
+        $lines->seek($number);
+        $codeBlockIndention = $line->indention();
+
+        while ($lines->valid()) {
+            $lines->next();
+
+            if (!$lines->valid()) {
+                break;
+            }
+
+            $current = $lines->current();
+
+            if ($current->isBlank()) {
+                continue;
+            }
+
+            // If we hit a line with less indention, we've left the code block
+            if ($current->indention() < $codeBlockIndention) {
+                break;
+            }
+
+            if (!RstParser::isLinkDefinition($current)) {
+                return Violation::from(
+                    'Please move link definition to the bottom of the RST code block',
                     $filename,
                     $number + 1,
                     $line,

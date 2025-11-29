@@ -28,7 +28,7 @@ use App\Value\ViolationInterface;
 #[Description('Make sure there is not trailing whitespace.')]
 #[InvalidExample('Invalid sentence ')]
 #[ValidExample('Valid sentence')]
-class RemoveTrailingWhitespace extends AbstractRule implements LineContentRule
+final class RemoveTrailingWhitespace extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

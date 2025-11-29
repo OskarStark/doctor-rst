@@ -30,7 +30,7 @@ use function Symfony\Component\String\u;
 #[InvalidExample('The :class:`Symfony\\Component\\Notifier\\Transport`` class')]
 #[InvalidExample('The :class:`Symfony\\\\AI\\\\Platform\\PlatformInterface` class')]
 #[ValidExample('The :class:`Symfony\\Component\\Notifier\\Transport` class')]
-class EnsurePhpReferenceSyntax extends AbstractRule implements LineContentRule
+final class EnsurePhpReferenceSyntax extends AbstractRule implements LineContentRule
 {
     private const string PATTERN = '/:(class|method|namespace|phpclass|phpfunction|phpmethod):`([^`]+)`/';
 

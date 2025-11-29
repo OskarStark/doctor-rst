@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @no-named-arguments
  */
 #[Description('Make sure forbidden directives are not used')]
-class ForbiddenDirectives extends AbstractRule implements Configurable, LineContentRule
+final class ForbiddenDirectives extends AbstractRule implements Configurable, LineContentRule
 {
     use DirectiveTrait;
 

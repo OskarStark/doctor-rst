@@ -28,7 +28,7 @@ use App\Value\ViolationInterface;
 #[Description('Make sure Composer `--dev` option for `require` command is used at the end.')]
 #[InvalidExample('composer require --dev symfony/var-dumper')]
 #[ValidExample('composer require symfony/var-dumper --dev')]
-class ComposerDevOptionAtTheEnd extends AbstractRule implements LineContentRule
+final class ComposerDevOptionAtTheEnd extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -23,7 +23,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implements LineContentRule
+final class UseDeprecatedDirectiveInsteadOfVersionadded extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

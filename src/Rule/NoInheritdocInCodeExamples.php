@@ -23,7 +23,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class NoInheritdocInCodeExamples extends AbstractRule implements LineContentRule
+final class NoInheritdocInCodeExamples extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

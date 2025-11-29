@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class NoConfigYaml extends AbstractRule implements LineContentRule
+final class NoConfigYaml extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

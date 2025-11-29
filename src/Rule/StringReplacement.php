@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class StringReplacement extends CheckListRule implements LineContentRule
+final class StringReplacement extends CheckListRule implements LineContentRule
 {
     public static function getGroups(): array
     {

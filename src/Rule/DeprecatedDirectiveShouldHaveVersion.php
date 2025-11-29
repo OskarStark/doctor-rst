@@ -31,7 +31,7 @@ use Composer\Semver\VersionParser;
 #[ValidExample('.. deprecated:: 3.4')]
 #[InvalidExample('.. deprecated::')]
 #[InvalidExample('.. deprecated:: foo-bar')]
-class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
+final class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
 {
     public function __construct(
         private readonly VersionParser $versionParser,

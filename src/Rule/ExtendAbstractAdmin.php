@@ -24,7 +24,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Ensure `AbstractAdmin` and the corresponding namespace `Sonata\\AdminBundle\\Admin\\AbstractAdmin` is used.')]
-class ExtendAbstractAdmin extends AbstractRule implements LineContentRule
+final class ExtendAbstractAdmin extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @no-named-arguments
  */
-class DeprecatedDirectiveMinVersion extends AbstractRule implements Configurable, LineContentRule
+final class DeprecatedDirectiveMinVersion extends AbstractRule implements Configurable, LineContentRule
 {
     private string $minVersion;
 

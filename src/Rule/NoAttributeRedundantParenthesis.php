@@ -29,7 +29,7 @@ use App\Value\ViolationInterface;
 #[InvalidExample('#[Bar()]')]
 #[ValidExample('#[Bar]')]
 #[ValidExample('#[Bar(\'foo\')]')]
-class NoAttributeRedundantParenthesis extends AbstractRule implements LineContentRule
+final class NoAttributeRedundantParenthesis extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

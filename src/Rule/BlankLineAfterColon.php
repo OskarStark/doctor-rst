@@ -26,7 +26,7 @@ use App\Value\ViolationInterface;
  * @no-named-arguments
  */
 #[Description('Make sure you have a blank line after a sentence which ends with a colon (`:`).')]
-class BlankLineAfterColon extends AbstractRule implements LineContentRule
+final class BlankLineAfterColon extends AbstractRule implements LineContentRule
 {
     use DirectiveTrait;
 

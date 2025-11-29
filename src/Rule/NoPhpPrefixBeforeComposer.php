@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 /**
  * @no-named-arguments
  */
-class NoPhpPrefixBeforeComposer extends AbstractRule implements LineContentRule
+final class NoPhpPrefixBeforeComposer extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {

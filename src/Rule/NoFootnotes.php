@@ -27,7 +27,7 @@ use App\Value\ViolationInterface;
  */
 #[Description('Make sure there is no footnotes')]
 #[InvalidExample('.. [5] A numerical footnote. Note')]
-class NoFootnotes extends AbstractRule implements LineContentRule
+final class NoFootnotes extends AbstractRule implements LineContentRule
 {
     public static function getGroups(): array
     {
