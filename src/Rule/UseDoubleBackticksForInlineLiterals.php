@@ -42,12 +42,14 @@ final class UseDoubleBackticksForInlineLiterals extends AbstractRule implements 
      * - Not preceded by :rolename (RST role like :ref:, :doc:, etc.)
      * - Content starts and ends with non-whitespace (valid inline literal format)
      * - Not followed by _ (RST link reference)
+     * - Content doesn't start with , ; or _ (to avoid matching text between RST links)
+     * - Content doesn't end with :[a-z] (to avoid matching text followed by RST roles)
      *
-     * The pattern ([^\s`][^`]*[^\s`]|\S) matches either:
+     * The inner pattern ([^\s`][^`]*[^\s`]|\S) matches either:
      * - Multi-char content: starts non-whitespace, any middle chars, ends non-whitespace
      * - Single char: just one non-whitespace character
      */
-    private const string PATTERN = '/(?<!:)(?<![a-z])`([^\s`][^`]*[^\s`]|\S)`(?!_)/i';
+    private const string PATTERN = '/(?<!:)(?<![a-z])`((?![,;_])([^\s`][^`]*[^\s`]|\S)(?<!:[a-z]))`(?!_)/i';
 
     public static function getGroups(): array
     {
