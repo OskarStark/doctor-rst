@@ -407,7 +407,7 @@ Name | Required
 
 ## `ensure_attribute_between_backticks_in_content`
 
-  > _Make sure to use backticks around attribute in content._
+  > _Make sure to use backticks around attributes in content_
 
 ##### Valid Examples :+1:
 
@@ -420,6 +420,11 @@ Use ``#[Route]`` to define route
 ```rst
 Use #[Route] to define route
 ```
+
+#### References
+
+- Rule class: [App\Rule\EnsureAttributeBetweenBackticksInContent](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/EnsureAttributeBetweenBackticksInContent.php)
+- Test class: [App\Tests\Rule\EnsureAttributeBetweenBackticksInContentTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/EnsureAttributeBetweenBackticksInContentTest.php)
 
 ## `ensure_bash_prompt_before_composer_command`
 
