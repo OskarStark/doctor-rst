@@ -64,6 +64,7 @@
 * [no_contraction](#no_contraction)
 * [no_directive_after_shorthand](#no_directive_after_shorthand)
 * [no_duplicate_use_statements](#no_duplicate_use_statements)
+* [no_empty_directive](#no_empty_directive)
 * [no_empty_literals](#no_empty_literals)
 * [no_explicit_use_of_code_block_php](#no_explicit_use_of_code_block_php)
 * [no_footnotes](#no_footnotes)
@@ -1121,6 +1122,37 @@ It's an example
 
 - Rule class: [App\Rule\NoDuplicateUseStatements](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoDuplicateUseStatements.php)
 - Test class: [App\Tests\Rule\NoDuplicateUseStatementsTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoDuplicateUseStatementsTest.php)
+
+## `no_empty_directive`
+
+  > _Ensure a directive is not empty._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+.. note::
+
+    This is a note.
+```
+
+##### Invalid Examples :-1:
+
+```rst
+.. note::
+
+```
+
+```rst
+.. caution::
+
+```
+
+#### References
+
+- Rule class: [App\Rule\NoEmptyDirective](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoEmptyDirective.php)
+- Test class: [App\Tests\Rule\NoEmptyDirectiveTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoEmptyDirectiveTest.php)
 
 ## `no_empty_literals`
 
