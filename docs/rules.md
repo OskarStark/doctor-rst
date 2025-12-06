@@ -37,6 +37,7 @@
 * [extension_xlf_instead_of_xliff](#extension_xlf_instead_of_xliff)
 * [filename_uses_dashes_only](#filename_uses_dashes_only)
 * [filename_uses_underscores_only](#filename_uses_underscores_only)
+* [filepath_and_namespace_should_match](#filepath_and_namespace_should_match)
 * [final_admin_classes](#final_admin_classes)
 * [final_admin_extension_classes](#final_admin_extension_classes)
 * [forbidden_directives](#forbidden_directives)
@@ -757,6 +758,35 @@ custom-extensions.rst
 
 - Rule class: [App\Rule\FilenameUsesUnderscoresOnly](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/FilenameUsesUnderscoresOnly.php)
 - Test class: [App\Tests\Rule\FilenameUsesUnderscoresOnlyTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/FilenameUsesUnderscoresOnlyTest.php)
+
+## `filepath_and_namespace_should_match`
+
+  > _Ensures the namespace in a PHP code block matches the filepath._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+.. code-block:: php
+
+    // src/Acme/FooBundle/Entity/User.php
+    namespace Acme\FooBundle\Entity;
+```
+
+##### Invalid Examples :-1:
+
+```rst
+.. code-block:: php
+
+    // src/Acme/FooBundle/Entity/User.php
+    namespace Acme\WrongBundle\Entity;
+```
+
+#### References
+
+- Rule class: [App\Rule\FilepathAndNamespaceShouldMatch](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/FilepathAndNamespaceShouldMatch.php)
+- Test class: [App\Tests\Rule\FilepathAndNamespaceShouldMatchTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/FilepathAndNamespaceShouldMatchTest.php)
 
 ## `final_admin_classes`
 
