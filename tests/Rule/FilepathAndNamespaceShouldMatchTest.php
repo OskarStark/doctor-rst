@@ -292,4 +292,92 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
             ]),
         ];
     }
+
+    /**
+     * @param array<string, string> $namespaceMapping
+     * @param array<int, string>    $ignoredPaths
+     */
+    #[Test]
+    #[DataProvider('checkWithIgnoredPathsProvider')]
+    public function checkWithIgnoredPaths(ViolationInterface $expected, array $namespaceMapping, array $ignoredPaths, RstSample $sample): void
+    {
+        $rule = new FilepathAndNamespaceShouldMatch();
+        $rule->setOptions([
+            'namespace_mapping' => $namespaceMapping,
+            'ignored_paths' => $ignoredPaths,
+        ]);
+
+        self::assertEquals(
+            $expected,
+            $rule->check($sample->lines, $sample->lineNumber, 'filename'),
+        );
+    }
+
+    public static function checkWithIgnoredPathsProvider(): iterable
+    {
+        yield 'valid: config/ path is ignored with regex' => [
+            NullViolation::create(),
+            self::DEFAULT_NAMESPACE_MAPPING,
+            ['/^config\//'],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // config/services.php',
+                '    namespace Symfony\Component\DependencyInjection\Loader\Configurator;',
+            ]),
+        ];
+
+        yield 'valid: Config/ path is ignored (case insensitive regex)' => [
+            NullViolation::create(),
+            self::DEFAULT_NAMESPACE_MAPPING,
+            ['/^config\//i'],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // Config/services.php',
+                '    namespace Symfony\Component\DependencyInjection\Loader\Configurator;',
+            ]),
+        ];
+
+        yield 'valid: multiple ignored paths with regex' => [
+            NullViolation::create(),
+            self::DEFAULT_NAMESPACE_MAPPING,
+            ['/^config\//', '/^migrations\//'],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // migrations/Version20200101.php',
+                '    namespace DoctrineMigrations;',
+            ]),
+        ];
+
+        yield 'valid: regex pattern matching any path containing config' => [
+            NullViolation::create(),
+            self::DEFAULT_NAMESPACE_MAPPING,
+            ['/config/'],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // app/config/services.php',
+                '    namespace Symfony\Component\DependencyInjection\Loader\Configurator;',
+            ]),
+        ];
+
+        yield 'invalid: non-ignored path still reports' => [
+            Violation::from(
+                'The namespace "Wrong\Namespace" does not match the filepath "src/Entity/User.php", expected namespace "Entity"',
+                'filename',
+                4,
+                'namespace Wrong\Namespace;',
+            ),
+            self::DEFAULT_NAMESPACE_MAPPING,
+            ['/^config\//'],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Entity/User.php',
+                '    namespace Wrong\Namespace;',
+            ]),
+        ];
+    }
 }

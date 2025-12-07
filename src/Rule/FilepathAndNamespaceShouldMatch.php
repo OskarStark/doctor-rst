@@ -47,11 +47,21 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
      */
     private array $namespaceMapping;
 
+    /**
+     * Regex patterns for filepaths to ignore.
+     * For example: ['/^config\//'] means config/services.php will be skipped.
+     *
+     * @var array<int, string>
+     */
+    private array $ignoredPaths = [];
+
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {
         $resolver
             ->setRequired('namespace_mapping')
-            ->setAllowedTypes('namespace_mapping', 'array');
+            ->setAllowedTypes('namespace_mapping', 'array')
+            ->setDefault('ignored_paths', [])
+            ->setAllowedTypes('ignored_paths', 'array');
 
         return $resolver;
     }
@@ -64,6 +74,8 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
 
         /** @phpstan-ignore assign.propertyType */
         $this->namespaceMapping = $resolvedOptions['namespace_mapping'];
+        /** @phpstan-ignore assign.propertyType */
+        $this->ignoredPaths = $resolvedOptions['ignored_paths'];
     }
 
     public static function getGroups(): array
@@ -103,6 +115,11 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
             if (null === $filepath && $matches = $currentLine->clean()->match('/^\/\/\s*(.+\.php)$/')) {
                 /** @var string[] $matches */
                 $filepath = $matches[1];
+
+                // Check if filepath should be ignored
+                if ($this->isIgnoredPath($filepath)) {
+                    return NullViolation::create();
+                }
             }
 
             // Look for namespace declaration like: namespace Acme\FooBundle\Entity;
@@ -138,6 +155,17 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
         }
 
         return NullViolation::create();
+    }
+
+    private function isIgnoredPath(string $filepath): bool
+    {
+        foreach ($this->ignoredPaths as $pattern) {
+            if (preg_match($pattern, $filepath)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private function extractNamespaceFromFilepath(string $filepath): ?string
