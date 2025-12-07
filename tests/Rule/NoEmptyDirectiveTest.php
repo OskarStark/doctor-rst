@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Rule;
 
+use App\Rst\RstParser;
 use App\Rule\NoEmptyDirective;
 use App\Tests\RstSample;
 use App\Tests\UnitTestCase;
@@ -27,6 +28,18 @@ use PHPUnit\Framework\Attributes\Test;
  */
 final class NoEmptyDirectiveTest extends UnitTestCase
 {
+    private const array DIRECTIVES_REQUIRING_CONTENT = [
+        RstParser::DIRECTIVE_NOTE,
+        RstParser::DIRECTIVE_WARNING,
+        RstParser::DIRECTIVE_CAUTION,
+        RstParser::DIRECTIVE_TIP,
+        RstParser::DIRECTIVE_IMPORTANT,
+        RstParser::DIRECTIVE_SEEALSO,
+        RstParser::DIRECTIVE_BEST_PRACTICE,
+        RstParser::DIRECTIVE_ADMONITION,
+        RstParser::DIRECTIVE_NOTICE,
+    ];
+
     #[Test]
     #[DataProvider('checkProvider')]
     public function check(ViolationInterface $expected, RstSample $sample): void
@@ -44,86 +57,16 @@ final class NoEmptyDirectiveTest extends UnitTestCase
     public static function checkProvider(): iterable
     {
         // Valid cases - directives with content
-        yield 'note with content' => [
-            NullViolation::create(),
-            new RstSample(<<<'RST'
-.. note::
+        foreach (self::DIRECTIVES_REQUIRING_CONTENT as $directive) {
+            yield \sprintf('%s with content', $directive) => [
+                NullViolation::create(),
+                new RstSample(\sprintf(<<<'RST'
+%s
 
-    This is a note.
-RST),
-        ];
-
-        yield 'caution with content' => [
-            NullViolation::create(),
-            new RstSample(<<<'RST'
-.. caution::
-
-    This is a caution.
-RST),
-        ];
-
-        yield 'warning with content' => [
-            NullViolation::create(),
-            new RstSample(<<<'RST'
-.. warning::
-
-    This is a warning.
-RST),
-        ];
-
-        yield 'tip with content' => [
-            NullViolation::create(),
-            new RstSample(<<<'RST'
-.. tip::
-
-    This is a tip.
-RST),
-        ];
-
-        yield 'important with content' => [
-            NullViolation::create(),
-            new RstSample(<<<'RST'
-.. important::
-
-    This is important.
-RST),
-        ];
-
-        yield 'seealso with content' => [
-            NullViolation::create(),
-            new RstSample(<<<'RST'
-.. seealso::
-
-    See also this.
-RST),
-        ];
-
-        yield 'best-practice with content' => [
-            NullViolation::create(),
-            new RstSample(<<<'RST'
-.. best-practice::
-
-    This is a best practice.
-RST),
-        ];
-
-        yield 'admonition with content' => [
-            NullViolation::create(),
-            new RstSample(<<<'RST'
-.. admonition:: Title
-
-    This is an admonition.
-RST),
-        ];
-
-        yield 'notice with content' => [
-            NullViolation::create(),
-            new RstSample(<<<'RST'
-.. notice::
-
-    This is a notice.
-RST),
-        ];
+    This is content.
+RST, $directive)),
+            ];
+        }
 
         // Non-relevant directives should be ignored
         yield 'code-block is ignored' => [
@@ -158,109 +101,20 @@ RST),
         ];
 
         // Invalid cases - empty directives
-        yield 'empty note' => [
-            Violation::from(
-                'The ".. note::" directive must not be empty.',
-                'filename',
-                1,
-                '.. note::',
-            ),
-            new RstSample(<<<'RST'
-.. note::
+        foreach (self::DIRECTIVES_REQUIRING_CONTENT as $directive) {
+            yield \sprintf('empty %s', $directive) => [
+                Violation::from(
+                    \sprintf('The "%s" directive must not be empty.', $directive),
+                    'filename',
+                    1,
+                    $directive,
+                ),
+                new RstSample(\sprintf(<<<'RST'
+%s
 
-RST),
-        ];
-
-        yield 'empty caution' => [
-            Violation::from(
-                'The ".. caution::" directive must not be empty.',
-                'filename',
-                1,
-                '.. caution::',
-            ),
-            new RstSample(<<<'RST'
-.. caution::
-
-RST),
-        ];
-
-        yield 'empty warning' => [
-            Violation::from(
-                'The ".. warning::" directive must not be empty.',
-                'filename',
-                1,
-                '.. warning::',
-            ),
-            new RstSample(<<<'RST'
-.. warning::
-
-RST),
-        ];
-
-        yield 'empty tip' => [
-            Violation::from(
-                'The ".. tip::" directive must not be empty.',
-                'filename',
-                1,
-                '.. tip::',
-            ),
-            new RstSample(<<<'RST'
-.. tip::
-
-RST),
-        ];
-
-        yield 'empty important' => [
-            Violation::from(
-                'The ".. important::" directive must not be empty.',
-                'filename',
-                1,
-                '.. important::',
-            ),
-            new RstSample(<<<'RST'
-.. important::
-
-RST),
-        ];
-
-        yield 'empty seealso' => [
-            Violation::from(
-                'The ".. seealso::" directive must not be empty.',
-                'filename',
-                1,
-                '.. seealso::',
-            ),
-            new RstSample(<<<'RST'
-.. seealso::
-
-RST),
-        ];
-
-        yield 'empty best-practice' => [
-            Violation::from(
-                'The ".. best-practice::" directive must not be empty.',
-                'filename',
-                1,
-                '.. best-practice::',
-            ),
-            new RstSample(<<<'RST'
-.. best-practice::
-
-RST),
-        ];
-
-        yield 'empty notice' => [
-            Violation::from(
-                'The ".. notice::" directive must not be empty.',
-                'filename',
-                1,
-                '.. notice::',
-            ),
-            new RstSample(<<<'RST'
-.. notice::
-
-RST),
-        ];
+RST, $directive)),
+            ];
+        }
 
         // Edge cases
         yield 'note with only blank lines after' => [
