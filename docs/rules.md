@@ -771,6 +771,7 @@ custom-extensions.rst
 Name | Required
 --- | ---
 `namespace_mapping` | `true` | `array`
+`ignored_paths` | `false` | `array`
 
 ##### Valid Examples :+1:
 
