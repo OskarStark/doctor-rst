@@ -15,9 +15,6 @@ namespace App\Tests;
 
 use App\Value\Lines;
 
-/**
- * @no-named-arguments
- */
 final readonly class RstSample
 {
     public Lines $lines;

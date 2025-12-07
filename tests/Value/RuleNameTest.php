@@ -19,9 +19,6 @@ use Ergebnis\DataProvider\StringProvider;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class RuleNameTest extends UnitTestCase
 {
     #[Test]

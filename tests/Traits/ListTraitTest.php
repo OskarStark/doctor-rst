@@ -19,9 +19,6 @@ use App\Tests\Util\ListItemTraitWrapper;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class ListTraitTest extends UnitTestCase
 {
     private ListItemTraitWrapper $traitWrapper;

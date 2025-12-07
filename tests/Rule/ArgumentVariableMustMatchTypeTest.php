@@ -24,9 +24,6 @@ use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
 use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 
-/**
- * @no-named-arguments
- */
 final class ArgumentVariableMustMatchTypeTest extends UnitTestCase
 {
     #[Test]

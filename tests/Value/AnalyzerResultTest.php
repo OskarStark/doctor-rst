@@ -20,9 +20,6 @@ use App\Value\FileResult;
 use App\Value\Violation;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class AnalyzerResultTest extends UnitTestCase
 {
     #[Test]

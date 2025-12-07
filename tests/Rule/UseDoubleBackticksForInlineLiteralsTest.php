@@ -18,9 +18,6 @@ use App\Tests\RstSample;
 use App\Value\NullViolation;
 use App\Value\Violation;
 
-/**
- * @no-named-arguments
- */
 final class UseDoubleBackticksForInlineLiteralsTest extends AbstractLineContentRuleTestCase
 {
     public function createRule(): UseDoubleBackticksForInlineLiterals

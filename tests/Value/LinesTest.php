@@ -17,9 +17,6 @@ use App\Tests\UnitTestCase;
 use App\Value\Lines;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class LinesTest extends UnitTestCase
 {
     #[Test]
