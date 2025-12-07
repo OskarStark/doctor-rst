@@ -56,13 +56,23 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
      */
     private array $ignoredPaths = [];
 
+    /**
+     * Regex patterns for namespaces to ignore.
+     * For example: ['/^Symfony\\\\/'] means namespaces starting with Symfony\ will be skipped.
+     *
+     * @var array<int, string>
+     */
+    private array $ignoredNamespaces = [];
+
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {
         $resolver
             ->setRequired('namespace_mapping')
             ->setAllowedTypes('namespace_mapping', 'array')
             ->setDefault('ignored_paths', [])
-            ->setAllowedTypes('ignored_paths', 'array');
+            ->setAllowedTypes('ignored_paths', 'array')
+            ->setDefault('ignored_namespaces', [])
+            ->setAllowedTypes('ignored_namespaces', 'array');
 
         return $resolver;
     }
@@ -77,6 +87,8 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
         $this->namespaceMapping = $resolvedOptions['namespace_mapping'];
         /** @phpstan-ignore assign.propertyType */
         $this->ignoredPaths = $resolvedOptions['ignored_paths'];
+        /** @phpstan-ignore assign.propertyType */
+        $this->ignoredNamespaces = $resolvedOptions['ignored_namespaces'];
     }
 
     public static function getGroups(): array
@@ -128,6 +140,11 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
                 /** @var string[] $matches */
                 $namespace = $matches[1];
                 $namespaceLineNumber = $currentLineNumber;
+
+                // Check if namespace should be ignored
+                if ($this->isIgnoredNamespace($namespace)) {
+                    return NullViolation::create();
+                }
             }
 
             // If we found both, check if they match
@@ -162,6 +179,17 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
     {
         foreach ($this->ignoredPaths as $pattern) {
             if (preg_match($pattern, $filepath)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isIgnoredNamespace(string $namespace): bool
+    {
+        foreach ($this->ignoredNamespaces as $pattern) {
+            if (preg_match($pattern, $namespace)) {
                 return true;
             }
         }
