@@ -69,5 +69,15 @@ final class EnsureAttributeBetweenBackticksInContentTest extends UnitTestCase
             NullViolation::create(),
             new RstSample('use ``#[MapEntity]`` attributes'),
         ];
+
+        yield 'No violation inside :ref: directive' => [
+            NullViolation::create(),
+            new RstSample(':ref:`the #[Route] attribute <routing-route-attributes>`'),
+        ];
+
+        yield 'No violation inside :ref: directive with multiple attributes' => [
+            NullViolation::create(),
+            new RstSample(':ref:`the #[Route] and #[Entity] attributes <some-reference>`'),
+        ];
     }
 }
