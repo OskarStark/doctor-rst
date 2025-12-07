@@ -1142,7 +1142,7 @@ It's an example
 ```rst
 .. note::
 
-I am a note
+This is a note.
 ```
 
 #### References
