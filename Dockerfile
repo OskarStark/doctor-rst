@@ -1,9 +1,9 @@
-FROM php:8.4-cli-alpine as build
+FROM php:8.4-cli-alpine AS build
 
-RUN apk add git # required for box to detect the version
-RUN apk add --update icu-dev && docker-php-ext-install -j$(nproc) intl # related to https://github.com/box-project/box/issues/516
+RUN apk add --no-cache git # required for box to detect the version
+RUN apk add --no-cache icu-dev && docker-php-ext-install -j$(nproc) intl # related to https://github.com/box-project/box/issues/516
 
-COPY --from=composer:2.8.5 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.9.2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /usr/src/app
 ADD . /usr/src/app
