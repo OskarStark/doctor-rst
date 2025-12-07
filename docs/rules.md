@@ -1145,11 +1145,6 @@ It's an example
 I am a note
 ```
 
-```rst
-.. caution::
-
-```
-
 #### References
 
 - Rule class: [App\Rule\NoEmptyDirective](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoEmptyDirective.php)
