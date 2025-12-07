@@ -765,6 +765,12 @@ custom-extensions.rst
 
 #### Groups [`@Sonata`, `@Symfony`]
 
+#### Configuration options
+
+Name | Required
+--- | ---
+`prefixes` | `true` | `string[]`
+
 ##### Valid Examples :+1:
 
 ```rst
