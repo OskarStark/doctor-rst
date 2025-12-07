@@ -22,6 +22,7 @@ use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 #[Description('Ensures the namespace in a PHP code block matches the filepath.')]
 #[InvalidExample(<<<'RST'
@@ -36,15 +37,31 @@ RST)]
     // src/Acme/FooBundle/Entity/User.php
     namespace Acme\FooBundle\Entity;
 RST)]
-final class FilepathAndNamespaceShouldMatch extends AbstractRule implements LineContentRule
+final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Configurable, LineContentRule
 {
-    private const array COMMON_PREFIXES = [
-        'src/',
-        'lib/',
-        'app/',
-        'tests/',
-        'bundle/',
-    ];
+    /**
+     * @var string[]
+     */
+    private array $prefixes;
+
+    public function configureOptions(OptionsResolver $resolver): OptionsResolver
+    {
+        $resolver
+            ->setRequired('prefixes')
+            ->setAllowedTypes('prefixes', 'string[]');
+
+        return $resolver;
+    }
+
+    public function setOptions(array $options): void
+    {
+        $resolver = $this->configureOptions(new OptionsResolver());
+
+        $resolvedOptions = $resolver->resolve($options);
+
+        /** @phpstan-ignore assign.propertyType */
+        $this->prefixes = $resolvedOptions['prefixes'];
+    }
 
     public static function getGroups(): array
     {
@@ -94,7 +111,7 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Line
 
             // If we found both, check if they match
             if (null !== $filepath && null !== $namespace) {
-                $expectedNamespace = self::extractNamespaceFromFilepath($filepath);
+                $expectedNamespace = $this->extractNamespaceFromFilepath($filepath);
 
                 if (null !== $expectedNamespace && $expectedNamespace !== $namespace) {
                     return Violation::from(
@@ -120,12 +137,12 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Line
         return NullViolation::create();
     }
 
-    private static function extractNamespaceFromFilepath(string $filepath): ?string
+    private function extractNamespaceFromFilepath(string $filepath): ?string
     {
         // Remove common prefixes
         $normalizedPath = $filepath;
 
-        foreach (self::COMMON_PREFIXES as $prefix) {
+        foreach ($this->prefixes as $prefix) {
             if (str_starts_with(strtolower($normalizedPath), $prefix)) {
                 $normalizedPath = substr($normalizedPath, \strlen($prefix));
 
