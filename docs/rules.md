@@ -770,7 +770,7 @@ custom-extensions.rst
 
 Name | Required
 --- | ---
-`prefixes` | `true` | `string[]`
+`namespace_mapping` | `true` | `array`
 
 ##### Valid Examples :+1:
 

@@ -22,25 +22,30 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
 {
-    private const array DEFAULT_PREFIXES = [
-        'src/',
-        'lib/',
-        'app/',
-        'tests/',
-        'bundle/',
+    /**
+     * Default namespace mappings: filepath prefix => namespace prefix.
+     *
+     * @var array<string, string>
+     */
+    private const array DEFAULT_NAMESPACE_MAPPING = [
+        'src/' => '',
+        'lib/' => '',
+        'app/' => '',
+        'tests/' => '',
+        'bundle/' => '',
     ];
 
+    /**
+     * @param array<string, string> $namespaceMapping
+     */
     #[Test]
     #[DataProvider('checkProvider')]
-    public function check(ViolationInterface $expected, array $prefixes, RstSample $sample): void
+    public function check(ViolationInterface $expected, array $namespaceMapping, RstSample $sample): void
     {
         $rule = new FilepathAndNamespaceShouldMatch();
-        $rule->setOptions(['prefixes' => $prefixes]);
+        $rule->setOptions(['namespace_mapping' => $namespaceMapping]);
 
         self::assertEquals(
             $expected,
@@ -56,7 +61,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
         foreach ($codeBlocks as $codeBlock) {
             yield 'valid: matching filepath and namespace - '.$codeBlock => [
                 NullViolation::create(),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '',
@@ -68,7 +73,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
 
             yield 'valid: matching filepath and namespace without blank lines - '.$codeBlock => [
                 NullViolation::create(),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '    // src/Acme/FooBundle/Entity/User.php',
@@ -78,7 +83,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
 
             yield 'valid: matching filepath with lib prefix - '.$codeBlock => [
                 NullViolation::create(),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '',
@@ -89,7 +94,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
 
             yield 'valid: matching filepath with app prefix - '.$codeBlock => [
                 NullViolation::create(),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '',
@@ -100,7 +105,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
 
             yield 'valid: matching filepath with tests prefix - '.$codeBlock => [
                 NullViolation::create(),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '',
@@ -112,7 +117,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
             // Only filepath, no namespace - should not report
             yield 'valid: only filepath, no namespace - '.$codeBlock => [
                 NullViolation::create(),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '',
@@ -125,7 +130,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
             // Only namespace, no filepath - should not report
             yield 'valid: only namespace, no filepath - '.$codeBlock => [
                 NullViolation::create(),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '',
@@ -138,7 +143,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
             // No filepath and no namespace - should not report
             yield 'valid: no filepath and no namespace - '.$codeBlock => [
                 NullViolation::create(),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '',
@@ -149,7 +154,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
             // File in root src directory (no subdirectory) - should not report
             yield 'valid: file in root src directory - '.$codeBlock => [
                 NullViolation::create(),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '',
@@ -168,7 +173,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
                     5,
                     'namespace Acme\WrongBundle\Entity;',
                 ),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '',
@@ -185,7 +190,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
                     3,
                     'namespace Wrong\Namespace;',
                 ),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '    // src/Acme/FooBundle/Entity/User.php',
@@ -200,7 +205,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
                     3,
                     'namespace Acme\FooBundle;',
                 ),
-                self::DEFAULT_PREFIXES,
+                self::DEFAULT_NAMESPACE_MAPPING,
                 new RstSample([
                     $codeBlock,
                     '    // src/Acme/FooBundle/Entity/User.php',
@@ -209,10 +214,10 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
             ];
         }
 
-        // Test with custom prefix
+        // Test with custom prefix (no namespace prefix)
         yield 'valid: custom prefix configuration' => [
             NullViolation::create(),
-            ['custom/'],
+            ['custom/' => ''],
             new RstSample([
                 '.. code-block:: php',
                 '',
@@ -228,12 +233,62 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
                 4,
                 'namespace Acme\FooBundle\Entity;',
             ),
-            ['custom/'],
+            ['custom/' => ''],
             new RstSample([
                 '.. code-block:: php',
                 '',
                 '    // src/Acme/FooBundle/Entity/User.php',
                 '    namespace Acme\FooBundle\Entity;',
+            ]),
+        ];
+
+        // Test with namespace mapping (src/ -> App\)
+        yield 'valid: src maps to App namespace' => [
+            NullViolation::create(),
+            ['src/' => 'App\\'],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Form/DataTransformer/IssueToNumberTransformer.php',
+                '    namespace App\Form\DataTransformer;',
+            ]),
+        ];
+
+        yield 'invalid: src maps to App namespace but namespace is wrong' => [
+            Violation::from(
+                'The namespace "Form\DataTransformer" does not match the filepath "src/Form/DataTransformer/IssueToNumberTransformer.php", expected namespace "App\Form\DataTransformer"',
+                'filename',
+                4,
+                'namespace Form\DataTransformer;',
+            ),
+            ['src/' => 'App\\'],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Form/DataTransformer/IssueToNumberTransformer.php',
+                '    namespace Form\DataTransformer;',
+            ]),
+        ];
+
+        yield 'valid: tests maps to App\Tests namespace' => [
+            NullViolation::create(),
+            ['src/' => 'App\\', 'tests/' => 'App\\Tests\\'],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // tests/Functional/UserTest.php',
+                '    namespace App\Tests\Functional;',
+            ]),
+        ];
+
+        yield 'valid: file in root src directory with App namespace' => [
+            NullViolation::create(),
+            ['src/' => 'App\\'],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Kernel.php',
+                '    namespace App;',
             ]),
         ];
     }

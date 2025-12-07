@@ -40,15 +40,18 @@ RST)]
 final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Configurable, LineContentRule
 {
     /**
-     * @var string[]
+     * Maps filepath prefixes to namespace prefixes.
+     * For example: ['src/' => 'App\\'] means src/Form/Foo.php -> App\Form.
+     *
+     * @var array<string, string>
      */
-    private array $prefixes;
+    private array $namespaceMapping;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
     {
         $resolver
-            ->setRequired('prefixes')
-            ->setAllowedTypes('prefixes', 'string[]');
+            ->setRequired('namespace_mapping')
+            ->setAllowedTypes('namespace_mapping', 'array');
 
         return $resolver;
     }
@@ -60,7 +63,7 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
         $resolvedOptions = $resolver->resolve($options);
 
         /** @phpstan-ignore assign.propertyType */
-        $this->prefixes = $resolvedOptions['prefixes'];
+        $this->namespaceMapping = $resolvedOptions['namespace_mapping'];
     }
 
     public static function getGroups(): array
@@ -139,12 +142,14 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
 
     private function extractNamespaceFromFilepath(string $filepath): ?string
     {
-        // Remove common prefixes
         $normalizedPath = $filepath;
+        $namespacePrefix = '';
 
-        foreach ($this->prefixes as $prefix) {
-            if (str_starts_with(strtolower($normalizedPath), $prefix)) {
-                $normalizedPath = substr($normalizedPath, \strlen($prefix));
+        // Find matching mapping and apply it
+        foreach ($this->namespaceMapping as $pathPrefix => $nsPrefix) {
+            if (str_starts_with(strtolower($normalizedPath), strtolower($pathPrefix))) {
+                $normalizedPath = substr($normalizedPath, \strlen($pathPrefix));
+                $namespacePrefix = $nsPrefix;
 
                 break;
             }
@@ -154,20 +159,32 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
         $lastSlash = strrpos($normalizedPath, '/');
 
         if (false === $lastSlash) {
-            // No directory part, can't determine namespace
+            // No directory part
+            // If we have a namespace prefix, return it (trimmed of trailing backslash)
+            if ('' !== $namespacePrefix) {
+                return rtrim($namespacePrefix, '\\');
+            }
+
+            // No namespace prefix and no directory part, can't determine namespace
             return null;
         }
 
         $directoryPath = substr($normalizedPath, 0, $lastSlash);
 
         // Convert path separators to namespace separators
-        $namespace = str_replace('/', '\\', $directoryPath);
+        $namespaceSuffix = str_replace('/', '\\', $directoryPath);
+
+        // Combine prefix and suffix
+        if ('' !== $namespacePrefix) {
+            // namespacePrefix already ends with \ (e.g., "App\")
+            return $namespacePrefix.$namespaceSuffix;
+        }
 
         // Return null if namespace is empty
-        if ('' === $namespace) {
+        if ('' === $namespaceSuffix) {
             return null;
         }
 
-        return $namespace;
+        return $namespaceSuffix;
     }
 }
