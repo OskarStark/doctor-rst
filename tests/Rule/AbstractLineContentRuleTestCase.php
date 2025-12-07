@@ -20,9 +20,6 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 abstract class AbstractLineContentRuleTestCase extends UnitTestCase
 {
     abstract public function createRule(): LineContentRule;

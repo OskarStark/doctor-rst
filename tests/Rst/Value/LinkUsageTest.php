@@ -19,9 +19,6 @@ use App\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class LinkUsageTest extends UnitTestCase
 {
     #[Test]

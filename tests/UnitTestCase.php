@@ -18,9 +18,6 @@ use Faker\Factory;
 use Faker\Generator;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @no-named-arguments
- */
 abstract class UnitTestCase extends TestCase
 {
     /**

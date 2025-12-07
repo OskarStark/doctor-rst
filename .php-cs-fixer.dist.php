@@ -25,6 +25,11 @@ file that was distributed with this source code.
 HEADER;
 
 $customRules = [
+    'general_phpdoc_annotation_remove' => [
+        'annotations' => [
+            'no-named-arguments',
+        ],
+    ],
     'no_trailing_whitespace_in_string' => false,
 ];
 

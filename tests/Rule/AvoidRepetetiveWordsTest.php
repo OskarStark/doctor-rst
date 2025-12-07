@@ -18,9 +18,6 @@ use App\Tests\RstSample;
 use App\Value\NullViolation;
 use App\Value\Violation;
 
-/**
- * @no-named-arguments
- */
 final class AvoidRepetetiveWordsTest extends AbstractLineContentRuleTestCase
 {
     public function createRule(): AvoidRepetetiveWords

@@ -19,9 +19,6 @@ use App\Formatter\Registry;
 use App\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class RegistryTest extends UnitTestCase
 {
     #[Test]

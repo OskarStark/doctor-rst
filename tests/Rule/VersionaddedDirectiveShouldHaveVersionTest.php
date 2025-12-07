@@ -23,9 +23,6 @@ use Composer\Semver\VersionParser;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class VersionaddedDirectiveShouldHaveVersionTest extends UnitTestCase
 {
     #[Test]

@@ -18,9 +18,6 @@ use App\Value\ExcludedViolationList;
 use App\Value\Violation;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class ExcludedViolationListTest extends UnitTestCase
 {
     #[Test]

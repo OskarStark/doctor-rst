@@ -23,9 +23,6 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class EnsureBashPromptBeforeComposerCommandTest extends UnitTestCase
 {
     #[Test]

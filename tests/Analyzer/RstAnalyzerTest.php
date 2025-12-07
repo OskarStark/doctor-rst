@@ -18,9 +18,6 @@ use App\Rule\MaxBlankLines;
 use App\Tests\UnitTestCase;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class RstAnalyzerTest extends UnitTestCase
 {
     #[Test]
