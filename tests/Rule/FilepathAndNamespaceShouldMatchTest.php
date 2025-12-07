@@ -38,7 +38,7 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
     ];
 
     /**
-     * @param array<string, string> $namespaceMapping
+     * @param array<string, list<string>|string> $namespaceMapping
      */
     #[Test]
     #[DataProvider('checkProvider')]
@@ -291,11 +291,72 @@ final class FilepathAndNamespaceShouldMatchTest extends UnitTestCase
                 '    namespace App;',
             ]),
         ];
+
+        // Test with array of namespace prefixes
+        yield 'valid: src maps to multiple namespaces - App matches' => [
+            NullViolation::create(),
+            ['src/' => ['App\\', 'Acme\\']],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Form/DataTransformer/IssueToNumberTransformer.php',
+                '    namespace App\Form\DataTransformer;',
+            ]),
+        ];
+
+        yield 'valid: src maps to multiple namespaces - Acme matches' => [
+            NullViolation::create(),
+            ['src/' => ['App\\', 'Acme\\']],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Form/DataTransformer/IssueToNumberTransformer.php',
+                '    namespace Acme\Form\DataTransformer;',
+            ]),
+        ];
+
+        yield 'invalid: src maps to multiple namespaces but namespace is wrong' => [
+            Violation::from(
+                'The namespace "Wrong\Form\DataTransformer" does not match the filepath "src/Form/DataTransformer/IssueToNumberTransformer.php", expected namespace "App\Form\DataTransformer" or "Acme\Form\DataTransformer"',
+                'filename',
+                4,
+                'namespace Wrong\Form\DataTransformer;',
+            ),
+            ['src/' => ['App\\', 'Acme\\']],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Form/DataTransformer/IssueToNumberTransformer.php',
+                '    namespace Wrong\Form\DataTransformer;',
+            ]),
+        ];
+
+        yield 'valid: file in root src directory with multiple namespace options - App matches' => [
+            NullViolation::create(),
+            ['src/' => ['App\\', 'Acme\\']],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Kernel.php',
+                '    namespace App;',
+            ]),
+        ];
+
+        yield 'valid: file in root src directory with multiple namespace options - Acme matches' => [
+            NullViolation::create(),
+            ['src/' => ['App\\', 'Acme\\']],
+            new RstSample([
+                '.. code-block:: php',
+                '',
+                '    // src/Kernel.php',
+                '    namespace Acme;',
+            ]),
+        ];
     }
 
     /**
-     * @param array<string, string> $namespaceMapping
-     * @param array<int, string>    $ignoredPaths
+     * @param array<string, list<string>|string> $namespaceMapping
+     * @param array<int, string>                 $ignoredPaths
      */
     #[Test]
     #[DataProvider('checkWithIgnoredPathsProvider')]

@@ -42,8 +42,9 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
     /**
      * Maps filepath prefixes to namespace prefixes.
      * For example: ['src/' => 'App\\'] means src/Form/Foo.php -> App\Form.
+     * Can also be an array: ['src/' => ['App\\', 'Acme\\']] accepts both.
      *
-     * @var array<string, string>
+     * @var array<string, list<string>|string>
      */
     private array $namespaceMapping;
 
@@ -131,15 +132,15 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
 
             // If we found both, check if they match
             if (null !== $filepath && null !== $namespace) {
-                $expectedNamespace = $this->extractNamespaceFromFilepath($filepath);
+                $expectedNamespaces = $this->extractNamespacesFromFilepath($filepath);
 
-                if (null !== $expectedNamespace && $expectedNamespace !== $namespace) {
+                if ([] !== $expectedNamespaces && !\in_array($namespace, $expectedNamespaces, true)) {
                     return Violation::from(
                         \sprintf(
                             'The namespace "%s" does not match the filepath "%s", expected namespace "%s"',
                             $namespace,
                             $filepath,
-                            $expectedNamespace,
+                            implode('" or "', $expectedNamespaces),
                         ),
                         $filename,
                         $namespaceLineNumber + 1,
@@ -168,16 +169,19 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
         return false;
     }
 
-    private function extractNamespaceFromFilepath(string $filepath): ?string
+    /**
+     * @return list<string>
+     */
+    private function extractNamespacesFromFilepath(string $filepath): array
     {
         $normalizedPath = $filepath;
-        $namespacePrefix = '';
+        $namespacePrefixes = [];
 
         // Find matching mapping and apply it
-        foreach ($this->namespaceMapping as $pathPrefix => $nsPrefix) {
+        foreach ($this->namespaceMapping as $pathPrefix => $nsPrefixes) {
             if (str_starts_with(strtolower($normalizedPath), strtolower($pathPrefix))) {
                 $normalizedPath = substr($normalizedPath, \strlen($pathPrefix));
-                $namespacePrefix = $nsPrefix;
+                $namespacePrefixes = \is_array($nsPrefixes) ? $nsPrefixes : [$nsPrefixes];
 
                 break;
             }
@@ -188,13 +192,13 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
 
         if (false === $lastSlash) {
             // No directory part
-            // If we have a namespace prefix, return it (trimmed of trailing backslash)
-            if ('' !== $namespacePrefix) {
-                return rtrim($namespacePrefix, '\\');
+            // If we have namespace prefixes, return them (trimmed of trailing backslash)
+            if ([] !== $namespacePrefixes) {
+                return array_map(static fn (string $prefix): string => rtrim($prefix, '\\'), $namespacePrefixes);
             }
 
             // No namespace prefix and no directory part, can't determine namespace
-            return null;
+            return [];
         }
 
         $directoryPath = substr($normalizedPath, 0, $lastSlash);
@@ -203,16 +207,16 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
         $namespaceSuffix = str_replace('/', '\\', $directoryPath);
 
         // Combine prefix and suffix
-        if ('' !== $namespacePrefix) {
-            // namespacePrefix already ends with \ (e.g., "App\")
-            return $namespacePrefix.$namespaceSuffix;
+        if ([] !== $namespacePrefixes) {
+            // namespacePrefixes already end with \ (e.g., "App\")
+            return array_map(static fn (string $prefix): string => $prefix.$namespaceSuffix, $namespacePrefixes);
         }
 
-        // Return null if namespace is empty
+        // Return empty array if namespace is empty
         if ('' === $namespaceSuffix) {
-            return null;
+            return [];
         }
 
-        return $namespaceSuffix;
+        return [$namespaceSuffix];
     }
 }
