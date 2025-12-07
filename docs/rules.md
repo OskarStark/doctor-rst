@@ -772,6 +772,7 @@ Name | Required
 --- | ---
 `namespace_mapping` | `true` | `array`
 `ignored_paths` | `false` | `array`
+`ignored_namespaces` | `false` | `array`
 
 ##### Valid Examples :+1:
 
