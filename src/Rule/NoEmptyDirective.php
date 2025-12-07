@@ -28,10 +28,7 @@ use App\Value\ViolationInterface;
 #[InvalidExample(<<<'RST'
 .. note::
 
-RST)]
-#[InvalidExample(<<<'RST'
-.. caution::
-
+I am a note
 RST)]
 #[ValidExample(<<<'RST'
 .. note::
