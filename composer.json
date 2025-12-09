@@ -32,7 +32,7 @@
         "phpstan/phpstan-phpunit": "^2.0.10",
         "phpstan/phpstan-webmozart-assert": "^2.0.0",
         "phpunit/phpunit": "^12.5.2",
-        "rector/rector": "^2.2.11",
+        "rector/rector": "^2.2.13",
         "symfony/var-dumper": "^7.4.0"
     },
     "replace": {
