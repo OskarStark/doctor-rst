@@ -52,9 +52,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->skip([
         PreferPHPUnitThisCallRector::class,
-        ReplaceTestAnnotationWithPrefixedFunctionRector::class,
-        'Rector\Transform\Rector\Assign\PropertyFetchToMethodCallRector', // Deprecated rule in Rector 2.2.6
-    ]);
+        ReplaceTestAnnotationWithPrefixedFunctionRector::class, ]);
 
     $rectorConfig->rule(PreferPHPUnitSelfCallRector::class);
 
