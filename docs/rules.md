@@ -76,6 +76,7 @@
 * [no_php_open_tag_in_code_block_php_directive](#no_php_open_tag_in_code_block_php_directive)
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
 * [no_php_prefix_before_composer](#no_php_prefix_before_composer)
+* [no_relative_doc_path](#no_relative_doc_path)
 * [no_space_before_self_xml_closing_tag](#no_space_before_self_xml_closing_tag)
 * [no_typographic_quotes](#no_typographic_quotes)
 * [non_static_phpunit_assertions](#non_static_phpunit_assertions)
@@ -1329,6 +1330,37 @@ php bin/console list
 
 - Rule class: [App\Rule\NoPhpPrefixBeforeComposer](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoPhpPrefixBeforeComposer.php)
 - Test class: [App\Tests\Rule\NoPhpPrefixBeforeComposerTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoPhpPrefixBeforeComposerTest.php)
+
+## `no_relative_doc_path`
+
+  > _Ensure :doc: directives use absolute paths._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+:doc:`/contributing/code/maintenance`
+```
+
+```rst
+:doc:`File </contributing/code/maintenance>`
+```
+
+##### Invalid Examples :-1:
+
+```rst
+:doc:`maintenance`
+```
+
+```rst
+:doc:`File <maintenance>`
+```
+
+#### References
+
+- Rule class: [App\Rule\NoRelativeDocPath](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoRelativeDocPath.php)
+- Test class: [App\Tests\Rule\NoRelativeDocPathTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoRelativeDocPathTest.php)
 
 ## `no_space_before_self_xml_closing_tag`
 
