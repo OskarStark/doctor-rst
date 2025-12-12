@@ -18,10 +18,12 @@ final class AnalyzerResult
     /**
      * @param FileResult[]                              $results
      * @param array{regex?: string[], lines?: string[]} $whitelistConfig
+     * @param ViolationInterface[]                      $directoryViolations
      */
     public function __construct(
         private readonly array $results,
         private array $whitelistConfig,
+        private readonly array $directoryViolations = [],
     ) {
     }
 
@@ -35,6 +37,10 @@ final class AnalyzerResult
 
     public function hasViolations(): bool
     {
+        if ([] !== $this->directoryViolations) {
+            return true;
+        }
+
         foreach ($this->results as $fileResult) {
             if ($fileResult->violationList()->hasViolations()) {
                 return true;
@@ -42,6 +48,14 @@ final class AnalyzerResult
         }
 
         return false;
+    }
+
+    /**
+     * @return ViolationInterface[]
+     */
+    public function directoryViolations(): array
+    {
+        return $this->directoryViolations;
     }
 
     /**

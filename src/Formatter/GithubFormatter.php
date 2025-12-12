@@ -37,6 +37,16 @@ class GithubFormatter implements Formatter
                 ));
             }
         }
+
+        // Output directory-level violations
+        foreach ($analyzerResult->directoryViolations() as $violation) {
+            $style->writeln(\sprintf(
+                '::error file=%s,line=%d::%s',
+                $violation->filename(),
+                $violation->lineno(),
+                $violation->message(),
+            ));
+        }
     }
 
     public function name(): string
