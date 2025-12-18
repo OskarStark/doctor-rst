@@ -48,7 +48,7 @@ jobs:
 
             -
                 name: "Commit regenerated docs/rules.md file"
-                uses: "stefanzweifel/git-auto-commit-action@v7.0.0"
+                uses: "stefanzweifel/git-auto-commit-action@v7.1.0"
                 with:
                     branch: "${{ github.head_ref }}"
                     commit_author: "${{ env.COMMITTER_NAME }} <${{ env.COMMITTER_EMAIL }}>"
