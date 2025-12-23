@@ -45,7 +45,7 @@ return static function (RectorConfig $rectorConfig): void {
         SetList::PHP_84,
         PHPUnitSetList::PHPUNIT_CODE_QUALITY,
         PHPUnitSetList::PHPUNIT_110,
-        SymfonySetList::SYMFONY_73,
+        SymfonySetList::SYMFONY_74,
         SymfonySetList::SYMFONY_CODE_QUALITY,
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
     ]);
