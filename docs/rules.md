@@ -31,6 +31,7 @@
 * [ensure_link_definition_contains_valid_url](#ensure_link_definition_contains_valid_url)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
 * [ensure_php_reference_syntax](#ensure_php_reference_syntax)
+* [ensure_shorthand_colons](#ensure_shorthand_colons)
 * [extend_abstract_admin](#extend_abstract_admin)
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
@@ -650,6 +651,33 @@ The :class:`Symfony\\AI\\Platform\PlatformInterface` class
 
 - Rule class: [App\Rule\EnsurePhpReferenceSyntax](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/EnsurePhpReferenceSyntax.php)
 - Test class: [App\Tests\Rule\EnsurePhpReferenceSyntaxTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/EnsurePhpReferenceSyntaxTest.php)
+
+## `ensure_shorthand_colons`
+
+  > _Ensure lines end with `::` (shorthand) if followed by a blank line and an indented block._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+use it as follows::
+
+    $uuidFactory = new UuidFactory();
+```
+
+##### Invalid Examples :-1:
+
+```rst
+use it as follows:
+
+    $uuidFactory = new UuidFactory();
+```
+
+#### References
+
+- Rule class: [App\Rule\EnsureShorthandColons](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/EnsureShorthandColons.php)
+- Test class: [App\Tests\Rule\EnsureShorthandColonsTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/EnsureShorthandColonsTest.php)
 
 ## `extend_abstract_admin`
 
