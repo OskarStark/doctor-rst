@@ -1,4 +1,4 @@
-FROM php:8.4-cli-alpine AS build
+FROM php:8.5-cli-alpine AS build
 
 RUN apk add --no-cache git # required for box to detect the version
 RUN apk add --no-cache icu-dev && docker-php-ext-install -j$(nproc) intl # related to https://github.com/box-project/box/issues/516
@@ -13,7 +13,7 @@ RUN composer install --classmap-authoritative --no-interaction --no-dev --optimi
 ADD https://github.com/humbug/box/releases/download/4.6.10/box.phar ./box.phar
 RUN php box.phar compile
 
-FROM php:8.4-cli-alpine
+FROM php:8.5-cli-alpine
 
 LABEL "com.github.actions.name"="DOCtor-RST"
 LABEL "com.github.actions.description"="check *.rst files against given rules"

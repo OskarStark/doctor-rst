@@ -18,7 +18,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.4"
+                    - "8.5"
 
         steps:
             - name: "Checkout code"
@@ -46,7 +46,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - '8.4'
+                    - '8.5'
 
         steps:
             - name: "Checkout code"
@@ -75,7 +75,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - '8.4'
+                    - '8.5'
 
         steps:
             - name: "Checkout code"
@@ -104,7 +104,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.4"
+                    - "8.5"
 
         steps:
             - name: "Checkout code"
@@ -137,7 +137,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.4"
+                    - "8.5"
 
         steps:
             # workaround for missing secret in fork PRs - see https://github.com/actions/checkout/issues/298
@@ -184,7 +184,7 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.4"
+                    - "8.5"
 
         steps:
             -
