@@ -102,6 +102,16 @@ enable it::
     some code
 RST;
 
+        // Multiple blank lines between shorthand and directive
+        $invalidMultipleBlankLines = <<<'RST'
+enable it::
+
+
+.. code-block:: terminal
+
+    some code
+RST;
+
         yield [
             Violation::from(
                 'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
@@ -132,6 +142,17 @@ RST;
                 '.. code-block:: terminal',
             ),
             new RstSample($invalidNonIndentedCodeBlock),
+        ];
+
+        // Test with multiple blank lines between shorthand and directive
+        yield 'multiple_blank_lines_before_directive' => [
+            Violation::from(
+                'A ".. code-block:: terminal" directive is following a shorthand notation "::", this will lead to a broken markup!',
+                'filename',
+                1,
+                '.. code-block:: terminal',
+            ),
+            new RstSample($invalidMultipleBlankLines),
         ];
     }
 }
