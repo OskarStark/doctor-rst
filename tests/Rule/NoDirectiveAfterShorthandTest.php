@@ -93,6 +93,15 @@ RST;
     .. configuration-block::
 RST;
 
+        // https://github.com/symfony/symfony-docs/pull/21681
+        $invalidNonIndentedCodeBlock = <<<'RST'
+enable it::
+
+.. code-block:: terminal
+
+    some code
+RST;
+
         yield [
             Violation::from(
                 'A ".. configuration-block::" directive is following a shorthand notation "::", this will lead to a broken markup!',
@@ -112,5 +121,18 @@ RST;
             ),
             new RstSample($invalid2),
         ];
+
+        // Test for non-indented code-block directive following shorthand
+        // This is the case from symfony/symfony-docs#21681
+        yield 'non_indented_code_block_after_shorthand' => [
+            Violation::from(
+                'A ".. code-block:: terminal" directive is following a shorthand notation "::", this will lead to a broken markup!',
+                'filename',
+                1,
+                '.. code-block:: terminal',
+            ),
+            new RstSample($invalidNonIndentedCodeBlock),
+        ];
     }
 }
+
