@@ -1174,6 +1174,26 @@ It's an example
 
 #### Groups [`@Sonata`, `@Symfony`]
 
+##### Valid Examples :+1:
+
+```rst
+enable it:
+
+.. code-block:: terminal
+
+    some code
+```
+
+##### Invalid Examples :-1:
+
+```rst
+enable it::
+
+.. code-block:: terminal
+
+    some code
+```
+
 #### References
 
 - Rule class: [App\Rule\NoDirectiveAfterShorthand](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoDirectiveAfterShorthand.php)
