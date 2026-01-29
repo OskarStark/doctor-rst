@@ -94,7 +94,7 @@ $ruleSet = Php85::create()->withHeader($header)->withRules(Rules::fromArray(arra
         'sort_algorithm' => 'custom',
         'order' => [
             'PHPUnit\\Framework\\Attributes\\Test',
-            'PHPUnit\\Framework\\Attributes\\Testdox',
+            'PHPUnit\\Framework\\Attributes\\TestDox',
             'PHPUnit\\Framework\\Attributes\\DataProvider',
         ],
     ],
