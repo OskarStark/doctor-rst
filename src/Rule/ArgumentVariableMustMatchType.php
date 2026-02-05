@@ -85,7 +85,7 @@ final class ArgumentVariableMustMatchType extends AbstractRule implements Config
             }
         }
 
-        $message = $messageParts ? implode('. ', $messageParts) : null;
+        $message = [] !== $messageParts ? implode('. ', $messageParts) : null;
 
         if (null === $message) {
             return NullViolation::create();

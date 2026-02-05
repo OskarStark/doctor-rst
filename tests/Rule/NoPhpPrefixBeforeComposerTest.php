@@ -36,20 +36,18 @@ final class NoPhpPrefixBeforeComposerTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please remove "php" prefix',
-                    'filename',
-                    1,
-                    'please execute php composer',
-                ),
-                new RstSample('please execute php composer'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('please execute composer install'),
-            ],
+        yield [
+            Violation::from(
+                'Please remove "php" prefix',
+                'filename',
+                1,
+                'please execute php composer',
+            ),
+            new RstSample('please execute php composer'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('please execute composer install'),
         ];
     }
 }

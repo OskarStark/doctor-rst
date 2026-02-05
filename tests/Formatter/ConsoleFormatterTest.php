@@ -32,7 +32,7 @@ final class ConsoleFormatterTest extends UnitTestCase
         $analyzeDir = \dirname(__DIR__, 2).'/dummy';
 
         $bufferedOutput = new BufferedOutput();
-        $style = new SymfonyStyle($this->createMock(InputInterface::class), $bufferedOutput);
+        $style = new SymfonyStyle(self::createStub(InputInterface::class), $bufferedOutput);
 
         $fileResultWithViolations = new FileResult(
             new \SplFileInfo($analyzeDir.'/docs/index.rst'),

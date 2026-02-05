@@ -36,118 +36,116 @@ final class NoBlankLineAfterFilepathInTwigCodeBlockTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please remove blank line after "{# templates/index.html.twig #}"',
-                    'filename',
-                    3,
-                    '{# templates/index.html.twig #}',
-                ),
-                new RstSample([
-                    '.. code-block:: twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. code-block:: twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                Violation::from(
-                    'Please remove blank line after "{# templates/index.html.twig #}"',
-                    'filename',
-                    3,
-                    '{# templates/index.html.twig #}',
-                ),
-                new RstSample([
-                    '.. code-block:: jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. code-block:: jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                Violation::from(
-                    'Please remove blank line after "{# templates/index.html.twig #}"',
-                    'filename',
-                    3,
-                    '{# templates/index.html.twig #}',
-                ),
-                new RstSample([
-                    '.. code-block:: html+jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. code-block:: html+jinja',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                Violation::from(
-                    'Please remove blank line after "{# templates/index.html.twig #}"',
-                    'filename',
-                    3,
-                    '{# templates/index.html.twig #}',
-                ),
-                new RstSample([
-                    '.. code-block:: html+twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. code-block:: html+twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '',
-                    '    {# a comment #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample([
-                    '.. code-block:: html+twig',
-                    '',
-                    '    {# templates/index.html.twig #}',
-                    '    {% set foo = "bar" %}',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('temp'),
-            ],
+        yield [
+            Violation::from(
+                'Please remove blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                3,
+                '{# templates/index.html.twig #}',
+            ),
+            new RstSample([
+                '.. code-block:: twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            Violation::from(
+                'Please remove blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                3,
+                '{# templates/index.html.twig #}',
+            ),
+            new RstSample([
+                '.. code-block:: jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            Violation::from(
+                'Please remove blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                3,
+                '{# templates/index.html.twig #}',
+            ),
+            new RstSample([
+                '.. code-block:: html+jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: html+jinja',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            Violation::from(
+                'Please remove blank line after "{# templates/index.html.twig #}"',
+                'filename',
+                3,
+                '{# templates/index.html.twig #}',
+            ),
+            new RstSample([
+                '.. code-block:: html+twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: html+twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '',
+                '    {# a comment #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample([
+                '.. code-block:: html+twig',
+                '',
+                '    {# templates/index.html.twig #}',
+                '    {% set foo = "bar" %}',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('temp'),
         ];
     }
 }

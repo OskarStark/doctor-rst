@@ -133,11 +133,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
                 continue;
             }
 
-            if ($lines->current()->isHeadline()) {
-                return true;
-            }
-
-            return false;
+            return $lines->current()->isHeadline();
         }
 
         return false;
@@ -158,11 +154,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
                 continue;
             }
 
-            if (RstParser::isTable($lines->current())) {
-                return true;
-            }
-
-            return false;
+            return RstParser::isTable($lines->current());
         }
 
         return false;
@@ -183,11 +175,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
                 continue;
             }
 
-            if (preg_match('/\?$/', $lines->current()->clean()->toString())) {
-                return true;
-            }
-
-            return false;
+            return (bool) preg_match('/\?$/', $lines->current()->clean()->toString());
         }
 
         return false;

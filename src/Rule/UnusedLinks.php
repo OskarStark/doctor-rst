@@ -55,12 +55,10 @@ final class UnusedLinks extends AbstractRule implements FileContentRule, ResetIn
 
             preg_match_all('/(?:`[^`]+`|(?:(?!_)\w)+(?:[-._+:](?:(?!_)\w)+)*+)_/', $lines->current()->raw()->toString(), $matches);
 
-            if (!empty($matches[0])) {
-                foreach ($matches[0] as $match) {
-                    if (RstParser::isLinkUsage($match)) {
-                        $usage = LinkUsage::fromLine($match);
-                        $this->linkUsages[$usage->name()->value()] = $usage;
-                    }
+            foreach ($matches[0] as $match) {
+                if (RstParser::isLinkUsage($match)) {
+                    $usage = LinkUsage::fromLine($match);
+                    $this->linkUsages[$usage->name()->value()] = $usage;
                 }
             }
 
@@ -73,7 +71,7 @@ final class UnusedLinks extends AbstractRule implements FileContentRule, ResetIn
             }
         }
 
-        if (!empty($this->linkDefinitions)) {
+        if ([] !== $this->linkDefinitions) {
             $message = \sprintf(
                 'The following link definitions aren\'t used anymore and should be removed: "%s"',
                 implode('", "', array_unique(array_keys($this->linkDefinitions))),

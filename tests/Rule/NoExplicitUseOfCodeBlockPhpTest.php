@@ -202,8 +202,6 @@ RST;
 
 RST;
 
-        $invalid_content =
-
         $valid_code_block_after_headline = <<<'RST'
 Creating an ACL and Adding an ACE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

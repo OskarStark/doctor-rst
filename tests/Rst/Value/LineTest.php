@@ -36,43 +36,41 @@ final class LineTest extends UnitTestCase
     }
 
     /**
-     * @return array<array{0: string, 1: string}>
+     * @return \Iterator<(int|string), array{string, string}>
      */
     public static function cleanProvider(): iterable
     {
-        yield from [
-            [
-                '.. code-block:: php',
-                '.. code-block:: php',
-            ],
-            [
-                '.. code-block:: php',
-                '  .. code-block:: php  ',
-            ],
-            [
-                '',
-                '\r',
-            ],
-            [
-                '',
-                '\n',
-            ],
-            [
-                'when you need to embed a ``\n`` or a Unicode character in a string.',
-                'when you need to embed a ``\n`` or a Unicode character in a string.\n',
-            ],
-            [
-                'use Sonata\AdminBundle\Admin\Admin;',
-                'use Sonata\AdminBundle\Admin\Admin;',
-            ],
-            [
-                'use Sonata\AdminBundle\Admin\Admin',
-                'use Sonata\AdminBundle\Admin\Admin',
-            ],
-            [
-                'use Sonata\AdminBundle\Admin\Admin',
-                'use Sonata\AdminBundle\Admin\Admin  ',
-            ],
+        yield [
+            '.. code-block:: php',
+            '.. code-block:: php',
+        ];
+        yield [
+            '.. code-block:: php',
+            '  .. code-block:: php  ',
+        ];
+        yield [
+            '',
+            '\r',
+        ];
+        yield [
+            '',
+            '\n',
+        ];
+        yield [
+            'when you need to embed a ``\n`` or a Unicode character in a string.',
+            'when you need to embed a ``\n`` or a Unicode character in a string.\n',
+        ];
+        yield [
+            'use Sonata\AdminBundle\Admin\Admin;',
+            'use Sonata\AdminBundle\Admin\Admin;',
+        ];
+        yield [
+            'use Sonata\AdminBundle\Admin\Admin',
+            'use Sonata\AdminBundle\Admin\Admin',
+        ];
+        yield [
+            'use Sonata\AdminBundle\Admin\Admin',
+            'use Sonata\AdminBundle\Admin\Admin  ',
         ];
     }
 
@@ -84,16 +82,14 @@ final class LineTest extends UnitTestCase
     }
 
     /**
-     * @return array<array{0: bool, 1: string}>
+     * @return \Iterator<(int|string), array{bool, string}>
      */
     public static function isBlankProvider(): iterable
     {
-        yield from [
-            [true, '\r\n'],
-            [true, ''],
-            [true, ' '],
-            [false, 'foo'],
-        ];
+        yield [true, '\r\n'];
+        yield [true, ''];
+        yield [true, ' '];
+        yield [false, 'foo'];
     }
 
     #[Test]

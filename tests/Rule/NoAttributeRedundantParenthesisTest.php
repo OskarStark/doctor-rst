@@ -36,33 +36,31 @@ final class NoAttributeRedundantParenthesisTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please remove redundant parenthesis on attribute',
-                    'filename',
-                    1,
-                    '#[Bar()]',
-                ),
-                new RstSample('#[Bar()]'),
-            ],
-            [
-                Violation::from(
-                    'Please remove redundant parenthesis on attribute',
-                    'filename',
-                    1,
-                    'Attribute #[Bar()] in my text',
-                ),
-                new RstSample('Attribute #[Bar()] in my text'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('#[Bar]'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample("#[Bar('foo')]"),
-            ],
+        yield [
+            Violation::from(
+                'Please remove redundant parenthesis on attribute',
+                'filename',
+                1,
+                '#[Bar()]',
+            ),
+            new RstSample('#[Bar()]'),
+        ];
+        yield [
+            Violation::from(
+                'Please remove redundant parenthesis on attribute',
+                'filename',
+                1,
+                'Attribute #[Bar()] in my text',
+            ),
+            new RstSample('Attribute #[Bar()] in my text'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('#[Bar]'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample("#[Bar('foo')]"),
         ];
     }
 }

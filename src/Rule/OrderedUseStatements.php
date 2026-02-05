@@ -69,7 +69,7 @@ final class OrderedUseStatements extends AbstractRule implements LineContentRule
             $lines->next();
         }
 
-        if (empty($statements) || 1 === \count($statements)) {
+        if ([] === $statements || 1 === \count($statements)) {
             return NullViolation::create();
         }
 
