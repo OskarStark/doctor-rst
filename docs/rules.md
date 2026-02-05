@@ -80,6 +80,7 @@
 * [no_relative_doc_path](#no_relative_doc_path)
 * [no_space_before_self_xml_closing_tag](#no_space_before_self_xml_closing_tag)
 * [no_typographic_quotes](#no_typographic_quotes)
+* [no_unused_inc_files](#no_unused_inc_files)
 * [non_static_phpunit_assertions](#non_static_phpunit_assertions)
 * [only_backslashes_in_namespace_in_php_code_block](#only_backslashes_in_namespace_in_php_code_block)
 * [only_backslashes_in_use_statements_in_php_code_block](#only_backslashes_in_use_statements_in_php_code_block)
@@ -1421,6 +1422,17 @@ Lorem ‘ipsum’ dolor “sit amet”
 
 - Rule class: [App\Rule\NoTypographicQuotes](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoTypographicQuotes.php)
 - Test class: [App\Tests\Rule\NoTypographicQuotesTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoTypographicQuotesTest.php)
+
+## `no_unused_inc_files`
+
+  > _Report all .rst.inc files which are not included anywhere in the documentation._
+
+#### Groups [`@Symfony`]
+
+#### References
+
+- Rule class: [App\Rule\NoUnusedIncFiles](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoUnusedIncFiles.php)
+- Test class: [App\Tests\Rule\NoUnusedIncFilesTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoUnusedIncFilesTest.php)
 
 ## `non_static_phpunit_assertions`
 
