@@ -17,7 +17,7 @@
         "symfony/service-contracts": "^3.6.1",
         "symfony/string": "^7.4.4",
         "symfony/yaml": "^7.4.1",
-        "webmozart/assert": "^1.12.1"
+        "webmozart/assert": "^2.0"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.49.0",
