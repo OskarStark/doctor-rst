@@ -15,6 +15,7 @@ use Rector\CodeQuality\Rector\Attribute\SortAttributeNamedArgsRector;
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
 use Rector\CodeQuality\Rector\FuncCall\SimplifyRegexPatternRector;
 use Rector\CodeQuality\Rector\FuncCall\SortCallLikeNamedArgsRector;
+use Rector\CodeQuality\Rector\If_\CombineIfRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\Cast\RecastingRemovalRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
@@ -74,6 +75,7 @@ return RectorConfig::configure()
         NullToStrictStringFuncCallArgRector::class, // Avoid redundant casts when value is already a string
         ReturnBinaryOrToEarlyReturnRector::class, // Keep combined conditions readable instead of splitting into multiple returns
         ChangeOrIfContinueToMultiContinueRector::class, // Keep combined conditions with continue readable
+        CombineIfRector::class, // Keep nested ifs for better readability
         RecastingRemovalRector::class, // Keep explicit casts for clarity
         DisallowedEmptyRuleFixerRector::class, // Keep empty() for readability
     ])

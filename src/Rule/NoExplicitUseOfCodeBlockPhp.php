@@ -62,8 +62,13 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
         }
 
         // it has no indention, check if it comes after a headline, in this case its ok
-        if (!preg_match('/^[\s]+/', $line->raw()->toString(), $matches) && (self::directAfterHeadline($lines, $number) || self::directAfterTable($lines, $number) || self::previousParagraphEndsWithQuestionMark($lines, $number))) {
-            return NullViolation::create();
+        if (!preg_match('/^[\s]+/', $line->raw()->toString(), $matches)) {
+            if (self::directAfterHeadline($lines, $number)
+                || self::directAfterTable($lines, $number)
+                || self::previousParagraphEndsWithQuestionMark($lines, $number)
+            ) {
+                return NullViolation::create();
+            }
         }
 
         // check if the code block is not on the first level, in this case
