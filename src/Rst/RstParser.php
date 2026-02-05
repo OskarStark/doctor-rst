@@ -105,27 +105,17 @@ class RstParser
 
     public static function isPhpDirective(Line $line): bool
     {
-        if ($line->isDefaultDirective()) {
+        if ($line->isDefaultDirective()
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP, true)
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_ANNOTATIONS, true)
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_ATTRIBUTES, true)
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_SYMFONY, true)
+            || self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_STANDALONE, true)
+        ) {
             return true;
         }
 
-        if (self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP, true)) {
-            return true;
-        }
-
-        if (self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_ANNOTATIONS, true)) {
-            return true;
-        }
-
-        if (self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_ATTRIBUTES, true)) {
-            return true;
-        }
-
-        if (self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_SYMFONY, true)) {
-            return true;
-        }
-
-        return self::codeBlockDirectiveIsTypeOf($line, self::CODE_BLOCK_PHP_STANDALONE, true);
+        return false;
     }
 
     public static function directiveIs(Line $line, string $directive, ?bool $strict = false): bool
@@ -144,7 +134,13 @@ class RstParser
             $directivesExcludedCodeBlock = array_diff(self::DIRECTIVES, [$directive]);
             $rawLine = $line->raw()->toString();
 
-            return array_all($directivesExcludedCodeBlock, static fn ($other) => !str_contains($rawLine, $other));
+            foreach ($directivesExcludedCodeBlock as $other) {
+                if (str_contains($rawLine, $other)) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         return false;
@@ -198,7 +194,11 @@ class RstParser
                 return true;
             }
 
-            return ($matches = $line->clean()->match('/\:\: (.*)$/')) && $type === $matches[1];
+            if (($matches = $line->clean()->match('/\:\: (.*)$/')) && $type === $matches[1]) {
+                return true;
+            }
+
+            return false;
         }
 
         return false;

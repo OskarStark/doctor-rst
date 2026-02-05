@@ -68,6 +68,7 @@ return RectorConfig::configure()
         LocallyCalledStaticMethodToNonStaticRector::class,
         PreferPHPUnitThisCallRector::class,
         NullToStrictStringFuncCallArgRector::class, // Avoid redundant casts when value is already a string
+        ReturnBinaryOrToEarlyReturnRector::class, // Keep combined conditions readable instead of splitting into multiple returns
     ])
     ->withRules([
         PreferPHPUnitSelfCallRector::class,
