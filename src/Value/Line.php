@@ -58,7 +58,7 @@ final class Line
         if (null === $this->indention) {
             if ($matches = $this->raw->match('/^[\s]+/')) {
                 /** @var string[] $matches */
-                return $this->indention = \strlen($matches[0]);
+                return $this->indention = \strlen((string) $matches[0]);
             }
 
             return $this->indention = 0;
@@ -82,9 +82,15 @@ final class Line
             $string = ltrim($this->raw->toString());
             $len = \strlen($string);
 
-            if (2 <= $len && '.' === $string[0] && '.' === $string[1] && (!str_starts_with($string, '.. _`') && str_contains($string, '::'))
+            if (2 <= $len
+                && '.' === $string[0]
+                && '.' === $string[1]
             ) {
-                return $this->isDirective = true;
+                if (
+                    !str_starts_with($string, '.. _`')
+                    && str_contains($string, '::')) {
+                    return $this->isDirective = true;
+                }
             }
 
             if ($this->isDefaultDirective()) {
