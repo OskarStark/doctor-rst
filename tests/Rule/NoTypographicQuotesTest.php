@@ -35,43 +35,41 @@ final class NoTypographicQuotesTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please use straight single quotes (\' ... \') instead of curly quotes (‘ ... ’)',
-                    'filename',
-                    1,
-                    'Lorem ipsum ‘dolor sit amet’, consectetur adipiscing elit.',
-                ),
-                new RstSample('Lorem ipsum ‘dolor sit amet’, consectetur adipiscing elit.'),
-            ],
-            [
-                Violation::from(
-                    'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
-                    'filename',
-                    1,
-                    'Lorem ipsum “dolor sit amet”, consectetur adipiscing elit.',
-                ),
-                new RstSample('Lorem ipsum “dolor sit amet”, consectetur adipiscing elit.'),
-            ],
-            [
-                Violation::from(
-                    'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
-                    'filename',
-                    1,
-                    'Lorem ipsum „dolor sit amet“, consectetur adipiscing elit.',
-                ),
-                new RstSample('Lorem ipsum „dolor sit amet“, consectetur adipiscing elit.'),
-            ],
-            [
-                Violation::from(
-                    'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
-                    'filename',
-                    1,
-                    'Lorem ipsum «dolor sit amet», consectetur adipiscing elit.',
-                ),
-                new RstSample('Lorem ipsum «dolor sit amet», consectetur adipiscing elit.'),
-            ],
+        yield [
+            Violation::from(
+                'Please use straight single quotes (\' ... \') instead of curly quotes (‘ ... ’)',
+                'filename',
+                1,
+                'Lorem ipsum ‘dolor sit amet’, consectetur adipiscing elit.',
+            ),
+            new RstSample('Lorem ipsum ‘dolor sit amet’, consectetur adipiscing elit.'),
+        ];
+        yield [
+            Violation::from(
+                'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
+                'filename',
+                1,
+                'Lorem ipsum “dolor sit amet”, consectetur adipiscing elit.',
+            ),
+            new RstSample('Lorem ipsum “dolor sit amet”, consectetur adipiscing elit.'),
+        ];
+        yield [
+            Violation::from(
+                'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
+                'filename',
+                1,
+                'Lorem ipsum „dolor sit amet“, consectetur adipiscing elit.',
+            ),
+            new RstSample('Lorem ipsum „dolor sit amet“, consectetur adipiscing elit.'),
+        ];
+        yield [
+            Violation::from(
+                'Please use straight double quotes (" ... ") instead of typographic quotes (“ ... ”  „ ... “  « ... »)',
+                'filename',
+                1,
+                'Lorem ipsum «dolor sit amet», consectetur adipiscing elit.',
+            ),
+            new RstSample('Lorem ipsum «dolor sit amet», consectetur adipiscing elit.'),
         ];
     }
 }

@@ -62,11 +62,11 @@ final class AnalyzerResultTest extends UnitTestCase
         $analyserResult = new AnalyzerResult(
             [
                 new FileResult(
-                    $this->createMock(\SplFileInfo::class),
+                    self::createStub(\SplFileInfo::class),
                     $excludedViolationListOne,
                 ),
                 new FileResult(
-                    $this->createMock(\SplFileInfo::class),
+                    self::createStub(\SplFileInfo::class),
                     $excludedViolationListTwo,
                 ),
             ],

@@ -57,7 +57,7 @@ class RulesCommand extends Command
         if ([] === $rules) {
             $this->io->warning('No rules available!');
 
-            return (int) Command::FAILURE;
+            return Command::FAILURE;
         }
 
         foreach ($rules as $rule) {
@@ -73,7 +73,7 @@ class RulesCommand extends Command
             $this->rule($rule);
         }
 
-        return (int) Command::SUCCESS;
+        return Command::SUCCESS;
     }
 
     private function rule(Rule $rule): void
@@ -163,7 +163,7 @@ class RulesCommand extends Command
                             '%s | %s | %s | %s',
                             \sprintf('`%s`', $option['name']),
                             \sprintf('`%s`', $option['required'] ? 'true' : 'false'),
-                            \sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
+                            [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`',
                             $default,
                         ));
                     }
@@ -176,7 +176,7 @@ class RulesCommand extends Command
                             '%s | %s | %s',
                             \sprintf('`%s`', $option['name']),
                             \sprintf('`%s`', $option['required'] ? 'true' : 'false'),
-                            \sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
+                            [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`',
                         ));
                     }
                 }
@@ -185,7 +185,7 @@ class RulesCommand extends Command
             }
         }
 
-        if ($rule instanceof CheckListRule && !empty($rule::getList())) {
+        if ($rule instanceof CheckListRule && [] !== $rule::getList()) {
             $this->io->writeln('#### Checks');
             $this->io->newLine();
             $this->io->writeln('Pattern | Message');
@@ -204,7 +204,7 @@ class RulesCommand extends Command
             $validExamples[] = $attribute->newInstance()->value;
         }
 
-        if ($validExamples) {
+        if ([] !== $validExamples) {
             $this->renderExamples('##### Valid Examples :+1:', $validExamples);
         }
 
@@ -214,7 +214,7 @@ class RulesCommand extends Command
             $invalidExamples[] = $attribute->newInstance()->value;
         }
 
-        if ($invalidExamples) {
+        if ([] !== $invalidExamples) {
             $this->renderExamples('##### Invalid Examples :-1:', $invalidExamples);
         }
 

@@ -24,8 +24,7 @@ trait ListTrait
         $lines->seek($number);
 
         if (RstParser::isListItem($lines->current())) {
-            return !((new PhpHelper())->isPartOfMultilineComment($lines, $number)
-                || (new PhpHelper())->isPartOfDocBlock($lines, $number));
+            return !(new PhpHelper())->isPartOfMultilineComment($lines, $number) && !(new PhpHelper())->isPartOfDocBlock($lines, $number);
         }
 
         $currentIndention = $lines->current()->indention();

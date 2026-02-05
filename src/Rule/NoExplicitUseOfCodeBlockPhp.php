@@ -62,13 +62,8 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
         }
 
         // it has no indention, check if it comes after a headline, in this case its ok
-        if (!preg_match('/^[\s]+/', $line->raw()->toString(), $matches)) {
-            if (self::directAfterHeadline($lines, $number)
-                || self::directAfterTable($lines, $number)
-                || self::previousParagraphEndsWithQuestionMark($lines, $number)
-            ) {
-                return NullViolation::create();
-            }
+        if (!preg_match('/^[\s]+/', $line->raw()->toString(), $matches) && (self::directAfterHeadline($lines, $number) || self::directAfterTable($lines, $number) || self::previousParagraphEndsWithQuestionMark($lines, $number))) {
+            return NullViolation::create();
         }
 
         // check if the code block is not on the first level, in this case
@@ -133,11 +128,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
                 continue;
             }
 
-            if ($lines->current()->isHeadline()) {
-                return true;
-            }
-
-            return false;
+            return $lines->current()->isHeadline();
         }
 
         return false;
@@ -158,11 +149,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
                 continue;
             }
 
-            if (RstParser::isTable($lines->current())) {
-                return true;
-            }
-
-            return false;
+            return RstParser::isTable($lines->current());
         }
 
         return false;
@@ -183,11 +170,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
                 continue;
             }
 
-            if (preg_match('/\?$/', $lines->current()->clean()->toString())) {
-                return true;
-            }
-
-            return false;
+            return (bool) preg_match('/\?$/', $lines->current()->clean()->toString());
         }
 
         return false;

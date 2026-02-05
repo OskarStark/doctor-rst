@@ -37,45 +37,43 @@ final class VersionaddedDirectiveShouldHaveVersionTest extends UnitTestCase
     }
 
     /**
-     * @return array<array{0: ViolationInterface, 1: RstSample}>
+     * @return \Iterator<(int|string), array{ViolationInterface, RstSample}>
      */
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                NullViolation::create(),
-                new RstSample('.. versionadded:: 1'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.. versionadded:: 1.2'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.. versionadded:: 1.2.0'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.. versionadded:: 1.2   '),
-            ],
-            [
-                Violation::from(
-                    'Please provide a version behind ".. versionadded::"',
-                    'filename',
-                    1,
-                    '.. versionadded::',
-                ),
-                new RstSample('.. versionadded::'),
-            ],
-            [
-                Violation::from(
-                    'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
-                    'filename',
-                    1,
-                    '.. versionadded:: foo',
-                ),
-                new RstSample('.. versionadded:: foo'),
-            ],
+        yield [
+            NullViolation::create(),
+            new RstSample('.. versionadded:: 1'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.. versionadded:: 1.2'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.. versionadded:: 1.2.0'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.. versionadded:: 1.2   '),
+        ];
+        yield [
+            Violation::from(
+                'Please provide a version behind ".. versionadded::"',
+                'filename',
+                1,
+                '.. versionadded::',
+            ),
+            new RstSample('.. versionadded::'),
+        ];
+        yield [
+            Violation::from(
+                'Please provide a numeric version behind ".. versionadded::" instead of "foo"',
+                'filename',
+                1,
+                '.. versionadded:: foo',
+            ),
+            new RstSample('.. versionadded:: foo'),
         ];
     }
 }

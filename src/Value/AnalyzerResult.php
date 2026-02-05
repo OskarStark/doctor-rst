@@ -35,13 +35,7 @@ final class AnalyzerResult
 
     public function hasViolations(): bool
     {
-        foreach ($this->results as $fileResult) {
-            if ($fileResult->violationList()->hasViolations()) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($this->results, static fn ($fileResult) => $fileResult->violationList()->hasViolations());
     }
 
     /**

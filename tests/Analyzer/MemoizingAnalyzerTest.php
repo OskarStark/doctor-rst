@@ -50,18 +50,18 @@ final class MemoizingAnalyzerTest extends UnitTestCase
         ];
 
         $this->cache
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('has')
             ->with($fileInfo, $rules)
             ->willReturn(true);
 
         $this->cache
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('get')
             ->with($fileInfo, $rules)
             ->willReturn([]);
 
-        $this->analyzer->expects(self::never())->method('analyze');
+        $this->analyzer->expects($this->never())->method('analyze');
 
         $this->memoizingAnalyzer->analyze($fileInfo, $rules);
     }
@@ -74,21 +74,21 @@ final class MemoizingAnalyzerTest extends UnitTestCase
             new DummyRule(),
         ];
 
-        $this->cache->expects(self::never())->method('get');
+        $this->cache->expects($this->never())->method('get');
 
         $this->cache
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('has')
             ->with($fileInfo, $rules)
             ->willReturn(false);
 
         $this->cache
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('set')
             ->with($fileInfo, $rules, []);
 
         $this->analyzer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('analyze')
             ->with($fileInfo, $rules)
             ->willReturn([]);

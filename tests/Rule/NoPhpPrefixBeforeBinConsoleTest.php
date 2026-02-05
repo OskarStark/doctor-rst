@@ -36,20 +36,18 @@ final class NoPhpPrefixBeforeBinConsoleTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please remove "php" prefix before "bin/console"',
-                    'filename',
-                    1,
-                    'please execute php bin/console foo',
-                ),
-                new RstSample('please execute php bin/console foo'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('please execute bin/console foo'),
-            ],
+        yield [
+            Violation::from(
+                'Please remove "php" prefix before "bin/console"',
+                'filename',
+                1,
+                'please execute php bin/console foo',
+            ),
+            new RstSample('please execute php bin/console foo'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('please execute bin/console foo'),
         ];
     }
 }

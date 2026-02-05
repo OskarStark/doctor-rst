@@ -54,9 +54,9 @@ final class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements
 
         if ($matches = $line->clean()->match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             /** @var string[] $matches */
-            $version = trim((string) $matches[1]);
+            $version = trim($matches[1]);
 
-            if (empty($version)) {
+            if ('' === $version || '0' === $version) {
                 return Violation::from(
                     \sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_DEPRECATED),
                     $filename,

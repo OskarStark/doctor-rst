@@ -35,28 +35,26 @@ final class ValidUseStatementsTests extends UnitTestCase
     }
 
     /**
-     * @return array<array{0: ViolationInterface, 1: RstSample}>
+     * @return \Iterator<(int|string), array{ViolationInterface, RstSample}>
      */
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please do not escape the backslashes in a use statement.',
-                    'filename',
-                    1,
-                    'use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;',
-                ),
-                new RstSample('use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('use Symfony\Component\Form\Extension\Core\Type\FormType;'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('don\'t use the :class:`Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\ControllerTrait`'),
-            ],
+        yield [
+            Violation::from(
+                'Please do not escape the backslashes in a use statement.',
+                'filename',
+                1,
+                'use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;',
+            ),
+            new RstSample('use Symfony\\\\Component\\\\Form\\\\Extension\\\\Core\\\\Type\\\\FormType;'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('use Symfony\Component\Form\Extension\Core\Type\FormType;'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('don\'t use the :class:`Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\ControllerTrait`'),
         ];
     }
 }

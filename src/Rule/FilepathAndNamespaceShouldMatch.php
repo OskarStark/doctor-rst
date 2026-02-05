@@ -177,24 +177,12 @@ final class FilepathAndNamespaceShouldMatch extends AbstractRule implements Conf
 
     private function isIgnoredPath(string $filepath): bool
     {
-        foreach ($this->ignoredPaths as $pattern) {
-            if (preg_match($pattern, $filepath)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($this->ignoredPaths, static fn ($pattern) => (bool) preg_match($pattern, $filepath));
     }
 
     private function isIgnoredNamespace(string $namespace): bool
     {
-        foreach ($this->ignoredNamespaces as $pattern) {
-            if (preg_match($pattern, $namespace)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($this->ignoredNamespaces, static fn ($pattern) => (bool) preg_match($pattern, $namespace));
     }
 
     /**

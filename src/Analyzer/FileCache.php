@@ -21,7 +21,7 @@ final class FileCache implements Cache
     /**
      * @var array<string, array{hash: false|string, rules: string, violations: Violation[]}>
      */
-    private array $cache;
+    private array $cache = [];
     private bool $loaded = false;
 
     /**
@@ -31,7 +31,6 @@ final class FileCache implements Cache
 
     public function __construct(private readonly string $cacheFile)
     {
-        $this->cache = [];
     }
 
     public function has(\SplFileInfo $file, array $rules): bool
@@ -86,7 +85,7 @@ final class FileCache implements Cache
 
     public function load(): void
     {
-        if (true === $this->loaded) {
+        if ($this->loaded) {
             return;
         }
 

@@ -36,29 +36,27 @@ final class FinalAdminExtensionClassesTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please use "final" for AdminExtension class',
-                    'filename',
-                    1,
-                    'class TestExtension extends AbstractAdminExtension',
-                ),
-                new RstSample('class TestExtension extends AbstractAdminExtension'),
-            ],
-            [
-                Violation::from(
-                    'Please use "final" for AdminExtension class',
-                    'filename',
-                    1,
-                    'class TestExtension extends AbstractAdminExtension',
-                ),
-                new RstSample('    class TestExtension extends AbstractAdminExtension'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('final class TestExtension extends AbstractAdminExtension'),
-            ],
+        yield [
+            Violation::from(
+                'Please use "final" for AdminExtension class',
+                'filename',
+                1,
+                'class TestExtension extends AbstractAdminExtension',
+            ),
+            new RstSample('class TestExtension extends AbstractAdminExtension'),
+        ];
+        yield [
+            Violation::from(
+                'Please use "final" for AdminExtension class',
+                'filename',
+                1,
+                'class TestExtension extends AbstractAdminExtension',
+            ),
+            new RstSample('    class TestExtension extends AbstractAdminExtension'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('final class TestExtension extends AbstractAdminExtension'),
         ];
     }
 }
