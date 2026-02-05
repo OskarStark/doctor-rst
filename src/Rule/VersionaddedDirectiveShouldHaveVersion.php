@@ -55,7 +55,7 @@ final class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implemen
         if (preg_match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_VERSIONADDED), $line->clean()->toString(), $matches)) {
             $version = trim($matches[1]);
 
-            if ('' === $version || '0' === $version) {
+            if (empty($version)) {
                 return Violation::from(
                     \sprintf('Please provide a version behind "%s"', RstParser::DIRECTIVE_VERSIONADDED),
                     $filename,

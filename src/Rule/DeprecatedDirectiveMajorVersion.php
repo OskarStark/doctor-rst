@@ -66,7 +66,7 @@ final class DeprecatedDirectiveMajorVersion extends AbstractRule implements Conf
 
         if ($matches = $line->clean()->match(\sprintf('/^%s(.*)$/', RstParser::DIRECTIVE_DEPRECATED))) {
             /** @var string[] $matches */
-            $version = trim($matches[1]);
+            $version = trim((string) $matches[1]);
 
             try {
                 $normalizedVersion = $this->versionParser->normalize($version);
