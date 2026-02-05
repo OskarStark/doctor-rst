@@ -65,15 +65,11 @@ final class AvoidRepetetiveWords extends AbstractRule implements LineContentRule
         $words = explode(' ', $line->clean()->toString());
 
         foreach ($words as $key => $word) {
-            if (0 === $key) {
+            if (0 === $key || \in_array($word, self::whitelist(), true)) {
                 continue;
             }
 
-            if (\in_array($word, self::whitelist(), true)) {
-                continue;
-            }
-
-            if (isset($words[$key + 1]) && $words[$key + 1] !== '' && $words[$key + 1] !== '0' && 1 < \strlen($word) && $words[$key + 1] === $word && (!is_numeric(rtrim($word, ',')))) {
+            if (isset($words[$key + 1]) && !empty($words[$key + 1]) && 1 < \strlen($word) && $words[$key + 1] === $word && (!is_numeric(rtrim($word, ',')))) {
                 $message = \sprintf('The word "%s" is used more times in a row.', $word);
 
                 return Violation::from(
