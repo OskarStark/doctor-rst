@@ -66,6 +66,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
             if (self::directAfterHeadline($lines, $number)
                 || self::directAfterTable($lines, $number)
                 || self::previousParagraphEndsWithQuestionMark($lines, $number)
+                || self::previousParagraphEndsWithLink($lines, $number)
             ) {
                 return NullViolation::create();
             }
@@ -176,6 +177,27 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
             }
 
             return (bool) preg_match('/\?$/', $lines->current()->clean()->toString());
+        }
+
+        return false;
+    }
+
+    private static function previousParagraphEndsWithLink(Lines $lines, int $number): bool
+    {
+        $lines->seek($number);
+
+        $i = $number;
+
+        while (1 <= $i) {
+            --$i;
+
+            $lines->seek($i);
+
+            if ($lines->current()->isBlank()) {
+                continue;
+            }
+
+            return (bool) preg_match('/`__?$/', $lines->current()->clean()->toString());
         }
 
         return false;
