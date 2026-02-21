@@ -1,4 +1,4 @@
-FROM php:8.5-cli-alpine AS build
+FROM php:8.4-cli-alpine AS build
 
 RUN apk add --no-cache git # required for box to detect the version
 RUN apk add --no-cache icu-dev && docker-php-ext-install -j$(nproc) intl # related to https://github.com/box-project/box/issues/516
