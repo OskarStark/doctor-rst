@@ -32,6 +32,7 @@ jobs:
                 name: "Install PHP with extensions"
                 uses: "shivammathur/setup-php@v2"
                 with:
+                    tools: none
                     coverage: "none"
                     extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"

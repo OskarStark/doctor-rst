@@ -28,7 +28,7 @@ jobs:
                     coverage: "none"
                     extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
-                    tools: composer:2.4.4
+                    tools: none
 
             -   name: "Composer install"
                 uses: "ramsey/composer-install@v3"

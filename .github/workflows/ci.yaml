@@ -30,7 +30,7 @@ jobs:
                   coverage: "none"
                   extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                   php-version: "${{ matrix.php-version }}"
-                  tools: composer:v2
+                  tools: none
 
             -   name: "Composer install"
                 uses: "ramsey/composer-install@v3"
@@ -57,7 +57,7 @@ jobs:
               with:
                   coverage: "none"
                   php-version: ${{ matrix.php-version }}
-                  tools: composer:v2
+                  tools: none
 
             - name: "Composer install"
               uses: "ramsey/composer-install@v3"
@@ -86,7 +86,7 @@ jobs:
               with:
                   coverage: "none"
                   php-version: ${{ matrix.php-version }}
-                  tools: composer:v2
+                  tools: none
 
             - name: "Composer install"
               uses: "ramsey/composer-install@v3"
@@ -116,7 +116,7 @@ jobs:
                   coverage: "none"
                   extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                   php-version: "${{ matrix.php-version }}"
-                  tools: composer:v2
+                  tools: none
 
             -   name: "Composer install"
                 uses: "ramsey/composer-install@v3"
@@ -164,7 +164,7 @@ jobs:
                     coverage: "none"
                     extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
-                    tools: composer:v2
+                    tools: none
 
             -
                 name: "Composer instal"
@@ -198,7 +198,7 @@ jobs:
                     coverage: "none"
                     extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
-                    tools: composer:v2
+                    tools: none
 
             -
                 name: "Composer install"
