@@ -109,7 +109,7 @@ class RulesCommand extends Command
             $this->io->writeln('#### Configuration options');
             $this->io->newLine();
 
-            /** @var array<array{name: string, required: bool, types: array, default: mixed}> $options */
+            /** @var array<array{name: string, required: bool, types: array<string>, default: mixed}> $options */
             $options = [];
 
             $hasAnOptionWithDefaultValue = false;
