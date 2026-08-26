@@ -131,6 +131,12 @@ class RulesCommand extends Command
                         $required = false;
 
                         $default = $introspector->getDefault($option);
+
+                        // Since Symfony 8.0, the introspector returns the raw closure of a
+                        // nested options definition instead of the resolved array.
+                        if ($default instanceof \Closure) {
+                            $default = [];
+                        }
                     }
                 }
 
@@ -254,7 +260,7 @@ class RulesCommand extends Command
         $this->io->writeln(\sprintf(
             '- Rule class: %s',
             $ruleLink,
-        ),);
+        ), );
 
         $testName = \sprintf(
             'App\Tests\Rule\\%sTest',
@@ -270,7 +276,7 @@ class RulesCommand extends Command
             $this->io->writeln(\sprintf(
                 '- Test class: %s',
                 $testLink,
-            ),);
+            ), );
         }
 
         $this->io->newLine();
