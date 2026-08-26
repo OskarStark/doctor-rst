@@ -30,7 +30,7 @@ final class EnsurePhpReferenceSyntaxTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsurePhpReferenceSyntax())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsurePhpReferenceSyntax()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

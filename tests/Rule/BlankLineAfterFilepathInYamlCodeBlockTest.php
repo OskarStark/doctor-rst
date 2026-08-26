@@ -30,7 +30,7 @@ final class BlankLineAfterFilepathInYamlCodeBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInYamlCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new BlankLineAfterFilepathInYamlCodeBlock()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

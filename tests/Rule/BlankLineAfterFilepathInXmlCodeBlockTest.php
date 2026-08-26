@@ -30,7 +30,7 @@ final class BlankLineAfterFilepathInXmlCodeBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new BlankLineAfterFilepathInXmlCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new BlankLineAfterFilepathInXmlCodeBlock()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

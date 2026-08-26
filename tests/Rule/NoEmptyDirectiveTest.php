@@ -43,7 +43,7 @@ final class NoEmptyDirectiveTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoEmptyDirective())
+            new NoEmptyDirective()
                 ->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }

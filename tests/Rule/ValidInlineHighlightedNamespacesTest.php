@@ -30,7 +30,7 @@ final class ValidInlineHighlightedNamespacesTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new ValidInlineHighlightedNamespaces())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new ValidInlineHighlightedNamespaces()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

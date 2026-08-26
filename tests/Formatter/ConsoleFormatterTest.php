@@ -52,7 +52,7 @@ final class ConsoleFormatterTest extends UnitTestCase
             ],
         ]);
 
-        (new ConsoleFormatter())->format($style, $analyzerResult, $analyzeDir, true);
+        new ConsoleFormatter()->format($style, $analyzerResult, $analyzeDir, true);
 
         $expected = <<<'OUTPUT'
 docs/index.rst ✘

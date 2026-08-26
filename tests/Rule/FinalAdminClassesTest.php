@@ -36,7 +36,7 @@ final class FinalAdminClassesTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new FinalAdminClasses())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new FinalAdminClasses()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

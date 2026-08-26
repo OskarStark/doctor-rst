@@ -30,7 +30,7 @@ final class TitleUnderlineLengthMustMatchTitleLengthTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new TitleUnderlineLengthMustMatchTitleLength())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new TitleUnderlineLengthMustMatchTitleLength()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

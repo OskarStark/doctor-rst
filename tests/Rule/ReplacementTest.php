@@ -31,7 +31,7 @@ final class ReplacementTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (Replacement::getList() as $search => $message) {
-            $configuredRules[] = (new Replacement())->configure($search, $message);
+            $configuredRules[] = new Replacement()->configure($search, $message);
         }
 
         $violations = [];

@@ -124,7 +124,7 @@ final class FileCache implements Cache
             serialize([
                 'version' => Application::VERSION,
                 'payload' => $cache,
-            ],),
+            ], ),
         );
     }
 

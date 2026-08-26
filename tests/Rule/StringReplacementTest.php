@@ -33,7 +33,7 @@ final class StringReplacementTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (StringReplacement::getList() as $search => $message) {
-            $configuredRules[] = (new StringReplacement())->configure($search, $message);
+            $configuredRules[] = new StringReplacement()->configure($search, $message);
         }
 
         $violations = [];

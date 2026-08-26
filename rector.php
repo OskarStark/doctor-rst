@@ -14,13 +14,10 @@ declare(strict_types=1);
 use Rector\CodeQuality\Rector\Attribute\SortAttributeNamedArgsRector;
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
 use Rector\CodeQuality\Rector\FuncCall\SortCallLikeNamedArgsRector;
-use Rector\CodeQuality\Rector\If_\CombineIfRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\Cast\RecastingRemovalRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
 use Rector\DeadCode\Rector\MethodCall\RemoveNullArgOnNullDefaultParamRector;
-use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
-use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitSelfCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
 
@@ -61,11 +58,8 @@ return RectorConfig::configure()
         RemoveNullArgOnNullDefaultParamRector::class => [
             __DIR__.'/tests', // Keep explicit null arguments in tests for clarity
         ],
-        AddOverrideAttributeToOverriddenMethodsRector::class,
         LocallyCalledStaticMethodToNonStaticRector::class,
         PreferPHPUnitThisCallRector::class,
-        NullToStrictStringFuncCallArgRector::class, // Avoid redundant casts when value is already a string
-        CombineIfRector::class, // Keep nested ifs for better readability
         RecastingRemovalRector::class, // Keep explicit casts for clarity
     ])
     ->withRules([

@@ -31,7 +31,7 @@ final class VersionaddedDirectiveShouldHaveVersionTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new VersionaddedDirectiveShouldHaveVersion(new VersionParser()))
+            new VersionaddedDirectiveShouldHaveVersion(new VersionParser())
                 ->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }

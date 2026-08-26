@@ -29,7 +29,7 @@ final class NoTypographicQuotesTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoTypographicQuotes())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoTypographicQuotes()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

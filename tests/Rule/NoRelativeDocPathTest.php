@@ -30,7 +30,7 @@ final class NoRelativeDocPathTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoRelativeDocPath())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoRelativeDocPath()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

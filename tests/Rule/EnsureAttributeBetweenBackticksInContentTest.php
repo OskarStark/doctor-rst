@@ -30,7 +30,7 @@ final class EnsureAttributeBetweenBackticksInContentTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsureAttributeBetweenBackticksInContent())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsureAttributeBetweenBackticksInContent()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

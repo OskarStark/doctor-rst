@@ -30,7 +30,7 @@ final class NoBracketsInMethodDirectiveTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoBracketsInMethodDirective())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoBracketsInMethodDirective()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 
