@@ -254,7 +254,7 @@ class RulesCommand extends Command
         $this->io->writeln(\sprintf(
             '- Rule class: %s',
             $ruleLink,
-        ),);
+        ), );
 
         $testName = \sprintf(
             'App\Tests\Rule\\%sTest',
@@ -270,7 +270,7 @@ class RulesCommand extends Command
             $this->io->writeln(\sprintf(
                 '- Test class: %s',
                 $testLink,
-            ),);
+            ), );
         }
 
         $this->io->newLine();

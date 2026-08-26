@@ -61,7 +61,7 @@ final class FileCacheTest extends UnitTestCase
                     'violations' => [],
                 ],
             ],
-        ],);
+        ], );
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
             ->at($this->root);
@@ -104,7 +104,7 @@ final class FileCacheTest extends UnitTestCase
                     'violations' => [],
                 ],
             ],
-        ],);
+        ], );
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
             ->at($this->root);
@@ -131,7 +131,7 @@ final class FileCacheTest extends UnitTestCase
                     'violations' => [],
                 ],
             ],
-        ],);
+        ], );
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
             ->at($this->root);
@@ -153,7 +153,7 @@ final class FileCacheTest extends UnitTestCase
                     'violations' => [],
                 ],
             ],
-        ],);
+        ], );
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
             ->at($this->root);
