@@ -89,15 +89,13 @@ final class BlankLineAfterDirectiveTest extends UnitTestCase
 
         yield [
             NullViolation::create(),
-            new RstSample(
-                <<<'SAMPLE'
+            new RstSample(<<<'SAMPLE'
 .. code-block:: text
     :caption: src/app.js
     :emphasize-lines: 3,11
 
     import {h, render} from 'preact';
-SAMPLE
-            ),
+SAMPLE),
         ];
 
         yield [

@@ -37,9 +37,7 @@ final readonly class RuleName
         Assert::stringNotEmpty($class);
         Assert::notWhitespaceOnly($class);
 
-        return self::fromString(
-            u(substr((string) strrchr($class, '\\'), 1))->snake()->toString(),
-        );
+        return self::fromString(u(substr((string) strrchr($class, '\\'), 1))->snake()->toString());
     }
 
     public static function fromString(string $value): self

@@ -32,9 +32,7 @@ final class XmlHelper
         } elseif (preg_match('/^<!--(.*)/', $string)
             && (
                 ($closed && preg_match('/(.*)-->$/', $string))
-                || (
-                    !$closed && !preg_match('/(.*)-->$/', $string)
-                )
+                || (!$closed && !preg_match('/(.*)-->$/', $string))
             )) {
             return true;
         }

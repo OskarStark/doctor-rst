@@ -17,9 +17,8 @@ use Webmozart\Assert\Assert;
 
 final readonly class LinkUsage
 {
-    private function __construct(
-        private LinkName $name,
-    ) {
+    private function __construct(private LinkName $name)
+    {
     }
 
     public static function fromLine(string $line): self

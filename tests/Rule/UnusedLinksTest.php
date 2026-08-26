@@ -44,67 +44,56 @@ final class UnusedLinksTest extends UnitTestCase
 
         yield [
             NullViolation::create(),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 I am a `Link`_
 
 .. _`Link`: https://example.com
-RST
-            ),
+RST),
         ];
 
         yield [
             NullViolation::create(),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 I am a `Link`_ and `Link2`_
 
 .. _`Link`: https://example.com
 .. _`Link2`: https://example2.com
-RST
-            ),
+RST),
         ];
 
         yield [
             NullViolation::create(),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 I am a `Link`_
 
 .. _Link: https://example.com
-RST
-            ),
+RST),
         ];
 
         yield [
             NullViolation::create(),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 I am a `Link`_ and `Link2`_
 
 .. _Link: https://example.com
 .. _Link2: https://example2.com
-RST
-            ),
+RST),
         ];
 
         yield [
             NullViolation::create(),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 I am `a Link`_, `some other Link`_ and Link2_
 
 .. _a Link: https://example.com
 .. _Link2: https://example2.com
 .. _`some other Link`: https://example3.com
-RST
-            ),
+RST),
         ];
 
         yield [
             NullViolation::create(),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 Date Handling
 ~~~~~~~~~~~~~
 
@@ -113,14 +102,12 @@ date or a date-time into a Unix timestamp; for example ``2016-05-27`` or
 ``2016-05-27T02:59:43.1Z`` (`ISO-8601`_)::
 
 .. _`ISO-8601`: http://www.iso.org/iso/iso8601
-RST
-            ),
+RST),
         ];
 
         yield [
             NullViolation::create(),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 Active Core Members
 ~~~~~~~~~~~~~~~~~~~
 
@@ -198,8 +185,7 @@ Symfony contributions:
 .. _`HeahDude`: https://github.com/HeahDude
 .. _`OskarStark`: https://github.com/OskarStark
 .. _`romainneutron`: https://github.com/romainneutron
-RST
-            ),
+RST),
         ];
     }
 
@@ -212,14 +198,12 @@ RST
                 1,
                 '',
             ),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 I am a `Link`_
 
 .. _`Link`: https://example.com
 .. _`unused`: https://404.com
-RST
-            ),
+RST),
         ];
 
         yield [
@@ -229,14 +213,12 @@ RST
                 1,
                 '',
             ),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 I am a `Link`_
 
 .. _Link: https://example.com
 .. _unused: https://404.com
-RST
-            ),
+RST),
         ];
 
         yield [
@@ -246,16 +228,14 @@ RST
                 1,
                 '',
             ),
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 I am a `Link`_
 
 .. _unused2: https://example.com/foo
 .. _Link: https://example.com
 .. _unused1: https://404.com
 .. _`unused 3`: https://example.org
-RST
-            ),
+RST),
         ];
     }
 }

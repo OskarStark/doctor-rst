@@ -22,7 +22,7 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-final class ValidUseStatementsTests extends UnitTestCase
+final class ValidUseStatementsTest extends UnitTestCase
 {
     #[Test]
     #[DataProvider('checkProvider')]

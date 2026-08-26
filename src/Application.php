@@ -67,7 +67,7 @@ class Application extends BaseApplication
             $fileLoader->load('cache.php');
         }
 
-        $container->compile();
+        $container->compile(true);
 
         return $container;
     }

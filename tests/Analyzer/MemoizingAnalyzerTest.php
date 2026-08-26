@@ -24,12 +24,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 final class MemoizingAnalyzerTest extends UnitTestCase
 {
     /**
-     * @var Analyzer|MockObject
+     * @var Analyzer&MockObject
      */
     private MockObject $analyzer;
 
     /**
-     * @var Cache|MockObject
+     * @var Cache&MockObject
      */
     private MockObject $cache;
     private MemoizingAnalyzer $memoizingAnalyzer;
