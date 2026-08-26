@@ -36,7 +36,7 @@ final class ArgumentVariableMustMatchType extends AbstractRule implements Config
         $resolver
             ->setRequired('arguments')
             ->setAllowedTypes('arguments', 'array')
-            ->setDefault('arguments', static function (OptionsResolver $connResolver): void {
+            ->setOptions('arguments', static function (OptionsResolver $connResolver): void {
                 $connResolver
                     ->setPrototype(true)
                     ->setRequired(['type', 'name']);

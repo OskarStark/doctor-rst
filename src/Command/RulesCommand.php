@@ -131,12 +131,6 @@ class RulesCommand extends Command
                         $required = false;
 
                         $default = $introspector->getDefault($option);
-
-                        // Since Symfony 8.0, the introspector returns the raw closure of a
-                        // nested options definition instead of the resolved array.
-                        if ($default instanceof \Closure) {
-                            $default = [];
-                        }
                     }
                 }
 
