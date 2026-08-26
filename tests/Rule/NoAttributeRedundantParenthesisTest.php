@@ -30,7 +30,7 @@ final class NoAttributeRedundantParenthesisTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoAttributeRedundantParenthesis())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoAttributeRedundantParenthesis()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

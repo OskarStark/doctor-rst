@@ -30,7 +30,7 @@ final class NoBlankLineAfterFilepathInTwigCodeBlockTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoBlankLineAfterFilepathInTwigCodeBlock())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoBlankLineAfterFilepathInTwigCodeBlock()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

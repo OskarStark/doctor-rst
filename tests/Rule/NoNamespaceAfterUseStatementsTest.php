@@ -30,7 +30,7 @@ final class NoNamespaceAfterUseStatementsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoNamespaceAfterUseStatements())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoNamespaceAfterUseStatements()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

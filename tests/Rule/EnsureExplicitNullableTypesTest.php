@@ -31,7 +31,7 @@ final class EnsureExplicitNullableTypesTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsureExplicitNullableTypes())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsureExplicitNullableTypes()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

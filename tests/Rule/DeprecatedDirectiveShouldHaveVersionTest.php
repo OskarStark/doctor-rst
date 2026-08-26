@@ -31,7 +31,7 @@ final class DeprecatedDirectiveShouldHaveVersionTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new DeprecatedDirectiveShouldHaveVersion(new VersionParser()))
+            new DeprecatedDirectiveShouldHaveVersion(new VersionParser())
                 ->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }

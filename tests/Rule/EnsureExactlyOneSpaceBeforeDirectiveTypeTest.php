@@ -31,7 +31,7 @@ final class EnsureExactlyOneSpaceBeforeDirectiveTypeTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsureExactlyOneSpaceBeforeDirectiveType())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsureExactlyOneSpaceBeforeDirectiveType()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

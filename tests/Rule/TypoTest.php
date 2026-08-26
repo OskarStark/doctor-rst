@@ -32,7 +32,7 @@ final class TypoTest extends UnitTestCase
         $configuredRules = [];
 
         foreach (Typo::getList() as $search => $message) {
-            $configuredRules[] = (new Typo())->configure($search, $message);
+            $configuredRules[] = new Typo()->configure($search, $message);
         }
 
         $violations = [];

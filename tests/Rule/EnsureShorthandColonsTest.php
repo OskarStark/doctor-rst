@@ -30,7 +30,7 @@ final class EnsureShorthandColonsTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new EnsureShorthandColons())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new EnsureShorthandColons()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

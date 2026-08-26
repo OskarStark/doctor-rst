@@ -30,7 +30,7 @@ final class NoNonBreakingSpaceTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoNonBreakingSpace())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoNonBreakingSpace()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

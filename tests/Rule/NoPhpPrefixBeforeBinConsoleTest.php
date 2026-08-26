@@ -30,7 +30,7 @@ final class NoPhpPrefixBeforeBinConsoleTest extends UnitTestCase
     {
         self::assertEquals(
             $expected,
-            (new NoPhpPrefixBeforeBinConsole())->check($sample->lines, $sample->lineNumber, 'filename'),
+            new NoPhpPrefixBeforeBinConsole()->check($sample->lines, $sample->lineNumber, 'filename'),
         );
     }
 

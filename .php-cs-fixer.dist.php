@@ -34,6 +34,10 @@ $customRules = [
         ],
     ],
     'no_trailing_whitespace_in_string' => false,
+    // Keep in sync with Rector's NewMethodCallWithoutParenthesesRector, which strips these parentheses.
+    'new_expression_parentheses' => [
+        'use_parentheses' => false,
+    ],
 ];
 
 $ruleSet = Php85::create()->withHeader($header)->withRules(Rules::fromArray(array_merge([
