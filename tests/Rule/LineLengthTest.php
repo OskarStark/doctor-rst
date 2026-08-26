@@ -36,22 +36,20 @@ final class LineLengthTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Line is to long (max 20) currently: 23',
-                    'filename',
-                    1,
-                    'This is a cool sentence',
-                ),
-                20,
-                new RstSample('This is a cool sentence'),
-            ],
-            [
-                NullViolation::create(),
-                20,
-                new RstSample('This is a sentence'),
-            ],
+        yield [
+            Violation::from(
+                'Line is to long (max 20) currently: 23',
+                'filename',
+                1,
+                'This is a cool sentence',
+            ),
+            20,
+            new RstSample('This is a cool sentence'),
+        ];
+        yield [
+            NullViolation::create(),
+            20,
+            new RstSample('This is a sentence'),
         ];
     }
 }

@@ -202,8 +202,6 @@ RST;
 
 RST;
 
-        $invalid_content =
-
         $valid_code_block_after_headline = <<<'RST'
 Creating an ACL and Adding an ACE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -556,6 +554,30 @@ RST,
             NullViolation::create(),
             new RstSample(<<<'RST'
 This is nice PHP code, isn't it?
+
+.. code-block:: php
+
+    echo 'Hello World!';
+RST
+                , 2),
+        ];
+
+        yield 'valid because previous paragraph ends with a named link' => [
+            NullViolation::create(),
+            new RstSample(<<<'RST'
+**Required:** `Brave Search API key`_
+
+.. code-block:: php
+
+    $key = 'my-api-key';
+RST
+                , 2),
+        ];
+
+        yield 'valid because previous paragraph ends with an anonymous link' => [
+            NullViolation::create(),
+            new RstSample(<<<'RST'
+See the `official documentation`__
 
 .. code-block:: php
 

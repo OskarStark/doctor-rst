@@ -36,20 +36,18 @@ final class NoComposerReqTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please "composer require" instead of "composer req"',
-                    'filename',
-                    1,
-                    'composer req symfony/form',
-                ),
-                new RstSample('composer req symfony/form'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('composer require symfony/form'),
-            ],
+        yield [
+            Violation::from(
+                'Please "composer require" instead of "composer req"',
+                'filename',
+                1,
+                'composer req symfony/form',
+            ),
+            new RstSample('composer req symfony/form'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('composer require symfony/form'),
         ];
     }
 }

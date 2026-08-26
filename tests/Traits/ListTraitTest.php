@@ -51,11 +51,9 @@ final class ListTraitTest extends UnitTestCase
     {
         yield [
             false,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 I am just a cool text!
-RST
-            ),
+RST),
         ];
 
         $list_1 = <<<'RST'

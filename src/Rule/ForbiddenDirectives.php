@@ -40,9 +40,10 @@ final class ForbiddenDirectives extends AbstractRule implements Configurable, Li
         $resolver
             ->setRequired('directives')
             ->setAllowedTypes('directives', 'array')
-            ->setNormalizer('directives', static function (Options $options, array $directives): array {
+            ->setNormalizer(
+                'directives',
                 /** @phpstan-ignore-next-line */
-                return \array_map(static function (array|string $directive) {
+                static fn (Options $options, array $directives): array => \array_map(static function (array|string $directive) {
                     /** @var array<array{directive: string, replacements: ?string[]}>|string $directive */
                     if (!\is_array($directive)) {
                         $directive = ['directive' => $directive];
@@ -57,8 +58,8 @@ final class ForbiddenDirectives extends AbstractRule implements Configurable, Li
                     }
 
                     return $directive;
-                }, $directives);
-            })
+                }, $directives),
+            )
             ->setDefault('directives', []);
 
         return $resolver;

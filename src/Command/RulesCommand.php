@@ -57,7 +57,7 @@ class RulesCommand extends Command
         if ([] === $rules) {
             $this->io->warning('No rules available!');
 
-            return (int) Command::FAILURE;
+            return Command::FAILURE;
         }
 
         foreach ($rules as $rule) {
@@ -73,7 +73,7 @@ class RulesCommand extends Command
             $this->rule($rule);
         }
 
-        return (int) Command::SUCCESS;
+        return Command::SUCCESS;
     }
 
     private function rule(Rule $rule): void
@@ -109,7 +109,7 @@ class RulesCommand extends Command
             $this->io->writeln('#### Configuration options');
             $this->io->newLine();
 
-            /** @var array<array{name: string, required: bool, types: array, default: mixed}> $options */
+            /** @var array<array{name: string, required: bool, types: array<string>, default: mixed}> $options */
             $options = [];
 
             $hasAnOptionWithDefaultValue = false;
@@ -152,7 +152,10 @@ class RulesCommand extends Command
                             $default = '';
                         } else {
                             if (\is_array($defaultValue)) {
-                                $defaultValue = '[]';
+                                $defaultValue = \sprintf('[%s]', implode(', ', array_map(
+                                    static fn (mixed $value): string => \is_string($value) ? \sprintf("'%s'", $value) : var_export($value, true),
+                                    $defaultValue,
+                                )));
                             }
 
                             /** @phpstan-ignore-next-line */
@@ -163,7 +166,7 @@ class RulesCommand extends Command
                             '%s | %s | %s | %s',
                             \sprintf('`%s`', $option['name']),
                             \sprintf('`%s`', $option['required'] ? 'true' : 'false'),
-                            \sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
+                            [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`',
                             $default,
                         ));
                     }
@@ -176,7 +179,7 @@ class RulesCommand extends Command
                             '%s | %s | %s',
                             \sprintf('`%s`', $option['name']),
                             \sprintf('`%s`', $option['required'] ? 'true' : 'false'),
-                            \sprintf('%s', [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`'),
+                            [] === $option['types'] ? '' : '`'.implode('`, `', $option['types']).'`',
                         ));
                     }
                 }
@@ -185,7 +188,7 @@ class RulesCommand extends Command
             }
         }
 
-        if ($rule instanceof CheckListRule && !empty($rule::getList())) {
+        if ($rule instanceof CheckListRule && [] !== $rule::getList()) {
             $this->io->writeln('#### Checks');
             $this->io->newLine();
             $this->io->writeln('Pattern | Message');
@@ -204,7 +207,7 @@ class RulesCommand extends Command
             $validExamples[] = $attribute->newInstance()->value;
         }
 
-        if ($validExamples) {
+        if ([] !== $validExamples) {
             $this->renderExamples('##### Valid Examples :+1:', $validExamples);
         }
 
@@ -214,7 +217,7 @@ class RulesCommand extends Command
             $invalidExamples[] = $attribute->newInstance()->value;
         }
 
-        if ($invalidExamples) {
+        if ([] !== $invalidExamples) {
             $this->renderExamples('##### Invalid Examples :-1:', $invalidExamples);
         }
 
@@ -248,12 +251,10 @@ class RulesCommand extends Command
             $classShortName,
         );
         $ruleLink = self::renderGithubLink($className, $classPath);
-        $this->io->writeln(
-            \sprintf(
-                '- Rule class: %s',
-                $ruleLink,
-            ),
-        );
+        $this->io->writeln(\sprintf(
+            '- Rule class: %s',
+            $ruleLink,
+        ),);
 
         $testName = \sprintf(
             'App\Tests\Rule\\%sTest',
@@ -266,12 +267,10 @@ class RulesCommand extends Command
                 $classShortName,
             );
             $testLink = self::renderGithubLink($testName, $testPath);
-            $this->io->writeln(
-                \sprintf(
-                    '- Test class: %s',
-                    $testLink,
-                ),
-            );
+            $this->io->writeln(\sprintf(
+                '- Test class: %s',
+                $testLink,
+            ),);
         }
 
         $this->io->newLine();

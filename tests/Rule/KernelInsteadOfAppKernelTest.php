@@ -36,51 +36,49 @@ final class KernelInsteadOfAppKernelTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
-                    'filename',
-                    1,
-                    'register the bundle in app/AppKernel.php',
-                ),
-                new RstSample('register the bundle in app/AppKernel.php'),
-            ],
-            [
-                Violation::from(
-                    'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
-                    'filename',
-                    1,
-                    'register the bundle in app/AppKernel.php',
-                ),
-                new RstSample('    register the bundle in app/AppKernel.php'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('register the bundle in src/Kernel.php'),
-            ],
-            [
-                Violation::from(
-                    'Please use "Kernel" instead of "AppKernel"',
-                    'filename',
-                    1,
-                    'register the bundle via AppKernel',
-                ),
-                new RstSample('register the bundle via AppKernel'),
-            ],
-            [
-                Violation::from(
-                    'Please use "Kernel" instead of "AppKernel"',
-                    'filename',
-                    1,
-                    'register the bundle via AppKernel',
-                ),
-                new RstSample('    register the bundle via AppKernel'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('register the bundle via Kernel'),
-            ],
+        yield [
+            Violation::from(
+                'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
+                'filename',
+                1,
+                'register the bundle in app/AppKernel.php',
+            ),
+            new RstSample('register the bundle in app/AppKernel.php'),
+        ];
+        yield [
+            Violation::from(
+                'Please use "src/Kernel.php" instead of "app/AppKernel.php"',
+                'filename',
+                1,
+                'register the bundle in app/AppKernel.php',
+            ),
+            new RstSample('    register the bundle in app/AppKernel.php'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('register the bundle in src/Kernel.php'),
+        ];
+        yield [
+            Violation::from(
+                'Please use "Kernel" instead of "AppKernel"',
+                'filename',
+                1,
+                'register the bundle via AppKernel',
+            ),
+            new RstSample('register the bundle via AppKernel'),
+        ];
+        yield [
+            Violation::from(
+                'Please use "Kernel" instead of "AppKernel"',
+                'filename',
+                1,
+                'register the bundle via AppKernel',
+            ),
+            new RstSample('    register the bundle via AppKernel'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('register the bundle via Kernel'),
         ];
     }
 }

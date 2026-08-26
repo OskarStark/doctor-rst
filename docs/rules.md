@@ -31,6 +31,7 @@
 * [ensure_link_definition_contains_valid_url](#ensure_link_definition_contains_valid_url)
 * [ensure_order_of_code_blocks_in_configuration_block](#ensure_order_of_code_blocks_in_configuration_block)
 * [ensure_php_reference_syntax](#ensure_php_reference_syntax)
+* [ensure_shorthand_colons](#ensure_shorthand_colons)
 * [extend_abstract_admin](#extend_abstract_admin)
 * [extend_abstract_controller](#extend_abstract_controller)
 * [extend_controller](#extend_controller)
@@ -76,7 +77,9 @@
 * [no_php_open_tag_in_code_block_php_directive](#no_php_open_tag_in_code_block_php_directive)
 * [no_php_prefix_before_bin_console](#no_php_prefix_before_bin_console)
 * [no_php_prefix_before_composer](#no_php_prefix_before_composer)
+* [no_relative_doc_path](#no_relative_doc_path)
 * [no_space_before_self_xml_closing_tag](#no_space_before_self_xml_closing_tag)
+* [no_standalone_syntax_element](#no_standalone_syntax_element)
 * [no_typographic_quotes](#no_typographic_quotes)
 * [no_unused_inc_files](#no_unused_inc_files)
 * [non_static_phpunit_assertions](#non_static_phpunit_assertions)
@@ -651,6 +654,33 @@ The :class:`Symfony\\AI\\Platform\PlatformInterface` class
 - Rule class: [App\Rule\EnsurePhpReferenceSyntax](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/EnsurePhpReferenceSyntax.php)
 - Test class: [App\Tests\Rule\EnsurePhpReferenceSyntaxTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/EnsurePhpReferenceSyntaxTest.php)
 
+## `ensure_shorthand_colons`
+
+  > _Ensure lines end with `::` (shorthand) if followed by a blank line and an indented block._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+use it as follows::
+
+    $uuidFactory = new UuidFactory();
+```
+
+##### Invalid Examples :-1:
+
+```rst
+use it as follows:
+
+    $uuidFactory = new UuidFactory();
+```
+
+#### References
+
+- Rule class: [App\Rule\EnsureShorthandColons](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/EnsureShorthandColons.php)
+- Test class: [App\Tests\Rule\EnsureShorthandColonsTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/EnsureShorthandColonsTest.php)
+
 ## `extend_abstract_admin`
 
   > _Ensure `AbstractAdmin` and the corresponding namespace `Sonata\AdminBundle\Admin\AbstractAdmin` is used._
@@ -773,6 +803,7 @@ Name | Required
 --- | ---
 `namespace_mapping` | `true` | `array`
 `ignored_paths` | `false` | `array`
+`ignored_namespaces` | `false` | `array`
 
 ##### Valid Examples :+1:
 
@@ -1330,6 +1361,37 @@ php bin/console list
 - Rule class: [App\Rule\NoPhpPrefixBeforeComposer](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoPhpPrefixBeforeComposer.php)
 - Test class: [App\Tests\Rule\NoPhpPrefixBeforeComposerTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoPhpPrefixBeforeComposerTest.php)
 
+## `no_relative_doc_path`
+
+  > _Ensure :doc: directives use absolute paths._
+
+#### Groups [`@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+:doc:`/contributing/code/maintenance`
+```
+
+```rst
+:doc:`File </contributing/code/maintenance>`
+```
+
+##### Invalid Examples :-1:
+
+```rst
+:doc:`maintenance`
+```
+
+```rst
+:doc:`File <maintenance>`
+```
+
+#### References
+
+- Rule class: [App\Rule\NoRelativeDocPath](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoRelativeDocPath.php)
+- Test class: [App\Tests\Rule\NoRelativeDocPathTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoRelativeDocPathTest.php)
+
 ## `no_space_before_self_xml_closing_tag`
 
 #### Groups [`@Sonata`]
@@ -1338,6 +1400,43 @@ php bin/console list
 
 - Rule class: [App\Rule\NoSpaceBeforeSelfXmlClosingTag](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoSpaceBeforeSelfXmlClosingTag.php)
 - Test class: [App\Tests\Rule\NoSpaceBeforeSelfXmlClosingTagTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoSpaceBeforeSelfXmlClosingTagTest.php)
+
+## `no_standalone_syntax_element`
+
+  > _Make sure configured syntax elements are not used alone on a line, prefer the full declaration._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+#### Configuration options
+
+Name | Required | Allowed Types | Default
+--- | --- | --- | ---
+`elements` | `false` | `string[]` | `['::']`
+
+##### Valid Examples :+1:
+
+```rst
+The following example shows the usage:
+
+.. code-block:: php
+
+    $uuidFactory = new UuidFactory();
+```
+
+##### Invalid Examples :-1:
+
+```rst
+The following example shows the usage:
+
+::
+
+    $uuidFactory = new UuidFactory();
+```
+
+#### References
+
+- Rule class: [App\Rule\NoStandaloneSyntaxElement](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoStandaloneSyntaxElement.php)
+- Test class: [App\Tests\Rule\NoStandaloneSyntaxElementTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoStandaloneSyntaxElementTest.php)
 
 ## `no_typographic_quotes`
 
@@ -1793,6 +1892,7 @@ new Uuid::fromString()
 #### References
 
 - Rule class: [App\Rule\ValidUseStatements](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/ValidUseStatements.php)
+- Test class: [App\Tests\Rule\ValidUseStatementsTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/ValidUseStatementsTest.php)
 
 ## `versionadded_directive_major_version`
 

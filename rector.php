@@ -11,55 +11,63 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+use Rector\CodeQuality\Rector\Attribute\SortAttributeNamedArgsRector;
+use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
+use Rector\CodeQuality\Rector\FuncCall\SortCallLikeNamedArgsRector;
+use Rector\CodeQuality\Rector\If_\CombineIfRector;
 use Rector\Config\RectorConfig;
-use Rector\Doctrine\Set\DoctrineSetList;
+use Rector\DeadCode\Rector\Cast\RecastingRemovalRector;
+use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
+use Rector\DeadCode\Rector\MethodCall\RemoveNullArgOnNullDefaultParamRector;
+use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
+use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitSelfCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
-use Rector\PHPUnit\CodeQuality\Rector\ClassMethod\ReplaceTestAnnotationWithPrefixedFunctionRector;
-use Rector\PHPUnit\PHPUnit100\Rector\Class_\StaticDataProviderClassMethodRector;
-use Rector\PHPUnit\Set\PHPUnitSetList;
-use Rector\Set\ValueObject\SetList;
-use Rector\Symfony\Set\SymfonySetList;
-use Rector\ValueObject\PhpVersion;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->parallel();
-    $rectorConfig->paths([
+return RectorConfig::configure()
+    ->withParallel()
+    ->withPaths([
         __DIR__.'/composer-unused.php',
         __DIR__.'/.php-cs-fixer.dist.php',
         __DIR__.'/rector.php',
         __DIR__.'/src',
         __DIR__.'/tests',
-    ]);
-
-    $rectorConfig->phpVersion(PhpVersion::PHP_84);
-    $rectorConfig->importNames();
-    $rectorConfig->importShortClasses(false);
-    $rectorConfig->phpstanConfigs([
+    ])
+    ->withImportNames(importShortClasses: false)
+    ->withPHPStanConfigs([
         getcwd().'/phpstan.neon.dist',
         'vendor/phpstan/phpstan-phpunit/extension.neon',
         'vendor/phpstan/phpstan-webmozart-assert/extension.neon',
-    ]);
-
-    $rectorConfig->sets([
-        SetList::PHP_84,
-        PHPUnitSetList::PHPUNIT_CODE_QUALITY,
-        PHPUnitSetList::PHPUNIT_110,
-        SymfonySetList::SYMFONY_73,
-        SymfonySetList::SYMFONY_CODE_QUALITY,
-        DoctrineSetList::DOCTRINE_CODE_QUALITY,
-    ]);
-
-    $rectorConfig->skip([
+    ])
+    ->withPhpSets()
+    ->withComposerBased(
+        phpunit: true,
+        symfony: true,
+    )
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        earlyReturn: true,
+        phpunitCodeQuality: true,
+        symfonyCodeQuality: true,
+        symfonyConfigs: true,
+    )
+    ->withSkip([
+        SortAttributeNamedArgsRector::class,
+        SortCallLikeNamedArgsRector::class,
+        RemoveUnusedPublicMethodParameterRector::class => [
+            __DIR__.'/src/EventListener', // Keep event args in listeners for consistency
+        ],
+        RemoveNullArgOnNullDefaultParamRector::class => [
+            __DIR__.'/tests', // Keep explicit null arguments in tests for clarity
+        ],
+        AddOverrideAttributeToOverriddenMethodsRector::class,
+        LocallyCalledStaticMethodToNonStaticRector::class,
         PreferPHPUnitThisCallRector::class,
-        ReplaceTestAnnotationWithPrefixedFunctionRector::class,
-        'Rector\Transform\Rector\Assign\PropertyFetchToMethodCallRector', // Deprecated rule in Rector 2.2.6
+        NullToStrictStringFuncCallArgRector::class, // Avoid redundant casts when value is already a string
+        CombineIfRector::class, // Keep nested ifs for better readability
+        RecastingRemovalRector::class, // Keep explicit casts for clarity
+    ])
+    ->withRules([
+        PreferPHPUnitSelfCallRector::class,
     ]);
-
-    $rectorConfig->rule(PreferPHPUnitSelfCallRector::class);
-
-    /**
-     * @see https://github.com/rectorphp/rector-phpunit/blob/main/docs/rector_rules_overview.md#staticdataproviderclassmethodrector
-     */
-    $rectorConfig->rule(StaticDataProviderClassMethodRector::class);
-};

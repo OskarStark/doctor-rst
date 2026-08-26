@@ -3,37 +3,37 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^8.4",
+        "php": "^8.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-mbstring": "*",
         "composer/semver": "^3.4.4",
         "ondram/ci-detector": "^4.2.0",
-        "symfony/config": "^7.4.0",
-        "symfony/console": "^7.4.0",
-        "symfony/dependency-injection": "^7.4.0",
-        "symfony/finder": "^7.4.0",
+        "symfony/config": "^7.4.4",
+        "symfony/console": "^7.4.4",
+        "symfony/dependency-injection": "^7.4.5",
+        "symfony/finder": "^7.4.5",
         "symfony/options-resolver": "^7.4.0",
         "symfony/service-contracts": "^3.6.1",
-        "symfony/string": "^7.4.0",
-        "symfony/yaml": "^7.4.0",
-        "webmozart/assert": "^1.12.1"
+        "symfony/string": "^7.4.4",
+        "symfony/yaml": "^7.4.1",
+        "webmozart/assert": "^2.0"
     },
     "require-dev": {
-        "ergebnis/composer-normalize": "^2.48.2",
+        "ergebnis/composer-normalize": "^2.49.0",
         "ergebnis/data-provider": "^3.6",
-        "ergebnis/php-cs-fixer-config": "^6.57",
-        "friendsofphp/php-cs-fixer": "^3.91.2",
-        "icanhazstring/composer-unused": "^0.9.5",
-        "maglnet/composer-require-checker": "^4.19.0",
+        "ergebnis/php-cs-fixer-config": "^6.59.0",
+        "friendsofphp/php-cs-fixer": "^3.93.1",
+        "icanhazstring/composer-unused": "^0.9.6",
+        "maglnet/composer-require-checker": "^4.20.0",
         "mikey179/vfsstream": "^1.6.12",
         "phpstan/extension-installer": "^1.4.3",
-        "phpstan/phpstan": "^2.1.32",
-        "phpstan/phpstan-phpunit": "^2.0.8",
+        "phpstan/phpstan": "^2.1.38",
+        "phpstan/phpstan-phpunit": "^2.0.12",
         "phpstan/phpstan-webmozart-assert": "^2.0.0",
-        "phpunit/phpunit": "^12.4.5",
-        "rector/rector": "^2.2.11",
-        "symfony/var-dumper": "^7.4.0"
+        "phpunit/phpunit": "^12.5.9",
+        "rector/rector": "^2.3.5",
+        "symfony/var-dumper": "^7.4.4"
     },
     "replace": {
         "paragonie/random_compat": "^2.0",
@@ -49,7 +49,8 @@
         "symfony/polyfill-php81": "*",
         "symfony/polyfill-php82": "*",
         "symfony/polyfill-php83": "*",
-        "symfony/polyfill-php84": "*"
+        "symfony/polyfill-php84": "*",
+        "symfony/polyfill-php85": "*"
     },
     "autoload": {
         "psr-4": {
@@ -68,6 +69,9 @@
         "allow-plugins": {
             "ergebnis/composer-normalize": true,
             "phpstan/extension-installer": true
+        },
+        "audit": {
+            "abandoned": "report"
         },
         "preferred-install": {
             "*": "dist"

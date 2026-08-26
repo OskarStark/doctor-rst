@@ -18,12 +18,12 @@ jobs:
         strategy:
             matrix:
                 php-version:
-                    - "8.4"
+                    - "8.5"
 
         steps:
             -
                 name: "Checkout"
-                uses: "actions/checkout@v6"
+                uses: "actions/checkout@v7"
                 with:
                     ref: "${{ github.head_ref }}"
                     token: "${{ secrets.GITHUB_TOKEN }}"
@@ -38,7 +38,7 @@ jobs:
                     
 
             -   name: "Composer install"
-                uses: "ramsey/composer-install@v3"
+                uses: "ramsey/composer-install@v4"
                 with:
                     composer-options: "--no-scripts"
 
@@ -48,7 +48,7 @@ jobs:
 
             -
                 name: "Commit regenerated docs/rules.md file"
-                uses: "stefanzweifel/git-auto-commit-action@v7.0.0"
+                uses: "stefanzweifel/git-auto-commit-action@v7.2.0"
                 with:
                     branch: "${{ github.head_ref }}"
                     commit_author: "${{ env.COMMITTER_NAME }} <${{ env.COMMITTER_EMAIL }}>"

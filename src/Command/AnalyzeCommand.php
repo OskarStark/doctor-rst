@@ -71,7 +71,7 @@ class AnalyzeCommand extends Command
         if (!$analyzeDir = realpath($dir)) {
             $io->error(\sprintf('Could not find directory: %s', $dir));
 
-            return (int) Command::FAILURE;
+            return Command::FAILURE;
         }
 
         $io->text(\sprintf('Analyze *.rst(.inc) files in: <info>%s</info>', $analyzeDir));
@@ -79,7 +79,7 @@ class AnalyzeCommand extends Command
         if (!is_file($configFile = $analyzeDir.'/.doctor-rst.yaml')) {
             $io->error(\sprintf('Could not find config file: %s', $configFile));
 
-            return (int) Command::FAILURE;
+            return Command::FAILURE;
         }
 
         $io->text(\sprintf('Used config file:             <info>%s</info>', $configFile));
@@ -120,13 +120,13 @@ class AnalyzeCommand extends Command
             $this->rulesConfiguration->excludeRulesForFilePath($filePath, $rules);
         }
 
-        if (!empty($input->getOption('rule') && !empty($input->getOption('group')))) {
+        if ($input->getOption('rule') && !empty($input->getOption('group'))) {
             $io->error('You can only provide "rule" or "group"!');
 
-            return (int) Command::FAILURE;
+            return Command::FAILURE;
         }
 
-        if (\is_array($input->getOption('rule')) && !empty($input->getOption('rule'))) {
+        if (\is_array($input->getOption('rule')) && $input->getOption('rule') !== []) {
             foreach ($input->getOption('rule') as $rule) {
                 /** @var string $rule */
                 $this->rulesConfiguration->addRuleForAll($this->registry->getRule(RuleName::fromString($rule)));
@@ -145,7 +145,7 @@ class AnalyzeCommand extends Command
         if (!$this->rulesConfiguration->hasRulesForAll()) {
             $io->warning('No rules selected!');
 
-            return (int) Command::FAILURE;
+            return Command::FAILURE;
         }
 
         $errorFormat = $input->getOption('error-format');
@@ -166,7 +166,7 @@ class AnalyzeCommand extends Command
             }
         }
 
-        $showValidFiles = $input->getOption('short') ? false : true;
+        $showValidFiles = !(bool) $input->getOption('short');
 
         $finder = new Finder();
         $finder->files()->name(['*.rst', '*.rst.inc'])->in($analyzeDir)->exclude('vendor');

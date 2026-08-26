@@ -126,7 +126,7 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule imp
         if (!$xliff && !$this->equal($codeBlocks, $validOrder) && 1 !== \count($validOrder)) {
             $message = \sprintf(
                 'Please use the following order for your code blocks: "%s"',
-                str_replace('.. code-block:: ', '', implode(', ', $validOrder)),
+                str_replace('.. code-block:: ', '', implode(', ', array_values($validOrder))),
             );
 
             return Violation::from(
@@ -147,7 +147,7 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule imp
         if ($xliff && !$this->equal($codeBlocks, $validXliffOrder) && !$this->equal($codeBlocks, $validOrder)) {
             $message = \sprintf(
                 'Please use the following order for your code blocks: "%s"',
-                str_replace('.. code-block:: ', '', implode(', ', $validXliffOrder)),
+                str_replace('.. code-block:: ', '', implode(', ', array_values($validXliffOrder))),
             );
 
             return Violation::from(
@@ -172,6 +172,9 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule imp
         }
     }
 
+    /**
+     * @return list<string>
+     */
     private static function validOrder(): array
     {
         return [
@@ -185,6 +188,9 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule imp
         ];
     }
 
+    /**
+     * @return list<string>
+     */
     private static function validOrderIncludingXliff(): array
     {
         return [
@@ -196,6 +202,9 @@ final class EnsureOrderOfCodeBlocksInConfigurationBlock extends AbstractRule imp
         ];
     }
 
+    /**
+     * @return list<string>
+     */
     private static function validOrderOnlyPhpSymfonyAndPhpStandalone(): array
     {
         return [

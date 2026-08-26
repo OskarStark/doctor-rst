@@ -28,7 +28,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
     /**
      * @var string[]
      */
-    final public const array ALLOWED_PREVIOUS_DIRECTIVES = [
+    public const array ALLOWED_PREVIOUS_DIRECTIVES = [
         RstParser::DIRECTIVE_CAUTION,
         RstParser::DIRECTIVE_CONFIGURATION_BLOCK,
         RstParser::DIRECTIVE_DEPRECATED,
@@ -66,6 +66,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
             if (self::directAfterHeadline($lines, $number)
                 || self::directAfterTable($lines, $number)
                 || self::previousParagraphEndsWithQuestionMark($lines, $number)
+                || self::previousParagraphEndsWithLink($lines, $number)
             ) {
                 return NullViolation::create();
             }
@@ -133,11 +134,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
                 continue;
             }
 
-            if ($lines->current()->isHeadline()) {
-                return true;
-            }
-
-            return false;
+            return $lines->current()->isHeadline();
         }
 
         return false;
@@ -158,11 +155,7 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
                 continue;
             }
 
-            if (RstParser::isTable($lines->current())) {
-                return true;
-            }
-
-            return false;
+            return RstParser::isTable($lines->current());
         }
 
         return false;
@@ -183,11 +176,28 @@ final class NoExplicitUseOfCodeBlockPhp extends AbstractRule implements LineCont
                 continue;
             }
 
-            if (preg_match('/\?$/', $lines->current()->clean()->toString())) {
-                return true;
+            return (bool) preg_match('/\?$/', $lines->current()->clean()->toString());
+        }
+
+        return false;
+    }
+
+    private static function previousParagraphEndsWithLink(Lines $lines, int $number): bool
+    {
+        $lines->seek($number);
+
+        $i = $number;
+
+        while (1 <= $i) {
+            --$i;
+
+            $lines->seek($i);
+
+            if ($lines->current()->isBlank()) {
+                continue;
             }
 
-            return false;
+            return (bool) preg_match('/`__?$/', $lines->current()->clean()->toString());
         }
 
         return false;

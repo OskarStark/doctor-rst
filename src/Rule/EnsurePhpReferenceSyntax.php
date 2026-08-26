@@ -21,6 +21,7 @@ use App\Value\NullViolation;
 use App\Value\RuleGroup;
 use App\Value\Violation;
 use App\Value\ViolationInterface;
+use Symfony\Component\String\UnicodeString;
 use function Symfony\Component\String\u;
 
 #[Description('Ensure php reference syntax is valid.')]
@@ -78,7 +79,7 @@ final class EnsurePhpReferenceSyntax extends AbstractRule implements LineContent
      * This detects cases like "Symfony\\AI\\Platform\PlatformInterface"
      * where there's a mix of \\ and \.
      */
-    private static function hasInconsistentBackslashes(\Symfony\Component\String\UnicodeString $reference): bool
+    private static function hasInconsistentBackslashes(UnicodeString $reference): bool
     {
         // No backslash at all - consistent
         if (!$reference->containsAny('\\')) {

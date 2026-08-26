@@ -20,12 +20,7 @@ final class InMemoryCache implements Cache
     /**
      * @var array<string, Violation[]>
      */
-    private array $cache;
-
-    public function __construct()
-    {
-        $this->cache = [];
-    }
+    private array $cache = [];
 
     public function has(\SplFileInfo $file, array $rules): bool
     {

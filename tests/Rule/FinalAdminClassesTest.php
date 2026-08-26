@@ -41,33 +41,31 @@ final class FinalAdminClassesTest extends UnitTestCase
     }
 
     /**
-     * @return array<array{0: ViolationInterface, 1: RstSample}>
+     * @return \Iterator<(int|string), array{ViolationInterface, RstSample}>
      */
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please use "final" for Admin class',
-                    'filename',
-                    1,
-                    'class TestAdmin extends AbstractAdmin',
-                ),
-                new RstSample('class TestAdmin extends AbstractAdmin'),
-            ],
-            [
-                Violation::from(
-                    'Please use "final" for Admin class',
-                    'filename',
-                    1,
-                    'class TestAdmin extends AbstractAdmin',
-                ),
-                new RstSample('    class TestAdmin extends AbstractAdmin'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('final class TestAdmin extends AbstractAdmin'),
-            ],
+        yield [
+            Violation::from(
+                'Please use "final" for Admin class',
+                'filename',
+                1,
+                'class TestAdmin extends AbstractAdmin',
+            ),
+            new RstSample('class TestAdmin extends AbstractAdmin'),
+        ];
+        yield [
+            Violation::from(
+                'Please use "final" for Admin class',
+                'filename',
+                1,
+                'class TestAdmin extends AbstractAdmin',
+            ),
+            new RstSample('    class TestAdmin extends AbstractAdmin'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('final class TestAdmin extends AbstractAdmin'),
         ];
     }
 }

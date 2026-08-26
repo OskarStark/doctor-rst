@@ -36,41 +36,39 @@ final class NoBrokenRefDirectiveTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please use correct syntax for :ref: directive',
-                    'filename',
-                    1,
-                    'see ref:`Redis section <messenger-redis-transport>` below',
-                ),
-                new RstSample('see ref:`Redis section <messenger-redis-transport>` below'),
-            ],
-            [
-                Violation::from(
-                    'Please use correct syntax for :ref: directive',
-                    'filename',
-                    1,
-                    'see :ref `Redis section <messenger-redis-transport>` below',
-                ),
-                new RstSample('see :ref `Redis section <messenger-redis-transport>` below'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('see :ref:`Redis section <messenger-redis-transport>` below'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('If you prefer to use'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('Then use the :method:`Symfony\\Component\\Lock\\LockInterface::refresh` method'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('new Link(href: style.css'),
-            ],
+        yield [
+            Violation::from(
+                'Please use correct syntax for :ref: directive',
+                'filename',
+                1,
+                'see ref:`Redis section <messenger-redis-transport>` below',
+            ),
+            new RstSample('see ref:`Redis section <messenger-redis-transport>` below'),
+        ];
+        yield [
+            Violation::from(
+                'Please use correct syntax for :ref: directive',
+                'filename',
+                1,
+                'see :ref `Redis section <messenger-redis-transport>` below',
+            ),
+            new RstSample('see :ref `Redis section <messenger-redis-transport>` below'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('see :ref:`Redis section <messenger-redis-transport>` below'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('If you prefer to use'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('Then use the :method:`Symfony\\Component\\Lock\\LockInterface::refresh` method'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('new Link(href: style.css'),
         ];
     }
 }

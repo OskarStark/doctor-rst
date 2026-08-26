@@ -36,20 +36,18 @@ final class NoFootnotesTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    "Please don't use footnotes as they are not supported",
-                    'filename',
-                    1,
-                    '.. [5] A numerical footnote. Note',
-                ),
-                new RstSample('.. [5] A numerical footnote. Note'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.. _`Symfony`: https://symfony.com'),
-            ],
+        yield [
+            Violation::from(
+                "Please don't use footnotes as they are not supported",
+                'filename',
+                1,
+                '.. [5] A numerical footnote. Note',
+            ),
+            new RstSample('.. [5] A numerical footnote. Note'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.. _`Symfony`: https://symfony.com'),
         ];
     }
 }

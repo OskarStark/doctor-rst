@@ -16,8 +16,7 @@ namespace App\Attribute\Rule;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 class Description
 {
-    public function __construct(
-        public readonly string $value,
-    ) {
+    public function __construct(public readonly string $value)
+    {
     }
 }

@@ -29,17 +29,12 @@ final class XmlHelper
             if (preg_match('/^<!--(.*)/', $string)) {
                 return true;
             }
-        } else {
-            if (preg_match('/^<!--(.*)/', $string)
-                && (
-                    ($closed && preg_match('/(.*)-->$/', $string))
-                    || (
-                        !$closed && !preg_match('/(.*)-->$/', $string)
-                    )
-                )
-            ) {
-                return true;
-            }
+        } elseif (preg_match('/^<!--(.*)/', $string)
+            && (
+                ($closed && preg_match('/(.*)-->$/', $string))
+                || (!$closed && !preg_match('/(.*)-->$/', $string))
+            )) {
+            return true;
         }
 
         return false;

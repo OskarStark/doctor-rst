@@ -52,18 +52,16 @@ final class FileCacheTest extends UnitTestCase
             ->withContent('')
             ->at($this->root);
 
-        $content = serialize(
-            [
-                'version' => Application::VERSION,
-                'payload' => [
-                    $rstFile->url() => [
-                        'hash' => sha1_file($rstFile->url()),
-                        'rules' => sha1(serialize($rules)),
-                        'violations' => [],
-                    ],
+        $content = serialize([
+            'version' => Application::VERSION,
+            'payload' => [
+                $rstFile->url() => [
+                    'hash' => sha1_file($rstFile->url()),
+                    'rules' => sha1(serialize($rules)),
+                    'violations' => [],
                 ],
             ],
-        );
+        ],);
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
             ->at($this->root);
@@ -97,18 +95,16 @@ final class FileCacheTest extends UnitTestCase
             ->withContent('')
             ->at($this->root);
 
-        $content = serialize(
-            [
-                'version' => Application::VERSION,
-                'payload' => [
-                    $rstFile->url() => [
-                        'hash' => 'test',
-                        'rules' => sha1(serialize($rules)),
-                        'violations' => [],
-                    ],
+        $content = serialize([
+            'version' => Application::VERSION,
+            'payload' => [
+                $rstFile->url() => [
+                    'hash' => 'test',
+                    'rules' => sha1(serialize($rules)),
+                    'violations' => [],
                 ],
             ],
-        );
+        ],);
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
             ->at($this->root);
@@ -126,18 +122,16 @@ final class FileCacheTest extends UnitTestCase
             ->withContent('')
             ->at($this->root);
 
-        $content = serialize(
-            [
-                'version' => Application::VERSION,
-                'payload' => [
-                    $rstFile->url() => [
-                        'hash' => sha1_file($rstFile->url()),
-                        'rules' => 'test',
-                        'violations' => [],
-                    ],
+        $content = serialize([
+            'version' => Application::VERSION,
+            'payload' => [
+                $rstFile->url() => [
+                    'hash' => sha1_file($rstFile->url()),
+                    'rules' => 'test',
+                    'violations' => [],
                 ],
             ],
-        );
+        ],);
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
             ->at($this->root);
@@ -150,18 +144,16 @@ final class FileCacheTest extends UnitTestCase
     #[Test]
     public function unparsedFilesWillDeletedFromCacheFile(): void
     {
-        $content = serialize(
-            [
-                'version' => Application::VERSION,
-                'payload' => [
-                    'doc.rst' => [
-                        'hash' => 'test',
-                        'rules' => 'test',
-                        'violations' => [],
-                    ],
+        $content = serialize([
+            'version' => Application::VERSION,
+            'payload' => [
+                'doc.rst' => [
+                    'hash' => 'test',
+                    'rules' => 'test',
+                    'violations' => [],
                 ],
             ],
-        );
+        ],);
         $cacheFile = vfsStream::newFile('.doctor-rst.cache')
             ->withContent($content)
             ->at($this->root);

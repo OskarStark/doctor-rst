@@ -35,41 +35,39 @@ final class YamlInsteadOfYmlSuffixTest extends UnitTestCase
     }
 
     /**
-     * @return array<array{0: ViolationInterface, 1: RstSample}>
+     * @return \Iterator<(int|string), array{ViolationInterface, RstSample}>
      */
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"',
-                    'filename',
-                    1,
-                    '.. code-block:: yml',
-                ),
-                new RstSample('.. code-block:: yml'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.. code-block:: yaml'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('.travis.yml'),
-            ],
-            [
-                Violation::from(
-                    'Please use ".yaml" instead of ".yml"',
-                    'filename',
-                    1,
-                    'Register your service in services.yml file',
-                ),
-                new RstSample('Register your service in services.yml file'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('Register your service in services.yaml file'),
-            ],
+        yield [
+            Violation::from(
+                'Please use ".. code-block:: yaml" instead of ".. code-block:: yml"',
+                'filename',
+                1,
+                '.. code-block:: yml',
+            ),
+            new RstSample('.. code-block:: yml'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.. code-block:: yaml'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('.travis.yml'),
+        ];
+        yield [
+            Violation::from(
+                'Please use ".yaml" instead of ".yml"',
+                'filename',
+                1,
+                'Register your service in services.yml file',
+            ),
+            new RstSample('Register your service in services.yml file'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('Register your service in services.yaml file'),
         ];
     }
 }

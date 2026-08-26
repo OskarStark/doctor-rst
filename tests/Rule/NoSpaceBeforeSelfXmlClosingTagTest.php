@@ -36,37 +36,35 @@ final class NoSpaceBeforeSelfXmlClosingTagTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please remove space before "/>"',
-                    'filename',
-                    1,
-                    '<argument type="service" id="sonata.admin.search.handler" />',
-                ),
-                new RstSample('<argument type="service" id="sonata.admin.search.handler" />'),
-            ],
-            [
-                Violation::from(
-                    'Please remove space before "/>"',
-                    'filename',
-                    1,
-                    '<argument />',
-                ),
-                new RstSample('<argument />'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('/>'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('<argument type="service" id="sonata.admin.search.handler"/>'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('<br/>'),
-            ],
+        yield [
+            Violation::from(
+                'Please remove space before "/>"',
+                'filename',
+                1,
+                '<argument type="service" id="sonata.admin.search.handler" />',
+            ),
+            new RstSample('<argument type="service" id="sonata.admin.search.handler" />'),
+        ];
+        yield [
+            Violation::from(
+                'Please remove space before "/>"',
+                'filename',
+                1,
+                '<argument />',
+            ),
+            new RstSample('<argument />'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('/>'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('<argument type="service" id="sonata.admin.search.handler"/>'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('<br/>'),
         ];
     }
 }

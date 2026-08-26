@@ -135,17 +135,7 @@ trait DirectiveTrait
             ) {
                 if (RstParser::directiveIs($currentLine, $directive)) {
                     if (null !== $directiveTypes) {
-                        $found = false;
-
-                        foreach ($directiveTypes as $type) {
-                            if (RstParser::codeBlockDirectiveIsTypeOf($currentLine, $type)) {
-                                $found = true;
-
-                                break;
-                            }
-                        }
-
-                        return $found;
+                        return array_any($directiveTypes, static fn ($type) => RstParser::codeBlockDirectiveIsTypeOf($currentLine, $type));
                     }
 
                     return true;
@@ -199,17 +189,7 @@ trait DirectiveTrait
                 ))
             ) {
                 if (null !== $directiveTypes) {
-                    $found = false;
-
-                    foreach ($directiveTypes as $type) {
-                        if (RstParser::codeBlockDirectiveIsTypeOf($lines->current(), $type)) {
-                            $found = true;
-
-                            break;
-                        }
-                    }
-
-                    return $found;
+                    return array_any($directiveTypes, static fn ($type) => RstParser::codeBlockDirectiveIsTypeOf($lines->current(), $type));
                 }
 
                 return true;

@@ -175,11 +175,7 @@ final class Indention extends AbstractRule implements Configurable, LineContentR
             $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention) {
-                if (XmlHelper::isComment($lines->current(), false)) {
-                    return true;
-                }
-
-                return false;
+                return XmlHelper::isComment($lines->current(), false);
             }
         }
 
@@ -210,11 +206,7 @@ final class Indention extends AbstractRule implements Configurable, LineContentR
             $lineIndention = $lines->current()->indention();
 
             if ($lineIndention < $currentIndention) {
-                if (TwigHelper::isComment($lines->current(), false)) {
-                    return true;
-                }
-
-                return false;
+                return TwigHelper::isComment($lines->current(), false);
             }
         }
 

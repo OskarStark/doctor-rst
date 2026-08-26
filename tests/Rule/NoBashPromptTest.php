@@ -36,54 +36,52 @@ final class NoBashPromptTest extends UnitTestCase
 
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please remove the "$" prefix in .. code-block:: directive',
-                    'filename',
-                    1,
-                    '$ composer install sonata-project/admin-bundle',
-                ),
-                new RstSample([
-                    '.. code-block:: bash',
-                    '',
-                    '    $ composer install sonata-project/admin-bundle',
-                ]),
-            ],
-            [
-                Violation::from(
-                    'Please remove the "$" prefix in .. code-block:: directive',
-                    'filename',
-                    1,
-                    '$ composer install sonata-project/admin-bundle',
-                ),
-                new RstSample([
-                    '.. code-block:: shell',
-                    '',
-                    '    $ composer install sonata-project/admin-bundle',
-                ]),
-            ],
-            [
-                Violation::from(
-                    'Please remove the "$" prefix in .. code-block:: directive',
-                    'filename',
-                    1,
-                    '$ composer install sonata-project/admin-bundle',
-                ),
-                new RstSample([
-                    '.. code-block:: terminal',
-                    '',
-                    '    $ composer install sonata-project/admin-bundle',
-                ]),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('$ composer install sonata-project/admin-bundle'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('composer install sonata-project/admin-bundle'),
-            ],
+        yield [
+            Violation::from(
+                'Please remove the "$" prefix in .. code-block:: directive',
+                'filename',
+                1,
+                '$ composer install sonata-project/admin-bundle',
+            ),
+            new RstSample([
+                '.. code-block:: bash',
+                '',
+                '    $ composer install sonata-project/admin-bundle',
+            ]),
+        ];
+        yield [
+            Violation::from(
+                'Please remove the "$" prefix in .. code-block:: directive',
+                'filename',
+                1,
+                '$ composer install sonata-project/admin-bundle',
+            ),
+            new RstSample([
+                '.. code-block:: shell',
+                '',
+                '    $ composer install sonata-project/admin-bundle',
+            ]),
+        ];
+        yield [
+            Violation::from(
+                'Please remove the "$" prefix in .. code-block:: directive',
+                'filename',
+                1,
+                '$ composer install sonata-project/admin-bundle',
+            ),
+            new RstSample([
+                '.. code-block:: terminal',
+                '',
+                '    $ composer install sonata-project/admin-bundle',
+            ]),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('$ composer install sonata-project/admin-bundle'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('composer install sonata-project/admin-bundle'),
         ];
     }
 }

@@ -13,7 +13,10 @@ declare(strict_types=1);
 
 use Ergebnis\PhpCsFixer\Config\Factory;
 use Ergebnis\PhpCsFixer\Config\Rules;
-use Ergebnis\PhpCsFixer\Config\RuleSet\Php84;
+use Ergebnis\PhpCsFixer\Config\RuleSet\Php85;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 
 $header = <<<'HEADER'
 This file is part of DOCtor-RST.
@@ -33,7 +36,7 @@ $customRules = [
     'no_trailing_whitespace_in_string' => false,
 ];
 
-$ruleSet = Php84::create()->withHeader($header)->withRules(Rules::fromArray(array_merge([
+$ruleSet = Php85::create()->withHeader($header)->withRules(Rules::fromArray(array_merge([
     'blank_line_before_statement' => [
         'statements' => [
             'break',
@@ -93,9 +96,9 @@ $ruleSet = Php84::create()->withHeader($header)->withRules(Rules::fromArray(arra
     'ordered_attributes' => [
         'sort_algorithm' => 'custom',
         'order' => [
-            'PHPUnit\\Framework\\Attributes\\Test',
-            'PHPUnit\\Framework\\Attributes\\Testdox',
-            'PHPUnit\\Framework\\Attributes\\DataProvider',
+            Test::class,
+            TestDox::class,
+            DataProvider::class,
         ],
     ],
 ], $customRules)));

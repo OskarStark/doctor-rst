@@ -23,9 +23,6 @@ use App\Value\ViolationInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 
-/**
- * @no-named-arguments
- */
 final class NoEmptyDirectiveTest extends UnitTestCase
 {
     private const array DIRECTIVES_REQUIRING_CONTENT = [

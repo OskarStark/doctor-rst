@@ -30,9 +30,8 @@ use Composer\Semver\VersionParser;
 #[InvalidExample('.. versionadded:: foo-bar')]
 final class VersionaddedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
 {
-    public function __construct(
-        private readonly VersionParser $versionParser,
-    ) {
+    public function __construct(private readonly VersionParser $versionParser)
+    {
     }
 
     public static function getGroups(): array

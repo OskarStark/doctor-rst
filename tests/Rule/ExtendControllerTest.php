@@ -35,63 +35,61 @@ final class ExtendControllerTest extends UnitTestCase
     }
 
     /**
-     * @return array<array{0: ViolationInterface, 1: RstSample}>
+     * @return \Iterator<(int|string), array{ViolationInterface, RstSample}>
      */
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please extend Controller instead of AbstractController',
-                    'filename',
-                    1,
-                    'class TestController extends AbstractController',
-                ),
-                new RstSample('class TestController extends AbstractController'),
-            ],
-            [
-                Violation::from(
-                    'Please extend Controller instead of AbstractController',
-                    'filename',
-                    1,
-                    'class TestController extends AbstractController',
-                ),
-                new RstSample('    class TestController extends AbstractController'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('class TestController extends Controller'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('    class TestController extends Controller'),
-            ],
-            [
-                Violation::from(
-                    'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
-                    'filename',
-                    1,
-                    'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;',
-                ),
-                new RstSample('use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
-            ],
-            [
-                Violation::from(
-                    'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
-                    'filename',
-                    1,
-                    'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;',
-                ),
-                new RstSample('    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('use Symfony\Bundle\FrameworkBundle\Controller\Controller;'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('    use Symfony\Bundle\FrameworkBundle\Controller\Controller;'),
-            ],
+        yield [
+            Violation::from(
+                'Please extend Controller instead of AbstractController',
+                'filename',
+                1,
+                'class TestController extends AbstractController',
+            ),
+            new RstSample('class TestController extends AbstractController'),
+        ];
+        yield [
+            Violation::from(
+                'Please extend Controller instead of AbstractController',
+                'filename',
+                1,
+                'class TestController extends AbstractController',
+            ),
+            new RstSample('    class TestController extends AbstractController'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('class TestController extends Controller'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('    class TestController extends Controller'),
+        ];
+        yield [
+            Violation::from(
+                'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
+                'filename',
+                1,
+                'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;',
+            ),
+            new RstSample('use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
+        ];
+        yield [
+            Violation::from(
+                'Please use "Symfony\Bundle\FrameworkBundle\Controller\Controller" instead of "Symfony\Bundle\FrameworkBundle\Controller\AbstractController"',
+                'filename',
+                1,
+                'use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;',
+            ),
+            new RstSample('    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('use Symfony\Bundle\FrameworkBundle\Controller\Controller;'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('    use Symfony\Bundle\FrameworkBundle\Controller\Controller;'),
         ];
     }
 }

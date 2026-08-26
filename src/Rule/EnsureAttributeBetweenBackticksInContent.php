@@ -44,6 +44,11 @@ final class EnsureAttributeBetweenBackticksInContent extends AbstractRule implem
         }
 
         if ($line->raw()->match('/(?<!`)#\[[^\]]*\](?!`)/')) {
+            // Skip if the attribute is inside a :ref: directive where backticks cannot be used
+            if ($line->raw()->match('/:ref:`[^`]*#\[[^\]]*\][^`]*`/')) {
+                return NullViolation::create();
+            }
+
             return Violation::from(
                 \sprintf('Please ensure to use backticks "%s"', $line->raw()->toString()),
                 $filename,

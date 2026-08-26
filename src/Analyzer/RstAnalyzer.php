@@ -33,7 +33,7 @@ final class RstAnalyzer implements Analyzer
         $realpath = $file->getRealPath();
 
         if (false === $realpath) {
-            throw new \RuntimeException(\sprintf('Cannot get real path for file: %s', (string) $file->getPathname()));
+            throw new \RuntimeException(\sprintf('Cannot get real path for file: %s', $file->getPathname()));
         }
 
         $content = file($realpath);

@@ -18,10 +18,7 @@ abstract class CheckListRule extends AbstractRule
     public string $search;
     public string $message;
 
-    /**
-     * @return static
-     */
-    public function configure(string $pattern, ?string $message): self
+    public function configure(string $pattern, ?string $message): static
     {
         $this->search = $pattern;
         $this->message = $message ?? static::getDefaultMessage();

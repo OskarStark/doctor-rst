@@ -26,9 +26,8 @@ final class DeprecatedDirectiveMajorVersion extends AbstractRule implements Conf
 {
     private int $majorVersion;
 
-    public function __construct(
-        private readonly VersionParser $versionParser,
-    ) {
+    public function __construct(private readonly VersionParser $versionParser)
+    {
     }
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver

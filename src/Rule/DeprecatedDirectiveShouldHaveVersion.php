@@ -30,9 +30,8 @@ use Composer\Semver\VersionParser;
 #[InvalidExample('.. deprecated:: foo-bar')]
 final class DeprecatedDirectiveShouldHaveVersion extends AbstractRule implements LineContentRule
 {
-    public function __construct(
-        private readonly VersionParser $versionParser,
-    ) {
+    public function __construct(private readonly VersionParser $versionParser)
+    {
     }
 
     public static function getGroups(): array

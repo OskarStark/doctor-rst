@@ -35,24 +35,22 @@ final class ExtensionXlfInsteadOfXliffTest extends UnitTestCase
     }
 
     /**
-     * @return array<array{0: ViolationInterface, 1: RstSample}>
+     * @return \Iterator<(int|string), array{ViolationInterface, RstSample}>
      */
     public static function checkProvider(): iterable
     {
-        yield from [
-            [
-                Violation::from(
-                    'Please use ".xlf" extension instead of ".xliff"',
-                    'filename',
-                    1,
-                    'messages.xliff',
-                ),
-                new RstSample('messages.xliff'),
-            ],
-            [
-                NullViolation::create(),
-                new RstSample('messages.xlf'),
-            ],
+        yield [
+            Violation::from(
+                'Please use ".xlf" extension instead of ".xliff"',
+                'filename',
+                1,
+                'messages.xliff',
+            ),
+            new RstSample('messages.xliff'),
+        ];
+        yield [
+            NullViolation::create(),
+            new RstSample('messages.xlf'),
         ];
     }
 }

@@ -42,7 +42,7 @@ final class TitleUnderlineLengthMustMatchTitleLength extends AbstractRule implem
 
         if ($lines->valid()
             && !$lines->current()->isBlank()
-            && !(mb_strlen($lines->current()->clean()->toString()) === $headLineLength)
+            && mb_strlen($lines->current()->clean()->toString()) !== $headLineLength
         ) {
             return Violation::from(
                 \sprintf(
