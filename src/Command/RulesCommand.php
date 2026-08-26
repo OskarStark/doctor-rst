@@ -152,7 +152,10 @@ class RulesCommand extends Command
                             $default = '';
                         } else {
                             if (\is_array($defaultValue)) {
-                                $defaultValue = '[]';
+                                $defaultValue = \sprintf('[%s]', implode(', ', array_map(
+                                    static fn (mixed $value): string => \is_string($value) ? \sprintf("'%s'", $value) : var_export($value, true),
+                                    $defaultValue,
+                                )));
                             }
 
                             /** @phpstan-ignore-next-line */

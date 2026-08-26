@@ -79,6 +79,7 @@
 * [no_php_prefix_before_composer](#no_php_prefix_before_composer)
 * [no_relative_doc_path](#no_relative_doc_path)
 * [no_space_before_self_xml_closing_tag](#no_space_before_self_xml_closing_tag)
+* [no_standalone_syntax_element](#no_standalone_syntax_element)
 * [no_typographic_quotes](#no_typographic_quotes)
 * [non_static_phpunit_assertions](#non_static_phpunit_assertions)
 * [only_backslashes_in_namespace_in_php_code_block](#only_backslashes_in_namespace_in_php_code_block)
@@ -1398,6 +1399,43 @@ php bin/console list
 
 - Rule class: [App\Rule\NoSpaceBeforeSelfXmlClosingTag](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoSpaceBeforeSelfXmlClosingTag.php)
 - Test class: [App\Tests\Rule\NoSpaceBeforeSelfXmlClosingTagTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoSpaceBeforeSelfXmlClosingTagTest.php)
+
+## `no_standalone_syntax_element`
+
+  > _Make sure configured syntax elements are not used alone on a line, prefer the full declaration._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+#### Configuration options
+
+Name | Required | Allowed Types | Default
+--- | --- | --- | ---
+`elements` | `false` | `string[]` | `['::']`
+
+##### Valid Examples :+1:
+
+```rst
+The following example shows the usage:
+
+.. code-block:: php
+
+    $uuidFactory = new UuidFactory();
+```
+
+##### Invalid Examples :-1:
+
+```rst
+The following example shows the usage:
+
+::
+
+    $uuidFactory = new UuidFactory();
+```
+
+#### References
+
+- Rule class: [App\Rule\NoStandaloneSyntaxElement](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/NoStandaloneSyntaxElement.php)
+- Test class: [App\Tests\Rule\NoStandaloneSyntaxElementTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/NoStandaloneSyntaxElementTest.php)
 
 ## `no_typographic_quotes`
 
