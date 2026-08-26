@@ -13,22 +13,16 @@ declare(strict_types=1);
 
 use Rector\CodeQuality\Rector\Attribute\SortAttributeNamedArgsRector;
 use Rector\CodeQuality\Rector\ClassMethod\LocallyCalledStaticMethodToNonStaticRector;
-use Rector\CodeQuality\Rector\FuncCall\SimplifyRegexPatternRector;
 use Rector\CodeQuality\Rector\FuncCall\SortCallLikeNamedArgsRector;
 use Rector\CodeQuality\Rector\If_\CombineIfRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\Cast\RecastingRemovalRector;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPublicMethodParameterRector;
 use Rector\DeadCode\Rector\MethodCall\RemoveNullArgOnNullDefaultParamRector;
-use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
-use Rector\EarlyReturn\Rector\Return_\ReturnBinaryOrToEarlyReturnRector;
 use Rector\Php81\Rector\FuncCall\NullToStrictStringFuncCallArgRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitSelfCallRector;
 use Rector\PHPUnit\CodeQuality\Rector\Class_\PreferPHPUnitThisCallRector;
-use Rector\PHPUnit\PHPUnit100\Rector\Class_\StaticDataProviderClassMethodRector;
-use Rector\Strict\Rector\Empty_\DisallowedEmptyRuleFixerRector;
-use Rector\Symfony\CodeQuality\Rector\Class_\ControllerMethodInjectionToConstructorRector;
 
 return RectorConfig::configure()
     ->withParallel()
@@ -61,8 +55,6 @@ return RectorConfig::configure()
     ->withSkip([
         SortAttributeNamedArgsRector::class,
         SortCallLikeNamedArgsRector::class,
-        ControllerMethodInjectionToConstructorRector::class, // Route parameters should stay as action parameters, not constructor
-        SimplifyRegexPatternRector::class, // Keep explicit regex patterns for better readability
         RemoveUnusedPublicMethodParameterRector::class => [
             __DIR__.'/src/EventListener', // Keep event args in listeners for consistency
         ],
@@ -73,13 +65,9 @@ return RectorConfig::configure()
         LocallyCalledStaticMethodToNonStaticRector::class,
         PreferPHPUnitThisCallRector::class,
         NullToStrictStringFuncCallArgRector::class, // Avoid redundant casts when value is already a string
-        ReturnBinaryOrToEarlyReturnRector::class, // Keep combined conditions readable instead of splitting into multiple returns
-        ChangeOrIfContinueToMultiContinueRector::class, // Keep combined conditions with continue readable
         CombineIfRector::class, // Keep nested ifs for better readability
         RecastingRemovalRector::class, // Keep explicit casts for clarity
-        DisallowedEmptyRuleFixerRector::class, // Keep empty() for readability
     ])
     ->withRules([
         PreferPHPUnitSelfCallRector::class,
-        StaticDataProviderClassMethodRector::class,
     ]);

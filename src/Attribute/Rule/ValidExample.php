@@ -16,8 +16,7 @@ namespace App\Attribute\Rule;
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
 class ValidExample
 {
-    public function __construct(
-        public readonly string $value,
-    ) {
+    public function __construct(public readonly string $value)
+    {
     }
 }

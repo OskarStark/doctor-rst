@@ -135,9 +135,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
     #[Test]
     public function invalidOptionType(): void
     {
-        $this->expectExceptionObject(
-            new InvalidOptionsException('The option "directives" with value ".. caution::" is expected to be of type "array", but is of type "string".'),
-        );
+        $this->expectExceptionObject(new InvalidOptionsException('The option "directives" with value ".. caution::" is expected to be of type "array", but is of type "string".'));
 
         $rule = new ForbiddenDirectives();
         $rule->setOptions([
@@ -148,9 +146,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
     #[Test]
     public function invalidDirective(): void
     {
-        $this->expectExceptionObject(
-            new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value'),
-        );
+        $this->expectExceptionObject(new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value'));
 
         $rule = new ForbiddenDirectives();
         $rule->setOptions([
@@ -166,9 +162,7 @@ final class ForbiddenDirectivesTest extends UnitTestCase
     #[Test]
     public function missingDirective(): void
     {
-        $this->expectExceptionObject(
-            new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value'),
-        );
+        $this->expectExceptionObject(new InvalidOptionsException('A directive in "directives" is invalid. It needs at least a "directive" key with a string value'));
 
         $rule = new ForbiddenDirectives();
         $rule->setOptions([

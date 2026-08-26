@@ -251,12 +251,10 @@ class RulesCommand extends Command
             $classShortName,
         );
         $ruleLink = self::renderGithubLink($className, $classPath);
-        $this->io->writeln(
-            \sprintf(
-                '- Rule class: %s',
-                $ruleLink,
-            ),
-        );
+        $this->io->writeln(\sprintf(
+            '- Rule class: %s',
+            $ruleLink,
+        ),);
 
         $testName = \sprintf(
             'App\Tests\Rule\\%sTest',
@@ -269,12 +267,10 @@ class RulesCommand extends Command
                 $classShortName,
             );
             $testLink = self::renderGithubLink($testName, $testPath);
-            $this->io->writeln(
-                \sprintf(
-                    '- Test class: %s',
-                    $testLink,
-                ),
-            );
+            $this->io->writeln(\sprintf(
+                '- Test class: %s',
+                $testLink,
+            ),);
         }
 
         $this->io->newLine();

@@ -146,9 +146,7 @@ final class ArgumentVariableMustMatchTypeTest extends UnitTestCase
     #[Test]
     public function invalidOptionType(): void
     {
-        $this->expectExceptionObject(
-            new InvalidOptionsException('The nested option "arguments" with value "foo" is expected to be of type array, but is of type "string".'),
-        );
+        $this->expectExceptionObject(new InvalidOptionsException('The nested option "arguments" with value "foo" is expected to be of type array, but is of type "string".'));
 
         $rule = new ArgumentVariableMustMatchType();
         $rule->setOptions([
@@ -159,9 +157,7 @@ final class ArgumentVariableMustMatchTypeTest extends UnitTestCase
     #[Test]
     public function invalidOptionValue(): void
     {
-        $this->expectExceptionObject(
-            new UndefinedOptionsException('The option "arguments[0][foo]" does not exist. Defined options are: "name", "type".'),
-        );
+        $this->expectExceptionObject(new UndefinedOptionsException('The option "arguments[0][foo]" does not exist. Defined options are: "name", "type".'));
 
         $rule = new ArgumentVariableMustMatchType();
         $rule->setOptions([

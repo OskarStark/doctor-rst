@@ -1880,6 +1880,7 @@ new Uuid::fromString()
 #### References
 
 - Rule class: [App\Rule\ValidUseStatements](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/ValidUseStatements.php)
+- Test class: [App\Tests\Rule\ValidUseStatementsTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/ValidUseStatementsTest.php)
 
 ## `versionadded_directive_major_version`
 

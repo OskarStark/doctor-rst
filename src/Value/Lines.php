@@ -20,9 +20,8 @@ final class Lines implements \SeekableIterator
     /**
      * @param Line[] $array
      */
-    private function __construct(
-        private array $array,
-    ) {
+    private function __construct(private array $array)
+    {
     }
 
     public function __clone()

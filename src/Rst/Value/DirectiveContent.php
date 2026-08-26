@@ -15,11 +15,10 @@ namespace App\Rst\Value;
 
 final class DirectiveContent
 {
-    public array $cleaned = [];
+    public array $cleaned;
 
-    public function __construct(
-        public readonly array $raw,
-    ) {
+    public function __construct(public readonly array $raw)
+    {
         $cleaned = [];
 
         // remove entries in the array which equals an empty string, but only at the start and at the end

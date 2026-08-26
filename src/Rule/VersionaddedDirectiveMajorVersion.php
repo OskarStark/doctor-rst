@@ -26,9 +26,8 @@ final class VersionaddedDirectiveMajorVersion extends AbstractRule implements Co
 {
     private int $majorVersion;
 
-    public function __construct(
-        private readonly VersionParser $versionParser,
-    ) {
+    public function __construct(private readonly VersionParser $versionParser)
+    {
     }
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver

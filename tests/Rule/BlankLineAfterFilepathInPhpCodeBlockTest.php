@@ -47,53 +47,45 @@ final class BlankLineAfterFilepathInPhpCodeBlockTest extends UnitTestCase
                     3,
                     '// src/Handler/Collection.php',
                 ),
-                new RstSample(
-                    [
-                        $codeBlock,
-                        '',
-                        '    // src/Handler/Collection.php',
-                        '    namespace App\\Handler;',
-                    ],
-                ),
+                new RstSample([
+                    $codeBlock,
+                    '',
+                    '    // src/Handler/Collection.php',
+                    '    namespace App\\Handler;',
+                ], ),
             ];
 
             yield [
                 NullViolation::create(),
-                new RstSample(
-                    [
-                        $codeBlock,
-                        '',
-                        '    // src/Handler/Collection.php',
-                        '',
-                        '    namespace App\\Handler;',
-                    ],
-                ),
+                new RstSample([
+                    $codeBlock,
+                    '',
+                    '    // src/Handler/Collection.php',
+                    '',
+                    '    namespace App\\Handler;',
+                ], ),
             ];
 
             yield [
                 NullViolation::create(),
-                new RstSample(
-                    [
-                        $codeBlock,
-                        '',
-                        '    // src/Handler/Collection.php',
-                        '    // a comment',
-                        '    namespace App\\Handler;',
-                    ],
-                ),
+                new RstSample([
+                    $codeBlock,
+                    '',
+                    '    // src/Handler/Collection.php',
+                    '    // a comment',
+                    '    namespace App\\Handler;',
+                ], ),
             ];
 
             yield [
                 NullViolation::create(),
-                new RstSample(
-                    [
-                        $codeBlock,
-                        '',
-                        '    // src/Handler/Collection.php',
-                        '    # a comment',
-                        '    namespace App\\Handler;',
-                    ],
-                ),
+                new RstSample([
+                    $codeBlock,
+                    '',
+                    '    // src/Handler/Collection.php',
+                    '    # a comment',
+                    '    namespace App\\Handler;',
+                ], ),
             ];
         }
 

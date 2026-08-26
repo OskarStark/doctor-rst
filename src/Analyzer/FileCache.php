@@ -121,12 +121,10 @@ final class FileCache implements Cache
 
         file_put_contents(
             $this->cacheFile,
-            serialize(
-                [
-                    'version' => Application::VERSION,
-                    'payload' => $cache,
-                ],
-            ),
+            serialize([
+                'version' => Application::VERSION,
+                'payload' => $cache,
+            ],),
         );
     }
 

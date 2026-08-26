@@ -227,12 +227,10 @@ RST
         yield 'list item (#) first line' => [
             NullViolation::create(),
             4,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 #. At the beginning of the request, the Firewall checks the firewall map
    to see if any firewall should be active for this URL;
-RST
-            ),
+RST),
         ];
 
         yield 'list item (#) second line' => [
@@ -248,12 +246,10 @@ RST
         yield 'list item (*) first line' => [
             NullViolation::create(),
             4,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 * At the beginning of the request, the Firewall checks the firewall map
   to see if any firewall should be active for this URL;
-RST
-            ),
+RST),
         ];
 
         yield 'list item (*) second line' => [
@@ -269,12 +265,10 @@ RST
         yield 'comment (rst) first line' => [
             NullViolation::create(),
             4,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 .. I am a comment
    and have a second line.
-RST
-            ),
+RST),
         ];
 
         yield 'comment (rst) second line' => [
@@ -290,21 +284,17 @@ RST
         yield 'special char "├─"' => [
             NullViolation::create(),
             4,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
   ├─ app.php
-RST
-            ),
+RST),
         ];
 
         yield 'special char "└─"' => [
             NullViolation::create(),
             4,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
   └─ ...
-RST
-            ),
+RST),
         ];
 
         yield 'twig multiline comment' => [
@@ -382,12 +372,10 @@ RST
     {
         yield [
             true,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 <!-- appends the '@app.username_checker' argument to the parent
      argument list -->
-RST
-            ),
+RST),
         ];
 
         yield [
@@ -401,11 +389,9 @@ RST
 
         yield [
             false,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 <!-- appends the '@app.username_checker' argument to the parent -->
-RST
-            ),
+RST),
         ];
 
         yield [
@@ -453,12 +439,10 @@ RST
     {
         yield [
             true,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 {# appends the '@app.username_checker' argument to the parent
    argument list #}
-RST
-            ),
+RST),
         ];
 
         yield [
@@ -472,11 +456,9 @@ RST
 
         yield [
             false,
-            new RstSample(
-                <<<'RST'
+            new RstSample(<<<'RST'
 {# appends the '@app.username_checker' argument to the parent #}
-RST
-            ),
+RST),
         ];
 
         yield [false, new RstSample('foo bar')];
