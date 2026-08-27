@@ -140,22 +140,11 @@ jobs:
                     - "8.5"
 
         steps:
-            # workaround for missing secret in fork PRs - see https://github.com/actions/checkout/issues/298
-            # see https://github.com/rectorphp/rector/commit/d395e1c28b8e6a56711dcc2e10490a82965850e4
-            -   if: github.actor != 'dependabot[bot]'
+            # nothing is committed back here, so the default checkout is enough; naming the
+            # branch would fail on a pull request from a fork, whose branch only exists there
+            -
                 name: "Checkout"
                 uses: "actions/checkout@v7"
-                with:
-                    ref: "${{ github.head_ref }}"
-                    # Must be used to be able to commit changed files
-                    token: "${{ secrets.GITHUB_TOKEN }}"
-
-            # in forks, the token is not available - so we cannot use it
-            -   if: github.actor == 'dependabot[bot]'
-                name: "Checkout"
-                uses: "actions/checkout@v7"
-                with:
-                    ref: "${{ github.head_ref }}"
 
             -
                 name: "Install PHP with extensions"
