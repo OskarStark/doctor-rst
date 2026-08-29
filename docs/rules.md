@@ -102,6 +102,7 @@
 * [use_double_backticks_for_inline_literals](#use_double_backticks_for_inline_literals)
 * [use_https_xsd_urls](#use_https_xsd_urls)
 * [use_named_constructor_without_new_keyword_rule](#use_named_constructor_without_new_keyword_rule)
+* [use_single_backticks_for_ref_and_doc](#use_single_backticks_for_ref_and_doc)
 * [valid_inline_highlighted_namespaces](#valid_inline_highlighted_namespaces)
 * [valid_use_statements](#valid_use_statements)
 * [versionadded_directive_major_version](#versionadded_directive_major_version)
@@ -1841,6 +1842,29 @@ new Uuid::fromString()
 
 - Rule class: [App\Rule\UseNamedConstructorWithoutNewKeywordRule](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/UseNamedConstructorWithoutNewKeywordRule.php)
 - Test class: [App\Tests\Rule\UseNamedConstructorWithoutNewKeywordRuleTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/UseNamedConstructorWithoutNewKeywordRuleTest.php)
+
+## `use_single_backticks_for_ref_and_doc`
+
+  > _Ensure the content of :ref: and :doc: directives is surrounded by a single backtick._
+
+#### Groups [`@Sonata`, `@Symfony`]
+
+##### Valid Examples :+1:
+
+```rst
+:doc:`Route </routing>`
+```
+
+##### Invalid Examples :-1:
+
+```rst
+:ref:`DeprecatedAlias <routing-alias-deprecation>``
+```
+
+#### References
+
+- Rule class: [App\Rule\UseSingleBackticksForRefAndDoc](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/UseSingleBackticksForRefAndDoc.php)
+- Test class: [App\Tests\Rule\UseSingleBackticksForRefAndDocTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/UseSingleBackticksForRefAndDocTest.php)
 
 ## `valid_inline_highlighted_namespaces`
 
