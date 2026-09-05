@@ -356,6 +356,45 @@ RST
 RST
                 , 5),
         ];
+
+        $simple_table_example = <<<'RST'
+=================  =====================================================================================
+Value              Recommended situation
+=================  =====================================================================================
+``max[total]=0``   Recommended for actively maintained projects with robust/no dependencies
+``max[direct]=0``  Recommended for projects with dependencies that fail to keep up with new deprecations
+``max[self]=0``    Recommended for libraries that use the deprecation system themselves
+                   and cannot afford to use one of the modes above
+=================  =====================================================================================
+RST;
+
+        yield 'simple table cell' => [
+            NullViolation::create(),
+            4,
+            new RstSample($simple_table_example, 3),
+        ];
+
+        yield 'simple table cell continued on the next line' => [
+            NullViolation::create(),
+            4,
+            new RstSample($simple_table_example, 6),
+        ];
+
+        yield 'wrongly indented line right below a headline' => [
+            Violation::from(
+                'Please add 4 spaces for every indention.',
+                'filename',
+                3,
+                'Content',
+            ),
+            4,
+            new RstSample(<<<'RST'
+Headline
+========
+  Content
+RST
+                , 2),
+        ];
     }
 
     #[Test]

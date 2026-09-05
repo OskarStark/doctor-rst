@@ -19,6 +19,7 @@ use App\Helper\XmlHelper;
 use App\Rst\RstParser;
 use App\Traits\DirectiveTrait;
 use App\Traits\ListTrait;
+use App\Traits\TableTrait;
 use App\Value\Lines;
 use App\Value\NullViolation;
 use App\Value\RuleGroup;
@@ -30,6 +31,7 @@ final class Indention extends AbstractRule implements Configurable, LineContentR
 {
     use DirectiveTrait;
     use ListTrait;
+    use TableTrait;
     private int $size;
 
     public function configureOptions(OptionsResolver $resolver): OptionsResolver
@@ -68,6 +70,7 @@ final class Indention extends AbstractRule implements Configurable, LineContentR
             || $this->isPartOfFootnote($lines, $number)
             || $this->isPartOfRstComment($lines, $number)
             || $this->isPartOfLineNumberAnnotation($lines, $number)
+            || $this->isPartOfSimpleTable($lines, $number)
             || $this->in(RstParser::DIRECTIVE_INDEX, $lines, $number)
             || $this->in(RstParser::DIRECTIVE_FIGURE, $lines, $number)
             || $this->in(RstParser::DIRECTIVE_IMAGE, $lines, $number)
