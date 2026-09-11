@@ -39,7 +39,7 @@ final class EnsureAttributeBetweenBackticksInContent extends AbstractRule implem
             return NullViolation::create();
         }
 
-        if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number, [RstParser::CODE_BLOCK_DIFF])) {
+        if ($this->in(RstParser::DIRECTIVE_CODE_BLOCK, $lines, $number)) {
             return NullViolation::create();
         }
 
