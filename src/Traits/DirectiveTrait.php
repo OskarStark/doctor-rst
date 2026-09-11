@@ -143,6 +143,10 @@ trait DirectiveTrait
 
                 return false;
             }
+
+            if ($lineIndention < $currentIndention) {
+                $currentIndention = $lineIndention;
+            }
         }
 
         return false;
