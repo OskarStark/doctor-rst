@@ -297,6 +297,67 @@ RST;
             [RstParser::CODE_BLOCK_JAVASCRIPT],
         ];
 
+        $in_nested_yaml = <<<'RST'
+.. code-block:: yaml
+
+    framework:
+        messenger:
+            transports: ~
+RST;
+
+        yield [
+            true,
+            new RstSample($in_nested_yaml, 4),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+        ];
+
+        $list_item_with_code_block = <<<'RST'
+.. code-block:: text
+
+    I am some output
+
+#. Install Flex:
+
+   .. code-block:: terminal
+
+       $ composer require symfony/flex
+
+   I am just a cool text!
+RST;
+
+        yield [
+            true,
+            new RstSample($list_item_with_code_block, 8),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+        ];
+
+        yield [
+            false,
+            new RstSample($list_item_with_code_block, 10),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+        ];
+
+        $definition_with_code_block = <<<'RST'
+.. code-block:: text
+
+    I am some output
+
+``consumer``
+    Typically set via an environment variable:
+
+    .. code-block:: yaml
+
+        consumer: '%env(MESSENGER_CONSUMER_NAME)%'
+
+    I am just a cool text!
+RST;
+
+        yield [
+            false,
+            new RstSample($definition_with_code_block, 11),
+            RstParser::DIRECTIVE_CODE_BLOCK,
+        ];
+
         yield [
             false,
             new RstSample(<<<'RST'

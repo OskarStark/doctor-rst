@@ -65,6 +65,28 @@ final class EnsureAttributeBetweenBackticksInContentTest extends UnitTestCase
             new RstSample('use #[MapEntity] attributes'),
         ];
 
+        yield 'Has violation in a list item following a code-block' => [
+            Violation::from(
+                'Please ensure to use backticks "   then use #[MapEntity] attributes"',
+                'filename',
+                11,
+                'then use #[MapEntity] attributes',
+            ),
+            new RstSample([
+                '.. code-block:: diff',
+                '',
+                '    - "symfony/symfony": "*"',
+                '',
+                '#. Install Flex:',
+                '',
+                '   .. code-block:: terminal',
+                '',
+                '       $ composer require symfony/flex',
+                '',
+                '   then use #[MapEntity] attributes',
+            ], 10),
+        ];
+
         yield 'Has no violation' => [
             NullViolation::create(),
             new RstSample('use ``#[MapEntity]`` attributes'),
