@@ -187,6 +187,26 @@ Symfony contributions:
 .. _`romainneutron`: https://github.com/romainneutron
 RST),
         ];
+
+        yield 'link usage after an inline literal' => [
+            NullViolation::create(),
+            new RstSample(<<<'RST'
+The base ``Constraint`` class
+implements `__serialize()`_.
+
+.. _`__serialize()`: https://example.com
+RST),
+        ];
+
+        yield 'link usage spanning two lines' => [
+            NullViolation::create(),
+            new RstSample(<<<'RST'
+You can check it with `foo
+bar`_.
+
+.. _foo bar: https://github.com/foor/bar
+RST),
+        ];
     }
 
     public static function invalidProvider(): iterable

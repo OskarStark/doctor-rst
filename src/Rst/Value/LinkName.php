@@ -19,7 +19,9 @@ final readonly class LinkName
 
     private function __construct(string $value)
     {
-        $this->value = trim($value);
+        // reference names are whitespace normalized, so a name written on several lines
+        // matches the same name written on one line
+        $this->value = trim((string) preg_replace('/\s+/', ' ', $value));
     }
 
     public static function fromString(string $value): self

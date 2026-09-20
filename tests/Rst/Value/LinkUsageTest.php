@@ -37,6 +37,7 @@ final class LinkUsageTest extends UnitTestCase
     {
         yield ['Link1', '`Link1`_'];
         yield ['Link 1', '`Link 1`_'];
+        yield ['Link 1', "`Link\n1`_"];
     }
 
     #[Test]
