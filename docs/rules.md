@@ -354,6 +354,7 @@ composer require symfony/var-dumper --dev
 #### References
 
 - Rule class: [App\Rule\CorrectCodeBlockDirectiveBasedOnTheContent](https://github.com/OskarStark/doctor-rst/blob/develop/src/Rule/CorrectCodeBlockDirectiveBasedOnTheContent.php)
+- Test class: [App\Tests\Rule\CorrectCodeBlockDirectiveBasedOnTheContentTest](https://github.com/OskarStark/doctor-rst/blob/develop/tests/Rule/CorrectCodeBlockDirectiveBasedOnTheContentTest.php)
 
 ## `deprecated_directive_major_version`
 
