@@ -113,6 +113,8 @@ final class ReplacementTest extends UnitTestCase
             '--env prod' => '--env=prod',
             '--env test' => '--env=test',
             'End 2 End' => 'End-to-End',
+            // the pattern carries an "i" modifier, so it must not be matched as plain text
+            'end 2 end' => 'End-to-End',
             'E2E' => 'End-to-End',
             'informations' => 'information',
             'Informations' => 'Information',
