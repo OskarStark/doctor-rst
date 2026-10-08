@@ -50,6 +50,14 @@ final class RulesConfiguration
     }
 
     /**
+     * @return Rule[]
+     */
+    public function getRulesForAll(): array
+    {
+        return $this->rulesForAll;
+    }
+
+    /**
      * @param Rule[] $rules
      */
     public function excludeRulesForFilePath(string $filePath, array $rules): void
