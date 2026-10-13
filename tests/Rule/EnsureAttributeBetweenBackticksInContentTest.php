@@ -46,13 +46,46 @@ final class EnsureAttributeBetweenBackticksInContentTest extends UnitTestCase
             ];
         }
 
-        yield 'No violation for diff code-block' => [
+        foreach (['diff', 'terminal', 'yaml', 'text', 'twig'] as $type) {
+            yield \sprintf('No violation for code-block "%s"', $type) => [
+                NullViolation::create(),
+                new RstSample([
+                    \sprintf('.. code-block:: %s', $type),
+                    '',
+                    '    #[AsEventListener]',
+                ], 2),
+            ];
+        }
+
+        yield 'No violation for a console output listing an attribute' => [
             NullViolation::create(),
             new RstSample([
-                '.. code-block:: diff',
+                '.. code-block:: terminal',
                 '',
-                '    #[AsEventListener]',
-            ]),
+                '    $ php bin/console debug:messenger',
+                '',
+                '      Transports',
+                '      ----------',
+                '',
+                '      audit',
+                '          App\Message\DummyQuery (from #[AsMessage])',
+            ], 8),
+        ];
+
+        yield 'Has violation in content following a code-block' => [
+            Violation::from(
+                'Please ensure to use backticks "use #[MapEntity] attributes"',
+                'filename',
+                5,
+                'use #[MapEntity] attributes',
+            ),
+            new RstSample([
+                '.. code-block:: terminal',
+                '',
+                '    $ php bin/console debug:router',
+                '',
+                'use #[MapEntity] attributes',
+            ], 4),
         ];
 
         yield 'Has violation without backticks' => [
