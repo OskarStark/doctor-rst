@@ -39,6 +39,21 @@ class ConsoleFormatter implements Formatter
             }
         }
 
+        // Format directory-level violations
+        foreach ($analyzerResult->directoryViolations() as $violation) {
+            $style->writeln(\sprintf(
+                '<fg=red;options=bold>%s</> %s',
+                "\xE2\x9C\x98" /* HEAVY BALLOT X (U+2718) */,
+                $violation->message(),
+            ));
+
+            if (!empty($violation->rawLine())) {
+                $style->writeln(\sprintf('   <info>-></info>  %s', $violation->rawLine()));
+            }
+
+            $style->newLine();
+        }
+
         if ($unusedWhitelistRegex = $analyzerResult->getUnusedWhitelistRules()['regex']) {
             foreach ($unusedWhitelistRegex as $rule) {
                 $style->warning(\sprintf(
@@ -57,12 +72,28 @@ class ConsoleFormatter implements Formatter
             }
         }
 
-        if (0 < $violatedFiles) {
-            $style->warning(\sprintf(
-                'Found "%s" invalid %s!',
-                $violatedFiles,
-                1 === $violatedFiles ? 'file' : 'files',
-            ));
+        $directoryViolationCount = \count($analyzerResult->directoryViolations());
+
+        if (0 < $violatedFiles || 0 < $directoryViolationCount) {
+            $messages = [];
+
+            if (0 < $violatedFiles) {
+                $messages[] = \sprintf(
+                    '"%s" invalid %s',
+                    $violatedFiles,
+                    1 === $violatedFiles ? 'file' : 'files',
+                );
+            }
+
+            if (0 < $directoryViolationCount) {
+                $messages[] = \sprintf(
+                    '"%s" directory-level %s',
+                    $directoryViolationCount,
+                    1 === $directoryViolationCount ? 'violation' : 'violations',
+                );
+            }
+
+            $style->warning('Found '.implode(' and ', $messages).'!');
         } else {
             $style->success('All files are valid!');
         }

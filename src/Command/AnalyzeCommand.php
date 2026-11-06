@@ -17,6 +17,7 @@ use App\Analyzer\MemoizingAnalyzer;
 use App\Formatter\Registry as FormatterRegistry;
 use App\Handler\Registry;
 use App\Rule\Configurable;
+use App\Rule\DirectoryContentRule;
 use App\Value\AnalyzerResult;
 use App\Value\ExcludedViolationList;
 use App\Value\FileResult;
@@ -189,7 +190,20 @@ class AnalyzeCommand extends Command
             );
         }
 
-        $analyzerResult = new AnalyzerResult($fileResults, $whitelistConfig);
+        // Run DirectoryContentRules after all files have been analyzed
+        $directoryRules = array_filter(
+            $this->rulesConfiguration->getRulesForAll(),
+            static fn ($rule) => $rule instanceof DirectoryContentRule,
+        );
+
+        $directoryViolations = [];
+
+        /** @var DirectoryContentRule $rule */
+        foreach ($directoryRules as $rule) {
+            $directoryViolations = [...$directoryViolations, ...$rule->check(clone $finder, $analyzeDir)];
+        }
+
+        $analyzerResult = new AnalyzerResult($fileResults, $whitelistConfig, $directoryViolations);
 
         $this->analyzer->write();
 
