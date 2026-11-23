@@ -1977,16 +1977,16 @@
         },
         {
             "name": "ergebnis/data-provider",
-            "version": "3.7.1",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ergebnis/data-provider.git",
-                "reference": "15e41a715f672e1825eee1a8a3853b185680eb01"
+                "reference": "c24552b3822d68c86d106e9b65a1c9c7f5e845af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ergebnis/data-provider/zipball/15e41a715f672e1825eee1a8a3853b185680eb01",
-                "reference": "15e41a715f672e1825eee1a8a3853b185680eb01",
+                "url": "https://api.github.com/repos/ergebnis/data-provider/zipball/c24552b3822d68c86d106e9b65a1c9c7f5e845af",
+                "reference": "c24552b3822d68c86d106e9b65a1c9c7f5e845af",
                 "shasum": ""
             },
             "require": {
@@ -1994,24 +1994,24 @@
                 "php": "~7.4.0 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0 || ~8.5.0 || ~8.6.0"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.54.0",
-                "ergebnis/license": "^2.8.0",
-                "ergebnis/php-cs-fixer-config": "^6.64.1",
-                "ergebnis/phpunit-slow-test-detector": "^2.26.0",
-                "ergebnis/rector-rules": "^1.18.5",
+                "ergebnis/composer-normalize": "^2.56.1",
+                "ergebnis/license": "^2.9.0",
+                "ergebnis/php-cs-fixer-config": "^6.64.3",
+                "ergebnis/phpunit-slow-test-detector": "^2.27.0",
+                "ergebnis/rector-rules": "^1.19.0",
                 "infection/infection": "~0.26.6",
                 "phpstan/extension-installer": "^1.4.3",
                 "phpstan/phpstan": "^2.2.15",
                 "phpstan/phpstan-deprecation-rules": "^2.0.5",
                 "phpstan/phpstan-phpunit": "^2.1.1",
-                "phpstan/phpstan-strict-rules": "^2.1.0",
+                "phpstan/phpstan-strict-rules": "^2.1.1",
                 "phpunit/phpunit": "^9.6.33",
                 "rector/rector": "^2.7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "3.7-dev"
+                    "dev-main": "3.8-dev"
                 },
                 "composer-normalize": {
                     "indent-size": 2,
@@ -2044,7 +2044,7 @@
                 "issues": "https://github.com/ergebnis/data-provider/issues",
                 "source": "https://github.com/ergebnis/data-provider"
             },
-            "time": "2026-10-22T04:39:37+00:00"
+            "time": "2026-11-19T13:12:21+00:00"
         },
         {
             "name": "ergebnis/differ",
