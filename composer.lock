@@ -1608,78 +1608,6 @@
             "time": "2023-03-17T00:41:49+00:00"
         },
         {
-            "name": "composer-unused/symbol-parser",
-            "version": "0.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer-unused/symbol-parser.git",
-                "reference": "afa62007cca768bd1ecbc0e8ed347c675c239410"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/composer-unused/symbol-parser/zipball/afa62007cca768bd1ecbc0e8ed347c675c239410",
-                "reference": "afa62007cca768bd1ecbc0e8ed347c675c239410",
-                "shasum": ""
-            },
-            "require": {
-                "composer-unused/contracts": "^0.3",
-                "nikic/php-parser": "^5.0",
-                "php": "^7.4 || ^8.0",
-                "phpstan/phpdoc-parser": "^1.25 || ^2",
-                "psr/container": "^1.0 || ^2.0",
-                "psr/log": "^1.1 || ^2 || ^3",
-                "symfony/finder": "^5.3 || ^6.0 || ^7.0 || ^8.0"
-            },
-            "require-dev": {
-                "ergebnis/composer-normalize": "^2.49",
-                "ext-ds": "*",
-                "phpstan/phpstan": "^2.1",
-                "phpunit/phpunit": "^10.5",
-                "roave/security-advisories": "dev-master",
-                "squizlabs/php_codesniffer": "^4.0.1",
-                "symfony/property-access": "^5.4 || ^6.0 || ^7.0 || ^8.0",
-                "symfony/serializer": "^5.4 || ^6.0 || ^7.0 || ^8.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ComposerUnused\\SymbolParser\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andreas Frömer",
-                    "email": "composer-unused@icanhazstring.com"
-                }
-            ],
-            "description": "Toolkit to parse symbols from a composer package",
-            "homepage": "https://github.com/composer-unused/symbol-parser",
-            "keywords": [
-                "composer",
-                "parser",
-                "symbol"
-            ],
-            "support": {
-                "issues": "https://github.com/composer-unused/symbol-parser/issues",
-                "source": "https://github.com/composer-unused/symbol-parser"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sponsors/icanhazstring",
-                    "type": "github"
-                },
-                {
-                    "url": "https://paypal.me/icanhazstring",
-                    "type": "other"
-                }
-            ],
-            "time": "2026-01-29T13:38:57+00:00"
-        },
-        {
             "name": "composer/pcre",
             "version": "3.4.0",
             "source": {
@@ -2922,33 +2850,33 @@
         },
         {
             "name": "icanhazstring/composer-unused",
-            "version": "0.9.8",
+            "version": "0.9.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer-unused/composer-unused.git",
-                "reference": "7374b91d32e2885a9458cd2c2c39fdc55a7c52d9"
+                "reference": "00034869d0e5ec97409fb492562a7ec9d677c049"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/7374b91d32e2885a9458cd2c2c39fdc55a7c52d9",
-                "reference": "7374b91d32e2885a9458cd2c2c39fdc55a7c52d9",
+                "url": "https://api.github.com/repos/composer-unused/composer-unused/zipball/00034869d0e5ec97409fb492562a7ec9d677c049",
+                "reference": "00034869d0e5ec97409fb492562a7ec9d677c049",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.0",
                 "composer-unused/contracts": "^0.3",
-                "composer-unused/symbol-parser": "^0.3.1",
                 "composer/xdebug-handler": "^3.0",
                 "ext-json": "*",
                 "nikic/php-parser": "^5.0",
                 "ondram/ci-detector": "^4.1",
-                "php": "^8.1",
+                "php": "^8.3",
                 "phpstan/phpdoc-parser": "^1.25 || ^2",
                 "psr/container": "^1.0 || ^2.0",
                 "psr/log": "^1.1 || ^2 || ^3",
                 "symfony/config": "^6.0 || ^7.0 || ^8.0",
                 "symfony/console": "^6.0 || ^7.0 || ^8.0",
                 "symfony/dependency-injection": "^6.0 || ^7.0 || ^8.0",
+                "symfony/finder": "^5.3 || ^6.0 || ^7.0 || ^8.0",
                 "symfony/property-access": "^6.0 || ^7.0 || ^8.0",
                 "symfony/serializer": "^6.0 || ^7.0 || ^8.0",
                 "webmozart/assert": "^1.10 || ^2.0",
@@ -2969,7 +2897,6 @@
                 "phpstan/phpstan": "^2.1.40",
                 "phpstan/phpstan-phpunit": "^2.0.16",
                 "phpunit/phpunit": "^9.6.34",
-                "roave/security-advisories": "dev-master",
                 "squizlabs/php_codesniffer": "^4.0"
             },
             "bin": [
@@ -2984,6 +2911,7 @@
             },
             "autoload": {
                 "psr-4": {
+                    "ComposerUnused\\SymbolParser\\": "src/SymbolParser",
                     "ComposerUnused\\ComposerUnused\\": "src"
                 }
             },
@@ -3019,7 +2947,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-10-31T13:13:19+00:00"
+            "time": "2026-11-20T12:53:59+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
