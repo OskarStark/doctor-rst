@@ -216,16 +216,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v8.1.11",
+            "version": "v8.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "8a6f757bf803464bc8451e1fafc3699588e29c48"
+                "reference": "7b7f07b1ec6da7d7cada3ed73fa302a8e791ecf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/8a6f757bf803464bc8451e1fafc3699588e29c48",
-                "reference": "8a6f757bf803464bc8451e1fafc3699588e29c48",
+                "url": "https://api.github.com/repos/symfony/config/zipball/7b7f07b1ec6da7d7cada3ed73fa302a8e791ecf0",
+                "reference": "7b7f07b1ec6da7d7cada3ed73fa302a8e791ecf0",
                 "shasum": ""
             },
             "require": {
@@ -270,7 +270,7 @@
             "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/config/tree/v8.1.11"
+                "source": "https://github.com/symfony/config/tree/v8.1.12"
             },
             "funding": [
                 {
@@ -290,7 +290,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-04T08:39:20+00:00"
+            "time": "2026-11-09T20:09:12+00:00"
         },
         {
             "name": "symfony/console",
@@ -546,16 +546,16 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v8.1.11",
+            "version": "v8.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "58f57b6a33e3495f7f41e01258f1ae5ef76cccd2"
+                "reference": "a8f7a3cf9d3140902eaee85baf1f8e98666d336a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/58f57b6a33e3495f7f41e01258f1ae5ef76cccd2",
-                "reference": "58f57b6a33e3495f7f41e01258f1ae5ef76cccd2",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/a8f7a3cf9d3140902eaee85baf1f8e98666d336a",
+                "reference": "a8f7a3cf9d3140902eaee85baf1f8e98666d336a",
                 "shasum": ""
             },
             "require": {
@@ -593,7 +593,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v8.1.11"
+                "source": "https://github.com/symfony/filesystem/tree/v8.1.12"
             },
             "funding": [
                 {
@@ -613,7 +613,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-11-04T08:39:20+00:00"
+            "time": "2026-11-24T15:59:55+00:00"
         },
         {
             "name": "symfony/finder",
